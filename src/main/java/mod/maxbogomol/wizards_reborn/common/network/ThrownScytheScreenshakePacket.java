@@ -13,13 +13,13 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class ThrowedScytheScreenshakePacket extends PositionClientPacket {
+public class ThrownScytheScreenshakePacket extends PositionClientPacket {
 
-    public ThrowedScytheScreenshakePacket(double x, double y, double z) {
+    public ThrownScytheScreenshakePacket(double x, double y, double z) {
         super(x, y, z);
     }
 
-    public ThrowedScytheScreenshakePacket(Vec3 vec) {
+    public ThrownScytheScreenshakePacket(Vec3 vec) {
         super(vec);
     }
 
@@ -36,10 +36,10 @@ public class ThrowedScytheScreenshakePacket extends PositionClientPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, ThrowedScytheScreenshakePacket.class, ThrowedScytheScreenshakePacket::encode, ThrowedScytheScreenshakePacket::decode, ThrowedScytheScreenshakePacket::handle);
+        instance.registerMessage(index, ThrownScytheScreenshakePacket.class, ThrownScytheScreenshakePacket::encode, ThrownScytheScreenshakePacket::decode, ThrownScytheScreenshakePacket::handle);
     }
 
-    public static ThrowedScytheScreenshakePacket decode(FriendlyByteBuf buf) {
-        return decode(ThrowedScytheScreenshakePacket::new, buf);
+    public static ThrownScytheScreenshakePacket decode(FriendlyByteBuf buf) {
+        return decode(ThrownScytheScreenshakePacket::new, buf);
     }
 }

@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
+import mod.maxbogomol.wizards_reborn.common.entity.ThrownScytheEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
@@ -25,14 +25,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends EntityRenderer<T> {
+public class ThrownScytheRenderer<T extends ThrownScytheEntity> extends EntityRenderer<T> {
 
-    public ThrowedScytheRenderer(EntityRendererProvider.Context context) {
+    public ThrownScytheRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public void render(ThrowedScytheEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
+    public void render(ThrownScytheEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
         Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
 
         List<TrailPoint> trail = new ArrayList<>(entity.trailPointBuilder.getTrailPoints());

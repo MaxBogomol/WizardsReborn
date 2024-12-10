@@ -10,7 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.common.network.ThrowedScytheScreenshakePacket;
+import mod.maxbogomol.wizards_reborn.common.network.ThrownScytheScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
@@ -47,35 +47,35 @@ import java.awt.*;
 import java.util.List;
 import java.util.*;
 
-public class ThrowedScytheEntity extends ThrowableItemProjectile {
-    public static final EntityDataAccessor<Optional<UUID>> ownerId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    public static final EntityDataAccessor<Integer> endTickId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> blockId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> blockTickId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Float> baseDamageId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> magicDamageId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Integer> slotId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Float> endPointXId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> endPointYId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> endPointZId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Boolean> isRightId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.BOOLEAN);
+public class ThrownScytheEntity extends ThrowableItemProjectile {
+    public static final EntityDataAccessor<Optional<UUID>> ownerId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    public static final EntityDataAccessor<Integer> endTickId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> blockId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> blockTickId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> baseDamageId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> magicDamageId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Integer> slotId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> endPointXId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> endPointYId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> endPointZId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Boolean> isRightId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.BOOLEAN);
 
     public TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(30);
     public Map<UUID, Integer> damagedEntities = new HashMap<>();
 
-    public ThrowedScytheEntity(EntityType<?> type, Level level) {
-        super(WizardsRebornEntities.THROWED_SCYTHE.get(), level);
+    public ThrownScytheEntity(EntityType<?> type, Level level) {
+        super(WizardsRebornEntities.THROWN_SCYTHE.get(), level);
         noPhysics = false;
     }
 
-    public ThrowedScytheEntity(Level level) {
-        super(WizardsRebornEntities.THROWED_SCYTHE.get(), level);
+    public ThrownScytheEntity(Level level) {
+        super(WizardsRebornEntities.THROWN_SCYTHE.get(), level);
     }
 
-    public ThrowedScytheEntity(Level level, double x, double y, double z) {
-        super(WizardsRebornEntities.THROWED_SCYTHE.get(), x, y, z, level);
+    public ThrownScytheEntity(Level level, double x, double y, double z) {
+        super(WizardsRebornEntities.THROWN_SCYTHE.get(), x, y, z, level);
     }
 
     public void setData(Entity owner, float baseDamage, float magicDamage, int slot, boolean isRight) {
@@ -240,7 +240,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
             boolean dist = false;
             if (getOwner() instanceof Player player) {
                 if (distanceTo(getOwner()) < 150 && player.isAlive()) {
-                    WizardsRebornPacketHandler.sendTo(player, new ThrowedScytheScreenshakePacket(position().subtract(player.getEyePosition())));
+                    WizardsRebornPacketHandler.sendTo(player, new ThrownScytheScreenshakePacket(position().subtract(player.getEyePosition())));
                     player.knockback(1f, getX() - player.getX(), getZ() - player.getZ());
                     player.hurtMarked = true;
 

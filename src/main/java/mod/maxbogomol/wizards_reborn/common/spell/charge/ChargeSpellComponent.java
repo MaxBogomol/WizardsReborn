@@ -19,7 +19,7 @@ public class ChargeSpellComponent extends SpellComponent {
     public Vec3 vecOld = Vec3.ZERO;
 
     public double charge = 0;
-    public boolean throwed = false;
+    public boolean thrown = false;
 
     public boolean first = true;
 
@@ -34,7 +34,7 @@ public class ChargeSpellComponent extends SpellComponent {
         tag.put("vec", SpellContext.vecToTag(vec));
         tag.put("vecOld", SpellContext.vecToTag(vecOld));
         tag.putDouble("charge", charge);
-        tag.putBoolean("throwed", throwed);
+        tag.putBoolean("thrown", thrown);
 
         return tag;
     }
@@ -47,7 +47,7 @@ public class ChargeSpellComponent extends SpellComponent {
         useTick = tag.getInt("useTick");
         endTick = tag.getInt("endTick");
         charge = tag.getDouble("charge");
-        throwed = tag.getBoolean("throwed");
+        thrown = tag.getBoolean("thrown");
         if (first) {
             vec = SpellContext.vecFromTag(tag.getCompound("vec"));
             vecOld = SpellContext.vecFromTag(tag.getCompound("vecOld"));

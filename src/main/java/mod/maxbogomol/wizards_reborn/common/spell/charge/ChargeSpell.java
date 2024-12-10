@@ -146,7 +146,7 @@ public class ChargeSpell extends Spell {
 
             hitTick(entity, hitResult);
 
-            if (spellComponent.throwed) {
+            if (spellComponent.thrown) {
                 if (hitResult.hasEntities()) {
                     onImpact(entity.level(), entity, hitResult, hitResult.getEntities().get(0));
                     hasEffect = false;
@@ -162,9 +162,9 @@ public class ChargeSpell extends Spell {
             }
 
             if (!entity.level().isClientSide()) {
-                if (!spellComponent.throwed) {
+                if (!spellComponent.thrown) {
                     if (spellComponent.useTick <= 0) {
-                        spellComponent.throwed = true;
+                        spellComponent.thrown = true;
                         Vec3 vel = spellComponent.vec.scale(40).scale(1.0 / 25);
                         entity.setDeltaMovement(vel);
                         entity.updateSpellComponent(spellComponent);
@@ -188,7 +188,7 @@ public class ChargeSpell extends Spell {
                 }
             }
 
-            if (hasEffect && (spellComponent.tick > 1 || !spellComponent.throwed)) trailEffect(entity.level(), entity, hitResult);
+            if (hasEffect && (spellComponent.tick > 1 || !spellComponent.thrown)) trailEffect(entity.level(), entity, hitResult);
             hitEndTick(entity, hitResult);
         } else {
             entity.setDeltaMovement(0, 0, 0);
@@ -203,7 +203,7 @@ public class ChargeSpell extends Spell {
 
         if (entity.level().isClientSide()) {
             Vec3 vec = spellComponent.vec.scale(40).scale(1.0 / 25);
-            if (!spellComponent.throwed) {
+            if (!spellComponent.thrown) {
                 spellComponent.trailPointBuilder.addTrailPoint(entity.position().add(vec));
             } else {
                 if (spellComponent.tick > 1) {
@@ -218,7 +218,7 @@ public class ChargeSpell extends Spell {
         ChargeSpellComponent spellComponent = getSpellComponent(entity);
         Vec3 offset = entity.getSpellContext().getOffset();
 
-        if (spellComponent.throwed) {
+        if (spellComponent.thrown) {
             Vec3 motion = entity.getDeltaMovement();
             entity.setDeltaMovement(motion.x * 0.99, motion.y * 0.99, motion.z * 0.99);
 
@@ -244,7 +244,7 @@ public class ChargeSpell extends Spell {
     public void updateRot(SpellEntity entity) {
         ChargeSpellComponent spellComponent = getSpellComponent(entity);
 
-        if (spellComponent.throwed) {
+        if (spellComponent.thrown) {
             Vec3 vec3 = entity.getDeltaMovement();
             double d0 = vec3.horizontalDistance();
             entity.setYRot((float) (Mth.atan2(vec3.x, vec3.z) * (double) (180F / (float) Math.PI)));
@@ -317,7 +317,7 @@ public class ChargeSpell extends Spell {
         if (!level.isClientSide()) {
             ChargeSpellComponent spellComponent = getSpellComponent(entity);
             float charge = (float) (0.5f + ((spellComponent.charge / getCharge()) / 2f));
-            if (!spellComponent.throwed) {
+            if (!spellComponent.thrown) {
                 Vec3 pos = entity.position();
                 Vec3 vec = pos.add(spellComponent.vec.scale(40).scale(1.0 / 25));
                 Vec3 vecOld = pos.add(spellComponent.vecOld.scale(40).scale(1.0 / 25));
@@ -352,7 +352,7 @@ public class ChargeSpell extends Spell {
     public void render(SpellEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
         Color color =  getColor();
         ChargeSpellComponent spellComponent = getSpellComponent(entity);
-        float charge = (float) (0.5f + (((spellComponent.charge + (!spellComponent.throwed ? partialTicks : 0)) / getCharge()) / 2f));
+        float charge = (float) (0.5f + (((spellComponent.charge + (!spellComponent.thrown ? partialTicks : 0)) / getCharge()) / 2f));
         if (charge > 1f) charge = 1f;
 
         Vec3 vec = spellComponent.vec;
@@ -376,7 +376,7 @@ public class ChargeSpell extends Spell {
         float y = (float) Mth.lerp(partialTicks, entity.yOld, entity.getY());
         float z = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
 
-        if (!spellComponent.throwed) {
+        if (!spellComponent.thrown) {
             if (trail.size() > 0) {
                 trail.set(trail.size() - 1, new TrailPoint(new Vec3(x, y, z).add(lookVec)));
             }

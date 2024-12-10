@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.ScytheThrowItemAnimation;
-import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
+import mod.maxbogomol.wizards_reborn.common.entity.ThrownScytheEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.stats.Stats;
@@ -88,7 +88,7 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
                                 }
                             }
 
-                            ThrowedScytheEntity entity = new ThrowedScytheEntity(level, player.position().x, player.position().y + player.getBbHeight() / 2f, player.position().z);
+                            ThrownScytheEntity entity = new ThrownScytheEntity(level, player.position().x, player.position().y + player.getBbHeight() / 2f, player.position().z);
                             entity.setData(livingEntity, baseDamage, magicDamage, slot, ItemAnimation.isRightHand(player, player.getUsedItemHand()));
                             entity.setItem(stack);
 

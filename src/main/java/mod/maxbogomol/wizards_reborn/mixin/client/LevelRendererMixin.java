@@ -25,7 +25,7 @@ public abstract class LevelRendererMixin {
 
             if (projectile.getSpell() instanceof ChargeSpell spell) {
                 ChargeSpellComponent spellComponent = spell.getSpellComponent(projectile);
-                if (!spellComponent.throwed) {
+                if (!spellComponent.thrown) {
                     spell.updatePos(projectile);
                 }
             }
