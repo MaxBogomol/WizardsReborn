@@ -211,7 +211,7 @@ public class ProjectileSpell extends Spell {
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
                 .setColor(color)
                 .setFirstAlpha(0.5f)
-                .renderTrail(poseStack, trail, (f) -> {return f * 0.3f;});
+                .renderTrail(poseStack, trail, (f) -> RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION.apply(f) * 0.3f);
         poseStack.popPose();
     }
 

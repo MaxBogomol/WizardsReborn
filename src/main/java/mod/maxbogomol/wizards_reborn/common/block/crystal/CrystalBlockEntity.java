@@ -181,7 +181,9 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
             if (startRitual && !CrystalRitualUtil.isEmpty(ritual)) {
                 if (random.nextFloat() < 0.08f) {
                     ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                            .setBehavior(SparkParticleBehavior.create().build())
+                            .setBehavior(SparkParticleBehavior.create()
+                                    .setScaleData(GenericParticleData.create(1, 3, 1).build())
+                                    .build())
                             .setColorData(ColorParticleData.create(ritual.getColor()).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0.75f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setScaleData(GenericParticleData.create(0.025f, 0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())

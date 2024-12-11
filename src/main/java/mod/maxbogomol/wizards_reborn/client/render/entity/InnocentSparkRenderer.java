@@ -64,9 +64,9 @@ public class InnocentSparkRenderer<T extends InnocentSparkEntity> extends Entity
                 .setSecondColor(color2)
                 .setAlpha(0)
                 .setSecondAlpha(alpha)
-                .renderTrail(poseStack, trail, (f) -> f * 0.8f)
+                .renderTrail(poseStack, trail, (f) -> RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION.apply(f) * 0.8f)
                 .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE)
-                .renderTrail(poseStack, trail, (f) -> f * 0.4f);
+                .renderTrail(poseStack, trail, (f) -> RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION.apply(f) * 0.4f);
         poseStack.popPose();
 
         if (entity.getFade()) alpha = entity.getFadeTick() / 30f;

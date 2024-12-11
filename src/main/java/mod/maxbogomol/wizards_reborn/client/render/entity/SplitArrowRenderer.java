@@ -54,7 +54,7 @@ public class SplitArrowRenderer<T extends SplitArrowEntity> extends EntityRender
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
                 .setColor(color)
                 .setFirstAlpha(0.25f).setSecondAlpha(1f)
-                .renderTrail(poseStack, trail, (f) -> {return f * 0.25f;});
+                .renderTrail(poseStack, trail, (f) -> RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION.apply(f) * 0.25f);
         poseStack.popPose();
     }
 

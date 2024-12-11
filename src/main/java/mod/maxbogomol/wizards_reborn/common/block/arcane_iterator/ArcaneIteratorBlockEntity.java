@@ -14,6 +14,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
@@ -408,6 +409,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                                     .setColorData(ColorParticleData.create().setRandomColor().build())
                                                     .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
                                                     .enableSecondColor()
+                                                    .setWidthFunction(RenderUtil.LINEAR_IN_SEMI_ROUND_WIDTH_FUNCTION)
                                                     .build())
                                             .setColorData(ColorParticleData.create().setRandomColor().build())
                                             .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())

@@ -37,7 +37,7 @@ public class MagicBladePacket extends PositionClientPacket {
         builder.setBehavior(SparkParticleBehavior.create()
                         .enableSecondColor()
                         .setColorData(ColorParticleData.create().setRandomColor().build())
-                        .setTransparencyData(GenericParticleData.create(0.2f, 0.2f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setTransparencyData(GenericParticleData.create(0.6f, 0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .build())
                 .setColorData(ColorParticleData.create(0.431f, 0.305f, 0.662f).build())
                 .setTransparencyData(GenericParticleData.create(0.6f, 0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())

@@ -11,6 +11,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.TwoPositionColorClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
@@ -58,7 +59,7 @@ public class BlinkSpellPacket extends TwoPositionColorClientPacket {
         };
         ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
-                .setBehavior(TrailParticleBehavior.create().build())
+                .setBehavior(TrailParticleBehavior.create().setWidthFunction(RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION).build())
                 .setColorData(ColorParticleData.create(r, g, b).build())
                 .setTransparencyData(GenericParticleData.create(0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.5f).setEasing(Easing.QUARTIC_OUT).build())

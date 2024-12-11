@@ -56,7 +56,7 @@ public class ThrownScytheRenderer<T extends ThrownScytheEntity> extends EntityRe
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
                 .setColor(color)
                 .setAlpha(0.5f)
-                .renderTrail(poseStack, trail, (f) -> {return f * 0.08f;});
+                .renderTrail(poseStack, trail, (f) -> RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION.apply(f) * 0.08f);
         poseStack.popPose();
 
         if (entity.getFade() && entity.getFadeTick() <= 30 && entity.getEndTick() > 0) {

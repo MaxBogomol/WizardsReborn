@@ -393,7 +393,7 @@ public class ChargeSpell extends Spell {
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
                 .setColor(color)
                 .setFirstAlpha(0.5f)
-                .renderTrail(poseStack, trail, (f) -> {return f * 0.3f * finalCharge;});
+                .renderTrail(poseStack, trail, (f) -> RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION.apply(f) * 0.3f * finalCharge);
         poseStack.popPose();
     }
 

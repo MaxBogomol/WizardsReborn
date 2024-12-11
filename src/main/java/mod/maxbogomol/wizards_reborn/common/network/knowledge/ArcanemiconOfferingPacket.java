@@ -10,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import net.minecraft.network.FriendlyByteBuf;
@@ -41,7 +42,7 @@ public class ArcanemiconOfferingPacket extends PositionClientPacket {
 
         ParticleBuilder sparkleBuilder = ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
-                .setBehavior(TrailParticleBehavior.create().build())
+                .setBehavior(TrailParticleBehavior.create().setWidthFunction(RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION).build())
                 .setColorData(ColorParticleData.create(new Color(123, 73, 109)).build())
                 .setTransparencyData(GenericParticleData.create(0.4f, 0.4f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.2f, 0.4f, 0f).setEasing(Easing.ELASTIC_OUT).build())
@@ -51,7 +52,7 @@ public class ArcanemiconOfferingPacket extends PositionClientPacket {
 
         ParticleBuilder circleBuilder = ParticleBuilder.create(FluffyFurParticles.TINY_CIRCLE)
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
-                .setBehavior(TrailParticleBehavior.create().build())
+                .setBehavior(TrailParticleBehavior.create().setWidthFunction(RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION).build())
                 .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.4f, 0.4f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.2f, 0.4f, 0f).setEasing(Easing.ELASTIC_OUT).build())
@@ -75,7 +76,7 @@ public class ArcanemiconOfferingPacket extends PositionClientPacket {
 
         ParticleBuilder.create(FluffyFurParticles.DOT)
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
-                .setBehavior(TrailParticleBehavior.create().build())
+                .setBehavior(TrailParticleBehavior.create().setWidthFunction(RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION).build())
                 .setColorData(ColorParticleData.create(new Color(123, 73, 109)).build())
                 .setTransparencyData(GenericParticleData.create(0.3f, 0.3f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.3f, 0.4f, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -121,6 +122,7 @@ public class ArcanemiconOfferingPacket extends PositionClientPacket {
                         .setColorData(ColorParticleData.create().setRandomColor().build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .enableSecondColor()
+                        .setWidthFunction(RenderUtil.LINEAR_IN_SEMI_ROUND_WIDTH_FUNCTION)
                         .build())
                 .setColorData(ColorParticleData.create().setRandomColor().build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
