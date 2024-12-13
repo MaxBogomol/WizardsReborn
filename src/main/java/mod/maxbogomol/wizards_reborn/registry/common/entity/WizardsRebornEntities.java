@@ -19,7 +19,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -49,7 +49,7 @@ public class WizardsRebornEntities {
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
         @SubscribeEvent
-        public static void registerEntities(FMLClientSetupEvent event) {
+        public static void registerEntities(FMLCommonSetupEvent event) {
             InnocentSparkEntity.addType(new InnocentSparkEntity.SwordSparkType());
             InnocentSparkEntity.addType(new InnocentSparkEntity.PickaxeSparkType());
             InnocentSparkEntity.addType(new InnocentSparkEntity.AxeSparkType());
