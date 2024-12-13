@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpriteParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
@@ -211,6 +212,7 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
                                     .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
                                     .setScaleData(GenericParticleData.create(0.025f, 0.05f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
                                     .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
+                                    .setSpriteData(SpriteParticleData.CRUMBS_RANDOM)
                                     .setLifetime(20)
                                     .addVelocity(-x / 20f, -y / 20f, -z / 20f)
                                     .spawn(level, getBlockPos().getX() + 0.5F + x, getBlockPos().getY() + 1.125F + y, getBlockPos().getZ() + 0.5F + z);

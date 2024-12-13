@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.behavior.TrailParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpriteParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
@@ -454,6 +455,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                             .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
                                             .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
                                             .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
+                                            .setSpriteData(SpriteParticleData.CRUMBS_RANDOM)
                                             .setLifetime(20)
                                             .addVelocity(-x, -y, -z)
                                             .disablePhysics()

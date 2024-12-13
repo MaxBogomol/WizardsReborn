@@ -137,7 +137,7 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
             if (size > 0) {
                 int slot = size - 1;
                 if (!container.getItem(slot).isEmpty()) {
-                    BlockSimpleInventory.addHandPlayerItem(level, player, hand, stack, container.getItem(size));
+                    BlockSimpleInventory.addHandPlayerItem(level, player, hand, stack, container.getItem(slot));
                     container.removeItem(slot, 1);
                     level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(blockEntity);
