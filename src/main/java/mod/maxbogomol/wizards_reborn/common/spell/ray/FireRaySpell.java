@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
+import mod.maxbogomol.fluffy_fur.common.fire.FireBlockHandler;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
@@ -10,20 +11,13 @@ import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.CandleCakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
@@ -80,22 +74,20 @@ public class FireRaySpell extends RaySpell {
                     if (entity.getSpellContext().canRemoveWissen(this, getBlockWissen(entity, focusLevel))) {
                         BlockPos blockPos = hitResult.getBlockPos();
                         BlockState blockState = level.getBlockState(blockPos);
-                        if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
+                        if (!FireBlockHandler.canLightBlock(level, blockPos, blockState, entity.getOwner())) {
                             BlockPos blockPos1 = hitResult.getBlockPos().relative(hitResult.getDirection());
-                            BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos1), BaseFireBlock.getState(level, blockPos1), entity.getOwner());
-                            if (BaseFireBlock.canBePlacedAt(level, blockPos1, Direction.UP) && !MinecraftForge.EVENT_BUS.post(placeEvent)) {
+                            BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos1), FireBlockHandler.getFireBlockState(level, blockPos1, level.getBlockState(blockPos1), entity.getOwner()), entity.getOwner());
+                            if (FireBlockHandler.canSetFireBlock(level, blockPos1, level.getBlockState(blockPos1), entity.getOwner()) && !MinecraftForge.EVENT_BUS.post(placeEvent)) {
                                 level.playSound(null, blockPos1, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.1F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-                                BlockState blockstate1 = BaseFireBlock.getState(level, blockPos1);
-                                level.setBlock(blockPos1, blockstate1, 11);
+                                FireBlockHandler.setFireBlock(level, blockPos1, level.getBlockState(blockPos1), entity.getOwner());
                                 entity.getSpellContext().removeWissen(this, getBlockWissen(entity, focusLevel));
                                 WizardsRebornPacketHandler.sendToTracking(level, blockPos1, new FireRaySpellPacket(new Vec3(blockPos1.getX() + 0.5f, blockPos1.getY() + 0.2f, blockPos1.getZ() + 0.5f), getColor()));
                             }
                         } else {
-                            BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos), BaseFireBlock.getState(level, blockPos), entity.getOwner());
+                            BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos), FireBlockHandler.getFireBlockState(level, blockPos, blockState, entity.getOwner()), entity.getOwner());
                             if (!MinecraftForge.EVENT_BUS.post(placeEvent)) {
                                 level.playSound(null, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-                                level.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
-                                level.gameEvent(entity.getOwner(), GameEvent.BLOCK_CHANGE, blockPos);
+                                FireBlockHandler.setLightBlock(level, blockPos, blockState, entity.getOwner());
                                 entity.getSpellContext().removeWissen(this, getBlockWissen(entity, focusLevel));
                                 WizardsRebornPacketHandler.sendToTracking(level, blockPos, new FireRaySpellPacket(new Vec3(blockPos.getX() + 0.5f, blockPos.getY() + 0.2f, blockPos.getZ() + 0.5f), getColor()));
                             }

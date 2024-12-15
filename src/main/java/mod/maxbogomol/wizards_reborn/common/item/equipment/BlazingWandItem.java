@@ -8,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
+import mod.maxbogomol.fluffy_fur.common.fire.FireBlockHandler;
 import mod.maxbogomol.fluffy_fur.common.fire.FireItemHandler;
 import mod.maxbogomol.fluffy_fur.common.fire.FireItemModifier;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
@@ -24,7 +25,6 @@ import mod.maxbogomol.wizards_reborn.common.network.item.BlazingWandBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.item.BlazingWandExtinguishingPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -41,10 +41,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.CandleCakeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -134,12 +130,11 @@ public class BlazingWandItem extends Item implements IGuiParticleItem {
                 return InteractionResult.SUCCESS;
             }
 
-            if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
+            if (!FireBlockHandler.canLightBlock(level, blockPos, blockState, player)) {
                 BlockPos blockPos1 = blockPos.relative(context.getClickedFace());
-                if (BaseFireBlock.canBePlacedAt(level, blockPos1, Direction.UP)) {
+                if (FireBlockHandler.canSetFireBlock(level, blockPos1, level.getBlockState(blockPos1), player)) {
                     level.playSound(null, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-                    BlockState blockstate1 = BaseFireBlock.getState(level, blockPos1);
-                    level.setBlock(blockPos1, blockstate1, 11);
+                    FireBlockHandler.setFireBlock(level, blockPos1, level.getBlockState(blockPos1), player);
                     WissenUtil.removeWissenFromWissenItems(items, cost);
                     player.awardStat(Stats.ITEM_USED.get(this));
                     if (!level.isClientSide()) WizardsRebornPacketHandler.sendToTracking(level, blockPos1, new BlazingWandBurstPacket(blockPos1));
@@ -147,8 +142,7 @@ public class BlazingWandItem extends Item implements IGuiParticleItem {
                 }
             } else {
                 level.playSound(null, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-                level.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
-                level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+                FireBlockHandler.setLightBlock(level, blockPos, blockState, player);
                 WissenUtil.removeWissenFromWissenItems(items, cost);
                 player.awardStat(Stats.ITEM_USED.get(this));
                 if (!level.isClientSide()) WizardsRebornPacketHandler.sendToTracking(level, blockPos, new BlazingWandBurstPacket(blockPos));

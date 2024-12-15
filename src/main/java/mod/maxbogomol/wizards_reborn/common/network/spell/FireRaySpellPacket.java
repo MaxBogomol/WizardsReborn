@@ -36,7 +36,7 @@ public class FireRaySpellPacket extends PositionColorClientPacket {
                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                 .setScaleData(GenericParticleData.create(0.3f, 0).build())
                 .setLifetime(40)
-                .randomVelocity(0.05f)
+                .randomVelocity(0.1f)
                 .repeat(level, x, y, z, 15, 0.6f);
         ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setColorData(ColorParticleData.create(0.979f, 0.912f, 0.585f).build())
@@ -44,7 +44,7 @@ public class FireRaySpellPacket extends PositionColorClientPacket {
                 .setScaleData(GenericParticleData.create(0.2f, 0).build())
                 .setLifetime(60)
                 .setGravity(1f)
-                .randomVelocity(0.085f)
+                .randomVelocity(0.185f)
                 .repeat(level, x, y, z, 15, 0.1f);
     }
 
