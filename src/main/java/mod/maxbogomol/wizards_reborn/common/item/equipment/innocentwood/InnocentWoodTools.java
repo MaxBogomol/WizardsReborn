@@ -34,22 +34,25 @@ public class InnocentWoodTools extends ArcaneWoodTools {
         InteractionResultHolder<ItemStack> result = super.use(level, player, hand);
         if (result.getResult() != InteractionResult.PASS) return result;
         ItemStack stack = player.getItemInHand(hand);
-        if (stack.getDamageValue() < stack.getMaxDamage() - 27) {
-            if (!level.isClientSide()) {
-                int slot = hand == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;
-                InnocentSparkEntity entity = new InnocentSparkEntity(level, player.getEyePosition().x(), player.getEyePosition().y(), player.getEyePosition().z());
-                entity.setData(player, slot, player.getEyePosition());
-                entity.setItem(stack);
+        if (!player.isShiftKeyDown()) {
+            if (stack.getDamageValue() < stack.getMaxDamage() - 27) {
+                if (!level.isClientSide()) {
+                    int slot = hand == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;
+                    InnocentSparkEntity entity = new InnocentSparkEntity(level, player.getEyePosition().x(), player.getEyePosition().y(), player.getEyePosition().z());
+                    entity.setData(player, slot, player.getEyePosition());
+                    entity.setItem(stack);
 
-                entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 0.5F, 0F);
-                level.addFreshEntity(entity);
+                    entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 0.5F, 0F);
+                    level.addFreshEntity(entity);
 
-                stack.hurtAndBreak(25, player, (e) -> {});
-                int cooldown = 500 - (150 * getLifeRoots(stack));
-                if (cooldown < 50) cooldown = 50;
-                player.getCooldowns().addCooldown(stack.getItem(), cooldown);
+                    stack.hurtAndBreak(25, player, (e) -> {
+                    });
+                    int cooldown = 500 - (150 * getLifeRoots(stack));
+                    if (cooldown < 50) cooldown = 50;
+                    player.getCooldowns().addCooldown(stack.getItem(), cooldown);
+                }
+                return InteractionResultHolder.success(stack);
             }
-            return InteractionResultHolder.success(stack);
         }
         return InteractionResultHolder.pass(stack);
     }

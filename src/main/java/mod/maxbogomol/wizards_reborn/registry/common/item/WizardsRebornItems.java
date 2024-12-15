@@ -4,6 +4,9 @@ package mod.maxbogomol.wizards_reborn.registry.common.item;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
+import mod.maxbogomol.fluffy_fur.common.book.CustomBook;
+import mod.maxbogomol.fluffy_fur.common.book.CustomBookComponent;
+import mod.maxbogomol.fluffy_fur.common.book.CustomBookHandler;
 import mod.maxbogomol.fluffy_fur.common.item.CustomBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.CustomChestBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.FuelBlockItem;
@@ -44,6 +47,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -803,6 +807,33 @@ public class WizardsRebornItems {
                 }
 
                 return itemStack;
+            }
+        });
+    }
+
+    public static void setupBook() {
+        ResourceLocation texture = new ResourceLocation(WizardsReborn.MOD_ID, "textures/models/book/arcanemicon.png");
+        CustomBookHandler.register(new CustomBook() {
+            public boolean isBook(Level level, Vec3 pos, ItemStack itemStack) {
+                return itemStack.getItem() == WizardsRebornItems.ARCANEMICON.get();
+            }
+
+            public ResourceLocation getTexture(Level level, Vec3 pos, ItemStack itemStack, CustomBookComponent component) {
+                return texture;
+            }
+
+            @OnlyIn(Dist.CLIENT)
+            public void openGui(Level level, ItemStack stack) {
+                if (stack.getItem() instanceof ArcanemiconItem item) {
+                    item.openGui(level, stack);
+                }
+            }
+
+            @OnlyIn(Dist.CLIENT)
+            public void openGui(Level level, Vec3 pos, ItemStack stack) {
+                if (stack.getItem() instanceof ArcanemiconItem item) {
+                    item.openGui(level, pos, stack);
+                }
             }
         });
     }

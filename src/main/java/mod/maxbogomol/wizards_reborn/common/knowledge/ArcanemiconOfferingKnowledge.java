@@ -1,16 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
-import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
-import mod.maxbogomol.wizards_reborn.common.network.knowledge.ArcanemiconOfferingPacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.knowledge.ArcanemiconOfferingMessagePacket;
+import mod.maxbogomol.wizards_reborn.common.network.knowledge.ArcanemiconOfferingPacket;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornKnowledges;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -56,13 +54,10 @@ public class ArcanemiconOfferingKnowledge extends Knowledge {
     @Override
     public void award(Player player) {
         if (!KnowledgeUtil.isKnowledge(player, WizardsRebornKnowledges.ARCANEMICON)) {
-            player.sendSystemMessage(Component.literal("<").append(
-                            Component.translatable("message.wizards_reborn.someone").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 123, 73, 109))))
-                    .append(Component.literal("> "))
-                    .append(Component.translatable("message.wizards_reborn.arcanemicon_offering").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 251, 179, 176)))));
             player.getInventory().add(new ItemStack(WizardsRebornItems.ARCANEMICON.get()));
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.ARCANEMICON_OFFERING.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
             WizardsRebornPacketHandler.sendToTracking(player.level(), player.getOnPos(), new ArcanemiconOfferingPacket(player.position().add(0, 1, 0)));
+            WizardsRebornPacketHandler.sendTo(player, new ArcanemiconOfferingMessagePacket());
         }
     }
 }

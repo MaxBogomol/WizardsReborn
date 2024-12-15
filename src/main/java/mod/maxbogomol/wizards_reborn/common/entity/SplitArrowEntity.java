@@ -125,6 +125,7 @@ public class SplitArrowEntity extends AbstractArrow {
         super.onHitBlock(result);
         setFade(true);
         setFadeTick(11);
+        setPos(result.getLocation());
 
         if (!level().isClientSide()) {
             Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();

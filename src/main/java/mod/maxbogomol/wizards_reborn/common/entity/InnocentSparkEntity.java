@@ -40,7 +40,6 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 public class InnocentSparkEntity extends ThrowableItemProjectile {
     public static final EntityDataAccessor<Optional<UUID>> ownerId = SynchedEntityData.defineId(InnocentSparkEntity.class, EntityDataSerializers.OPTIONAL_UUID);
@@ -194,10 +193,6 @@ public class InnocentSparkEntity extends ThrowableItemProjectile {
         setDeltaMovement(motion.x - x, motion.y - y, motion.z - z);
     }
 
-    public Predicate<Entity> getEntityFilter() {
-        return (e) -> !e.isSpectator() && e.isPickable() && (!e.equals(getOwner()));
-    }
-
     @Override
     protected Item getDefaultItem() {
         return WizardsRebornItems.INNOCENT_WOOD_SWORD.get();
@@ -293,10 +288,6 @@ public class InnocentSparkEntity extends ThrowableItemProjectile {
 
     public Player getSender() {
         return (getEntityData().get(ownerId).isPresent()) ? level().getPlayerByUUID(getEntityData().get(ownerId).get()) : null;
-    }
-
-    public UUID getSenderUUID() {
-        return (getEntityData().get(ownerId).isPresent()) ? getEntityData().get(ownerId).get() : null;
     }
 
     public int getSlot() {

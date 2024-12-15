@@ -6,10 +6,7 @@ import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.*;
 import mod.maxbogomol.wizards_reborn.common.network.block.*;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.item.*;
-import mod.maxbogomol.wizards_reborn.common.network.knowledge.ArcanemiconOfferingPacket;
-import mod.maxbogomol.wizards_reborn.common.network.knowledge.ArcanemiconToastPacket;
-import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeToastPacket;
-import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeUpdatePacket;
+import mod.maxbogomol.wizards_reborn.common.network.knowledge.*;
 import mod.maxbogomol.wizards_reborn.common.network.lightray.LightRayBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.*;
 import net.minecraft.core.BlockPos;
@@ -68,6 +65,8 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         CrystalInfusionBurstPacket.register(HANDLER, id++);
 
         ArcanemiconOfferingPacket.register(HANDLER, id++);
+        ArcanemiconOfferingMessagePacket.register(HANDLER, id++);
+        ArcanemiconMessagePacket.register(HANDLER, id++);
         WissenDustBurstPacket.register(HANDLER, id++);
         MortarPacket.register(HANDLER, id++);
         ArcanumLensBurstPacket.register(HANDLER, id++);

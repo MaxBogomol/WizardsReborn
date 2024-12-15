@@ -101,13 +101,16 @@ public class WizardsReborn {
         WizardsRebornPacketHandler.init();
         WizardsRebornAlchemyPotions.init();
         WizardsRebornKnowledges.init();
+
         Researches.init();
+
         WissenWandItem.setupControlTypes();
 
+        WizardsRebornItems.setupBook();
+        WizardsRebornItems.setupItems();
         WizardsRebornItems.setupCrystalsItems();
         WizardsRebornItems.setupDrinksItems();
         WizardsRebornBlocks.setupBlocks();
-        WizardsRebornItems.setupItems();
     }
 
     public static void hi() {

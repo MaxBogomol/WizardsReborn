@@ -182,8 +182,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 arrow = arrow1;
             }
             LivingEntity target = event.getEntity();
-            if (arrow != null)
-                onHit(new Vec3(target.getX(), target.getY() + (target.getBbHeight() / 2), target.getZ()), arrow);
+            if (arrow != null) onHit(new Vec3(target.getX(), target.getY() + (target.getBbHeight() / 2), target.getZ()), arrow);
         }
     }
 

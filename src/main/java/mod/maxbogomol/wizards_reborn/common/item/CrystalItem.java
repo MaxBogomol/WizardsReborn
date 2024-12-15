@@ -104,9 +104,12 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
             int red = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getRed(), color.getRed());
             int green = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
             int blue = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
-
             int packColor = ColorUtil.packColor(255, red, green, blue);
-            list.add(Component.translatable(stat.getTranslatedName()).append(": " + statLevel).withStyle(Style.EMPTY.withColor(packColor)));
+            
+            String statLevelString = String.valueOf(statLevel);
+            CompoundTag nbt = stack.getOrCreateTag();
+            if (nbt.contains("randomStats")) statLevelString = "?";
+            list.add(Component.translatable(stat.getTranslatedName()).append(": " + statLevelString).withStyle(Style.EMPTY.withColor(packColor)));
         }
     }
 

@@ -8,13 +8,16 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
 import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.network.ThrownScytheScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
+import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -28,10 +31,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +42,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -90,9 +92,7 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
     @Override
     public void tick() {
         if (!getFade()) {
-            HitResult ray = ProjectileUtil.getHitResultOnMoveVector(this, (e) -> {
-                return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(this.getSenderUUID()) || this.tickCount > 5);
-            });
+            RayHitResult hitResult = RayCast.getHit(level(), new RayCastContext(position(), position().add(getDeltaMovement())));
 
             if (!level().isClientSide()) {
                 Vec3 mov = getDeltaMovement();
@@ -127,10 +127,11 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                 }
             }
 
-            if (ray.getType() == HitResult.Type.BLOCK) {
+            if (hitResult.hasBlock()) {
                 setBlock(true);
                 setBlockTick(30);
                 setDeltaMovement(0, 0, 0);
+                setPos(hitResult.getPos());
             }
 
             Vec3 motion = getDeltaMovement();
@@ -182,7 +183,7 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                                 .setRenderType(FluffyFurRenderTypes.ADDITIVE)
                                 .setBehavior(CubeParticleBehavior.create().build())
                                 .setColorData(ColorParticleData.create(0.882f, 0.498f, 0.404f, 0.979f, 0.912f, 0.585f).build())
-                                .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                                .setTransparencyData(GenericParticleData.create(0.6f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                                 .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
                                 .setLifetime(40)
@@ -239,9 +240,10 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
         if (!level().isClientSide()) {
             boolean dist = false;
             if (getOwner() instanceof Player player) {
-                if (distanceTo(getOwner()) < 150 && player.isAlive()) {
+                if (distanceTo(getOwner()) < 250 && player.isAlive()) {
                     WizardsRebornPacketHandler.sendTo(player, new ThrownScytheScreenshakePacket(position().subtract(player.getEyePosition())));
-                    player.knockback(1f, getX() - player.getX(), getZ() - player.getZ());
+                    int knockback = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.KNOCKBACK, getItem());
+                    player.knockback(1f + (0.4f * knockback), getX() - player.getX(), getZ() - player.getZ());
                     player.hurtMarked = true;
 
                     level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
@@ -346,7 +348,9 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
 
     public void hitEntity(Entity target) {
         if (!level().isClientSide() && getOwner() instanceof LivingEntity owner) {
-            DamageSource source = target.damageSources().mobProjectile(this, owner);
+            ItemStack oldStack = owner.getItemBySlot(EquipmentSlot.MAINHAND);
+            owner.setItemSlot(EquipmentSlot.MAINHAND, getItem());
+            DamageSource source = DamageHandler.create(target.level(), DamageTypes.GENERIC, this, owner);
             boolean success = target.hurt(source, getBaseDamage());
             if (success && target instanceof LivingEntity livingEntity) {
                 ItemStack scythe = getItem();
@@ -365,6 +369,7 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
 
                 level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
             }
+            owner.setItemSlot(EquipmentSlot.MAINHAND, oldStack);
         }
     }
 
