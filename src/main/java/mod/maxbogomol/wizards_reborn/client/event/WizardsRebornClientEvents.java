@@ -1,36 +1,48 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
 import com.google.common.collect.Multimap;
+import com.mojang.datafixers.util.Either;
 import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidItem;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipComponent;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
+import mod.maxbogomol.wizards_reborn.common.item.ArcaneLumosItem;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneBowItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.event.ComputeFovModifierEvent;
-import net.minecraftforge.client.event.MovementInputUpdateEvent;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.event.ViewportEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.List;
 
 public class WizardsRebornClientEvents {
 
@@ -40,7 +52,7 @@ public class WizardsRebornClientEvents {
     }
 
     @SubscribeEvent
-    public void onDrawScreenPost(RenderGuiOverlayEvent.Pre event) {
+    public void onRenderGuiOverlayEvent(RenderGuiOverlayEvent.Pre event) {
         if (WizardsReborn.proxy.getPlayer().isAlive()) {
             if (event.getOverlay().id() == VanillaGuiOverlay.CROSSHAIR.id()) {
                 WissenWandItem.drawWissenGui(event.getGuiGraphics());
@@ -71,6 +83,51 @@ public class WizardsRebornClientEvents {
                         event.getToolTip().addAll(i, ArcaneEnchantmentUtil.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
                     }
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        FracturedCrystalItem.onTooltipRenderColor(event);
+        CrystalItem.onTooltipRenderColor(event);
+        ArcaneLumosItem.onTooltipRenderColor(event);
+    }
+
+    @SubscribeEvent
+    public void onTooltipRenderGatherComponents(RenderTooltipEvent.GatherComponents event) {
+        ItemStack stack = event.getItemStack();
+        List<Either<FormattedText, TooltipComponent>> tooltipElements = event.getTooltipElements();
+        int i = 1;
+        if (stack.getItem() instanceof IWissenItem item) {
+            WissenItemUtil.existWissen(stack);
+            ValueFrameTooltipComponent component = new ValueFrameTooltipComponent(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), (float) item.getMaxWissen() / WissenItemUtil.getWissen(stack));
+            addTooltipComponent(component, i, tooltipElements);
+            i++;
+        }
+        if (stack.getItem() instanceof IFluidItem item) {
+            CompoundTag nbt = stack.getOrCreateTag();
+            if (nbt.contains("fluidTank")) {
+                ValueFrameTooltipComponent component = new ValueFrameTooltipComponent(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), (float) item.getMaxFluid(stack) / nbt.getCompound("fluidTank").getInt("Amount"));
+                addTooltipComponent(component, i, tooltipElements);
+                i++;
+            }
+        }
+        if (stack.getItem() instanceof ISteamItem item) {
+            CompoundTag nbt = stack.getOrCreateTag();
+            if (nbt.contains("steam")) {
+                ValueFrameTooltipComponent component = new ValueFrameTooltipComponent(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), (float) item.getMaxSteam() / nbt.getInt("steam"));
+                addTooltipComponent(component, i, tooltipElements);
+            }
+        }
+    }
+
+    public static void addTooltipComponent(TooltipComponent component, int i, List<Either<FormattedText, TooltipComponent>> tooltipElements) {
+        if (component != null) {
+            if (tooltipElements.size() >= 1) {
+                tooltipElements.add(i, Either.right(component));
+            } else {
+                tooltipElements.add(Either.right(component));
             }
         }
     }

@@ -23,6 +23,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -107,6 +108,17 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
                     .randomVelocity(0.01f)
                     .randomOffset(0.125f)
                     .spawn(level, entity.getX(), entity.getY() + 0.25F, entity.getZ());
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        if (event.getItemStack().getItem() instanceof FracturedCrystalItem item) {
+            Color color = item.getType().getColor();
+            int packColorStart = ColorUtil.packColor(255 / 5, color.getRed(), color.getGreen(), color.getBlue());
+            int packColorEnd = ColorUtil.packColor(color);
+            event.setBorderStart(packColorStart);
+            event.setBorderEnd(packColorEnd);
         }
     }
 }

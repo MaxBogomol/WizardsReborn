@@ -17,6 +17,8 @@ import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
+import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameClientTooltipComponent;
+import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipComponent;
 import mod.maxbogomol.wizards_reborn.client.model.item.CollarItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.DrinksModels;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
@@ -49,6 +51,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -765,6 +768,11 @@ public class WizardsRebornItems {
         public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
             event.register(new AlchemyPotionItem.ColorHandler(), ALCHEMY_VIAL_POTION.get(), ALCHEMY_FLASK_POTION.get());
             event.register(new RunicWisestonePlateItem.ColorHandler(), RUNIC_WISESTONE_PLATE.get());
+        }
+
+        @SubscribeEvent
+        public static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
+            event.register(ValueFrameTooltipComponent.class, ValueFrameClientTooltipComponent::new);
         }
     }
 

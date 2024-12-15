@@ -14,6 +14,7 @@ import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 
 import java.awt.*;
 import java.util.Random;
@@ -63,7 +65,6 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
 
             if (lumos.color.hasFirstStar()) {
                 if (random.nextFloat() < 0.03) {
-                    ;
                     ParticleBuilder.create(FluffyFurParticles.STAR)
                             .setColorData(ColorParticleData.create(lumos.color.getColorSecondStar()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
@@ -120,6 +121,19 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                         .renderCenteredQuad(poseStack, 7f)
                         .endBatch();
                 poseStack.popPose();
+            }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        if (event.getItemStack().getItem() instanceof ArcaneLumosItem item) {
+            if (item.getBlock() instanceof ArcaneLumosBlock lumos) {
+                Color color = lumos.color.getLightRayColor(ClientTickHandler.partialTicks);
+                int packColorStart = ColorUtil.packColor(255 / 5, color.getRed(), color.getGreen(), color.getBlue());
+                int packColorEnd = ColorUtil.packColor(color);
+                event.setBorderStart(packColorStart);
+                event.setBorderEnd(packColorEnd);
             }
         }
     }

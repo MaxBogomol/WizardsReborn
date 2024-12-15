@@ -36,6 +36,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -185,6 +186,21 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
                         .endBatch();
                 poseStack.popPose();
             }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        if (event.getItemStack().getItem() instanceof CrystalItem item) {
+            Color color = item.getType().getColor();
+            int packColorStart = ColorUtil.packColor(255 / 5, color.getRed(), color.getGreen(), color.getBlue());
+            int packColorEnd = ColorUtil.packColor(color);
+            if (item.getPolishing().hasParticle()) {
+                color = item.getPolishing().getColor();
+                packColorStart = ColorUtil.packColor(255 / 3, color.getRed(), color.getGreen(), color.getBlue());
+            }
+            event.setBorderStart(packColorStart);
+            event.setBorderEnd(packColorEnd);
         }
     }
 }
