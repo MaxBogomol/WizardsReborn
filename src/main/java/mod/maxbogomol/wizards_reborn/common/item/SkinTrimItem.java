@@ -8,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -69,5 +71,16 @@ public class SkinTrimItem extends Item implements IGuiParticleItem {
         sparkleBuilder.renderCenteredQuad(poseStack, 9f)
                 .endBatch();
         poseStack.popPose();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        if (event.getItemStack().getItem() instanceof SkinTrimItem item) {
+            Color color = item.skin.getColor();
+            int packColorStart = ColorUtil.packColor(255 / 10, color.getRed(), color.getGreen(), color.getBlue());
+            int packColorEnd = ColorUtil.packColor(color);
+            event.setBorderStart(packColorStart);
+            event.setBorderEnd(packColorEnd);
+        }
     }
 }

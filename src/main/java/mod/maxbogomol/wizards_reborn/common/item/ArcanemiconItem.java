@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -71,8 +72,8 @@ public class ArcanemiconItem extends Item {
     public static Component getEditionComponent() {
         int edition = WizardsReborn.VERSION_NUMBER;
         Random random = new Random(edition);
-        Color color1 = new Color(random.nextInt(0, 255), random.nextInt(0, 255), random.nextInt(0, 255));
-        Color color2 = new Color(random.nextInt(0, 255), random.nextInt(0, 255), random.nextInt(0, 255));
+        Color color1 = new Color(random.nextInt(0, 256), random.nextInt(0, 256), random.nextInt(0, 256));
+        Color color2 = new Color(random.nextInt(0, 256), random.nextInt(0, 256), random.nextInt(0, 256));
         float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 5f;
         MutableComponent component = Component.empty();
 
@@ -89,5 +90,19 @@ public class ArcanemiconItem extends Item {
         }
 
         return component;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        if (event.getItemStack().getItem() instanceof ArcanemiconItem item) {
+            int edition = WizardsReborn.VERSION_NUMBER;
+            Random random = new Random(edition);
+            Color color1 = new Color(random.nextInt(0, 256), random.nextInt(0, 256), random.nextInt(0, 256));
+            Color color2 = new Color(random.nextInt(0, 256), random.nextInt(0, 256), random.nextInt(0, 256));
+            int packColorStart = ColorUtil.packColor(color1);
+            int packColorEnd = ColorUtil.packColor(color2);
+            event.setBorderStart(packColorStart);
+            event.setBorderEnd(packColorEnd);
+        }
     }
 }

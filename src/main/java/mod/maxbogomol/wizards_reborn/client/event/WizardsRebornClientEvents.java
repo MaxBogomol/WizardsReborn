@@ -17,10 +17,9 @@ import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchant
 import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
-import mod.maxbogomol.wizards_reborn.common.item.ArcaneLumosItem;
-import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneBowItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
@@ -89,9 +88,13 @@ public class WizardsRebornClientEvents {
 
     @SubscribeEvent
     public void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        ArcanemiconItem.onTooltipRenderColor(event);
         FracturedCrystalItem.onTooltipRenderColor(event);
         CrystalItem.onTooltipRenderColor(event);
         ArcaneLumosItem.onTooltipRenderColor(event);
+        EngravedWisestoneItem.onTooltipRenderColor(event);
+        RunicWisestonePlateItem.onTooltipRenderColor(event);
+        SkinTrimItem.onTooltipRenderColor(event);
     }
 
     @SubscribeEvent

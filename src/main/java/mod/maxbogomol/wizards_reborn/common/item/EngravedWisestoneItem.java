@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -102,6 +103,19 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
                     .renderCenteredQuad(poseStack, 12f)
                     .endBatch();
             poseStack.popPose();
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        if (event.getItemStack().getItem() instanceof EngravedWisestoneItem item) {
+            if (item.getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
+                Color color = block.getMonogram().getColor();
+                int packColorStart = ColorUtil.packColor(255 / 10, color.getRed(), color.getGreen(), color.getBlue());
+                int packColorEnd = ColorUtil.packColor(color);
+                event.setBorderStart(packColorStart);
+                event.setBorderEnd(packColorEnd);
+            }
         }
     }
 }

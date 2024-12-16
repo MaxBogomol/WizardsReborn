@@ -9,8 +9,8 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColor;
@@ -24,6 +24,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -113,6 +114,20 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
                         .renderCenteredQuad(poseStack, 2f * offset)
                         .endBatch();
                 poseStack.popPose();
+            }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void onTooltipRenderColor(RenderTooltipEvent.Color event) {
+        if (event.getItemStack().getItem() instanceof RunicWisestonePlateItem item) {
+            CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(event.getItemStack());
+            if (!CrystalRitualUtil.isEmpty(ritual)) {
+                Color color = ritual.getColor();
+                int packColorStart = ColorUtil.packColor(255 / 10, color.getRed(), color.getGreen(), color.getBlue());
+                int packColorEnd = ColorUtil.packColor(color);
+                event.setBorderStart(packColorStart);
+                event.setBorderEnd(packColorEnd);
             }
         }
     }
