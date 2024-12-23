@@ -1,22 +1,22 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption;
 
-import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
-import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.util.TotemOfExperienceAbsorptionBlockUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+
 import net.minecraft.util.Mth;
+
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -41,16 +41,16 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.function.Consumer;
+
 import java.util.stream.Stream;
 
 public class TotemOfExperienceAbsorptionBlock extends Block implements EntityBlock, SimpleWaterloggedBlock, ITotemBlock {
@@ -120,32 +120,7 @@ public class TotemOfExperienceAbsorptionBlock extends Block implements EntityBlo
                     player.giveExperiencePoints(-remainAdd);
                     level.playSound(null, player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1.2f);
                     if (player.level().isClientSide()) {
-                        final Consumer<GenericParticle> blockTarget = p -> {
-                            Vec3 blockPos = pos.getCenter().add(0, 0.25f, 0);
-                            Vec3 pPos = p.getPosition();
-                            float x = 0;
-                            float y = 0;
-                            float z = 0;
-
-                            if (blockPos.x() < pPos.x()) x = -0.01f;
-                            if (blockPos.x() > pPos.x()) x = 0.01f;
-                            if (blockPos.y() < pPos.y()) y = -0.01f;
-                            if (blockPos.y() > pPos.y()) y = 0.01f;
-                            if (blockPos.z() < pPos.z()) z = -0.01f;
-                            if (blockPos.z() > pPos.z()) z = 0.01f;
-
-                            p.setSpeed(p.getSpeed().add(x, y, z));
-                        };
-                        ParticleBuilder.create(FluffyFurParticles.WISP)
-                                .setColorData(ColorParticleData.create(0.784f, 1f, 0.560f).build())
-                                .setTransparencyData(GenericParticleData.create(0.3f, 0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                                .setScaleData(GenericParticleData.create(0.05f, 0.15f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                                .addTickActor(blockTarget)
-                                .setLifetime(50)
-                                .randomVelocity(0.5f)
-                                .disablePhysics()
-                                .setFriction(0.9f)
-                                .repeat(level, player.getX(), player.getY() + (player.getEyeHeight() / 2), player.getZ(), 5);
+                        TotemOfExperienceAbsorptionBlockUtil.transferExperienceToPlayer(level, pos, player, blockEntity);
                     }
                     level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(blockEntity);
