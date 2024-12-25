@@ -90,7 +90,7 @@ public class BlazingWandItem extends Item implements IGuiParticleItem {
                         target.invulnerableTime = 0;
                         target.hurt(DamageHandler.create(player.level(), WizardsRebornDamageTypes.ARCANE_MAGIC, player, player), getAttackDamage());
                         target.invulnerableTime = invulnerableTime;
-                        target.level().playSound(WizardsReborn.proxy.getPlayer(), target.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.5f, (float) (1.2f + ((random.nextFloat() - 0.5D) / 2)));
+                        target.level().playSound(null, target.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.5f, (float) (1.2f + ((random.nextFloat() - 0.5D) / 2)));
                         WizardsRebornPacketHandler.sendToTracking(target.level(), target.blockPosition(), new BlazingWandAttackPacket(target.position().add(0, target.getBbHeight() / 2f, 0)));
                     }
                 }

@@ -12,7 +12,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
@@ -103,8 +103,8 @@ public class CrystalInfusionRecipeCategory implements IRecipeCategory<CrystalInf
         int stringWidth = font.width(textLight);
 
         if (WizardsRebornClientConfig.SHOW_LIGHT_NAME.get()) {
-            gui.drawString(font, textLight, 141 - stringWidth + 1, 59, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textLight, 141 - stringWidth, 58, ArcanemiconGui.TEXT_COLOR_INT, false);
+            gui.drawString(font, textLight, 141 - stringWidth + 1, 59, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textLight, 141 - stringWidth, 58, ArcanemiconScreen.TEXT_COLOR_INT, false);
         }
     }
 }

@@ -7,6 +7,8 @@ import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
 import mod.maxbogomol.fluffy_fur.common.book.CustomBook;
 import mod.maxbogomol.fluffy_fur.common.book.CustomBookComponent;
 import mod.maxbogomol.fluffy_fur.common.book.CustomBookHandler;
+import mod.maxbogomol.fluffy_fur.common.entity.ItemEntityHandler;
+import mod.maxbogomol.fluffy_fur.common.entity.ItemEntityModifier;
 import mod.maxbogomol.fluffy_fur.common.item.CustomBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.CustomChestBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.FuelBlockItem;
@@ -16,6 +18,7 @@ import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameClientTooltipComponent;
 import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipComponent;
@@ -29,6 +32,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.*;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.banner.WizardsRebornBannerPatternTags;
@@ -43,7 +47,9 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -815,6 +821,34 @@ public class WizardsRebornItems {
                 }
 
                 return itemStack;
+            }
+        });
+
+        ItemEntityHandler.register(new ItemEntityModifier() {
+            public boolean isItem(Level level, ItemEntity entity, ItemStack stack) {
+                return ArcaneEnchantmentUtil.isArcaneItem(stack);
+            }
+
+            public boolean rejectHurt(Level level, ItemEntity entity, ItemStack stack, DamageSource source, float amount) {
+                return true;
+            }
+        });
+        ItemEntityHandler.register(new ItemEntityModifier() {
+            public boolean isItem(Level level, ItemEntity entity, ItemStack stack) {
+                if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+                    return ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.THROW) > 0;
+                }
+                return false;
+            }
+
+            public void tick(Level level, ItemEntity entity, ItemStack stack) {
+                if (entity.isNoGravity()) {
+                    entity.setDeltaMovement(Vec3.ZERO);
+                }
+            }
+
+            public boolean rejectHurt(Level level, ItemEntity entity, ItemStack stack, DamageSource source, float amount) {
+                return true;
             }
         });
     }

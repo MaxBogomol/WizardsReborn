@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.common.world.WorldGen;
+import mod.maxbogomol.wizards_reborn.common.levelgen.WizardsRebornFeatures;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -19,23 +19,23 @@ import java.util.Optional;
 public class MorBlock extends MushroomBlock {
 
     public MorBlock(Properties properties) {
-        super(properties, WorldGen.TALL_MOR);
+        super(properties, WizardsRebornFeatures.TALL_MOR);
     }
 
     @Override
     public boolean growMushroom(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
-        ResourceKey<ConfiguredFeature<?, ?>> configuredfeature = WorldGen.TALL_MOR;
+        ResourceKey<ConfiguredFeature<?, ?>> configuredfeature = WizardsRebornFeatures.TALL_MOR;
         if (random.nextFloat() < 0.4) {
             if (this == WizardsRebornBlocks.MOR.get()) {
-                configuredfeature = WorldGen.TALL_MOR;
+                configuredfeature = WizardsRebornFeatures.TALL_MOR;
             } else {
-                configuredfeature = WorldGen.TALL_ELDER_MOR;
+                configuredfeature = WizardsRebornFeatures.TALL_ELDER_MOR;
             }
         } else {
             if (this == WizardsRebornBlocks.MOR.get()) {
-                configuredfeature = WorldGen.HUGE_MOR;
+                configuredfeature = WizardsRebornFeatures.HUGE_MOR;
             } else {
-                configuredfeature = WorldGen.HUGE_ELDER_MOR;
+                configuredfeature = WizardsRebornFeatures.HUGE_ELDER_MOR;
             }
         }
 

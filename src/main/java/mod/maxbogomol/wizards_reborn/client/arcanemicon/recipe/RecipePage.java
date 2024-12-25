@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,19 +15,19 @@ public class RecipePage extends Page {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public boolean isChanged(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         return false;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void renderChanged(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         if (isChanged(book, gui, x, y, mouseX, mouseY)) {
             renderChangedText(book, gui, x, y, mouseX, mouseY);
         }
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderChangedText(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void renderChangedText(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         String title = I18n.get(getChangedText());
         int titleWidth = Minecraft.getInstance().font.width(title);
         drawText(book, gui, title, x + 64 - titleWidth / 2, y + 15 - Minecraft.getInstance().font.lineHeight);

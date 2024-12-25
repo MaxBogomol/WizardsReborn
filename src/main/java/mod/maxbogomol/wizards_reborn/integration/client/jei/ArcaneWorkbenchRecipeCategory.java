@@ -10,7 +10,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
@@ -84,8 +84,8 @@ public class ArcaneWorkbenchRecipeCategory implements IRecipeCategory<ArcaneWork
         int stringWidth = font.width(textWissen);
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
-            gui.drawString(font, textWissen, 166 - stringWidth + 1, 71, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textWissen, 166 - stringWidth, 70, ArcanemiconGui.TEXT_COLOR_INT, false);
+            gui.drawString(font, textWissen, 166 - stringWidth + 1, 71, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textWissen, 166 - stringWidth, 70, ArcanemiconScreen.TEXT_COLOR_INT, false);
         }
     }
 }

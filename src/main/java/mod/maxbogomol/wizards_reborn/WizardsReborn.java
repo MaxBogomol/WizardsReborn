@@ -24,6 +24,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTabs;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemSkins;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.levelgen.WizardsRebornTrunkPlacerTypes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;

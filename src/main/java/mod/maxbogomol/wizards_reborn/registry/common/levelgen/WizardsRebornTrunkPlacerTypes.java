@@ -1,7 +1,7 @@
-package mod.maxbogomol.wizards_reborn.registry.common;
+package mod.maxbogomol.wizards_reborn.registry.common.levelgen;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTrunkPlacer;
+import mod.maxbogomol.wizards_reborn.common.levelgen.ArcaneWoodTrunkPlacer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -2,12 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.google.common.base.Preconditions;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.nbt.CompoundTag;
@@ -201,7 +200,7 @@ public class AlchemyPotionItem extends PlacedItem {
                         added = added - (added % 250);
                         if (added >= 250) {
                             handler.fill(fluid, IFluidHandler.FluidAction.EXECUTE);
-                            player.level().playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.BOTTLE_EMPTY, SoundSource.PLAYERS, 1.0f, 1.0f);
+                            player.level().playSound(null, player.getOnPos(), SoundEvents.BOTTLE_EMPTY, SoundSource.PLAYERS, 1.0f, 1.0f);
 
                             if (!player.getAbilities().instabuild) {
                                 setUses(stack, getUses(stack) + (added / 250));

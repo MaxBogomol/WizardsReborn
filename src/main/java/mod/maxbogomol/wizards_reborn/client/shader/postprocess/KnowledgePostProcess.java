@@ -58,8 +58,8 @@ public class KnowledgePostProcess extends PostProcess {
     @Override
     public void beforeProcess(PoseStack poseStack) {
         float offset = (float) Math.sin(Math.toRadians((Mth.lerp(ClientTickHandler.partialTicks, oldTick, tick) / getMaxTick()) * 90)) * getIntensity();
-        effectInstance.safeGetUniform("ConvergeX").set(new Vector3f(-4f * offset, 0, 2 * offset));
-        effectInstance.safeGetUniform("ConvergeY").set(new Vector3f(0, -4f * offset, 2 * offset));
+        effectInstance.safeGetUniform("ConvergeX").set(new Vector3f(-2f * offset, 0, 1 * offset));
+        effectInstance.safeGetUniform("ConvergeY").set(new Vector3f(0, -2f * offset, 1 * offset));
     }
 
     @Override

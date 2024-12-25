@@ -10,7 +10,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
@@ -94,8 +94,8 @@ public class WissenCrystallizerRecipeCategory implements IRecipeCategory<WissenC
         int stringWidth = font.width(textWissen);
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
-            gui.drawString(font, textWissen, 141 - stringWidth + 1, 59, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textWissen, 141 - stringWidth, 58, ArcanemiconGui.TEXT_COLOR_INT, false);
+            gui.drawString(font, textWissen, 141 - stringWidth + 1, 59, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textWissen, 141 - stringWidth, 58, ArcanemiconScreen.TEXT_COLOR_INT, false);
         }
     }
 }

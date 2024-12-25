@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 import com.google.common.collect.Lists;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,7 +27,7 @@ public class BlockPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
 
         int lines = (int) Math.ceil(blocks.size() / 6);

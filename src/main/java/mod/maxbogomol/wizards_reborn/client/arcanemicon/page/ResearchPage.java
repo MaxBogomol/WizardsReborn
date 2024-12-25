@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramHandler;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Chapter;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
@@ -58,12 +58,12 @@ public class ResearchPage extends Page {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void tick(ArcanemiconGui book) {
+    public void tick(ArcanemiconScreen book) {
         setActives();
     }
 
     @OnlyIn(Dist.CLIENT)
-    public boolean click(ArcanemiconGui book, int x, int y, int mouseX, int mouseY) {
+    public boolean click(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY) {
         if (mouseX >= x && mouseY >= y && mouseX <= x + 128 && mouseY <= y + 160) {
             if (main) {
                 if (mouseY < y + 130) {
@@ -95,7 +95,7 @@ public class ResearchPage extends Page {
                     int actives = getAllActives();
                     if (actives >= mapSize) {
                         if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX <= x + 95 + 18 && mouseY <= y + 132 + 18) {
-                            ArcanemiconGui.currentChapter = lastChapter;
+                            ArcanemiconScreen.currentChapter = lastChapter;
                             WizardsRebornPacketHandler.sendToServer(new SpellUnlockPacket(spell));
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
@@ -138,7 +138,7 @@ public class ResearchPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         boolean hardmode = WizardsRebornClientConfig.RESEARCH_HARDMODE.get();
         if (Minecraft.getInstance().level.getLevelData().isHardcore()) hardmode = true;
         if (main) {

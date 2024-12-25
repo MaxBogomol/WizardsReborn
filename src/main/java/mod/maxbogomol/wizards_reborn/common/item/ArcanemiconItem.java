@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -50,13 +50,13 @@ public class ArcanemiconItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public void openGui(Level level, ItemStack stack) {
         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
-        Minecraft.getInstance().setScreen(new ArcanemiconGui());
+        Minecraft.getInstance().setScreen(new ArcanemiconScreen());
     }
 
     @OnlyIn(Dist.CLIENT)
     public void openGui(Level level, Vec3 pos, ItemStack stack) {
         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
-        ArcanemiconGui gui = new ArcanemiconGui();
+        ArcanemiconScreen gui = new ArcanemiconScreen();
         gui.blockPos = BlockPos.containing(pos);
         gui.isBLock = true;
         Minecraft.getInstance().setScreen(gui);

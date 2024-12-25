@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,7 +27,7 @@ public class TitledSpellCharPage extends Page {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public boolean click(ArcanemiconGui book, int x, int y, int mouseX, int mouseY) {
+    public boolean click(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY) {
         if (mouseX >= x + 55 && mouseY >= y + 131 && mouseX <= x + 55 + 18 && mouseY <= y + 131 + 18) {
             ArcanemiconChapters.RESEARCH_MAIN.lastChapter = book.currentChapter;
             book.currentChapter = ArcanemiconChapters.RESEARCH;
@@ -40,7 +40,7 @@ public class TitledSpellCharPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         gui.blit(BACKGROUND, x, y, 128, 0, 128, 20);
 
         String title = I18n.get(this.title);

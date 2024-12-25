@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.google.common.base.Preconditions;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
@@ -54,7 +53,7 @@ public class AlchemyBottleItem extends PlacedItem implements ICustomBlockEntityD
 
                         AlchemyPotionItem.setUses(potionItem, bottle.maxUses - (remove / 250));
 
-                        player.level().playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.BOTTLE_FILL, SoundSource.PLAYERS, 1.0f, 1.0f);
+                        player.level().playSound(null, player.getOnPos(), SoundEvents.BOTTLE_FILL, SoundSource.PLAYERS, 1.0f, 1.0f);
 
                         if (stack.isEmpty()) {
                             player.setItemInHand(hand, potionItem);

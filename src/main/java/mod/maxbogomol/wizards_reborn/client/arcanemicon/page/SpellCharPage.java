@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -29,7 +29,7 @@ public class SpellCharPage extends Page {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public boolean click(ArcanemiconGui book, int x, int y, int mouseX, int mouseY) {
+    public boolean click(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY) {
         if (!KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
             int points = KnowledgeUtil.getKnowledgePoints(Minecraft.getInstance().player) - KnowledgeUtil.getSpellPoints(Minecraft.getInstance().player);
             if (points < 0) {
@@ -40,7 +40,7 @@ public class SpellCharPage extends Page {
                 if (mouseX >= x + 55 && mouseY >= y + 131 && mouseX <= x + 55 + 18 && mouseY <= y + 131 + 18) {
                     if (spell.getResearch() != null) {
                         ArcanemiconChapters.RESEARCH_MAIN.lastChapter = book.currentChapter;
-                        ArcanemiconGui.currentChapter = ArcanemiconChapters.RESEARCH;
+                        ArcanemiconScreen.currentChapter = ArcanemiconChapters.RESEARCH;
                         ArcanemiconChapters.RESEARCH_MAIN.createNap(spell);
                         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                         return true;
@@ -53,7 +53,7 @@ public class SpellCharPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         if (I18n.exists(text)) drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
 
         if (!KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {

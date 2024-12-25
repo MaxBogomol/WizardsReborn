@@ -15,7 +15,7 @@ import mod.maxbogomol.fluffy_fur.common.recipe.FluidIngredient;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
@@ -133,8 +133,8 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
             String textWissen = Integer.toString(recipe.getRecipeWissen());
             int stringWidth = font.width(textWissen);
 
-            gui.drawString(font, textWissen, 122 - (stringWidth / 2) + 1, 95, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textWissen, 122 - (stringWidth / 2), 95, ArcanemiconGui.TEXT_COLOR_INT, false);
+            gui.drawString(font, textWissen, 122 - (stringWidth / 2) + 1, 95, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textWissen, 122 - (stringWidth / 2), 95, ArcanemiconScreen.TEXT_COLOR_INT, false);
             if (mouseX >= 116 && mouseY >= 68 && mouseX <= 116 + 16 && mouseY <= 68 + 16) {
                 gui.renderTooltip(font, NumericalUtil.getWissenName(), (int) mouseX, (int) mouseY);
             }
@@ -146,8 +146,8 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
             String textSteam = Integer.toString(recipe.getRecipeSteam());
             int stringWidth = font.width(textSteam);
 
-            gui.drawString(font, textSteam, 122 - (stringWidth / 2) + 1, 15, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textSteam, 122 - (stringWidth / 2), 15, ArcanemiconGui.TEXT_COLOR_INT, false);
+            gui.drawString(font, textSteam, 122 - (stringWidth / 2) + 1, 15, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textSteam, 122 - (stringWidth / 2), 15, ArcanemiconScreen.TEXT_COLOR_INT, false);
             if (mouseX >= 116 && mouseY >= 28 && mouseX <= 116 + 16 && mouseY <= 28 + 16) {
                 gui.renderTooltip(font, NumericalUtil.getSteamName(), (int) mouseX, (int) mouseY);
             }

@@ -24,7 +24,7 @@ public class Category {
         hoveramount = 0;
     }
 
-    public boolean click(ArcanemiconGui gui, int x, int y, boolean right, int mouseX, int mouseY) {
+    public boolean click(ArcanemiconScreen gui, int x, int y, boolean right, int mouseX, int mouseY) {
         int w = 20;
         int xx = x;
         if (!right) x -= 20;
@@ -34,8 +34,8 @@ public class Category {
         boolean hover = mouseX >= x && mouseY >= y && mouseX <= xx && mouseY <= y + 18;
         if (right)  hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
         if (hover) {
-            ArcanemiconGui.historyEntries.clear();
-            ArcanemiconGui.currentHistory = 0;
+            ArcanemiconScreen.historyEntries.clear();
+            ArcanemiconScreen.currentHistory = 0;
             gui.changeChapter(chapter);
             Minecraft.getInstance().player.playNotifySound(SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.NEUTRAL, 0.5f, 1.0f);
             return true;
@@ -43,7 +43,7 @@ public class Category {
         return false;
     }
 
-    public void draw(ArcanemiconGui book, GuiGraphics gui, int x, int y, boolean right, int mouseX, int mouseY) {
+    public void draw(ArcanemiconScreen book, GuiGraphics gui, int x, int y, boolean right, int mouseX, int mouseY) {
         int w = 20;
         int xx = x;
         if (!right) x -= 20;
@@ -61,12 +61,12 @@ public class Category {
             x += hoveramount * 18;
         }
 
-        gui.blit(ArcanemiconGui.BACKGROUND, x, y, 312, right ? 0 : 18, 39, 18, 512, 512);
+        gui.blit(ArcanemiconScreen.BACKGROUND, x, y, 312, right ? 0 : 18, 39, 18, 512, 512);
         gui.renderItem(icon, x + (right ? 21 : 2), y + 1);
         gui.renderItemDecorations(Minecraft.getInstance().font, icon, x + (right ? 21 : 2), y + 1, null);
     }
 
-    public void drawTooltip(ArcanemiconGui book, GuiGraphics gui, int x, int y, boolean right, int mouseX, int mouseY) {
+    public void drawTooltip(ArcanemiconScreen book, GuiGraphics gui, int x, int y, boolean right, int mouseX, int mouseY) {
         int w = 20;
         int xx = x;
         if (!right) x -= 20;

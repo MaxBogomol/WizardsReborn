@@ -39,7 +39,7 @@ public class WissenWandRenderHandler {
     public static Vec3 oldBlock = Vec3.ZERO;
     public static Vec3 nowBlock = Vec3.ZERO;
     public static Vec3 blockRay = Vec3.ZERO;
-    public static Vec3 oldBlockRay  = Vec3.ZERO;
+    public static Vec3 oldBlockRay = Vec3.ZERO;
     public static Vec3 nowBlockRay = Vec3.ZERO;
     public static Vec3 side = Vec3.ZERO;
     public static Vec3 oldSide = Vec3.ZERO;

@@ -22,7 +22,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArcanemiconGui extends Screen {
+public class ArcanemiconScreen extends Screen {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon.png");
     public static int xSize = 312;
     public static int ySize = 180;
@@ -41,7 +41,7 @@ public class ArcanemiconGui extends Screen {
     public BlockPos blockPos = BlockPos.ZERO;
     public boolean isBLock = false;
 
-    public ArcanemiconGui() {
+    public ArcanemiconScreen() {
         super(Component.translatable("gui.wizards_reborn.arcanemicon.title"));
         if (currentChapter == null) {
             currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
@@ -56,6 +56,13 @@ public class ArcanemiconGui extends Screen {
         for (Category category : ArcanemiconChapters.additionalCategories) {
             category.reset();
         }
+    }
+
+    public static void loggedReset() {
+        currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
+        currentPage = 0;
+        historyEntries.clear();
+        currentHistory = 1;
     }
 
     public void changeChapter(Chapter next) {

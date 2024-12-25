@@ -145,7 +145,7 @@ public class AlchemyBagItem extends BaseCurioItem implements IBagItem {
         if (!level.isClientSide) {
             MenuProvider containerProvider = createContainerProvider(level, stack);
             NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, b -> b.writeItem(stack));
-            level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1f, 1f);
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1f, 1f);
         }
     }
 }

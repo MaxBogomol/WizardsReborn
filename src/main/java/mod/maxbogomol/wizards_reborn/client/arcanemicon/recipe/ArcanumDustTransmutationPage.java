@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -30,7 +30,7 @@ public class ArcanumDustTransmutationPage extends RecipePage {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         drawItem(book, gui, new ItemStack(WizardsRebornItems.ARCANUM_DUST.get()),x + 56, y + 18, mouseX, mouseY);
         drawItem(book, gui, input,x + 56, y + 69, mouseX, mouseY);
         drawItem(book, gui, result,x + 56, y + 123, mouseX, mouseY);
@@ -39,7 +39,7 @@ public class ArcanumDustTransmutationPage extends RecipePage {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public boolean isChanged(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         ClientLevel level = Minecraft.getInstance().level;
 
         if (level != null) {

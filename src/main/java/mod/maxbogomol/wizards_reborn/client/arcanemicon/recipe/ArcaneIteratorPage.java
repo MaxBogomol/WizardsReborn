@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
@@ -67,7 +67,7 @@ public class ArcaneIteratorPage extends RecipePage {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         Font font = Minecraft.getInstance().font;
 
         if (experience > 0) {
@@ -121,7 +121,7 @@ public class ArcaneIteratorPage extends RecipePage {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public boolean isChanged(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         ClientLevel level = Minecraft.getInstance().level;
 
         if (level != null) {

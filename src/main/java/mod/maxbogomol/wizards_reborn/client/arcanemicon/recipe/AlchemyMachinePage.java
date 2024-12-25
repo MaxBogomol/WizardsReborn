@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
@@ -52,7 +52,7 @@ public class AlchemyMachinePage extends RecipePage {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         for (int i = 0; i < 2; i ++) {
             for (int j = 0; j < 3; j ++) {
                 int index = i * 3 + j;
@@ -155,7 +155,7 @@ public class AlchemyMachinePage extends RecipePage {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public boolean isChanged(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         ClientLevel level = Minecraft.getInstance().level;
 
         if (level != null) {

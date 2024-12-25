@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.index;
 
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +42,7 @@ public class BlockEntry {
         }
     }
 
-    public void drawTooltip(ArcanemiconGui gui, int x, int y, int mouseX, int mouseY) {
+    public void drawTooltip(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
         if (block != ItemStack.EMPTY && gui.currentItem == ItemStack.EMPTY) {
             boolean hover = mouseX >= x && mouseY >= y && mouseX <= x + 16 && mouseY <= y + 16;
             if (hover) gui.currentItem = block;

@@ -68,12 +68,12 @@ public class SaltWallTorchBlock extends Block implements EntityBlock, SimpleWate
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState blockstate = this.defaultBlockState();
-        LevelReader levelreader = pContext.getLevel();
-        BlockPos blockpos = pContext.getClickedPos();
-        Direction[] adirection = pContext.getNearestLookingDirections();
-        FluidState fluidState = pContext.getLevel().getFluidState(pContext.getClickedPos());
+        LevelReader levelreader = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
+        Direction[] adirection = context.getNearestLookingDirections();
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
 
         for(Direction direction : adirection) {
             if (direction.getAxis().isHorizontal()) {

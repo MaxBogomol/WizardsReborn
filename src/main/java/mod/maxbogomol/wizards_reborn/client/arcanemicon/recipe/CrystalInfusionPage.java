@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
@@ -32,7 +32,7 @@ public class CrystalInfusionPage extends RecipePage {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         int index = 1;
         double angleBetweenEach = 360.0 / (inputs.length);
         Vec2 point = new Vec2(56, 22), center = new Vec2(56, 57);
@@ -58,7 +58,7 @@ public class CrystalInfusionPage extends RecipePage {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public boolean isChanged(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         ClientLevel level = Minecraft.getInstance().level;
 
         if (level != null) {

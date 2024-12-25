@@ -81,7 +81,7 @@ public class WissenWandItem extends Item {
             player.displayClientMessage(getModeTranslate(stack), true);
 
             player.awardStat(Stats.ITEM_USED.get(this));
-            level.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
+            level.playSound(null, player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
 
             return InteractionResultHolder.success(stack);
         }
@@ -121,7 +121,7 @@ public class WissenWandItem extends Item {
 
         if (result == InteractionResult.SUCCESS) {
             context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
-            level.playSound(WizardsReborn.proxy.getPlayer(), context.getClickedPos(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+            level.playSound(null, context.getClickedPos(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
         }
 
         return result;

@@ -10,7 +10,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
@@ -72,8 +72,8 @@ public class JewelerTableRecipeCategory implements IRecipeCategory<JewelerTableR
         int stringWidth = font.width(textWissen);
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
-            gui.drawString(font, textWissen, 145 - stringWidth + 1, 39, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textWissen, 145 - stringWidth, 38, ArcanemiconGui.TEXT_COLOR_INT, false);
+            gui.drawString(font, textWissen, 145 - stringWidth + 1, 39, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textWissen, 145 - stringWidth, 38, ArcanemiconScreen.TEXT_COLOR_INT, false);
         }
     }
 }

@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.MonogramIndexEntry;
 import net.minecraft.client.Minecraft;
@@ -25,7 +25,7 @@ public class MonogramIndexPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean click(ArcanemiconGui gui, int x, int y, int mouseX, int mouseY) {
+    public boolean click(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
         for (int i = 0; i < entries.length; i ++) if (entries[i].isUnlocked()) {
             if (mouseX >= x + 2 && mouseX <= x + 124 && mouseY >= y + 8 + i * 20 && mouseY <= y + 26 + i * 20) {
                 gui.changeChapter(entries[i].chapter);
@@ -38,7 +38,7 @@ public class MonogramIndexPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
 
         for (int i = 0; i < entries.length; i ++) {
             gui.blit(BACKGROUND, x, y + 7 + (i * 20), 128, 20, 128, 18);

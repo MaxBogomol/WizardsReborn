@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -36,7 +36,7 @@ public class ProgressionPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean click(ArcanemiconGui gui, int x, int y, int mouseX, int mouseY) {
+    public boolean click(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
         boolean changed = true;
         boolean click = false;
         if (mouseX >= x + 25 && mouseY >= y + 132 && mouseX <= x + 25 + 12 && mouseY <= y + 132 + 12) {
@@ -65,7 +65,7 @@ public class ProgressionPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean mouseScrolled(ArcanemiconGui book, int x, int y, int mouseX, int mouseY, int delta) {
+    public boolean mouseScrolled(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY, int delta) {
         if (mouseX >= x && mouseX <= x + 128 && mouseY >= y && mouseY <= y + 160) {
             offset += delta;
             boolean changed = true;
@@ -87,7 +87,7 @@ public class ProgressionPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         float step = (float) 360 / 9 / 2;
         List<Component> renderList = new ArrayList<>();
 

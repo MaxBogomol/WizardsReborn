@@ -20,7 +20,7 @@ public abstract class Page {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void drawItem(ArcanemiconGui book, GuiGraphics gui, ItemStack stack, int x, int y, int mouseX, int mouseY) {
+    public static void drawItem(ArcanemiconScreen book, GuiGraphics gui, ItemStack stack, int x, int y, int mouseX, int mouseY) {
         gui.renderItem(stack, x, y);
         gui.renderItemDecorations(Minecraft.getInstance().font, stack, x, y, null);
         if (mouseX >= x && mouseY >= y && mouseX <= x + 16 && mouseY <= y + 16) {
@@ -29,14 +29,14 @@ public abstract class Page {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void drawText(ArcanemiconGui book, GuiGraphics gui, String text, int x, int y) {
+    public static void drawText(ArcanemiconScreen book, GuiGraphics gui, String text, int x, int y) {
         Font font = Minecraft.getInstance().font;
-        gui.drawString(font, text, x + 1, y + 1, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
-        gui.drawString(font, text, x, y, ArcanemiconGui.TEXT_COLOR_INT, false);
+        gui.drawString(font, text, x + 1, y + 1, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+        gui.drawString(font, text, x, y, ArcanemiconScreen.TEXT_COLOR_INT, false);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void drawWrappingText(ArcanemiconGui book, GuiGraphics gui, String text, int x, int y, int w) {
+    public static void drawWrappingText(ArcanemiconScreen book, GuiGraphics gui, String text, int x, int y, int w) {
         Font font = Minecraft.getInstance().font;
         List<String> lines = new ArrayList<>();
         if (text.contains("wizards_reborn:wandMenu")) {
@@ -76,35 +76,35 @@ public abstract class Page {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void tick(ArcanemiconGui book) {
+    public void tick(ArcanemiconScreen book) {
 
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void fullRender(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void fullRender(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         renderBackground(book, gui, x, y, mouseX, mouseY);
         render(book, gui, x, y, mouseX, mouseY);
         renderIngredients(book, gui, x, y, mouseX, mouseY);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderBackground(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void renderBackground(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         gui.blit(background, x, y, 0, 0, 128, 160);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public boolean click(ArcanemiconGui book, int x, int y, int mouseX, int mouseY) {
+    public boolean click(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY) {
         return false;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public boolean mouseScrolled(ArcanemiconGui book, int x, int y, int mouseX, int mouseY, int delta) {
+    public boolean mouseScrolled(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY, int delta) {
         return false;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {}
+    public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {}
 
     @OnlyIn(Dist.CLIENT)
-    public void renderIngredients(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {}
+    public void renderIngredients(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {}
 }

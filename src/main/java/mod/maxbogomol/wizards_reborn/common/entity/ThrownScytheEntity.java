@@ -279,6 +279,9 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                     } else {
                         ItemEntity itemEntity = new ItemEntity(level(), player.getX(), player.getY() + 0.5f, player.getZ(), getItem());
                         itemEntity.setPickUpDelay(40);
+                        itemEntity.setTarget(getSenderUUID());
+                        itemEntity.setNoGravity(true);
+                        itemEntity.setDeltaMovement(Vec3.ZERO);
                         level().addFreshEntity(itemEntity);
                     }
                 } else {
@@ -288,10 +291,13 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
             if (getOwner() != null && dist) {
                 ItemEntity itemEntity = new ItemEntity(level(), getX(), getY() + 0.1f, getZ(), getItem());
                 itemEntity.setPickUpDelay(40);
+                itemEntity.setTarget(getSenderUUID());
+                itemEntity.setNoGravity(true);
+                itemEntity.setDeltaMovement(Vec3.ZERO);
                 level().addFreshEntity(itemEntity);
             }
         } else {
-            if (getSender() != null && distanceTo(getSender()) < 150 && getSender().isAlive()) {
+            if (getSender() != null && distanceTo(getSender()) < 250 && getSender().isAlive()) {
                 Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;

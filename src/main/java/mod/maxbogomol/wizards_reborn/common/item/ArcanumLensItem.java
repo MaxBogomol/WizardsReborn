@@ -65,8 +65,8 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
             }
 
             WizardsRebornPacketHandler.sendToTracking(level, player.getOnPos(), new ArcanumLensBurstPacket(player.position().add(0, player.getBbHeight() / 2, 0)));
-            level.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
-            level.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 4)));
+            level.playSound(null, player.blockPosition(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
+            level.playSound(null, player.blockPosition(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 4)));
         }
 
         player.getCooldowns().addCooldown(this, 50);

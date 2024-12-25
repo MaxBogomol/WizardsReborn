@@ -67,8 +67,8 @@ import mod.maxbogomol.wizards_reborn.common.block.wissen_altar.WissenAltarBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_cell.WissenCellBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer.WissenCrystallizerBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlock;
-import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
-import mod.maxbogomol.wizards_reborn.common.world.tree.InnocentWoodTree;
+import mod.maxbogomol.wizards_reborn.common.block.grower.ArcaneWoodTreeGrower;
+import mod.maxbogomol.wizards_reborn.common.block.grower.InnocentWoodTreeGrower;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMonograms;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -132,7 +132,7 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).sound(WizardsRebornSounds.ARCANE_WOOD_HANGING_SIGN).noOcclusion().noCollission(), WizardsRebornWoodTypes.ARCANE_WOOD.resolve().get()));
     public static final RegistryObject<Block> ARCANE_WOOD_WALL_HANGING_SIGN = BLOCKS.register("arcane_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).sound(WizardsRebornSounds.ARCANE_WOOD_HANGING_SIGN).noOcclusion().noCollission(), WizardsRebornWoodTypes.ARCANE_WOOD.resolve().get()));
     public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.AZALEA_LEAVES).lightLevel((state) -> 5)));
-    public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).sound(SoundType.AZALEA)));
+    public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).sound(SoundType.AZALEA)));
     public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> INNOCENT_WOOD_LOG = BLOCKS.register("innocent_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LOG).mapColor(MapColor.TERRACOTTA_GRAY).sound(WizardsRebornSounds.INNOCENT_WOOD)));
@@ -159,7 +159,7 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> INNOCENT_WOOD_HANGING_SIGN = BLOCKS.register("innocent_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get()).sound(WizardsRebornSounds.INNOCENT_WOOD_HANGING_SIGN).noOcclusion().noCollission(), WizardsRebornWoodTypes.INNOCENT_WOOD.resolve().get()));
     public static final RegistryObject<Block> INNOCENT_WOOD_WALL_HANGING_SIGN = BLOCKS.register("innocent_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get()).sound(WizardsRebornSounds.INNOCENT_WOOD_HANGING_SIGN).noOcclusion().noCollission(), WizardsRebornWoodTypes.INNOCENT_WOOD.resolve().get()));
     public static final RegistryObject<Block> INNOCENT_WOOD_LEAVES = BLOCKS.register("innocent_wood_leaves", () -> new InnocentWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
-    public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new InnocentWoodTree(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new InnocentWoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)));
     public static final RegistryObject<Block> POTTED_INNOCENT_WOOD_SAPLING = BLOCKS.register("potted_innocent_wood_sapling", () -> new FlowerPotBlock(INNOCENT_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
     public static final RegistryObject<Block> POTTED_PETALS_OF_INNOCENCE = BLOCKS.register("potted_petals_of_innocence", () -> new FlowerPotBlock(PETALS_OF_INNOCENCE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));

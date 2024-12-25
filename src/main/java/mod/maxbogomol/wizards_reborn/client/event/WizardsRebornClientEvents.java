@@ -9,8 +9,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipComponent;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
@@ -47,7 +46,7 @@ public class WizardsRebornClientEvents {
 
     @SubscribeEvent
     public void loggedPlayer(PlayerEvent.PlayerLoggedInEvent event) {
-        ArcanemiconGui.currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
+        ArcanemiconScreen.loggedReset();
     }
 
     @SubscribeEvent

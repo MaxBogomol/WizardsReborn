@@ -10,7 +10,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
@@ -68,8 +68,8 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
         int stringWidth = font.width(textWissen);
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
-            gui.drawString(font, textWissen, (56 - stringWidth) / 2 + 1, 34 + font.lineHeight + 1, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textWissen, (56 - stringWidth) / 2, 34 + font.lineHeight, ArcanemiconGui.TEXT_COLOR_INT, false);
+            gui.drawString(font, textWissen, (56 - stringWidth) / 2 + 1, 34 + font.lineHeight + 1, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textWissen, (56 - stringWidth) / 2, 34 + font.lineHeight, ArcanemiconScreen.TEXT_COLOR_INT, false);
         }
     }
 }

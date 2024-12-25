@@ -94,7 +94,7 @@ public class ArcanumDustItem extends ArcanumItem {
                 }
                 if (!isCreative) stack.shrink(1);
                 WizardsRebornPacketHandler.sendToTracking(level, blockPos, new WissenDustBurstPacket(blockPos, pos, vel));
-                level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsRebornSounds.ARCANUM_DUST_TRANSMUTATION.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 2)));
+                level.playSound(null, blockPos, WizardsRebornSounds.ARCANUM_DUST_TRANSMUTATION.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 2)));
 
                 return true;
             }
