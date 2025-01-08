@@ -4,15 +4,16 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "wizards_reborn.refmap.json",
   "mixins": [
-    "common.CreeperMixin",
-    "common.PhantomMixin",
-    "common.BowItemMixin",
     "common.AbstractArrowMixin",
-    "common.FaceAttachedHorizontalDirectionalBlockMixin"
+    "common.BowItemMixin",
+    "common.CreeperMixin",
+    "common.FaceAttachedHorizontalDirectionalBlockMixin",
+    "common.BlockMixin",
+    "common.PhantomMixin"
   ],
   "client": [
-    "client.LevelRendererMixin",
-    "client.GuiGraphicsMixin"
+    "client.GuiGraphicsMixin",
+    "client.LevelRendererMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

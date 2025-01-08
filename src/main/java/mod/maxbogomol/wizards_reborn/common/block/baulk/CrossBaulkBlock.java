@@ -1,12 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.block.baulk;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -53,5 +55,12 @@ public class CrossBaulkBlock extends CrossBaulkBaseBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return TickableBlockEntity.getTickerHelper();
+    }
+
+    public static boolean canConnectLantern(LevelReader level, BlockPos pos, Direction direction) {
+        if (level.getBlockEntity(pos) instanceof CrossBaulkBlockEntity blockEntity) {
+            return blockEntity.getConnection(direction) == PipeConnection.END;
+        }
+        return false;
     }
 }

@@ -107,7 +107,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
 
         y = 0;
         for (FluidIngredient o : recipe.getFluidIngredients()) {
-            builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 55, 30 + y)
+            builder.addSlot(RecipeIngredientRole.CATALYST, 55, 30 + y)
                     .setFluidRenderer(o.getFluids().get(0).getAmount(), false, 16, 16)
                     .addIngredients(ForgeTypes.FLUID_STACK, o.getFluids());
             y = y + 18;
