@@ -19,7 +19,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.screen.AlchemyMachineScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.JewelerTableScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -76,8 +76,8 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(CrystalRitualRecipeCategory.TYPE, sortRecipes(WizardsRebornRecipes.CRYSTAL_RITUAL.get(), BY_ID));
         registration.addRecipes(CrystalInfusionRecipeCategory.TYPE, sortRecipes(WizardsRebornRecipes.CRYSTAL_INFUSION.get(), BY_ID));
 
-        if (FarmersDelightIntegration.isLoaded()) {
-            FarmersDelightIntegration.JeiLoadedOnly.addKnifeJEIInfo(registration);
+        if (WizardsRebornFarmersDelight.isLoaded()) {
+            WizardsRebornFarmersDelight.JeiLoadedOnly.addKnifeJEIInfo(registration);
         }
     }
 

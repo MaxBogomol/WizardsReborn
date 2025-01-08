@@ -160,8 +160,10 @@
 
   "block.wizards_reborn.mor": "Мор",
   "block.wizards_reborn.potted_mor": "Мор в горшке",
+  "block.wizards_reborn.mor_colony": "Колония мора",
   "block.wizards_reborn.mor_block": "Блок мора",
   "block.wizards_reborn.elder_mor": "Древний мор",
+  "block.wizards_reborn.elder_mor_colony": "Колония древнего мора",
   "block.wizards_reborn.potted_elder_mor": "Древний мор в горшке",
   "block.wizards_reborn.elder_mor_block": "Блок древнего мора",
 

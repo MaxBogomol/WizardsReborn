@@ -13,8 +13,8 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
-import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import net.minecraft.core.registries.Registries;
@@ -57,9 +57,9 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.NETHER_ARCANE_GOLD_ORE);
             event.accept(WizardsRebornItems.RAW_ARCANE_GOLD_BLOCK);
 
-            if (CreateIntegration.isLoaded()) {
-                event.accept(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD);
-                event.accept(CreateIntegration.ARCANE_GOLD_SHEET);
+            if (WizardsRebornCreate.isLoaded()) {
+                event.accept(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD);
+                event.accept(WizardsRebornCreate.ItemsLoadedOnly.ARCANE_GOLD_SHEET);
             }
 
             event.accept(WizardsRebornItems.ARCANE_GOLD_SWORD);
@@ -68,8 +68,8 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_GOLD_SHOVEL);
             event.accept(WizardsRebornItems.ARCANE_GOLD_HOE);
             event.accept(WizardsRebornItems.ARCANE_GOLD_SCYTHE);
-            if (FarmersDelightIntegration.isLoaded()) {
-                event.accept(FarmersDelightIntegration.ARCANE_GOLD_KNIFE);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE);
             }
 
             event.accept(WizardsRebornItems.ARCANE_GOLD_HELMET);
@@ -80,15 +80,15 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.SARCON_INGOT);
             event.accept(WizardsRebornItems.SARCON_NUGGET);
             event.accept(WizardsRebornItems.SARCON_BLOCK);
-            if (CreateIntegration.isLoaded()) {
-                event.accept(CreateIntegration.SARCON_SHEET);
+            if (WizardsRebornCreate.isLoaded()) {
+                event.accept(WizardsRebornCreate.ItemsLoadedOnly.SARCON_SHEET);
             }
 
             event.accept(WizardsRebornItems.VILENIUM_INGOT);
             event.accept(WizardsRebornItems.VILENIUM_NUGGET);
             event.accept(WizardsRebornItems.VILENIUM_BLOCK);
-            if (CreateIntegration.isLoaded()) {
-                event.accept(CreateIntegration.VILENIUM_SHEET);
+            if (WizardsRebornCreate.isLoaded()) {
+                event.accept(WizardsRebornCreate.ItemsLoadedOnly.VILENIUM_SHEET);
             }
 
             event.accept(WizardsRebornItems.ARCANUM);
@@ -138,8 +138,8 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_WOOD_SHOVEL);
             event.accept(WizardsRebornItems.ARCANE_WOOD_HOE);
             event.accept(WizardsRebornItems.ARCANE_WOOD_SCYTHE);
-            if (FarmersDelightIntegration.isLoaded()) {
-                event.accept(FarmersDelightIntegration.ARCANE_WOOD_KNIFE);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_WOOD_KNIFE);
             }
             event.accept(WizardsRebornItems.ARCANE_WOOD_MORTAR);
             event.accept(WizardsRebornItems.ARCANE_WOOD_LEAVES);
@@ -175,8 +175,8 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.INNOCENT_WOOD_SHOVEL);
             event.accept(WizardsRebornItems.INNOCENT_WOOD_HOE);
             event.accept(WizardsRebornItems.INNOCENT_WOOD_SCYTHE);
-            if (FarmersDelightIntegration.isLoaded()) {
-                event.accept(FarmersDelightIntegration.INNOCENT_WOOD_KNIFE);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.INNOCENT_WOOD_KNIFE);
             }
             event.accept(WizardsRebornItems.INNOCENT_WOOD_MORTAR);
             event.accept(WizardsRebornItems.INNOCENT_WOOD_LEAVES);
@@ -212,8 +212,14 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_LINEN_HAY);
 
             event.accept(WizardsRebornItems.MOR);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.MOR_COLONY);
+            }
             event.accept(WizardsRebornItems.MOR_BLOCK);
             event.accept(WizardsRebornItems.ELDER_MOR);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.ELDER_MOR_COLONY);
+            }
             event.accept(WizardsRebornItems.ELDER_MOR_BLOCK);
 
             event.accept(WizardsRebornItems.PITCHER_TURNIP);

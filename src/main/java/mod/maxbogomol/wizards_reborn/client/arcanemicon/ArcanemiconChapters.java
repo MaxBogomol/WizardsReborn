@@ -16,8 +16,8 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage.*;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
-import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.*;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
@@ -4331,26 +4331,26 @@ public class ArcanemiconChapters {
             ));
 
             ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.crushed_raw_arcane_gold",
-                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()))
+                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()))
             ));
             ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_ORE.get()),
-                    new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNuggetTwo, new ItemStack(Items.COBBLED_DEEPSLATE)
+                    new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNuggetTwo, new ItemStack(Items.COBBLED_DEEPSLATE)
             ));
             ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.DEEPSLATE_ARCANE_GOLD_ORE.get()),
-                    new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNuggetTwo, new ItemStack(Items.COBBLED_DEEPSLATE)
+                    new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNuggetTwo, new ItemStack(Items.COBBLED_DEEPSLATE)
             ));
             ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.NETHER_ARCANE_GOLD_ORE.get()),
                     new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 12), experienceNugget, new ItemStack(Items.NETHERRACK)
             ));
             ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD.get()),
-                    new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNugget
+                    new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNugget
             ));
             ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD_BLOCK.get()),
-                    new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get(), 9), experienceNuggetBig
+                    new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get(), 9), experienceNuggetBig
             ));
-            ARCANE_GOLD.addPage(new SmeltingPage(ARCANE_GOLD_INGOT_ITEM, new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get())));
+            ARCANE_GOLD.addPage(new SmeltingPage(ARCANE_GOLD_INGOT_ITEM, new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get())));
             ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_sheet",
-                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(CreateIntegration.ARCANE_GOLD_SHEET.get()))
+                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.ARCANE_GOLD_SHEET.get()))
             ));
 
             ARCANUM_LENS.addPage(new CrushingPage(ARCANUM_LENS_ITEM,
@@ -4376,7 +4376,7 @@ public class ArcanemiconChapters {
             SMOKING_PIPE.addPage(new CenserPage(cinderFlourEffects, new ItemStack(IntegrationUtil.getItem("create", "cinder_flour"))));
             SMOKING_PIPE.addPage(new CenserPage(powderedObsidianEffects, new ItemStack(IntegrationUtil.getItem("create", "powdered_obsidian"))));
 
-            ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage(new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get(), 4), FluidStack.EMPTY, true, true,
+            ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage(new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get(), 4), FluidStack.EMPTY, true, true,
                     new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.WISSEN_TEA.get(), 200), FluidStack.EMPTY,
                     new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")),
                     new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")),
@@ -4388,9 +4388,9 @@ public class ArcanemiconChapters {
     public static void integrationFarmersDelightInit() {
         if (ModList.get().isLoaded("farmersdelight")) {
             ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_knife",
-                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(FarmersDelightIntegration.ARCANE_GOLD_KNIFE.get()))
+                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()))
             ));
-            ARCANE_GOLD.addPage(new CraftingTablePage(new ItemStack(FarmersDelightIntegration.ARCANE_GOLD_KNIFE.get()),
+            ARCANE_GOLD.addPage(new CraftingTablePage(new ItemStack(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()),
                     EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM,
                     EMPTY_ITEM, ARCANE_WOOD_BRANCH_ITEM
             ));

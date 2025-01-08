@@ -9,7 +9,7 @@ public class KnifeInnocentSparkType extends InnocentSparkEntity.SwordSparkType {
 
     @Override
     public boolean isItem(InnocentSparkEntity entity) {
-        return entity.getItem().getItem() == FarmersDelightIntegration.INNOCENT_WOOD_KNIFE.get();
+        return entity.getItem().getItem() == WizardsRebornFarmersDelight.ItemsLoadedOnly.INNOCENT_WOOD_KNIFE.get();
     }
 
     @Override

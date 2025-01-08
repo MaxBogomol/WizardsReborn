@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:mor",
+    "wizards_reborn:elder_mor",
+    {
+      "id": "wizards_reborn:mor_colony",
+      "required": false
+    },
+    {
+      "id": "wizards_reborn:elder_mor_colony",
+      "required": false
+    }
+  ]
+}

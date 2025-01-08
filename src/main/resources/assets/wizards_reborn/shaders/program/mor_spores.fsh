@@ -49,7 +49,7 @@ void main() {
     vec4 PrevTexel = vec4(texture(PrevSampler, prewUV).rgb, 1.0);
     vec3 color = vec3(max(PrevTexel.rgb * Phosphor, CurrTexel.rgb));
     vec3 hsv = RGBtoHSV(color.rgb);
-    hsv.x = fract(hsv.x + (time * (speed / 2)));
+    hsv.x = fract(hsv.x + (time * (speed / 2) + length(uv - vec2(0.5, 0.5))));
     vec3 c = HSVtoRGB(hsv);
     vec3 f = mix(texture(DiffuseSampler, texCoord).rgb, c, fade);
     fragColor = vec4(f, 1.0);

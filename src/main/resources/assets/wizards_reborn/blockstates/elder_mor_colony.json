@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "wizards_reborn:block/elder_mor_colony_stage0"
+    },
+    "age=1": {
+      "model": "wizards_reborn:block/elder_mor_colony_stage1"
+    },
+    "age=2": {
+      "model": "wizards_reborn:block/elder_mor_colony_stage2"
+    },
+    "age=3": {
+      "model": "wizards_reborn:block/elder_mor_colony_stage3"
+    }
+  }
+}

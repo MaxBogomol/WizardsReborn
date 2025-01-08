@@ -160,9 +160,11 @@
 
   "block.wizards_reborn.mor": "Mor",
   "block.wizards_reborn.potted_mor": "Potted Mor",
+  "block.wizards_reborn.mor_colony": "Mor Colony",
   "block.wizards_reborn.mor_block": "Mor Block",
   "block.wizards_reborn.elder_mor": "Elder Mor",
   "block.wizards_reborn.potted_elder_mor": "Potted Elder Mor",
+  "block.wizards_reborn.elder_mor_colony": "Elder Mor Colony",
   "block.wizards_reborn.elder_mor_block": "Elder Mor Block",
 
   "block.wizards_reborn.pitcher_turnip": "Pitcher Turnip",

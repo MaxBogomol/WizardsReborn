@@ -5,11 +5,12 @@
   "refmap": "wizards_reborn.refmap.json",
   "mixins": [
     "common.AbstractArrowMixin",
+    "common.BlockMixin",
     "common.BowItemMixin",
     "common.CreeperMixin",
     "common.FaceAttachedHorizontalDirectionalBlockMixin",
-    "common.BlockMixin",
-    "common.PhantomMixin"
+    "common.PhantomMixin",
+    "common.RichSoilBlockMixin"
   ],
   "client": [
     "client.GuiGraphicsMixin",

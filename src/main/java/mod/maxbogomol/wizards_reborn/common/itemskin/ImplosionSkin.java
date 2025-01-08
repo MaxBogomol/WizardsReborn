@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
 
 import java.awt.*;
 
@@ -27,8 +27,8 @@ public class ImplosionSkin extends ItemSkin {
         addSkinEntry(new ItemClassSkinEntry(ArcaneBowItem.class, WizardsReborn.MOD_ID+":implosion_bow"));
         addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/implosion_arcane_wand"));
         addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":implosion_wissen_wand"));
-        if (FarmersDelightIntegration.isLoaded()) {
-            FarmersDelightIntegration.LoadedOnly.addKnifeSkin(this, WizardsReborn.MOD_ID+":implosion_knife");
+        if (WizardsRebornFarmersDelight.isLoaded()) {
+            WizardsRebornFarmersDelight.LoadedOnly.addKnifeSkin(this, WizardsReborn.MOD_ID+":implosion_knife");
         }
     }
 }

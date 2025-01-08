@@ -12,8 +12,8 @@ import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
-import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.*;
 import mod.maxbogomol.wizards_reborn.registry.common.banner.WizardsRebornBannerPatterns;
@@ -68,8 +68,8 @@ public class WizardsReborn {
         WizardsRebornMobEffects.register(eventBus);
         WizardsRebornFluids.register(eventBus);
 
-        CreateIntegration.init(eventBus);
-        FarmersDelightIntegration.init(eventBus);
+        WizardsRebornCreate.init(eventBus);
+        WizardsRebornFarmersDelight.init(eventBus);
 
         WizardsRebornCrystals.register();
         WizardsRebornMonograms.register();

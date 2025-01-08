@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItemSkins;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.itemskin.*;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -128,10 +128,10 @@ public class WizardsRebornItemSkins {
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_TROUSERS.getId());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_BOOTS.getId());
 
-            if (FarmersDelightIntegration.isLoaded()) {
-                FluffyFurItemSkins.addSkinModel(map, FarmersDelightIntegration.ARCANE_GOLD_KNIFE.getId());
-                FluffyFurItemSkins.addSkinModel(map, FarmersDelightIntegration.ARCANE_WOOD_KNIFE.getId());
-                FluffyFurItemSkins.addSkinModel(map, FarmersDelightIntegration.INNOCENT_WOOD_KNIFE.getId());
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                FluffyFurItemSkins.addSkinModel(map, WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.getId());
+                FluffyFurItemSkins.addSkinModel(map, WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_WOOD_KNIFE.getId());
+                FluffyFurItemSkins.addSkinModel(map, WizardsRebornFarmersDelight.ItemsLoadedOnly.INNOCENT_WOOD_KNIFE.getId());
             }
         }
     }
