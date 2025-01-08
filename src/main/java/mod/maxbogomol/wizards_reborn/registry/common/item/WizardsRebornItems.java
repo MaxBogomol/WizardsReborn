@@ -823,6 +823,20 @@ public class WizardsRebornItems {
                 return itemStack;
             }
         });
+        DispenserBlock.registerBehavior(FLOWER_FERTILIZER.get(), new OptionalDispenseItemBehavior() {
+            protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
+                this.setSuccess(true);
+                Level level = blockSource.getLevel();
+                BlockPos blockpos = blockSource.getPos().relative(blockSource.getBlockState().getValue(DispenserBlock.FACING));
+                if (!FlowerFertilizerItem.growCropFertilizer(itemStack, blockSource.getLevel(), blockpos)) {
+                    this.setSuccess(false);
+                } else if (!level.isClientSide) {
+                    level.levelEvent(1505, blockpos, 0);
+                }
+
+                return itemStack;
+            }
+        });
 
         ItemEntityHandler.register(new ItemEntityModifier() {
             public boolean isItem(Level level, ItemEntity entity, ItemStack stack) {

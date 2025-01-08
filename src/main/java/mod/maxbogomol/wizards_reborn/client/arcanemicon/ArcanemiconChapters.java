@@ -3016,17 +3016,17 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISESTONE.get()))
                 ),
-                new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WISESTONE.get()),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WISESTONE.get(), 8),
                         new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE),
                         new ItemStack(Items.COBBLESTONE), ARCANUM_ITEM, new ItemStack(Items.COBBLESTONE),
                         new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE)
                 ),
-                new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WISESTONE.get()),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WISESTONE.get(), 8),
                         new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE),
                         new ItemStack(Items.COBBLED_DEEPSLATE), ARCANUM_ITEM, new ItemStack(Items.COBBLED_DEEPSLATE),
                         new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE)
                 ),
-                new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WISESTONE.get()),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WISESTONE.get(), 8),
                         new ItemStack(Items.BLACKSTONE), new ItemStack(Items.BLACKSTONE), new ItemStack(Items.BLACKSTONE),
                         new ItemStack(Items.BLACKSTONE), ARCANUM_ITEM, new ItemStack(Items.BLACKSTONE),
                         new ItemStack(Items.BLACKSTONE), new ItemStack(Items.BLACKSTONE), new ItemStack(Items.BLACKSTONE)
