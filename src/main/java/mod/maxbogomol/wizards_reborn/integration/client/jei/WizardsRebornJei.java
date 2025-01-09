@@ -19,7 +19,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.screen.AlchemyMachineScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.JewelerTableScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;

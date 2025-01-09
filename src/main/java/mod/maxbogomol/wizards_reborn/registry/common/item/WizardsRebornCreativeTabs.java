@@ -14,7 +14,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import net.minecraft.core.registries.Registries;

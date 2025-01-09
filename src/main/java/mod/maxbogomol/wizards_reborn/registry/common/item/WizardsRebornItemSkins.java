@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItemSkins;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.itemskin.*;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

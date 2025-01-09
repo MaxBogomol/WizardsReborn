@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.integration.common.farmersdelight;
+package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight;
 
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;

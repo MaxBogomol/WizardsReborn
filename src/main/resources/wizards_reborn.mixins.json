@@ -10,7 +10,7 @@
     "common.CreeperMixin",
     "common.FaceAttachedHorizontalDirectionalBlockMixin",
     "common.PhantomMixin",
-    "common.RichSoilBlockMixin"
+    "common.farmers_delight.RichSoilBlockMixin"
   ],
   "client": [
     "client.GuiGraphicsMixin",

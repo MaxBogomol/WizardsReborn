@@ -1,6 +1,6 @@
-package mod.maxbogomol.wizards_reborn.mixin.common;
+package mod.maxbogomol.wizards_reborn.mixin.common.farmers_delight;
 
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

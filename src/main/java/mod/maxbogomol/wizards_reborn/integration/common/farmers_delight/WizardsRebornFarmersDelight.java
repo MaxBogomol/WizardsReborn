@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.integration.common.farmersdelight;
+package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;

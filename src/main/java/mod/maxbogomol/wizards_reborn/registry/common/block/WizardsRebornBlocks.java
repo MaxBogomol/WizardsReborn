@@ -5,8 +5,6 @@ import mod.maxbogomol.fluffy_fur.common.block.sign.CustomCeilingHangingSignBlock
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomStandingSignBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomWallHangingSignBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomWallSignBlock;
-import mod.maxbogomol.fluffy_fur.common.loot.LootTableConditionHandler;
-import mod.maxbogomol.fluffy_fur.common.loot.SimpleLootTableCondition;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.*;
@@ -71,12 +69,10 @@ import mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer.WissenCrys
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlock;
 import mod.maxbogomol.wizards_reborn.common.block.grower.ArcaneWoodTreeGrower;
 import mod.maxbogomol.wizards_reborn.common.block.grower.InnocentWoodTreeGrower;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMonograms;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;

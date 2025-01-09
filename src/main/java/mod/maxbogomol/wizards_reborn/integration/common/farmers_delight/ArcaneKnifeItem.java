@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.integration.common.farmersdelight;
+package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
