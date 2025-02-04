@@ -16,22 +16,6 @@ uniform float fade;
 
 out vec4 fragColor;
 
-float applyDistortion(vec2 uv, float zoom, float distortion, float gooeyness, float wibble, float time, float speed) {
-    float gameTime = time * speed;
-    float s = sin(gameTime*0.1);
-    float s2 = 0.5+sin(gameTime*1.8);
-    vec2 d = uv*(distortion+s*.3);
-    d.x += gameTime*0.25+sin(d.x+d.y + gameTime*0.3)*wibble;
-    d.y += gameTime*0.25+sin(d.x + gameTime*0.3)*wibble;
-    float v1=length(0.5-fract(d.xy))+gooeyness;
-    d = (1.0-zoom)*0.5+(uv*zoom);
-    float v2=length(0.5-fract(d.xy));
-    v1 *= 1.0-v2*v1;
-    v1 = v1*v1*v1;
-    v1 *= 1.9+s2*0.4;
-    return v1;
-}
-
 vec2 applyDistortion(vec2 uv, float s1, float s2, float time, float distortion) {
     uv.x += cos(uv.y * s1 + time * 1.4) * distortion;
     uv.y += sin(uv.x * s2 + time * 1.4) * distortion;
