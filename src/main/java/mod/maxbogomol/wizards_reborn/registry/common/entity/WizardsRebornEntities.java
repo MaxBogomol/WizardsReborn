@@ -5,6 +5,8 @@ import mod.maxbogomol.fluffy_fur.common.entity.CustomBoatEntity;
 import mod.maxbogomol.fluffy_fur.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.render.entity.*;
+import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
+import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.entity.*;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.KnifeInnocentSparkType;
@@ -15,6 +17,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,8 +37,8 @@ public class WizardsRebornEntities {
     public static final RegistryObject<EntityType<CustomBoatEntity>> CORK_BAMBOO_RAFT = ENTITIES.register("cork_bamboo_raft", () -> EntityType.Builder.<CustomBoatEntity>of((t, l) -> (new CustomBoatEntity(t, l, WizardsRebornItems.CORK_BAMBOO_RAFT, true)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_boat").toString()));
     public static final RegistryObject<EntityType<CustomChestBoatEntity>> CORK_BAMBOO_CHEST_RAFT = ENTITIES.register("cork_bamboo_chest_raft", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.CORK_BAMBOO_CHEST_RAFT, true)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chest_boat").toString()));
 
-    public static final RegistryObject<EntityType<SpellEntity>> SPELL = ENTITIES.register("spell", () -> EntityType.Builder.<SpellEntity>of(SpellEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "spell_projectile").toString()));
-    public static final RegistryObject<EntityType<ThrownScytheEntity>> THROWN_SCYTHE = ENTITIES.register("thrown_scythe", () -> EntityType.Builder.<ThrownScytheEntity>of(ThrownScytheEntity::new, MobCategory.MISC).sized(1.75f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "throwed_scythe").toString()));
+    public static final RegistryObject<EntityType<SpellEntity>> SPELL = ENTITIES.register("spell", () -> EntityType.Builder.<SpellEntity>of(SpellEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "spell").toString()));
+    public static final RegistryObject<EntityType<ThrownScytheEntity>> THROWN_SCYTHE = ENTITIES.register("thrown_scythe", () -> EntityType.Builder.<ThrownScytheEntity>of(ThrownScytheEntity::new, MobCategory.MISC).sized(1.75f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_scythe").toString()));
     public static final RegistryObject<EntityType<SplitArrowEntity>> SPLIT_ARROW = ENTITIES.register("split_arrow", () -> EntityType.Builder.<SplitArrowEntity>of(SplitArrowEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "split_arrow").toString()));
 
     public static final RegistryObject<EntityType<InnocentSparkEntity>> INNOCENT_SPARK = ENTITIES.register("innocent_spark", () -> EntityType.Builder.<InnocentSparkEntity>of(InnocentSparkEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_spark").toString()));
@@ -64,6 +67,12 @@ public class WizardsRebornEntities {
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event) {
             event.put(SNIFFALO.get(), SniffaloEntity.createAttributes().build());
+        }
+
+        @SubscribeEvent
+        public static void registerCaps(RegisterCapabilitiesEvent event) {
+            event.register(IKnowledge.class);
+            event.register(IArrowModifier.class);
         }
     }
 

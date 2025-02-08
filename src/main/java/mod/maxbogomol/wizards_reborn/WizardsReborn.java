@@ -4,8 +4,6 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.proxy.ClientProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
-import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
-import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.event.WizardsRebornEvents;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
@@ -28,9 +26,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.levelgen.WizardsRebornTrunk
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -117,14 +113,5 @@ public class WizardsReborn {
     public static void hi() {
         FluffyFur.LOGGER.info("Hi Wizard's Reborn :3");
         LOGGER.info("Hi Fluffy Fur :3");
-    }
-
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void registerCaps(RegisterCapabilitiesEvent event) {
-            event.register(IKnowledge.class);
-            event.register(IArrowModifier.class);
-        }
     }
 }
