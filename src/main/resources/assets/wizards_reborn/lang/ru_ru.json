@@ -2081,7 +2081,7 @@
   "config.client.wizards_reborn.overlay.arcaneWand.wissenText": "Текст виссена",
   "config.client.wizards_reborn.overlay.arcaneWand.wissenText.desc": "Включает отображение виссена в HUD.",
   "config.client.wizards_reborn.overlay.arcaneWand.reverseBar": "Реверс панели",
-  "config.client.wizards_reborn.overlay.arcaneWand.reverseBardesc": "Включает реверс панели.",
+  "config.client.wizards_reborn.overlay.arcaneWand.reverseBar.desc": "Включает реверс панели.",
   "config.client.wizards_reborn.overlay.arcaneWand.showEmptySpells": "Показ пустых заклинаний",
   "config.client.wizards_reborn.overlay.arcaneWand.showEmptySpells.desc": "Включает показ пустых заклинаний в панели."
 }

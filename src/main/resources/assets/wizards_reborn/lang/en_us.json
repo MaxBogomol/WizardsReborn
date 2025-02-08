@@ -2081,7 +2081,7 @@
   "config.client.wizards_reborn.overlay.arcaneWand.wissenText": "Wissen Text",
   "config.client.wizards_reborn.overlay.arcaneWand.wissenText.desc": "Enable draw wissen in HUD.",
   "config.client.wizards_reborn.overlay.arcaneWand.reverseBar": "Reverse Bar",
-  "config.client.wizards_reborn.overlay.arcaneWand.reverseBardesc": "Enable reverse bar.",
+  "config.client.wizards_reborn.overlay.arcaneWand.reverseBar.desc": "Enable reverse bar.",
   "config.client.wizards_reborn.overlay.arcaneWand.showEmptySpells": "Show Empty Spells",
   "config.client.wizards_reborn.overlay.arcaneWand.showEmptySpells.desc": "Enable show empty spells in bar."
 }
