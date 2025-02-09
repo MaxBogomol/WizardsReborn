@@ -12,6 +12,8 @@ public class WizardsRebornClientConfig {
     public static ForgeConfigSpec.ConfigValue<Integer>
             WISSEN_RAYS_LIMIT,
             ARCANE_WAND_OVERLAY_X_OFFSET, ARCANE_WAND_OVERLAY_Y_OFFSET, ARCANE_WAND_OVERLAY_SECOND_X_OFFSET, ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET, ARCANE_WAND_OVERLAY_BAR_X_OFFSET, ARCANE_WAND_OVERLAY_BAR_Y_OFFSET;
+    public static ForgeConfigSpec.ConfigValue<Double>
+            KNOWLEDGE_SHADER_INTENSITY, MOR_SPORES_SHADER_INTENSITY, WISSEN_AURA_SHADER_INTENSITY, IRRITATION_SHADER_INTENSITY, LIGHT_RAYS_SHADER_INTENSITY, LIGHT_RAYS_SHADER_RADIUS;
 
     public WizardsRebornClientConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Graphics").push("graphics");
@@ -22,6 +24,15 @@ public class WizardsRebornClientConfig {
 
         builder.comment("Particles").push("particles");
         WISSEN_RAYS_LIMIT = builder.comment("Limit wissen rays per tick.").defineInRange("wissenRaysLimit", 200, 0, 1000);
+        builder.pop();
+
+        builder.comment("Shaders").push("shaders");
+        KNOWLEDGE_SHADER_INTENSITY = builder.comment("Intensity of gaining knowledge effect post process shader.").defineInRange("knowledgeShaderIntensity", 1d, 0, 2d);
+        MOR_SPORES_SHADER_INTENSITY = builder.comment("Intensity of Mor Spores effect post process shader.").comment("WARNING: ").defineInRange("morSporesShaderIntensity", 1d, 0.25d, 2d);
+        WISSEN_AURA_SHADER_INTENSITY = builder.comment("Intensity of Wissen Aura effect post process shader.").defineInRange("wissenAuraShaderIntensity", 1d, 0, 2d);
+        IRRITATION_SHADER_INTENSITY = builder.comment("Intensity of Irritation effect post process shader.").defineInRange("irritationShaderIntensity", 1d, 0, 2d);
+        LIGHT_RAYS_SHADER_INTENSITY = builder.comment("Intensity of Light Rays glow effect post process shader.").defineInRange("lightRaysShaderIntensity", 1d, 0, 2d);
+        LIGHT_RAYS_SHADER_RADIUS = builder.comment("Radius of Light Rays glow effect post process shader.").defineInRange("lightRaysShaderRadius", 1d, 0, 2d);
         builder.pop();
         builder.pop();
 

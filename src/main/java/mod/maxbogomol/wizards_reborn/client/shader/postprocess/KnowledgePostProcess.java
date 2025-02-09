@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.shader.postprocess;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcess;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -77,6 +78,7 @@ public class KnowledgePostProcess extends PostProcess {
     }
 
     public float getIntensity() {
-        return 5;
+        double intensity =  WizardsRebornClientConfig.KNOWLEDGE_SHADER_INTENSITY.get();
+        return 5 * (float) intensity;
     }
 }

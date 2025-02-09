@@ -12,6 +12,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.client.shader.postprocess.LightGlowPostProcess;
 import mod.maxbogomol.wizards_reborn.client.shader.postprocess.LightGlowPostProcessInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -190,7 +191,9 @@ public class LightUtil {
     public static void renderLightRay(Level level, BlockPos startPos, Vec3 from, Vec3 to, float rayDistance, Color color, Color colorType, Color colorConcentrated, boolean concentrated, float partialTicks, PoseStack poseStack) {
         LightRayHitResult hitResult = getLightRayHitResult(level, startPos, from, to, rayDistance);
         renderLightRay(from, hitResult.getPosHit(), color, colorType, colorConcentrated, concentrated, partialTicks, poseStack);
-        LightGlowPostProcess.INSTANCE.addInstance(new LightGlowPostProcessInstance(from.toVector3f(), hitResult.getPosHit().toVector3f(), new Vector3f(color.getRed() / 255f, color.getBlue() / 255f, color.getBlue() / 255f)).setIntensity(1f).setRadius(0.5f));
+        double intensity =  WizardsRebornClientConfig.LIGHT_RAYS_SHADER_INTENSITY.get();
+        double radius =  WizardsRebornClientConfig.LIGHT_RAYS_SHADER_RADIUS.get();
+        LightGlowPostProcess.INSTANCE.addInstance(new LightGlowPostProcessInstance(from.toVector3f(), hitResult.getPosHit().toVector3f(), new Vector3f(color.getRed() / 255f, color.getBlue() / 255f, color.getBlue() / 255f)).setIntensity((float) intensity).setRadius(0.5f * (float) radius));
     }
 
     public static void transferLight(BlockEntity from, BlockEntity to) {

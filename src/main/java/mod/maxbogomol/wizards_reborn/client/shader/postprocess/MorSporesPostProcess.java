@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcess;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -47,7 +48,8 @@ public class MorSporesPostProcess extends PostProcess {
 
     @Override
     public void beforeProcess(PoseStack poseStack) {
-        float fade = (Mth.lerp(ClientTickHandler.partialTicks, oldTick, tick) / getMaxTick());
+        double intensity =  WizardsRebornClientConfig.MOR_SPORES_SHADER_INTENSITY.get();
+        float fade = (Mth.lerp(ClientTickHandler.partialTicks, oldTick, tick) / getMaxTick()) * (float) intensity;
         effectInstance.safeGetUniform("fade").set(fade);
     }
 
