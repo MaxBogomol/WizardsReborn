@@ -71,6 +71,7 @@ public class WizardsRebornClient {
     }
 
     public static void setupSplashes() {
+        SplashHandler.addSplash("Also try Malum!");
         SplashHandler.addSplash("Also try Implosion!");
     }
 }
