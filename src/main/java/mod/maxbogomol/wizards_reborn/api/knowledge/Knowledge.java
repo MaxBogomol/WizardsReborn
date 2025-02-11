@@ -52,7 +52,7 @@ public class Knowledge {
     }
 
     public boolean addTick(Player player) {
-        if (!KnowledgeUtil.isKnowledge(player, this) && canReceived(player)) {
+        if (canReceived(player)) {
             KnowledgeUtil.addKnowledge(player, this);
             return true;
         }

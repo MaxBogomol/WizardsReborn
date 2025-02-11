@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
@@ -13,8 +14,8 @@ import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypeTags;
@@ -42,6 +43,8 @@ import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.ArrayList;
 
 public class WizardsRebornEvents {
     @SubscribeEvent
@@ -73,7 +76,9 @@ public class WizardsRebornEvents {
         if (!event.player.level().isClientSide()) {
             Player player = event.player;
 
-            for (Knowledge knowledge : KnowledgeHandler.getKnowledges()) {
+            ArrayList<Knowledge> knowledges = new ArrayList<>(KnowledgeHandler.getKnowledges());
+            knowledges.removeAll(KnowledgeUtil.getKnowledges(player));
+            for (Knowledge knowledge : knowledges) {
                 knowledge.addTick(player);
             }
 

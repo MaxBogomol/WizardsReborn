@@ -3,13 +3,15 @@ package mod.maxbogomol.wizards_reborn.api.knowledge;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeToastPacket;
 import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeUpdatePacket;
-import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -73,6 +75,15 @@ public class KnowledgeUtil {
 
             WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
+    }
+
+    public static Set<Knowledge> getKnowledges(Entity entity) {
+        if (!(entity instanceof Player)) return new HashSet<>();
+        AtomicReference<Set<Knowledge>> set = new AtomicReference<>();
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
+            set.set(k.getKnowledges());
+        });
+        return set.get();
     }
 
     public static void addKnowledgeFromScroll(Entity entity, Knowledge knowledge) {
