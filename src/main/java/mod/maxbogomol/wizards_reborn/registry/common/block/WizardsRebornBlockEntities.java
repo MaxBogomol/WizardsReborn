@@ -44,7 +44,7 @@ import mod.maxbogomol.wizards_reborn.common.block.sensor.wissen_activator.Wissen
 import mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage.SteamThermalStorageBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem.ExperienceTotemBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.experience.ExperienceTotemBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.totem.flames.TotemOfFlamesBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_altar.WissenAltarBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_cell.WissenCellBlockEntity;

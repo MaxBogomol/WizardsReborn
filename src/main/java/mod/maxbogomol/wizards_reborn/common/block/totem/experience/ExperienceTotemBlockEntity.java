@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem;
+package mod.maxbogomol.wizards_reborn.common.block.totem.experience;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;

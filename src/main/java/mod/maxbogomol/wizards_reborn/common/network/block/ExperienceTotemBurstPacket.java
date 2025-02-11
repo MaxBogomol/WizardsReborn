@@ -34,6 +34,10 @@ public class ExperienceTotemBurstPacket extends TwoPositionClientPacket {
         super(pos, vec);
     }
 
+    public ExperienceTotemBurstPacket(Vec3 pos, Vec3 vec) {
+        super(pos, vec);
+    }
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {

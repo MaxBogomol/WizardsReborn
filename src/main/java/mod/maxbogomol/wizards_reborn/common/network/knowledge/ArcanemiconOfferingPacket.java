@@ -14,6 +14,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,17 +23,21 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.awt.*;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ArcanemiconOfferingPacket extends PositionClientPacket {
+    protected final UUID uuid;
 
-    public ArcanemiconOfferingPacket(double x, double y, double z) {
+    public ArcanemiconOfferingPacket(double x, double y, double z, UUID uuid) {
         super(x, y, z);
+        this.uuid = uuid;
     }
 
-    public ArcanemiconOfferingPacket(Vec3 vec) {
+    public ArcanemiconOfferingPacket(Vec3 vec, UUID uuid) {
         super(vec);
+        this.uuid = uuid;
     }
 
     @Override
@@ -87,8 +92,14 @@ public class ArcanemiconOfferingPacket extends PositionClientPacket {
                 .setGravity(0.5f)
                 .repeat(level, x, y, z, 30);
 
+        Player player = WizardsReborn.proxy.getPlayer();
+        if (level.getPlayerByUUID(uuid) != null) {
+            player = level.getPlayerByUUID(uuid);
+        }
+
+        Player finalPlayer = player;
         final Consumer<GenericParticle> playerTarget = p -> {
-            Vec3 playerPos = WizardsReborn.proxy.getPlayer().position();
+            Vec3 playerPos = finalPlayer.position();
             Vec3 pos = p.getPosition();
 
             double dX = playerPos.x() - pos.x();
@@ -140,7 +151,14 @@ public class ArcanemiconOfferingPacket extends PositionClientPacket {
         instance.registerMessage(index, ArcanemiconOfferingPacket.class, ArcanemiconOfferingPacket::encode, ArcanemiconOfferingPacket::decode, ArcanemiconOfferingPacket::handle);
     }
 
+    public void encode(FriendlyByteBuf buf) {
+        buf.writeDouble(this.x);
+        buf.writeDouble(this.y);
+        buf.writeDouble(this.z);
+        buf.writeUUID(this.uuid);
+    }
+
     public static ArcanemiconOfferingPacket decode(FriendlyByteBuf buf) {
-        return decode(ArcanemiconOfferingPacket::new, buf);
+        return new ArcanemiconOfferingPacket(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readUUID());
     }
 }

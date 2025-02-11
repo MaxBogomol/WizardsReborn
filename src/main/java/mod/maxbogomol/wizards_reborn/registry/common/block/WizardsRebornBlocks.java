@@ -59,7 +59,7 @@ import mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage.SteamThe
 import mod.maxbogomol.wizards_reborn.common.block.totem.TotemBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlock;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlock;
-import mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem.ExperienceTotemBlock;
+import mod.maxbogomol.wizards_reborn.common.block.totem.experience.ExperienceTotemBlock;
 import mod.maxbogomol.wizards_reborn.common.block.totem.flames.TotemOfFlamesBlock;
 import mod.maxbogomol.wizards_reborn.common.block.underground_grape.UndergroundGrapeVinesBlock;
 import mod.maxbogomol.wizards_reborn.common.block.underground_grape.UndergroundGrapeVinesPlantBlock;

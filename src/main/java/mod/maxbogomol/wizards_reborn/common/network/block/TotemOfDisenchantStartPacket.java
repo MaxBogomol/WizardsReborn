@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.network.block;
 
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfDisenchantSoundInstance;
@@ -107,7 +106,7 @@ public class TotemOfDisenchantStartPacket extends ServerPacket {
             totem.enchantmentLevel = enchantmentLevel;
             BlockEntityUpdate.packet(totem);
 
-            level.playSound(WizardsReborn.proxy.getPlayer(), totem.getBlockPos(), WizardsRebornSounds.TOTEM_OF_DISENCHANT_START.get(), SoundSource.BLOCKS, 1f, 1f);
+            level.playSound(null, totem.getBlockPos(), WizardsRebornSounds.TOTEM_OF_DISENCHANT_START.get(), SoundSource.BLOCKS, 1f, 1f);
             TotemOfDisenchantSoundInstance.playSound(totem);
         }
     }
