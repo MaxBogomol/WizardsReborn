@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.util.BlockUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
@@ -35,7 +36,7 @@ public class RainCloudSpell extends CloudSpell {
 
             int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-            float chance = (0.1f + ((focusLevel + magicModifier) * 0.025f));
+            float chance = (0.1f + ((focusLevel + magicModifier) * 0.025f)) + WizardsRebornConfig.RAIN_CLOUD_POWER.get().floatValue();
 
             if (random.nextFloat() < chance) {
                 float x = (float) (entity.getX() + ((random.nextFloat() - 0.5F) * 2 * size));

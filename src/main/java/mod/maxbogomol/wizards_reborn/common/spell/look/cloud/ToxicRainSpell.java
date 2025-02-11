@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
@@ -52,7 +53,7 @@ public class ToxicRainSpell extends CloudSpell {
 
             int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-            float damage = (0.5f + ((focusLevel + magicModifier) * 0.25f));
+            float damage = (0.5f + ((focusLevel + magicModifier) * 0.25f)) + WizardsRebornConfig.TOXIC_RAIN_DAMAGE.get().floatValue();
 
             List<LivingEntity> list = entity.level().getEntitiesOfClass(LivingEntity.class, new AABB(entity.getX() - size, entity.getY() - 15, entity.getZ() - size, entity.getX() + size, entity.getY() + 0.5f, entity.getZ() + size));
 
@@ -63,9 +64,10 @@ public class ToxicRainSpell extends CloudSpell {
                         DamageSource damageSource = DamageHandler.create(entity.level(), WizardsRebornDamageTypes.ARCANE_MAGIC);
                         target.hurt(damageSource, damage);
                     }
-                    target.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (20 + (10 * (focusLevel + magicModifier))), 1));
-                    target.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (20 + (20 * (focusLevel + magicModifier))), 0));
-                    target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) (100 + (40 * (focusLevel + magicModifier))), 0));
+                    float power = WizardsRebornConfig.TOXIC_RAIN_POWER.get().floatValue();
+                    target.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (20 + (10 * (focusLevel + magicModifier)) + power), 1));
+                    target.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (20 + (20 * (focusLevel + magicModifier)) + power), 0));
+                    target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) (100 + (40 * (focusLevel + magicModifier)) + power), 0));
                 }
             }
         }

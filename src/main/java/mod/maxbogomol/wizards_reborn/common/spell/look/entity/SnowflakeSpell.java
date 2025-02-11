@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.SnowflakeSpellPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
@@ -49,7 +50,7 @@ public class SnowflakeSpell extends EntityLookSpell {
         if (!level.isClientSide()) {
             int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
-            float damage = (float) (0.75f + (focusLevel * 0.5)) + magicModifier;
+            float damage = (float) (0.75f + (focusLevel * 0.5)) + magicModifier + WizardsRebornConfig.SNOWFLAKE_DAMAGE.get().floatValue();
 
             RayHitResult hit = getEntityHit(level, spellContext);
             Vec3 pos = hit.getPos();

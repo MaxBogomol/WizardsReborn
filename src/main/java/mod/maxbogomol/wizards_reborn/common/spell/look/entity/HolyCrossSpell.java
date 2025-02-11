@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorIte
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellHeartsPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellSkullsPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
@@ -50,7 +51,7 @@ public class HolyCrossSpell extends EntityLookSpell {
         if (!level.isClientSide()) {
             int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
-            float damage = (float) (1.0f + ((focusLevel + magicModifier) * 0.5));
+            float damage = (float) (1.0f + ((focusLevel + magicModifier) * 0.5)) + WizardsRebornConfig.HOLY_CROSS_DAMAGE.get().floatValue();
 
             RayHitResult hit = getEntityHit(level, spellContext);
             Vec3 pos = hit.getPos();

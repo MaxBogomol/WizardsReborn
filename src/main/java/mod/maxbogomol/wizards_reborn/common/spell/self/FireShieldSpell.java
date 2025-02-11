@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FireShieldSpellPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -44,7 +45,7 @@ public class FireShieldSpell extends SelfSpell {
                 int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
                 float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity);
 
-                entity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, (int) (2000 + (450 * (focusLevel + magicModifier))), 0));
+                entity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, (int) (2000 + (450 * (focusLevel + magicModifier)) + WizardsRebornConfig.FIRE_SHIELD_POWER.get().floatValue()), 0));
                 entity.setTicksFrozen(0);
                 WizardsRebornPacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new FireShieldSpellPacket(entity.position().add(0, entity.getBbHeight() / 2f, 0), new Vec3(entity.getBbWidth() / 2f, entity.getBbHeight() / 2f, entity.getBbWidth() / 2f), getColor()));
             }

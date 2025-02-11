@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorIte
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.BlinkFovPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.BlinkSpellPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
@@ -50,8 +51,8 @@ public class BlinkSpell extends LookSpell {
 
     @Override
     public double getLookDistance() {
-        if (isSharp) return 6f;
-        return 5f;
+        if (isSharp) return 6f + WizardsRebornConfig.BLINK_POWER.get().floatValue();
+        return 5f + WizardsRebornConfig.SHARP_BLINK_POWER.get().floatValue();
     }
 
     @Override
@@ -83,6 +84,7 @@ public class BlinkSpell extends LookSpell {
                 float damage = (3f + (focusLevel)) + magicModifier;
 
                 if (isSharp) {
+                    damage = damage + WizardsRebornConfig.SHARP_BLINK_DAMAGE.get().floatValue();
                     for (Entity target : RayCast.getHitEntities(level, spellContext.getPos(), pos, 0.5f)) {
                         if (!target.equals(spellContext.getEntity()) && target instanceof LivingEntity) {
                             DamageSource damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, entity);

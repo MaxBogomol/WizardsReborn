@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirImpactSpellPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
@@ -67,7 +68,7 @@ public class AirImpactSpell extends EntityLookSpell {
         if (!level.isClientSide()) {
             int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
-            float power = 1.1f + ((focusLevel + magicModifier) * 0.1f);
+            float power = 1.1f + ((focusLevel + magicModifier) * 0.1f) + WizardsRebornConfig.AIR_IMPACT_POWER.get().floatValue();
 
             Vec3 vec = spellContext.getVec().scale(power);
 

@@ -11,6 +11,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.network.ThrownScytheScreenshakePacket;
@@ -127,7 +128,7 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                 }
             }
 
-            if (hitResult.hasBlock()) {
+            if (!getBlock() && (hitResult.hasBlock() || (position().y() < level().dimensionType().minY() + FluffyFurConfig.VOID_HEIGHT.get()))) {
                 setBlock(true);
                 setBlockTick(30);
                 setDeltaMovement(0, 0, 0);

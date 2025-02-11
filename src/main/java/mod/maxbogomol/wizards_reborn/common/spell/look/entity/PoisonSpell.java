@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellSkullsPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -56,7 +57,8 @@ public class PoisonSpell extends EntityLookSpell {
             if (hit.hasEntities()) {
                 for (Entity entity : hit.getEntities()) {
                     if (entity instanceof LivingEntity livingEntity) {
-                        livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (200 + (50 * (focusLevel + magicModifier))), 0));
+                        float power = WizardsRebornConfig.POISON_POWER.get().floatValue();
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (200 + (50 * (focusLevel + magicModifier)) + power), 0));
                         WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new CrossSpellSkullsPacket(pos, getColor()));
                     }
                 }

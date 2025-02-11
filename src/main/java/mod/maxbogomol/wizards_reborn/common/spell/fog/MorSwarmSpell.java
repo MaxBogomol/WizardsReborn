@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -67,7 +68,7 @@ public class MorSwarmSpell extends FogSpell {
             List<Entity> entities = getEntities(entity.level(), blocks);
 
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-            float damage = (0.25f + ((focusLevel + magicModifier) * 0.15f));
+            float damage = (0.25f + ((focusLevel + magicModifier) * 0.15f)) + WizardsRebornConfig.MOR_SWARM_DAMAGE.get().floatValue();
 
             for (Entity e : entities) {
                 if (e instanceof LivingEntity target) {
@@ -76,10 +77,11 @@ public class MorSwarmSpell extends FogSpell {
                         DamageSource damageSource = DamageHandler.create(entity.level(), WizardsRebornDamageTypes.ARCANE_MAGIC);
                         target.hurt(damageSource, damage);
                     }
-                    target.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (60 + (20 * (focusLevel + magicModifier))), 1));
-                    target.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (20 + (20 * (focusLevel + magicModifier))), 0));
-                    target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) (100 + (40 * (focusLevel + magicModifier))), 0));
-                    target.addEffect(new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), (int) (100 + (40 * (focusLevel + magicModifier))), 0));
+                    float power = WizardsRebornConfig.MOR_SWARM_DAMAGE.get().floatValue();
+                    target.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (60 + (20 * (focusLevel + magicModifier)) + power), 1));
+                    target.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (20 + (20 * (focusLevel + magicModifier)) + power), 0));
+                    target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) (100 + (40 * (focusLevel + magicModifier)) + power), 0));
+                    target.addEffect(new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), (int) (100 + (40 * (focusLevel + magicModifier)) + power), 0));
                 }
             }
         }

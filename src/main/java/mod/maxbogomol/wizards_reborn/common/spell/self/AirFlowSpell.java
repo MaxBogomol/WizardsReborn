@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirFlowSpellPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -44,7 +45,7 @@ public class AirFlowSpell extends SelfSpell {
                 int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
                 float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity);
 
-                float scale = 0.55f + (focusLevel * 0.15f);
+                float scale = 0.55f + (focusLevel * 0.15f) + WizardsRebornConfig.AIR_FLOW_POWER.get().floatValue();
 
                 Vec3 vel = entity.getViewVector(0).scale(scale);
                 if (entity.isFallFlying()) {

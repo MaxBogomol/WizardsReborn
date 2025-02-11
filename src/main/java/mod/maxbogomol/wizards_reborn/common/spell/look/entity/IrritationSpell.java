@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.IrritationSpellPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -60,7 +61,8 @@ public class IrritationSpell extends EntityLookSpell {
             if (hit.hasEntities()) {
                 for (Entity entity : hit.getEntities()) {
                     if (entity instanceof LivingEntity livingEntity) {
-                        livingEntity.addEffect(new MobEffectInstance(WizardsRebornMobEffects.IRRITATION.get(), (int) (400 + (100 * (focusLevel + magicModifier))), 0));
+                        float power = WizardsRebornConfig.IRRITATION_POWER.get().floatValue();
+                        livingEntity.addEffect(new MobEffectInstance(WizardsRebornMobEffects.IRRITATION.get(), (int) (400 + (100 * (focusLevel + magicModifier)) + power), 0));
                         WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new IrritationSpellPacket(pos, getColor()));
                     }
                 }

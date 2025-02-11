@@ -6,6 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public class WizardsRebornClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             SPELLS_ITEM_ANIMATIONS,
+            LIGHT_RAYS_SHADER,
             RESEARCH_HARDMODE, OLD_RESEARCH_MONOGRAM_OUTLINE, BRIGHT_RESEARCH_MONOGRAM_OUTLINE, RESEARCH_MONOGRAM_CONNECTS, MONOGRAM_GLOW, MONOGRAM_GLOW_COLOR, MONOGRAM_COLOR, MONOGRAM_RAYS, CONFIG_CENTER,
             NUMERICAL_WISSEN, NUMERICAL_COOLDOWN, SHOW_LIGHT_NAME, NUMERICAL_EXPERIENCE, NUMERICAL_HEAT, NUMERICAL_FLUID, NUMERICAL_STEAM,
             ARCANE_WAND_OVERLAY_UP, ARCANE_WAND_OVERLAY_RIGHT, ARCANE_WAND_OVERLAY_SIDE_HUD, ARCANE_WAND_OVERLAY_SIDE_BAR, ARCANE_WAND_OVERLAY_HORIZONTAL_BAR, ARCANE_WAND_OVERLAY_SECOND_HUD_FREE, ARCANE_WAND_OVERLAY_BAR_FREE, ARCANE_WAND_OVERLAY_COOLDOWN_TEXT, ARCANE_WAND_OVERLAY_WISSEN_TEXT, ARCANE_WAND_OVERLAY_REVERSE_BAR, ARCANE_WAND_OVERLAY_SHOW_EMPTY;
@@ -28,9 +29,10 @@ public class WizardsRebornClientConfig {
 
         builder.comment("Shaders").push("shaders");
         KNOWLEDGE_SHADER_INTENSITY = builder.comment("Intensity of gaining knowledge effect post process shader.").defineInRange("knowledgeShaderIntensity", 1d, 0, 2d);
-        MOR_SPORES_SHADER_INTENSITY = builder.comment("Intensity of Mor Spores effect post process shader.").comment("WARNING: ").defineInRange("morSporesShaderIntensity", 1d, 0.25d, 2d);
+        MOR_SPORES_SHADER_INTENSITY = builder.comment("Intensity of Mor Spores effect post process shader.").comment("WARNING: High value is not recommended due to bright flashes.").defineInRange("morSporesShaderIntensity", 1d, 0.25d, 2d);
         WISSEN_AURA_SHADER_INTENSITY = builder.comment("Intensity of Wissen Aura effect post process shader.").defineInRange("wissenAuraShaderIntensity", 1d, 0, 2d);
         IRRITATION_SHADER_INTENSITY = builder.comment("Intensity of Irritation effect post process shader.").defineInRange("irritationShaderIntensity", 1d, 0, 2d);
+        LIGHT_RAYS_SHADER = builder.comment("Enable Light Rays glow effect post process shader.").define("lightRaysShader", true);
         LIGHT_RAYS_SHADER_INTENSITY = builder.comment("Intensity of Light Rays glow effect post process shader.").defineInRange("lightRaysShaderIntensity", 1d, 0, 2d);
         LIGHT_RAYS_SHADER_RADIUS = builder.comment("Radius of Light Rays glow effect post process shader.").defineInRange("lightRaysShaderRadius", 1d, 0, 2d);
         builder.pop();
