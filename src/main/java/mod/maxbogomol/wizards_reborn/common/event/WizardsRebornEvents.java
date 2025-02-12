@@ -45,6 +45,7 @@ import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class WizardsRebornEvents {
     @SubscribeEvent
@@ -77,7 +78,8 @@ public class WizardsRebornEvents {
             Player player = event.player;
 
             ArrayList<Knowledge> knowledges = new ArrayList<>(KnowledgeHandler.getKnowledges());
-            knowledges.removeAll(KnowledgeUtil.getKnowledges(player));
+            Set<Knowledge> set = KnowledgeUtil.getKnowledges(player);
+            if (set != null) knowledges.removeAll(set);
             for (Knowledge knowledge : knowledges) {
                 knowledge.addTick(player);
             }
