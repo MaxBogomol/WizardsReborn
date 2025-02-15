@@ -1,0 +1,9 @@
+{
+	"parent": "wizards_reborn:block/arcane_hopper",
+	"display": {
+		"head": {
+			"rotation": [-180, 0, 0],
+			"translation": [0, 14, 0]
+		}
+	}
+}

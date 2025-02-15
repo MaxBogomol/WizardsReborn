@@ -9,10 +9,7 @@ import mod.maxbogomol.fluffy_fur.common.book.CustomBookComponent;
 import mod.maxbogomol.fluffy_fur.common.book.CustomBookHandler;
 import mod.maxbogomol.fluffy_fur.common.entity.ItemEntityHandler;
 import mod.maxbogomol.fluffy_fur.common.entity.ItemEntityModifier;
-import mod.maxbogomol.fluffy_fur.common.item.CustomBoatItem;
-import mod.maxbogomol.fluffy_fur.common.item.CustomChestBoatItem;
-import mod.maxbogomol.fluffy_fur.common.item.FuelBlockItem;
-import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
+import mod.maxbogomol.fluffy_fur.common.item.*;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
@@ -394,7 +391,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> INNOCENT_PEDESTAL = ITEMS.register("innocent_pedestal", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_PEDESTAL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_LEVER = ITEMS.register("arcane_lever", () -> new BlockItem(WizardsRebornBlocks.ARCANE_LEVER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_HOPPER = ITEMS.register("arcane_hopper", () -> new BlockItem(WizardsRebornBlocks.ARCANE_HOPPER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_HOPPER = ITEMS.register("arcane_hopper", () -> new HeadBlockItem(WizardsRebornBlocks.ARCANE_HOPPER.get(), new Item.Properties()));
     public static final RegistryObject<Item> REDSTONE_SENSOR = ITEMS.register("redstone_sensor", () -> new BlockItem(WizardsRebornBlocks.REDSTONE_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_SENSOR = ITEMS.register("wissen_sensor", () -> new BlockItem(WizardsRebornBlocks.WISSEN_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> COOLDOWN_SENSOR = ITEMS.register("cooldown_sensor", () -> new BlockItem(WizardsRebornBlocks.COOLDOWN_SENSOR.get(), new Item.Properties()));
@@ -704,6 +701,7 @@ public class WizardsRebornItems {
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_scythe"));
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_gold_scythe"));
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "blaze_reap"));
+            event.register(LargeItemRenderer.getInHeadModelResourceLocation(WizardsReborn.MOD_ID, "arcane_hopper"));
 
             for (String skin : LeatherCollarItem.skins.values()) {
                 event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + skin), "inventory"));
@@ -721,6 +719,8 @@ public class WizardsRebornItems {
             WandCrystalsModels.addWandItem(map, ARCANE_WAND.getId());
 
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "blaze_reap");
+
+            LargeItemRenderer.bakeInHeadModel(map, WizardsReborn.MOD_ID, "arcane_hopper");
 
             for (String skin : LeatherCollarItem.skins.keySet()) {
                 BakedModel model = map.get(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + LeatherCollarItem.skins.get(skin)), "inventory"));
