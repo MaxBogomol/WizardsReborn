@@ -9,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -34,6 +35,10 @@ public class MagnificentMaidSkin extends ItemSkin {
                 .addArmorSkin(EquipmentSlot.FEET, WizardsReborn.MOD_ID + ":magnificent_maid_boots"));
         addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/magnificent_maid_arcane_wand"));
         addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":magnificent_maid_wissen_wand"));
+
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_armor"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_wand"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.wissen_wand"));
     }
 
     public static class MagnificentMaidArmorSkinEntry extends ArcaneArmorClassSkinEntry {

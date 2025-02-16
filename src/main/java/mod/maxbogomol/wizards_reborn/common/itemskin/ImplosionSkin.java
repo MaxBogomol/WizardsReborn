@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
+import net.minecraft.network.chat.Component;
 
 import java.awt.*;
 
@@ -30,5 +31,10 @@ public class ImplosionSkin extends ItemSkin {
         if (WizardsRebornFarmersDelight.isLoaded()) {
             WizardsRebornFarmersDelight.LoadedOnly.addKnifeSkin(this, WizardsReborn.MOD_ID+":implosion_knife");
         }
+
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_tools"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_bows"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_wand"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.wissen_wand"));
     }
 }

@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.itemskin;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 
 import java.awt.*;
@@ -21,5 +22,7 @@ public class PhantomInkSkin extends ItemSkin {
                 .addArmorSkin(EquipmentSlot.CHEST, null)
                 .addArmorSkin(EquipmentSlot.LEGS, null)
                 .addArmorSkin(EquipmentSlot.FEET, null));
+
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_armor"));
     }
 }

@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneScytheItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -35,6 +36,11 @@ public class SoulHunterSkin extends ItemSkin {
         addSkinEntry(new ItemClassSkinEntry(ArcaneScytheItem.class, WizardsReborn.MOD_ID+":soul_hunter_scythe"));
         addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/soul_hunter_arcane_wand"));
         addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":soul_hunter_wissen_wand"));
+
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_armor"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_scythes"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_wand"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.wissen_wand"));
     }
 
     public static class SoulHunterArmorSkinEntry extends ArcaneArmorClassSkinEntry {

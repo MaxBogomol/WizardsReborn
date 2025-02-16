@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.InventorWizardArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +26,8 @@ public class TopHatSkin extends ItemSkin {
         addSkinEntry(new TopHatArmorSkinEntry(InventorWizardArmorItem.class,
                 WizardsReborn.MOD_ID+":textures/models/armor/skin/top_hat.png")
                 .addArmorSkin(EquipmentSlot.HEAD, WizardsReborn.MOD_ID + ":top_hat"));
+
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_magic_hats"));
     }
 
     public static class TopHatArmorSkinEntry extends ArcaneArmorClassSkinEntry {

@@ -10,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -39,6 +40,8 @@ public class SkinTrimItem extends Item implements IGuiParticleItem {
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         list.add(getSkin().getSkinComponent());
+        list.add(Component.empty());
+        list.addAll(getSkin().getApplyingItemsComponents(Screen.hasShiftDown()));
     }
 
     @Override
