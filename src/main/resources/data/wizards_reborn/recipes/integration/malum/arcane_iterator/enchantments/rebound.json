@@ -1,0 +1,44 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:arcane_iterator",
+        "enchantment": {
+          "enchantment": "malum:rebound"
+        },
+        "wissen": 1200,
+        "experience": 6,
+        "ingredients": [
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "malum:processed_soulstone"
+          },
+          {
+            "item": "malum:processed_soulstone"
+          },
+          {
+            "tag": "forge:gems/diamond"
+          },
+          {
+            "tag": "forge:gems/diamond"
+          },
+          {
+            "item": "malum:hallowed_gold_ingot"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:arcane_iterator",
+        "enchantment": {
+          "enchantment": "malum:replenishing"
+        },
+        "wissen": 1200,
+        "experience": 5,
+        "ingredients": [
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "malum:mnemonic_fragment"
+          },
+          {
+            "tag": "forge:dusts/redstone"
+          },
+          {
+            "tag": "forge:dusts/redstone"
+          },
+          {
+            "tag": "forge:dusts/redstone"
+          },
+          {
+            "item": "malum:hallowed_gold_ingot"
+          }
+        ]
+      }
+    }
+  ]
+}

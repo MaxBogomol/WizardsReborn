@@ -87,6 +87,8 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:5493390")
 
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
+    compileOnly fg.deobf("curse.maven:create-328085:5838779")
+    compileOnly fg.deobf("curse.maven:malum-484064:5929596")
 
     runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:6183224")
     runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")

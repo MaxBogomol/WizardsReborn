@@ -1,0 +1,47 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:arcane_iterator",
+        "enchantment": {
+          "enchantment": "malum:ascension"
+        },
+        "wissen": 1200,
+        "experience": 6,
+        "ingredients": [
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "malum:soul_stained_steel_ingot"
+          },
+          {
+            "item": "malum:soul_stained_steel_ingot"
+          },
+          {
+            "tag": "forge:bones"
+          },
+          {
+            "tag": "forge:bones"
+          },
+          {
+            "tag": "forge:bones"
+          },
+          {
+            "item": "malum:hallowed_gold_ingot"
+          }
+        ]
+      }
+    }
+  ]
+}

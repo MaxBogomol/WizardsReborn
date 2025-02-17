@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "malum:spirit_repair",
+        "itemIdRegex": "innocent_wood.+",
+        "modIdRegex": "wizards_reborn",
+        "durabilityPercentage": 1,
+        "inputs": [
+
+        ],
+        "repairMaterial": {
+          "item": "wizards_reborn:innocent_wood_branch",
+          "count": 1
+        },
+        "spirits": [
+          {
+            "type": "arcane",
+            "count": 6
+          }
+        ]
+      }
+    }
+  ]
+}

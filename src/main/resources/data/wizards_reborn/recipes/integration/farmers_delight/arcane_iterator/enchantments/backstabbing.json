@@ -1,0 +1,38 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "farmersdelight"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:arcane_iterator",
+        "enchantment": {
+          "enchantment": "farmersdelight:backstabbing"
+        },
+        "wissen": 1200,
+        "experience": 5,
+        "ingredients": [
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "tag": "forge:gems/quartz"
+          },
+          {
+            "tag": "forge:ingots/gold"
+          },
+          {
+            "item": "minecraft:emerald"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:arcane_iterator",
+        "enchantment": {
+          "enchantment": "malum:animated"
+        },
+        "wissen": 1200,
+        "experience": 5,
+        "ingredients": [
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "malum:soul_stained_steel_ingot"
+          },
+          {
+            "tag": "forge:dusts/redstone"
+          },
+          {
+            "tag": "forge:dusts/redstone"
+          },
+          {
+            "tag": "forge:dusts/redstone"
+          },
+          {
+            "tag": "forge:feathers"
+          },
+          {
+            "tag": "forge:feathers"
+          }
+        ]
+      }
+    }
+  ]
+}

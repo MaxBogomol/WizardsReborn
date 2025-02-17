@@ -1,0 +1,20 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:wissen_altar",
+        "ingredient": {
+          "item": "malum:chunk_of_brilliance"
+        },
+        "wissen": 750
+      }
+    }
+  ]
+}

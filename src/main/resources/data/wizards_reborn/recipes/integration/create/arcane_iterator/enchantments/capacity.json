@@ -1,0 +1,38 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:arcane_iterator",
+        "enchantment": {
+          "enchantment": "create:capacity"
+        },
+        "wissen": 1200,
+        "experience": 5,
+        "ingredients": [
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "minecraft:lapis_lazuli"
+          },
+          {
+            "item": "create:fluid_tank"
+          },
+          {
+            "tag": "forge:plates/copper"
+          },
+          {
+            "item": "create:cogwheel"
+          }
+        ]
+      }
+    }
+  ]
+}

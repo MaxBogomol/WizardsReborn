@@ -1,14 +1,14 @@
 {
   "type": "forge:conditional",
-    "recipes": [
-      {
-        "conditions": [
-          {
-            "type": "forge:mod_loaded",
-            "modid": "create"
-          }
-        ],
-        "recipe": {
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
         "type": "create:crushing",
         "ingredients": [
           {

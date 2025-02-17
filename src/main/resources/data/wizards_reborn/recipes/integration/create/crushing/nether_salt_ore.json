@@ -1,15 +1,15 @@
 {
   "type": "forge:conditional",
-    "recipes": [
-      {
-        "conditions": [
-          {
-            "type": "forge:mod_loaded",
-            "modid": "create"
-          }
-        ],
-        "recipe": {
-    "type": "create:crushing",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "create:crushing",
         "ingredients": [
           {
             "item": "wizards_reborn:nether_salt_ore"
