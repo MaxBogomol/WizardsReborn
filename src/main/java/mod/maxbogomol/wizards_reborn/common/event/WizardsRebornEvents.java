@@ -74,14 +74,15 @@ public class WizardsRebornEvents {
 
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent event) {
-        if (!event.player.level().isClientSide()) {
-            Player player = event.player;
-
-            ArrayList<Knowledge> knowledges = new ArrayList<>(KnowledgeHandler.getKnowledges());
-            Set<Knowledge> set = KnowledgeUtil.getKnowledges(player);
-            if (set != null) knowledges.removeAll(set);
-            for (Knowledge knowledge : knowledges) {
-                knowledge.addTick(player);
+        Player player = event.player;
+        if (!player.level().isClientSide()) {
+            if (player.tickCount % 20 == 0) {
+                ArrayList<Knowledge> knowledges = new ArrayList<>(KnowledgeHandler.getKnowledges());
+                Set<Knowledge> set = KnowledgeUtil.getKnowledges(player);
+                if (set != null) knowledges.removeAll(set);
+                for (Knowledge knowledge : knowledges) {
+                    knowledge.addTick(player);
+                }
             }
 
             ArcaneFortressArmorItem.playerTick(event);

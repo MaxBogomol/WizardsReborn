@@ -831,6 +831,8 @@
   "alchemy_potion.wizards_reborn.magical_attunement": "Зелье магического созвучия",
   "alchemy_potion.wizards_reborn.darkness": "Зелье тьмы",
 
+  "alchemy_potion.wizards_reborn.gluttony": "Зелье чревоугодия",
+
   "_comment_11": "Лор предметов",
   "lore.wizards_reborn.wissen_wand_mode.functional": "Функциональный режим",
   "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Режим получения соединения",

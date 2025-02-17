@@ -831,6 +831,8 @@
   "alchemy_potion.wizards_reborn.magical_attunement": "Potion of Magical Attunement",
   "alchemy_potion.wizards_reborn.darkness": "Potion of Darkness",
 
+  "alchemy_potion.wizards_reborn.gluttony": "Potion of Gluttony",
+
   "_comment_11": "Items lore",
   "lore.wizards_reborn.wissen_wand_mode.functional": "Functional Mode",
   "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Receive Connect Mode",
