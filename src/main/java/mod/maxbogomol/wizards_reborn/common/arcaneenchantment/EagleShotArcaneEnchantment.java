@@ -16,7 +16,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -57,7 +56,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
         if (entityLiving instanceof Player player && ArcaneEnchantmentUtil.isArcaneItem(stack)) {
             int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.EAGLE_SHOT);
             if (enchantmentLevel > 0) {
-                if (BowItem.getPowerForTime(stack.getUseDuration() - timeLeft) >= 1f) {
+                if (stack.getUseDuration() - timeLeft > 35) {
                     float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
                     List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
                     int wissen = WissenUtil.getWissenInItems(items);
@@ -132,7 +131,9 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
             }
 
             if (WissenUtil.canRemoveWissen(wissen, cost)) {
-                fow = fow - (BowItem.getPowerForTime(player.getTicksUsingItem()) * 0.4f) - 0.3f;
+                float f = player.getTicksUsingItem() / 35f;
+                if (f > 1f) f = 1f;
+                fow = fow - (f * 0.4f) - 0.3f;
                 if (fow < 0) fow = 0;
             }
         }
