@@ -1,0 +1,43 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "fluffy_fur:speckle_plush",
+    "count": 1
+  },
+  "wissen": 1000,
+  "ingredients": [
+    {
+      "tag": "minecraft:fishes"
+    },
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:flint_and_steel"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:orange_wool"
+    },
+    {
+      "item": "minecraft:orange_wool"
+    },
+    {
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "minecraft:brown_wool"
+    }
+  ]
+}

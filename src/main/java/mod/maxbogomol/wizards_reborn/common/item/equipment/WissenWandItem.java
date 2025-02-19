@@ -651,7 +651,7 @@ public class WissenWandItem extends Item {
                     if (player.isShiftKeyDown() && WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
                         int x = minecraft.getWindow().getGuiScaledWidth() / 2;
                         int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtil.getHeatName(steamBlockEntity.getSteam(), steamBlockEntity.getMaxSteam());
+                        Component name = NumericalUtil.getSteamName(steamBlockEntity.getSteam(), steamBlockEntity.getMaxSteam());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }

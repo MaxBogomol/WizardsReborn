@@ -24,6 +24,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -37,6 +38,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +49,7 @@ public class LeatherCollarItem extends BaseCurioItem implements IGuiParticleItem
     private static final ResourceLocation COLLAR_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/leather_collar.png");
 
     public static Map<String, String> skins = new HashMap<>();
+    public static Color yapingColor = new Color(DyeColor.PINK.getMapColor().col);
 
     public LeatherCollarItem(Properties properties) {
         super(properties);
@@ -88,6 +91,7 @@ public class LeatherCollarItem extends BaseCurioItem implements IGuiParticleItem
         String name1 = "lore.wizards_reborn.leather_collar.0";
         String name2 = "lore.wizards_reborn.leather_collar.1";
         String hearts = "lore.wizards_reborn.leather_collar.2";
+        String yap = "lore.wizards_reborn.leather_collar.yaping";
 
         float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.05f;
         float ticksF = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 2f;
@@ -119,6 +123,23 @@ public class LeatherCollarItem extends BaseCurioItem implements IGuiParticleItem
         if (skin != null) {
             list.add(Component.literal(skin).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 255, 173, 186)))
                     .append(" ").append(Component.translatable(hearts).withStyle(ChatFormatting.RED)));
+
+            Player player = WizardsReborn.proxy.getPlayer();
+            if (player != null) {
+                boolean yaping = false;
+                String name = player.getGameProfile().getName();
+                if (skin.equals("MaxBogomol") && name.equals("OnixTheCat")) {
+                    yaping = true;
+                } else if (skin.equals("OnixTheCat") && name.equals("MaxBogomol")) {
+                    yaping = true;
+                }
+                if (skin.equals("SammySemicolon") && name.equals("mlekpi")) {
+                    yaping = true;
+                } else if (skin.equals("mlekpi") && name.equals("SammySemicolon")) {
+                    yaping = true;
+                }
+                if (yaping) list.add(Component.translatable(yap).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(yapingColor))));
+            }
         }
     }
 

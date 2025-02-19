@@ -4227,18 +4227,13 @@ public class ArcanemiconChapters {
 
         SPECIAL_THANKS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.special_thanks",
-                new TitlePage("wizards_reborn.arcanemicon.page.special_thanks.0"),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.1", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/maxbogomol_head.png")),
-                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.2"),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.3", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/onjerlay_head.png")),
-                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.4"),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.5", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/kekqupap_head.png")),
-                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.6"),
-                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.7"),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.8", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/onixthecat_head.png")),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.9", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/idark_head.png")),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.10", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/ishi_sama_head.png")),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.11", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/falaut_head.png"))
+                new TitlePage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.0"),
+                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/maxbogomol_head.png")),
+                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.0"),
+                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/onjerlay_head.png")),
+                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.0"),
+                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1"),
+                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.2", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/onixthecat_head.png"))
         );
 
         ADDITIONAL_INDEX = new Chapter(

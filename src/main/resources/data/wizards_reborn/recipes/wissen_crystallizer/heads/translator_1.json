@@ -10,7 +10,7 @@
       "tag": "forge:heads"
     },
     {
-      "item": "wizards_reborn:purple_arcane_lumos"
+      "item": "wizards_reborn:rainbow_arcane_lumos"
     },
     {
       "item": "wizards_reborn:purple_arcane_lumos"
@@ -22,23 +22,23 @@
       "item": "wizards_reborn:purple_arcane_lumos"
     },
     {
-      "item": "wizards_reborn:lime_arcane_lumos"
+      "item": "wizards_reborn:green_arcane_lumos"
     },
     {
-      "item": "wizards_reborn:lime_arcane_lumos"
+      "item": "wizards_reborn:green_arcane_lumos"
     },
     {
-      "item": "wizards_reborn:lime_arcane_lumos"
+      "item": "wizards_reborn:green_arcane_lumos"
     },
     {
-      "item": "wizards_reborn:light_blue_arcane_lumos"
+      "item": "wizards_reborn:gray_arcane_lumos"
     },
     {
-      "item": "wizards_reborn:light_blue_arcane_lumos"
+      "item": "wizards_reborn:gray_arcane_lumos"
     },
     {
-      "item": "wizards_reborn:light_blue_arcane_lumos"
+      "item": "wizards_reborn:gray_arcane_lumos"
     }
   ],
-  "SkullOwner" : "OnixTheCat"
+  "SkullOwner" : "Kekqupap"
 }
