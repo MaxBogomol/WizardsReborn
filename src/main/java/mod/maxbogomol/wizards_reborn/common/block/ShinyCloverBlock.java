@@ -41,9 +41,10 @@ public class ShinyCloverBlock extends BushBlock {
                     .setColorData(ColorParticleData.create(0.427f, 0.612f, 0.423f, 0.968f, 0.941f, 0.549f).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                    .setLifetime(10)
+                    .setLifetime(15)
                     .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
-                    .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                    .randomOffset(0.25f, 0, 0.25f)
+                    .spawn(level, pos.getX() + 0.5f, pos.getY() + 0.1f, pos.getZ() + 0.5f);
         }
     }
 }

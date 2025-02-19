@@ -27,9 +27,10 @@ public class PetalsOfInnocenceBlock extends PinkPetalsBlock {
                     .setColorData(ColorParticleData.create(0.968f, 0.968f, 0.968f).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.05f, 0).build())
-                    .setLifetime(10)
+                    .setLifetime(15)
                     .addVelocity(-(X / 100), (random.nextDouble() / 40), -(Z / 100))
-                    .spawn(level, pos.getX() + 0.5F + X, pos.getY() + 0.05F, pos.getZ() + 0.5F + Z);
+                    .randomOffset(0.25f, 0, 0.25f)
+                    .spawn(level, pos.getX() + 0.5f, pos.getY() + 0.05f, pos.getZ() + 0.5f);
         }
     }
 }
