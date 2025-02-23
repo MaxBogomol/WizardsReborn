@@ -1,18 +1,18 @@
-package mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage;
+package mod.maxbogomol.wizards_reborn.client.arcanemicon.titled;
 
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.SpellIndexEntry;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.SpellIndexPage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.MonogramIndexEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.MonogramIndexPage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class TitledSpellIndexPage extends SpellIndexPage {
+public class TitledMonogramIndexPage extends MonogramIndexPage {
     public String title;
 
-    public TitledSpellIndexPage(String textKey, SpellIndexEntry... pages) {
+    public TitledMonogramIndexPage(String textKey, MonogramIndexEntry... pages) {
         super(pages);
         this.title = textKey + ".title";
     }

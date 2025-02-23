@@ -1,8 +1,9 @@
-package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight;
+package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item;
 
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.entity.InnocentSparkEntity;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 
 public class KnifeInnocentSparkType extends InnocentSparkEntity.SwordSparkType {

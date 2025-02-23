@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight;
+package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.ArcaneWoodTools;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.InnocentWoodTools;

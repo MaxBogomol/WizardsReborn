@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage;
+package mod.maxbogomol.wizards_reborn.client.arcanemicon.titled;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;

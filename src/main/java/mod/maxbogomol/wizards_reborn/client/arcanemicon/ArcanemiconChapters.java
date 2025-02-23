@@ -2,23 +2,23 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
+import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.util.IntegrationUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionHandler;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.*;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.integration.CrushingPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage.*;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.*;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.*;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -4227,13 +4227,17 @@ public class ArcanemiconChapters {
 
         SPECIAL_THANKS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.special_thanks",
-                new TitlePage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.0"),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/maxbogomol_head.png")),
-                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.0"),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/onjerlay_head.png")),
+                new ThanksPage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.0"),
+                new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1", new ItemStack(FluffyFurItems.MAXBOGOMOL_PLUSH.get())),
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.0"),
-                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1"),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.2", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/onixthecat_head.png"))
+                new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1", new ItemStack(FluffyFurItems.ONIXTHECAT_PLUSH.get())),
+                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.0"),
+                new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.1", new ItemStack(FluffyFurItems.UNOLOGICALSAMSAR_PLUSH.get())),
+                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.foxairplane.0"),
+                new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.foxairplane.1", new ItemStack(FluffyFurItems.FOXAIRPLANE_PLUSH.get())),
+                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.0"),
+                new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1", ItemStack.EMPTY),
+                new ThanksVillagePage("wizards_reborn.arcanemicon.page.special_thanks.fluffy_village")
         );
 
         ADDITIONAL_INDEX = new Chapter(
@@ -4302,100 +4306,11 @@ public class ArcanemiconChapters {
     }
 
     public static void integrationsInit() {
-        integrationCreateInit();
-        integrationFarmersDelightInit();
+        if (WizardsRebornCreate.isLoaded()) WizardsRebornCreate.ClientLoadedOnly.arcanemiconChaptersInit();
+        if (WizardsRebornFarmersDelight.isLoaded()) WizardsRebornFarmersDelight.ClientLoadedOnly.arcanemiconChaptersInit();
         integrationEmbersInit();
         //integrationEidolonInit();
         //integrationMalumInit();
-    }
-
-    public static void integrationCreateInit() {
-        if (ModList.get().isLoaded("create")) {
-            ItemStack experienceNugget = new ItemStack(IntegrationUtil.getItem("create", "experience_nugget"));
-            ItemStack experienceNuggetTwo = new ItemStack(IntegrationUtil.getItem("create", "experience_nugget"), 2);
-            ItemStack experienceNuggetBig = new ItemStack(IntegrationUtil.getItem("create", "experience_nugget"), 18);
-
-            ARCANUM.addPage(new CrushingPage(ARCANUM_ITEM,
-                    new ItemStack(WizardsRebornItems.ARCANUM_DUST.get(), 3), ARCANUM_DUST_ITEM
-            ));
-            ARCANUM.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.ARCANUM_ORE.get()),
-                    new ItemStack(WizardsRebornItems.ARCANUM.get(), 3), ARCANUM_ITEM, experienceNugget, new ItemStack(Items.COBBLESTONE)
-            ));
-            ARCANUM.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.DEEPSLATE_ARCANUM_ORE.get()),
-                    new ItemStack(WizardsRebornItems.ARCANUM.get(), 3), ARCANUM_ITEM, experienceNugget, new ItemStack(Items.COBBLED_DEEPSLATE)
-            ));
-
-            ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.crushed_raw_arcane_gold",
-                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()))
-            ));
-            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_ORE.get()),
-                    new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNuggetTwo, new ItemStack(Items.COBBLED_DEEPSLATE)
-            ));
-            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.DEEPSLATE_ARCANE_GOLD_ORE.get()),
-                    new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNuggetTwo, new ItemStack(Items.COBBLED_DEEPSLATE)
-            ));
-            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.NETHER_ARCANE_GOLD_ORE.get()),
-                    new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 12), experienceNugget, new ItemStack(Items.NETHERRACK)
-            ));
-            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD.get()),
-                    new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNugget
-            ));
-            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD_BLOCK.get()),
-                    new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get(), 9), experienceNuggetBig
-            ));
-            ARCANE_GOLD.addPage(new SmeltingPage(ARCANE_GOLD_INGOT_ITEM, new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get())));
-            ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_sheet",
-                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.ARCANE_GOLD_SHEET.get()))
-            ));
-
-            ARCANUM_LENS.addPage(new CrushingPage(ARCANUM_LENS_ITEM,
-                    new ItemStack(WizardsRebornItems.ARCANUM_DUST.get(), 4), ARCANUM_DUST_ITEM
-            ));
-
-            NETHER_SALT.addPage(new CrushingPage(new ItemStack(WizardsRebornItems.NETHER_SALT_ORE.get()),
-                    new ItemStack(WizardsRebornItems.NETHER_SALT.get(), 2), NETHER_SALT_ITEM, new ItemStack(Items.QUARTZ), experienceNugget, new ItemStack(Items.NETHERRACK)
-            ));
-
-            List<MobEffectInstance> noEffects = new ArrayList<>();
-            List<MobEffectInstance> cinderFlourEffects = new ArrayList<>();
-            List<MobEffectInstance> powderedObsidianEffects = new ArrayList<>();
-
-            cinderFlourEffects.add(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1000, 0));
-            cinderFlourEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
-            cinderFlourEffects.add(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
-
-            powderedObsidianEffects.add(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 800, 0));
-            powderedObsidianEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 500, 0));
-
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("create", "wheat_flour"))));
-            SMOKING_PIPE.addPage(new CenserPage(cinderFlourEffects, new ItemStack(IntegrationUtil.getItem("create", "cinder_flour"))));
-            SMOKING_PIPE.addPage(new CenserPage(powderedObsidianEffects, new ItemStack(IntegrationUtil.getItem("create", "powdered_obsidian"))));
-
-            ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage(new ItemStack(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get(), 4), FluidStack.EMPTY, true, true,
-                    new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.WISSEN_TEA.get(), 200), FluidStack.EMPTY,
-                    new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")),
-                    new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")),
-                    ARCANUM_ITEM, NATURAL_CALX_ITEM
-            ));
-        }
-    }
-
-    public static void integrationFarmersDelightInit() {
-        if (ModList.get().isLoaded("farmersdelight")) {
-            ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_knife",
-                    new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()))
-            ));
-            ARCANE_GOLD.addPage(new CraftingTablePage(new ItemStack(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()),
-                    EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM,
-                    EMPTY_ITEM, ARCANE_WOOD_BRANCH_ITEM
-            ));
-
-            List<MobEffectInstance> noEffects = new ArrayList<>();
-
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("farmersdelight", "cabbage_seeds"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("farmersdelight", "tomato_seeds"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("farmersdelight", "rice"))));
-        }
     }
 
     public static void integrationEmbersInit() {

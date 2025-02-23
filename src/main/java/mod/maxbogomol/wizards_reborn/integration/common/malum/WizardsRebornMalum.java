@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.integration.common.malun;
+package mod.maxbogomol.wizards_reborn.integration.common.malum;
 
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;

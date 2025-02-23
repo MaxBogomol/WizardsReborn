@@ -6,9 +6,18 @@ import mod.maxbogomol.fluffy_fur.common.itemskin.ItemClassSkinEntry;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CraftingTablePage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.ArcaneKnifeItem;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.ArcaneWoodKnifeItem;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.InnocentWoodKnifeItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTiers;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +29,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.item.MushroomColonyItem;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WizardsRebornFarmersDelight {
     public static boolean LOADED;
@@ -59,6 +72,24 @@ public class WizardsRebornFarmersDelight {
 
         public static void addKnifeSkin(ItemSkin skin, String item) {
             skin.addSkinEntry(new ItemClassSkinEntry(ArcaneKnifeItem.class, item));
+        }
+    }
+
+    public static class ClientLoadedOnly {
+        public static void arcanemiconChaptersInit() {
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_knife",
+                    new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()))
+            ));
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new CraftingTablePage(new ItemStack(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()),
+                    ArcanemiconChapters.EMPTY_ITEM, ArcanemiconChapters.ARCANE_GOLD_INGOT_ITEM, ArcanemiconChapters.EMPTY_ITEM,
+                    ArcanemiconChapters.EMPTY_ITEM, ArcanemiconChapters.ARCANE_WOOD_BRANCH_ITEM
+            ));
+
+            List<MobEffectInstance> noEffects = new ArrayList<>();
+
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.CABBAGE_SEEDS.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.TOMATO_SEEDS.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.RICE.get())));
         }
     }
 

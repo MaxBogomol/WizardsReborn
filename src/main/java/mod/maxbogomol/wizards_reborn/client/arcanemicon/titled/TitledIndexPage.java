@@ -1,20 +1,26 @@
-package mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage;
+package mod.maxbogomol.wizards_reborn.client.arcanemicon.titled;
 
-import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.MonogramRecipesPage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.IndexEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IndexPage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class TitledMonogramRecipesPage extends MonogramRecipesPage {
+public class TitledIndexPage extends IndexPage {
     public String title;
 
-    public TitledMonogramRecipesPage(String textKey, Monogram monogram) {
-        super(monogram);
+    public TitledIndexPage(String textKey, IndexEntry... pages) {
+        super(pages);
         this.title = textKey + ".title";
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public boolean click(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
+        return super.click(gui, x, y + 16, mouseX, mouseY);
     }
 
     @Override

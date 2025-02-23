@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage;
+package mod.maxbogomol.wizards_reborn.client.arcanemicon.titled;
 
 import com.google.common.collect.Lists;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;

@@ -9,7 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.entity.*;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
-import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.KnifeInnocentSparkType;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.KnifeInnocentSparkType;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
