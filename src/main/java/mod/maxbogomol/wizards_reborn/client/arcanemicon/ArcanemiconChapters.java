@@ -4236,7 +4236,7 @@ public class ArcanemiconChapters {
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.foxairplane.0"),
                 new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.foxairplane.1", new ItemStack(FluffyFurItems.FOXAIRPLANE_PLUSH.get())),
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.0"),
-                new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1", ItemStack.EMPTY),
+                new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1", new ItemStack(FluffyFurItems.ONJERLAY_PLUSH.get())),
                 new ThanksVillagePage("wizards_reborn.arcanemicon.page.special_thanks.fluffy_village")
         );
 
