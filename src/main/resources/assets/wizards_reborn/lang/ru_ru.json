@@ -394,6 +394,12 @@
   "block.wizards_reborn.creative_fluid_storage": "Креативное жидкостное хранилище",
   "block.wizards_reborn.creative_steam_storage": "Креативное паровое хранилище",
 
+  "block.wizards_reborn.gilded_arcane_wood_planks": "Позолоченные арканово-древесные доски",
+  "block.wizards_reborn.gilded_innocent_wood_planks": "Позолоченные невинно-древесные доски",
+  "block.wizards_reborn.gilded_cork_bamboo_planks": "Позолоченные пробково-бамбуковые доски",
+  "block.wizards_reborn.gilded_cork_bamboo_chiseled_planks": "Позолоченные пробково-бамбуковые резные доски",
+  "block.wizards_reborn.gilded_polished_wisestone": "Позолоченный полированный мудро-камень",
+
   "block.wizards_reborn.arcane_salt_torch": "Аркановый солевой факел",
   "block.wizards_reborn.arcane_salt_wall_torch": "Аркановый солевой настенный факел",
   "block.wizards_reborn.innocent_salt_torch": "Невинный солевой факел",

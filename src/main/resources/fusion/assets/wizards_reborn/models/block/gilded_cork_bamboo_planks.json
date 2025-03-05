@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "all": "wizards_reborn:block/gilded_cork_bamboo_planks"
+  },
+  "connections": [
+    {
+      "type": "fluffy_fur:match_block_tag",
+      "block": "wizards_reborn:gilded"
+    }
+  ],
+  "loader": "fusion:model",
+  "type": "fusion:connecting"
+}

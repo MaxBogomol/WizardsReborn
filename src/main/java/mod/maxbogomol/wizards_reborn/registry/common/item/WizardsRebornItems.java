@@ -437,6 +437,12 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> CREATIVE_FLUID_STORAGE = ITEMS.register("creative_fluid_storage", () -> new BlockItem(WizardsRebornBlocks.CREATIVE_FLUID_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_STEAM_STORAGE = ITEMS.register("creative_steam_storage", () -> new BlockItem(WizardsRebornBlocks.CREATIVE_STEAM_STORAGE.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> GILDED_ARCANE_WOOD_PLANKS = ITEMS.register("gilded_arcane_wood_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_ARCANE_WOOD_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GILDED_INNOCENT_WOOD_PLANKS = ITEMS.register("gilded_innocent_wood_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_INNOCENT_WOOD_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GILDED_CORK_BAMBOO_PLANKS = ITEMS.register("gilded_cork_bamboo_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_CORK_BAMBOO_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GILDED_CORK_BAMBOO_CHISELED_PLANKS = ITEMS.register("gilded_cork_bamboo_chiseled_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_CORK_BAMBOO_CHISELED_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GILDED_POLISHED_WISESTONE = ITEMS.register("gilded_polished_wisestone", () -> new BlockItem(WizardsRebornBlocks.GILDED_POLISHED_WISESTONE.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> ARCANE_SALT_TORCH = ITEMS.register("arcane_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.ARCANE_SALT_TORCH.get(), WizardsRebornBlocks.ARCANE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
     public static final RegistryObject<Item> INNOCENT_SALT_TORCH = ITEMS.register("innocent_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.INNOCENT_SALT_TORCH.get(), WizardsRebornBlocks.INNOCENT_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
     public static final RegistryObject<Item> CORK_BAMBOO_SALT_TORCH = ITEMS.register("cork_bamboo_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.CORK_BAMBOO_SALT_TORCH.get(), WizardsRebornBlocks.CORK_BAMBOO_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));

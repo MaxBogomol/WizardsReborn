@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "wizards_reborn:block/gilded_cork_bamboo_planks"
+  }
+}

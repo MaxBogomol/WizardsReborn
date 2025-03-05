@@ -431,6 +431,12 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.CREATIVE_FLUID_STORAGE);
             event.accept(WizardsRebornItems.CREATIVE_STEAM_STORAGE);
 
+            event.accept(WizardsRebornItems.GILDED_ARCANE_WOOD_PLANKS);
+            event.accept(WizardsRebornItems.GILDED_INNOCENT_WOOD_PLANKS);
+            event.accept(WizardsRebornItems.GILDED_CORK_BAMBOO_PLANKS);
+            event.accept(WizardsRebornItems.GILDED_CORK_BAMBOO_CHISELED_PLANKS);
+            event.accept(WizardsRebornItems.GILDED_POLISHED_WISESTONE);
+
             event.accept(WizardsRebornItems.ARCANE_SALT_TORCH);
             event.accept(WizardsRebornItems.INNOCENT_SALT_TORCH);
             event.accept(WizardsRebornItems.CORK_BAMBOO_SALT_TORCH);
