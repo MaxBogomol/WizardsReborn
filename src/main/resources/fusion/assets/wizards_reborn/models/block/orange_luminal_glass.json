@@ -5,77 +5,9 @@
     "all": "wizards_reborn:block/orange_luminal_glass"
   },
   "connections": [
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:white_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:light_gray_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:gray_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:black_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:brown_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:red_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:orange_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:yellow_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:lime_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:green_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:cyan_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:light_blue_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:blue_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:purple_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:magenta_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:pink_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:rainbow_luminal_glass"
-    },
-    {
-      "type": "match_block",
-      "block": "wizards_reborn:cosmic_luminal_glass"
+        {
+      "type": "fluffy_fur:match_block_tag",
+      "block": "wizards_reborn:luminal_glass"
     }
   ],
   "loader": "fusion:model",
