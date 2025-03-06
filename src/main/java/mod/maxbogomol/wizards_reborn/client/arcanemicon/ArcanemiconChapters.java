@@ -4104,7 +4104,6 @@ public class ArcanemiconChapters {
     }
 
     public static void additionalInit() {
-
         PROGRESSION = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.progression",
                 new ProgressionPage("wizards_reborn.arcanemicon.page.progression", WizardsRebornKnowledges.progression),
@@ -4231,8 +4230,8 @@ public class ArcanemiconChapters {
                 new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1", new ItemStack(FluffyFurItems.MAXBOGOMOL_PLUSH.get())),
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.0"),
                 new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1", new ItemStack(FluffyFurItems.ONIXTHECAT_PLUSH.get())),
-                new TextPage("wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.0"),
-                new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.1", new ItemStack(FluffyFurItems.UNOLOGICALSAMSAR_PLUSH.get())),
+                new BunnyThanksPage("wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar"),
+                new BunnyThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar", new ItemStack(FluffyFurItems.UNOLOGICALSAMSAR_PLUSH.get())),
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.foxairplane.0"),
                 new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.foxairplane.1", new ItemStack(FluffyFurItems.FOXAIRPLANE_PLUSH.get())),
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onjerlay.0"),

@@ -404,11 +404,11 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> CREATIVE_FLUID_STORAGE = BLOCKS.register("creative_fluid_storage", () -> new CreativeFluidStorageBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> CREATIVE_STEAM_STORAGE = BLOCKS.register("creative_steam_storage", () -> new CreativeSteamStorageBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
 
-    public static final RegistryObject<Block> GILDED_ARCANE_WOOD_PLANKS = BLOCKS.register("gilded_arcane_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion()));
-    public static final RegistryObject<Block> GILDED_INNOCENT_WOOD_PLANKS = BLOCKS.register("gilded_innocent_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get()).noOcclusion()));
+    public static final RegistryObject<Block> GILDED_ARCANE_WOOD_PLANKS = BLOCKS.register("gilded_arcane_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> GILDED_INNOCENT_WOOD_PLANKS = BLOCKS.register("gilded_innocent_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> GILDED_CORK_BAMBOO_PLANKS = BLOCKS.register("gilded_cork_bamboo_planks", () -> new Block(BlockBehaviour.Properties.copy(CORK_BAMBOO_PLANKS.get()).noOcclusion()));
-    public static final RegistryObject<Block> GILDED_CORK_BAMBOO_CHISELED_PLANKS = BLOCKS.register("gilded_cork_bamboo_chiseled_planks", () -> new Block(BlockBehaviour.Properties.copy(CORK_BAMBOO_CHISELED_PLANKS.get()).noOcclusion()));
-    public static final RegistryObject<Block> GILDED_POLISHED_WISESTONE = BLOCKS.register("gilded_polished_wisestone", () -> new Block(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()).noOcclusion()));
+    public static final RegistryObject<Block> GILDED_CORK_BAMBOO_CHISELED_PLANKS = BLOCKS.register("gilded_cork_bamboo_chiseled_planks", () -> new Block(BlockBehaviour.Properties.copy(CORK_BAMBOO_CHISELED_PLANKS.get())));
+    public static final RegistryObject<Block> GILDED_POLISHED_WISESTONE = BLOCKS.register("gilded_polished_wisestone", () -> new Block(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
 
     public static final RegistryObject<Block> ARCANE_SALT_TORCH = BLOCKS.register("arcane_salt_torch", () -> new SaltTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0).mapColor(MapColor.PODZOL).sound(WizardsRebornSounds.ARCANE_WOOD)));
     public static final RegistryObject<Block> ARCANE_SALT_WALL_TORCH = BLOCKS.register("arcane_salt_wall_torch", () -> new SaltWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0).mapColor(MapColor.PODZOL).sound(WizardsRebornSounds.ARCANE_WOOD)));
