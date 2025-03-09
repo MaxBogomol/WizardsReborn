@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
+import mod.maxbogomol.wizards_reborn.integration.common.malum.WizardsRebornMalum;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import net.minecraft.core.registries.Registries;
@@ -62,6 +63,12 @@ public class WizardsRebornCreativeTabs {
                 event.accept(WizardsRebornCreate.ItemsLoadedOnly.ARCANE_GOLD_SHEET);
             }
 
+            if (WizardsRebornMalum.isLoaded()) {
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.CRACKED_ARCANE_GOLD_IMPETUS);
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.ARCANE_GOLD_IMPETUS);
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.ARCANE_GOLD_NODE);
+            }
+
             event.accept(WizardsRebornItems.ARCANE_GOLD_SWORD);
             event.accept(WizardsRebornItems.ARCANE_GOLD_PICKAXE);
             event.accept(WizardsRebornItems.ARCANE_GOLD_AXE);
@@ -80,15 +87,29 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.SARCON_INGOT);
             event.accept(WizardsRebornItems.SARCON_NUGGET);
             event.accept(WizardsRebornItems.SARCON_BLOCK);
+
             if (WizardsRebornCreate.isLoaded()) {
                 event.accept(WizardsRebornCreate.ItemsLoadedOnly.SARCON_SHEET);
+            }
+
+            if (WizardsRebornMalum.isLoaded()) {
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.CRACKED_SARCON_IMPETUS);
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.SARCON_IMPETUS);
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.SARCON_NODE);
             }
 
             event.accept(WizardsRebornItems.VILENIUM_INGOT);
             event.accept(WizardsRebornItems.VILENIUM_NUGGET);
             event.accept(WizardsRebornItems.VILENIUM_BLOCK);
+
             if (WizardsRebornCreate.isLoaded()) {
                 event.accept(WizardsRebornCreate.ItemsLoadedOnly.VILENIUM_SHEET);
+            }
+
+            if (WizardsRebornMalum.isLoaded()) {
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.CRACKED_VILENIUM_IMPETUS);
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.VILENIUM_IMPETUS);
+                event.accept(WizardsRebornMalum.ItemsLoadedOnly.VILENIUM_NODE);
             }
 
             event.accept(WizardsRebornItems.ARCANUM);

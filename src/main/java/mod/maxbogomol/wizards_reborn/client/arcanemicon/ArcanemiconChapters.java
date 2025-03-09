@@ -3,7 +3,6 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
-import mod.maxbogomol.fluffy_fur.util.IntegrationUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionHandler;
@@ -18,7 +17,9 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
+import mod.maxbogomol.wizards_reborn.integration.common.embers.WizardsRebornEmbers;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
+import mod.maxbogomol.wizards_reborn.integration.common.malum.WizardsRebornMalum;
 import mod.maxbogomol.wizards_reborn.registry.common.*;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -34,7 +35,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -4307,44 +4307,7 @@ public class ArcanemiconChapters {
     public static void integrationsInit() {
         if (WizardsRebornCreate.isLoaded()) WizardsRebornCreate.ClientLoadedOnly.arcanemiconChaptersInit();
         if (WizardsRebornFarmersDelight.isLoaded()) WizardsRebornFarmersDelight.ClientLoadedOnly.arcanemiconChaptersInit();
-        integrationEmbersInit();
-        //integrationEidolonInit();
-        //integrationMalumInit();
-    }
-
-    public static void integrationEmbersInit() {
-        if (ModList.get().isLoaded("embers")) {
-            List<MobEffectInstance> emberGritEffects = new ArrayList<>();
-            emberGritEffects.add(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 8000, 0));
-            emberGritEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
-            emberGritEffects.add(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
-
-            SMOKING_PIPE.addPage(new CenserPage(emberGritEffects, new ItemStack(IntegrationUtil.getItem("embers", "ember_grit"))));
-        }
-    }
-
-    public static void integrationEidolonInit() {
-        if (ModList.get().isLoaded("eidolon")) {
-            List<MobEffectInstance> noEffects = new ArrayList<>();
-
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "death_essence"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "crimson_essence"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "fungus_sprouts"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "warped_sprouts"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "ender_calx"))));
-        }
-    }
-
-    public static void integrationMalumInit() {
-        if (ModList.get().isLoaded("malum")) {
-            List<MobEffectInstance> noEffects = new ArrayList<>();
-
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "rotting_essence"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "hex_ash"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "alchemical_calx"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "cursed_grit"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "void_salts"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "blighted_gunk"))));
-        }
+        if (WizardsRebornMalum.isLoaded()) WizardsRebornMalum.ClientLoadedOnly.arcanemiconChaptersInit();
+        if (WizardsRebornEmbers.isLoaded()) WizardsRebornEmbers.ClientLoadedOnly.arcanemiconChaptersInit();
     }
 }

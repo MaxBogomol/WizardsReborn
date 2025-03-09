@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.client.arcanemicon.integration;
+package mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;

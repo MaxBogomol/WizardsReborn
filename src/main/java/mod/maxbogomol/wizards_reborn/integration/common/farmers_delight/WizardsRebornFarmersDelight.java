@@ -8,6 +8,8 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.ArcaneIteratorPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CraftingTablePage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
@@ -37,6 +39,9 @@ import java.util.List;
 
 public class WizardsRebornFarmersDelight {
     public static boolean LOADED;
+    public static String MOD_ID = "farmersdelight";
+    public static String ID = "farmers_delight";
+    public static String NAME = "Farmer's Delight";
 
     public static class ItemsLoadedOnly {
         public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, WizardsReborn.MOD_ID);
@@ -76,17 +81,41 @@ public class WizardsRebornFarmersDelight {
     }
 
     public static class ClientLoadedOnly {
+        public static IntegrationPage INTEGRATION_PAGE;
+
         public static void arcanemiconChaptersInit() {
-            ArcanemiconChapters.ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_knife",
-                    new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()))
+            INTEGRATION_PAGE = new IntegrationPage(true, ID, NAME);
+
+            ArcanemiconChapters.ARCANE_WOOD.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.ARCANE_WOOD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_knife",
+                    new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_WOOD_KNIFE.get()))
             ));
-            ArcanemiconChapters.ARCANE_GOLD.addPage(new CraftingTablePage(new ItemStack(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()),
+            ArcanemiconChapters.ARCANE_WOOD.addPage(new CraftingTablePage(new ItemStack(ItemsLoadedOnly.ARCANE_WOOD_KNIFE.get()),
+                    ArcanemiconChapters.EMPTY_ITEM, ArcanemiconChapters.ARCANE_WOOD_PLANKS_ITEM, ArcanemiconChapters.EMPTY_ITEM,
+                    ArcanemiconChapters.EMPTY_ITEM, ArcanemiconChapters.ARCANE_WOOD_BRANCH_ITEM
+            ));
+
+            ArcanemiconChapters.ARCANE_GOLD.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_knife",
+                    new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()))
+            ));
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new CraftingTablePage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()),
                     ArcanemiconChapters.EMPTY_ITEM, ArcanemiconChapters.ARCANE_GOLD_INGOT_ITEM, ArcanemiconChapters.EMPTY_ITEM,
                     ArcanemiconChapters.EMPTY_ITEM, ArcanemiconChapters.ARCANE_WOOD_BRANCH_ITEM
             ));
 
+            ArcanemiconChapters.INNOCENT_WOOD_TOOLS.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.INNOCENT_WOOD_TOOLS.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_knife",
+                    new BlockEntry(ArcanemiconChapters.INNOCENT_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.INNOCENT_WOOD_KNIFE.get()))
+            ));
+            ArcanemiconChapters.INNOCENT_WOOD_TOOLS.addPage(new ArcaneIteratorPage(new ItemStack(ItemsLoadedOnly.INNOCENT_WOOD_KNIFE.get()), 0, 0, new ItemStack(ItemsLoadedOnly.ARCANE_WOOD_KNIFE.get()),
+                    ArcanemiconChapters.INNOCENT_WOOD_BRANCH_ITEM, ArcanemiconChapters.INNOCENT_WOOD_BRANCH_ITEM, ArcanemiconChapters.INNOCENT_WOOD_BRANCH_ITEM,
+                    ArcanemiconChapters.ARCACITE_ITEM, ArcanemiconChapters.ARCACITE_ITEM, ArcanemiconChapters.NATURAL_CALX_ITEM
+            ));
+
             List<MobEffectInstance> noEffects = new ArrayList<>();
 
+            ArcanemiconChapters.SMOKING_PIPE.addPage(INTEGRATION_PAGE);
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.CABBAGE_SEEDS.get())));
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.TOMATO_SEEDS.get())));
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.RICE.get())));
@@ -102,7 +131,7 @@ public class WizardsRebornFarmersDelight {
     }
 
     public static void init(IEventBus eventBus) {
-        LOADED = ModList.get().isLoaded("farmersdelight");
+        LOADED = ModList.get().isLoaded(MOD_ID);
 
         if (isLoaded()) {
             LoadedOnly.makeItems();

@@ -11,6 +11,7 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
+import mod.maxbogomol.wizards_reborn.integration.common.embers.WizardsRebornEmbers;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.integration.common.malum.WizardsRebornMalum;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
@@ -68,6 +69,7 @@ public class WizardsReborn {
         WizardsRebornFarmersDelight.init(eventBus);
         WizardsRebornCreate.init(eventBus);
         WizardsRebornMalum.init(eventBus);
+        WizardsRebornEmbers.init(eventBus);
 
         WizardsRebornCrystals.register();
         WizardsRebornMonograms.register();
@@ -111,6 +113,7 @@ public class WizardsReborn {
         WizardsRebornItems.setupDrinksItems();
         WizardsRebornBlocks.setupBlocks();
 
+        WizardsRebornCreate.setup();
         WizardsRebornMalum.setup();
     }
 

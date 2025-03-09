@@ -11,7 +11,7 @@
       "recipe": {
         "type": "wizards_reborn:censer",
         "ingredient": {
-          "item": "create:cinder_flour"
+          "item": "create:powdered_obsidian"
         },
         "effects": [
           {
