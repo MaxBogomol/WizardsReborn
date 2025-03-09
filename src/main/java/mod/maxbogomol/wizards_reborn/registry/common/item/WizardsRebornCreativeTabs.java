@@ -75,6 +75,7 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_GOLD_SHOVEL);
             event.accept(WizardsRebornItems.ARCANE_GOLD_HOE);
             event.accept(WizardsRebornItems.ARCANE_GOLD_SCYTHE);
+
             if (WizardsRebornFarmersDelight.isLoaded()) {
                 event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE);
             }
