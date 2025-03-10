@@ -8,23 +8,30 @@ import com.sammy.malum.registry.common.item.ItemRegistry;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionHandler;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.AlchemyMachinePage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WizardsRebornMalum {
     public static boolean LOADED;
@@ -117,6 +124,74 @@ public class WizardsRebornMalum {
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.CRACKED_ARCANE_GOLD_IMPETUS.get())),
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get())),
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get()))
+            ));
+
+            Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<>();
+            Map<AlchemyPotion, ItemStack> flaskPotions = new HashMap<>();
+
+            for (AlchemyPotion potion : AlchemyPotionHandler.getAlchemyPotions()) {
+                ItemStack stack = new ItemStack(WizardsRebornItems.ALCHEMY_VIAL_POTION.get());
+                AlchemyPotionUtil.setPotion(stack, potion);
+                vialPotions.put(potion, stack);
+
+                stack = new ItemStack(WizardsRebornItems.ALCHEMY_FLASK_POTION.get());
+                AlchemyPotionUtil.setPotion(stack, potion);
+                flaskPotions.put(potion, stack);
+            }
+
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.SACRED_SPIRIT), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get())
+            ));
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.SACRED_SOUL), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
+            ));
+
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.WICKED_SPIRIT), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get())
+            ));
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.WICKED_SOUL), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
+            ));
+
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.AERIAL_SPIRIT), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.AERIAL_SPIRIT.get()), new ItemStack(ItemRegistry.AERIAL_SPIRIT.get())
+            ));
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.AERIAL_SOUL), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.AERIAL_SPIRIT.get()), new ItemStack(ItemRegistry.AERIAL_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
+            ));
+
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.AQUEOUS_SPIRIT), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get())
+            ));
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.AQUEOUS_SOUL), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
+            ));
+
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.EARTHEN_SPIRIT), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get()), new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get())
+            ));
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.EARTHEN_SOUL), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get()), new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
+            ));
+
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.INFERNAL_SPIRIT), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get())
+            ));
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.INFERNAL_SOUL), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
             ));
 
             List<MobEffectInstance> noEffects = new ArrayList<>();

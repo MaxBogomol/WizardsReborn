@@ -1,0 +1,41 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:alchemy_machine",
+        "alchemyPotion": {
+          "alchemy_potion": "wizards_reborn:infernal_soul"
+        },
+        "wissen": 100,
+        "steam": 300,
+        "ingredients": [
+          {
+            "tag": "wizards_reborn:alchemy_potions"
+          },
+          {
+            "item": "malum:arcane_spirit"
+          },
+          {
+            "item": "malum:infernal_spirit"
+          },
+          {
+            "item": "malum:infernal_spirit"
+          },
+          {
+            "item": "malum:eldritch_spirit"
+          }
+        ],
+        "alchemyPotionIngredient": {
+          "alchemy_potion": "wizards_reborn:mundane_brew"
+        }
+      }
+    }
+  ]
+}

@@ -1091,26 +1091,26 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.CRYSTAL_BAG.get()),
                         EMPTY_ITEM, new ItemStack(WizardsRebornItems.LEATHER_BELT.get()),  EMPTY_ITEM,
-                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST),  new ItemStack(Items.LEATHER),
-                        new ItemStack(WizardsRebornItems.EARTH_CRYSTAL_SEED.get()), new ItemStack(Items.LEATHER),  new ItemStack(WizardsRebornItems.EARTH_CRYSTAL_SEED.get()),
+                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST), new ItemStack(Items.LEATHER),
+                        new ItemStack(WizardsRebornItems.EARTH_CRYSTAL_SEED.get()), new ItemStack(Items.LEATHER), new ItemStack(WizardsRebornItems.EARTH_CRYSTAL_SEED.get()),
                         ALCHEMY_CALX_ITEM, EMPTY_ITEM, ENCHANTED_CALX_ITEM
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.CRYSTAL_BAG.get()),
                         EMPTY_ITEM, new ItemStack(WizardsRebornItems.LEATHER_BELT.get()),  EMPTY_ITEM,
-                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST),  new ItemStack(Items.LEATHER),
-                        new ItemStack(WizardsRebornItems.WATER_CRYSTAL_SEED.get()), new ItemStack(Items.LEATHER),  new ItemStack(WizardsRebornItems.WATER_CRYSTAL_SEED.get()),
+                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST), new ItemStack(Items.LEATHER),
+                        new ItemStack(WizardsRebornItems.WATER_CRYSTAL_SEED.get()), new ItemStack(Items.LEATHER), new ItemStack(WizardsRebornItems.WATER_CRYSTAL_SEED.get()),
                         ALCHEMY_CALX_ITEM, EMPTY_ITEM, ENCHANTED_CALX_ITEM
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.CRYSTAL_BAG.get()),
                         EMPTY_ITEM, new ItemStack(WizardsRebornItems.LEATHER_BELT.get()),  EMPTY_ITEM,
-                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST),  new ItemStack(Items.LEATHER),
-                        new ItemStack(WizardsRebornItems.AIR_CRYSTAL_SEED.get()), new ItemStack(Items.LEATHER),  new ItemStack(WizardsRebornItems.AIR_CRYSTAL_SEED.get()),
+                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST), new ItemStack(Items.LEATHER),
+                        new ItemStack(WizardsRebornItems.AIR_CRYSTAL_SEED.get()), new ItemStack(Items.LEATHER), new ItemStack(WizardsRebornItems.AIR_CRYSTAL_SEED.get()),
                         ALCHEMY_CALX_ITEM, EMPTY_ITEM, ENCHANTED_CALX_ITEM
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.CRYSTAL_BAG.get()),
                         EMPTY_ITEM, new ItemStack(WizardsRebornItems.LEATHER_BELT.get()),  EMPTY_ITEM,
-                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST),  new ItemStack(Items.LEATHER),
-                        new ItemStack(WizardsRebornItems.FIRE_CRYSTAL_SEED.get()), new ItemStack(Items.LEATHER),  new ItemStack(WizardsRebornItems.FIRE_CRYSTAL_SEED.get()),
+                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST), new ItemStack(Items.LEATHER),
+                        new ItemStack(WizardsRebornItems.FIRE_CRYSTAL_SEED.get()), new ItemStack(Items.LEATHER), new ItemStack(WizardsRebornItems.FIRE_CRYSTAL_SEED.get()),
                         ALCHEMY_CALX_ITEM, EMPTY_ITEM, ENCHANTED_CALX_ITEM
                 )
         );
@@ -1233,7 +1233,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_FORTRESS_BELT.get()))
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.ARCANE_FORTRESS_BELT.get()),
-                        EMPTY_ITEM,  new ItemStack(WizardsRebornItems.LEATHER_BELT.get()), EMPTY_ITEM,
+                        EMPTY_ITEM, new ItemStack(WizardsRebornItems.LEATHER_BELT.get()), EMPTY_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, ARCACITE_ITEM, ARCANE_GOLD_INGOT_ITEM,
                         EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM,
                         ALCHEMY_CALX_ITEM, EMPTY_ITEM, NATURAL_CALX_ITEM
@@ -1251,7 +1251,7 @@ public class ArcanemiconChapters {
                 new TitlePage("wizards_reborn.arcanemicon.page.inventor_wizard_armor.wissen_nature"),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.INVENTOR_WIZARD_HAT.get()),
                         new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER),
-                        new ItemStack(Items.LEATHER), new ItemStack(WizardsRebornItems.ARCANE_GOLD_HELMET.get()),  new ItemStack(Items.LEATHER),
+                        new ItemStack(Items.LEATHER), new ItemStack(WizardsRebornItems.ARCANE_GOLD_HELMET.get()), new ItemStack(Items.LEATHER),
                         ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM,
                         ARCACITE_ITEM, new ItemStack(Items.LEATHER), ARCACITE_ITEM, new ItemStack(Items.LEATHER)
                 ),
@@ -1277,7 +1277,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INVENTOR_WIZARD_BELT.get()))
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.INVENTOR_WIZARD_BELT.get()),
-                        EMPTY_ITEM,  new ItemStack(WizardsRebornItems.LEATHER_BELT.get()), EMPTY_ITEM,
+                        EMPTY_ITEM, new ItemStack(WizardsRebornItems.LEATHER_BELT.get()), EMPTY_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, ARCANUM_ITEM, ARCANE_GOLD_INGOT_ITEM,
                         EMPTY_ITEM, EMPTY_ITEM, EMPTY_ITEM,
                         ALCHEMY_CALX_ITEM, EMPTY_ITEM, ENCHANTED_CALX_ITEM
@@ -3573,8 +3573,8 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.ALCHEMY_BAG.get()),
                         EMPTY_ITEM, new ItemStack(WizardsRebornItems.LEATHER_BELT.get()),  EMPTY_ITEM,
-                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST),  new ItemStack(Items.LEATHER),
-                        new ItemStack(WizardsRebornItems.ALCHEMY_VIAL.get()), new ItemStack(Items.LEATHER),  new ItemStack(WizardsRebornItems.ALCHEMY_VIAL.get()),
+                        new ItemStack(Items.LEATHER), new ItemStack(Items.CHEST), new ItemStack(Items.LEATHER),
+                        new ItemStack(WizardsRebornItems.ALCHEMY_VIAL.get()), new ItemStack(Items.LEATHER), new ItemStack(WizardsRebornItems.ALCHEMY_VIAL.get()),
                         ALCHEMY_CALX_ITEM, EMPTY_ITEM, ALCHEMY_CALX_ITEM
                 )
         );
@@ -3788,7 +3788,7 @@ public class ArcanemiconChapters {
                         vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.OBSIDIAN), new ItemStack(Items.OBSIDIAN), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
                 ),
                 new AlchemyMachinePage(vialPotions.get(WizardsRebornAlchemyPotions.DARKNESS), FluidStack.EMPTY, false, true,
-                        new FluidStack(WizardsRebornFluids.MUSHROOM_BREW.get(), 2000),  new FluidStack(WizardsRebornFluids.HELLISH_MUSHROOM_BREW.get(), 1000), FluidStack.EMPTY,
+                        new FluidStack(WizardsRebornFluids.MUSHROOM_BREW.get(), 2000), new FluidStack(WizardsRebornFluids.HELLISH_MUSHROOM_BREW.get(), 1000), FluidStack.EMPTY,
                         vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.REDSTONE)
                 )
         );
