@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:censer",
+        "ingredient": {
+          "item": "malum:living_flesh"
+        },
+        "effects": [
+          {
+            "effect": "minecraft:saturation",
+            "duration": 2,
+            "amplifier": 4
+          }
+        ]
+      }
+    }
+  ]
+}

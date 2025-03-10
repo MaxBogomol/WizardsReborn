@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:censer",
+        "ingredient": {
+          "item": "malum:sacred_spirit"
+        },
+        "effects": [
+          {
+            "effect": "minecraft:instant_health",
+            "duration": 2,
+            "amplifier": 0
+          }
+        ]
+      }
+    }
+  ]
+}

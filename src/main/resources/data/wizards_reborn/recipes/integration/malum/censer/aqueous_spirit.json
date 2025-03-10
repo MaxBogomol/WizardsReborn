@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:censer",
+        "ingredient": {
+          "item": "malum:aqueous_spirit"
+        },
+        "effects": [
+          {
+            "effect": "malum:poseidons_grasp",
+            "duration": 2500,
+            "amplifier": 0
+          }
+        ]
+      }
+    }
+  ]
+}

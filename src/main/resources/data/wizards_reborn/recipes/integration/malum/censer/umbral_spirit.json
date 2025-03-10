@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:censer",
+        "ingredient": {
+          "item": "malum:umbral_spirit"
+        },
+        "effects": [
+          {
+            "effect": "minecraft:regeneration",
+            "duration": 12000,
+            "amplifier": 2
+          },
+          {
+            "effect": "minecraft:health_boost",
+            "duration": 12000,
+            "amplifier": 4
+          }
+        ]
+      }
+    }
+  ]
+}

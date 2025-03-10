@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:censer",
+        "ingredient": {
+          "item": "malum:earthen_spirit"
+        },
+        "effects": [
+          {
+            "effect": "malum:gaias_bulwark",
+            "duration": 2500,
+            "amplifier": 0
+          }
+        ]
+      }
+    }
+  ]
+}

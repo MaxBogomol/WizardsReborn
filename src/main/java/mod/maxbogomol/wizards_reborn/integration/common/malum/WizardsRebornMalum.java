@@ -120,13 +120,66 @@ public class WizardsRebornMalum {
             ));
 
             List<MobEffectInstance> noEffects = new ArrayList<>();
+            List<MobEffectInstance> regenerationSpiritEffects = new ArrayList<>();
+            List<MobEffectInstance> sacredSpiritEffects = new ArrayList<>();
+            List<MobEffectInstance> wickedSpiritEffects = new ArrayList<>();
+            List<MobEffectInstance> aerialSpiritEffects = new ArrayList<>();
+            List<MobEffectInstance> aqueousSpiritEffects = new ArrayList<>();
+            List<MobEffectInstance> earthenSpiritEffects = new ArrayList<>();
+            List<MobEffectInstance> infernalSpiritEffects = new ArrayList<>();
+            List<MobEffectInstance> rottingEssenceEffects = new ArrayList<>();
+            List<MobEffectInstance> warpFluxEffects = new ArrayList<>();
+            List<MobEffectInstance> hexAshEffects = new ArrayList<>();
+            List<MobEffectInstance> livingFleshEffects = new ArrayList<>();
+            List<MobEffectInstance> blightedGunkEffects = new ArrayList<>();
+            List<MobEffectInstance> voidSaltsEffects = new ArrayList<>();
+            List<MobEffectInstance> auricEmbersEffects = new ArrayList<>();
+
+            regenerationSpiritEffects.add(new MobEffectInstance(MobEffects.REGENERATION, 750, 0));
+
+            sacredSpiritEffects.add(new MobEffectInstance(MobEffects.HEAL, 2, 0));
+            wickedSpiritEffects.add(new MobEffectInstance(MobEffects.HARM, 2, 0));
+            aerialSpiritEffects.add(new MobEffectInstance(MobEffectRegistry.ZEPHYRS_COURAGE.get(), 2500, 0));
+            aqueousSpiritEffects.add(new MobEffectInstance(MobEffectRegistry.POSEIDONS_GRASP.get(), 2500, 0));
+            earthenSpiritEffects.add(new MobEffectInstance(MobEffectRegistry.GAIAS_BULWARK.get(), 2500, 0));
+            infernalSpiritEffects.add(new MobEffectInstance(MobEffectRegistry.MINERS_RAGE.get(), 2500, 0));
+
+            rottingEssenceEffects.add(new MobEffectInstance(MobEffects.HUNGER, 1200, 0));
+
+            warpFluxEffects.add(new MobEffectInstance(MobEffects.LEVITATION, 600, 0));
+
+            hexAshEffects.add(new MobEffectInstance(MobEffects.BLINDNESS, 2400, 0));
+            hexAshEffects.add(new MobEffectInstance(MobEffects.CONFUSION, 1600, 0));
+            hexAshEffects.add(new MobEffectInstance(MobEffects.HARM, 1, 2));
+
+            livingFleshEffects.add(new MobEffectInstance(MobEffects.SATURATION, 2, 4));
+
+            blightedGunkEffects.add(new MobEffectInstance(MobEffects.WITHER, 1000, 0));
+
+            voidSaltsEffects.add(new MobEffectInstance(MobEffects.REGENERATION, 525, 0));
+
+            auricEmbersEffects.add(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 14000, 0));
+            auricEmbersEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
+            auricEmbersEffects.add(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
 
             ArcanemiconChapters.SMOKING_PIPE.addPage(INTEGRATION_PAGE);
-            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ItemRegistry.ROTTING_ESSENCE.get())));
-            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ItemRegistry.HEX_ASH.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(sacredSpiritEffects, new ItemStack(ItemRegistry.SACRED_SPIRIT.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(wickedSpiritEffects, new ItemStack(ItemRegistry.WICKED_SPIRIT.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(regenerationSpiritEffects, new ItemStack(ItemRegistry.ARCANE_SPIRIT.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(regenerationSpiritEffects, new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(aerialSpiritEffects, new ItemStack(ItemRegistry.AERIAL_SPIRIT.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(aqueousSpiritEffects, new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(earthenSpiritEffects, new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(infernalSpiritEffects, new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(rottingEssenceEffects, new ItemStack(ItemRegistry.ROTTING_ESSENCE.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ItemRegistry.GRIM_TALC.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(warpFluxEffects, new ItemStack(ItemRegistry.WARP_FLUX.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(hexAshEffects, new ItemStack(ItemRegistry.HEX_ASH.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(livingFleshEffects, new ItemStack(ItemRegistry.LIVING_FLESH.get())));
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ItemRegistry.ALCHEMICAL_CALX.get())));
-            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ItemRegistry.VOID_SALTS.get())));
-            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ItemRegistry.BLIGHTED_GUNK.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(blightedGunkEffects, new ItemStack(ItemRegistry.BLIGHTED_GUNK.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(voidSaltsEffects, new ItemStack(ItemRegistry.VOID_SALTS.get())));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(auricEmbersEffects, new ItemStack(ItemRegistry.AURIC_EMBERS.get())));
         }
     }
 

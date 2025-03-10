@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:censer",
+        "ingredient": {
+          "item": "malum:rotting_essence"
+        },
+        "effects": [
+          {
+            "effect": "minecraft:hunger",
+            "duration": 1200,
+            "amplifier": 0
+          }
+        ]
+      }
+    }
+  ]
+}
