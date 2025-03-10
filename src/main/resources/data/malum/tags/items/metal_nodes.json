@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "wizards_reborn:arcane_gold_node",
+      "required": false
+    },
+    {
+      "id": "wizards_reborn:sarcon_node",
+      "required": false
+    },
+    {
+      "id": "wizards_reborn:vilenium_node",
+      "required": false
+    }
+  ]
+}

@@ -43,17 +43,17 @@ public class WizardsRebornMalum {
     public static class ItemsLoadedOnly {
         public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, WizardsReborn.MOD_ID);
 
-        public static RegistryObject<Item> CRACKED_ARCANE_GOLD_IMPETUS;
-        public static RegistryObject<Item> ARCANE_GOLD_IMPETUS;
-        public static RegistryObject<Item> ARCANE_GOLD_NODE;
+        public static RegistryObject<CrackedImpetusItem> CRACKED_ARCANE_GOLD_IMPETUS;
+        public static RegistryObject<ImpetusItem> ARCANE_GOLD_IMPETUS;
+        public static RegistryObject<NodeItem> ARCANE_GOLD_NODE;
 
-        public static RegistryObject<Item> CRACKED_SARCON_IMPETUS;
-        public static RegistryObject<Item> SARCON_IMPETUS;
-        public static RegistryObject<Item> SARCON_NODE;
+        public static RegistryObject<CrackedImpetusItem> CRACKED_SARCON_IMPETUS;
+        public static RegistryObject<ImpetusItem> SARCON_IMPETUS;
+        public static RegistryObject<NodeItem> SARCON_NODE;
 
-        public static RegistryObject<Item> CRACKED_VILENIUM_IMPETUS;
-        public static RegistryObject<Item> VILENIUM_IMPETUS;
-        public static RegistryObject<Item> VILENIUM_NODE;
+        public static RegistryObject<CrackedImpetusItem> CRACKED_VILENIUM_IMPETUS;
+        public static RegistryObject<ImpetusItem> VILENIUM_IMPETUS;
+        public static RegistryObject<NodeItem> VILENIUM_NODE;
     }
 
     public static class AlchemyPotionsLoadedOnly {
@@ -100,17 +100,17 @@ public class WizardsRebornMalum {
 
     public static class LoadedOnly {
         public static void makeItems() {
-            ItemsLoadedOnly.CRACKED_ARCANE_GOLD_IMPETUS = ItemsLoadedOnly.ITEMS.register("cracked_arcane_gold_impetus", () -> new CrackedImpetusItem(new Item.Properties().stacksTo(1)));
-            ItemsLoadedOnly.ARCANE_GOLD_IMPETUS = ItemsLoadedOnly.ITEMS.register("arcane_gold_impetus", () -> new ImpetusItem(new Item.Properties().stacksTo(1)));
-            ItemsLoadedOnly.ARCANE_GOLD_NODE = ItemsLoadedOnly.ITEMS.register("arcane_gold_node", () -> new NodeItem(new Item.Properties().stacksTo(1)));
+            ItemsLoadedOnly.CRACKED_ARCANE_GOLD_IMPETUS = ItemsLoadedOnly.ITEMS.register("cracked_arcane_gold_impetus", () -> new CrackedImpetusItem(ItemRegistry.METALLURGIC_PROPERTIES()));
+            ItemsLoadedOnly.ARCANE_GOLD_IMPETUS = ItemsLoadedOnly.ITEMS.register("arcane_gold_impetus", () -> new ImpetusItem(ItemRegistry.METALLURGIC_PROPERTIES().durability(800)).setCrackedVariant(() -> ItemsLoadedOnly.CRACKED_ARCANE_GOLD_IMPETUS.get()));
+            ItemsLoadedOnly.ARCANE_GOLD_NODE = ItemsLoadedOnly.ITEMS.register("arcane_gold_node", () -> new NodeItem(ItemRegistry.METALLURGIC_NODE_PROPERTIES()));
 
-            ItemsLoadedOnly.CRACKED_SARCON_IMPETUS = ItemsLoadedOnly.ITEMS.register("cracked_sarcon_impetus", () -> new CrackedImpetusItem(new Item.Properties().stacksTo(1)));
-            ItemsLoadedOnly.SARCON_IMPETUS = ItemsLoadedOnly.ITEMS.register("sarcon_impetus", () -> new ImpetusItem(new Item.Properties().stacksTo(1)));
-            ItemsLoadedOnly.SARCON_NODE = ItemsLoadedOnly.ITEMS.register("sarcon_node", () -> new NodeItem(new Item.Properties().stacksTo(1)));
+            ItemsLoadedOnly.CRACKED_SARCON_IMPETUS = ItemsLoadedOnly.ITEMS.register("cracked_sarcon_impetus", () -> new CrackedImpetusItem(ItemRegistry.METALLURGIC_PROPERTIES()));
+            ItemsLoadedOnly.SARCON_IMPETUS = ItemsLoadedOnly.ITEMS.register("sarcon_impetus", () -> new ImpetusItem(ItemRegistry.METALLURGIC_PROPERTIES().durability(800)).setCrackedVariant(() -> ItemsLoadedOnly.CRACKED_SARCON_IMPETUS.get()));
+            ItemsLoadedOnly.SARCON_NODE = ItemsLoadedOnly.ITEMS.register("sarcon_node", () -> new NodeItem(ItemRegistry.METALLURGIC_NODE_PROPERTIES()));
 
-            ItemsLoadedOnly.CRACKED_VILENIUM_IMPETUS = ItemsLoadedOnly.ITEMS.register("cracked_vilenium_impetus", () -> new CrackedImpetusItem(new Item.Properties().stacksTo(1)));
-            ItemsLoadedOnly.VILENIUM_IMPETUS = ItemsLoadedOnly.ITEMS.register("vilenium_impetus", () -> new ImpetusItem(new Item.Properties().stacksTo(1)));
-            ItemsLoadedOnly.VILENIUM_NODE = ItemsLoadedOnly.ITEMS.register("vilenium_node", () -> new NodeItem(new Item.Properties().stacksTo(1)));
+            ItemsLoadedOnly.CRACKED_VILENIUM_IMPETUS = ItemsLoadedOnly.ITEMS.register("cracked_vilenium_impetus", () -> new CrackedImpetusItem(ItemRegistry.METALLURGIC_PROPERTIES()));
+            ItemsLoadedOnly.VILENIUM_IMPETUS = ItemsLoadedOnly.ITEMS.register("vilenium_impetus", () -> new ImpetusItem(ItemRegistry.METALLURGIC_PROPERTIES().durability(800)).setCrackedVariant(() -> ItemsLoadedOnly.CRACKED_VILENIUM_IMPETUS.get()));
+            ItemsLoadedOnly.VILENIUM_NODE = ItemsLoadedOnly.ITEMS.register("vilenium_node", () -> new NodeItem(ItemRegistry.METALLURGIC_NODE_PROPERTIES()));
         }
     }
 
