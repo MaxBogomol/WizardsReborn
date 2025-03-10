@@ -21,6 +21,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
@@ -192,6 +193,11 @@ public class WizardsRebornMalum {
             ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.INFERNAL_SOUL), FluidStack.EMPTY, true, true,
                     FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
+            ));
+
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.GLUTTONY), FluidStack.EMPTY, true, true,
+                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                    vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.HONEYCOMB), new ItemStack(ItemRegistry.ROTTING_ESSENCE.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get())
             ));
 
             List<MobEffectInstance> noEffects = new ArrayList<>();
