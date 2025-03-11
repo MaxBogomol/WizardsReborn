@@ -64,7 +64,7 @@ public class ArcaneRecordItem extends RecordItem implements IGuiParticleItem {
                 float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 6 + (ticks * 2f)))));
                 offset = (offset - 0.25f) * (1 / 0.75f);
                 if (offset < 0) offset = 0;
-                poseStack.translate(x + 7.5 + (Math.sin(Math.toRadians(i * 12)) * 4), y + 8.5f, 100);
+                poseStack.translate(x + 8 + (Math.sin(Math.toRadians(i * 12)) * 4), y + 8.5f, 100);
                 poseStack.mulPose(Axis.ZP.rotationDegrees(ticks + (i * 2f)));
                 RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                         .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/wisp"))

@@ -2,14 +2,14 @@ package mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemic
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.RecipePage;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CrushingPage extends Page {
+public class CrushingPage extends RecipePage {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/integration/create/crushing_page.png");
     public ItemStack input;
     public ItemStack[] results;

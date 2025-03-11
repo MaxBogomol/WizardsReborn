@@ -383,6 +383,12 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_BOOTS.get()),
                         ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.gilded_arcane_wood_planks",
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.GILDED_ARCANE_WOOD_PLANKS.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.GILDED_ARCANE_WOOD_PLANKS.get()),
+                        ARCANE_WOOD_PLANKS_ITEM, ARCANE_GOLD_NUGGET_ITEM
                 )
         );
 
@@ -2737,6 +2743,12 @@ public class ArcanemiconChapters {
                         EMPTY_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_LOG.get()), EMPTY_ITEM,
                         new ItemStack(WizardsRebornItems.INNOCENT_WOOD_LOG.get())
                 ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.gilded_innocent_wood_planks",
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.GILDED_INNOCENT_WOOD_PLANKS.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.GILDED_INNOCENT_WOOD_PLANKS.get()),
+                        INNOCENT_WOOD_PLANKS_ITEM, ARCANE_GOLD_NUGGET_ITEM
+                ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_baulks",
                         new BlockEntry(INNOCENT_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_BAULK.get())),
                         new BlockEntry(INNOCENT_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.STRIPPED_INNOCENT_WOOD_BAULK.get())),
@@ -3141,6 +3153,12 @@ public class ArcanemiconChapters {
                 ),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.POLISHED_WISESTONE_BUTTON.get(), 1),
                         POLISHED_WISESTONE_ITEM
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.gilded_polished_wisestone",
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.GILDED_POLISHED_WISESTONE.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.GILDED_POLISHED_WISESTONE.get()),
+                        POLISHED_WISESTONE_ITEM, ARCANE_GOLD_NUGGET_ITEM
                 )
         );
 
