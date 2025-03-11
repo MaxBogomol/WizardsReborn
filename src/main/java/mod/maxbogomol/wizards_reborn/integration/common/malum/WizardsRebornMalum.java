@@ -13,9 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.AlchemyMachinePage;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.ArcaneIteratorPage;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -129,6 +127,12 @@ public class WizardsRebornMalum {
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get())),
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get()))
             ));
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new SmeltingPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 6), new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get())));
+
+            ArcanemiconChapters.WISSEN_ALTAR.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.WISSEN_ALTAR.addPage(new WissenAltarPage(new ItemStack(ItemRegistry.ARCANE_SPIRIT.get())));
+            ArcanemiconChapters.WISSEN_ALTAR.addPage(new WissenAltarPage(new ItemStack(ItemRegistry.CHUNK_OF_BRILLIANCE.get())));
+            ArcanemiconChapters.WISSEN_ALTAR.addPage(new WissenAltarPage(new ItemStack(ItemRegistry.MNEMONIC_FRAGMENT.get())));
 
             ArcanemiconChapters.ARCANE_ITERATOR.addPage(INTEGRATION_PAGE);
             ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 8, 0, EnchantmentRegistry.SPIRIT_PLUNDER.get(),

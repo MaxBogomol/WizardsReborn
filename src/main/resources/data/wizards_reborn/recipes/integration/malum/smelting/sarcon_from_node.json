@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:smelting",
+        "cookingtime": 200,
+        "experience": 0.25,
+        "ingredient": {
+          "item": "wizards_reborn:sarcon_node"
+        },
+        "result": {
+          "count": 6,
+          "item": "wizards_reborn:sarcon_nugget"
+        }
+      }
+    }
+  ]
+}

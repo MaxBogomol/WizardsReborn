@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:blasting",
+        "cookingtime": 100,
+        "experience": 0.25,
+        "ingredient": {
+          "item": "wizards_reborn:vilenium_node"
+        },
+        "result": {
+          "count": 6,
+          "item": "wizards_reborn:vilenium_nugget"
+        }
+      }
+    }
+  ]
+}
