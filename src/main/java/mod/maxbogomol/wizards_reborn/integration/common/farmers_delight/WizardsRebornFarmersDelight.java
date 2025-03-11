@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight;
 
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllEnchantments;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemClassSkinEntry;
@@ -22,6 +24,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,6 +34,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.item.MushroomColonyItem;
+import vectorwing.farmersdelight.common.registry.ModEnchantments;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -102,6 +106,12 @@ public class WizardsRebornFarmersDelight {
             ArcanemiconChapters.ARCANE_GOLD.addPage(new CraftingTablePage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_KNIFE.get()),
                     ArcanemiconChapters.EMPTY_ITEM, ArcanemiconChapters.ARCANE_GOLD_INGOT_ITEM, ArcanemiconChapters.EMPTY_ITEM,
                     ArcanemiconChapters.EMPTY_ITEM, ArcanemiconChapters.ARCANE_WOOD_BRANCH_ITEM
+            ));
+
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, ModEnchantments.BACKSTABBING.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(Items.QUARTZ), new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.EMERALD)
             ));
 
             ArcanemiconChapters.INNOCENT_WOOD_TOOLS.addPage(INTEGRATION_PAGE);

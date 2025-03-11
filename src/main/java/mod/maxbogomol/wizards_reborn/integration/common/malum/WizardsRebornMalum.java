@@ -4,6 +4,7 @@ import com.sammy.malum.common.item.impetus.CrackedImpetusItem;
 import com.sammy.malum.common.item.impetus.ImpetusItem;
 import com.sammy.malum.common.item.impetus.NodeItem;
 import com.sammy.malum.registry.common.MobEffectRegistry;
+import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
@@ -13,6 +14,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.AlchemyMachinePage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.ArcaneIteratorPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
@@ -28,6 +30,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import vectorwing.farmersdelight.common.registry.ModEnchantments;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,6 +128,38 @@ public class WizardsRebornMalum {
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.CRACKED_ARCANE_GOLD_IMPETUS.get())),
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get())),
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get()))
+            ));
+
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 8, 0, EnchantmentRegistry.SPIRIT_PLUNDER.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()), new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()),
+                    new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD)
+            ));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, EnchantmentRegistry.HAUNTED.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.DIAMOND),
+                    new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get()), new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get()), new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get())
+            ));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, EnchantmentRegistry.ANIMATED.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE),
+                    new ItemStack(Items.FEATHER), new ItemStack(Items.FEATHER)
+            ));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 6, 0, EnchantmentRegistry.REBOUND.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get()), new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get()),
+                    new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND), new ItemStack(ItemRegistry.HALLOWED_GOLD_INGOT.get())
+            ));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 6, 0, EnchantmentRegistry.ASCENSION.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()), new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()),
+                    new ItemStack(Items.BONE), new ItemStack(Items.BONE), new ItemStack(Items.BONE), new ItemStack(ItemRegistry.HALLOWED_GOLD_INGOT.get())
+            ));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, EnchantmentRegistry.REPLENISHING.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(ItemRegistry.MNEMONIC_FRAGMENT.get()),
+                    new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(ItemRegistry.HALLOWED_GOLD_INGOT.get())
             ));
 
             Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<>();

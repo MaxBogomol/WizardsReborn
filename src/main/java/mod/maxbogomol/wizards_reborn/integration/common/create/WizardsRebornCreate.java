@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.integration.common.create;
 
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllEnchantments;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -9,6 +11,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.AlchemyMachinePage;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.ArcaneIteratorPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.SmeltingPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
@@ -22,6 +25,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
@@ -107,6 +111,17 @@ public class WizardsRebornCreate {
             ArcanemiconChapters.ARCANE_GOLD.addPage(new SmeltingPage(ArcanemiconChapters.ARCANE_GOLD_INGOT_ITEM, new ItemStack(ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get())));
             ArcanemiconChapters.ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_sheet",
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_SHEET.get()))
+            ));
+
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, AllEnchantments.POTATO_RECOVERY.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(AllBlocks.COGWHEEL.asItem()),
+                    new ItemStack(Items.POTATO), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO)
+            ));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, AllEnchantments.CAPACITY.get(),
+                    new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                    new ItemStack(AllBlocks.FLUID_TANK.asItem()), new ItemStack(AllItems.COPPER_SHEET), new ItemStack(AllBlocks.COGWHEEL.asItem())
             ));
 
             ArcanemiconChapters.ARCANUM_LENS.addPage(INTEGRATION_PAGE);
