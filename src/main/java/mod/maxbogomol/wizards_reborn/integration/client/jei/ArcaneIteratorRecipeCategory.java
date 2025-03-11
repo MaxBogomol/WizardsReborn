@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.integration.client.jei;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -10,6 +11,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
@@ -26,9 +28,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.phys.Vec2;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneIteratorRecipe> {
     public static final RecipeType<ArcaneIteratorRecipe> TYPE = RecipeType.create(WizardsReborn.MOD_ID, "arcane_iterator", ArcaneIteratorRecipe.class);
@@ -66,32 +72,31 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull ArcaneIteratorRecipe recipe, @NotNull IFocusGroup focusGroup) {
         int size = recipe.getIngredients().size();
-        ItemStack book = ItemStack.EMPTY;
-        ItemStack bookResult = recipe.getResultItem(RegistryAccess.EMPTY).copy();
+        List<ItemStack> inputs = new ArrayList<>();
+        List<ItemStack> outputs = new ArrayList<>();
+        ItemStack result = recipe.getResultItem(RegistryAccess.EMPTY).copy();
+        IRecipeSlotBuilder input = null;
 
         if ((recipe.hasRecipeEnchantment() || recipe.hasRecipeArcaneEnchantment()) && recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
             size++;
-            book = new ItemStack(Items.BOOK);
-            bookResult = new ItemStack(Items.ENCHANTED_BOOK);
+            inputs = recipe.hasRecipeArcaneEnchantment() ? getInputArcaneBookItems(recipe.getRecipeArcaneEnchantment()) : getInputBookItems(recipe.getRecipeEnchantment());
+            outputs = recipe.hasRecipeArcaneEnchantment() ? getOutputArcaneBookItems(recipe.getRecipeArcaneEnchantment()) : getOutputBookItems(recipe.getRecipeEnchantment());
+        }
 
+        if (outputs.isEmpty()) {
+            if (recipe.hasRecipeEnchantment()) {
+                if (result.getItem().equals(Items.ENCHANTED_BOOK)) {
+                    EnchantedBookItem.addEnchantment(result, new EnchantmentInstance(recipe.getRecipeEnchantment(), 1));
+                } else {
+                    result.enchant(recipe.getRecipeEnchantment(), 1);
+                }
+            }
             if (recipe.hasRecipeArcaneEnchantment()) {
-                book = new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get());
-                bookResult = new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get());
+                ArcaneEnchantmentUtil.addItemArcaneEnchantment(result, recipe.getRecipeArcaneEnchantment());
             }
-        }
-
-        if (recipe.hasRecipeEnchantment()) {
-            if (bookResult.getItem().equals(Items.ENCHANTED_BOOK)) {
-                EnchantedBookItem.addEnchantment(bookResult, new EnchantmentInstance(recipe.getRecipeEnchantment(), 1));
-            } else {
-                bookResult.enchant(recipe.getRecipeEnchantment(), 1);
+            if (recipe.hasRecipeCrystalRitual()) {
+                CrystalRitualUtil.setCrystalRitual(result, recipe.getRecipeCrystalRitual());
             }
-        }
-        if (recipe.hasRecipeArcaneEnchantment()) {
-            ArcaneEnchantmentUtil.addItemArcaneEnchantment(bookResult, recipe.getRecipeArcaneEnchantment());
-        }
-        if (recipe.hasRecipeCrystalRitual()) {
-            CrystalRitualUtil.setCrystalRitual(bookResult, recipe.getRecipeCrystalRitual());
         }
 
         int index = 1;
@@ -101,7 +106,7 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
 
         for (int i = 0; i < size; i++)  {
             if (first) {
-                if (book.isEmpty()) {
+                if (inputs.isEmpty()) {
                     builder.addSlot(RecipeIngredientRole.INPUT, (int) point.x, (int) point.y).addIngredients(recipe.getIngredients().get(i));
                 } else {
                     builder.addSlot(RecipeIngredientRole.INPUT, (int) point.x, (int) point.y).addIngredients(recipe.getIngredients().get(i - 1));
@@ -109,16 +114,22 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
                 index += 1;
                 point = rotatePointAbout(point, center, angleBetweenEach);
             } else {
-                if (book.isEmpty()) {
+                if (inputs.isEmpty()) {
                     builder.addSlot(RecipeIngredientRole.INPUT, 35, 36).addIngredients(recipe.getIngredients().get(i));
                 } else {
-                    builder.addSlot(RecipeIngredientRole.INPUT, 35, 36).addItemStack(book);
+                    input = builder.addSlot(RecipeIngredientRole.INPUT, 35, 36).addItemStacks(inputs);
                 }
                 first = true;
             }
         }
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 121, 36).addItemStack(bookResult);
+        IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 121, 36);
+        if (outputs.isEmpty()) {
+            output.addItemStack(result);
+        } else {
+            output.addItemStacks(outputs);
+            if (input != null) builder.createFocusLink(input, output);
+        }
     }
 
     public static Vec2 rotatePointAbout(Vec2 in, Vec2 about, double degrees) {
@@ -150,5 +161,47 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
             String stringSize = String.valueOf(recipe.getRecipeHealth());
             gui.drawString(font, stringSize, 100, 15, 0xffffff);
         }
+    }
+
+    public static List<ItemStack> getInputBookItems(Enchantment enchantment) {
+        List<ItemStack> items = new ArrayList<>();
+        items.add(new ItemStack(Items.BOOK));
+        for (int i = 0; i < enchantment.getMaxLevel() - 1; i++) {
+            ItemStack itemStack = new ItemStack(Items.ENCHANTED_BOOK);
+            EnchantedBookItem.addEnchantment(itemStack, new EnchantmentInstance(enchantment, i + 1));
+            items.add(itemStack);
+        }
+        return items;
+    }
+
+    public static List<ItemStack> getInputArcaneBookItems(ArcaneEnchantment enchantment) {
+        List<ItemStack> items = new ArrayList<>();
+        items.add(new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get()));
+        for (int i = 0; i < enchantment.getMaxLevel() - 1; i++) {
+            ItemStack itemStack = new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get());
+            ArcaneEnchantmentUtil.addArcaneEnchantment(itemStack, enchantment, i + 1);
+            items.add(itemStack);
+        }
+        return items;
+    }
+
+    public static List<ItemStack> getOutputBookItems(Enchantment enchantment) {
+        List<ItemStack> items = new ArrayList<>();
+        for (int i = 0; i < enchantment.getMaxLevel(); i++) {
+            ItemStack itemStack = new ItemStack(Items.ENCHANTED_BOOK);
+            EnchantedBookItem.addEnchantment(itemStack, new EnchantmentInstance(enchantment, i + 1));
+            items.add(itemStack);
+        }
+        return items;
+    }
+
+    public static List<ItemStack> getOutputArcaneBookItems(ArcaneEnchantment enchantment) {
+        List<ItemStack> items = new ArrayList<>();
+        for (int i = 0; i < enchantment.getMaxLevel(); i++) {
+            ItemStack itemStack = new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get());
+            ArcaneEnchantmentUtil.addArcaneEnchantment(itemStack, enchantment, i + 1);
+            items.add(itemStack);
+        }
+        return items;
     }
 }

@@ -73,6 +73,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull AlchemyMachineRecipe recipe, @NotNull IFocusGroup focusGroup) {
         int x = 0;
         int y = 0;
+        IRecipeSlotBuilder alchemyPotion = null;
         for (int i = 0; i < 6; i++) {
             if (i < recipe.getIngredients().size()) {
                 Ingredient ingredient = recipe.getIngredients().get(i);
@@ -87,6 +88,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
                             ItemStack bottle = stack.copy();
                             AlchemyPotionUtil.setPotion(bottle, recipe.getRecipeAlchemyPotionIngredient());
                             slot.addItemStack(bottle);
+                            alchemyPotion = slot;
                         }
                     }
                 }
@@ -120,7 +122,8 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
         }
 
         if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotion())) {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStacks(getPotionItems(recipe.getRecipeAlchemyPotion()));
+            IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStacks(getPotionItems(recipe.getRecipeAlchemyPotion()));
+            if (alchemyPotion != null) builder.createFocusLink(alchemyPotion, output);
         } else {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         }
