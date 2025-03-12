@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
+import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritInfusionPage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -127,6 +128,7 @@ public class WizardsRebornMalum {
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get())),
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get()))
             ));
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new SpiritInfusionPage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get()), new ItemStack(ItemRegistry.ALCHEMICAL_IMPETUS.get())));
             ArcanemiconChapters.ARCANE_GOLD.addPage(new SmeltingPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 6), new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get())));
 
             ArcanemiconChapters.WISSEN_ALTAR.addPage(INTEGRATION_PAGE);
