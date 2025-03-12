@@ -9,26 +9,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class SpiritInfusionPage extends RecipePage {
-    public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/integration/malum/spirit_infusion_page.png");
+public class SpiritFocusingPage extends RecipePage {
+    public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/integration/malum/spirit_focusing_page.png");
     public ItemStack result;
     public ItemStack input;
 
-    public ItemStack[] extraInputs;
     public ItemStack[] spirits;
 
-    public SpiritInfusionPage(ItemStack result, ItemStack input) {
+    public SpiritFocusingPage(ItemStack result, ItemStack input) {
         super(BACKGROUND);
         this.result = result;
         this.input = input;
     }
 
-    public SpiritInfusionPage setExtraInputs(ItemStack... items) {
-        extraInputs = items;
-        return this;
-    }
-
-    public SpiritInfusionPage setSpirits(ItemStack... items) {
+    public SpiritFocusingPage setSpirits(ItemStack... items) {
         spirits = items;
         return this;
     }
@@ -41,15 +35,8 @@ public class SpiritInfusionPage extends RecipePage {
         int i = 0;
         for (ItemStack o : spirits) {
             int offset = 56 - 5 + (i * 26) - ((spirits.length - 1) * 13);
-            gui.blit(BACKGROUND, x + 12, y + offset, 128, 0, 26, 26, 256, 256);
-            drawItem(book, gui, o,x + 12 + 5, y + offset + 5, mouseX, mouseY);
-            i++;
-        }
-        i = 0;
-        for (ItemStack o : extraInputs) {
-            int offset = 56 - 5 + (i * 26) - ((extraInputs.length - 1) * 13);
-            gui.blit(BACKGROUND, x + 92, y + offset, 128, 0, 26, 26, 256, 256);
-            drawItem(book, gui, o,x + 92 + 5, y + offset + 5, mouseX, mouseY);
+            gui.blit(BACKGROUND, x + offset, y + 12, 128, 0, 26, 26, 256, 256);
+            drawItem(book, gui, o,x + offset + 5, y + 12 + 5, mouseX, mouseY);
             i++;
         }
         renderChanged(book, gui, x, y, mouseX, mouseY);

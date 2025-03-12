@@ -592,9 +592,9 @@
   "gui.wizards_reborn.totem_of_disenchant.title": "Totem de désenchantement",
   "gui.wizards_reborn.runic_pedestal.title": "Piédestal runique",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Transmutation de poussière des arcanes",
-  "gui.wizards_reborn.category.mortar": "Mortier",
-  "gui.wizards_reborn.category.censer": "Encensoir",
+  "gui.wizards_reborn.jei.arcanum_dust_transmutation": "Transmutation de poussière des arcanes",
+  "gui.wizards_reborn.jei.mortar": "Mortier",
+  "gui.wizards_reborn.jei.censer": "Encensoir",
 
   "config.jade.plugin_wizards_reborn.crystal_growth": "Croissance du cristal",
   "config.jade.plugin_wizards_reborn.numerical": "Chiffres",

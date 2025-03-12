@@ -1063,9 +1063,9 @@
     "gui.wizards_reborn.totem_of_disenchant.title": "解呪のトーテム",
     "gui.wizards_reborn.runic_pedestal.title": "ルーンの台座",
 
-    "gui.wizards_reborn.category.arcanum_dust_transmutation": "アルカナムダストの変換",
-    "gui.wizards_reborn.category.mortar": "乳鉢",
-    "gui.wizards_reborn.category.censer": "香炉",
+    "gui.wizards_reborn.jei.arcanum_dust_transmutation": "アルカナムダストの変換",
+    "gui.wizards_reborn.jei.mortar": "乳鉢",
+    "gui.wizards_reborn.jei.censer": "香炉",
 
     "config.jade.plugin_wizards_reborn.crystal_growth": "クリスタルの成長",
     "config.jade.plugin_wizards_reborn.numerical": "数値",

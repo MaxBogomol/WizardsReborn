@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
+import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritFocusingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritInfusionPage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -29,7 +30,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import vectorwing.farmersdelight.common.registry.ModEnchantments;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,7 +128,13 @@ public class WizardsRebornMalum {
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get())),
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get()))
             ));
-            ArcanemiconChapters.ARCANE_GOLD.addPage(new SpiritInfusionPage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get()), new ItemStack(ItemRegistry.ALCHEMICAL_IMPETUS.get())));
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new SpiritInfusionPage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get()), new ItemStack(ItemRegistry.ALCHEMICAL_IMPETUS.get()))
+                    .setExtraInputs(new ItemStack(Items.GUNPOWDER, 4), new ItemStack(ItemRegistry.CTHONIC_GOLD.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_INGOT.get(), 6))
+                    .setSpirits(new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get(), 8), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get(), 8))
+            );
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new SpiritFocusingPage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get(), 3), new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get()))
+                    .setSpirits(new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get(), 2), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get(), 2))
+            );
             ArcanemiconChapters.ARCANE_GOLD.addPage(new SmeltingPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 6), new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get())));
 
             ArcanemiconChapters.WISSEN_ALTAR.addPage(INTEGRATION_PAGE);

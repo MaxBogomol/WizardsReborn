@@ -1061,9 +1061,9 @@
     "gui.wizards_reborn.totem_of_disenchant.title": "祛魔图腾",
     "gui.wizards_reborn.runic_pedestal.title": "符文基座",
 
-    "gui.wizards_reborn.category.arcanum_dust_transmutation": "秘术水晶粉转化",
-    "gui.wizards_reborn.category.mortar": "研钵",
-    "gui.wizards_reborn.category.censer": "奥术香炉",
+    "gui.wizards_reborn.jei.arcanum_dust_transmutation": "秘术水晶粉转化",
+    "gui.wizards_reborn.jei.mortar": "研钵",
+    "gui.wizards_reborn.jei.censer": "奥术香炉",
 
     "config.jade.plugin_wizards_reborn.crystal_growth": "水晶生长状态",
     "config.jade.plugin_wizards_reborn.numerical": "各种设备的数值显示",

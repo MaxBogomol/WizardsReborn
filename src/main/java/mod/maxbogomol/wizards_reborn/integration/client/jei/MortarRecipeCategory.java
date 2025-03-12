@@ -42,7 +42,7 @@ public class MortarRecipeCategory implements IRecipeCategory<MortarRecipe> {
 
     @Override
     public Component getTitle() {
-        return Component.nullToEmpty(Component.translatable("gui.wizards_reborn.category.mortar").getString());
+        return Component.nullToEmpty(Component.translatable("gui.wizards_reborn.jei.mortar").getString());
     }
 
     @Override

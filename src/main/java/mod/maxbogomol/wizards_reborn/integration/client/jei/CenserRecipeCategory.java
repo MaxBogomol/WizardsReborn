@@ -44,7 +44,7 @@ public class CenserRecipeCategory implements IRecipeCategory<CenserRecipe> {
 
     @Override
     public Component getTitle() {
-        return Component.nullToEmpty(Component.translatable("gui.wizards_reborn.category.censer").getString());
+        return Component.nullToEmpty(Component.translatable("gui.wizards_reborn.jei.censer").getString());
     }
 
     @Override

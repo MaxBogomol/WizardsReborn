@@ -21,10 +21,11 @@ public abstract class Page {
 
     @OnlyIn(Dist.CLIENT)
     public static void drawItem(ArcanemiconScreen book, GuiGraphics gui, ItemStack stack, int x, int y, int mouseX, int mouseY) {
+        Font font = Minecraft.getInstance().font;
         gui.renderItem(stack, x, y);
-        gui.renderItemDecorations(Minecraft.getInstance().font, stack, x, y, null);
+        gui.renderItemDecorations(font, stack, x, y, null);
         if (mouseX >= x && mouseY >= y && mouseX <= x + 16 && mouseY <= y + 16) {
-            gui.renderTooltip(Minecraft.getInstance().font, stack, mouseX, mouseY);
+            gui.renderTooltip(font, stack, mouseX, mouseY);
         }
     }
 

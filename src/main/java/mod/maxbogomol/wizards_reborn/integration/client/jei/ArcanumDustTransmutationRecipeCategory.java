@@ -37,7 +37,7 @@ public class ArcanumDustTransmutationRecipeCategory implements IRecipeCategory<A
 
     @Override
     public Component getTitle() {
-        return Component.nullToEmpty(Component.translatable("gui.wizards_reborn.category.arcanum_dust_transmutation").getString());
+        return Component.nullToEmpty(Component.translatable("gui.wizards_reborn.jei.arcanum_dust_transmutation").getString());
     }
 
     @Override

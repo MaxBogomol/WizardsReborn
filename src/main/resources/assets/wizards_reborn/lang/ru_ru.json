@@ -1103,9 +1103,9 @@
   "gui.wizards_reborn.totem_of_disenchant.title": "Тотем разачарования",
   "gui.wizards_reborn.runic_pedestal.title": "Рунический пьедестал",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
-  "gui.wizards_reborn.category.mortar": "Ступка",
-  "gui.wizards_reborn.category.censer": "Курильница",
+  "gui.wizards_reborn.jei.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
+  "gui.wizards_reborn.jei.mortar": "Ступка",
+  "gui.wizards_reborn.jei.censer": "Курильница",
 
   "config.jade.plugin_wizards_reborn.crystal_growth": "Рост кристаллов",
   "config.jade.plugin_wizards_reborn.numerical": "Числовые значения",
