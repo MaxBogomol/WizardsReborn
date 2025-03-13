@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -26,43 +27,33 @@ public class ArcaneIteratorPage extends RecipePage {
     public ItemStack[] inputs;
     public Enchantment enchantment;
     public ArcaneEnchantment arcaneEnchantment;
-    public int experience;
-    public int health;
+    public int experience = 0;
+    public int health = 0;
 
-    public ArcaneIteratorPage(ItemStack result, int experience, int health, ItemStack... inputs) {
+    public ArcaneIteratorPage(ItemStack result, ItemStack... inputs) {
         super(BACKGROUND);
         this.result = result;
         this.inputs = inputs;
-        this.experience = experience;
-        this.health = health;
     }
 
-    public ArcaneIteratorPage(ItemStack result, int experience, int health, Enchantment enchantment, ItemStack... inputs) {
-        super(BACKGROUND);
-        this.result = result;
-        this.inputs = inputs;
+    public ArcaneIteratorPage setExperience(int experience) {
+        this.experience = experience;
+        return this;
+    }
+
+    public ArcaneIteratorPage setHealth(int health) {
+        this.health = health;
+        return this;
+    }
+
+    public ArcaneIteratorPage setEnchantment(Enchantment enchantment) {
         this.enchantment = enchantment;
-        this.experience = experience;
-        this.health = health;
+        return this;
     }
 
-    public ArcaneIteratorPage(ItemStack result, int experience, int health, ArcaneEnchantment arcaneEnchantment, ItemStack... inputs) {
-        super(BACKGROUND);
-        this.result = result;
-        this.inputs = inputs;
+    public ArcaneIteratorPage setArcaneEnchantment(ArcaneEnchantment arcaneEnchantment) {
         this.arcaneEnchantment = arcaneEnchantment;
-        this.experience = experience;
-        this.health = health;
-    }
-
-    public ArcaneIteratorPage(ItemStack result, int experience, int health, Enchantment enchantment, ArcaneEnchantment arcaneEnchantment, ItemStack... inputs) {
-        super(BACKGROUND);
-        this.result = result;
-        this.inputs = inputs;
-        this.enchantment = enchantment;
-        this.arcaneEnchantment = arcaneEnchantment;
-        this.experience = experience;
-        this.health = health;
+        return this;
     }
 
     @Override

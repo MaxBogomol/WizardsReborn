@@ -19,18 +19,18 @@ import javax.annotation.Nullable;
 public class MortarRecipe implements Recipe<Container>  {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "mortar");
     private final ResourceLocation id;
-    private final Ingredient recipeItem;
+    private final Ingredient input;
     private final ItemStack output;
 
-    public MortarRecipe(ResourceLocation id, Ingredient recipeItem, ItemStack output) {
+    public MortarRecipe(ResourceLocation id, Ingredient input, ItemStack output) {
         this.id = id;
-        this.recipeItem = recipeItem;
+        this.input = input;
         this.output = output;
     }
 
     @Override
     public boolean matches(Container container, Level level) {
-        return recipeItem.test(container.getItem(0));
+        return input.test(container.getItem(0));
     }
 
     @Override
@@ -38,10 +38,7 @@ public class MortarRecipe implements Recipe<Container>  {
         return ItemStack.EMPTY;
     }
 
-    public Ingredient getIngredientRecipe() {
-        return recipeItem;
-    }
-
+    @Override
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.ARCANE_WOOD_MORTAR.get());
     }
@@ -52,30 +49,18 @@ public class MortarRecipe implements Recipe<Container>  {
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
-        return WizardsRebornRecipes.MORTAR_SERIALIZER.get();
-    }
-
-    public static class MortarRecipeType implements RecipeType<MortarRecipe> {
-        @Override
-        public String toString() {
-            return MortarRecipe.TYPE_ID.toString();
-        }
-    }
-
-    @Override
     public RecipeType<?> getType(){
         return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public RecipeSerializer<?> getSerializer() {
+        return WizardsRebornRecipes.MORTAR_SERIALIZER.get();
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return output;
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
     }
 
     @Override
@@ -89,7 +74,6 @@ public class MortarRecipe implements Recipe<Container>  {
         public MortarRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "from"));
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "to"));
-
             return new MortarRecipe(recipeId, input, output);
         }
 
@@ -98,14 +82,22 @@ public class MortarRecipe implements Recipe<Container>  {
         public MortarRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             Ingredient input = Ingredient.fromNetwork(buffer);
             ItemStack output = buffer.readItem();
-
             return new MortarRecipe(recipeId, input, output);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, MortarRecipe recipe) {
-            recipe.getIngredientRecipe().toNetwork(buffer);
+            recipe.getInput().toNetwork(buffer);
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
         }
+    }
+
+    public Ingredient getInput() {
+        return input;
+    }
+
+    @Override
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return output;
     }
 }

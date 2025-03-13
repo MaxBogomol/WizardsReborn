@@ -67,7 +67,7 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
             Container container = getItemHandler();
             if (!container.isEmpty()) {
                 Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_CRYSTALLIZER.get(), getItemHandler(), level);
-                wissenInCraft = recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
+                wissenInCraft = recipe.map(WissenCrystallizerRecipe::getWissen).orElse(0);
 
                 if (sortItems()) update = true;
 
@@ -96,10 +96,10 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
                         startCraft = false;
 
                         ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-                        if (recipe.get().getRecipeIsNBTCrystal()) {
+                        if (recipe.get().getIsNBTCrystal()) {
                             CrystalUtil.createCrystalFromFractured(stack, getItemHandler());
                         }
-                        if (recipe.get().getRecipeIsSaveNBT()) {
+                        if (recipe.get().getIsSaveNBT()) {
                             stack.setTag(getItemHandler().getItem(0).getOrCreateTag());
                         }
 
@@ -354,11 +354,11 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
     public List<ItemStack> getItemsResult() {
         List<ItemStack> list = new ArrayList<>();
         Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_CRYSTALLIZER.get(), getItemHandler(), level);
-        wissenInCraft =  recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
+        wissenInCraft =  recipe.map(WissenCrystallizerRecipe::getWissen).orElse(0);
 
         if (recipe.isPresent() && wissenInCraft > 0) {
             ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-            if (recipe.get().getRecipeIsSaveNBT()) {
+            if (recipe.get().getIsSaveNBT()) {
                 stack.setTag(getItemHandler().getItem(0).copy().getOrCreateTag());
             }
             list.add(stack);

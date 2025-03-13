@@ -114,15 +114,15 @@ public class WizardsRebornCreate {
             ));
 
             ArcanemiconChapters.ARCANE_ITERATOR.addPage(INTEGRATION_PAGE);
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, AllEnchantments.POTATO_RECOVERY.get(),
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(AllBlocks.COGWHEEL.asItem()),
                     new ItemStack(Items.POTATO), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO)
-            ));
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, AllEnchantments.CAPACITY.get(),
+            ).setExperience(5).setEnchantment(AllEnchantments.POTATO_RECOVERY.get()));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(AllBlocks.FLUID_TANK.asItem()), new ItemStack(AllItems.COPPER_SHEET), new ItemStack(AllBlocks.COGWHEEL.asItem())
-            ));
+            ).setExperience(5).setEnchantment(AllEnchantments.CAPACITY.get()));
 
             ArcanemiconChapters.ARCANUM_LENS.addPage(INTEGRATION_PAGE);
             ArcanemiconChapters.ARCANUM_LENS.addPage(new CrushingPage(ArcanemiconChapters.ARCANUM_LENS_ITEM,
@@ -151,12 +151,12 @@ public class WizardsRebornCreate {
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(powderedObsidianEffects, new ItemStack(AllItems.POWDERED_OBSIDIAN.get())));
 
             ArcanemiconChapters.ALCHEMY_TRANSMUTATION.addPage(INTEGRATION_PAGE);
-            ArcanemiconChapters.ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage(new ItemStack(ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get(), 4), FluidStack.EMPTY, true, true,
-                    new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.WISSEN_TEA.get(), 200), FluidStack.EMPTY,
-                    new ItemStack(AllItems.CRUSHED_GOLD.get()), new ItemStack(AllItems.CRUSHED_GOLD.get()),
-                    new ItemStack(AllItems.CRUSHED_GOLD.get()), new ItemStack(AllItems.CRUSHED_GOLD.get()),
-                    ArcanemiconChapters.ARCANUM_ITEM, ArcanemiconChapters.NATURAL_CALX_ITEM
-            ));
+            ArcanemiconChapters.ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage().setResult(new ItemStack(ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get(), 4)).setIsWissen(true).setIsSteam(true)
+                            .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.WISSEN_TEA.get(), 200)).setInputs(
+                                    new ItemStack(AllItems.CRUSHED_GOLD.get()), new ItemStack(AllItems.CRUSHED_GOLD.get()),
+                                    new ItemStack(AllItems.CRUSHED_GOLD.get()), new ItemStack(AllItems.CRUSHED_GOLD.get()),
+                                    ArcanemiconChapters.ARCANUM_ITEM, ArcanemiconChapters.NATURAL_CALX_ITEM)
+            );
         }
     }
 

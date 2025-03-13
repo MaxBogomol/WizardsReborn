@@ -130,7 +130,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
 
         SimpleContainer inv = new SimpleContainer(1);
         inv.setItem(0, stack);
-        int wissenInItem = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level).map(WissenAltarRecipe::getRecipeWissen).orElse(0);
+        int wissenInItem = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level).map(WissenAltarRecipe::getWissen).orElse(0);
         if (wissenInItem > 0) {
             if (container.getItem(1).isEmpty()) {
                 container.setItem(1, stack.copy());

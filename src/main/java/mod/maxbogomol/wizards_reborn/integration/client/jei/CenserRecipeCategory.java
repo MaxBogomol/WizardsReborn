@@ -59,7 +59,7 @@ public class CenserRecipeCategory implements IRecipeCategory<CenserRecipe> {
 
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull CenserRecipe recipe, @NotNull IFocusGroup focusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 26, 58).addIngredients(recipe.getIngredientRecipe());
+        builder.addSlot(RecipeIngredientRole.INPUT, 26, 58).addIngredients(recipe.getInput());
     }
 
     @Override

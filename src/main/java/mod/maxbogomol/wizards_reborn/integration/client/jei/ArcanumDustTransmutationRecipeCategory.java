@@ -53,7 +53,7 @@ public class ArcanumDustTransmutationRecipeCategory implements IRecipeCategory<A
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull ArcanumDustTransmutationRecipe recipe, @NotNull IFocusGroup focusGroup) {
         builder.addSlot(RecipeIngredientRole.INPUT, 4, 16).addItemStack(WizardsRebornItems.ARCANUM_DUST.get().getDefaultInstance());
-        builder.addSlot(RecipeIngredientRole.INPUT, 63, 16).addIngredients(recipe.getIngredientRecipe());
+        builder.addSlot(RecipeIngredientRole.INPUT, 63, 16).addIngredients(recipe.getInput());
 
         if (recipe.getDisplay() == ItemStack.EMPTY) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 125, 16).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));

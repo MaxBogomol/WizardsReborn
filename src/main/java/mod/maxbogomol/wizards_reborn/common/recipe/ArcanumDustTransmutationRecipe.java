@@ -19,22 +19,30 @@ import javax.annotation.Nullable;
 public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "arcanum_dust_transmutation");
     private final ResourceLocation id;
-    private final Ingredient recipeItem;
+    private final Ingredient input;
     private final ItemStack output;
-    private final ItemStack display;
-    private final boolean place_block;
+    private ItemStack display = ItemStack.EMPTY;
+    private boolean placeBlock = false;
 
-    public ArcanumDustTransmutationRecipe(ResourceLocation id, Ingredient recipeItem, ItemStack output, ItemStack display, boolean place_block) {
+    public ArcanumDustTransmutationRecipe(ResourceLocation id, Ingredient input, ItemStack output) {
         this.id = id;
-        this.recipeItem = recipeItem;
+        this.input = input;
         this.output = output;
+    }
+
+    public ArcanumDustTransmutationRecipe setDisplay(ItemStack display) {
         this.display = display;
-        this.place_block = place_block;
+        return this;
+    }
+
+    public ArcanumDustTransmutationRecipe setPlaceBlock(boolean placeBlock) {
+        this.placeBlock = placeBlock;
+        return this;
     }
 
     @Override
     public boolean matches(Container container, Level level) {
-        return recipeItem.test(container.getItem(0));
+        return input.test(container.getItem(0));
     }
 
     @Override
@@ -42,18 +50,7 @@ public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
         return ItemStack.EMPTY;
     }
 
-    public Ingredient getIngredientRecipe() {
-        return recipeItem;
-    }
-
-    public boolean getPlaceBlock() {
-        return place_block;
-    }
-
-    public ItemStack getDisplay() {
-        return display;
-    }
-
+    @Override
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.ARCANUM_DUST.get());
     }
@@ -64,23 +61,18 @@ public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
-        return WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION_SERIALIZER.get();
-    }
-
-    @Override
     public RecipeType<?> getType(){
         return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public RecipeSerializer<?> getSerializer() {
+        return WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION_SERIALIZER.get();
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return output;
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
     }
 
     @Override
@@ -95,15 +87,14 @@ public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
             Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "from"));
             ItemStack output = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "to")).getDefaultInstance();
             ItemStack display = ItemStack.EMPTY;
-            boolean place_block = true;
+            boolean placeBlock = true;
             if (GsonHelper.isValidNode(json, "display")) {
                 display = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "display"));
             }
-            if (GsonHelper.isValidNode(json, "place_block")) {
-                place_block = GsonHelper.getAsBoolean(json, "place_block");
+            if (GsonHelper.isValidNode(json, "placeBlock")) {
+                placeBlock = GsonHelper.getAsBoolean(json, "placeBlock");
             }
-
-            return new ArcanumDustTransmutationRecipe(recipeId, input, output, display, place_block);
+            return new ArcanumDustTransmutationRecipe(recipeId, input, output).setDisplay(display).setPlaceBlock(placeBlock);
         }
 
         @Nullable
@@ -112,17 +103,33 @@ public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
             Ingredient input = Ingredient.fromNetwork(buffer);
             ItemStack output = buffer.readItem();
             ItemStack display = buffer.readItem();
-            boolean place_block = buffer.readBoolean();
-
-            return new ArcanumDustTransmutationRecipe(recipeId, input, output, display, place_block);
+            boolean placeBlock = buffer.readBoolean();
+            return new ArcanumDustTransmutationRecipe(recipeId, input, output).setDisplay(display).setPlaceBlock(placeBlock);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, ArcanumDustTransmutationRecipe recipe) {
-            recipe.getIngredientRecipe().toNetwork(buffer);
+            recipe.getInput().toNetwork(buffer);
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             buffer.writeItemStack(recipe.getDisplay(), false);
             buffer.writeBoolean(recipe.getPlaceBlock());
         }
+    }
+
+    @Override
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return output;
+    }
+
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public boolean getPlaceBlock() {
+        return placeBlock;
+    }
+
+    public ItemStack getDisplay() {
+        return display;
     }
 }

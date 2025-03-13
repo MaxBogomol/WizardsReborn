@@ -99,7 +99,7 @@ public class CrystalInfusionRecipeCategory implements IRecipeCategory<CrystalInf
     @Override
     public void draw(@NotNull CrystalInfusionRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
-        String textLight = Integer.toString(recipe.getRecipeLight());
+        String textLight = Integer.toString(recipe.getLight());
         int stringWidth = font.width(textLight);
 
         if (WizardsRebornClientConfig.SHOW_LIGHT_NAME.get()) {

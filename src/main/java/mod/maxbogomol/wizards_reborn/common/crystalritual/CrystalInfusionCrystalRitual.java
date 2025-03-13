@@ -81,7 +81,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
 
             if (recipe.isPresent()) {
                 clearItemHandler(crystal);
-                setMaxCooldown(crystal, getMaxRitualCooldown(recipe.get().getRecipeLight(), item) + 20);
+                setMaxCooldown(crystal, getMaxRitualCooldown(recipe.get().getLight(), item) + 20);
                 setCooldown(crystal, getMaxCooldown(crystal));
 
                 CrystalRitualArea area = getArea(crystal);

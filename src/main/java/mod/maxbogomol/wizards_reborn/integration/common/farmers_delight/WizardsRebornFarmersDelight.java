@@ -25,6 +25,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -109,16 +110,16 @@ public class WizardsRebornFarmersDelight {
             ));
 
             ArcanemiconChapters.ARCANE_ITERATOR.addPage(INTEGRATION_PAGE);
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, ModEnchantments.BACKSTABBING.get(),
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(Items.QUARTZ), new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.EMERALD)
-            ));
+            ).setExperience(5).setEnchantment(ModEnchantments.BACKSTABBING.get()));
 
             ArcanemiconChapters.INNOCENT_WOOD_TOOLS.addPage(INTEGRATION_PAGE);
             ArcanemiconChapters.INNOCENT_WOOD_TOOLS.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_knife",
                     new BlockEntry(ArcanemiconChapters.INNOCENT_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.INNOCENT_WOOD_KNIFE.get()))
             ));
-            ArcanemiconChapters.INNOCENT_WOOD_TOOLS.addPage(new ArcaneIteratorPage(new ItemStack(ItemsLoadedOnly.INNOCENT_WOOD_KNIFE.get()), 0, 0, new ItemStack(ItemsLoadedOnly.ARCANE_WOOD_KNIFE.get()),
+            ArcanemiconChapters.INNOCENT_WOOD_TOOLS.addPage(new ArcaneIteratorPage(new ItemStack(ItemsLoadedOnly.INNOCENT_WOOD_KNIFE.get()), new ItemStack(ItemsLoadedOnly.ARCANE_WOOD_KNIFE.get()),
                     ArcanemiconChapters.INNOCENT_WOOD_BRANCH_ITEM, ArcanemiconChapters.INNOCENT_WOOD_BRANCH_ITEM, ArcanemiconChapters.INNOCENT_WOOD_BRANCH_ITEM,
                     ArcanemiconChapters.ARCACITE_ITEM, ArcanemiconChapters.ARCACITE_ITEM, ArcanemiconChapters.NATURAL_CALX_ITEM
             ));

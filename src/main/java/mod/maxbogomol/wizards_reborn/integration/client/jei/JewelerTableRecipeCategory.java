@@ -68,7 +68,7 @@ public class JewelerTableRecipeCategory implements IRecipeCategory<JewelerTableR
     @Override
     public void draw(@NotNull JewelerTableRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
-        String textWissen = Integer.toString(recipe.getRecipeWissen());
+        String textWissen = Integer.toString(recipe.getWissen());
         int stringWidth = font.width(textWissen);
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {

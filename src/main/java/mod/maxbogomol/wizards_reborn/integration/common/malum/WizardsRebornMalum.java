@@ -17,6 +17,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
 import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritFocusingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritInfusionPage;
+import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritRepairPage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,6 +25,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
@@ -135,6 +137,9 @@ public class WizardsRebornMalum {
             ArcanemiconChapters.ARCANE_GOLD.addPage(new SpiritFocusingPage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get(), 3), new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get()))
                     .setSpirits(new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get(), 2), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get(), 2))
             );
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new SpiritRepairPage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_IMPETUS.get()), new ItemStack(ItemsLoadedOnly.CRACKED_ARCANE_GOLD_IMPETUS.get()), new ItemStack(ItemRegistry.CTHONIC_GOLD.get(), 2))
+                    .setSpirits(new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get(), 16), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get(), 16))
+            );
             ArcanemiconChapters.ARCANE_GOLD.addPage(new SmeltingPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 6), new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get())));
 
             ArcanemiconChapters.WISSEN_ALTAR.addPage(INTEGRATION_PAGE);
@@ -143,36 +148,36 @@ public class WizardsRebornMalum {
             ArcanemiconChapters.WISSEN_ALTAR.addPage(new WissenAltarPage(new ItemStack(ItemRegistry.MNEMONIC_FRAGMENT.get())));
 
             ArcanemiconChapters.ARCANE_ITERATOR.addPage(INTEGRATION_PAGE);
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 8, 0, EnchantmentRegistry.SPIRIT_PLUNDER.get(),
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()), new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()),
                     new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD)
-            ));
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, EnchantmentRegistry.HAUNTED.get(),
+            ).setExperience(8).setEnchantment(EnchantmentRegistry.SPIRIT_PLUNDER.get()));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.DIAMOND),
                     new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get()), new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get()), new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get())
-            ));
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, EnchantmentRegistry.ANIMATED.get(),
+            ).setExperience(5).setEnchantment(EnchantmentRegistry.HAUNTED.get()));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE),
                     new ItemStack(Items.FEATHER), new ItemStack(Items.FEATHER)
-            ));
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 6, 0, EnchantmentRegistry.REBOUND.get(),
+            ).setExperience(5).setEnchantment(EnchantmentRegistry.ANIMATED.get()));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get()), new ItemStack(ItemRegistry.PROCESSED_SOULSTONE.get()),
                     new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND), new ItemStack(ItemRegistry.HALLOWED_GOLD_INGOT.get())
-            ));
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 6, 0, EnchantmentRegistry.ASCENSION.get(),
+            ).setExperience(6).setEnchantment(EnchantmentRegistry.REBOUND.get()));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()), new ItemStack(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()),
                     new ItemStack(Items.BONE), new ItemStack(Items.BONE), new ItemStack(Items.BONE), new ItemStack(ItemRegistry.HALLOWED_GOLD_INGOT.get())
-            ));
-            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, EnchantmentRegistry.REPLENISHING.get(),
+            ).setExperience(6).setEnchantment(EnchantmentRegistry.ASCENSION.get()));
+            ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),
                     new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                     new ItemStack(ItemRegistry.MNEMONIC_FRAGMENT.get()),
                     new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(ItemRegistry.HALLOWED_GOLD_INGOT.get())
-            ));
+            ).setExperience(5).setEnchantment(EnchantmentRegistry.REPLENISHING.get()));
 
             Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<>();
             Map<AlchemyPotion, ItemStack> flaskPotions = new HashMap<>();
@@ -188,62 +193,49 @@ public class WizardsRebornMalum {
             }
 
             ArcanemiconChapters.ALCHEMY_BREWS.addPage(INTEGRATION_PAGE);
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.SACRED_SPIRIT), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.SACRED_SPIRIT)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get())
             ));
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.SACRED_SOUL), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.SACRED_SOUL)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
             ));
 
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.WICKED_SPIRIT), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.WICKED_SPIRIT)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get())
             ));
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.WICKED_SOUL), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.WICKED_SOUL)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
             ));
 
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.AERIAL_SPIRIT), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.AERIAL_SPIRIT)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.AERIAL_SPIRIT.get()), new ItemStack(ItemRegistry.AERIAL_SPIRIT.get())
             ));
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.AERIAL_SOUL), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.AERIAL_SOUL)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.AERIAL_SPIRIT.get()), new ItemStack(ItemRegistry.AERIAL_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
             ));
 
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.AQUEOUS_SPIRIT), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.AQUEOUS_SPIRIT)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get())
             ));
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.AQUEOUS_SOUL), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.AQUEOUS_SOUL)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
             ));
 
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.EARTHEN_SPIRIT), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.EARTHEN_SPIRIT)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get()), new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get())
             ));
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.EARTHEN_SOUL), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.EARTHEN_SOUL)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get()), new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
             ));
 
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.INFERNAL_SPIRIT), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.INFERNAL_SPIRIT)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get())
             ));
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.INFERNAL_SOUL), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.INFERNAL_SOUL)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get()), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get()), new ItemStack(ItemRegistry.ELDRITCH_SPIRIT.get())
             ));
 
-            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage(vialPotions.get(AlchemyPotionsLoadedOnly.GLUTTONY), FluidStack.EMPTY, true, true,
-                    FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+            ArcanemiconChapters.ALCHEMY_BREWS.addPage(new AlchemyMachinePage().setResult(vialPotions.get(AlchemyPotionsLoadedOnly.GLUTTONY)).setIsWissen(true).setIsSteam(true).setInputs(
                     vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.HONEYCOMB), new ItemStack(ItemRegistry.ROTTING_ESSENCE.get()), new ItemStack(ItemRegistry.AQUEOUS_SPIRIT.get()), new ItemStack(ItemRegistry.SACRED_SPIRIT.get()), new ItemStack(ItemRegistry.WICKED_SPIRIT.get())
             ));
 

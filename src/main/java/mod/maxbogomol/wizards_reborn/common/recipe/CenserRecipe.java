@@ -47,14 +47,6 @@ public class CenserRecipe implements Recipe<Container>  {
         return ItemStack.EMPTY;
     }
 
-    public Ingredient getIngredientRecipe() {
-        return input;
-    }
-
-    public List<MobEffectInstance> getEffects() {
-        return effects;
-    }
-
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.ARCANE_CENSER.get());
     }
@@ -65,23 +57,18 @@ public class CenserRecipe implements Recipe<Container>  {
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
-        return WizardsRebornRecipes.CENSER_SERIALIZER.get();
-    }
-
-    @Override
     public RecipeType<?> getType(){
         return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public RecipeSerializer<?> getSerializer() {
+        return WizardsRebornRecipes.CENSER_SERIALIZER.get();
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return ItemStack.EMPTY;
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
     }
 
     @Override
@@ -94,16 +81,13 @@ public class CenserRecipe implements Recipe<Container>  {
         @Override
         public CenserRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
-
             List<MobEffectInstance> effects = new ArrayList<>();
-
             if (json.has("effects")) {
                 JsonArray eff = GsonHelper.getAsJsonArray(json, "effects");
                 for (JsonElement e : eff) {
                     effects.add(RecipeUtil.deserializeMobEffect(e.getAsJsonObject()));
                 }
             }
-
             return new CenserRecipe(recipeId, input, effects);
         }
 
@@ -111,24 +95,34 @@ public class CenserRecipe implements Recipe<Container>  {
         @Override
         public CenserRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             Ingredient input = Ingredient.fromNetwork(buffer);
-
             List<MobEffectInstance> effects = new ArrayList<>();
             int effectsSize = buffer.readInt();
             for (int i = 0; i < effectsSize; i++) {
                 effects.add(RecipeUtil.mobEffectFromNetwork(buffer));
             }
-
             return new CenserRecipe(recipeId, input, effects);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, CenserRecipe recipe) {
-            recipe.getIngredientRecipe().toNetwork(buffer);
-
+            recipe.getInput().toNetwork(buffer);
             buffer.writeInt(recipe.getEffects().size());
             for (MobEffectInstance effect : recipe.getEffects()) {
                 RecipeUtil.mobEffectToNetwork(effect, buffer);
             }
         }
+    }
+
+    @Override
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return ItemStack.EMPTY;
+    }
+
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public List<MobEffectInstance> getEffects() {
+        return effects;
     }
 }

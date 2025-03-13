@@ -283,7 +283,7 @@ public class CrystalRitual {
         }
 
         Optional<CrystalRitualRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CRYSTAL_RITUAL.get(), inv, level);
-        return recipe.filter(crystalRitualRecipe -> (crystalRitualRecipe.getRecipeRitual() == this)).isPresent();
+        return recipe.filter(crystalRitualRecipe -> (crystalRitualRecipe.getRitual() == this)).isPresent();
     }
 
     public static void deleteItemsFromPedestals(Level level, BlockPos startPos, List<ArcanePedestalBlockEntity> pedestals, boolean hasSound, boolean hasEffect) {

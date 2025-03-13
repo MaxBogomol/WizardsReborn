@@ -58,7 +58,7 @@ public class MortarRecipeCategory implements IRecipeCategory<MortarRecipe> {
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull MortarRecipe recipe, @NotNull IFocusGroup focusGroup) {
         builder.addSlot(RecipeIngredientRole.INPUT, 4, 16).addItemStacks(getMortarItems());
-        builder.addSlot(RecipeIngredientRole.INPUT, 63, 16).addIngredients(recipe.getIngredientRecipe());
+        builder.addSlot(RecipeIngredientRole.INPUT, 63, 16).addIngredients(recipe.getInput());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 125, 16).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
     }
 

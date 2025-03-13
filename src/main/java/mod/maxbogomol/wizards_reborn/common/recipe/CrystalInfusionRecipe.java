@@ -25,8 +25,8 @@ import java.util.List;
 public class CrystalInfusionRecipe implements Recipe<Container> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "crystal_infusion");
     private final ResourceLocation id;
-    private final ItemStack output;
     private final NonNullList<Ingredient> inputs;
+    private final ItemStack output;
     private final int light;
 
     public CrystalInfusionRecipe(ResourceLocation id, ItemStack output, int light, Ingredient... inputs) {
@@ -75,16 +75,6 @@ public class CrystalInfusionRecipe implements Recipe<Container> {
         return output;
     }
 
-    @Nonnull
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return inputs;
-    }
-
-    public int getRecipeLight() {
-        return light;
-    }
-
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.EARTH_CRYSTAL.get());
     }
@@ -95,8 +85,23 @@ public class CrystalInfusionRecipe implements Recipe<Container> {
     }
 
     @Override
+    public RecipeType<?> getType(){
+        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return WizardsRebornRecipes.CRYSTAL_INFUSION_SERIALIZER.get();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public boolean isSpecial(){
+        return true;
     }
 
     public static class Serializer implements RecipeSerializer<CrystalInfusionRecipe> {
@@ -110,7 +115,6 @@ public class CrystalInfusionRecipe implements Recipe<Container> {
             for (JsonElement e : ingrs) {
                 inputs.add(Ingredient.fromJson(e));
             }
-
             return new CrystalInfusionRecipe(recipeId, output, light, inputs.toArray(new Ingredient[0]));
         }
 
@@ -133,18 +137,14 @@ public class CrystalInfusionRecipe implements Recipe<Container> {
                 input.toNetwork(buffer);
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buffer.writeInt(recipe.getRecipeLight());
+            buffer.writeInt(recipe.getLight());
         }
     }
 
+    @Nonnull
     @Override
-    public RecipeType<?> getType(){
-        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     @Override
@@ -152,8 +152,7 @@ public class CrystalInfusionRecipe implements Recipe<Container> {
         return output;
     }
 
-    @Override
-    public boolean isSpecial(){
-        return true;
+    public int getLight() {
+        return light;
     }
 }

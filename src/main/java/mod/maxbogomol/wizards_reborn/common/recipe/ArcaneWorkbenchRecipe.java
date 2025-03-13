@@ -30,22 +30,18 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
     private final ItemStack output;
     private final NonNullList<Ingredient> inputs;
     private final int wissen;
-    private final int saveNBT;
+    private int saveNBT = -1;
 
     public ArcaneWorkbenchRecipe(ResourceLocation id, ItemStack output, int wissen, Ingredient... inputs) {
         this.id = id;
         this.output = output;
         this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
         this.wissen = wissen;
-        this.saveNBT = -1;
     }
 
-    public ArcaneWorkbenchRecipe(ResourceLocation id, ItemStack output, int wissen, int saveNBT, Ingredient... inputs) {
-        this.id = id;
-        this.output = output;
-        this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
-        this.wissen = wissen;
+    public ArcaneWorkbenchRecipe setSaveNBT(int saveNBT) {
         this.saveNBT = saveNBT;
+        return this;
     }
 
     @Override
@@ -69,20 +65,6 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
         return output;
     }
 
-    @Nonnull
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return inputs;
-    }
-
-    public int getRecipeWissen() {
-        return wissen;
-    }
-
-    public int getRecipeSaveNBT() {
-        return saveNBT;
-    }
-
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.ARCANE_WORKBENCH.get());
     }
@@ -93,8 +75,23 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
     }
 
     @Override
+    public RecipeType<?> getType(){
+        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return WizardsRebornRecipes.ARCANE_WORKBENCH_SERIALIZER.get();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public boolean isSpecial(){
+        return true;
     }
 
     public static class Serializer implements RecipeSerializer<ArcaneWorkbenchRecipe> {
@@ -138,7 +135,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
                 saveNBT = GsonHelper.getAsInt(json, "saveNBT");
             }
 
-            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, saveNBT, inputs.toArray(new Ingredient[0]));
+            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, inputs.toArray(new Ingredient[0])).setSaveNBT(saveNBT);
         }
 
         @Nullable
@@ -151,7 +148,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
             ItemStack output = buffer.readItem();
             int wissen = buffer.readInt();
             int saveNBT = buffer.readInt();
-            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, saveNBT, inputs);
+            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, inputs).setSaveNBT(saveNBT);
         }
 
         @Override
@@ -161,19 +158,15 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
                 input.toNetwork(buffer);
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buffer.writeInt(recipe.getRecipeWissen());
-            buffer.writeInt(recipe.getRecipeSaveNBT());
+            buffer.writeInt(recipe.getWissen());
+            buffer.writeInt(recipe.getSaveNBT());
         }
     }
 
+    @Nonnull
     @Override
-    public RecipeType<?> getType(){
-        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     @Override
@@ -181,8 +174,11 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
         return output;
     }
 
-    @Override
-    public boolean isSpecial(){
-        return true;
+    public int getWissen() {
+        return wissen;
+    }
+
+    public int getSaveNBT() {
+        return saveNBT;
     }
 }

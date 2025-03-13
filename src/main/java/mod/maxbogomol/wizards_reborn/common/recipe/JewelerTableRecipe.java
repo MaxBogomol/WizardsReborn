@@ -25,25 +25,21 @@ import java.util.List;
 public class JewelerTableRecipe implements Recipe<Container> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "jeweler_table");
     private final ResourceLocation id;
-    private final ItemStack output;
     private final NonNullList<Ingredient> inputs;
+    private final ItemStack output;
     private final int wissen;
-    private final boolean isSaveNBT;
+    private boolean isSaveNBT = false;
 
     public JewelerTableRecipe(ResourceLocation id, ItemStack output, int wissen, Ingredient... inputs) {
         this.id = id;
         this.output = output;
         this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
         this.wissen = wissen;
-        this.isSaveNBT = false;
     }
 
-    public JewelerTableRecipe(ResourceLocation id, ItemStack output, int wissen, boolean isSaveNBT, Ingredient... inputs) {
-        this.id = id;
-        this.output = output;
-        this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
-        this.wissen = wissen;
+    public JewelerTableRecipe setIsSaveNBT(boolean isSaveNBT) {
         this.isSaveNBT = isSaveNBT;
+        return this;
     }
 
     @Override
@@ -67,20 +63,7 @@ public class JewelerTableRecipe implements Recipe<Container> {
         return output;
     }
 
-    @Nonnull
     @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return inputs;
-    }
-
-    public int getRecipeWissen() {
-        return wissen;
-    }
-
-    public boolean getRecipeIsSaveNBT() {
-        return isSaveNBT;
-    }
-
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.JEWELER_TABLE.get());
     }
@@ -91,8 +74,23 @@ public class JewelerTableRecipe implements Recipe<Container> {
     }
 
     @Override
+    public RecipeType<?> getType(){
+        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return WizardsRebornRecipes.JEWELER_TABLE_SERIALIZER.get();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public boolean isSpecial(){
+        return true;
     }
 
     public static class Serializer implements RecipeSerializer<JewelerTableRecipe> {
@@ -106,14 +104,13 @@ public class JewelerTableRecipe implements Recipe<Container> {
             for (JsonElement e : ingrs) {
                 inputs.add(Ingredient.fromJson(e));
             }
-            boolean isNBTCrystal = false;
             boolean isSaveNBT = false;
 
             if (json.has("saveNBT")) {
                 isSaveNBT = GsonHelper.getAsBoolean(json, "saveNBT");
             }
 
-            return new JewelerTableRecipe(recipeId, output, wissen, isSaveNBT, inputs.toArray(new Ingredient[0]));
+            return new JewelerTableRecipe(recipeId, output, wissen, inputs.toArray(new Ingredient[0])).setIsSaveNBT(isSaveNBT);
         }
 
         @Nullable
@@ -126,7 +123,7 @@ public class JewelerTableRecipe implements Recipe<Container> {
             ItemStack output = buffer.readItem();
             int wissen = buffer.readInt();
             boolean isSaveNBT = buffer.readBoolean();
-            return new JewelerTableRecipe(recipeId, output, wissen, isSaveNBT, inputs);
+            return new JewelerTableRecipe(recipeId, output, wissen, inputs).setIsSaveNBT(isSaveNBT);
         }
 
         @Override
@@ -136,19 +133,15 @@ public class JewelerTableRecipe implements Recipe<Container> {
                 input.toNetwork(buffer);
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buffer.writeInt(recipe.getRecipeWissen());
-            buffer.writeBoolean(recipe.getRecipeIsSaveNBT());
+            buffer.writeInt(recipe.getWissen());
+            buffer.writeBoolean(recipe.getIsSaveNBT());
         }
     }
 
+    @Nonnull
     @Override
-    public RecipeType<?> getType(){
-        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     @Override
@@ -156,8 +149,11 @@ public class JewelerTableRecipe implements Recipe<Container> {
         return output;
     }
 
-    @Override
-    public boolean isSpecial(){
-        return true;
+    public int getWissen() {
+        return wissen;
+    }
+
+    public boolean getIsSaveNBT() {
+        return isSaveNBT;
     }
 }

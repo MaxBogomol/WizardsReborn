@@ -93,7 +93,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
 
             if (!inv.isEmpty()) {
                 Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.JEWELER_TABLE.get(), inv, level);
-                wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
+                wissenInCraft = recipe.map(JewelerTableRecipe::getWissen).orElse(0);
 
                 ItemSkin skin = getSkin();
                 if (skin != null) wissenInCraft = 250;
@@ -141,7 +141,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
                                 startCraft = false;
 
                                 output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
-                                if (recipe.get().getRecipeIsSaveNBT()) {
+                                if (recipe.get().getIsSaveNBT()) {
                                     output.setTag(itemHandler.getStackInSlot(0).getOrCreateTag());
                                 }
 
@@ -515,11 +515,11 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
         inv.setItem(2, itemOutputHandler.getStackInSlot(0));
 
         Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.JEWELER_TABLE.get(), inv, level);
-        wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
+        wissenInCraft = recipe.map(JewelerTableRecipe::getWissen).orElse(0);
 
         if (recipe.isPresent() && wissenInCraft > 0) {
             ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-            if (recipe.get().getRecipeIsSaveNBT()) {
+            if (recipe.get().getIsSaveNBT()) {
                 stack.setTag(itemHandler.getStackInSlot(0).copy().getOrCreateTag());
             }
             list.add(stack);

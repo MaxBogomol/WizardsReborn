@@ -58,13 +58,13 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
 
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WissenAltarRecipe recipe, @NotNull IFocusGroup focusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 20, 20).addIngredients(recipe.getIngredientRecipe());
+        builder.addSlot(RecipeIngredientRole.INPUT, 20, 20).addIngredients(recipe.getInput());
     }
 
     @Override
     public void draw(@NotNull WissenAltarRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
-        String textWissen = Integer.toString(recipe.getRecipeWissen());
+        String textWissen = Integer.toString(recipe.getWissen());
         int stringWidth = font.width(textWissen);
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {

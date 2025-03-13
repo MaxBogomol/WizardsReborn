@@ -90,7 +90,7 @@ public class WissenCrystallizerRecipeCategory implements IRecipeCategory<WissenC
     @Override
     public void draw(@NotNull WissenCrystallizerRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
-        String textWissen = Integer.toString(recipe.getRecipeWissen());
+        String textWissen = Integer.toString(recipe.getWissen());
         int stringWidth = font.width(textWissen);
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {

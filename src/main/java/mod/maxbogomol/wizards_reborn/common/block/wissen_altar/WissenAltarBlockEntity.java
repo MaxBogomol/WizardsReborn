@@ -70,7 +70,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
             inv.setItem(0, container.getItem(2));
             if (!inv.isEmpty()) {
                 wissenInItem = 0;
-                wissenInItem = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level).map(WissenAltarRecipe::getRecipeWissen).orElse(0);
+                wissenInItem = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level).map(WissenAltarRecipe::getWissen).orElse(0);
 
                 if ((wissenInItem > 0) && (wissen < getMaxWissen())) {
                     int addRemainCraft = WissenUtil.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInItem);
@@ -185,7 +185,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
         if (index == 1) {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, stack);
-            int wissenInItem = getLevel().getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, getLevel()).map(WissenAltarRecipe::getRecipeWissen).orElse(0);
+            int wissenInItem = getLevel().getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, getLevel()).map(WissenAltarRecipe::getWissen).orElse(0);
             if (wissenInItem > 0) {
                 if (canPlaceItem(index, stack)) {
                     ItemStack existing = getItem(index);

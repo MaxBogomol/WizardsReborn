@@ -29,25 +29,60 @@ import java.util.Optional;
 
 public class AlchemyMachinePage extends RecipePage {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/alchemy_machine_page.png");
-    public ItemStack result;
+    public ItemStack result = ItemStack.EMPTY;
     public ItemStack[] inputs;
-    public FluidStack fluidInputs1;
-    public FluidStack fluidInputs2;
-    public FluidStack fluidInputs3;
-    public FluidStack fluidResult;
-    public boolean isWissen;
-    public boolean isSteam;
+    public FluidStack fluidInput1 = FluidStack.EMPTY;
+    public FluidStack fluidInput2 = FluidStack.EMPTY;
+    public FluidStack fluidInput3 = FluidStack.EMPTY;
+    public FluidStack fluidResult = FluidStack.EMPTY;
+    public boolean isWissen = false;
+    public boolean isSteam = false;
 
-    public AlchemyMachinePage(ItemStack result, FluidStack fluidResult, boolean isWissen, boolean isSteam, FluidStack fluidInputs1, FluidStack fluidInputs2, FluidStack fluidInputs3, ItemStack... inputs) {
+    public AlchemyMachinePage() {
         super(BACKGROUND);
+    }
+
+    public AlchemyMachinePage setResult(ItemStack result) {
         this.result = result;
+        return this;
+    }
+
+    public AlchemyMachinePage setInputs(ItemStack... inputs) {
         this.inputs = inputs;
+        return this;
+    }
+
+    public AlchemyMachinePage setFluidResult(FluidStack fluidResult) {
         this.fluidResult = fluidResult;
-        this.fluidInputs1 = fluidInputs1;
-        this.fluidInputs2 = fluidInputs2;
-        this.fluidInputs3 = fluidInputs3;
+        return this;
+    }
+
+    public AlchemyMachinePage setFluidInputs(FluidStack fluidInput1, FluidStack fluidInput2, FluidStack fluidInput3) {
+        this.fluidInput1 = fluidInput1;
+        this.fluidInput2 = fluidInput2;
+        this.fluidInput3 = fluidInput3;
+        return this;
+    }
+
+    public AlchemyMachinePage setFluidInputs(FluidStack fluidInput1, FluidStack fluidInput2) {
+        this.fluidInput1 = fluidInput1;
+        this.fluidInput2 = fluidInput2;
+        return this;
+    }
+
+    public AlchemyMachinePage setFluidInputs(FluidStack fluidInput1) {
+        this.fluidInput1 = fluidInput1;
+        return this;
+    }
+
+    public AlchemyMachinePage setIsWissen(boolean isWissen) {
         this.isWissen = isWissen;
+        return this;
+    }
+
+    public AlchemyMachinePage setIsSteam(boolean isSteam) {
         this.isSteam = isSteam;
+        return this;
     }
 
     @Override
@@ -65,51 +100,51 @@ public class AlchemyMachinePage extends RecipePage {
             drawItem(book, gui, result, x + 34, y + 128, mouseX, mouseY);
         }
 
-        if (!fluidInputs1.isEmpty()) {
-            drawItem(book, gui, fluidInputs1.getFluid().getBucket().asItem().getDefaultInstance(), x + 38, y + 55, mouseX, mouseY);
+        if (!fluidInput1.isEmpty()) {
+            drawItem(book, gui, fluidInput1.getFluid().getBucket().asItem().getDefaultInstance(), x + 38, y + 55, mouseX, mouseY);
 
             int width = 32;
-            width /= (double) 5000 / (double) fluidInputs1.getAmount();
+            width /= (int) ((double) 5000 / (double) fluidInput1.getAmount());
             gui.blit(BACKGROUND, x + 38 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 38 + 4 && mouseY >= y + 76 && mouseX <= x + 38 + 4 + 8 && mouseY <= y + 76 + 32) {
-                Component component = NumericalUtil.getFluidName(fluidInputs1, 5000);
+                Component component = NumericalUtil.getFluidName(fluidInput1, 5000);
                 if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
-                    component = NumericalUtil.getFluidName(fluidInputs1);
+                    component = NumericalUtil.getFluidName(fluidInput1);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
         } else {
             gui.blit(BACKGROUND, x + 38, y + 76 + 8, 136, 0, 16, 16, 256, 256);
         }
-        if (!fluidInputs2.isEmpty()) {
-            drawItem(book, gui, fluidInputs2.getFluid().getBucket().asItem().getDefaultInstance(), x + 56, y + 55, mouseX, mouseY);
+        if (!fluidInput2.isEmpty()) {
+            drawItem(book, gui, fluidInput2.getFluid().getBucket().asItem().getDefaultInstance(), x + 56, y + 55, mouseX, mouseY);
 
             int width = 32;
-            width /= (double) 5000 / (double) fluidInputs2.getAmount();
+            width /= (int) ((double) 5000 / (double) fluidInput2.getAmount());
             gui.blit(BACKGROUND, x + 56 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 56 + 4 && mouseY >= y + 76 && mouseX <= x + 56 + 4 + 8 && mouseY <= y + 76 + 32) {
-                Component component = NumericalUtil.getFluidName(fluidInputs2, 5000);
+                Component component = NumericalUtil.getFluidName(fluidInput2, 5000);
                 if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
-                    component = NumericalUtil.getFluidName(fluidInputs2);
+                    component = NumericalUtil.getFluidName(fluidInput2);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
         } else {
             gui.blit(BACKGROUND, x + 56, y + 76 + 8, 136, 0, 16, 16, 256, 256);
         }
-        if (!fluidInputs3.isEmpty()) {
-            drawItem(book, gui, fluidInputs3.getFluid().getBucket().asItem().getDefaultInstance(), x + 74, y + 55, mouseX, mouseY);
+        if (!fluidInput3.isEmpty()) {
+            drawItem(book, gui, fluidInput3.getFluid().getBucket().asItem().getDefaultInstance(), x + 74, y + 55, mouseX, mouseY);
 
             int width = 32;
-            width /= (double) 5000 / (double) fluidInputs3.getAmount();
+            width /= (int) ((double) 5000 / (double) fluidInput3.getAmount());
             gui.blit(BACKGROUND, x + 74 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 74 + 4 && mouseY >= y + 76 && mouseX <= x + 74 + 4 + 8 && mouseY <= y + 76 + 32) {
-                Component component = NumericalUtil.getFluidName(fluidInputs3, 5000);
+                Component component = NumericalUtil.getFluidName(fluidInput3, 5000);
                 if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
-                    component = NumericalUtil.getFluidName(fluidInputs3);
+                    component = NumericalUtil.getFluidName(fluidInput3);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
@@ -121,7 +156,7 @@ public class AlchemyMachinePage extends RecipePage {
             drawItem(book, gui, fluidResult.getFluid().getBucket().asItem().getDefaultInstance(), x + 75, y + 128, mouseX, mouseY);
 
             int width = 32;
-            width /= (double) 5000 / (double) fluidResult.getAmount();
+            width /= (int) ((double) 5000 / (double) fluidResult.getAmount());
             gui.blit(BACKGROUND, x + 60, y + 120 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 60 && mouseY >= y + 120 && mouseX <= x + 60 + 8 && mouseY <= y + 120 + 32) {
@@ -164,9 +199,9 @@ public class AlchemyMachinePage extends RecipePage {
                 inv.setItem(i, inputs[i]);
             }
             inv.setItem(6, ItemStack.EMPTY);
-            fluidTank1.setFluid(fluidInputs1);
-            fluidTank2.setFluid(fluidInputs2);
-            fluidTank3.setFluid(fluidInputs3);
+            fluidTank1.setFluid(fluidInput1);
+            fluidTank2.setFluid(fluidInput2);
+            fluidTank3.setFluid(fluidInput3);
             AlchemyMachineContext context = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
 
             List<ItemStack> list = new ArrayList<>();
@@ -195,16 +230,16 @@ public class AlchemyMachinePage extends RecipePage {
 
                 for (int i = 0; i < recipe.get().getFluidIngredients().size(); i++) {
                     for (FluidStack fluidStack : recipe.get().getFluidIngredients().get(i).getFluids()) {
-                        if (fluidInputs1.isFluidEqual(fluidStack) & !ft1) ft1 = true;
-                        if (fluidInputs2.isFluidEqual(fluidStack) & !ft2) ft2 = true;
-                        if (fluidInputs3.isFluidEqual(fluidStack) & !ft3) ft3 = true;
+                        if (fluidInput1.isFluidEqual(fluidStack) & !ft1) ft1 = true;
+                        if (fluidInput2.isFluidEqual(fluidStack) & !ft2) ft2 = true;
+                        if (fluidInput3.isFluidEqual(fluidStack) & !ft3) ft3 = true;
 
                     }
                 }
 
-                if (!ft1 && !fluidInputs1.isEmpty()) return true;
-                if (!ft2 && !fluidInputs2.isEmpty()) return true;
-                if (!ft3 && !fluidInputs3.isEmpty()) return true;
+                if (!ft1 && !fluidInput1.isEmpty()) return true;
+                if (!ft2 && !fluidInput2.isEmpty()) return true;
+                if (!ft3 && !fluidInput3.isEmpty()) return true;
 
                 if (!fluidResult.isFluidEqual(recipe.get().getResultFluid())) return true;
             } else {
@@ -220,12 +255,12 @@ public class AlchemyMachinePage extends RecipePage {
     public ItemStack getAlchemyBottle() {
         ItemStack stack = ItemStack.EMPTY;
 
-        for (int i = 0; i < inputs.length; i++) {
-            if (inputs[i].getItem() instanceof AlchemyBottleItem item) {
+        for (ItemStack input : inputs) {
+            if (input.getItem() instanceof AlchemyBottleItem item) {
                 stack = item.getPotionItem();
             }
-            if (inputs[i].getItem() instanceof AlchemyPotionItem item) {
-                stack = inputs[i].copy();
+            if (input.getItem() instanceof AlchemyPotionItem item) {
+                stack = input.copy();
             }
         }
 

@@ -26,28 +26,27 @@ import java.util.List;
 public class WissenCrystallizerRecipe implements Recipe<Container> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "wissen_crystallizer");
     private final ResourceLocation id;
-    private final ItemStack output;
     private final NonNullList<Ingredient> inputs;
+    private final ItemStack output;
     private final int wissen;
-    private final boolean isNBTCrystal;
-    private final boolean isSaveNBT;
+    private boolean isNBTCrystal = false;
+    private boolean isSaveNBT = false;
 
     public WissenCrystallizerRecipe(ResourceLocation id, ItemStack output, int wissen, Ingredient... inputs) {
         this.id = id;
         this.output = output;
         this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
         this.wissen = wissen;
-        this.isNBTCrystal = false;
-        this.isSaveNBT = false;
     }
 
-    public WissenCrystallizerRecipe(ResourceLocation id, ItemStack output, int wissen, boolean isNBTCrystal, boolean isSaveNBT, Ingredient... inputs) {
-        this.id = id;
-        this.output = output;
-        this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
-        this.wissen = wissen;
+    public WissenCrystallizerRecipe setIsNBTCrystal(boolean isNBTCrystal) {
         this.isNBTCrystal = isNBTCrystal;
+        return this;
+    }
+
+    public WissenCrystallizerRecipe setIsSaveNBT(boolean isSaveNBT) {
         this.isSaveNBT = isSaveNBT;
+        return this;
     }
 
     @Override
@@ -98,24 +97,7 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
         return output;
     }
 
-    @Nonnull
     @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return inputs;
-    }
-
-    public int getRecipeWissen() {
-        return wissen;
-    }
-
-    public boolean getRecipeIsNBTCrystal() {
-        return isNBTCrystal;
-    }
-
-    public boolean getRecipeIsSaveNBT() {
-        return isSaveNBT;
-    }
-
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.WISSEN_CRYSTALLIZER.get());
     }
@@ -126,8 +108,23 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
     }
 
     @Override
+    public RecipeType<?> getType(){
+        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return WizardsRebornRecipes.WISSEN_CRYSTALLIZER_SERIALIZER.get();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public boolean isSpecial(){
+        return true;
     }
 
     public static class Serializer implements RecipeSerializer<WissenCrystallizerRecipe> {
@@ -155,7 +152,7 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
                 tag.putString("SkullOwner", json.get("SkullOwner").getAsString());
             }
 
-            return new WissenCrystallizerRecipe(recipeId, output, wissen, isNBTCrystal, isSaveNBT, inputs.toArray(new Ingredient[0]));
+            return new WissenCrystallizerRecipe(recipeId, output, wissen, inputs.toArray(new Ingredient[0])).setIsNBTCrystal(isNBTCrystal).setIsSaveNBT(isSaveNBT);
         }
 
         @Nullable
@@ -169,7 +166,7 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
             int wissen = buffer.readInt();
             boolean isNBTCrystal = buffer.readBoolean();
             boolean isSaveNBT = buffer.readBoolean();
-            return new WissenCrystallizerRecipe(recipeId, output, wissen, isNBTCrystal, isSaveNBT, inputs);
+            return new WissenCrystallizerRecipe(recipeId, output, wissen, inputs).setIsNBTCrystal(isNBTCrystal).setIsSaveNBT(isSaveNBT);
         }
 
         @Override
@@ -179,20 +176,16 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
                 input.toNetwork(buffer);
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buffer.writeInt(recipe.getRecipeWissen());
-            buffer.writeBoolean(recipe.getRecipeIsNBTCrystal());
-            buffer.writeBoolean(recipe.getRecipeIsSaveNBT());
+            buffer.writeInt(recipe.getWissen());
+            buffer.writeBoolean(recipe.getIsNBTCrystal());
+            buffer.writeBoolean(recipe.getIsSaveNBT());
         }
     }
 
+    @Nonnull
     @Override
-    public RecipeType<?> getType(){
-        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     @Override
@@ -200,8 +193,15 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
         return output;
     }
 
-    @Override
-    public boolean isSpecial(){
-        return true;
+    public int getWissen() {
+        return wissen;
+    }
+
+    public boolean getIsNBTCrystal() {
+        return isNBTCrystal;
+    }
+
+    public boolean getIsSaveNBT() {
+        return isSaveNBT;
     }
 }

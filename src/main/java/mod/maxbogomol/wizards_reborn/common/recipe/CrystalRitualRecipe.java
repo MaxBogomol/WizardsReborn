@@ -30,8 +30,8 @@ import java.util.List;
 public class CrystalRitualRecipe implements Recipe<Container> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "crystal_ritual");
     private final ResourceLocation id;
-    private final CrystalRitual ritual;
     private final NonNullList<Ingredient> inputs;
+    private final CrystalRitual ritual;
 
     public CrystalRitualRecipe(ResourceLocation id, CrystalRitual ritual, Ingredient... inputs) {
         this.id = id;
@@ -78,16 +78,6 @@ public class CrystalRitualRecipe implements Recipe<Container> {
         return ItemStack.EMPTY;
     }
 
-    @Nonnull
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return inputs;
-    }
-
-    public CrystalRitual getRecipeRitual() {
-        return ritual;
-    }
-
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.RUNIC_PEDESTAL.get());
     }
@@ -98,8 +88,23 @@ public class CrystalRitualRecipe implements Recipe<Container> {
     }
 
     @Override
+    public RecipeType<?> getType(){
+        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return WizardsRebornRecipes.CRYSTAL_RITUAL_SERIALIZER.get();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public boolean isSpecial(){
+        return true;
     }
 
     public static class Serializer implements RecipeSerializer<CrystalRitualRecipe> {
@@ -134,18 +139,14 @@ public class CrystalRitualRecipe implements Recipe<Container> {
             for (Ingredient input : recipe.getIngredients()) {
                 input.toNetwork(buffer);
             }
-            CrystalRitualUtil.crystalRitualToNetwork(recipe.getRecipeRitual(), buffer);
+            CrystalRitualUtil.crystalRitualToNetwork(recipe.getRitual(), buffer);
         }
     }
 
+    @Nonnull
     @Override
-    public RecipeType<?> getType(){
-        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     @Override
@@ -153,8 +154,7 @@ public class CrystalRitualRecipe implements Recipe<Container> {
         return ItemStack.EMPTY;
     }
 
-    @Override
-    public boolean isSpecial(){
-        return true;
+    public CrystalRitual getRitual() {
+        return ritual;
     }
 }

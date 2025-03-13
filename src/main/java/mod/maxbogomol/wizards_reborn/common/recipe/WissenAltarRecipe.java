@@ -22,18 +22,18 @@ import javax.annotation.Nullable;
 public class WissenAltarRecipe implements Recipe<Container> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "wissen_altar");
     private final ResourceLocation id;
-    private final Ingredient recipeItem;
+    private final Ingredient input;
     private final int wissen;
 
-    public WissenAltarRecipe(ResourceLocation id, Ingredient recipeItem, int wissen) {
+    public WissenAltarRecipe(ResourceLocation id, Ingredient input, int wissen) {
         this.id = id;
-        this.recipeItem = recipeItem;
+        this.input = input;
         this.wissen = wissen;
     }
 
     @Override
     public boolean matches(Container container, Level level) {
-        return recipeItem.test(container.getItem(0));
+        return input.test(container.getItem(0));
     }
 
     @Override
@@ -41,14 +41,7 @@ public class WissenAltarRecipe implements Recipe<Container> {
         return ItemStack.EMPTY;
     }
 
-    public Ingredient getIngredientRecipe() {
-        return recipeItem;
-    }
-
-    public int getRecipeWissen() {
-        return wissen;
-    }
-
+    @Override
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.WISSEN_ALTAR.get());
     }
@@ -59,8 +52,23 @@ public class WissenAltarRecipe implements Recipe<Container> {
     }
 
     @Override
+    public RecipeType<?> getType(){
+        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return WizardsRebornRecipes.WISSEN_ALTAR_SERIALIZER.get();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public boolean isSpecial(){
+        return true;
     }
 
     public static class Serializer implements RecipeSerializer<WissenAltarRecipe> {
@@ -69,7 +77,6 @@ public class WissenAltarRecipe implements Recipe<Container> {
         public WissenAltarRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
             int wissen = GsonHelper.getAsInt(json, "wissen");
-
             return new WissenAltarRecipe(recipeId, input, wissen);
         }
 
@@ -83,19 +90,9 @@ public class WissenAltarRecipe implements Recipe<Container> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, WissenAltarRecipe recipe) {
-            recipe.getIngredientRecipe().toNetwork(buffer);
-            buffer.writeInt(recipe.getRecipeWissen());
+            recipe.getInput().toNetwork(buffer);
+            buffer.writeInt(recipe.getWissen());
         }
-    }
-
-    @Override
-    public RecipeType<?> getType(){
-        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
     }
 
     @Override
@@ -103,8 +100,12 @@ public class WissenAltarRecipe implements Recipe<Container> {
         return ItemStack.EMPTY;
     }
 
-    @Override
-    public boolean isSpecial(){
-        return true;
+    public Ingredient getInput() {
+        return input;
     }
+
+    public int getWissen() {
+        return wissen;
+    }
+
 }

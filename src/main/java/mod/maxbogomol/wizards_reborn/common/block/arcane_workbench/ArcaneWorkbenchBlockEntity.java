@@ -90,7 +90,7 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
 
             if (!inv.isEmpty()) {
                 Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANE_WORKBENCH.get(), inv, level);
-                wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
+                wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getWissen).orElse(0);
 
                 if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
                     wissenIsCraft = 0;
@@ -137,8 +137,8 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
                             startCraft = false;
 
                             CompoundTag tag = new CompoundTag();
-                            if (recipe.get().getRecipeSaveNBT() >= 0) {
-                                tag = itemHandler.getStackInSlot(recipe.get().getRecipeSaveNBT()).getOrCreateTag();
+                            if (recipe.get().getSaveNBT() >= 0) {
+                                tag = itemHandler.getStackInSlot(recipe.get().getSaveNBT()).getOrCreateTag();
                             }
                             output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
 
@@ -485,14 +485,14 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
         inv.setItem(13, itemOutputHandler.getStackInSlot(0));
 
         Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANE_WORKBENCH.get(), inv, level);
-        wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
+        wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getWissen).orElse(0);
 
         if (recipe.isPresent() && wissenInCraft > 0) {
             ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 
             CompoundTag tag = new CompoundTag();
-            if (recipe.get().getRecipeSaveNBT() >= 0) {
-                tag = itemHandler.getStackInSlot(recipe.get().getRecipeSaveNBT()).getOrCreateTag();
+            if (recipe.get().getSaveNBT() >= 0) {
+                tag = itemHandler.getStackInSlot(recipe.get().getSaveNBT()).getOrCreateTag();
             }
             stack.setTag(tag);
 
