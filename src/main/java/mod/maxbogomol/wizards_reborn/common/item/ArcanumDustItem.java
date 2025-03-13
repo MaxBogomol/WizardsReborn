@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.item.WissenDustBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
@@ -59,11 +58,11 @@ public class ArcanumDustItem extends ArcanumItem {
             Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager()
                     .getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, level);
 
-            AtomicBoolean place_block = new AtomicBoolean(true);
+            AtomicBoolean placeBlock = new AtomicBoolean(true);
             AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);
 
             recipe.ifPresent(iRecipe -> {
-                place_block.set(iRecipe.getPlaceBlock());
+                placeBlock.set(iRecipe.getPlaceBlock());
                 item.set(iRecipe.getResultItem(RegistryAccess.EMPTY).copy());
             });
 
@@ -72,7 +71,7 @@ public class ArcanumDustItem extends ArcanumItem {
             if (!(item.get().isEmpty())) {
                 if (item.get().getItem() instanceof BlockItem blockitem) {
                     level.destroyBlock(blockPos, false);
-                    if (place_block.get()) {
+                    if (placeBlock.get()) {
                         level.setBlockAndUpdate(blockPos, blockitem.getBlock().defaultBlockState());
                     } else {
                         level.addFreshEntity(new ItemEntity(level, blockPos.getX() + 0.5F, blockPos.getY() + 0.5F, blockPos.getZ() + 0.5F, item.get()));

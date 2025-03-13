@@ -18,10 +18,18 @@ import java.util.function.Supplier;
 public class WissenWandSetModePacket extends ServerPacket {
     protected final boolean hand;
     protected final int mode;
+    protected final boolean sound;
 
     public WissenWandSetModePacket(boolean hand, int mode) {
         this.hand = hand;
         this.mode = mode;
+        this.sound = true;
+    }
+
+    public WissenWandSetModePacket(boolean hand, int mode, boolean sound) {
+        this.hand = hand;
+        this.mode = mode;
+        this.sound = sound;
     }
 
     @Override
@@ -38,7 +46,7 @@ public class WissenWandSetModePacket extends ServerPacket {
         }
 
         player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-        player.serverLevel().playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
+        if (sound) player.serverLevel().playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
     }
 
     public static void register(SimpleChannel instance, int index) {
@@ -48,9 +56,10 @@ public class WissenWandSetModePacket extends ServerPacket {
     public void encode(FriendlyByteBuf buf) {
         buf.writeBoolean(hand);
         buf.writeInt(mode);
+        buf.writeBoolean(sound);
     }
 
     public static WissenWandSetModePacket decode(FriendlyByteBuf buf) {
-        return new WissenWandSetModePacket(buf.readBoolean(), buf.readInt());
+        return new WissenWandSetModePacket(buf.readBoolean(), buf.readInt(), buf.readBoolean());
     }
 }

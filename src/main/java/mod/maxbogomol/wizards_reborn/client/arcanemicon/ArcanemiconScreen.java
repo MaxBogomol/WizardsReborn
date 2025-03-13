@@ -4,6 +4,8 @@ import com.mojang.blaze3d.platform.InputConstants;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.item.ArcanemiconSoundPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -317,5 +319,11 @@ public class ArcanemiconScreen extends Screen {
         }
 
         return (super.keyPressed(keyCode, scanCode, modifiers));
+    }
+
+    @Override
+    public void onClose() {
+        super.onClose();
+        WizardsRebornPacketHandler.sendToServer(new ArcanemiconSoundPacket(isBLock ? blockPos.getCenter() : WizardsReborn.proxy.getPlayer().position()));
     }
 }

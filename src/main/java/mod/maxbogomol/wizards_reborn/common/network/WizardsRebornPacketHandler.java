@@ -24,6 +24,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
     public static void init() {
         int id = 0;
 
+        ArcanemiconSoundPacket.register(HANDLER, id++);
         ArcaneWandSetCrystalPacket.register(HANDLER, id++);
         ArcaneWandRemoveCrystalPacket.register(HANDLER, id++);
         ArcaneWandSpellSetPacket.register(HANDLER, id++);

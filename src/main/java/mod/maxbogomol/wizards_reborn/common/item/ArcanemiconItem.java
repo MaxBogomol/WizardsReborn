@@ -4,13 +4,13 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.item.ArcanemiconSoundPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -49,13 +49,13 @@ public class ArcanemiconItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     public void openGui(Level level, ItemStack stack) {
-        Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+        WizardsRebornPacketHandler.sendToServer(new ArcanemiconSoundPacket(WizardsReborn.proxy.getPlayer().position()));
         Minecraft.getInstance().setScreen(new ArcanemiconScreen());
     }
 
     @OnlyIn(Dist.CLIENT)
     public void openGui(Level level, Vec3 pos, ItemStack stack) {
-        Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+        WizardsRebornPacketHandler.sendToServer(new ArcanemiconSoundPacket(pos));
         ArcanemiconScreen gui = new ArcanemiconScreen();
         gui.blockPos = BlockPos.containing(pos);
         gui.isBLock = true;

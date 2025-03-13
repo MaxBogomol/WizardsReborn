@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,10 +27,18 @@ import java.util.function.Supplier;
 public class ArcaneWandSetCrystalPacket extends ServerPacket {
     protected final boolean hand;
     protected final ItemStack crystal;
+    protected final boolean sound;
 
     public ArcaneWandSetCrystalPacket(boolean hand, ItemStack crystal) {
         this.hand = hand;
         this.crystal = crystal;
+        this.sound = true;
+    }
+
+    public ArcaneWandSetCrystalPacket(boolean hand, ItemStack crystal, boolean sound) {
+        this.hand = hand;
+        this.crystal = crystal;
+        this.sound = sound;
     }
 
     @Override
@@ -118,6 +127,7 @@ public class ArcaneWandSetCrystalPacket extends ServerPacket {
         }
 
         if (sound) player.serverLevel().playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1f, 1f);
+        if (this.sound) player.serverLevel().playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
     }
 
     public static void register(SimpleChannel instance, int index) {
@@ -127,9 +137,10 @@ public class ArcaneWandSetCrystalPacket extends ServerPacket {
     public void encode(FriendlyByteBuf buf) {
         buf.writeBoolean(hand);
         buf.writeItem(crystal);
+        buf.writeBoolean(sound);
     }
 
     public static ArcaneWandSetCrystalPacket decode(FriendlyByteBuf buf) {
-        return new ArcaneWandSetCrystalPacket(buf.readBoolean(), buf.readItem());
+        return new ArcaneWandSetCrystalPacket(buf.readBoolean(), buf.readItem(), buf.readBoolean());
     }
 }

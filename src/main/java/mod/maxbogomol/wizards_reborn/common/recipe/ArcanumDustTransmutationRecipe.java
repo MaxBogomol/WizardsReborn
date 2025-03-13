@@ -22,7 +22,7 @@ public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
     private final Ingredient input;
     private final ItemStack output;
     private ItemStack display = ItemStack.EMPTY;
-    private boolean placeBlock = false;
+    private boolean placeBlock = true;
 
     public ArcanumDustTransmutationRecipe(ResourceLocation id, Ingredient input, ItemStack output) {
         this.id = id;
