@@ -82,11 +82,11 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
                 IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.INPUT, 15 + x, 30 + y);
 
                 for (ItemStack stack : items) {
-                    if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
+                    if (!AlchemyPotionUtil.isEmpty(recipe.getAlchemyPotionIngredient())) {
                         if (stack.getItem() instanceof AlchemyPotionItem item) {
                             setIngr = false;
                             ItemStack bottle = stack.copy();
-                            AlchemyPotionUtil.setPotion(bottle, recipe.getRecipeAlchemyPotionIngredient());
+                            AlchemyPotionUtil.setPotion(bottle, recipe.getAlchemyPotionIngredient());
                             slot.addItemStack(bottle);
                             alchemyPotion = slot;
                         }
@@ -108,21 +108,21 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
         }
 
         y = 0;
-        for (FluidIngredient o : recipe.getFluidIngredients()) {
+        for (FluidIngredient o : recipe.getFluidInputs()) {
             builder.addSlot(RecipeIngredientRole.CATALYST, 55, 30 + y)
                     .setFluidRenderer(o.getFluids().get(0).getAmount(), false, 16, 16)
                     .addIngredients(ForgeTypes.FLUID_STACK, o.getFluids());
             y = y + 18;
         }
 
-        if (!recipe.getResultFluid().isEmpty()) {
+        if (!recipe.getFluidResult().isEmpty()) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 29)
-                    .setFluidRenderer(recipe.getResultFluid().getAmount(), false, 16, 16)
-                    .addIngredient(ForgeTypes.FLUID_STACK, recipe.getResultFluid());
+                    .setFluidRenderer(recipe.getFluidResult().getAmount(), false, 16, 16)
+                    .addIngredient(ForgeTypes.FLUID_STACK, recipe.getFluidResult());
         }
 
-        if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotion())) {
-            IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStacks(getPotionItems(recipe.getRecipeAlchemyPotion()));
+        if (!AlchemyPotionUtil.isEmpty(recipe.getAlchemyPotion())) {
+            IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStacks(getPotionItems(recipe.getAlchemyPotion()));
             if (alchemyPotion != null) builder.createFocusLink(alchemyPotion, output);
         } else {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
@@ -132,8 +132,8 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
     @Override
     public void draw(@NotNull AlchemyMachineRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
-        if (recipe.getRecipeWissen() > 0 && WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
-            String textWissen = Integer.toString(recipe.getRecipeWissen());
+        if (recipe.getWissen() > 0 && WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
+            String textWissen = Integer.toString(recipe.getWissen());
             int stringWidth = font.width(textWissen);
 
             gui.drawString(font, textWissen, 122 - (stringWidth / 2) + 1, 95, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
@@ -145,8 +145,8 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
             gui.blit(TEXTURE, 116, 68, 176, 8, 16, 16, 256, 256);
         }
 
-        if (recipe.getRecipeSteam() > 0 && WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
-            String textSteam = Integer.toString(recipe.getRecipeSteam());
+        if (recipe.getSteam() > 0 && WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
+            String textSteam = Integer.toString(recipe.getSteam());
             int stringWidth = font.width(textSteam);
 
             gui.drawString(font, textSteam, 122 - (stringWidth / 2) + 1, 15, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
@@ -159,23 +159,23 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
         }
 
         int y = 0;
-        for (FluidIngredient o : recipe.getFluidIngredients()) {
+        for (FluidIngredient o : recipe.getFluidInputs()) {
             int width = 32;
-            width /= (double) 5000 / (double) o.getFluids().get(0).getAmount();
+            width /= (int) ((double) 5000 / (double) o.getFluids().get(0).getAmount());
             gui.blit(TEXTURE, 76, 34 + y, 176, 0, width, 8, 256, 256);
 
             y = y + 18;
         }
 
         for (int i = 0; i < 3; i ++) {
-            if (i + 1 > recipe.getFluidIngredients().size()) {
+            if (i + 1 > recipe.getFluidInputs().size()) {
                 gui.blit(TEXTURE, 84, 30 + (i * 18), 176, 8, 16, 16, 256, 256);
             }
         }
 
-        if (!recipe.getResultFluid().isEmpty()) {
+        if (!recipe.getFluidResult().isEmpty()) {
             int width = 32;
-            width /= (double) 5000 / (double) recipe.getResultFluid().getAmount();
+            width /= (int) ((double) 5000 / (double) recipe.getFluidResult().getAmount());
             gui.blit(TEXTURE, 136, 52, 176, 0, width, 8, 256, 256);
         } else {
             gui.blit(TEXTURE, 144, 48, 176, 8, 16, 16, 256, 256);

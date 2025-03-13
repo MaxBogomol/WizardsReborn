@@ -132,8 +132,8 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                 if (!inv.isEmpty()) {
                     AlchemyMachineContext context = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
                     Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ALCHEMY_MACHINE.get(), context, level);
-                    wissenInCraft = recipe.map(AlchemyMachineRecipe::getRecipeWissen).orElse(0);
-                    steamInCraft = recipe.map(AlchemyMachineRecipe::getRecipeSteam).orElse(0);
+                    wissenInCraft = recipe.map(AlchemyMachineRecipe::getWissen).orElse(0);
+                    steamInCraft = recipe.map(AlchemyMachineRecipe::getSteam).orElse(0);
 
                     if ((wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) && (steamInCraft <= 0 && (steamIsCraft > 0 || startCraft))) {
                         wissenIsCraft = 0;
@@ -144,8 +144,8 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                     }
 
                     if (recipe.isPresent()) {
-                        int filled = boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.SIMULATE);
-                        boolean isCanFluid = filled == recipe.get().getResultFluid().getAmount();
+                        int filled = boiler.getTank().fill(recipe.get().getFluidResult(), IFluidHandler.FluidAction.SIMULATE);
+                        boolean isCanFluid = filled == recipe.get().getFluidResult().getAmount();
                         if (startCraft) {
                             ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
@@ -199,9 +199,9 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                                     startCraft = false;
 
                                     output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
-                                    if (!AlchemyPotionUtil.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                                    if (!AlchemyPotionUtil.isEmpty(recipe.get().getAlchemyPotion())) {
                                         output = getAlchemyBottle();
-                                        AlchemyPotionUtil.setPotion(output, recipe.get().getRecipeAlchemyPotion());
+                                        AlchemyPotionUtil.setPotion(output, recipe.get().getAlchemyPotion());
                                     }
 
                                     itemOutputHandler.setStackInSlot(0, output);
@@ -218,8 +218,8 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                                     boolean ft2 = false;
                                     boolean ft3 = false;
 
-                                    for (int i = 0; i < recipe.get().getFluidIngredients().size(); i++) {
-                                        for (FluidStack fluidStack : recipe.get().getFluidIngredients().get(i).getFluids()) {
+                                    for (int i = 0; i < recipe.get().getFluidInputs().size(); i++) {
+                                        for (FluidStack fluidStack : recipe.get().getFluidInputs().get(i).getFluids()) {
                                             if (fluidTank1.getFluid().isFluidEqual(fluidStack) & !ft1) {
                                                 FluidStack extracted = fluidTank1.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
                                                 fluidTank1.drain(extracted, IFluidHandler.FluidAction.EXECUTE);
@@ -240,9 +240,9 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                                         }
                                     }
 
-                                    if (!recipe.get().getResultFluid().isEmpty()) {
-                                        if (boiler.getTank().getFluid().isFluidEqual(recipe.get().getResultFluid()) || boiler.getTank().isEmpty()) {
-                                            boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.EXECUTE);
+                                    if (!recipe.get().getFluidResult().isEmpty()) {
+                                        if (boiler.getTank().getFluid().isFluidEqual(recipe.get().getFluidResult()) || boiler.getTank().isEmpty()) {
+                                            boiler.getTank().fill(recipe.get().getFluidResult(), IFluidHandler.FluidAction.EXECUTE);
                                         }
                                     }
 
@@ -480,10 +480,10 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     }
 
     public boolean isCanCraft(SimpleContainer inv, ItemStack output, AlchemyMachineRecipe recipe, boolean isCanFluid) {
-        if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
+        if (!AlchemyPotionUtil.isEmpty(recipe.getAlchemyPotionIngredient())) {
             ItemStack bottle = getAlchemyBottle();
             if (bottle.getItem() instanceof AlchemyPotionItem item) {
-                if (AlchemyPotionUtil.getPotion(bottle) != recipe.getRecipeAlchemyPotionIngredient()) {
+                if (AlchemyPotionUtil.getPotion(bottle) != recipe.getAlchemyPotionIngredient()) {
                     return false;
                 }
             } else {
@@ -491,7 +491,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             }
         }
 
-        if (recipe.getFluidIngredients().size() <= 0) {
+        if (recipe.getFluidInputs().size() <= 0) {
             for (int i = 0; i < 3; i++) {
                 if (!getTank(i).isEmpty()) {
                     return false;
@@ -499,21 +499,21 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             }
         }
 
-        if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotion())) {
+        if (!AlchemyPotionUtil.isEmpty(recipe.getAlchemyPotion())) {
             return true;
         }
 
-        if (!recipe.getResultFluid().isEmpty()) {
+        if (!recipe.getFluidInputs().isEmpty()) {
             return isCanFluid;
         }
 
-        if (!recipe.getResultFluid().isEmpty() && !recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
+        if (!recipe.getFluidInputs().isEmpty() && !recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
             if (isCanFluid) {
                 return isCanCraftItem(inv, output);
             }
         }
 
-        if (!recipe.getResultFluid().isEmpty()) {
+        if (!recipe.getFluidInputs().isEmpty()) {
             return isCanFluid;
         }
 
@@ -545,22 +545,22 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 
             if (level.getBlockEntity(getBlockPos().above()) instanceof AlchemyBoilerBlockEntity boiler) {
-                int filled = boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.SIMULATE);
-                boolean isCanFluid = filled == recipe.get().getResultFluid().getAmount();
+                int filled = boiler.getTank().fill(recipe.get().getFluidResult(), IFluidHandler.FluidAction.SIMULATE);
+                boolean isCanFluid = filled == recipe.get().getFluidResult().getAmount();
 
                 if (isCanCraft(inv, stack, recipe.get(), isCanFluid)) {
                     if (!stack.isEmpty()) {
                         list.add(stack);
                     } else {
-                        if (!AlchemyPotionUtil.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                        if (!AlchemyPotionUtil.isEmpty(recipe.get().getAlchemyPotion())) {
                             ItemStack bottle = getAlchemyBottle();
-                            AlchemyPotionUtil.setPotion(bottle, recipe.get().getRecipeAlchemyPotion());
+                            AlchemyPotionUtil.setPotion(bottle, recipe.get().getAlchemyPotion());
                             list.add(bottle);
                         }
                     }
 
-                    if (!recipe.get().getResultFluid().isEmpty()) {
-                        list.add(recipe.get().getResultFluid().getFluid().getBucket().getDefaultInstance().copy());
+                    if (!recipe.get().getFluidResult().isEmpty()) {
+                        list.add(recipe.get().getFluidResult().getFluid().getBucket().getDefaultInstance().copy());
                     }
                 }
             }

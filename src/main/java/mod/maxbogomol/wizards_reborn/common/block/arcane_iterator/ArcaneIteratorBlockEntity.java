@@ -106,9 +106,9 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
 
                 if (!inv.isEmpty()) {
                     Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANE_ITERATOR.get(), inv, level);
-                    wissenInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeWissen).orElse(0);
-                    experienceInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeExperience).orElse(0);
-                    healthInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeHealth).orElse(0);
+                    wissenInCraft = recipe.map(ArcaneIteratorRecipe::getWissen).orElse(0);
+                    experienceInCraft = recipe.map(ArcaneIteratorRecipe::getExperience).orElse(0);
+                    healthInCraft = recipe.map(ArcaneIteratorRecipe::getHealth).orElse(0);
 
                     boolean canCraft = canCraft(recipe);
 
@@ -181,15 +181,15 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                             CompoundTag tagPos = new CompoundTag();
                             ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
                             if (!stack.isEmpty()) {
-                                if (recipe.get().getRecipeIsSaveNBT()) {
+                                if (recipe.get().getIsSaveNBT()) {
                                     stack.setTag(items.get(0).getOrCreateTag());
                                 }
                             } else {
                                 stack = getMainPedestal().getItem(0).copy();
                             }
 
-                            if (recipe.get().hasRecipeEnchantment()) {
-                                Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                            if (recipe.get().hasEnchantment()) {
+                                Enchantment enchantment = recipe.get().getEnchantment();
                                 if (canEnchant(stack, enchantment)) {
                                     enchant(stack, enchantment);
                                 }
@@ -205,13 +205,13 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                 }
                             }
 
-                            if (recipe.get().hasRecipeArcaneEnchantment()) {
-                                ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
+                            if (recipe.get().hasArcaneEnchantment()) {
+                                ArcaneEnchantment enchantment = recipe.get().getArcaneEnchantment();
                                 ArcaneEnchantmentUtil.addItemArcaneEnchantment(stack, enchantment);
                             }
 
-                            if (recipe.get().hasRecipeCrystalRitual()) {
-                                CrystalRitual crystalRitual = recipe.get().getRecipeCrystalRitual();
+                            if (recipe.get().hasCrystalRitual()) {
+                                CrystalRitual crystalRitual = recipe.get().getCrystalRitual();
                                 CrystalRitualUtil.setCrystalRitual(stack, crystalRitual);
                             }
 
@@ -734,33 +734,33 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
             if (recipe.isPresent()) {
                 if (!recipe.get().getResultItem(RegistryAccess.EMPTY).isEmpty()) {
                     ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-                    if (recipe.get().getRecipeIsSaveNBT()) {
+                    if (recipe.get().getIsSaveNBT()) {
                         stack.setTag(items.get(0).copy().getOrCreateTag());
                     }
-                    if (recipe.get().hasRecipeEnchantment()) {
-                        Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                    if (recipe.get().hasEnchantment()) {
+                        Enchantment enchantment = recipe.get().getEnchantment();
                         if (canEnchant(stack, enchantment)) {
                             enchant(stack, enchantment);
                         }
                     }
-                    if (recipe.get().hasRecipeArcaneEnchantment()) {
-                        ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
+                    if (recipe.get().hasArcaneEnchantment()) {
+                        ArcaneEnchantment enchantment = recipe.get().getArcaneEnchantment();
                         if (ArcaneEnchantmentUtil.canAddItemArcaneEnchantment(stack, enchantment)) {
                             ArcaneEnchantmentUtil.addItemArcaneEnchantment(stack, enchantment);
                         }
                     }
-                    if (recipe.get().hasRecipeCrystalRitual()) {
-                        CrystalRitual crystalRitual = recipe.get().getRecipeCrystalRitual();
+                    if (recipe.get().hasCrystalRitual()) {
+                        CrystalRitual crystalRitual = recipe.get().getCrystalRitual();
                         CrystalRitualUtil.setCrystalRitual(stack, crystalRitual);
                     }
                     list.add(stack);
                 } else {
                     ArcanePedestalBlockEntity pedestal = getMainPedestal();
-                    if (!pedestal.getItemHandler().getItem(0).isEmpty() && (recipe.get().hasRecipeEnchantment() || recipe.get().hasRecipeArcaneEnchantment())) {
+                    if (!pedestal.getItemHandler().getItem(0).isEmpty() && (recipe.get().hasEnchantment() || recipe.get().hasArcaneEnchantment())) {
                         ItemStack stack = pedestal.getItemHandler().getItem(0).copy();
                         boolean canEnchant = false;
-                        if (recipe.get().hasRecipeEnchantment()) {
-                            Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                        if (recipe.get().hasEnchantment()) {
+                            Enchantment enchantment = recipe.get().getEnchantment();
                             if (canEnchant(stack, enchantment)) {
                                 canEnchant = true;
                                 enchant(stack, enchantment);
@@ -779,8 +779,8 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                 }
                             }
                         }
-                        if (recipe.get().hasRecipeArcaneEnchantment()) {
-                            ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
+                        if (recipe.get().hasArcaneEnchantment()) {
+                            ArcaneEnchantment enchantment = recipe.get().getArcaneEnchantment();
                             if (ArcaneEnchantmentUtil.canAddItemArcaneEnchantment(stack, enchantment)) {
                                 canEnchant = true;
                                 ArcaneEnchantmentUtil.addItemArcaneEnchantment(stack, enchantment);

@@ -33,31 +33,63 @@ import java.util.List;
 public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "alchemy_machine");
     private final ResourceLocation id;
-    private final ItemStack output;
-    private final FluidStack fluidOutput;
-    private final NonNullList<Ingredient> inputs;
-    private final NonNullList<FluidIngredient> fluidInputs;
-    private final int wissen;
-    private final int steam;
-    private final AlchemyPotion alchemyPotion;
-    private final AlchemyPotion alchemyPotionIngredient;
+    private NonNullList<Ingredient> inputs = NonNullList.create();
+    private NonNullList<FluidIngredient> fluidInputs = NonNullList.create();
+    private ItemStack output = ItemStack.EMPTY;
+    private FluidStack fluidOutput = FluidStack.EMPTY;
+    private int wissen = 0;
+    private int steam = 0;
+    private AlchemyPotion alchemyPotion = null;
+    private AlchemyPotion alchemyPotionIngredient = null;
 
-    public AlchemyMachineRecipe(ResourceLocation id, ItemStack output, FluidStack fluidOutput, AlchemyPotion alchemyPotion, int wissen, int steam, NonNullList<Ingredient> inputs, NonNullList<FluidIngredient> fluidInputs, AlchemyPotion alchemyPotionIngredient) {
+    public AlchemyMachineRecipe(ResourceLocation id) {
         this.id = id;
+    }
+
+    public AlchemyMachineRecipe setOutput(ItemStack output) {
         this.output = output;
+        return this;
+    }
+
+    public AlchemyMachineRecipe setFluidOutput(FluidStack fluidOutput) {
         this.fluidOutput = fluidOutput;
+        return this;
+    }
+
+    public AlchemyMachineRecipe setInputs(NonNullList<Ingredient> inputs) {
         this.inputs = inputs;
+        return this;
+    }
+
+    public AlchemyMachineRecipe setFluidInputs(NonNullList<FluidIngredient> fluidInputs) {
         this.fluidInputs = fluidInputs;
+        return this;
+    }
+
+    public AlchemyMachineRecipe setWissen(int wissen) {
         this.wissen = wissen;
+        return this;
+    }
+
+    public AlchemyMachineRecipe setSteam(int steam) {
         this.steam = steam;
+        return this;
+    }
+
+    public AlchemyMachineRecipe setAlchemyPotion(AlchemyPotion alchemyPotion) {
         this.alchemyPotion = alchemyPotion;
+        return this;
+    }
+
+    public AlchemyMachineRecipe setAlchemyPotionIngredient(AlchemyPotion alchemyPotionIngredient) {
         this.alchemyPotionIngredient = alchemyPotionIngredient;
+        return this;
     }
 
     @Override
     public boolean matches(AlchemyMachineContext context, Level level) {
         if (matches(inputs, context.container)) {
-            if (fluidInputs.size() > 0) {
+            if (!fluidInputs.isEmpty()) {
                 return fluidMatches(context, level);
             } else {
                 return true;
@@ -125,31 +157,6 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         return output;
     }
 
-    @Nonnull
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return inputs;
-    }
-
-    public NonNullList<FluidIngredient> getFluidIngredients() {
-        return fluidInputs;
-    }
-
-    public AlchemyPotion getRecipeAlchemyPotion() {
-        return alchemyPotion;
-    }
-
-    public AlchemyPotion getRecipeAlchemyPotionIngredient() {
-        return alchemyPotionIngredient;
-    }
-
-    public int getRecipeWissen() {
-        return wissen;
-    }
-
-    public int getRecipeSteam() {
-        return steam;
-    }
 
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsRebornItems.ALCHEMY_MACHINE.get());
@@ -161,8 +168,23 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     }
 
     @Override
+    public RecipeType<?> getType(){
+        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return WizardsRebornRecipes.ALCHEMY_MACHINE_SERIALIZER.get();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public boolean isSpecial(){
+        return true;
     }
 
     public static class Serializer implements RecipeSerializer<AlchemyMachineRecipe> {
@@ -215,7 +237,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
                 }
             }
 
-            return new AlchemyMachineRecipe(recipeId, outputItem, outputFluid, alchemyPotion, wissen, steam, inputs, fluidInputs, alchemyPotionIngredient);
+            return new AlchemyMachineRecipe(recipeId).setOutput(outputItem).setFluidOutput(outputFluid).setInputs(inputs).setFluidInputs(fluidInputs).setWissen(wissen).setSteam(steam).setAlchemyPotion(alchemyPotion).setAlchemyPotionIngredient(alchemyPotionIngredient);
         }
 
         @Nullable
@@ -237,7 +259,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
             AlchemyPotion alchemyPotion = AlchemyPotionUtil.alchemyPotionFromNetwork(buffer);
             int wissen = buffer.readInt();
             int steam = buffer.readInt();
-            return new AlchemyMachineRecipe(recipeId, outputItem, outputFluid, alchemyPotion, wissen, steam, inputs, fluidInputs, alchemyPotionIngredient);
+            return new AlchemyMachineRecipe(recipeId).setOutput(outputItem).setFluidOutput(outputFluid).setInputs(inputs).setFluidInputs(fluidInputs).setWissen(wissen).setSteam(steam).setAlchemyPotion(alchemyPotion).setAlchemyPotionIngredient(alchemyPotionIngredient);
         }
 
         @Override
@@ -246,27 +268,23 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
             for (Ingredient input : recipe.getIngredients()) {
                 input.toNetwork(buffer);
             }
-            buffer.writeInt(recipe.getFluidIngredients().size());
-            for (FluidIngredient input : recipe.getFluidIngredients()) {
+            buffer.writeInt(recipe.getFluidInputs().size());
+            for (FluidIngredient input : recipe.getFluidInputs()) {
                 input.write(buffer);
             }
-            AlchemyPotionUtil.alchemyPotionToNetwork(recipe.getRecipeAlchemyPotion(), buffer);
+            AlchemyPotionUtil.alchemyPotionToNetwork(recipe.getAlchemyPotion(), buffer);
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buffer.writeFluidStack(recipe.getResultFluid());
-            AlchemyPotionUtil.alchemyPotionToNetwork(recipe.getRecipeAlchemyPotion(), buffer);
-            buffer.writeInt(recipe.getRecipeWissen());
-            buffer.writeInt(recipe.getRecipeSteam());
+            buffer.writeFluidStack(recipe.getFluidResult());
+            AlchemyPotionUtil.alchemyPotionToNetwork(recipe.getAlchemyPotion(), buffer);
+            buffer.writeInt(recipe.getWissen());
+            buffer.writeInt(recipe.getSteam());
         }
     }
 
+    @Nonnull
     @Override
-    public RecipeType<?> getType(){
-        return BuiltInRegistries.RECIPE_TYPE.getOptional(TYPE_ID).get();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     @Override
@@ -274,12 +292,27 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         return output;
     }
 
-    public FluidStack getResultFluid() {
+    public NonNullList<FluidIngredient> getFluidInputs() {
+        return fluidInputs;
+    }
+
+    public FluidStack getFluidResult() {
         return fluidOutput;
     }
 
-    @Override
-    public boolean isSpecial(){
-        return true;
+    public AlchemyPotion getAlchemyPotion() {
+        return alchemyPotion;
+    }
+
+    public AlchemyPotion getAlchemyPotionIngredient() {
+        return alchemyPotionIngredient;
+    }
+
+    public int getWissen() {
+        return wissen;
+    }
+
+    public int getSteam() {
+        return steam;
     }
 }

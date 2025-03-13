@@ -213,23 +213,23 @@ public class AlchemyMachinePage extends RecipePage {
                 if (!stack.isEmpty()) {
                     list.add(stack);
                 } else {
-                    if (!AlchemyPotionUtil.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                    if (!AlchemyPotionUtil.isEmpty(recipe.get().getAlchemyPotion())) {
                         ItemStack bottle = getAlchemyBottle();
-                        AlchemyPotionUtil.setPotion(bottle, recipe.get().getRecipeAlchemyPotion());
+                        AlchemyPotionUtil.setPotion(bottle, recipe.get().getAlchemyPotion());
                         list.add(bottle);
                     }
                 }
 
-                if (!recipe.get().getResultFluid().isEmpty()) {
-                    list.add(recipe.get().getResultFluid().getFluid().getBucket().getDefaultInstance().copy());
+                if (!recipe.get().getFluidResult().isEmpty()) {
+                    list.add(recipe.get().getFluidResult().getFluid().getBucket().getDefaultInstance().copy());
                 }
 
                 boolean ft1 = false;
                 boolean ft2 = false;
                 boolean ft3 = false;
 
-                for (int i = 0; i < recipe.get().getFluidIngredients().size(); i++) {
-                    for (FluidStack fluidStack : recipe.get().getFluidIngredients().get(i).getFluids()) {
+                for (int i = 0; i < recipe.get().getFluidInputs().size(); i++) {
+                    for (FluidStack fluidStack : recipe.get().getFluidInputs().get(i).getFluids()) {
                         if (fluidInput1.isFluidEqual(fluidStack) & !ft1) ft1 = true;
                         if (fluidInput2.isFluidEqual(fluidStack) & !ft2) ft2 = true;
                         if (fluidInput3.isFluidEqual(fluidStack) & !ft3) ft3 = true;
@@ -241,7 +241,7 @@ public class AlchemyMachinePage extends RecipePage {
                 if (!ft2 && !fluidInput2.isEmpty()) return true;
                 if (!ft3 && !fluidInput3.isEmpty()) return true;
 
-                if (!fluidResult.isFluidEqual(recipe.get().getResultFluid())) return true;
+                if (!fluidResult.isFluidEqual(recipe.get().getFluidResult())) return true;
             } else {
                 return true;
             }

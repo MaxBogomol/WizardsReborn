@@ -77,25 +77,25 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
         ItemStack result = recipe.getResultItem(RegistryAccess.EMPTY).copy();
         IRecipeSlotBuilder input = null;
 
-        if ((recipe.hasRecipeEnchantment() || recipe.hasRecipeArcaneEnchantment()) && recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
+        if ((recipe.hasEnchantment() || recipe.hasArcaneEnchantment()) && recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
             size++;
-            inputs = recipe.hasRecipeArcaneEnchantment() ? getInputArcaneBookItems(recipe.getRecipeArcaneEnchantment()) : getInputBookItems(recipe.getRecipeEnchantment());
-            outputs = recipe.hasRecipeArcaneEnchantment() ? getOutputArcaneBookItems(recipe.getRecipeArcaneEnchantment()) : getOutputBookItems(recipe.getRecipeEnchantment());
+            inputs = recipe.hasArcaneEnchantment() ? getInputArcaneBookItems(recipe.getArcaneEnchantment()) : getInputBookItems(recipe.getEnchantment());
+            outputs = recipe.hasArcaneEnchantment() ? getOutputArcaneBookItems(recipe.getArcaneEnchantment()) : getOutputBookItems(recipe.getEnchantment());
         }
 
         if (outputs.isEmpty()) {
-            if (recipe.hasRecipeEnchantment()) {
+            if (recipe.hasEnchantment()) {
                 if (result.getItem().equals(Items.ENCHANTED_BOOK)) {
-                    EnchantedBookItem.addEnchantment(result, new EnchantmentInstance(recipe.getRecipeEnchantment(), 1));
+                    EnchantedBookItem.addEnchantment(result, new EnchantmentInstance(recipe.getEnchantment(), 1));
                 } else {
-                    result.enchant(recipe.getRecipeEnchantment(), 1);
+                    result.enchant(recipe.getEnchantment(), 1);
                 }
             }
-            if (recipe.hasRecipeArcaneEnchantment()) {
-                ArcaneEnchantmentUtil.addItemArcaneEnchantment(result, recipe.getRecipeArcaneEnchantment());
+            if (recipe.hasArcaneEnchantment()) {
+                ArcaneEnchantmentUtil.addItemArcaneEnchantment(result, recipe.getArcaneEnchantment());
             }
-            if (recipe.hasRecipeCrystalRitual()) {
-                CrystalRitualUtil.setCrystalRitual(result, recipe.getRecipeCrystalRitual());
+            if (recipe.hasCrystalRitual()) {
+                CrystalRitualUtil.setCrystalRitual(result, recipe.getCrystalRitual());
             }
         }
 
@@ -142,7 +142,7 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
     @Override
     public void draw(@NotNull ArcaneIteratorRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
-        String textWissen = Integer.toString(recipe.getRecipeWissen());
+        String textWissen = Integer.toString(recipe.getWissen());
         int stringWidth = font.width(textWissen);
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
@@ -150,15 +150,15 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
             gui.drawString(font, textWissen, 141 - stringWidth, 58, ArcanemiconScreen.TEXT_COLOR_INT, false);
         }
 
-        if (recipe.getRecipeExperience() > 0) {
+        if (recipe.getExperience() > 0) {
             gui.blit(TEXTURE, 90, 5, 144 + 9, 0, 9, 9, 256, 256);
-            String stringSize = String.valueOf(recipe.getRecipeExperience());
+            String stringSize = String.valueOf(recipe.getExperience());
             gui.drawString(font, stringSize, 100, 5, 0xffffff);
         }
 
-        if (recipe.getRecipeHealth() > 0) {
+        if (recipe.getHealth() > 0) {
             gui.blit(TEXTURE, 90, 15, 144, 0, 9, 9, 256, 256);
-            String stringSize = String.valueOf(recipe.getRecipeHealth());
+            String stringSize = String.valueOf(recipe.getHealth());
             gui.drawString(font, stringSize, 100, 15, 0xffffff);
         }
     }
