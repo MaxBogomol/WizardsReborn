@@ -61,10 +61,6 @@ public class FrostRaySpell extends RaySpell {
                     target.hurt(damageSource, damage);
 
                     Color color = getColor();
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
-
                     WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new FrostRaySpellPacket(hitResult.getPos(), getColor()));
                 }
             }

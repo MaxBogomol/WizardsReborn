@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.baulk;
 
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -17,10 +18,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -144,6 +142,7 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
                     facingState.updateShape(face.getOpposite(), state, level, facingPos, pos);
                     level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.4, pos.getY() + 0.5 + face.getStepY() * 0.4, pos.getZ() + 0.5 + face.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
                     BlockEntityUpdate.packet(pipe);
+                    level.scheduleTick(facingPos, facingState.getBlock(), 1);
                     return InteractionResult.SUCCESS;
                 } else {
                     Direction direction = Direction.from3DDataValue(closestHit);
@@ -254,13 +253,6 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        BlockEntity BE = level.getBlockEntity(currentPos);
-        if (BE instanceof PipeBaseBlockEntity pipe) {
-            BlockEntity facingBE = level.getBlockEntity(facingPos);
-            if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(facing.getOpposite()) != PipeConnection.DISABLED) {
-
-            }
-        }
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 

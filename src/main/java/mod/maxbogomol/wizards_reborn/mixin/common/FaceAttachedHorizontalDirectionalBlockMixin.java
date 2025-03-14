@@ -33,14 +33,11 @@ public abstract class FaceAttachedHorizontalDirectionalBlockMixin {
     }
 
     @Unique
-    private static Direction wizards_reborn$getConnectedDirection(BlockState pState) {
-        switch ((AttachFace)pState.getValue(FaceAttachedHorizontalDirectionalBlock.FACE)) {
-            case CEILING:
-                return Direction.DOWN;
-            case FLOOR:
-                return Direction.UP;
-            default:
-                return pState.getValue(FaceAttachedHorizontalDirectionalBlock.FACING);
-        }
+    private static Direction wizards_reborn$getConnectedDirection(BlockState state) {
+        return switch (state.getValue(FaceAttachedHorizontalDirectionalBlock.FACE)) {
+            case CEILING -> Direction.DOWN;
+            case FLOOR -> Direction.UP;
+            default -> state.getValue(FaceAttachedHorizontalDirectionalBlock.FACING);
+        };
     }
 }
