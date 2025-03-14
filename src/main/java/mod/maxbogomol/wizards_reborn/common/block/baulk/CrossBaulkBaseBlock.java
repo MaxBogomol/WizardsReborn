@@ -18,7 +18,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -230,7 +233,7 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
 
     public static VoxelShape getShapeWithConnection(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context, VoxelShape[] shapes) {
         BlockEntity BE = level.getBlockEntity(pos);
-        if (BE instanceof PipeBaseBlockEntity pipe) {
+        if (BE instanceof CrossBaulkBlockEntity pipe) {
             return shapes[getShapeIndex(pipe.connections[0], pipe.connections[1], pipe.connections[2], pipe.connections[3], pipe.connections[4], pipe.connections[5])];
         }
         return CENTER_AABB;
@@ -253,6 +256,33 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
+        BlockEntity BE = level.getBlockEntity(currentPos);
+        if (BE instanceof PipeBaseBlockEntity pipe) {
+            BlockEntity facingBE = level.getBlockEntity(facingPos);
+            if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(facing.getOpposite()) != PipeConnection.DISABLED) {
+                boolean enabled = pipe.getConnection(facing) != PipeConnection.DISABLED;
+                if (facingState.is(getConnectionTag()) && enabled) {
+                    if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(facing.getOpposite()) == PipeConnection.DISABLED) {
+                        pipe.setConnection(facing, PipeConnection.DISABLED);
+                    } else {
+                        pipe.setConnection(facing, PipeConnection.PIPE);
+                    }
+                } else {
+                    BlockEntity blockEntity = level.getBlockEntity(facingPos);
+                    if (connected(facing, facingState)) {
+                        pipe.setConnection(facing, PipeConnection.LEVER);
+                    } else if ((connectToBlockEntity(blockEntity, facing) && enabled)) {
+                        if (facingState.getBlock() instanceof IPipeConnection) {
+                            pipe.setConnection(facing, ((IPipeConnection) facingState.getBlock()).getPipeConnection(facingState, facing.getOpposite()));
+                        } else {
+                            pipe.setConnection(facing, PipeConnection.END);
+                        }
+                    } else if (enabled) {
+                        pipe.setConnection(facing, PipeConnection.NONE);
+                    }
+                }
+            }
+        }
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 

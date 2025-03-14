@@ -14,22 +14,22 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 
 public class CrossBaulkBlock extends CrossBaulkBaseBlock {
+
     public CrossBaulkBlock(Properties properties) {
         super(properties);
     }
 
     @Override
     public TagKey<Block> getConnectionTag() {
-        return WizardsRebornBlockTags.FLUID_PIPE_CONNECTION;
+        return WizardsRebornBlockTags.CROSS_BAULKS;
     }
 
     @Override
     public TagKey<Block> getToggleConnectionTag() {
-        return WizardsRebornBlockTags.FLUID_PIPE_CONNECTION;
+        return WizardsRebornBlockTags.CROSS_BAULKS;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CrossBaulkBlock extends CrossBaulkBaseBlock {
 
     @Override
     public boolean connectToBlockEntity(BlockEntity blockEntity, Direction direction) {
-        return blockEntity != null && blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, direction.getOpposite()).isPresent();
+        return false;
     }
 
     @Override

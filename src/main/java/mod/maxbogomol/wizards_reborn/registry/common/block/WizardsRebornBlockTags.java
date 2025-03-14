@@ -15,4 +15,5 @@ public class WizardsRebornBlockTags {
     public static final TagKey<Block> ALTAR_OF_DROUGHT_TARGET  = TagKey.create(Registries.BLOCK, new ResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_target"));
     public static final TagKey<Block> ORES  = TagKey.create(Registries.BLOCK, new ResourceLocation("forge", "ores"));
     public static final TagKey<Block> CORK_BAMBOO_PLANTABLE_ON  = TagKey.create(Registries.BLOCK, new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_plantable_on"));
+    public static final TagKey<Block> CROSS_BAULKS = TagKey.create(Registries.BLOCK, new ResourceLocation(WizardsReborn.MOD_ID, "cross_baulks"));
 }
