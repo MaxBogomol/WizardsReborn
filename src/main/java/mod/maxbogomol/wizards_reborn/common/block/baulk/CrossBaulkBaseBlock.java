@@ -154,23 +154,12 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
                     BlockPos facingPos = pos.relative(direction);
                     BlockState facingState = level.getBlockState(facingPos);
 
-                    if (pipe.getConnection(direction) == PipeConnection.PIPE && facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseBlockEntity facingPipe) {
-                        pipe.setConnection(direction, PipeConnection.DISABLED);
-                        facingPipe.setConnection(direction.getOpposite(), PipeConnection.DISABLED);
-                        level.updateNeighbourForOutputSignal(pos, this);
-                        level.updateNeighbourForOutputSignal(facingPos, this);
-                        level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.5, pos.getY() + 0.5 + direction.getStepY() * 0.5, pos.getZ() + 0.5 + direction.getStepZ() * 0.5, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        BlockEntityUpdate.packet(pipe);
-                        return InteractionResult.SUCCESS;
-                    }
-                    if (pipe.getConnection(direction).transfer && !facingState.is(getConnectionTag()) && !connected(direction, facingState)) {
-                        pipe.setConnection(direction, PipeConnection.DISABLED);
-                        level.updateNeighbourForOutputSignal(pos, this);
-                        facingState.updateShape(direction.getOpposite(), state, level, facingPos, pos);
-                        level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        BlockEntityUpdate.packet(pipe);
-                        return InteractionResult.SUCCESS;
-                    }
+                    pipe.setConnection(direction, PipeConnection.DISABLED);
+                    level.updateNeighbourForOutputSignal(pos, this);
+                    facingState.updateShape(direction.getOpposite(), state, level, facingPos, pos);
+                    level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                    BlockEntityUpdate.packet(pipe);
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
@@ -257,28 +246,19 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
         }
 
         BlockEntity BE = level.getBlockEntity(currentPos);
-        if (BE instanceof PipeBaseBlockEntity pipe) {
+        if (BE instanceof CrossBaulkBlockEntity pipe) {
             BlockEntity facingBE = level.getBlockEntity(facingPos);
-            if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(facing.getOpposite()) != PipeConnection.DISABLED) {
+            if (!(facingBE instanceof CrossBaulkBlockEntity) || ((CrossBaulkBlockEntity) facingBE).getConnection(facing.getOpposite()) != PipeConnection.DISABLED) {
                 boolean enabled = pipe.getConnection(facing) != PipeConnection.DISABLED;
                 if (facingState.is(getConnectionTag()) && enabled) {
-                    if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(facing.getOpposite()) == PipeConnection.DISABLED) {
+                    if (facingBE instanceof CrossBaulkBlockEntity && ((CrossBaulkBlockEntity) facingBE).getConnection(facing.getOpposite()) == PipeConnection.DISABLED) {
                         pipe.setConnection(facing, PipeConnection.DISABLED);
                     } else {
-                        pipe.setConnection(facing, PipeConnection.PIPE);
+                        pipe.setConnection(facing, PipeConnection.END);
                     }
                 } else {
-                    BlockEntity blockEntity = level.getBlockEntity(facingPos);
-                    if (connected(facing, facingState)) {
-                        pipe.setConnection(facing, PipeConnection.LEVER);
-                    } else if ((connectToBlockEntity(blockEntity, facing) && enabled)) {
-                        if (facingState.getBlock() instanceof IPipeConnection) {
-                            pipe.setConnection(facing, ((IPipeConnection) facingState.getBlock()).getPipeConnection(facingState, facing.getOpposite()));
-                        } else {
-                            pipe.setConnection(facing, PipeConnection.END);
-                        }
-                    } else if (enabled) {
-                        pipe.setConnection(facing, PipeConnection.NONE);
+                    if (connected(facing, facingState) && pipe.getConnection(facing) == PipeConnection.NONE) {
+                        pipe.setConnection(facing, PipeConnection.END);
                     }
                 }
             }

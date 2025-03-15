@@ -10,10 +10,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 
 public class CrossBaulkBlock extends CrossBaulkBaseBlock {
@@ -34,6 +36,12 @@ public class CrossBaulkBlock extends CrossBaulkBaseBlock {
 
     @Override
     public boolean connected(Direction direction, BlockState state) {
+        if (state.is(WizardsRebornBlockTags.CROSS_BAULKS_CONNECTION)) {
+            if (state.hasProperty(BlockStateProperties.AXIS)) {
+                return state.getValue(BlockStateProperties.AXIS) == direction.getAxis();
+            }
+        }
+
         return false;
     }
 
@@ -44,6 +52,12 @@ public class CrossBaulkBlock extends CrossBaulkBaseBlock {
 
     @Override
     public boolean unclog(BlockEntity blockEntity, Level level, BlockPos pos) {
+        if (blockEntity instanceof CrossBaulkBlockEntity pipe) {
+            for (Direction facing : Direction.values()) {
+                pipe.setConnection(facing, PipeConnection.NONE);
+            }
+            return true;
+        }
         return false;
     }
 

@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:arcane_wood_baulk",
+    "wizards_reborn:stripped_arcane_wood_baulk",
+    "wizards_reborn:arcane_wood_planks_baulk",
+    "wizards_reborn:innocent_wood_baulk",
+    "wizards_reborn:stripped_innocent_wood_baulk",
+    "wizards_reborn:innocent_wood_planks_baulk",
+    "wizards_reborn:cork_bamboo_baulk",
+    "wizards_reborn:cork_bamboo_planks_baulk",
+    "wizards_reborn:cork_bamboo_chiseled_planks_baulk"
+  ]
+}
