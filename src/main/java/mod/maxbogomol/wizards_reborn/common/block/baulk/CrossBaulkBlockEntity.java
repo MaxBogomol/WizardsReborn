@@ -44,7 +44,7 @@ public class CrossBaulkBlockEntity extends PipeBaseBlockEntity implements Tickab
                             connections[direction.get3DDataValue()] = PipeConnection.END;
                         }
                     } else {
-                        if (pipeBlock.connected(direction, facingState) && ((CrossBaulkBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.NONE) {
+                        if (pipeBlock.connected(direction, facingState) && facingBE instanceof CrossBaulkBlockEntity && ((CrossBaulkBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.NONE) {
                             connections[direction.get3DDataValue()] = PipeConnection.END;
                         }
                     }
