@@ -92,7 +92,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:malum-484064:6213791")
     compileOnly fg.deobf("curse.maven:lodestone-616457:6213794")
 
-    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:6183224")
+    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:6183253")
     runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
     runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
     runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")

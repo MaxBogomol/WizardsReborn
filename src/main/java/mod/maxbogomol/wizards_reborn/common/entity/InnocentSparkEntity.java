@@ -105,19 +105,20 @@ public class InnocentSparkEntity extends ThrowableItemProjectile {
             boolean isTick = true;
             if (getSender() != null) {
                 ItemStack item = getSender().getInventory().getItem(getSlot());
-                if (item.getItem().equals(getItem().getItem())) {
-                    if (item.getDamageValue() < item.getMaxDamage() - 1) {
-                        if (!level().isClientSide()) {
+                if (!level().isClientSide()) {
+                    if (item.getItem().equals(getItem().getItem())) {
+                        if (item.getDamageValue() < item.getMaxDamage() - 1) {
                             int tick = 2 + (ArcaneWoodTools.getLifeRoots(item));
                             if (tickCount % tick == 0) {
-                                item.hurtAndBreak(1, getSender(), (entity) -> {});
+                                item.hurtAndBreak(1, getSender(), (entity) -> {
+                                });
                             }
+                        } else {
+                            isTick = false;
                         }
                     } else {
                         isTick = false;
                     }
-                } else {
-                    isTick = false;
                 }
             } else {
                 isTick = false;
