@@ -12,42 +12,54 @@ Status: **Alpha**
 
 # About:
 
-"Wizard's Reborn" - the quintessence of all the author's favorite magic mods
-
-Inspired by Thaumcraft, Embers, Eidolon, Malum, Electroblob's Wizardry and Astral Sorcery, Wizard's Reborn is a story about magical matters and their manipulation. Everything is divided into four elements, which will help you explore this unusual world.
+Wizard's Reborn - a mod about magic in the style of alternative 1930s.  
 
 ![](https://cdn.modrinth.com/data/axZDcOCH/images/554f3b41f0eb5a5cd37c6d52319bcb1210162882.png)
 
-Ancient crystals can be found underground, containing a primordial power of a sacred knowledge, called "wissen" capable of transforming matter.
+In Earth's crust you can find odd blue crystals, which brings back memories about well-forgotten past.  
+In search for knowledges you create different machines and research spells.  
 
-Using the power of wissen, you can grow crystals that can refract energy to release it in the form of a magical physical object.
+Looks like all answers is in this scuffed book, which fell on my head, because only it will show me the way.  
 
-The mod adds magical materials, spells and mechanisms.
-![](https://cdn.modrinth.com/data/axZDcOCH/images/ffa7156e12d4b914e74c378b93216896d35127d9.png)
+![](https://cdn.modrinth.com/data/axZDcOCH/images/aec9a994b89d51b385d161960ed07cebacaaa7de.png)
 
-Various mechanisms are set in motion due to the power of wissen.
-![](https://cdn.modrinth.com/data/axZDcOCH/images/eb2f70821f1f3c8f46460af34b5640931f3cc279.png)
+#
 
-Connect fluid and steam pipes to create various mixtures and items in the alchemy machine.
-![](https://cdn.modrinth.com/data/axZDcOCH/images/f6a3dddf5d62ca85dc89804960cc65b5cf64a027.png)
+From these crystals I was able to obtain primordial energy, which my silly book calls "Wissen". This ether-like substance brings to life various magical mechanisms.  
 
-Using the power of crystals, wissen and light rays, masterfully learn the art of spells and rituals.
-![](https://cdn.modrinth.com/data/axZDcOCH/images/9793f17ea0b9c2debab129dca3a140c25fc8a85e.png)
+![](https://cdn.modrinth.com/data/axZDcOCH/images/9e3e089a761f1a622417dd9365f8f39fb99066a3.png)
 
-Automation will allow you to completely subjugate the mechanisms using the power of redstone!
-![](https://cdn.modrinth.com/data/axZDcOCH/images/5aac1cb34cf0c4422f934f3488bc7c6ef84716df.png)
+#
 
-All aspects of the mod are described in the "Arcanemicon" book. Thanks to it, you can learn everything without guides!
-![](https://cdn.modrinth.com/data/axZDcOCH/images/e883e07c835779e9e41a1d6daa2aaf654ee36ad2.png)
+![](https://cdn.modrinth.com/data/axZDcOCH/images/64907bf766a6645a18db912d18a4858c1c3411b6.png)
+
+#
+
+To fully reveal ancient potential, magic is not enough, so I've created this steam construction - Alchemy Machine!  
+
+**How to build!**  
+
+![](https://cdn.modrinth.com/data/axZDcOCH/images/afe55f4a68f97e206664621f50f321c38fae2332.png)
+
+# **How NOT to build!!!**  
+
+![](https://cdn.modrinth.com/data/axZDcOCH/images/818d28307dab7b1503d86100aecf5f7801f97ab2.png)
+
+#
+
+## But that's not all I wanted to tell you, so try to explore this perishable world by yourself!    
 
 The mod is in very early alpha, with a lot of different content planned for the future!  
 You can visit our **[Discord Server](https://discord.gg/cKf55qNugw)** to suggest your ideas or receive news about development.
 
-The mod is translated into 6 languages:  
-English and Russian (original) - by MaxBogomol  
-Ukrainian - by FoxPlane and iDark  
-Belarusian - by Kekqupap  
-French - by ishi_sama  
-Simplified Chinese - by FalAut
+#
 
-As well as a wonderful original soundtrack by Onjerlay
+![](https://cdn.modrinth.com/data/axZDcOCH/images/cc1897498c7d031252693c76fe625816282951df.png)
+
+<details>
+<summary>The Silly Council will decide your fate,</summary>
+
+meow
+
+</details>
+
