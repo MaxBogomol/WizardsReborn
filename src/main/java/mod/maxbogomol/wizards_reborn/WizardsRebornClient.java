@@ -62,9 +62,9 @@ public class WizardsRebornClient {
                 .addModrinthLink("https://modrinth.com/mod/wizards-reborn")
                 .addDiscordLink("https://discord.gg/cKf55qNugw");
         MAGICAL_ORIGINS_PANORAMA = new FluffyFurPanorama(WizardsReborn.MOD_ID + ":magical_origins", Component.translatable("panorama.wizards_reborn.magical_origins"))
-                .setMod(MOD_INSTANCE).setItem(new ItemStack(WizardsRebornItems.WISSEN_ALTAR.get())).setSort(0)
-                .setTexture(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/background/panorama"))
-                .setLogo(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/wizards_reborn.png"));
+                .setMod(MOD_INSTANCE).setItem(new ItemStack(WizardsRebornItems.ARCANE_WORKBENCH.get())).setSort(0)
+                .setTexture(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/menu/panorama/magical_origins/panorama"))
+                .setLogo(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/menu/title/wizards_reborn.png"));
 
         FluffyFurClient.registerMod(MOD_INSTANCE);
         FluffyFurClient.registerPanorama(MAGICAL_ORIGINS_PANORAMA);
