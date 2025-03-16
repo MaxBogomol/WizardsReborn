@@ -109,14 +109,15 @@ public class ChargeSpell extends Spell {
                 UUID entityUUID = spellData.getUUID("entity");
                 Entity entity = ((ServerLevel) level).getEntity(entityUUID);
                 if (entity instanceof SpellEntity spellEntity) {
-                    ChargeSpellComponent spellComponent = (ChargeSpellComponent) spellEntity.getSpellComponent();
-                    spellComponent.useTick = 1;
-                    spellComponent.charge = spellComponent.charge + 1;
-                    if (spellComponent.charge > getCharge()) {
-                        spellComponent.charge = getCharge();
+                    if (spellEntity.getSpellComponent() instanceof ChargeSpellComponent spellComponent) {
+                        spellComponent.useTick = 1;
+                        spellComponent.charge = spellComponent.charge + 1;
+                        if (spellComponent.charge > getCharge()) {
+                            spellComponent.charge = getCharge();
+                        }
+                        spellEntity.updateSpellComponent(spellComponent);
+                        spellEntity.updateSpellContext(spellContext);
                     }
-                    spellEntity.updateSpellComponent(spellComponent);
-                    spellEntity.updateSpellContext(spellContext);
                 }
             }
         }

@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.item.StopUseItemPacket;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.*;
 import mod.maxbogomol.wizards_reborn.common.network.block.*;
@@ -24,6 +25,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
     public static void init() {
         int id = 0;
 
+        StopUseItemPacket.register(HANDLER, id++);
         ArcanemiconSoundPacket.register(HANDLER, id++);
         ArcaneWandSetCrystalPacket.register(HANDLER, id++);
         ArcaneWandRemoveCrystalPacket.register(HANDLER, id++);

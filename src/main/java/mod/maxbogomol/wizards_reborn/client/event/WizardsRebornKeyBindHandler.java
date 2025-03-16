@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import mod.maxbogomol.fluffy_fur.common.network.item.StopUseItemPacket;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWandScreen;
@@ -93,6 +94,7 @@ public class WizardsRebornKeyBindHandler {
         }
 
         if (open && !player.isShiftKeyDown()) {
+            WizardsRebornPacketHandler.sendToServer(new StopUseItemPacket());
             Minecraft.getInstance().setScreen(new ArcaneWandScreen(Component.empty()));
             return true;
         } else if (open && player.isShiftKeyDown()) {
@@ -124,6 +126,7 @@ public class WizardsRebornKeyBindHandler {
         }
 
         if (open) {
+            WizardsRebornPacketHandler.sendToServer(new StopUseItemPacket());
             Minecraft.getInstance().setScreen(new WissenWandScreen(Component.empty()));
             return true;
         }
@@ -186,7 +189,6 @@ public class WizardsRebornKeyBindHandler {
                 int current = 0;
                 int currentSet = 0;
                 boolean set = false;
-                boolean spellSet = false;
 
                 if (WizardsRebornKeyMappings.SPELL_SETS_TOGGLE.isDown()) {
                     if (key == WizardsRebornKeyMappings.NEXT_SPELL.getKey().getValue()) {
@@ -213,7 +215,6 @@ public class WizardsRebornKeyBindHandler {
                         if (current < 0) current = 9;
                         WizardsRebornPacketHandler.sendToServer(new SpellSetSetCurrentSpellPacket(current));
                         set = true;
-                        spellSet = true;
                         currentSet = KnowledgeUtil.getCurrentSpellSet(player);
                     }
                     if (key == WizardsRebornKeyMappings.PREVIOUS_SPELL.getKey().getValue()) {
@@ -221,7 +222,6 @@ public class WizardsRebornKeyBindHandler {
                         if (current < 0) current = 9;
                         WizardsRebornPacketHandler.sendToServer(new SpellSetSetCurrentSpellPacket(current));
                         set = true;
-                        spellSet = true;
                         currentSet = KnowledgeUtil.getCurrentSpellSet(player);
                     }
                 }
@@ -231,13 +231,13 @@ public class WizardsRebornKeyBindHandler {
                         Spell spell = KnowledgeUtil.getSpellFromSet(player, currentSet, current);
                         String string = "";
                         if (spell != null) string = spell.getId();
-                        if (spellSet) WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(true, string));
+                        WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(true, string));
                     } else {
                         if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
                             Spell spell = KnowledgeUtil.getSpellFromSet(player, KnowledgeUtil.getCurrentSpellSet(player), current);
                             String string = "";
                             if (spell != null) string = spell.getId();
-                            if (spellSet) WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(false, string));
+                            WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(false, string));
                         }
                     }
                 }

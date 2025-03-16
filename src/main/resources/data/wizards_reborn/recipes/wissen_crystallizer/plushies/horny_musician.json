@@ -1,0 +1,43 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "fluffy_fur:onjerlay_plush",
+    "count": 1
+  },
+  "wissen": 1000,
+  "ingredients": [
+    {
+      "item": "minecraft:note_block"
+    },
+    {
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    }
+  ]
+}

@@ -4,6 +4,10 @@ buildscript {
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         maven { url = 'https://maven.parchmentmc.org' }
         mavenCentral()
+
+        flatDir {
+            dirs 'run/mods'
+        }
     }
 
     dependencies {
@@ -92,10 +96,13 @@ dependencies {
     compileOnly fg.deobf("curse.maven:malum-484064:6213791")
     compileOnly fg.deobf("curse.maven:lodestone-616457:6213794")
 
-    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:6183253")
     runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
     runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
     runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
+
+    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:6183224")
+    runtimeOnly fg.deobf("curse.maven:oculus-581495:6020952")
+    runtimeOnly fg.deobf("curse.maven:free-cam-557076:4588036")
 }
 
 jar {

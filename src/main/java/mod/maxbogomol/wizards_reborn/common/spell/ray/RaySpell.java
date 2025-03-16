@@ -109,18 +109,19 @@ public class RaySpell extends Spell {
                 UUID entityUUID = spellData.getUUID("entity");
                 Entity entity = ((ServerLevel) level).getEntity(entityUUID);
                 if (entity instanceof SpellEntity spellEntity) {
-                    RaySpellComponent spellComponent = getSpellComponent(spellEntity);
-                    spellComponent.useTick = 1;
-                    spellEntity.updateSpellComponent(spellComponent);
-                    spellEntity.setSpellContext(spellContext);
-                    spellEntity.updateSpellContext(spellContext);
+                    if (spellEntity.getSpellComponent() instanceof RaySpellComponent spellComponent) {
+                        spellComponent.useTick = 1;
+                        spellEntity.updateSpellComponent(spellComponent);
+                        spellEntity.setSpellContext(spellContext);
+                        spellEntity.updateSpellContext(spellContext);
 
-                    if (spellEntity.getSpellContext().canRemoveWissen(1)) {
-                        if (spellEntity.tickCount % tickCost() == 0) {
-                            spellEntity.getSpellContext().removeWissen(1);
+                        if (spellEntity.getSpellContext().canRemoveWissen(1)) {
+                            if (spellEntity.tickCount % tickCost() == 0) {
+                                spellEntity.getSpellContext().removeWissen(1);
+                            }
+                        } else {
+                            spellContext.startUsing(this);
                         }
-                    } else {
-                        spellContext.startUsing(this);
                     }
                 }
             }
