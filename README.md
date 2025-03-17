@@ -12,7 +12,7 @@ Status: **Alpha**
 
 # About:
 
-Wizard's Reborn - a mod about magic in the style of alternative 1930s.  
+"Wizard's Reborn" - a mod about magic in the style of alternative 1930s.  
 
 ![](https://cdn.modrinth.com/data/axZDcOCH/images/554f3b41f0eb5a5cd37c6d52319bcb1210162882.png)
 
