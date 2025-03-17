@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block;
+package mod.maxbogomol.wizards_reborn.common.block.plant;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

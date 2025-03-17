@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block;
+package mod.maxbogomol.wizards_reborn.common.block.plant;
 
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.BlockPos;

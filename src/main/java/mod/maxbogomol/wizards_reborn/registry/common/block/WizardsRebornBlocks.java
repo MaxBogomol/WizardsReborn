@@ -41,11 +41,14 @@ import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBloc
 import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBlock;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlock;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlock;
+import mod.maxbogomol.wizards_reborn.common.block.ore.ArcanumOreBlock;
+import mod.maxbogomol.wizards_reborn.common.block.ore.NetherSaltOreBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid.FluidExtractorBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.steam.SteamExtractorBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.steam.SteamPipeBlock;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlock;
+import mod.maxbogomol.wizards_reborn.common.block.plant.*;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlock;
 import mod.maxbogomol.wizards_reborn.common.block.salt.campfire.SaltCampfireBlock;
 import mod.maxbogomol.wizards_reborn.common.block.salt.lantern.SaltLanternBlock;
