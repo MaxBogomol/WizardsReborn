@@ -124,6 +124,12 @@ public class WizardsRebornFarmersDelight {
                     ArcanemiconChapters.ARCACITE_ITEM, ArcanemiconChapters.ARCACITE_ITEM, ArcanemiconChapters.NATURAL_CALX_ITEM
             ));
 
+            ArcanemiconChapters.MOR.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.MOR.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.mor_colony",
+                    new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.MOR_COLONY.get())),
+                    new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ELDER_MOR_COLONY.get()))
+            ));
+
             List<MobEffectInstance> noEffects = new ArrayList<>();
 
             ArcanemiconChapters.SMOKING_PIPE.addPage(INTEGRATION_PAGE);

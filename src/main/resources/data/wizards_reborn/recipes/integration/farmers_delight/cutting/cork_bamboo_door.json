@@ -12,12 +12,12 @@
         "type": "farmersdelight:cutting",
         "ingredients": [
           {
-            "item": "wizards_reborn:innocent_wood_trapdoor"
+            "item": "wizards_reborn:cork_bamboo_door"
           }
         ],
         "result": [
           {
-            "item": "wizards_reborn:innocent_wood_planks"
+            "item": "wizards_reborn:cork_bamboo_planks"
           }
         ],
         "tool": {

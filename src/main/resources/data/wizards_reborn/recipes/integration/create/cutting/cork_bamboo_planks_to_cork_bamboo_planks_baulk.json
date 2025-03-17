@@ -12,13 +12,13 @@
         "type": "create:cutting",
         "ingredients": [
           {
-            "item": "wizards_reborn:stripped_innocent_wood"
+            "item": "wizards_reborn:cork_bamboo_planks"
           }
         ],
         "results": [
           {
-            "item": "wizards_reborn:innocent_wood_planks",
-            "count" : 6
+            "item": "wizards_reborn:cork_bamboo_planks_baulk",
+            "count" : 4
           }
         ],
         "processingTime": 50

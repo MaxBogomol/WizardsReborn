@@ -192,8 +192,8 @@
 
   "wisestone_button_click_off": {"sounds": [{"name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.5, "volume": 0.6}], "subtitle": "subtitles.block.button.click"},
   "wisestone_button_click_on": {"sounds": [{"name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.6, "volume": 0.6}], "subtitle": "subtitles.block.button.click"},
-  "wisestone_pressure_plate_click_off": {"sounds": [{"name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.5, "volume": 0.6}], "subtitle": "sounds.wizards_reborn.wisestone_pressure_plate_click_off"},
-  "wisestone_pressure_plate_click_on": {"sounds": [{"name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.6, "volume": 0.6}], "subtitle": "sounds.wizards_reborn.wisestone_pressure_plate_click_on"},
+  "wisestone_pressure_plate_click_off": {"sounds": [{"name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.5, "volume": 0.6}], "subtitle": "subtitles.block.pressure_plate.click"},
+  "wisestone_pressure_plate_click_on": {"sounds": [{"name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.6, "volume": 0.6}], "subtitle": "subtitles.block.pressure_plate.click"},
 
   "mor_break": {"sounds": ["wizards_reborn:blocks/mor/break1", "wizards_reborn:blocks/mor/break2", "wizards_reborn:blocks/mor/break3", "wizards_reborn:blocks/mor/break4", "wizards_reborn:blocks/mor/break5", "wizards_reborn:blocks/mor/break6"], "subtitle": "subtitles.block.generic.break"},
   "mor_step": {"sounds": ["wizards_reborn:blocks/mor/step1", "wizards_reborn:blocks/mor/step2", "wizards_reborn:blocks/mor/step3", "wizards_reborn:blocks/mor/step4", "wizards_reborn:blocks/mor/step5", "wizards_reborn:blocks/mor/step6"], "subtitle": "subtitles.block.generic.footsteps"},
