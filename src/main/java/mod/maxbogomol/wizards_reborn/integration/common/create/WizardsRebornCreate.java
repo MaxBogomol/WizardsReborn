@@ -17,7 +17,10 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.SmeltingPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe.CrushingPage;
+import mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe.PressingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.create.common.alchemypotion.HoneyAlchemyPotion;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.client.arcanemicon.recipe.CuttingPage;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -112,6 +115,7 @@ public class WizardsRebornCreate {
             ArcanemiconChapters.ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_sheet",
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_SHEET.get()))
             ));
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new PressingPage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_SHEET.get()), ArcanemiconChapters.ARCANE_GOLD_INGOT_ITEM));
 
             ArcanemiconChapters.ARCANE_ITERATOR.addPage(INTEGRATION_PAGE);
             ArcanemiconChapters.ARCANE_ITERATOR.addPage(new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK),

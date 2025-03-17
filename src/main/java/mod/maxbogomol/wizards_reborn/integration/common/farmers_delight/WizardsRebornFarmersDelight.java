@@ -1,7 +1,5 @@
 package mod.maxbogomol.wizards_reborn.integration.common.farmers_delight;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllEnchantments;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemClassSkinEntry;
@@ -15,6 +13,8 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.ArcaneIteratorPag
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CraftingTablePage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
+import mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe.CrushingPage;
+import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.client.arcanemicon.recipe.CuttingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.ArcaneKnifeItem;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.ArcaneWoodKnifeItem;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.InnocentWoodKnifeItem;
@@ -25,7 +25,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -129,6 +128,8 @@ public class WizardsRebornFarmersDelight {
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.MOR_COLONY.get())),
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ELDER_MOR_COLONY.get()))
             ));
+            ArcanemiconChapters.MOR.addPage(new CuttingPage(new ItemStack(WizardsRebornItems.MOR.get(), 5), new ItemStack(ItemsLoadedOnly.MOR_COLONY.get())));
+            ArcanemiconChapters.MOR.addPage(new CuttingPage(new ItemStack(WizardsRebornItems.ELDER_MOR.get(), 5), new ItemStack(ItemsLoadedOnly.ELDER_MOR_COLONY.get())));
 
             List<MobEffectInstance> noEffects = new ArrayList<>();
 
