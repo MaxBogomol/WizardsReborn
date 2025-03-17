@@ -18,9 +18,8 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe.CrushingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe.PressingPage;
+import mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe.SplashingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.create.common.alchemypotion.HoneyAlchemyPotion;
-import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
-import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.client.arcanemicon.recipe.CuttingPage;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -28,7 +27,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
@@ -112,6 +110,9 @@ public class WizardsRebornCreate {
                     new ItemStack(ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get(), 9), experienceNuggetBig
             ));
             ArcanemiconChapters.ARCANE_GOLD.addPage(new SmeltingPage(ArcanemiconChapters.ARCANE_GOLD_INGOT_ITEM, new ItemStack(ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get())));
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new SplashingPage(new ItemStack(ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD.get()),
+                    new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 9), ArcanemiconChapters.ARCANUM_DUST_ITEM
+            ));
             ArcanemiconChapters.ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_sheet",
                     new BlockEntry(ArcanemiconChapters.ARCANE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_SHEET.get()))
             ));

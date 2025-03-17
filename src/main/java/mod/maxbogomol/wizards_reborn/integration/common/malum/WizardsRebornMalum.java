@@ -15,6 +15,8 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
+import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
+import mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe.SplashingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritFocusingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritInfusionPage;
 import mod.maxbogomol.wizards_reborn.integration.common.malum.client.arcanemicon.recipe.SpiritRepairPage;
@@ -25,9 +27,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -141,6 +141,7 @@ public class WizardsRebornMalum {
                     .setSpirits(new ItemStack(ItemRegistry.EARTHEN_SPIRIT.get(), 16), new ItemStack(ItemRegistry.INFERNAL_SPIRIT.get(), 16))
             );
             ArcanemiconChapters.ARCANE_GOLD.addPage(new SmeltingPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 6), new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get())));
+            if (WizardsRebornCreate.isLoaded()) CreateLoadedOnly.arcaneGoldChaptersInit();
 
             ArcanemiconChapters.WISSEN_ALTAR.addPage(INTEGRATION_PAGE);
             ArcanemiconChapters.WISSEN_ALTAR.addPage(new WissenAltarPage(new ItemStack(ItemRegistry.ARCANE_SPIRIT.get())));
@@ -300,6 +301,14 @@ public class WizardsRebornMalum {
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(blightedGunkEffects, new ItemStack(ItemRegistry.BLIGHTED_GUNK.get())));
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(voidSaltsEffects, new ItemStack(ItemRegistry.VOID_SALTS.get())));
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(auricEmbersEffects, new ItemStack(ItemRegistry.AURIC_EMBERS.get())));
+        }
+    }
+
+    public static class CreateLoadedOnly {
+        public static void arcaneGoldChaptersInit() {
+            ArcanemiconChapters.ARCANE_GOLD.addPage(new SplashingPage(new ItemStack(ItemsLoadedOnly.ARCANE_GOLD_NODE.get()),
+                    new ItemStack(WizardsRebornItems.ARCANE_GOLD_NUGGET.get(), 6), ArcanemiconChapters.ARCANUM_DUST_ITEM
+            ));
         }
     }
 
