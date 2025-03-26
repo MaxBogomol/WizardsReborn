@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.api.monogram.MonogramHandler;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
+import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -22,6 +23,8 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
@@ -70,6 +73,13 @@ public class WizardsRebornCommand {
                                         )
                                         .then(Commands.literal("all")
                                                 .executes(ctx -> removeAllSpell(ctx, EntityArgument.getPlayers(ctx, "player")))
+                                        )
+                                )
+                        )
+                        .then(Commands.literal("use")
+                                .then(Commands.argument("entity", EntityArgument.entities())
+                                        .then(Commands.argument("spell", new SpellArgumentType())
+                                                .executes(ctx -> useSpell(ctx, EntityArgument.getEntities(ctx, "entity"), SpellArgumentType.getSpell(ctx, "spell")))
                                         )
                                 )
                         )
@@ -261,6 +271,17 @@ public class WizardsRebornCommand {
                 return Component.translatable("commands.wizards_reborn.spell.remove.all.multiple", targetPlayers.size());
             }, true);
         }
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpell(CommandContext<CommandSourceStack> command, Collection<? extends Entity> targetEntities, Spell spell) throws CommandSyntaxException {
+        for (Entity entity : targetEntities) {
+            spell.useSpell(entity.level(), spell.getWandContext(entity, ItemStack.EMPTY));
+        }
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.remove.all.multiple", 1);
+        }, true);
         return Command.SINGLE_SUCCESS;
     }
 
