@@ -823,7 +823,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
         boolean flag = true;
         ResourceLocation resourcelocation = EnchantmentHelper.getEnchantmentId(enchantment);
 
-        for(int i = 0; i < listtag.size(); ++i) {
+        for (int i = 0; i < listtag.size(); ++i) {
             CompoundTag compoundtag = listtag.getCompound(i);
             ResourceLocation resourcelocation1 = EnchantmentHelper.getEnchantmentId(compoundtag);
             if (resourcelocation1 != null && resourcelocation1.equals(resourcelocation)) {

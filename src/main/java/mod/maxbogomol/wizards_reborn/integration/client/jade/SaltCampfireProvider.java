@@ -23,7 +23,7 @@ public enum SaltCampfireProvider implements IBlockComponentProvider {
         if (blockEntity instanceof SaltCampfireBlockEntity campfire) {
             IElementHelper elements = tooltip.getElementHelper();
 
-            for(int i = 0; i < campfire.cookingTime.length; ++i) {
+            for (int i = 0; i < campfire.cookingTime.length; ++i) {
                 ItemStack stack = campfire.getItems().get(i);
                 if (!stack.isEmpty() && (campfire.cookingTime[i] - campfire.cookingProgress[i] > 0)) {
                     IElement icon = elements.item(stack, 0.5f).size(new Vec2(11, 10)).translate(new Vec2(0, -1));

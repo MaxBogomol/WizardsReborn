@@ -110,7 +110,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             List<ItemStack> list = loottable.getRandomItems(lootparams);
             BlockPos blockpos = this.getHeadBlock();
 
-            for(ItemStack itemstack : list) {
+            for (ItemStack itemstack : list) {
                 ItemEntity itementity = new ItemEntity(serverlevel, (double)blockpos.getX(), (double)blockpos.getY(), (double)blockpos.getZ(), itemstack);
                 itementity.setDefaultPickUpDelay();
                 serverlevel.addFreshEntity(itementity);
@@ -251,7 +251,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         } else {
             this.hurt(source, (float) i);
             if (this.isVehicle()) {
-                for(Entity entity : this.getIndirectPassengers()) {
+                for (Entity entity : this.getIndirectPassengers()) {
                     entity.hurt(source, (float) i);
                 }
             }
@@ -522,7 +522,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             simplecontainer.removeListener(this);
             int i = Math.min(simplecontainer.getContainerSize(), this.inventory.getContainerSize());
 
-            for(int j = 0; j < i; ++j) {
+            for (int j = 0; j < i; ++j) {
                 ItemStack itemstack = simplecontainer.getItem(j);
                 if (!itemstack.isEmpty()) {
                     this.inventory.setItem(j, itemstack.copy());
@@ -555,7 +555,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     protected void dropEquipment() {
         super.dropEquipment();
         if (this.inventory != null) {
-            for(int i = 0; i < this.inventory.getContainerSize(); ++i) {
+            for (int i = 0; i < this.inventory.getContainerSize(); ++i) {
                 ItemStack itemstack = this.inventory.getItem(i);
                 if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
                     this.spawnAtLocation(itemstack);

@@ -84,7 +84,7 @@ public class SaltLanternBlock extends Block implements EntityBlock, SimpleWaterl
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
 
-        for(Direction direction : context.getNearestLookingDirections()) {
+        for (Direction direction : context.getNearestLookingDirections()) {
             if (direction.getAxis() == Direction.Axis.Y) {
                 BlockState blockstate = this.defaultBlockState().setValue(HANGING, Boolean.valueOf(direction == Direction.UP));
                 if (blockstate.canSurvive(context.getLevel(), context.getClickedPos())) {

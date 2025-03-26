@@ -67,7 +67,7 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
 
                             Multimap<Attribute, AttributeModifier> attributes = stack.getAttributeModifiers(EquipmentSlot.MAINHAND);
 
-                            for(Map.Entry<Attribute, AttributeModifier> entry : attributes.entries()) {
+                            for (Map.Entry<Attribute, AttributeModifier> entry : attributes.entries()) {
                                 AttributeModifier attribute = entry.getValue();
                                 if (entry.getKey() == Attributes.ATTACK_DAMAGE) {
                                     baseDamage = (float) (baseDamage + attribute.getAmount());

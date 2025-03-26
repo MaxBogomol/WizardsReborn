@@ -85,7 +85,7 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
     public void load(CompoundTag nbt) {
         super.load(nbt);
         maxCooldown = nbt.getInt("maxCooldown");
-        for(Direction facing : Direction.values())
+        for (Direction facing : Direction.values())
             if(nbt.contains("connection"+facing.get3DDataValue()))
                 connection[facing.get3DDataValue()] = nbt.getBoolean("connection"+facing.get3DDataValue());
     }
@@ -94,7 +94,7 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
         nbt.putInt("maxCooldown", maxCooldown);
-        for(Direction facing : Direction.values())
+        for (Direction facing : Direction.values())
             nbt.putBoolean("connection"+facing.get3DDataValue(),connection[facing.get3DDataValue()]);
     }
 

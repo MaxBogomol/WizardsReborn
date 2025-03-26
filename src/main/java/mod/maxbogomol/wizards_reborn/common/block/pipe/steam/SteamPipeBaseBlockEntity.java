@@ -88,19 +88,18 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
 
     protected boolean isAnySideUnclogged() {
         for (Direction facing : Direction.values()) {
-            if (!getConnection(facing).transfer)
-                continue;
+            if (!getConnection(facing).transfer) continue;
             BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
-            if (blockEntity instanceof SteamPipeBaseBlockEntity && !((SteamPipeBaseBlockEntity) blockEntity).clogged)
+            if (blockEntity instanceof SteamPipeBaseBlockEntity && !((SteamPipeBaseBlockEntity) blockEntity).clogged) {
                 return true;
+            }
         }
         return false;
     }
 
     public void tick() {
         if (!level.isClientSide()) {
-            if (!loaded)
-                initConnections();
+            if (!loaded) initConnections();
             ticksExisted++;
             boolean steamMoved = false;
 
@@ -108,10 +107,8 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
                 PipePriorityMap<Integer, Direction> possibleDirections = new PipePriorityMap<>();
 
                 for (Direction facing : Direction.values()) {
-                    if (!getConnection(facing).transfer)
-                        continue;
-                    if (isFrom(facing))
-                        continue;
+                    if (!getConnection(facing).transfer) continue;
+                    if (isFrom(facing)) continue;
                     BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
                     if (blockEntity != null) {
                         if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
@@ -230,8 +227,7 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
             }
         }
 
-        if (isFrom(facing))
-            setFrom(facing, false);
+        if (isFrom(facing)) setFrom(facing, false);
         return false;
     }
 
@@ -247,17 +243,15 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        if (nbt.contains("clogged"))
-            clogged = nbt.getBoolean("clogged");
-        if (nbt.contains("lastTransfer"))
-            lastTransfer = readNullableFacing(nbt.getInt("lastTransfer"));
-        for(Direction facing : Direction.values())
-            if(nbt.contains("from"+facing.get3DDataValue()))
-                from[facing.get3DDataValue()] = nbt.getBoolean("from"+facing.get3DDataValue());
-        if (nbt.contains("lastRobin"))
-            lastRobin = nbt.getInt("lastRobin");
-        if (nbt.contains("steam"))
-            steam = nbt.getInt("steam");
+        if (nbt.contains("clogged")) clogged = nbt.getBoolean("clogged");
+        if (nbt.contains("lastTransfer")) lastTransfer = readNullableFacing(nbt.getInt("lastTransfer"));
+        for (Direction facing : Direction.values()) {
+            if (nbt.contains("from" + facing.get3DDataValue())) {
+                from[facing.get3DDataValue()] = nbt.getBoolean("from" + facing.get3DDataValue());
+            }
+        }
+        if (nbt.contains("lastRobin")) lastRobin = nbt.getInt("lastRobin");
+        if (nbt.contains("steam")) steam = nbt.getInt("steam");
     }
 
     @Override
@@ -265,8 +259,9 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
         super.saveAdditional(nbt);
         writeCloggedFlag(nbt);
         writeLastTransfer(nbt);
-        for(Direction facing : Direction.values())
-            nbt.putBoolean("from"+facing.get3DDataValue(),from[facing.get3DDataValue()]);
+        for (Direction facing : Direction.values()) {
+            nbt.putBoolean("from" + facing.get3DDataValue(), from[facing.get3DDataValue()]);
+        }
         nbt.putInt("lastRobin",lastRobin);
         nbt.putInt("steam",steam);
     }
@@ -275,10 +270,8 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
     public CompoundTag getUpdateTag() {
         CompoundTag nbt = super.getUpdateTag();
         nbt.putInt("steam",steam);
-        if (syncCloggedFlag)
-            writeCloggedFlag(nbt);
-        if (syncTransfer)
-            writeLastTransfer(nbt);
+        if (syncCloggedFlag) writeCloggedFlag(nbt);
+        if (syncTransfer) writeLastTransfer(nbt);
         return nbt;
     }
 

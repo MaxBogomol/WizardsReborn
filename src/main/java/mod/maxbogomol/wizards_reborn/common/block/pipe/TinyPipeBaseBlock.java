@@ -62,30 +62,36 @@ public abstract class TinyPipeBaseBlock extends PipeBaseBlock {
                         for (PipeConnection west : PipeConnection.visual()) {
                             for (PipeConnection east : PipeConnection.visual()) {
                                 VoxelShape shape = center;
-                                if (down == PipeConnection.PIPE)
+                                if (down == PipeConnection.PIPE) {
                                     shape = Shapes.joinUnoptimized(shape, PIPE_DOWN_AABB, BooleanOp.OR);
-                                else if (down == PipeConnection.END)
+                                } else if (down == PipeConnection.END) {
                                     shape = Shapes.joinUnoptimized(shape, END_DOWN_AABB, BooleanOp.OR);
-                                if (up == PipeConnection.PIPE)
+                                }
+                                if (up == PipeConnection.PIPE) {
                                     shape = Shapes.joinUnoptimized(shape, PIPE_UP_AABB, BooleanOp.OR);
-                                else if (up == PipeConnection.END)
+                                } else if (up == PipeConnection.END) {
                                     shape = Shapes.joinUnoptimized(shape, END_UP_AABB, BooleanOp.OR);
-                                if (north == PipeConnection.PIPE)
+                                }
+                                if (north == PipeConnection.PIPE) {
                                     shape = Shapes.joinUnoptimized(shape, PIPE_NORTH_AABB, BooleanOp.OR);
-                                else if (north == PipeConnection.END)
+                                } else if (north == PipeConnection.END) {
                                     shape = Shapes.joinUnoptimized(shape, END_NORTH_AABB, BooleanOp.OR);
-                                if (south == PipeConnection.PIPE)
+                                }
+                                if (south == PipeConnection.PIPE) {
                                     shape = Shapes.joinUnoptimized(shape, PIPE_SOUTH_AABB, BooleanOp.OR);
-                                else if (south == PipeConnection.END)
+                                } else if (south == PipeConnection.END) {
                                     shape = Shapes.joinUnoptimized(shape, END_SOUTH_AABB, BooleanOp.OR);
-                                if (west == PipeConnection.PIPE)
+                                }
+                                if (west == PipeConnection.PIPE) {
                                     shape = Shapes.joinUnoptimized(shape, PIPE_WEST_AABB, BooleanOp.OR);
-                                else if (west == PipeConnection.END)
+                                } else if (west == PipeConnection.END) {
                                     shape = Shapes.joinUnoptimized(shape, END_WEST_AABB, BooleanOp.OR);
-                                if (east == PipeConnection.PIPE)
+                                }
+                                if (east == PipeConnection.PIPE) {
                                     shape = Shapes.joinUnoptimized(shape, PIPE_EAST_AABB, BooleanOp.OR);
-                                else if (east == PipeConnection.END)
+                                } else if (east == PipeConnection.END) {
                                     shape = Shapes.joinUnoptimized(shape, END_EAST_AABB, BooleanOp.OR);
+                                }
                                 shapes[getShapeIndex(down, up, north, south, west, east)] = shape.optimize();
                             }
                         }

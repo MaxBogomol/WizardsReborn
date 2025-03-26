@@ -75,7 +75,7 @@ public class SaltWallTorchBlock extends Block implements EntityBlock, SimpleWate
         Direction[] adirection = context.getNearestLookingDirections();
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
 
-        for(Direction direction : adirection) {
+        for (Direction direction : adirection) {
             if (direction.getAxis().isHorizontal()) {
                 Direction direction1 = direction.getOpposite();
                 blockstate = blockstate.setValue(FACING, direction1);

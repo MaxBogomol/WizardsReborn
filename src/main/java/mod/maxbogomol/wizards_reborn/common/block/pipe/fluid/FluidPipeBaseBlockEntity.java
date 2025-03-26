@@ -103,19 +103,18 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity imple
 
     protected boolean isAnySideUnclogged() {
         for (Direction facing : Direction.values()) {
-            if (!getConnection(facing).transfer)
-                continue;
+            if (!getConnection(facing).transfer) continue;
             BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
-            if (blockEntity instanceof FluidPipeBaseBlockEntity && !((FluidPipeBaseBlockEntity) blockEntity).clogged)
+            if (blockEntity instanceof FluidPipeBaseBlockEntity && !((FluidPipeBaseBlockEntity) blockEntity).clogged) {
                 return true;
+            }
         }
         return false;
     }
 
     public void tick() {
         if (!level.isClientSide()) {
-            if (!loaded)
-                initConnections();
+            if (!loaded) initConnections();
             ticksExisted++;
             boolean fluidMoved = false;
 
@@ -255,17 +254,15 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity imple
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        if (nbt.contains("clogged"))
-            clogged = nbt.getBoolean("clogged");
-        if (nbt.contains("tank"))
-            tank.readFromNBT(nbt.getCompound("tank"));
-        if (nbt.contains("lastTransfer"))
-            lastTransfer = readNullableFacing(nbt.getInt("lastTransfer"));
-        for(Direction facing : Direction.values())
-            if(nbt.contains("from"+facing.get3DDataValue()))
-                from[facing.get3DDataValue()] = nbt.getBoolean("from"+facing.get3DDataValue());
-        if (nbt.contains("lastRobin"))
-            lastRobin = nbt.getInt("lastRobin");
+        if (nbt.contains("clogged")) clogged = nbt.getBoolean("clogged");
+        if (nbt.contains("tank")) tank.readFromNBT(nbt.getCompound("tank"));
+        if (nbt.contains("lastTransfer")) lastTransfer = readNullableFacing(nbt.getInt("lastTransfer"));
+        for (Direction facing : Direction.values()) {
+            if (nbt.contains("from" + facing.get3DDataValue())) {
+                from[facing.get3DDataValue()] = nbt.getBoolean("from" + facing.get3DDataValue());
+            }
+        }
+        if (nbt.contains("lastRobin")) lastRobin = nbt.getInt("lastRobin");
     }
 
     @Override
@@ -274,20 +271,18 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity imple
         writeTank(nbt);
         writeCloggedFlag(nbt);
         writeLastTransfer(nbt);
-        for(Direction facing : Direction.values())
-            nbt.putBoolean("from"+facing.get3DDataValue(),from[facing.get3DDataValue()]);
+        for (Direction facing : Direction.values()) {
+            nbt.putBoolean("from" + facing.get3DDataValue(), from[facing.get3DDataValue()]);
+        }
         nbt.putInt("lastRobin",lastRobin);
     }
 
     @Override
     public CompoundTag getUpdateTag() {
         CompoundTag nbt = super.getUpdateTag();
-        if (syncTank)
-            writeTank(nbt);
-        if (syncCloggedFlag)
-            writeCloggedFlag(nbt);
-        if (syncTransfer)
-            writeLastTransfer(nbt);
+        if (syncTank) writeTank(nbt);
+        if (syncCloggedFlag) writeCloggedFlag(nbt);
+        if (syncTransfer) writeLastTransfer(nbt);
         return nbt;
     }
 

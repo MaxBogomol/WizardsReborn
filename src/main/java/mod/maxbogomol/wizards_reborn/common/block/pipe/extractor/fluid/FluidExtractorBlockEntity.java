@@ -85,8 +85,7 @@ public class FluidExtractorBlockEntity extends FluidPipeBaseBlockEntity {
         if (!level.isClientSide()) {
             active = (level.hasNeighborSignal(getBlockPos()) != level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED));
             for (Direction facing : Direction.values()) {
-                if (!getConnection(facing).transfer)
-                    continue;
+                if (!getConnection(facing).transfer) continue;
                 BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
                 if (blockEntity != null && !(blockEntity instanceof FluidPipeBaseBlockEntity)) {
                     if (active) {
@@ -118,10 +117,11 @@ public class FluidExtractorBlockEntity extends FluidPipeBaseBlockEntity {
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
         if (!this.remove && cap == ForgeCapabilities.FLUID_HANDLER) {
-            if (side == null)
+            if (side == null) {
                 return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, holder);
-            else if (getConnection(side).transfer)
+            } else if (getConnection(side).transfer) {
                 return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, LazyOptional.of(() -> this.sideHandlers[side.get3DDataValue()]));
+            }
         }
         return super.getCapability(cap, side);
     }

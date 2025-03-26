@@ -33,8 +33,8 @@ public class WizardsRebornCommand {
                 .then(Commands.literal("knowledge")
                         .then(Commands.literal("give")
                                 .then(Commands.argument("player", EntityArgument.players())
-                                        .then(Commands.argument("knowledge", new KnowledgeArgument())
-                                                .executes(ctx -> giveKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"), KnowledgeArgument.getKnowledge(ctx, "knowledge")))
+                                        .then(Commands.argument("knowledge", new KnowledgeArgumentType())
+                                                .executes(ctx -> giveKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"), KnowledgeArgumentType.getKnowledge(ctx, "knowledge")))
                                         )
                                         .then(Commands.literal("all")
                                                 .executes(ctx -> giveAllKnowledge(ctx, EntityArgument.getPlayers(ctx, "player")))
@@ -43,8 +43,8 @@ public class WizardsRebornCommand {
                         )
                         .then(Commands.literal("remove")
                                 .then(Commands.argument("player", EntityArgument.players())
-                                        .then(Commands.argument("knowledge", new KnowledgeArgument())
-                                                .executes(ctx -> removeKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"), KnowledgeArgument.getKnowledge(ctx, "knowledge")))
+                                        .then(Commands.argument("knowledge", new KnowledgeArgumentType())
+                                                .executes(ctx -> removeKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"), KnowledgeArgumentType.getKnowledge(ctx, "knowledge")))
                                         )
                                         .then(Commands.literal("all")
                                                 .executes(ctx -> removeAllKnowledge(ctx, EntityArgument.getPlayers(ctx, "player")))
@@ -55,8 +55,8 @@ public class WizardsRebornCommand {
                 .then(Commands.literal("spell")
                         .then(Commands.literal("give")
                                 .then(Commands.argument("player", EntityArgument.players())
-                                        .then(Commands.argument("spell", new SpellArgument())
-                                                .executes(ctx -> giveSpell(ctx, EntityArgument.getPlayers(ctx, "player"), SpellArgument.getSpell(ctx, "spell")))
+                                        .then(Commands.argument("spell", new SpellArgumentType())
+                                                .executes(ctx -> giveSpell(ctx, EntityArgument.getPlayers(ctx, "player"), SpellArgumentType.getSpell(ctx, "spell")))
                                         )
                                         .then(Commands.literal("all")
                                                 .executes(ctx -> giveAllSpell(ctx, EntityArgument.getPlayers(ctx, "player")))
@@ -65,8 +65,8 @@ public class WizardsRebornCommand {
                         )
                         .then(Commands.literal("remove")
                                 .then(Commands.argument("player", EntityArgument.players())
-                                        .then(Commands.argument("spell", new SpellArgument())
-                                                .executes(ctx -> removeSpell(ctx, EntityArgument.getPlayers(ctx, "player"), SpellArgument.getSpell(ctx, "spell")))
+                                        .then(Commands.argument("spell", new SpellArgumentType())
+                                                .executes(ctx -> removeSpell(ctx, EntityArgument.getPlayers(ctx, "player"), SpellArgumentType.getSpell(ctx, "spell")))
                                         )
                                         .then(Commands.literal("all")
                                                 .executes(ctx -> removeAllSpell(ctx, EntityArgument.getPlayers(ctx, "player")))
@@ -76,10 +76,10 @@ public class WizardsRebornCommand {
                 )
                 .then(Commands.literal("arcane_enchantment")
                         .then(Commands.argument("player", EntityArgument.players())
-                                .then(Commands.argument("arcane_enchantment", new ArcaneEnchantmentArgument())
-                                        .executes(ctx -> addArcaneEnchantment(ctx, EntityArgument.getPlayers(ctx, "player"), ArcaneEnchantmentArgument.getArcaneEnchantments(ctx, "arcane_enchantment")))
+                                .then(Commands.argument("arcane_enchantment", new ArcaneEnchantmentArgumentType())
+                                        .executes(ctx -> addArcaneEnchantment(ctx, EntityArgument.getPlayers(ctx, "player"), ArcaneEnchantmentArgumentType.getArcaneEnchantments(ctx, "arcane_enchantment")))
                                 .then(Commands.argument("level", IntegerArgumentType.integer(0))
-                                        .executes(ctx -> arcaneEnchantment(ctx, EntityArgument.getPlayers(ctx, "player"), ArcaneEnchantmentArgument.getArcaneEnchantments(ctx, "arcane_enchantment"), IntegerArgumentType.getInteger(ctx,"level")))
+                                        .executes(ctx -> arcaneEnchantment(ctx, EntityArgument.getPlayers(ctx, "player"), ArcaneEnchantmentArgumentType.getArcaneEnchantments(ctx, "arcane_enchantment"), IntegerArgumentType.getInteger(ctx,"level")))
                                 ))
                         )
                 )
@@ -129,7 +129,7 @@ public class WizardsRebornCommand {
     }
 
     private static int giveKnowledge(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, Knowledge knowledge) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             KnowledgeUtil.addKnowledge(player, knowledge);
         }
 
@@ -146,7 +146,7 @@ public class WizardsRebornCommand {
     }
 
     private static int removeKnowledge(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, Knowledge knowledge) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             KnowledgeUtil.removeKnowledge(player, knowledge);
         }
 
@@ -163,7 +163,7 @@ public class WizardsRebornCommand {
     }
 
     private static int giveAllKnowledge(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             KnowledgeUtil.addAllKnowledge(player);
         }
 
@@ -180,7 +180,7 @@ public class WizardsRebornCommand {
     }
 
     private static int removeAllKnowledge(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             KnowledgeUtil.removeAllKnowledge(player);
         }
 
@@ -197,7 +197,7 @@ public class WizardsRebornCommand {
     }
 
     private static int giveSpell(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, Spell spell) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             KnowledgeUtil.addSpell(player, spell);
         }
 
@@ -214,7 +214,7 @@ public class WizardsRebornCommand {
     }
 
     private static int removeSpell(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, Spell spell) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             KnowledgeUtil.removeSpell(player, spell);
         }
 
@@ -231,7 +231,7 @@ public class WizardsRebornCommand {
     }
 
     private static int giveAllSpell(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             KnowledgeUtil.addAllSpell(player);
         }
 
@@ -248,7 +248,7 @@ public class WizardsRebornCommand {
     }
 
     private static int removeAllSpell(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             KnowledgeUtil.removeAllSpell(player);
         }
 
@@ -265,7 +265,7 @@ public class WizardsRebornCommand {
     }
 
     private static int addArcaneEnchantment(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, ArcaneEnchantment arcaneEnchantment) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
@@ -291,7 +291,7 @@ public class WizardsRebornCommand {
     }
 
     private static int arcaneEnchantment(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, ArcaneEnchantment arcaneEnchantment, int enchantmentLevel) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (ArcaneEnchantmentUtil.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
@@ -315,7 +315,7 @@ public class WizardsRebornCommand {
     private static int setWissen(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, int wissen) throws CommandSyntaxException {
         int startWissen = wissen;
 
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
@@ -339,7 +339,7 @@ public class WizardsRebornCommand {
     }
 
     private static int addWissen(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, int wissen) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
@@ -362,7 +362,7 @@ public class WizardsRebornCommand {
     }
 
     private static int removeWissen(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, int wissen) throws CommandSyntaxException {
-        for(ServerPlayer player : targetPlayers) {
+        for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
@@ -425,10 +425,10 @@ public class WizardsRebornCommand {
         MutableComponent component = Component.empty();
         boolean error = false;
 
-        ArrayList<Monogram> map = new ArrayList<Monogram>();
-        ArrayList<Monogram> startMap = new ArrayList<Monogram>();
-        ArrayList<Monogram> maxMap = new ArrayList<Monogram>();
-        Map<Monogram, Integer> monograms = new HashMap<Monogram, Integer>();
+        ArrayList<Monogram> map = new ArrayList<>();
+        ArrayList<Monogram> startMap = new ArrayList<>();
+        ArrayList<Monogram> maxMap = new ArrayList<>();
+        Map<Monogram, Integer> monograms = new HashMap<>();
 
         map.add(MonogramHandler.getMonograms().get(random.nextInt(0, MonogramHandler.size())));
 
@@ -487,7 +487,7 @@ public class WizardsRebornCommand {
             }
         }
 
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        ArrayList<Integer> numbers = new ArrayList<>();
 
         if (map.size() > start) {
             while (numbers.size() < start) {
@@ -582,10 +582,8 @@ public class WizardsRebornCommand {
                 add = true;
             }
             MonogramRecipe addRecipe = MonogramHandler.getRecipe(monogram.getId());
-            if (addRecipe != null) {
-                if (addRecipe.getInputs().contains(secondMonogram)) {
-                    add = true;
-                }
+            if (addRecipe.getInputs().contains(secondMonogram)) {
+                add = true;
             }
         }
 

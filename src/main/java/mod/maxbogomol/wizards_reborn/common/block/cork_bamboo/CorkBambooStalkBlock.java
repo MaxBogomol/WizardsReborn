@@ -99,17 +99,13 @@ public class CorkBambooStalkBlock extends BambooStalkBlock {
 
     protected int getHeightAboveUpToMax(BlockGetter level, BlockPos pos) {
         int i;
-        for(i = 0; i < 16 && level.getBlockState(pos.above(i + 1)).is(WizardsRebornBlocks.CORK_BAMBOO.get()); ++i) {
-        }
-
+        for (i = 0; i < 16 && level.getBlockState(pos.above(i + 1)).is(WizardsRebornBlocks.CORK_BAMBOO.get()); ++i) {}
         return i;
     }
 
     protected int getHeightBelowUpToMax(BlockGetter level, BlockPos pos) {
         int i;
-        for(i = 0; i < 16 && level.getBlockState(pos.below(i + 1)).is(WizardsRebornBlocks.CORK_BAMBOO.get()); ++i) {
-        }
-
+        for (i = 0; i < 16 && level.getBlockState(pos.below(i + 1)).is(WizardsRebornBlocks.CORK_BAMBOO.get()); ++i) {}
         return i;
     }
 }

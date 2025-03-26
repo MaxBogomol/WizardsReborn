@@ -132,7 +132,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
     }
 
     private boolean inventoryFull() {
-        for(ItemStack itemstack : this.items) {
+        for (ItemStack itemstack : this.items) {
             if (itemstack.isEmpty() || itemstack.getCount() != itemstack.getMaxStackSize()) {
                 return false;
             }
@@ -151,7 +151,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
             if (isFullContainer(container, direction)) {
                 return false;
             } else {
-                for(int i = 0; i < sourceContainer.getContainerSize(); ++i) {
+                for (int i = 0; i < sourceContainer.getContainerSize(); ++i) {
                     if (!sourceContainer.getItem(i).isEmpty()) {
                         ItemStack itemstack = sourceContainer.getItem(i).copy();
                         ItemStack itemstack1 = addItem(sourceContainer, container, sourceContainer.removeItem(i, 1), direction);
@@ -196,7 +196,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
                 return tryTakeInItemFromSlot(hopper, container, p_59363_, direction);
             });
         } else {
-            for(ItemEntity itementity : getItemsAtAndAbove(level, hopper)) {
+            for (ItemEntity itementity : getItemsAtAndAbove(level, hopper)) {
                 if (addItem(hopper, itementity)) {
                     return true;
                 }
@@ -241,7 +241,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
             if (direction != null) {
                 int[] aint = worldlycontainer.getSlotsForFace(direction);
 
-                for(int k = 0; k < aint.length && !stack.isEmpty(); ++k) {
+                for (int k = 0; k < aint.length && !stack.isEmpty(); ++k) {
                     stack = tryMoveInItem(source, destination, stack, aint[k], direction);
                 }
 
@@ -251,7 +251,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
 
         int i = destination.getContainerSize();
 
-        for(int j = 0; j < i && !stack.isEmpty(); ++j) {
+        for (int j = 0; j < i && !stack.isEmpty(); ++j) {
             stack = tryMoveInItem(source, destination, stack, j, direction);
         }
 

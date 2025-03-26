@@ -83,7 +83,7 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        for(Direction facing : Direction.values())
+        for (Direction facing : Direction.values())
             if(nbt.contains("connection"+facing.get3DDataValue()))
                 connection[facing.get3DDataValue()] = nbt.getBoolean("connection"+facing.get3DDataValue());
     }
@@ -91,7 +91,7 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        for(Direction facing : Direction.values())
+        for (Direction facing : Direction.values())
             nbt.putBoolean("connection"+facing.get3DDataValue(),connection[facing.get3DDataValue()]);
     }
 

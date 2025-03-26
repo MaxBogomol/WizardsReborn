@@ -84,7 +84,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
 
                 if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
                     ListTag listtag = EnchantedBookItem.getEnchantments(stack);
-                    for(int ii = 0; ii < listtag.size(); ++ii) {
+                    for (int ii = 0; ii < listtag.size(); ++ii) {
                         CompoundTag compoundtag = listtag.getCompound(ii);
                         Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(EnchantmentHelper.getEnchantmentId(compoundtag));
                         enchantments.put(enchantment, EnchantmentHelper.getEnchantmentLevel(compoundtag));
@@ -124,7 +124,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                         int of = 0;
                         if (currentBook.getItem().equals(Items.ENCHANTED_BOOK)) {
                             ListTag listtag = EnchantedBookItem.getEnchantments(currentBook);
-                            for(int ii = 0; ii < listtag.size(); ++ii) {
+                            for (int ii = 0; ii < listtag.size(); ++ii) {
                                 CompoundTag compoundtag = listtag.getCompound(ii);
                                 Enchantment enchantment1 = ForgeRegistries.ENCHANTMENTS.getValue(EnchantmentHelper.getEnchantmentId(compoundtag));
                                 if (enchantment.equals(enchantment1)) {
@@ -178,7 +178,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
 
                 if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
                     ListTag listtag = EnchantedBookItem.getEnchantments(stack);
-                    for(int ii = 0; ii < listtag.size(); ++ii) {
+                    for (int ii = 0; ii < listtag.size(); ++ii) {
                         CompoundTag compoundtag = listtag.getCompound(ii);
                         Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(EnchantmentHelper.getEnchantmentId(compoundtag));
                         enchantments.put(enchantment, EnchantmentHelper.getEnchantmentLevel(compoundtag));

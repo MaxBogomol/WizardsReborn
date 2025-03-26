@@ -122,8 +122,9 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
 
     public void loadConnections(CompoundTag nbt) {
         for (Direction direction : Direction.values()) {
-            if (nbt.contains("connection" + direction.get3DDataValue()))
+            if (nbt.contains("connection" + direction.get3DDataValue())) {
                 connections[direction.get3DDataValue()] = PipeConnection.values()[nbt.getInt("connection" + direction.get3DDataValue())];
+            }
         }
         requestModelDataUpdate();
     }

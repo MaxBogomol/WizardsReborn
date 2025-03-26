@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ArcaneEnchantmentArgument implements ArgumentType<ArcaneEnchantment> {
+public class ArcaneEnchantmentArgumentType implements ArgumentType<ArcaneEnchantment> {
     private static final DynamicCommandExceptionType UNKNOWN = new DynamicCommandExceptionType((obj) -> Component.translatable("commands.wizards_reborn.arcane_enchantment.unknown", obj));
 
     public static ArcaneEnchantment getArcaneEnchantments(final CommandContext<?> context, final String name) {
@@ -37,7 +37,7 @@ public class ArcaneEnchantmentArgument implements ArgumentType<ArcaneEnchantment
         return e;
     }
 
-    public static ArcaneEnchantmentArgument arcaneEnchantments() {
-        return new ArcaneEnchantmentArgument();
+    public static ArcaneEnchantmentArgumentType arcaneEnchantments() {
+        return new ArcaneEnchantmentArgumentType();
     }
 }

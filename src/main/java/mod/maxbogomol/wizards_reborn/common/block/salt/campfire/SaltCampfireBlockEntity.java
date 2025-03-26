@@ -198,7 +198,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
 
             Direction direction = getBlockState().getValue(CampfireBlock.FACING);
             NonNullList<ItemStack> nonnulllist = getItems();
-            for(int j = 0; j < nonnulllist.size(); ++j) {
+            for (int j = 0; j < nonnulllist.size(); ++j) {
                 ItemStack itemstack = nonnulllist.get(j);
                 if (itemstack != ItemStack.EMPTY && (cookingTime[j] - cookingProgress[j] > 0)) {
                     pos = new Vec3(0.5F, 0.44921875F, 0.5F);
@@ -298,7 +298,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
     public static void cookTick(Level level, BlockPos pos, BlockState state, SaltCampfireBlockEntity pBlockEntity) {
         boolean flag = false;
 
-        for(int i = 0; i < pBlockEntity.items.size(); ++i) {
+        for (int i = 0; i < pBlockEntity.items.size(); ++i) {
             ItemStack itemstack = pBlockEntity.items.get(i);
             if (!itemstack.isEmpty()) {
                 flag = true;
@@ -334,7 +334,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public boolean placeFood(@Nullable Entity pEntity, ItemStack stack, int pCookTime) {
-        for(int i = 0; i < this.items.size(); ++i) {
+        for (int i = 0; i < this.items.size(); ++i) {
             ItemStack itemstack = this.items.get(i);
             if (itemstack.isEmpty()) {
                 this.cookingTime[i] = (pCookTime / 2);
@@ -361,7 +361,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
     public static CompoundTag saveAllItems(CompoundTag pTag, NonNullList<ItemStack> pList, boolean pSaveEmpty) {
         ListTag listtag = new ListTag();
 
-        for(int i = 0; i < pList.size(); ++i) {
+        for (int i = 0; i < pList.size(); ++i) {
             ItemStack itemstack = pList.get(i);
             if (!itemstack.isEmpty()) {
                 CompoundTag compoundtag = new CompoundTag();
@@ -381,7 +381,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
     public static void loadAllItems(CompoundTag pTag, NonNullList<ItemStack> pList) {
         ListTag listtag = pTag.getList("ItemsCook", 10);
 
-        for(int i = 0; i < listtag.size(); ++i) {
+        for (int i = 0; i < listtag.size(); ++i) {
             CompoundTag compoundtag = listtag.getCompound(i);
             int j = compoundtag.getByte("Slot") & 255;
             if (j >= 0 && j < pList.size()) {

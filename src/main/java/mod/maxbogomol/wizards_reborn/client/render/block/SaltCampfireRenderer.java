@@ -20,9 +20,9 @@ public class SaltCampfireRenderer implements BlockEntityRenderer<SaltCampfireBlo
         NonNullList<ItemStack> nonnulllist = blockEntity.getItems();
         int i = (int) blockEntity.getBlockPos().asLong();
 
-        for(int j = 0; j < nonnulllist.size(); ++j) {
-            ItemStack iteposeStacktack = nonnulllist.get(j);
-            if (iteposeStacktack != ItemStack.EMPTY && (blockEntity.cookingTime[j] - blockEntity.cookingProgress[j] > 0)) {
+        for (int j = 0; j < nonnulllist.size(); ++j) {
+            ItemStack itemStack = nonnulllist.get(j);
+            if (itemStack != ItemStack.EMPTY && (blockEntity.cookingTime[j] - blockEntity.cookingProgress[j] > 0)) {
                 poseStack.pushPose();
                 poseStack.translate(0.5F, 0.44921875F, 0.5F);
                 Direction direction1 = Direction.from2DDataValue((j + direction.get2DDataValue()) % 4);
@@ -31,7 +31,7 @@ public class SaltCampfireRenderer implements BlockEntityRenderer<SaltCampfireBlo
                 poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
                 poseStack.translate(-0.3125F, -0.3125F, 0.0F);
                 poseStack.scale(0.375F, 0.375F, 0.375F);
-                Minecraft.getInstance().getItemRenderer().renderStatic(iteposeStacktack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), i + j);
+                Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), i + j);
                 poseStack.popPose();
             }
         }

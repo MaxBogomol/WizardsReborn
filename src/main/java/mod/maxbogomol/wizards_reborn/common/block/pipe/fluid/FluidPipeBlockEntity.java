@@ -85,10 +85,11 @@ public class FluidPipeBlockEntity extends FluidPipeBaseBlockEntity {
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
         if (!this.remove && cap == ForgeCapabilities.FLUID_HANDLER) {
-            if (side == null)
+            if (side == null) {
                 return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, holder);
-            else if (getConnection(side).transfer)
+            } else if (getConnection(side).transfer) {
                 return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, LazyOptional.of(() -> this.sideHandlers[side.get3DDataValue()]));
+            }
         }
         return super.getCapability(cap, side);
     }

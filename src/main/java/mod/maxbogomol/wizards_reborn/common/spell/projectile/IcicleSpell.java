@@ -196,7 +196,7 @@ public class IcicleSpell extends ProjectileSpell {
         this.vertex(matrix4f, matrix3f, vertexconsumer, 0, -2, 2, 0.15625F, 0.3125F, 1, 0, 0, light);
         this.vertex(matrix4f, matrix3f, vertexconsumer, 0, -2, -2, 0.0F, 0.3125F, 1, 0, 0, light);
 
-        for(int j = 0; j < 4; ++j) {
+        for (int j = 0; j < 4; ++j) {
             stack.mulPose(Axis.XP.rotationDegrees(90.0F));
             this.vertex(matrix4f, matrix3f, vertexconsumer, -8, -2, 0, 0.0F, 0.0F, 0, 1, 0, light);
             this.vertex(matrix4f, matrix3f, vertexconsumer, 8, -2, 0, 0.5F, 0.0F, 0, 1, 0, light);

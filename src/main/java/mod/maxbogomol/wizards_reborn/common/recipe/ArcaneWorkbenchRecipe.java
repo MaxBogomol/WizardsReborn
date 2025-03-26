@@ -101,7 +101,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
             NonNullList<Ingredient> inputs = NonNullList.withSize(13, Ingredient.EMPTY);
 
             Map<String, Ingredient> keys = new HashMap<String, Ingredient>();
-            for(Map.Entry<String, JsonElement> entry : GsonHelper.getAsJsonObject(json, "key").entrySet()) {
+            for (Map.Entry<String, JsonElement> entry : GsonHelper.getAsJsonObject(json, "key").entrySet()) {
                 if (entry.getKey().length() != 1) {
                     throw new JsonSyntaxException("Invalid key entry: '" + (String) entry.getKey() + "' is an invalid symbol (must be 1 character only).");
                 }

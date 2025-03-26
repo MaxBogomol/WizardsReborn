@@ -29,8 +29,7 @@ public class SteamExtractorBlockEntity extends SteamPipeBaseBlockEntity {
         if (!level.isClientSide()) {
             active = (level.hasNeighborSignal(getBlockPos()) != level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED));
             for (Direction facing : Direction.values()) {
-                if (!getConnection(facing).transfer)
-                    continue;
+                if (!getConnection(facing).transfer) continue;
                 BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
                 if (blockEntity != null && !(blockEntity instanceof SteamPipeBaseBlockEntity)) {
                     if (active) {
