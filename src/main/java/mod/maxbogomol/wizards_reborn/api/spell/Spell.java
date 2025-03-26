@@ -248,6 +248,18 @@ public class Spell {
         finishUseSpell(level, getWandContext(entityLiving, stack));
     }
 
+    public SpellContext getCommandContext(Entity entity, ItemStack stack, InteractionHand hand) {
+        return getWandContext(entity, stack, hand);
+    }
+
+    public SpellContext getCommandContext(Entity entity, ItemStack stack) {
+        return getWandContext(entity, stack);
+    }
+
+    public SpellContext getCommandContext(Entity entity) {
+        return getWandContext(entity, ItemStack.EMPTY);
+    }
+
     public void entityTick(SpellEntity entity) {
 
     }

@@ -224,6 +224,20 @@ public class SpellContext {
         mainHand = tag.getBoolean("mainHand");
     }
 
+    public void copy(SpellContext context) {
+        this.pos = context.pos;
+        this.offset = context.offset;
+        this.blockPos = context.blockPos;
+        this.direction = context.direction;
+        this.distance = context.distance;
+        this.alternative = context.alternative;
+        this.level = context.level;
+        this.entity = context.entity;
+        this.mainHand = context.mainHand;
+        this.itemStack = context.itemStack;
+        this.stats = context.stats;
+    }
+
     public static CompoundTag vecToTag(Vec3 vec) {
         CompoundTag tag = new CompoundTag();
         tag.putDouble("x", vec.x());

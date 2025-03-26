@@ -13,6 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramHandler;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
@@ -20,6 +21,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -78,8 +81,17 @@ public class WizardsRebornCommand {
                         )
                         .then(Commands.literal("use")
                                 .then(Commands.argument("entity", EntityArgument.entities())
-                                        .then(Commands.argument("spell", new SpellArgumentType())
-                                                .executes(ctx -> useSpell(ctx, EntityArgument.getEntities(ctx, "entity"), SpellArgumentType.getSpell(ctx, "spell")))
+                                        .then(Commands.literal("entity")
+                                                .then(Commands.argument("spell", new SpellArgumentType())
+                                                        .executes(ctx -> useSpellEntity(ctx, EntityArgument.getEntities(ctx, "entity"), SpellArgumentType.getSpell(ctx, "spell")))
+                                                )
+                                        )
+                                        .then(Commands.literal("block")
+                                                .then(Commands.argument("spell", new SpellArgumentType())
+                                                        .then(Commands.argument("position", BlockPosArgument.blockPos())
+                                                                .executes(ctx -> useSpellBlock(ctx, EntityArgument.getEntities(ctx, "entity"), SpellArgumentType.getSpell(ctx, "spell"), BlockPosArgument.getBlockPos(ctx, "position")))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -274,14 +286,22 @@ public class WizardsRebornCommand {
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int useSpell(CommandContext<CommandSourceStack> command, Collection<? extends Entity> targetEntities, Spell spell) throws CommandSyntaxException {
+    private static int useSpellEntity(CommandContext<CommandSourceStack> command, Collection<? extends Entity> targetEntities, Spell spell) throws CommandSyntaxException {
         for (Entity entity : targetEntities) {
-            spell.useSpell(entity.level(), spell.getWandContext(entity, ItemStack.EMPTY));
+            SpellContext context = spell.getCommandContext(entity);
+            spell.useSpell(entity.level(), context);
         }
 
-        command.getSource().sendSuccess(() -> {
-            return Component.translatable("commands.wizards_reborn.spell.remove.all.multiple", 1);
-        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpellBlock(CommandContext<CommandSourceStack> command, Collection<? extends Entity> targetEntities, Spell spell, BlockPos blockPos) throws CommandSyntaxException {
+        for (Entity entity : targetEntities) {
+            SpellContext context = spell.getCommandContext(entity);
+            context.setBlockPos(blockPos);
+            spell.useSpellOn(entity.level(), context);
+        }
+
         return Command.SINGLE_SUCCESS;
     }
 
@@ -340,6 +360,7 @@ public class WizardsRebornCommand {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
+                    wissen = startWissen;
                     if (wissen > wissenItem.getMaxWissen()) wissen = wissenItem.getMaxWissen();
                     WissenItemUtil.existWissen(stack);
                     WissenItemUtil.setWissen(stack, wissen);
@@ -349,11 +370,11 @@ public class WizardsRebornCommand {
 
         if (targetPlayers.size() == 1) {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.set_wissen.single", Component.literal(String.valueOf(startWissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
+                return Component.translatable("commands.wizards_reborn.wissen.set.single", Component.literal(String.valueOf(startWissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
             }, true);
         } else {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.set_wissen.multiple", Component.literal(String.valueOf(startWissen)), targetPlayers.size());
+                return Component.translatable("commands.wizards_reborn.wissen.set.multiple", Component.literal(String.valueOf(startWissen)), targetPlayers.size());
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -372,11 +393,11 @@ public class WizardsRebornCommand {
 
         if (targetPlayers.size() == 1) {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.add_wissen.single", Component.literal(String.valueOf(wissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
+                return Component.translatable("commands.wizards_reborn.wissen.add.single", Component.literal(String.valueOf(wissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
             }, true);
         } else {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.add_wissen.multiple", Component.literal(String.valueOf(wissen)), targetPlayers.size());
+                return Component.translatable("commands.wizards_reborn.wissen.add.multiple", Component.literal(String.valueOf(wissen)), targetPlayers.size());
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -395,11 +416,11 @@ public class WizardsRebornCommand {
 
         if (targetPlayers.size() == 1) {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.remove_wissen.single", Component.literal(String.valueOf(wissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
+                return Component.translatable("commands.wizards_reborn.wissen.remove.single", Component.literal(String.valueOf(wissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
             }, true);
         } else {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.remove_wissen.multiple", Component.literal(String.valueOf(wissen)), targetPlayers.size());
+                return Component.translatable("commands.wizards_reborn.wissen.remove.multiple", Component.literal(String.valueOf(wissen)), targetPlayers.size());
             }, true);
         }
         return Command.SINGLE_SUCCESS;
