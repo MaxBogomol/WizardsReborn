@@ -824,7 +824,7 @@
 
   "_comment_10": "Алхимические зелья",
   "alchemy_potion.wizards_reborn.empty": "Пусто",
-  "alchemy_potion.wizards_reborn.:combined": "Комбинированное зелье",
+  "alchemy_potion.wizards_reborn.combined": "Комбинированное зелье",
   "alchemy_potion.wizards_reborn.night_vision": "Зелье ночного зрения",
   "alchemy_potion.wizards_reborn.invisibility": "Зелье невидимости",
   "alchemy_potion.wizards_reborn.leaping": "Зелье прыгучести",
@@ -2087,7 +2087,7 @@
   "config.client.wizards_reborn.numerical.wissen": "Виссен",
   "config.client.wizards_reborn.numerical.wissen.desc": "Включает числовой виссен.",
   "config.client.wizards_reborn.numerical.cooldown": "Перезаряд",
-  "config.client.wizards_reborn.numerical.cooldown.desc": "Включает числовойl перезаряд.",
+  "config.client.wizards_reborn.numerical.cooldown.desc": "Включает числовой перезаряд.",
   "config.client.wizards_reborn.numerical.light": "Свет",
   "config.client.wizards_reborn.numerical.light.desc": "Включает отображение названия света.",
   "config.client.wizards_reborn.numerical.experience": "Опыт",
