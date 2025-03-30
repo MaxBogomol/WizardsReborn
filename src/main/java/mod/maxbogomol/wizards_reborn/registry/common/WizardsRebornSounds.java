@@ -227,6 +227,7 @@ public class WizardsRebornSounds {
     public static final RegistryObject<SoundEvent> MUSIC_DISC_SHIMMER = SOUND_EVENTS.register("blue_shimmer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "blue_shimmer")));
     public static final RegistryObject<SoundEvent> MUSIC_DISC_CAPITALISM = SOUND_EVENTS.register("battle_against_a_true_capitalist", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "battle_against_a_true_capitalist")));
     public static final RegistryObject<SoundEvent> MUSIC_DISC_PANACHE = SOUND_EVENTS.register("magical_panache", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "magical_panache")));
+    public static final RegistryObject<SoundEvent> MUSIC_DISC_DISCO = SOUND_EVENTS.register("illegal_wizard_disco", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "illegal_wizard_disco")));
 
     public static final RegistryObject<SoundEvent> WISSEN_BURST = SOUND_EVENTS.register("wissen_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "wissen_burst")));
     public static final RegistryObject<SoundEvent> WISSEN_TRANSFER = SOUND_EVENTS.register("wissen_transfer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "wissen_transfer")));

@@ -41,38 +41,24 @@ public class ArcaneRecordItem extends RecordItem implements IGuiParticleItem {
         int ii = lengthInSeconds;
 
         float ticks = ((ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) + (ii * 10)) * 0.6f;
-        float alpha = (float) (0.1f + Math.abs(Math.sin(Math.toRadians(ticks)) * 0.15f));
 
-        if (!isCassette) {
-            for (int i = 0; i < 30; i++) {
-                poseStack.pushPose();
-                float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 6 + (ticks * 2f)))));
-                offset = (offset - 0.25f) * (1 / 0.75f);
-                if (offset < 0) offset = 0;
-                poseStack.translate(x + 7.5 + (Math.sin(Math.toRadians(i * 12)) * 7), y + 8 + (Math.cos(Math.toRadians(i * 12)) * 4), 100);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(ticks + (i * 2f)));
-                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
-                        .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/sparkle"))
-                        .setColor(color).setAlpha(alpha)
-                        .renderCenteredQuad(poseStack, 3f * offset)
-                        .endBatch();
-                poseStack.popPose();
-            }
-        } else {
-            for (int i = 0; i < 30; i++) {
-                poseStack.pushPose();
-                float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 6 + (ticks * 2f)))));
-                offset = (offset - 0.25f) * (1 / 0.75f);
-                if (offset < 0) offset = 0;
-                poseStack.translate(x + 8 + (Math.sin(Math.toRadians(i * 12)) * 4), y + 8.5f, 100);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(ticks + (i * 2f)));
-                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
-                        .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/wisp"))
-                        .setColor(color).setAlpha(alpha)
-                        .renderCenteredQuad(poseStack, 5f * offset)
-                        .endBatch();
-                poseStack.popPose();
-            }
-        }
+        poseStack.pushPose();
+        poseStack.translate(x + (isCassette ? 8f : 7.5f), y + (isCassette ? 8.5f : 8f), 100);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(ticks));
+        RenderBuilder sparkleBuilder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star"))
+                .setColor(color).setAlpha(0.5f)
+                .renderCenteredQuad(poseStack, isCassette ? 6f : 8f);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(22.5f));
+        sparkleBuilder.renderCenteredQuad(poseStack, isCassette ? 6f : 8f);
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(x + (isCassette ? 8f : 7.5f), y + (isCassette ? 8.5f : 8f), 100);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-ticks));
+        sparkleBuilder.setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/wisp"))
+                .renderCenteredQuad(poseStack, isCassette ? 7f : 8f)
+                .endBatch();
+        poseStack.popPose();
     }
 }

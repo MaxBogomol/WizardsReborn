@@ -578,6 +578,7 @@
   "item.wizards_reborn.music_disc_shimmer": "Аркановая пластинка",
   "item.wizards_reborn.music_disc_capitalism": "Аркановая пластинка",
   "item.wizards_reborn.music_disc_panache": "Аркановая кассета",
+  "item.wizards_reborn.music_disc_disco": "Аркановая кассета",
 
   "item.wizards_reborn.arcane_wood_trim": "Арканово-древесная отделка",
   "item.wizards_reborn.wisestone_trim": "Мудро-каменная отделка",
@@ -918,6 +919,7 @@
   "item.wizards_reborn.music_disc_shimmer.desc": "Onjerlay - Blue Shimmer",
   "item.wizards_reborn.music_disc_capitalism.desc": "Onjerlay - Battle against a true Capitalist",
   "item.wizards_reborn.music_disc_panache.desc": "Onjerlay - Magical Panache",
+  "item.wizards_reborn.music_disc_disco.desc": "Onjerlay - Illegal Wizard Disco",
 
   "_comment_14": "Узоры флагов",
   "block.minecraft.banner.wizards_reborn.violence.black": "Чёрный символ \"Насилие\"",

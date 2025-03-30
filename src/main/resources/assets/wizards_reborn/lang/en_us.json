@@ -578,6 +578,7 @@
   "item.wizards_reborn.music_disc_shimmer": "Arcane Music Disc",
   "item.wizards_reborn.music_disc_capitalism": "Arcane Music Disc",
   "item.wizards_reborn.music_disc_panache": "Arcane Cassette",
+  "item.wizards_reborn.music_disc_disco": "Arcane Cassette",
 
   "item.wizards_reborn.arcane_wood_trim": "Arcane Wood Trim",
   "item.wizards_reborn.wisestone_trim": "Wisestone Trim",
@@ -918,6 +919,7 @@
   "item.wizards_reborn.music_disc_shimmer.desc": "Onjerlay - Blue Shimmer",
   "item.wizards_reborn.music_disc_capitalism.desc": "Onjerlay - Battle against a true Capitalist",
   "item.wizards_reborn.music_disc_panache.desc": "Onjerlay - Magical Panache",
+  "item.wizards_reborn.music_disc_disco.desc": "Onjerlay - Illegal Wizard Disco",
 
   "_comment_14": "Banners",
   "block.minecraft.banner.wizards_reborn.violence.black": "Black Symbol \"Violence\"",

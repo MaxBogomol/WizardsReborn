@@ -625,6 +625,7 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.MUSIC_DISC_SHIMMER);
             event.accept(WizardsRebornItems.MUSIC_DISC_CAPITALISM);
             event.accept(WizardsRebornItems.MUSIC_DISC_PANACHE);
+            event.accept(WizardsRebornItems.MUSIC_DISC_DISCO);
 
             event.accept(WizardsRebornItems.ARCANE_WOOD_TRIM);
             event.accept(WizardsRebornItems.WISESTONE_TRIM);

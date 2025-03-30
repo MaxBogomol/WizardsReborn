@@ -608,6 +608,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> MUSIC_DISC_SHIMMER = ITEMS.register("music_disc_shimmer", () -> new ArcaneRecordItem(6, WizardsRebornSounds.MUSIC_DISC_SHIMMER.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 234, new Color(203, 234, 251)));
     public static final RegistryObject<Item> MUSIC_DISC_CAPITALISM = ITEMS.register("music_disc_capitalism", () -> new ArcaneRecordItem(6, WizardsRebornSounds. MUSIC_DISC_CAPITALISM.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 96, new Color(252, 240, 175)));
     public static final RegistryObject<Item> MUSIC_DISC_PANACHE = ITEMS.register("music_disc_panache", () -> new ArcaneRecordItem(6, WizardsRebornSounds.MUSIC_DISC_PANACHE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 91, new Color(252, 240, 175)).setCassette());
+    public static final RegistryObject<Item> MUSIC_DISC_DISCO = ITEMS.register("music_disc_disco", () -> new ArcaneRecordItem(6, WizardsRebornSounds.MUSIC_DISC_DISCO.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 138, new Color(184, 231, 131)).setCassette());
 
     public static final RegistryObject<Item> ARCANE_WOOD_TRIM = ITEMS.register("arcane_wood_trim", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_TRIM = ITEMS.register("wisestone_trim", () -> new Item(new Item.Properties()));
