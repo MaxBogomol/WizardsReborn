@@ -4,9 +4,9 @@ import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
@@ -148,7 +148,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         facingPipe.setConnection(face.getOpposite(), PipeConnection.PIPE);
                         level.updateNeighbourForOutputSignal(pos, this);
                         level.updateNeighbourForOutputSignal(facingPos, this);
-                        level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.5, pos.getY() + 0.5 + face.getStepY() * 0.5, pos.getZ() + 0.5 + face.getStepZ() * 0.5, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.5, pos.getY() + 0.5 + face.getStepY() * 0.5, pos.getZ() + 0.5 + face.getStepZ() * 0.5, WizardsRebornSounds.WISESTONE_HIT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                         BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
@@ -161,7 +161,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         }
                         level.updateNeighbourForOutputSignal(pos, this);
                         facingState.updateShape(face.getOpposite(), state, level, facingPos, pos);
-                        level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.4, pos.getY() + 0.5 + face.getStepY() * 0.4, pos.getZ() + 0.5 + face.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.4, pos.getY() + 0.5 + face.getStepY() * 0.4, pos.getZ() + 0.5 + face.getStepZ() * 0.4, WizardsRebornSounds.WISESTONE_HIT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                         BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
@@ -178,7 +178,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         facingPipe.setConnection(direction.getOpposite(), PipeConnection.DISABLED);
                         level.updateNeighbourForOutputSignal(pos, this);
                         level.updateNeighbourForOutputSignal(facingPos, this);
-                        level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.5, pos.getY() + 0.5 + direction.getStepY() * 0.5, pos.getZ() + 0.5 + direction.getStepZ() * 0.5, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.5, pos.getY() + 0.5 + direction.getStepY() * 0.5, pos.getZ() + 0.5 + direction.getStepZ() * 0.5, WizardsRebornSounds.WISESTONE_HIT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                         BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
@@ -186,7 +186,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         pipe.setConnection(direction, PipeConnection.DISABLED);
                         level.updateNeighbourForOutputSignal(pos, this);
                         facingState.updateShape(direction.getOpposite(), state, level, facingPos, pos);
-                        level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, WizardsRebornSounds.WISESTONE_HIT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                         BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }

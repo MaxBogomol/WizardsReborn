@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:saplings"
+  ],
+  "remove": [
+    "wizards_reborn:arcane_wood_sapling"
+  ]
+}

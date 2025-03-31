@@ -8,7 +8,7 @@
   "steam": 250,
   "ingredients": [
     {
-      "tag": "minecraft:music_discs"
+      "tag": "wizards_reborn:music_disc_arcanum_ingredient"
     },
     {
       "tag": "wizards_reborn:arcanum"

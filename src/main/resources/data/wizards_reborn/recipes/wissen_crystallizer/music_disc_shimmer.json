@@ -7,7 +7,7 @@
   "wissen": 1000,
   "ingredients": [
     {
-      "tag": "minecraft:music_discs"
+      "tag": "wizards_reborn:music_disc_shimmer_ingredient"
     },
     {
       "tag": "forge:cobblestone/deepslate"

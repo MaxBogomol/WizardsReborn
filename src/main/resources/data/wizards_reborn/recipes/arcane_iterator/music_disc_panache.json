@@ -7,7 +7,7 @@
   "wissen": 2000,
   "ingredients": [
     {
-      "tag": "minecraft:music_discs"
+      "tag": "wizards_reborn:music_disc_panache_ingredient"
     },
     {
       "item": "wizards_reborn:arcane_wood_planks"

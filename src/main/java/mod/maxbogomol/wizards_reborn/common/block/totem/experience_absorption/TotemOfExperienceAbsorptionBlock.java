@@ -114,7 +114,7 @@ public class TotemOfExperienceAbsorptionBlock extends Block implements EntityBlo
                     player.giveExperiencePoints(-remainAdd);
                     level.playSound(null, player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1.2f);
                     if (!player.level().isClientSide()) {
-                        WizardsRebornPacketHandler.sendToTracking(level, pos, new ExperienceTotemBurstPacket(pos.getCenter().add(0, 0.25f, 0), player.position().add(0, player.getEyeHeight() / 2, 0)));
+                        WizardsRebornPacketHandler.sendToTracking(level, pos, new ExperienceTotemBurstPacket(pos.getCenter(), player.position().add(0, player.getEyeHeight() / 2, 0)));
                     }
                     level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(blockEntity);

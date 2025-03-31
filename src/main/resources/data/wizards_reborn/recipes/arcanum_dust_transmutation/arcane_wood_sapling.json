@@ -1,7 +1,7 @@
 {
   "type": "wizards_reborn:arcanum_dust_transmutation",
   "from": {
-    "tag": "minecraft:saplings"
+    "tag": "wizards_reborn:arcane_wood_sapling_ingredient"
   },
   "to": {
     "item": "wizards_reborn:arcane_wood_sapling"

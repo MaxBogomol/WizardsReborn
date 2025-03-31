@@ -1,0 +1,19 @@
+{
+  "type": "wizards_reborn:crystal_infusion",
+  "output": {
+    "item": "wizards_reborn:music_disc_disco",
+    "count": 1
+  },
+  "light": 2000,
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:music_disc_disco_ingredient"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_planks"
+    },
+    {
+      "tag": "wizards_reborn:crystal_seeds"
+    }
+  ]
+}

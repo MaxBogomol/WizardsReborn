@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:music_discs"
+  ],
+  "remove": [
+    "wizards_reborn:music_disc_arcanum"
+  ]
+}
