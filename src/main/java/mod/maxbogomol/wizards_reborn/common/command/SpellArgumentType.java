@@ -23,18 +23,18 @@ public class SpellArgumentType implements ArgumentType<Spell> {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
-        for (Spell s : SpellHandler.getSpells())
-            if (s.getId().startsWith(builder.getRemainingLowerCase()))
-                builder.suggest(s.getId());
+        for (Spell spell : SpellHandler.getSpells()) {
+            if (spell.getId().startsWith(builder.getRemainingLowerCase())) builder.suggest(spell.getId());
+        }
         return builder.buildFuture();
     }
 
     @Override
     public Spell parse(StringReader reader) throws CommandSyntaxException {
-        ResourceLocation rl = ResourceLocation.read(reader);
-        Spell s = SpellHandler.getSpell(rl.toString());
-        if (s == null) throw UNKNOWN.create(rl.toString());
-        return s;
+        ResourceLocation resourceLocation = ResourceLocation.read(reader);
+        Spell spell = SpellHandler.getSpell(resourceLocation.toString());
+        if (spell == null) throw UNKNOWN.create(resourceLocation.toString());
+        return spell;
     }
 
     public static SpellArgumentType spells() {

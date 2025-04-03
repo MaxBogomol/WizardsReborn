@@ -23,18 +23,18 @@ public class ArcaneEnchantmentArgumentType implements ArgumentType<ArcaneEnchant
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
-        for (ArcaneEnchantment e : ArcaneEnchantmentHandler.getArcaneEnchantments())
-            if (e.getId().startsWith(builder.getRemainingLowerCase()))
-                builder.suggest(e.getId());
+        for (ArcaneEnchantment arcaneEnchantment : ArcaneEnchantmentHandler.getArcaneEnchantments()) {
+            if (arcaneEnchantment.getId().startsWith(builder.getRemainingLowerCase())) builder.suggest(arcaneEnchantment.getId());
+        }
         return builder.buildFuture();
     }
 
     @Override
     public ArcaneEnchantment parse(StringReader reader) throws CommandSyntaxException {
-        ResourceLocation rl = ResourceLocation.read(reader);
-        ArcaneEnchantment e = ArcaneEnchantmentHandler.getArcaneEnchantment(rl.toString());
-        if (e == null) throw UNKNOWN.create(rl.toString());
-        return e;
+        ResourceLocation resourceLocation = ResourceLocation.read(reader);
+        ArcaneEnchantment arcaneEnchantment = ArcaneEnchantmentHandler.getArcaneEnchantment(resourceLocation.toString());
+        if (arcaneEnchantment == null) throw UNKNOWN.create(resourceLocation.toString());
+        return arcaneEnchantment;
     }
 
     public static ArcaneEnchantmentArgumentType arcaneEnchantments() {

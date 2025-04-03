@@ -10,36 +10,38 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
-import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramHandler;
+import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
+import net.minecraft.commands.arguments.coordinates.Vec3Argument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
 
 public class WizardsRebornCommand {
+
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("wizards_reborn")
                 .requires(s -> s.hasPermission(2))
                 .then(Commands.literal("knowledge")
                         .then(Commands.literal("give")
                                 .then(Commands.argument("player", EntityArgument.players())
-                                        .then(Commands.argument("knowledge", new KnowledgeArgumentType())
+                                        .then(Commands.argument("knowledge", KnowledgeArgumentType.knowledges())
                                                 .executes(ctx -> giveKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"), KnowledgeArgumentType.getKnowledge(ctx, "knowledge")))
                                         )
                                         .then(Commands.literal("all")
@@ -49,7 +51,7 @@ public class WizardsRebornCommand {
                         )
                         .then(Commands.literal("remove")
                                 .then(Commands.argument("player", EntityArgument.players())
-                                        .then(Commands.argument("knowledge", new KnowledgeArgumentType())
+                                        .then(Commands.argument("knowledge", KnowledgeArgumentType.knowledges())
                                                 .executes(ctx -> removeKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"), KnowledgeArgumentType.getKnowledge(ctx, "knowledge")))
                                         )
                                         .then(Commands.literal("all")
@@ -61,7 +63,7 @@ public class WizardsRebornCommand {
                 .then(Commands.literal("spell")
                         .then(Commands.literal("give")
                                 .then(Commands.argument("player", EntityArgument.players())
-                                        .then(Commands.argument("spell", new SpellArgumentType())
+                                        .then(Commands.argument("spell", SpellArgumentType.spells())
                                                 .executes(ctx -> giveSpell(ctx, EntityArgument.getPlayers(ctx, "player"), SpellArgumentType.getSpell(ctx, "spell")))
                                         )
                                         .then(Commands.literal("all")
@@ -71,7 +73,7 @@ public class WizardsRebornCommand {
                         )
                         .then(Commands.literal("remove")
                                 .then(Commands.argument("player", EntityArgument.players())
-                                        .then(Commands.argument("spell", new SpellArgumentType())
+                                        .then(Commands.argument("spell", SpellArgumentType.spells())
                                                 .executes(ctx -> removeSpell(ctx, EntityArgument.getPlayers(ctx, "player"), SpellArgumentType.getSpell(ctx, "spell")))
                                         )
                                         .then(Commands.literal("all")
@@ -82,25 +84,87 @@ public class WizardsRebornCommand {
                         .then(Commands.literal("use")
                                 .then(Commands.literal("entity")
                                         .then(Commands.argument("entity", EntityArgument.entities())
-                                            .then(Commands.argument("spell", new SpellArgumentType())
+                                            .then(Commands.argument("spell", SpellArgumentType.spells())
                                                     .executes(ctx -> useSpellEntity(ctx, EntityArgument.getEntities(ctx, "entity"), SpellArgumentType.getSpell(ctx, "spell")))
                                             )
                                         )
                                 )
                                 .then(Commands.literal("block")
                                         .then(Commands.argument("entity", EntityArgument.entities())
-                                            .then(Commands.argument("spell", new SpellArgumentType())
+                                            .then(Commands.argument("spell", SpellArgumentType.spells())
                                                     .then(Commands.argument("position", BlockPosArgument.blockPos())
                                                             .executes(ctx -> useSpellBlock(ctx, EntityArgument.getEntities(ctx, "entity"), SpellArgumentType.getSpell(ctx, "spell"), BlockPosArgument.getBlockPos(ctx, "position")))
                                                     )
                                             )
                                         )
                                 )
+                                .then(Commands.literal("blank")
+                                        .then(Commands.argument("spell", SpellArgumentType.spells())
+                                                .then(Commands.literal("block")
+                                                    .then(Commands.argument("block", BlockPosArgument.blockPos())
+                                                            .executes(ctx -> useSpellBlankBlock(ctx, SpellArgumentType.getSpell(ctx, "spell"), BlockPosArgument.getBlockPos(ctx, "block")))
+                                                    )
+                                                )
+                                                .then(Commands.literal("block_pos")
+                                                        .then(Commands.argument("block", BlockPosArgument.blockPos())
+                                                                .then(Commands.argument("pos", Vec3Argument.vec3())
+                                                                    .executes(ctx -> useSpellBlankBlockPos(ctx, SpellArgumentType.getSpell(ctx, "spell"), BlockPosArgument.getBlockPos(ctx, "block"), Vec3Argument.getVec3(ctx, "pos")))
+                                                                )
+                                                        )
+                                                )
+                                                .then(Commands.literal("block_pos_vec")
+                                                        .then(Commands.argument("block", BlockPosArgument.blockPos())
+                                                                .then(Commands.argument("pos", Vec3Argument.vec3())
+                                                                        .then(Commands.argument("vec", Vec3Argument.vec3())
+                                                                            .executes(ctx -> useSpellBlankBlockPosVec(ctx, SpellArgumentType.getSpell(ctx, "spell"), BlockPosArgument.getBlockPos(ctx, "block"), Vec3Argument.getVec3(ctx, "pos"), Vec3Argument.getVec3(ctx, "vec")))
+                                                                    )
+                                                                )
+                                                        )
+                                                )
+                                                .then(Commands.literal("pos")
+                                                        .then(Commands.argument("pos", Vec3Argument.vec3())
+                                                                .executes(ctx -> useSpellBlankPos(ctx, SpellArgumentType.getSpell(ctx, "spell"), Vec3Argument.getVec3(ctx, "pos")))
+                                                        )
+                                                )
+                                                .then(Commands.literal("pos_vec")
+                                                        .then(Commands.argument("pos", Vec3Argument.vec3())
+                                                                .then(Commands.argument("vec", Vec3Argument.vec3())
+                                                                        .executes(ctx -> useSpellBlankPosVec(ctx, SpellArgumentType.getSpell(ctx, "spell"), Vec3Argument.getVec3(ctx, "pos"), Vec3Argument.getVec3(ctx, "vec")))
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(Commands.literal("blank_block")
+                                        .then(Commands.argument("spell", SpellArgumentType.spells())
+                                                .then(Commands.literal("block")
+                                                        .then(Commands.argument("block", BlockPosArgument.blockPos())
+                                                                .executes(ctx -> useSpellBlockBlankBlock(ctx, SpellArgumentType.getSpell(ctx, "spell"), BlockPosArgument.getBlockPos(ctx, "block")))
+                                                        )
+                                                )
+                                                .then(Commands.literal("block_pos")
+                                                        .then(Commands.argument("block", BlockPosArgument.blockPos())
+                                                                .then(Commands.argument("pos", Vec3Argument.vec3())
+                                                                        .executes(ctx -> useSpellBlockBlankBlockPos(ctx, SpellArgumentType.getSpell(ctx, "spell"), BlockPosArgument.getBlockPos(ctx, "block"), Vec3Argument.getVec3(ctx, "pos")))
+                                                                )
+                                                        )
+                                                )
+                                                .then(Commands.literal("block_pos_vec")
+                                                        .then(Commands.argument("block", BlockPosArgument.blockPos())
+                                                                .then(Commands.argument("pos", Vec3Argument.vec3())
+                                                                        .then(Commands.argument("vec", Vec3Argument.vec3())
+                                                                                .executes(ctx -> useSpellBlockBlankBlockPosVec(ctx, SpellArgumentType.getSpell(ctx, "spell"), BlockPosArgument.getBlockPos(ctx, "block"), Vec3Argument.getVec3(ctx, "pos"), Vec3Argument.getVec3(ctx, "vec")))
+                                                                        )
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
                         )
                 )
                 .then(Commands.literal("arcane_enchantment")
                         .then(Commands.argument("player", EntityArgument.players())
-                                .then(Commands.argument("arcane_enchantment", new ArcaneEnchantmentArgumentType())
+                                .then(Commands.argument("arcane_enchantment", ArcaneEnchantmentArgumentType.arcaneEnchantments())
                                         .executes(ctx -> addArcaneEnchantment(ctx, EntityArgument.getPlayers(ctx, "player"), ArcaneEnchantmentArgumentType.getArcaneEnchantments(ctx, "arcane_enchantment")))
                                 .then(Commands.argument("level", IntegerArgumentType.integer(0))
                                         .executes(ctx -> arcaneEnchantment(ctx, EntityArgument.getPlayers(ctx, "player"), ArcaneEnchantmentArgumentType.getArcaneEnchantments(ctx, "arcane_enchantment"), IntegerArgumentType.getInteger(ctx,"level")))
@@ -111,21 +175,21 @@ public class WizardsRebornCommand {
                         .then(Commands.literal("set")
                                 .then(Commands.argument("player", EntityArgument.players())
                                         .then(Commands.argument("wissen", IntegerArgumentType.integer(0))
-                                            .executes(ctx -> setWissen(ctx, EntityArgument.getPlayers(ctx, "player"), IntegerArgumentType.getInteger(ctx,"wissen")))
+                                            .executes(ctx -> setWissen(ctx, EntityArgument.getPlayers(ctx, "player"), IntegerArgumentType.getInteger(ctx, "wissen")))
                                         )
                                 )
                         )
                         .then(Commands.literal("add")
                                 .then(Commands.argument("player", EntityArgument.players())
                                         .then(Commands.argument("wissen", IntegerArgumentType.integer(0))
-                                            .executes(ctx -> addWissen(ctx, EntityArgument.getPlayers(ctx, "player"), IntegerArgumentType.getInteger(ctx,"wissen")))
+                                            .executes(ctx -> addWissen(ctx, EntityArgument.getPlayers(ctx, "player"), IntegerArgumentType.getInteger(ctx, "wissen")))
                                         )
                                 )
                         )
                         .then(Commands.literal("remove")
                                 .then(Commands.argument("player", EntityArgument.players())
                                         .then(Commands.argument("wissen", IntegerArgumentType.integer(0))
-                                            .executes(ctx -> removeWissen(ctx, EntityArgument.getPlayers(ctx, "player"), IntegerArgumentType.getInteger(ctx,"wissen")))
+                                            .executes(ctx -> removeWissen(ctx, EntityArgument.getPlayers(ctx, "player"), IntegerArgumentType.getInteger(ctx, "wissen")))
                                         )
                                 )
                         )
@@ -294,6 +358,15 @@ public class WizardsRebornCommand {
             spell.useSpell(entity.level(), context);
         }
 
+        if (targetEntities.size() == 1) {
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.wizards_reborn.spell.use.single", Component.translatable(spell.getTranslatedName()), targetEntities.iterator().next().getDisplayName());
+            }, true);
+        } else {
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.wizards_reborn.spell.use.multiple", Component.translatable(spell.getTranslatedName()), targetEntities.size());
+            }, true);
+        }
         return Command.SINGLE_SUCCESS;
     }
 
@@ -304,10 +377,147 @@ public class WizardsRebornCommand {
             spell.useSpellOn(entity.level(), context);
         }
 
+        if (targetEntities.size() == 1) {
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.wizards_reborn.spell.use.single", Component.translatable(spell.getTranslatedName()), targetEntities.iterator().next().getDisplayName());
+            }, true);
+        } else {
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.wizards_reborn.spell.use.multiple", Component.translatable(spell.getTranslatedName()), targetEntities.size());
+            }, true);
+        }
         return Command.SINGLE_SUCCESS;
     }
 
+    private static int useSpellBlankBlock(CommandContext<CommandSourceStack> command, Spell spell, BlockPos blockPos) throws CommandSyntaxException {
+        Level level = command.getSource().getLevel();
+        SpellContext context = spell.getCommandContext(null);
+        context.setLevel(level);
+        context.setBlockPos(blockPos);
+        spell.useSpell(level, context);
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.use", Component.translatable(spell.getTranslatedName()));
+        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpellBlankBlockPos(CommandContext<CommandSourceStack> command, Spell spell, BlockPos blockPos, Vec3 pos) throws CommandSyntaxException {
+        Level level = command.getSource().getLevel();
+        SpellContext context = spell.getCommandContext(null);
+        context.setLevel(level);
+        context.setBlockPos(blockPos);
+        context.setPos(pos);
+        spell.useSpell(level, context);
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.use", Component.translatable(spell.getTranslatedName()));
+        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpellBlankBlockPosVec(CommandContext<CommandSourceStack> command, Spell spell, BlockPos blockPos, Vec3 pos, Vec3 vec) throws CommandSyntaxException {
+        Level level = command.getSource().getLevel();
+        SpellContext context = spell.getCommandContext(null);
+        context.setLevel(level);
+        context.setBlockPos(blockPos);
+        context.setPos(pos);
+        context.setVec(getSpellVec(pos, vec));
+        spell.useSpell(level, context);
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.use", Component.translatable(spell.getTranslatedName()));
+        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpellBlankPos(CommandContext<CommandSourceStack> command, Spell spell, Vec3 pos) throws CommandSyntaxException {
+        Level level = command.getSource().getLevel();
+        SpellContext context = spell.getCommandContext(null);
+        context.setLevel(level);
+        context.setPos(pos);
+        spell.useSpell(level, context);
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.use", Component.translatable(spell.getTranslatedName()));
+        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpellBlankPosVec(CommandContext<CommandSourceStack> command, Spell spell, Vec3 pos, Vec3 vec) throws CommandSyntaxException {
+        Level level = command.getSource().getLevel();
+        SpellContext context = spell.getCommandContext(null);
+        context.setLevel(level);
+        context.setPos(pos);
+        context.setVec(getSpellVec(pos, vec));
+        spell.useSpell(level, context);
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.use", Component.translatable(spell.getTranslatedName()));
+        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpellBlockBlankBlock(CommandContext<CommandSourceStack> command, Spell spell, BlockPos blockPos) throws CommandSyntaxException {
+        Level level = command.getSource().getLevel();
+        SpellContext context = spell.getCommandContext(null);
+        context.setLevel(level);
+        context.setBlockPos(blockPos);
+        spell.useSpellOn(level, context);
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.use", Component.translatable(spell.getTranslatedName()));
+        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpellBlockBlankBlockPos(CommandContext<CommandSourceStack> command, Spell spell, BlockPos blockPos, Vec3 pos) throws CommandSyntaxException {
+        Level level = command.getSource().getLevel();
+        SpellContext context = spell.getCommandContext(null);
+        context.setLevel(level);
+        context.setBlockPos(blockPos);
+        context.setPos(pos);
+        spell.useSpellOn(level, context);
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.use", Component.translatable(spell.getTranslatedName()));
+        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int useSpellBlockBlankBlockPosVec(CommandContext<CommandSourceStack> command, Spell spell, BlockPos blockPos, Vec3 pos, Vec3 vec) throws CommandSyntaxException {
+        Level level = command.getSource().getLevel();
+        SpellContext context = spell.getCommandContext(null);
+        context.setLevel(level);
+        context.setBlockPos(blockPos);
+        context.setPos(pos);
+        context.setVec(getSpellVec(pos, vec));
+        spell.useSpellOn(level, context);
+
+        command.getSource().sendSuccess(() -> {
+            return Component.translatable("commands.wizards_reborn.spell.use", Component.translatable(spell.getTranslatedName()));
+        }, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static Vec3 getSpellVec(Vec3 pos, Vec3 vec) throws CommandSyntaxException {
+        double dX = pos.x() - vec.x();
+        double dY = pos.y() - vec.y();
+        double dZ = pos.z() - vec.z();
+
+        double yaw = Math.atan2(dZ, dX);
+        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+        double X = Math.sin(pitch) * Math.cos(yaw);
+        double Y = Math.cos(pitch);
+        double Z = Math.sin(pitch) * Math.sin(yaw);
+
+        return new Vec3(X, Y, Z);
+    }
+
     private static int addArcaneEnchantment(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, ArcaneEnchantment arcaneEnchantment) throws CommandSyntaxException {
+        int players = 0;
+
         for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
@@ -315,12 +525,15 @@ public class WizardsRebornCommand {
                     int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, arcaneEnchantment) + 1;
                     if (ArcaneEnchantmentUtil.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
                         ArcaneEnchantmentUtil.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
+                        players++;
                     }
                 }
             }
         }
 
-        if (targetPlayers.size() == 1) {
+        if (players == 0) {
+            command.getSource().sendFailure(Component.translatable("commands.wizards_reborn.arcane_enchantment.failed", Component.translatable(arcaneEnchantment.getTranslatedName())));
+        } else if (players == 1) {
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.wizards_reborn.arcane_enchantment.single", Component.translatable(arcaneEnchantment.getTranslatedName()), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
             }, true);
@@ -334,16 +547,21 @@ public class WizardsRebornCommand {
     }
 
     private static int arcaneEnchantment(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, ArcaneEnchantment arcaneEnchantment, int enchantmentLevel) throws CommandSyntaxException {
+        int players = 0;
+
         for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (ArcaneEnchantmentUtil.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
                     ArcaneEnchantmentUtil.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
+                    players++;
                 }
             }
         }
 
-        if (targetPlayers.size() == 1) {
+        if (players == 0) {
+            command.getSource().sendFailure(Component.translatable("commands.wizards_reborn.arcane_enchantment.failed", Component.translatable(arcaneEnchantment.getTranslatedName())));
+        } else if (players == 1) {
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.wizards_reborn.arcane_enchantment.single", Component.translatable(arcaneEnchantment.getTranslatedName()), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
             }, true);
@@ -356,6 +574,7 @@ public class WizardsRebornCommand {
     }
 
     private static int setWissen(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, int wissen) throws CommandSyntaxException {
+        int players = 0;
         int startWissen = wissen;
 
         for (ServerPlayer player : targetPlayers) {
@@ -366,11 +585,14 @@ public class WizardsRebornCommand {
                     if (wissen > wissenItem.getMaxWissen()) wissen = wissenItem.getMaxWissen();
                     WissenItemUtil.existWissen(stack);
                     WissenItemUtil.setWissen(stack, wissen);
+                    players++;
                 }
             }
         }
 
-        if (targetPlayers.size() == 1) {
+        if (players == 0) {
+            command.getSource().sendFailure(Component.translatable("commands.wizards_reborn.wissen.set.failed", Component.literal(String.valueOf(startWissen))));
+        } else if (players == 1) {
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.wizards_reborn.wissen.set.single", Component.literal(String.valueOf(startWissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
             }, true);
@@ -383,17 +605,22 @@ public class WizardsRebornCommand {
     }
 
     private static int addWissen(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, int wissen) throws CommandSyntaxException {
+        int players = 0;
+
         for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
                     WissenItemUtil.existWissen(stack);
                     WissenItemUtil.addWissen(stack, wissen, wissenItem.getMaxWissen());
+                    players++;
                 }
             }
         }
 
-        if (targetPlayers.size() == 1) {
+        if (players == 0) {
+            command.getSource().sendFailure(Component.translatable("commands.wizards_reborn.wissen.add.failed", Component.literal(String.valueOf(wissen))));
+        } else if (players == 1) {
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.wizards_reborn.wissen.add.single", Component.literal(String.valueOf(wissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
             }, true);
@@ -406,17 +633,22 @@ public class WizardsRebornCommand {
     }
 
     private static int removeWissen(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, int wissen) throws CommandSyntaxException {
+        int players = 0;
+
         for (ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
                     WissenItemUtil.existWissen(stack);
                     WissenItemUtil.removeWissen(stack, wissen);
+                    players++;
                 }
             }
         }
 
-        if (targetPlayers.size() == 1) {
+        if (players == 0) {
+            command.getSource().sendFailure(Component.translatable("commands.wizards_reborn.wissen.remove.failed", Component.literal(String.valueOf(wissen))));
+        } else if (players == 1) {
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.wizards_reborn.wissen.remove.single", Component.literal(String.valueOf(wissen)), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
             }, true);

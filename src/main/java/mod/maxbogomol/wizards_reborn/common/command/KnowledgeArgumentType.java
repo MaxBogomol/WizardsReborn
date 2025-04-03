@@ -23,18 +23,18 @@ public class KnowledgeArgumentType implements ArgumentType<Knowledge> {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
-        for (Knowledge s : KnowledgeHandler.getKnowledges())
-            if (s.getId().startsWith(builder.getRemainingLowerCase()))
-                builder.suggest(s.getId());
+        for (Knowledge knowledge : KnowledgeHandler.getKnowledges()) {
+            if (knowledge.getId().startsWith(builder.getRemainingLowerCase())) builder.suggest(knowledge.getId());
+        }
         return builder.buildFuture();
     }
 
     @Override
     public Knowledge parse(StringReader reader) throws CommandSyntaxException {
-        ResourceLocation rl = ResourceLocation.read(reader);
-        Knowledge s = KnowledgeHandler.getKnowledge(rl.toString());
-        if (s == null) throw UNKNOWN.create(rl.toString());
-        return s;
+        ResourceLocation resourceLocation = ResourceLocation.read(reader);
+        Knowledge knowledge = KnowledgeHandler.getKnowledge(resourceLocation.toString());
+        if (knowledge == null) throw UNKNOWN.create(resourceLocation.toString());
+        return knowledge;
     }
 
     public static KnowledgeArgumentType knowledges() {

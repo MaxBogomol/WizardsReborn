@@ -90,10 +90,12 @@ public class WandSpellContext extends SpellContext {
 
     public static WandSpellContext getFromWand(Entity entity, ItemStack stack, InteractionHand hand) {
         WandSpellContext spellContext = new WandSpellContext();
-        spellContext.setLevel(entity.level());
-        spellContext.setEntity(entity);
-        spellContext.setPos(entity.getEyePosition());
-        spellContext.setVec(entity.getLookAngle());
+        if (entity != null) {
+            spellContext.setLevel(entity.level());
+            spellContext.setEntity(entity);
+            spellContext.setPos(entity.getEyePosition());
+            spellContext.setVec(entity.getLookAngle());
+        }
         if (entity instanceof Player player) {
             spellContext.setDistance(player.getAttributeValue(ForgeMod.ENTITY_REACH.get()));
             spellContext.setAlternative(player.isShiftKeyDown());
