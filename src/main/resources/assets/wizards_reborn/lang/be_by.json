@@ -1,5 +1,6 @@
 {
   "creative_tab.wizards_reborn": "Wizard's Reborn",
+
   "_comment_1": "Прадметы і блокі",
   "item.wizards_reborn.arcane_gold_ingot": "Арканавы залаты злітак",
   "item.wizards_reborn.arcane_gold_nugget": "Кавалак арканавага золата",
@@ -11,6 +12,9 @@
   "block.wizards_reborn.raw_arcane_gold_block": "Блок сырога арканавага золата",
   "item.wizards_reborn.crushed_raw_arcane_gold": "Крышаная сырая арканавая залатая руда",
   "item.wizards_reborn.arcane_gold_sheet": "Арканавая залатая пласціна",
+  "item.wizards_reborn.cracked_arcane_gold_impetus": "Cracked Arcane Gold Impetus",
+  "item.wizards_reborn.arcane_gold_impetus": "Arcane Gold Impetus",
+  "item.wizards_reborn.arcane_gold_node": "Arcane Gold Node",
   "item.wizards_reborn.arcane_gold_sword": "Арканавы залаты меч",
   "item.wizards_reborn.arcane_gold_pickaxe": "Арканавая залатая кірка",
   "item.wizards_reborn.arcane_gold_axe": "Арканавая залатая сякера",
@@ -22,27 +26,40 @@
   "item.wizards_reborn.arcane_gold_chestplate": "Арканавая залатая кіраса",
   "item.wizards_reborn.arcane_gold_leggings": "Арканавыя залатыя понажы",
   "item.wizards_reborn.arcane_gold_boots": "Арканавыя залатыя боты",
+
   "item.wizards_reborn.sarcon_ingot": "Вілейкіумны злітак",
   "item.wizards_reborn.sarcon_nugget": "Кавалак вілейкіума",
   "block.wizards_reborn.sarcon_block": "Вілейкіумны блок",
   "item.wizards_reborn.sarcon_sheet": "Вілейкіумная пласціна",
+  "item.wizards_reborn.cracked_sarcon_impetus": "Cracked Sarcon Impetus",
+  "item.wizards_reborn.sarcon_impetus": "Sarcon Impetus",
+  "item.wizards_reborn.sarcon_node": "Sarcon Node",
+
   "item.wizards_reborn.vilenium_ingot": "Арыумны злітак",
   "item.wizards_reborn.vilenium_nugget": "Кавалак арыума",
   "block.wizards_reborn.vilenium_block": "Арыумны блок",
   "item.wizards_reborn.vilenium_sheet": "Арыумная пласціна",
+  "item.wizards_reborn.cracked_vilenium_impetus": "Cracked Vilenium Impetus",
+  "item.wizards_reborn.vilenium_impetus": "Vilenium Impetus",
+  "item.wizards_reborn.vilenium_node": "Vilenium Node",
+
   "item.wizards_reborn.arcanum": "Арканум",
   "item.wizards_reborn.arcanum_dust": "Арканумны пыл",
   "block.wizards_reborn.arcanum_block": "Арканумны блок",
   "block.wizards_reborn.arcanum_ore": "Арканумная руда",
   "block.wizards_reborn.deepslate_arcanum_ore": "Арканумная руда глыбінь",
   "block.wizards_reborn.arcanum_dust_block": "Блок арканумнага пылу",
+
   "item.wizards_reborn.arcacite": "Аркацыт",
   "block.wizards_reborn.arcacite_block": "Аркацытавы блок",
+
   "item.wizards_reborn.precision_crystal": "Крышталь дакладнасці",
   "block.wizards_reborn.precision_crystal_block": "Блок крышталя дакладнасці",
+
   "item.wizards_reborn.nether_salt": "Пераўскіт",
   "block.wizards_reborn.nether_salt_block": "Блок пераўскіту",
   "block.wizards_reborn.nether_salt_ore": "Руда пераўскіту",
+
   "block.wizards_reborn.arcane_wood_log": "Бервяно аркана-дрэва",
   "block.wizards_reborn.arcane_wood": "Драўніна аркана-дрэва",
   "block.wizards_reborn.stripped_arcane_wood_log": "Абчасанае бервяно аркана-дрэва",
@@ -80,6 +97,7 @@
   "block.wizards_reborn.arcane_wood_leaves": "Лісце аркана-дрэва",
   "block.wizards_reborn.arcane_wood_sapling": "Саджанец аркана-дрэва",
   "block.wizards_reborn.potted_arcane_wood_sapling": "Саджанец аркана-дрэва ў гаршчку",
+
   "block.wizards_reborn.innocent_wood_log": "Бервяно цнатлівага дрэва",
   "block.wizards_reborn.innocent_wood": "Драўніна цнатлівага дрэва",
   "block.wizards_reborn.stripped_innocent_wood_log": "Абчасанае бервяно цнатлівага дрэва",
@@ -119,6 +137,7 @@
   "block.wizards_reborn.potted_innocent_wood_sapling": "Саджанец цнатлівага дрэва ў гаршчку",
   "block.wizards_reborn.petals_of_innocence": "Цнатлівыя пялёсткі",
   "block.wizards_reborn.potted_petals_of_innocence": "Цнатлівая пялёсткі ў гаршчку",
+
   "block.wizards_reborn.wisestone": "Алмур",
   "block.wizards_reborn.wisestone_stairs": "Прыступкі з алмуру",
   "block.wizards_reborn.wisestone_slab": "Пліта з алмуру",
@@ -142,10 +161,12 @@
   "block.wizards_reborn.wisestone_pillar": "Алмуравая калона",
   "block.wizards_reborn.polished_wisestone_pressure_plate": "Націскная пліта з паліраванага алмуру",
   "block.wizards_reborn.polished_wisestone_button": "Кнопка з паліраванага алмуру",
+
   "block.wizards_reborn.arcane_linen": "Насенне арканавага лёну",
   "item.wizards_reborn.arcane_linen_seeds": "Насенне арканавага лёну",
   "item.wizards_reborn.arcane_linen": "Арканавы лён",
   "block.wizards_reborn.arcane_linen_hay": "Сноп арканавага лёну",
+
   "block.wizards_reborn.mor": "Мор",
   "block.wizards_reborn.potted_mor": "Мор ў гаршчку",
   "block.wizards_reborn.mor_colony": "Mor Colony",
@@ -154,6 +175,7 @@
   "block.wizards_reborn.potted_elder_mor": "Старажытны мор у гаршчку",
   "block.wizards_reborn.elder_mor_colony": "Elder Mor Colony",
   "block.wizards_reborn.elder_mor_block": "Блок старажытнага мора",
+
   "block.wizards_reborn.pitcher_turnip": "Рэпка гладышніку",
   "block.wizards_reborn.pitcher_turnip_block": "Блок рэпкі гладышніку",
   "block.wizards_reborn.potted_pitcher_turnip": "Рэпка гладышніку, што камічна не ўлазіць у гаршчок",
@@ -165,6 +187,7 @@
   "block.wizards_reborn.underground_grape_vines_plant": "Пячорная вінаградная лаза",
   "item.wizards_reborn.underground_grape_vine": "Пячорная вінаградная лаза",
   "item.wizards_reborn.underground_grape": "Пячорны вінаград",
+
   "block.wizards_reborn.cork_bamboo_seed": "Парастак коркавага бамбуку",
   "item.wizards_reborn.cork_bamboo_seed": "Насенне коркавага бамбуку",
   "block.wizards_reborn.cork_bamboo": "Коркавы бамбук",
@@ -194,6 +217,7 @@
   "block.wizards_reborn.cork_bamboo_hanging_wall_sign": "Насценная падвесная шыльда з коркавага бамбуку",
   "item.wizards_reborn.cork_bamboo_raft": "Плыт з коркавага бамбуку",
   "item.wizards_reborn.cork_bamboo_chest_raft": "Плыт з коркавага бамбуку з куфарам",
+
   "item.wizards_reborn.petals": "Пялёсткі",
   "item.wizards_reborn.flower_fertilizer": "Кветкавае ўгнанне",
   "block.wizards_reborn.placed_items": "Пастаўленыя рэчы",
@@ -204,48 +228,58 @@
   "item.wizards_reborn.ground_warped_fungus": "Молаты скажоны грыб",
   "item.wizards_reborn.ground_mor": "Молаты мор",
   "item.wizards_reborn.ground_elder_mor": "Молаты старажытны мор",
+
   "block.wizards_reborn.arcanum_seed": "Арканумнае насенне",
   "block.wizards_reborn.arcanum_growth": "Рослы арканум",
+
   "block.wizards_reborn.earth_crystal_seed": "Насенне крышталя зямлі",
   "block.wizards_reborn.water_crystal_seed": "Насенне крышталя вады",
   "block.wizards_reborn.air_crystal_seed": "Насенне крышталя паветра",
   "block.wizards_reborn.fire_crystal_seed": "Насенне крышталя агню",
   "block.wizards_reborn.void_crystal_seed": "Насенне крышталя пустэчы",
+
   "block.wizards_reborn.earth_crystal_growth": "Рослы крышталь зямлі",
   "block.wizards_reborn.water_crystal_growth": "Рослы крышталь вады",
   "block.wizards_reborn.air_crystal_growth": "Рослы крышталь паветра",
   "block.wizards_reborn.fire_crystal_growth": "Рослы крышталь агню",
   "block.wizards_reborn.void_crystal_growth": "Рослы крышталь пустэчы",
+
   "item.wizards_reborn.fractured_earth_crystal": "Зламаны крышталь зямлі",
   "item.wizards_reborn.fractured_water_crystal": "Зламаны крышталь вады",
   "item.wizards_reborn.fractured_air_crystal": "Зламаны крышталь паветра",
   "item.wizards_reborn.fractured_fire_crystal": "Зламаны крышталь агню",
   "item.wizards_reborn.fractured_void_crystal": "Зламаны крышталь пустэчы",
+
   "block.wizards_reborn.earth_crystal": "Крышталь зямлі",
   "block.wizards_reborn.water_crystal": "Крышталь вады",
   "block.wizards_reborn.air_crystal": "Крышталь паветра",
   "block.wizards_reborn.fire_crystal": "Крышталь агню",
   "block.wizards_reborn.void_crystal": "Крышталь пустэчы",
+
   "block.wizards_reborn.faceted_earth_crystal": "Агранены крышталь зямлі",
   "block.wizards_reborn.faceted_water_crystal": "Агранены крышталь вады",
   "block.wizards_reborn.faceted_air_crystal": "Агранены крышталь паветра",
   "block.wizards_reborn.faceted_fire_crystal": "Агранены крышталь агню",
   "block.wizards_reborn.faceted_void_crystal": "Агранены крышталь пустэчы",
+
   "block.wizards_reborn.advanced_earth_crystal": "Узмоцнены крышталь зямлі",
   "block.wizards_reborn.advanced_water_crystal": "Узмоцнены крышталь вады",
   "block.wizards_reborn.advanced_air_crystal": "Узмоцнены крышталь паветра",
   "block.wizards_reborn.advanced_fire_crystal": "Узмоцнены крышталь агню",
   "block.wizards_reborn.advanced_void_crystal": "Узмоцнены крышталь пустэчы",
+
   "block.wizards_reborn.masterful_earth_crystal": "Майстэрскі крышталь зямлі",
   "block.wizards_reborn.masterful_water_crystal": "Майстэрскі крышталь вады",
   "block.wizards_reborn.masterful_air_crystal": "Майстэрскі крышталь паветра",
   "block.wizards_reborn.masterful_fire_crystal": "Майстэрскі крышталь агню",
   "block.wizards_reborn.masterful_void_crystal": "Майстэрскі крышталь пустэчы",
+
   "block.wizards_reborn.pure_earth_crystal": "Чысты крышталь зямлі",
   "block.wizards_reborn.pure_water_crystal": "Чысты крышталь вады",
   "block.wizards_reborn.pure_air_crystal": "Чысты крышталь паветра",
   "block.wizards_reborn.pure_fire_crystal": "Чысты крышталь агню",
   "block.wizards_reborn.pure_void_crystal": "Чысты крышталь пустэчы",
+
   "block.wizards_reborn.white_arcane_lumos": "Белы арканавы люмас",
   "block.wizards_reborn.light_gray_arcane_lumos": "Светла-шэры арканавы люмас",
   "block.wizards_reborn.gray_arcane_lumos": "Шэры арканавы люмас",
@@ -264,6 +298,7 @@
   "block.wizards_reborn.pink_arcane_lumos": "Ружовы арканавы люмас",
   "block.wizards_reborn.rainbow_arcane_lumos": "Вясёлкавы арканавы люмас",
   "block.wizards_reborn.cosmic_arcane_lumos": "Касмічны арканавы люмас",
+
   "block.wizards_reborn.arcane_pedestal": "Арканавы пастамент",
   "block.wizards_reborn.wissen_altar": "Арканавы алтар",
   "block.wizards_reborn.wissen_translator": "Вісен-транслятар",
@@ -278,6 +313,7 @@
   "block.wizards_reborn.totem_of_experience_absorption": "Татэм паглынання досведу",
   "block.wizards_reborn.totem_of_disenchant": "Татэм расчаравання",
   "block.wizards_reborn.arcane_iterator": "Арканавы ітэратар",
+
   "block.wizards_reborn.wisestone_pedestal": "Алмуравы пастамент",
   "block.wizards_reborn.fluid_pipe": "Вадкасцевая труба",
   "block.wizards_reborn.fluid_extractor": "Вадкасцевы экстрактар",
@@ -289,10 +325,13 @@
   "block.wizards_reborn.alchemy_machine": "Алхімічная машына",
   "block.wizards_reborn.alchemy_boiler": "Алхімічны бойлер",
   "block.wizards_reborn.arcane_censer": "Арканавая курыльніца",
+
   "block.wizards_reborn.cork_bamboo_pedestal": "Пастамент з коркавага бамбуку",
+
   "block.wizards_reborn.light_emitter": "Выпраменнік святла",
   "block.wizards_reborn.light_transfer_lens": "Транс-святловая лінза",
   "block.wizards_reborn.runic_pedestal": "Рунічны пастамент",
+
   "block.wizards_reborn.engraved_wisestone": "Гравераваны алмур",
   "block.wizards_reborn.engraved_wisestone_lunam": "Гравераваны алмур",
   "block.wizards_reborn.engraved_wisestone_vita": "Гравераваны алмур",
@@ -314,7 +353,9 @@
   "block.wizards_reborn.engraved_wisestone_evolutionis": "Гравераваны алмур",
   "block.wizards_reborn.engraved_wisestone_tenebris": "Гравераваны алмур",
   "block.wizards_reborn.engraved_wisestone_universum": "Гравераваны алмур",
+
   "block.wizards_reborn.innocent_pedestal": "Цнатлівы пастамент",
+
   "block.wizards_reborn.arcane_lever": "Арканавы рычаг",
   "block.wizards_reborn.arcane_hopper": "Арканавая варонка",
   "block.wizards_reborn.redstone_sensor": "Сэнсар рэдстоўну",
@@ -327,6 +368,7 @@
   "block.wizards_reborn.steam_sensor": "Сэнсар пары",
   "block.wizards_reborn.wissen_activator": "Вісен-актыватар",
   "block.wizards_reborn.item_sorter": "Сартавальнік рэчаў",
+
   "block.wizards_reborn.arcane_wood_frame": "Рамка з аркана-дрэва",
   "block.wizards_reborn.arcane_wood_glass_frame": "Шкляная рамка з аркана-дрэва",
   "block.wizards_reborn.arcane_wood_casing": "Корпус з аркана-дрэва",
@@ -355,10 +397,18 @@
   "block.wizards_reborn.wisestone_light_casing": "Светлавы корпус з алмуру",
   "block.wizards_reborn.wisestone_fluid_casing": "Вадкасцевы корпус з алмуру",
   "block.wizards_reborn.wisestone_steam_casing": "Паравы корпус з алмуру",
+
   "block.wizards_reborn.creative_wissen_storage": "Творчае Вісен-сховішча",
   "block.wizards_reborn.creative_light_storage": "Творчае светлавое сховішча",
   "block.wizards_reborn.creative_fluid_storage": "Творчае вадкасцевае сховішча",
   "block.wizards_reborn.creative_steam_storage": "Творчае паравое сховішча",
+
+  "block.wizards_reborn.gilded_arcane_wood_planks": "Gilded Arcane Wood Planks",
+  "block.wizards_reborn.gilded_innocent_wood_planks": "Gilded Innocent Wood Planks",
+  "block.wizards_reborn.gilded_cork_bamboo_planks": "Gilded Cork Bamboo Planks",
+  "block.wizards_reborn.gilded_cork_bamboo_chiseled_planks": "Gilded Cork Bamboo Chiseled Planks",
+  "block.wizards_reborn.gilded_polished_wisestone": "Gilded Polished Wisestone",
+
   "block.wizards_reborn.arcane_salt_torch": "Пераўскітавы факел з аркана-дрэва",
   "block.wizards_reborn.arcane_salt_wall_torch": "Пераўскітавы факел з аркана-дрэва",
   "block.wizards_reborn.innocent_salt_torch": "Пераўскітавы факел з цнатлівага дрэва",
@@ -375,12 +425,14 @@
   "block.wizards_reborn.innocent_salt_campfire": "Пераўскітавае вогнішча з цнатлівага дрэва",
   "block.wizards_reborn.cork_bamboo_salt_campfire": "Пераўскітавае вогнішча з коркавага бамбуку",
   "block.wizards_reborn.wisestone_salt_campfire": "Пераўскітавае вогнішча з алмуру",
+
   "block.wizards_reborn.alchemy_glass": "Алхімічнае шкло",
   "item.wizards_reborn.alchemy_vial": "Алхімічная колба",
   "item.wizards_reborn.alchemy_flask": "Алхімічны слоік",
   "item.wizards_reborn.alchemy_bottle": "Алхімічная бутэлька",
   "item.wizards_reborn.alchemy_vial_potion": "Алхімічная колба",
   "item.wizards_reborn.alchemy_flask_potion": "Алхімічны слоік",
+
   "block.wizards_reborn.white_luminal_glass": "Белае люмінальнае шкло",
   "block.wizards_reborn.light_gray_luminal_glass": "Светла-шэрае люмінальнае шкло",
   "block.wizards_reborn.gray_luminal_glass": "Шэрае люмінальнае шкло",
@@ -399,6 +451,7 @@
   "block.wizards_reborn.pink_luminal_glass": "Ружовае люмінальнае шкло",
   "block.wizards_reborn.rainbow_luminal_glass": "Вясёлкавае люмінальнае шкло",
   "block.wizards_reborn.cosmic_luminal_glass": "Касмічнае люмінальнае шкло",
+
   "block.wizards_reborn.white_framed_luminal_glass": "Белае абрамленае люмінальнае шкло",
   "block.wizards_reborn.light_gray_framed_luminal_glass": "Светла-шэрае абрамленае люмінальнае шкло",
   "block.wizards_reborn.gray_framed_luminal_glass": "Шэрая абрамленае люмінальнае шкло",
@@ -417,22 +470,28 @@
   "block.wizards_reborn.pink_framed_luminal_glass": "Ружовае абрамленае люмінальнае шкло",
   "block.wizards_reborn.rainbow_framed_luminal_glass": "Вясёлкавае абрамленае люмінальнае шкло",
   "block.wizards_reborn.cosmic_framed_luminal_glass": "Касмічнае абрамленае люмінальнае шкло",
+
   "item.wizards_reborn.alchemy_calx": "Алхімічная вапна",
   "item.wizards_reborn.natural_calx": "Гаяўская вапна",
   "item.wizards_reborn.scorched_calx": "Бегемоцкая вапна",
   "item.wizards_reborn.distant_calx": "Апаліёнава вапна",
   "item.wizards_reborn.enchanted_calx": "Чароўная вапна",
+
   "block.wizards_reborn.alchemy_calx_block": "Блок алхімічнай вапны",
   "block.wizards_reborn.natural_calx_block": "Блок гаяўскай вапны",
   "block.wizards_reborn.scorched_calx_block": "Блок бегемоцкай вапны",
   "block.wizards_reborn.distant_calx_block": "Блок апаліёнавай вапны",
   "block.wizards_reborn.enchanted_calx_block": "Блок чароўнай вапны",
+
   "item.wizards_reborn.arcacite_polishing_mixture": "Аркацытавая паліравальная сумесь",
   "block.wizards_reborn.arcacite_polishing_mixture_block": "Блок аркацытавай паліравальнай сумесі",
+
   "block.wizards_reborn.sniffalo_egg": "Яйка нюхара",
+
   "item.wizards_reborn.arcanum_lens": "Арканавая лінза",
   "item.wizards_reborn.wisestone_plate": "Алмуравая  пласціна",
   "item.wizards_reborn.runic_wisestone_plate": "Рунічная алмуравая пласціна",
+
   "item.wizards_reborn.arcanum_amulet": "Арканумны кудмень",
   "item.wizards_reborn.arcanum_ring": "Арканумны пярсцёнак",
   "item.wizards_reborn.arcacite_amulet": "Аркацытавы кудмень",
@@ -445,31 +504,40 @@
   "item.wizards_reborn.inventor_wizard_belt": "Пояса мага-вынаходніка",
   "item.wizards_reborn.crystal_bag": "Крышталічная торба",
   "item.wizards_reborn.alchemy_bag": "Алхімічная торба",
+
   "item.wizards_reborn.leather_collar": "Скураны нашыйнік",
+
   "item.wizards_reborn.brown_mushroom_cap": "Шапка з баравіка",
   "item.wizards_reborn.red_mushroom_cap": "Шапка з мухамора",
   "item.wizards_reborn.crimson_fungus_cap": "Шапка з барвовага грыба",
   "item.wizards_reborn.warped_fungus_cap": "Шапка з скажонага грыба",
   "item.wizards_reborn.mor_cap": "Шапка з мора",
   "item.wizards_reborn.elder_mor_cap": "Шапка з старажытнага мора",
+
   "item.wizards_reborn.arcane_fortress_helmet": "Арканавы штурмавы шлем",
   "item.wizards_reborn.arcane_fortress_chestplate": "Арканавая штурмавая кіраса",
   "item.wizards_reborn.arcane_fortress_leggings": "Арканавыя штурмавыя понажы",
   "item.wizards_reborn.arcane_fortress_boots": "Арканавыя штурмавыя боты",
+
   "item.wizards_reborn.inventor_wizard_hat": "Капялюш мага-вынаходніка",
   "item.wizards_reborn.inventor_wizard_costume": "Касцюм мага-вынаходніка",
   "item.wizards_reborn.inventor_wizard_trousers": "Порткі мага-вынаходніка",
   "item.wizards_reborn.inventor_wizard_boots": "Боты мага-вынаходніка",
+
   "item.wizards_reborn.arcane_wand": "Арканавае жазло",
   "item.wizards_reborn.wissen_wand": "Вісен-жазло",
   "item.wizards_reborn.blazing_wand": "Blazing Wand",
+
   "item.wizards_reborn.arcane_wood_smoking_pipe": "Курыльная трубка з аркана-дрэва",
   "item.wizards_reborn.innocent_wood_smoking_pipe": "Курыльная трубка з цнатлівага дрэва",
   "item.wizards_reborn.bamboo_smoking_pipe": "Курыльная трубка з бамбуку",
   "item.wizards_reborn.cork_bamboo_smoking_pipe": "Курыльная трубка з коркавага бамбуку",
+
   "item.wizards_reborn.arcane_wood_cane": "Кій з аркана-дрэва",
   "item.wizards_reborn.arcane_wood_bow": "Лук з аркана-дрэва",
+
   "item.wizards_reborn.blaze_reap": "Агняжняяр",
+
   "item.wizards_reborn.cargo_carpet": "Грузавы дыван",
   "item.wizards_reborn.white_cargo_carpet": "Белы грузавы дыван",
   "item.wizards_reborn.light_gray_cargo_carpet": "Светла-шэры грузавы дыван",
@@ -488,6 +556,7 @@
   "item.wizards_reborn.magenta_cargo_carpet": "Пурпурны грузавы дыван",
   "item.wizards_reborn.pink_cargo_carpet": "Ружовы грузавы дыван",
   "item.wizards_reborn.rainbow_cargo_carpet": "Вясёлкавы грузавы дыван",
+
   "item.wizards_reborn.arcane_enchanted_book": "Арканавая зачараваная кніга",
   "item.wizards_reborn.arcanemicon": "Арканамікон",
   "item.wizards_reborn.knowledge_scroll": "Скрутак ведаў",
@@ -495,18 +564,22 @@
   "item.wizards_reborn.creative_knowledge_ancient_scroll": "Творчы старажытны скрутак",
   "item.wizards_reborn.creative_spell_scroll": "Творчы скрутак загавораў",
   "item.wizards_reborn.creative_spell_ancient_scroll": "Творчы старажытны скрутак ведаў",
+
   "item.wizards_reborn.violence_banner_pattern": "Шаблон сцяга",
   "item.wizards_reborn.reproduction_banner_pattern": "Шаблон сцяга",
   "item.wizards_reborn.cooperation_banner_pattern": "Шаблон сцяга",
   "item.wizards_reborn.hunger_banner_pattern": "Шаблон сцяга",
   "item.wizards_reborn.survival_banner_pattern": "Шаблон сцяга",
   "item.wizards_reborn.ascension_banner_pattern": "Шаблон сцяга",
+
   "item.wizards_reborn.music_disc_arcanum": "Арканавая грампласцінка",
   "item.wizards_reborn.music_disc_mor": "Арканавая грампласцінка",
   "item.wizards_reborn.music_disc_reborn": "Арканавая грампласцінка",
   "item.wizards_reborn.music_disc_shimmer": "Арканавая грампласцінка",
   "item.wizards_reborn.music_disc_capitalism": "Арканавая грампласцінка",
   "item.wizards_reborn.music_disc_panache": "Арканавая касета",
+  "item.wizards_reborn.music_disc_disco": "Arcane Cassette",
+
   "item.wizards_reborn.arcane_wood_trim": "Адстрой з аркана-дрэва",
   "item.wizards_reborn.wisestone_trim": "Адстрой з алмуру",
   "item.wizards_reborn.innocent_wood_trim": "Адстрой з цнатлівага дрэва",
@@ -516,6 +589,7 @@
   "item.wizards_reborn.soul_hunter_trim": "Адстрой з алмуру",
   "item.wizards_reborn.implosion_trim": "Адстрой з алмуру",
   "item.wizards_reborn.phantom_ink_trim": "Адстрой з цнатлівага дрэва",
+
   "item.wizards_reborn.vodka_bottle": "Бутэлька гарэлкі",
   "item.wizards_reborn.bourbon_bottle": "Бутэлька бурбону",
   "item.wizards_reborn.whiskey_bottle": "Бутэлька віскі",
@@ -546,8 +620,10 @@
   "item.wizards_reborn.baikal_bottle": "Бутэлька байкалу",
   "item.wizards_reborn.kvass_bottle": "Бутэлька квасу",
   "item.wizards_reborn.kissel_bottle": "Бутэлька кіселю",
+
   "item.wizards_reborn.shrimp": "Крэветка",
   "item.wizards_reborn.fried_shrimp": "Смажаная крэветка",
+
   "item.wizards_reborn.mundane_brew_bucket": "Вядро нязграбнага зелля",
   "item.wizards_reborn.alchemy_oil_bucket": "Вядро алхімічнага алея",
   "item.wizards_reborn.oil_tea_bucket": "Вядро алейнай гарбаты",
@@ -557,6 +633,7 @@
   "item.wizards_reborn.hellish_mushroom_brew_bucket": "Вядро грыбнога варыва з Пекла",
   "item.wizards_reborn.mor_brew_bucket": "Вядро моравага варыва",
   "item.wizards_reborn.flower_brew_bucket": "Вядро кветкавага варыва",
+
   "block.wizards_reborn.mundane_brew": "Нязграбнае зелле",
   "block.wizards_reborn.alchemy_oil": "Алхімічны алей",
   "block.wizards_reborn.oil_tea": "Алейная гарбата",
@@ -566,7 +643,9 @@
   "block.wizards_reborn.hellish_mushroom_brew": "Грыбное варыва з Пекла",
   "block.wizards_reborn.mor_brew": "Моравае варыва",
   "block.wizards_reborn.flower_brew": "Кветкавае варыва",
+
   "item.wizards_reborn.sniffalo_spawn_egg": "Яйка прызыву — Нюхар",
+
   "_comment_2": "Вадкасці",
   "fluid_type.wizards_reborn.mundane_brew": "Нязграбнае зелле",
   "fluid_type.wizards_reborn.alchemy_oil": "Алхімічны алей",
@@ -577,16 +656,19 @@
   "fluid_type.wizards_reborn.hellish_mushroom_brew": "Грыбное варыва з Пекла",
   "fluid_type.wizards_reborn.mor_brew": "Моравае варыва",
   "fluid_type.wizards_reborn.flower_brew": "Кветкавае варыва",
+
   "_comment_3": "Крышталі",
   "crystal_stat.wizards_reborn.focus": "Фокус",
   "crystal_stat.wizards_reborn.balance": "Баланс",
   "crystal_stat.wizards_reborn.absorption": "Паглынанне",
   "crystal_stat.wizards_reborn.resonance": "Рэзананс",
+
   "crystal_type.wizards_reborn.earth": "Зямля",
   "crystal_type.wizards_reborn.water": "Вада",
   "crystal_type.wizards_reborn.air": "Паветра",
   "crystal_type.wizards_reborn.fire": "Агонь",
   "crystal_type.wizards_reborn.void": "Пустэча",
+
   "_comment_4": "Загаворы",
   "spell.wizards_reborn.earth_projectile": "Снарад зямлі",
   "spell.wizards_reborn.water_projectile": "Снарад вады",
@@ -650,9 +732,11 @@
   "spell.wizards_reborn.renunciation": "Паглынанне чыстцам",
   "spell.wizards_reborn.ember_ray": "Эмбар-промень",
   "spell.wizards_reborn.wisdom": "Мудрасць",
+
   "spell.wizards_reborn.pipe_sound": "Звук прэнта",
   "spell.wizards_reborn.boom_sound": "Звук \"Бум\"",
   "spell.wizards_reborn.moai_sound": "Звук \"Моаі\"",
+
   "_comment_5": "Манаграмы",
   "monogram.wizards_reborn.lunam": "Lunam",
   "monogram.wizards_reborn.vita": "Vita",
@@ -674,6 +758,7 @@
   "monogram.wizards_reborn.evolutionis": "Evolutionis",
   "monogram.wizards_reborn.tenebris": "Tenebris",
   "monogram.wizards_reborn.universum": "Universum",
+
   "monogram.wizards_reborn.lunam.lore": "Луна",
   "monogram.wizards_reborn.vita.lore": "Жыццё",
   "monogram.wizards_reborn.solem.lore": "Сонца",
@@ -694,6 +779,7 @@
   "monogram.wizards_reborn.evolutionis.lore": "Развіццё",
   "monogram.wizards_reborn.tenebris.lore": "Цемра",
   "monogram.wizards_reborn.universum.lore": "Сусвет",
+
   "_comment_6": "Скіны",
   "item_skin.wizards_reborn.top_hat": "Фокуснік",
   "item_skin.wizards_reborn.soul_hunter": "Жняяр душ",
@@ -701,6 +787,7 @@
   "item_skin.wizards_reborn.phantom_ink": "Батанія момент",
   "item_skin.wizards_reborn.magnificent_maid": "Велічная пакаёўка",
   "item_skin.wizards_reborn.summer_love": "Летняе каханне",
+
   "item_skin.wizards_reborn.arcane_armor": "Arcane Armor",
   "item_skin.wizards_reborn.arcane_magic_hats": "Arcane Magic Hats",
   "item_skin.wizards_reborn.arcane_tools": "Arcane Tools",
@@ -708,6 +795,7 @@
   "item_skin.wizards_reborn.arcane_bows": "Arcane Bows",
   "item_skin.wizards_reborn.arcane_wand": "Arcane Wand",
   "item_skin.wizards_reborn.wissen_wand": "Wissen Wand",
+
   "_comment_7": "Арканавыя зачараванні",
   "arcane_enchantment.wizards_reborn.wissen_mending": "Вісен-раомнт",
   "arcane_enchantment.wizards_reborn.life_mending": "Крывавы рамонт",
@@ -718,6 +806,7 @@
   "arcane_enchantment.wizards_reborn.eagle_shot": "Арліны зрок",
   "arcane_enchantment.wizards_reborn.split": "Шквал стрэлаў",
   "arcane_enchantment.wizards_reborn.sonar": "Музыкальнае рэха",
+
   "_comment_8": "Крышталічныя рытуалы",
   "crystal_ritual.wizards_reborn.empty": "Пуста",
   "crystal_ritual.wizards_reborn.focusing": "Фокус",
@@ -725,6 +814,7 @@
   "crystal_ritual.wizards_reborn.ritual_breeding": "Штучная вясна",
   "crystal_ritual.wizards_reborn.crystal_growth_acceleration": "Паскарэнне росту крышталёў",
   "crystal_ritual.wizards_reborn.crystal_infusion": "Крышталічная інфузія",
+
   "_comment_9": "Кшталты промняў святла",
   "light_type.wizards_reborn.earth": "Зямля",
   "light_type.wizards_reborn.water": "Вада",
@@ -732,6 +822,7 @@
   "light_type.wizards_reborn.fire": "Агонь",
   "light_type.wizards_reborn.void": "Пустэча",
   "light_type.wizards_reborn.crystal_growth_acceleration": "Паскарэнне росту крышталёў",
+
   "_comment_10": "Алхімічныя зеллі",
   "alchemy_potion.wizards_reborn.empty": "Пуста",
   "alchemy_potion.wizards_reborn.combined": "Камбінаванае зелле",
@@ -755,34 +846,57 @@
   "alchemy_potion.wizards_reborn.resistance": "Зелле супраціў",
   "alchemy_potion.wizards_reborn.magical_attunement": "Зелле магічнага настрою",
   "alchemy_potion.wizards_reborn.darkness": "Зелле цемры",
+
+  "alchemy_potion.wizards_reborn.sacred_spirit": "Potion of Sacred Spirit",
+  "alchemy_potion.wizards_reborn.sacred_soul": "Potion of Sacred Soul",
+  "alchemy_potion.wizards_reborn.wicked_spirit": "Potion of Wicked Spirit",
+  "alchemy_potion.wizards_reborn.wicked_soul": "Potion of Wicked Soul",
+  "alchemy_potion.wizards_reborn.aerial_spirit": "Potion of Aerial Spirit",
+  "alchemy_potion.wizards_reborn.aerial_soul": "Potion of Aerial Soul",
+  "alchemy_potion.wizards_reborn.aqueous_spirit": "Potion of Aqueous Spirit",
+  "alchemy_potion.wizards_reborn.aqueous_soul": "Potion of Aqueous Soul",
+  "alchemy_potion.wizards_reborn.earthen_spirit": "Potion of Earthen Spirit",
+  "alchemy_potion.wizards_reborn.earthen_soul": "Potion of Earthen Soul",
+  "alchemy_potion.wizards_reborn.infernal_spirit": "Potion of Infernal Spirit",
+  "alchemy_potion.wizards_reborn.infernal_soul": "Potion of Infernal Soul",
   "alchemy_potion.wizards_reborn.gluttony": "Potion of Gluttony",
+
   "_comment_11": "Гісторыя прадметаў",
   "lore.wizards_reborn.wissen_wand_mode.functional": "Функцыйны рэжым",
   "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Рэжым атрымання злучэння",
   "lore.wizards_reborn.wissen_wand_mode.send_connect": "Рэжым адпраўлення злучэння",
   "lore.wizards_reborn.wissen_wand_mode.reload": "Рэжым перазагрузкі",
   "lore.wizards_reborn.wissen_wand_mode.off": "Выключаны рэжым",
+
   "lore.wizards_reborn.arcane_wand.crystal": "Крышталь:",
   "lore.wizards_reborn.arcane_wand.spell": "Загавор:",
+
   "lore.wizards_reborn.leather_collar.yaping": "Hey therre!! owo,,, hiiii! do i need to chang dis col thing donw hir? :3:3 please call me im free tonight ill be alone",
   "lore.wizards_reborn.leather_collar.0": "Meow :3",
   "lore.wizards_reborn.leather_collar.1": "Prrr~~",
   "lore.wizards_reborn.leather_collar.2": "❤ ❤ ❤",
+
   "lore.wizards_reborn.inventor_wizard_armor": "Вісен-прырода",
   "lore.wizards_reborn.arcane_fortress_armor": "Арканавы бастыён",
+
   "lore.wizards_reborn.knowledge_scroll": "Захоўвае веды %s'а",
+
   "lore.wizards_reborn.violence_banner_pattern": "Расфарбуй гэты кужаль пунсовым!",
   "lore.wizards_reborn.reproduction_banner_pattern": "Ланцугі вечнага юру закавалі гэты свет...",
   "lore.wizards_reborn.cooperation_banner_pattern": "Не здраджвай свайму сябру.",
   "lore.wizards_reborn.hunger_banner_pattern": "Паляўнічы не можа стаць дабычай.",
   "lore.wizards_reborn.survival_banner_pattern": "Забей або будзь забітым!",
   "lore.wizards_reborn.ascension_banner_pattern": "Пакінь усё... Ахай сваю душу...",
+
   "lore.wizards_reborn.drinks.alcoholic": "Алкагольны",
   "lore.wizards_reborn.drinks.non_alcoholic": "Безалкагольны",
   "lore.wizards_reborn.drinks.days_aged": "дзён вытрымана",
+
   "lore.wizards_reborn.shrimp": "Ці можа крэветка стаць тваім гадаванцам?",
   "lore.wizards_reborn.fried_shrimp": "Ты выблядак,,,,",
+
   "lore.wizards_reborn.arcane_enchantments": "Арканавыя зачараванні:",
+
   "_comment_12": "Матэрыялы для адстрояў",
   "trim_material.wizards_reborn.arcane_gold": "Арканавы залаты матэрыял",
   "trim_material.wizards_reborn.sarcon": "Вілейкіумны матэрыял",
@@ -790,6 +904,7 @@
   "trim_material.wizards_reborn.arcanum": "Арканумны матэрыял",
   "trim_material.wizards_reborn.arcacite": "Аркацытавы матэрыял",
   "trim_material.wizards_reborn.precision_crystal": "Матэрыял крышталя дакладнасці",
+
   "_comment_13": "Апісанне прадметаў",
   "item.wizards_reborn.violence_banner_pattern.desc": "Гвалт",
   "item.wizards_reborn.reproduction_banner_pattern.desc": "Рэпрадукцыя",
@@ -797,12 +912,15 @@
   "item.wizards_reborn.hunger_banner_pattern.desc": "Голад",
   "item.wizards_reborn.survival_banner_pattern.desc": "Выжыванне",
   "item.wizards_reborn.ascension_banner_pattern.desc": "Узвышэнне",
+
   "item.wizards_reborn.music_disc_arcanum.desc": "Onjerlay - Arcanum Swinging",
   "item.wizards_reborn.music_disc_mor.desc": "Onjerlay - Mor Marsh",
   "item.wizards_reborn.music_disc_reborn.desc": "Onjerlay - Reborn",
   "item.wizards_reborn.music_disc_shimmer.desc": "Onjerlay - Blue Shimmer",
   "item.wizards_reborn.music_disc_capitalism.desc": "Onjerlay - Battle against a true Capitalist",
   "item.wizards_reborn.music_disc_panache.desc": "Onjerlay - Magical Panache",
+  "item.wizards_reborn.music_disc_disco.desc": "Onjerlay - Illegal Wizard Disco",
+
   "_comment_14": "Сцяг",
   "block.minecraft.banner.wizards_reborn.violence.black": "Чорны сымбаль \"Гвалт\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Сіні сымбаль \"Гвалт\"",
@@ -820,6 +938,7 @@
   "block.minecraft.banner.wizards_reborn.violence.red": "Чырвоны сымбаль \"Гвалт\"",
   "block.minecraft.banner.wizards_reborn.violence.white": "Белы сымбаль \"Гвалт\"",
   "block.minecraft.banner.wizards_reborn.violence.yellow": "Жоўты сымбаль \"Гвалт\"",
+
   "block.minecraft.banner.wizards_reborn.reproduction.black": "Чорны сымбаль \"Рэпрадукцыя\"",
   "block.minecraft.banner.wizards_reborn.reproduction.blue": "Сіні сымбаль \"Рэпрадукцыя\"",
   "block.minecraft.banner.wizards_reborn.reproduction.brown": "Карычневы сымбаль \"Рэпрадукцыя\"",
@@ -836,6 +955,7 @@
   "block.minecraft.banner.wizards_reborn.reproduction.red": "Чырвоны сымбал \"Рэпрадукцыя\"",
   "block.minecraft.banner.wizards_reborn.reproduction.white": "Белы сымбаль \"Рэпрадукцыя\"",
   "block.minecraft.banner.wizards_reborn.reproduction.yellow": "Жоўты сымбаль \"Рэпрадукцыя\"",
+
   "block.minecraft.banner.wizards_reborn.cooperation.black": "Чорны сымбаль \"Кааперацыя\"",
   "block.minecraft.banner.wizards_reborn.cooperation.blue": "Сіні сымбаль \"Кааперацыя\"",
   "block.minecraft.banner.wizards_reborn.cooperation.brown": "Карычневы сымбаль \"Кааперацыя\"",
@@ -852,6 +972,7 @@
   "block.minecraft.banner.wizards_reborn.cooperation.red": "Чырвоны сымбаль \"Кааперацыя\"",
   "block.minecraft.banner.wizards_reborn.cooperation.white": "Белы сымбаль \"Кааперацыя\"",
   "block.minecraft.banner.wizards_reborn.cooperation.yellow": "Жоўты сымбаль \"Кааперацыя\"",
+
   "block.minecraft.banner.wizards_reborn.hunger.black": "Чорны сымбаль \"Голад\"",
   "block.minecraft.banner.wizards_reborn.hunger.blue": "Сіні сымбаль \"Голад\"",
   "block.minecraft.banner.wizards_reborn.hunger.brown": "Карычневы сымбаль \"Голад\"",
@@ -868,6 +989,7 @@
   "block.minecraft.banner.wizards_reborn.hunger.red": "Чырвоны сымбаль \"Голад\"",
   "block.minecraft.banner.wizards_reborn.hunger.white": "Белы сымбаль \"Голад\"",
   "block.minecraft.banner.wizards_reborn.hunger.yellow": "Жоўты сымбаль \"Голад\"",
+
   "block.minecraft.banner.wizards_reborn.survival.black": "Чорны сымбаль \"Выжыванне\"",
   "block.minecraft.banner.wizards_reborn.survival.blue": "Сіні сымбаль \"Выжыванне\"",
   "block.minecraft.banner.wizards_reborn.survival.brown": "Карычневы сымбаль \"Выжыванне\"",
@@ -884,6 +1006,7 @@
   "block.minecraft.banner.wizards_reborn.survival.red": "Чырвоны сымбаль \"Выжыванне\"",
   "block.minecraft.banner.wizards_reborn.survival.white": "Белы сымбаль \"Выжыванне\"",
   "block.minecraft.banner.wizards_reborn.survival.yellow": "Жоўты сымбаль \"Выжыванне\"",
+
   "block.minecraft.banner.wizards_reborn.ascension.black": "Чорны сымбаль \"Узвышэнне\"",
   "block.minecraft.banner.wizards_reborn.ascension.blue": "Сіні сымбаль \"Узвышэнне\"",
   "block.minecraft.banner.wizards_reborn.ascension.brown": "Карычневы сымбаль \"Узвышэнне\"",
@@ -900,6 +1023,7 @@
   "block.minecraft.banner.wizards_reborn.ascension.red": "Чырвоны сымбаль \"Узвышэнне\"",
   "block.minecraft.banner.wizards_reborn.ascension.white": "Белы сымбаль \"Узвышэнне\"",
   "block.minecraft.banner.wizards_reborn.ascension.yellow": "Жоўты сымбаль \"Узвышэнне\"",
+
   "_comment_15": "Гукі",
   "sounds.wizards_reborn.wissen_burst": "Выбліск Вісена",
   "sounds.wizards_reborn.wissen_transfer": "Перадача Вісена",
@@ -908,10 +1032,13 @@
   "sounds.wizards_reborn.spell_cast": "Загавор",
   "sounds.wizards_reborn.spell_burst": "Выбліск загавору",
   "sounds.wizards_reborn.spell_reload": "Перазарадка загавору",
+
   "sounds.wizards_reborn.arcanemicon_offering": "Атрыманне арканамікону",
   "sounds.wizards_reborn.arcanum_dust_transmutation": "Трансмутацыя арканавым пылам",
+
   "sounds.wizards_reborn.pedestal_insert": "Прадмет пакладзены на пастамент",
   "sounds.wizards_reborn.pedestal_remove": "Прадмет узяты з пастамента",
+
   "sounds.wizards_reborn.wissen_altar_burst": "Выбух арканавага алтара",
   "sounds.wizards_reborn.wissen_crystallizer_start": "Вісен-крышталізатар пачаў працаваць",
   "sounds.wizards_reborn.wissen_crystallizer_end": "Вісен-крышталізатар скончыў працаваць",
@@ -929,11 +1056,14 @@
   "sounds.wizards_reborn.arcane_iterator_loop": "Арканавы ітэратар працуе",
   "sounds.wizards_reborn.crystal_ritual_start": "Крышталічны рытуал пачаўся",
   "sounds.wizards_reborn.crystal_ritual_end": "Крышталічны рытуал скончыўся",
+
   "sounds.wizards_reborn.crystal_resonate": "Крышталь рэзануе",
   "sounds.wizards_reborn.crystal_shimmer": "Крышталь ззяе",
+
   "sounds.wizards_reborn.pipe": "Pipe",
   "sounds.wizards_reborn.boom": "Boom",
   "sounds.wizards_reborn.moai": "Moai",
+
   "_comment_16": "Істоты",
   "entity.wizards_reborn.arcane_wood_boat": "Човен з аркана-дрэва",
   "entity.wizards_reborn.arcane_wood_chest_boat": "Човен з аркана-дрэва з куфарам",
@@ -946,19 +1076,24 @@
   "entity.wizards_reborn.split_arrow": "Split Arrow",
   "entity.wizards_reborn.innocent_spark": "Innocent Spark",
   "entity.wizards_reborn.sniffalo": "Нюхар",
+
   "_comment_17": "Эфекты мабоў",
   "effect.wizards_reborn.mor_spores": "Моравыя споры",
   "effect.wizards_reborn.wissen_aura": "Вісен-аўра",
   "effect.wizards_reborn.irritation": "Цвяленне",
   "effect.wizards_reborn.tipsy": "Ужо цяпнуў",
+
   "_comment_18": "Якасці",
   "attribute.name.wizards_reborn.wissen_discount": "Зніжка Вісена",
   "attribute.name.wizards_reborn.magic_armor": "Магічная браня",
   "attribute.name.wizards_reborn.magic_modifier": "Магічны мадыфікатар",
   "attribute.name.wizards_reborn.arcane_damage": "Арканавыя пашкоджанні",
+
   "_comment_19": "Меню Флафі Фюр",
   "mod_description.wizards_reborn": "Wizard's Reborn - мод пра магію ў стыле альтэрнатыўных 1930.",
+
   "panorama.wizards_reborn.magical_origins": "Магічныя вытокі",
+
   "_comment_20": "GUI",
   "gui.wizards_reborn.arcanemicon.title": "Арканамікон",
   "gui.wizards_reborn.arcane_workbench.title": "Арканавы Варштат",
@@ -969,12 +1104,15 @@
   "gui.wizards_reborn.item_sorter.title": "Сартавальнік рэчаў",
   "gui.wizards_reborn.totem_of_disenchant.title": "Татэм расчаравання",
   "gui.wizards_reborn.runic_pedestal.title": "Рунічны пастамент",
+
   "gui.wizards_reborn.jei.arcanum_dust_transmutation": "Трансмутацыя арканумным пылам",
   "gui.wizards_reborn.jei.mortar": "Ступка",
   "gui.wizards_reborn.jei.censer": "Курыльніца",
+
   "config.jade.plugin_wizards_reborn.crystal_growth": "Рост крышталёў",
   "config.jade.plugin_wizards_reborn.numerical": "Лічбы",
   "config.jade.plugin_wizards_reborn.salt_campfire": "Пераўскітавае вогнішча",
+
   "gui.wizards_reborn.wissen": "Вісен",
   "gui.wizards_reborn.cooldown": "Перазарадка",
   "gui.wizards_reborn.light": "Святло",
@@ -982,12 +1120,14 @@
   "gui.wizards_reborn.steam": "Пара",
   "gui.wizards_reborn.experience": "Досвед",
   "gui.wizards_reborn.empty": "Пуста",
+
   "gui.wizards_reborn.wand.crystal": "Крышталь",
   "gui.wizards_reborn.wand.spell": "Загавор",
   "gui.wizards_reborn.wand.spell_sets": "Наборы загавораў",
   "gui.wizards_reborn.wand.spell_set": "Набор загавораў",
   "gui.wizards_reborn.wand.add_spell_set": "Дадаць набор загавораў",
   "gui.wizards_reborn.wand.add_spell": "Дадаць загавор",
+
   "_comment_21": "Паведамленні смерці",
   "death.attack.arcane_magic": "%s памёр праз арканавую магію",
   "death.attack.arcane_magic.player": "%s памёр праз арканувую магію ад %s",
@@ -995,14 +1135,17 @@
   "death.attack.ritual": "%s памёр падчас рытуалу",
   "death.attack.ritual.player": "%s памёр падчас рытуалу ад %s",
   "death.attack.ritual.item": "%s памёр падчас рытуалу ад %s, выкарыстоўваючы %s",
+
   "_comment_22": "Паведамленні",
   "message.wizards_reborn.someone": "Нехта",
   "message.wizards_reborn.arcanemicon_offering": "Мая моц пакідае мяне... Я даю табе гэтую кнігу, каб адрадзіць страчаныя веды! Дасягні гэтай мэты, бо я не змог...",
   "message.wizards_reborn.arcanemicon": "Запал да старажытных ведаў пачынае расквітаць унутры цябе! Ты знаеш, што рабіць.",
   "message.wizards_reborn.knowledge_scroll": "Вы атрымалі веды з %s",
+
   "_comment_23": "Тосты",
   "knowledge.toast.wizards_reborn.new_knowledge": "Атрымлены веды",
   "knowledge.toast.wizards_reborn.new_articles": "Даступныя артыкулы",
+
   "_comment_24": "Каманды",
   "commands.wizards_reborn.knowledge.unknown": "Не існуе ведаў з ID '%s'",
   "commands.wizards_reborn.knowledge.give.single": "Выдадзены веды гульцу %s",
@@ -1022,15 +1165,23 @@
   "commands.wizards_reborn.spell.give.all.multiple": "Выдадзены ўсе загаворы %s гульцам",
   "commands.wizards_reborn.spell.remove.all.single": "Выдалены ўсе загаворы ў гульца %s",
   "commands.wizards_reborn.spell.remove.all.multiple": "Выдалены ўсе загаворы ў %s гульцоў",
+  "commands.wizards_reborn.spell.use.single": "Used %s spell from entity %s",
+  "commands.wizards_reborn.spell.use.multiple": "Used %s spell from %s entities",
+  "commands.wizards_reborn.spell.use": "Used %s spell",
   "commands.wizards_reborn.arcane_enchantment.unknown": "Не існуе арканвага зачаравання з ID '%s'",
   "commands.wizards_reborn.arcane_enchantment.multiple": "Прыменена арканавае зачараванне %s да істоты %s",
   "commands.wizards_reborn.arcane_enchantment.single": "Прыменена арканавае зачараванне %s да прадмета істоты %s",
+  "commands.wizards_reborn.arcane_enchantment.failed": "Failed to apply arcane enchantment %s",
   "commands.wizards_reborn.wissen.set.multiple": "Зададзена значэнне Вісену %s гульцу %s",
   "commands.wizards_reborn.wissen.set.single": "Зададзена значэнне Вісену %s прадмету гульца %s",
+  "commands.wizards_reborn.wissen.set.failed": "Failed to set wissen %s",
   "commands.wizards_reborn.wissen.add.multiple": "Дададзена значэнне Вісену %s гульцу %s",
   "commands.wizards_reborn.wissen.add.single": "Дададзена значэнне Вісену %s прадмету гульца %s",
+  "commands.wizards_reborn.wissen.add.failed": "Failed to add wissen %s",
   "commands.wizards_reborn.wissen.remove.multiple": "Выдалена значэнне Вісену %s гульцу %s",
   "commands.wizards_reborn.wissen.remove.single": "Выдалена значэнне Вісену %s прадмету гульца %s",
+  "commands.wizards_reborn.wissen.remove.failed": "Failed to remove wissen %s",
+
   "_comment_25": "Прывязка клавіш",
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_menu": "Меню выбару",
@@ -1038,6 +1189,7 @@
   "key.wizards_reborn.next_spell": "Наступны загавор",
   "key.wizards_reborn.previous_spell": "Мінулы загавор",
   "key.wizards_reborn.spell_sets_toggle": "Пераключэнне набора загавораў",
+
   "_comment_26": "Арканамікон",
   "wizards_reborn.arcanemicon.category.arcane_nature": "Арканавая прырода",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Арканавая прырода",
@@ -1057,6 +1209,8 @@
   "wizards_reborn.arcanemicon.page.arcane_wood_baulks": "Дэкаратыўныя бэлькі.",
   "wizards_reborn.arcanemicon.page.arcane_wood_tools.title": "Прылады з аркана-дрэва",
   "wizards_reborn.arcanemicon.page.arcane_wood_tools": "Прылады, ў жылах якіх цячэ кроў. Павольна аднаўляюцца. Цалкам чыняцца з дапамогай галіны аркана-дрэва ў іншай руцэ.",
+  "wizards_reborn.arcanemicon.page.arcane_wood_knife.title": "Knife",
+  "wizards_reborn.arcanemicon.page.arcane_wood_knife": "Wooden Violence.",
   "wizards_reborn.arcanemicon.chapter.arcane_gold": "Арканавае золата",
   "wizards_reborn.arcanemicon.page.arcane_gold.title": "Арканавае золата",
   "wizards_reborn.arcanemicon.page.arcane_gold": "Трансмутацыя золата дазваляе яму праводзіць і захоўваць у сабе Вісен. \n Выкарыстоўваецца для большасці механізмаў.",
@@ -1064,12 +1218,16 @@
   "wizards_reborn.arcanemicon.page.arcane_gold_tools": "Палепшаныя залатыя прылады. \n \n Яны не дарэмныя.",
   "wizards_reborn.arcanemicon.page.arcane_gold_armor.title": "Браня з арканавага золата",
   "wizards_reborn.arcanemicon.page.arcane_gold_armor": "Такая сабе залатая браня. Можа стаць нечым большым",
+  "wizards_reborn.arcanemicon.page.gilded_arcane_wood_planks.title": "Gilded Planks",
+  "wizards_reborn.arcanemicon.page.gilded_arcane_wood_planks": "Arcane wood planks are elegantly decorated with arcane gold.",
   "wizards_reborn.arcanemicon.page.crushed_raw_arcane_gold.title": "Крышаная руда",
   "wizards_reborn.arcanemicon.page.crushed_raw_arcane_gold": "Пабольшаны выхад руды!",
   "wizards_reborn.arcanemicon.page.arcane_gold_sheet.title": "Пласціна",
   "wizards_reborn.arcanemicon.page.arcane_gold_sheet": "Мабыць будзе палезнай...",
   "wizards_reborn.arcanemicon.page.arcane_gold_knife.title": "Нож",
   "wizards_reborn.arcanemicon.page.arcane_gold_knife": "Для суіцыднікаў-мільядараў...",
+  "wizards_reborn.arcanemicon.page.arcane_gold_impetus.title": "Impetus",
+  "wizards_reborn.arcanemicon.page.arcane_gold_impetus": "Magical reproduction of arcane gold.",
   "wizards_reborn.arcanemicon.chapter.scythes": "Косы",
   "wizards_reborn.arcanemicon.page.scythes.title": "Косы",
   "wizards_reborn.arcanemicon.page.scythes": "Прылада, што выкарыстоўваецца для збору пасеваў. Гэтак жа, дзякуючы доўгай ручцы, дазваляе наносіць шкоду з вялікай адлегласці.",
@@ -1090,11 +1248,11 @@
   "wizards_reborn.arcanemicon.page.wissen_wand_mode.functional.title": "Функцыйны рэжым",
   "wizards_reborn.arcanemicon.page.wissen_wand_mode.functional": "Рэжым для актывацыі Вісен-механізмаў.",
   "wizards_reborn.arcanemicon.page.wissen_wand_mode.receive_connect.title": "Рэжым атрымання",
-  "wizards_reborn.arcanemicon.page.wissen_wand_mode.receive_connect": "Рэжым для атрымання Вісена праз Вісен-транслятар. Для падлучэння трэба выбраць механізм, з якога трэба забіраць Вісен, потым Вісен-транслятар.",
+  "wizards_reborn.arcanemicon.page.wissen_wand_mode.receive_connect": "Mode for setting up the wissen translator. First you need to select the wissen mechanism, then the wissen translator. From this mechanism the translator will receive wissen.",
   "wizards_reborn.arcanemicon.page.wissen_wand_mode.send_connect.title": "Рэжым адпраўлення",
-  "wizards_reborn.arcanemicon.page.wissen_wand_mode.send_connect": "Рэжым для адпраўлення Вісена праз Вісен-транслятар. Для падлучэння трэба выбраць механізм, у які вы хочаце адпраўляць Вісен, потым Вісен-транслятар.",
+  "wizards_reborn.arcanemicon.page.wissen_wand_mode.send_connect": "Mode for setting up the wissen translator. First you need to select the wissen mechanism, then the wissen translator. The translator will send wissen to this mechanism.",
   "wizards_reborn.arcanemicon.page.wissen_wand_mode.reload.title": "Рэжым перазагрузкі",
-  "wizards_reborn.arcanemicon.page.wissen_wand_mode.reload": "Рэжым для скіду падлучэнняў Вісен-транслятара.",
+  "wizards_reborn.arcanemicon.page.wissen_wand_mode.reload": "Mode for resetting the settings of the wissen mechanisms.",
   "wizards_reborn.arcanemicon.page.wissen_wand_mode.off.title": "Выключаны рэжым",
   "wizards_reborn.arcanemicon.page.wissen_wand_mode.off": "Рэжым без функцыяналу. Пустышка.",
   "wizards_reborn.arcanemicon.chapter.wissen_translator": "Вісен-транслятар",
@@ -1340,6 +1498,7 @@
   "wizards_reborn.arcanemicon.chapter.music_disc_capitalism": "\"Capitalism\"",
   "wizards_reborn.arcanemicon.page.music_disc_capitalism.title": "\"Capitalism\"",
   "wizards_reborn.arcanemicon.page.music_disc_capitalism": "\"Так, я вышынёй 7 ступяў! Пакуль!\" \n \n Onjerlay - Battle against a true Capitalist",
+
   "wizards_reborn.arcanemicon.category.spells": "Загаворы",
   "wizards_reborn.arcanemicon.chapter.spells_index": "Загаворы",
   "wizards_reborn.arcanemicon.page.spells_index.title": "Загаворы",
@@ -1607,6 +1766,7 @@
   "wizards_reborn.arcanemicon.chapter.universum_monogram": "Universum",
   "wizards_reborn.arcanemicon.page.universum_monogram.title": "Universum",
   "wizards_reborn.arcanemicon.page.universum_monogram": "Бясконцая пустэча... \n \n Падумаць толькі, што гэта проста выпадковая квантавая флуктуацыя...",
+
   "wizards_reborn.arcanemicon.category.crystal_rituals": "Крышталічныя рытуалы",
   "wizards_reborn.arcanemicon.chapter.crystal_rituals_index": "Крышталічныя рытуалы",
   "wizards_reborn.arcanemicon.page.crystal_rituals_index.title": "Крышталічныя рытуалы",
@@ -1656,6 +1816,8 @@
   "wizards_reborn.arcanemicon.page.innocent_wood_sapling": "Саджанец цнатлівага дрэва, зроблены з дапамогай крышталічнай інфузіі, які не можа зруйнаваць гэты свет.",
   "wizards_reborn.arcanemicon.page.innocent_wood.title": "Цнатлівае дрэва",
   "wizards_reborn.arcanemicon.page.innocent_wood": "Светлае дрэва, з якога сачыцца бянтэжлівая смала.",
+  "wizards_reborn.arcanemicon.page.gilded_innocent_wood_planks.title": "Gilded Planks",
+  "wizards_reborn.arcanemicon.page.gilded_innocent_wood_planks": "Innocent wood planks are elegantly decorated with arcane gold.",
   "wizards_reborn.arcanemicon.page.innocent_wood_baulks.title": "Цнатлівыя палены",
   "wizards_reborn.arcanemicon.page.innocent_wood_baulks": "Дэкаратыўныя бэлькі.",
   "wizards_reborn.arcanemicon.page.innocent_wood_mortar.title": "Ступка з цнатлівага дрэва",
@@ -1669,9 +1831,12 @@
   "wizards_reborn.arcanemicon.chapter.innocent_wood_tools": "Цнатлівыя прылады",
   "wizards_reborn.arcanemicon.page.innocent_wood_tools.title": "Цнатлівыя прылады",
   "wizards_reborn.arcanemicon.page.innocent_wood_tools": "Пры выкарыстанні, аднаўляюць АЗ гульца.",
+  "wizards_reborn.arcanemicon.page.innocent_wood_knife.title": "Knife",
+  "wizards_reborn.arcanemicon.page.innocent_wood_knife": "Innocent Violence?",
   "wizards_reborn.arcanemicon.chapter.phantom_ink_trim": "\"Батанія момент\"",
   "wizards_reborn.arcanemicon.page.phantom_ink_trim.title": "\"Батанія момент\"",
   "wizards_reborn.arcanemicon.page.phantom_ink_trim": "Гэты адстрой (які ў арыгінале мае назву \"Спектральны атрамант\", але на перакладчыке сідзіць блазан) робіць вашую браню цалкам нябачнай.",
+
   "wizards_reborn.arcanemicon.category.alchemy": "Алхімія",
   "wizards_reborn.arcanemicon.chapter.alchemy_index": "Алхімія",
   "wizards_reborn.arcanemicon.page.alchemy_index.title": "Алхімія",
@@ -1679,6 +1844,8 @@
   "wizards_reborn.arcanemicon.page.mor.0.title": "Мор",
   "wizards_reborn.arcanemicon.page.mor.0": "Знойдзены ў цёмных кутках багністых мясцовасцяў, мор гэта тып грыбоў, што валодае выразнымі алхімічнымі характарыстыкамі.",
   "wizards_reborn.arcanemicon.page.mor.1": "Апроч таго, пры няслушным ці празмерным выкарыстанні здольны аказваць галюцынагенны эфект.",
+  "wizards_reborn.arcanemicon.page.mor_colony.title": "Mor Colony",
+  "wizards_reborn.arcanemicon.page.mor_colony": "Mor, planted on compost, sends its mycelium deep and grows strongly.",
   "wizards_reborn.arcanemicon.chapter.mortar": "Ступка",
   "wizards_reborn.arcanemicon.page.mortar.title": "Ступка",
   "wizards_reborn.arcanemicon.page.mortar": "Ступка і песцік з аркана-дрэва выкарыстоўваецца для перамолвання розных рэчаў.",
@@ -1703,6 +1870,8 @@
   "wizards_reborn.arcanemicon.page.wisestone": "Цёмны штучны мармур. Падыходзіць для стварэння алхімічных механізмаў.",
   "wizards_reborn.arcanemicon.page.decorative_wisestone.title": "Дэкаратыўныя блокі",
   "wizards_reborn.arcanemicon.page.decorative_wisestone": "Дэкаратыўныя блокі з алмуру.",
+  "wizards_reborn.arcanemicon.page.gilded_polished_wisestone.title": "Gilded Wisestone",
+  "wizards_reborn.arcanemicon.page.gilded_polished_wisestone": "Wisestone are elegantly decorated with arcane gold.",
   "wizards_reborn.arcanemicon.chapter.wisestone_pedestal": "Алмуравы пастамент",
   "wizards_reborn.arcanemicon.page.wisestone_pedestal.title": "Алмуравы пастамент",
   "wizards_reborn.arcanemicon.page.wisestone_pedestal": "Элегантнейшы алмуравы пастамент. Зараз вашы рэліквіі выглядаюць болей містычнымі.",
@@ -1806,6 +1975,7 @@
   "wizards_reborn.arcanemicon.chapter.implosion_trim": "\"Крах\"",
   "wizards_reborn.arcanemicon.page.implosion_trim.title": "\"Крах\"",
   "wizards_reborn.arcanemicon.page.implosion_trim": "\"Гармонія - гэта не што іншае, як хаос\" \n \n - Implosion...",
+
   "wizards_reborn.arcanemicon.category.additional": "Дадатковае",
   "wizards_reborn.arcanemicon.chapter.additional_index": "Дадатковае",
   "wizards_reborn.arcanemicon.page.additional_index.title": "Дадатковае",
@@ -1849,19 +2019,33 @@
   "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.0": "Wizard's Reborn гэта пераасмысленне ідэй з усіх маіх улюбленых модаў. Гэта мой асабісты праект, які зроблен амаль цалкам мною на чыстым запале. Я паклаў вялікую частку душы ў яго.",
   "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1": "Дзякуй за то, што гуляеце з маім модам!",
   "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1.name": "MaxBogomol",
-  "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1.date": "01.05.2024",
   "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1.say": "П-ррррр",
+  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.0": "Для мяне, Wizard's reborn не проста бяздушны праект, ён стаў частка самога мяне. Усе ідэі і вырашэнні, на якіях наштурхнуў мяне гэты мод - вось гэта сапраўдная магія чалавечага гэнія.",
+  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1": "Strive for the top and inspire others the same way Max inspired me",
+  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1.name": "OnixTheCat",
+  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1.say": ":3",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar": "Meow meow meow meow meow meow meow",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.meow.0": "meow",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.meow.1": "meow meow meow",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.meow.2": "WOOF",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.meow.3": "Meow meow meow meow",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.meow.4": "meow meow meow meow",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.meow.5": "Meow!",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.meow.6": "Why do bunnies meow?",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.name": "unlogicalSamsar",
+  "wizards_reborn.arcanemicon.page.special_thanks.unlogicalsamsar.say": "§o$6 SHRIMP SPECIAL",
+  "wizards_reborn.arcanemicon.page.special_thanks.foxairplane.0": "\"why am i in a gay furry literature textbook???\" \n \n \"\"Two boi kittehs luv each other, so cute!! Dey iz happy togedda, no meen kitteh stuffs! Dey noms togedda an cuddle, like Ceiling Cat wants! :3\"",
+  "wizards_reborn.arcanemicon.page.special_thanks.foxairplane.1": "(FoxAirPlane 20:13)\"",
+  "wizards_reborn.arcanemicon.page.special_thanks.foxairplane.1.name": "FoxAirPlane",
+  "wizards_reborn.arcanemicon.page.special_thanks.foxairplane.1.say": "gayness",
   "wizards_reborn.arcanemicon.page.special_thanks.onjerlay.0": "Я напісаў сваю першую музыку менавіта для гэтага мода і працягвую гэта рабіць, проста таму што я хачу гэтага. Я вельмі ўдзячны MaxBogomol'у за такую магчымасць.",
   "wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1": "Калі вы чытаеце гэта ў будучыні і я стаў кампазітарам для інды-гульняў, значыць мая мара зрабілася рэчаіснасцю!",
   "wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1.name": "Onjerlay",
-  "wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1.date": "01.05.2024",
   "wizards_reborn.arcanemicon.page.special_thanks.onjerlay.1.say": "Ж",
-  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.0": "Што такое чараўніцтва для вас? Для кагосьці гэта натхняльныя стварэнне іншых, для кагосьці ўсе тыя, хто робіць гэтыя стварэнні.",
-  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1": "Для мяне, Wizard's reborn не проста бяздушны праект, ён стаў частка самога мяне. Усе ідэі і вырашэнні, на якіях наштурхнуў мяне гэты мод - вось гэта сапраўдная магія чалавечага гэнія.",
-  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.2": "Імкніцесь да вяршынь і натхняйце іншых, як Макс натхніў мяне",
-  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.2.name": "OnixTheCat",
-  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.2.date": "01.05.2024",
-  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.2.say": ":3",
+  "wizards_reborn.arcanemicon.page.special_thanks.fluffy_village": "Also, a big Thanks to my Discord server \n \"The Fluffy Village\". \n \n You are cool :3",
+  "wizards_reborn.arcanemicon.page.special_thanks.fluffy_village.name": "The Fluffy Village",
+  "wizards_reborn.arcanemicon.page.special_thanks.fluffy_village.welcome": "Welcome to our furry community!",
+
   "wizards_reborn.arcanemicon.unknown": "Невядома",
   "wizards_reborn.arcanemicon.research": "Даследванне",
   "wizards_reborn.arcanemicon.recipe_changed": "Рэцэпт быў зменены",
@@ -1870,6 +2054,7 @@
   "wizards_reborn.arcanemicon.knowledge_points": "Ачкі:",
   "wizards_reborn.arcanemicon.hardmode_research": "Цяжкі рэжым актываваны",
   "wizards_reborn.arcanemicon.edition": "Эдыцыя №%s",
+
   "knowledge.wizards_reborn.arcane_wood": "Аркана-дрэва",
   "knowledge.wizards_reborn.innocent_wood": "Цнатлівае дрэва",
   "knowledge.wizards_reborn.arcane_wood_tools": "Прылады з аркана-дрэва",
@@ -1879,11 +2064,13 @@
   "knowledge.wizards_reborn.faceted_crystals": "Аграненыя крышталі",
   "knowledge.wizards_reborn.arcane_lumos": "Арканавы люмас",
   "knowledge.wizards_reborn.crystal_seeds": "Крыштальнае насенне",
+
   "_comment_27": "Конфіг",
   "config.number.wizards_reborn.default": "Стандарт:",
   "config.number.wizards_reborn.range": "Дыяпазон:",
   "config.number.wizards_reborn.on": "Укл.",
   "config.number.wizards_reborn.off": "Выкл.",
+
   "config.client.wizards_reborn.graphics.animations.spellsItemAnimation": "Анімацыя прылады загавору",
   "config.client.wizards_reborn.graphics.animations.spellsItemAnimation.desc": "Уключае анімацыю прылады загавору.",
   "config.client.wizards_reborn.graphics.particles.wissenRaysLimit": "Ліміт Вісен-часцінак",
