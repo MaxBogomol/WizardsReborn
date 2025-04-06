@@ -60,7 +60,7 @@ public class ArcanemiconChapters {
             EMBER_RAY, WISDOM,
             RESEARCHES, MONOGRAMS, RESEARCH,
             LUNAM, VITA, SOLEM, MORS, MIRACULUM, TEMPUS, STATERA, ECLIPSIS, SICCITAS, SOLSTITIUM, FAMES, RENAISSANCE, BELLUM, LUX, KARA, DEGRADATIO, PRAEDICTIONEM, EVOLUTIONIS, TENEBRIS, UNIVERSUM,
-            LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, FOCUSING, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD, INNOCENT_WOOD_TOOLS, PHANTOM_INK_TRIM,
+            LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, FOCUSING, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD, INNOCENT_WOOD_TOOLS, PHANTOM_INK_TRIM, MUSIC_DISC_DISCO,
             MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, NETHER_SALT, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE, SOUL_HUNTER_TRIM, IMPLOSION_TRIM,
             PROGRESSION, STATISTIC, CONFIGS, SPECIAL_THANKS, GRAPHICS_CONFIGS, ANIMATIONS_CONFIGS, PARTICLES_CONFIGS, ARCANEMICON_CONFIGS, NUMERICAL_CONFIGS, OVERLAY_CONFIGS, ARCANE_WAND_OVERLAY_CONFIGS;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
@@ -2873,6 +2873,16 @@ public class ArcanemiconChapters {
                 )
         );
 
+        MUSIC_DISC_DISCO = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.music_disc_disco",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_disco",
+                        new BlockEntry(RUNIC_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_DISCO.get()))
+                ),
+                new CrystalInfusionPage(new ItemStack(WizardsRebornItems.MUSIC_DISC_DISCO.get()), new ItemStack(WizardsRebornItems.EARTH_CRYSTAL.get()),
+                        new ItemStack(Items.MUSIC_DISC_13), INNOCENT_WOOD_PLANKS_ITEM, new ItemStack(WizardsRebornItems.EARTH_CRYSTAL_SEED.get())
+                )
+        );
+
         CRYSTAL_RITUALS_INDEX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.crystal_rituals_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.crystal_rituals_index",
@@ -2893,7 +2903,8 @@ public class ArcanemiconChapters {
                         new IndexEntry(INNOCENT_WOOD_TOOLS, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_PICKAXE.get()), WizardsRebornKnowledges.INNOCENT_WOOD)
                 ),
                 new IndexPage(
-                        new IndexEntry(PHANTOM_INK_TRIM, new ItemStack(WizardsRebornItems.PHANTOM_INK_TRIM.get()), WizardsRebornKnowledges.INNOCENT_WOOD)
+                        new IndexEntry(PHANTOM_INK_TRIM, new ItemStack(WizardsRebornItems.PHANTOM_INK_TRIM.get()), WizardsRebornKnowledges.INNOCENT_WOOD),
+                        new IndexEntry(MUSIC_DISC_DISCO, new ItemStack(WizardsRebornItems.MUSIC_DISC_DISCO.get()), WizardsRebornKnowledges.INNOCENT_WOOD)
                 )
         );
     }
