@@ -8,6 +8,8 @@ import mod.maxbogomol.fluffy_fur.util.RecipeUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -88,7 +90,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
 
     @Override
     public boolean matches(AlchemyMachineContext context, Level level) {
-        if (matches(inputs, context.container)) {
+        if (matches(inputs, context.container, this)) {
             if (!fluidInputs.isEmpty()) {
                 return fluidMatches(context, level);
             } else {
@@ -98,7 +100,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         return false;
     }
 
-    public static boolean matches(List<Ingredient> inputs, Container container) {
+    public static boolean matches(List<Ingredient> inputs, Container container, AlchemyMachineRecipe recipe) {
         List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
         List<ItemStack> items = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -109,17 +111,26 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         }
 
         for (ItemStack input : items) {
+            boolean potion = true;
             int stackIndex = -1;
 
+            if (!getAlchemyBottle(input).isEmpty()) {
+                if (input.getItem() instanceof AlchemyPotionItem) {
+                    if (AlchemyPotionUtil.getPotion(input) != recipe.getAlchemyPotionIngredient()) {
+                        potion = false;
+                    }
+                }
+            }
+
             for (int j = 0; j < ingredientsMissing.size(); j++) {
-                Ingredient ingr = ingredientsMissing.get(j);
-                if (ingr.test(input)) {
+                Ingredient ingredient = ingredientsMissing.get(j);
+                if (ingredient.test(input)) {
                     stackIndex = j;
                     break;
                 }
             }
 
-            if (stackIndex != -1) {
+            if (stackIndex != -1 && potion) {
                 ingredientsMissing.remove(stackIndex);
             } else {
                 return false;
@@ -146,10 +157,24 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
                 if (matched)
                     break;
             }
-            if (!matched && !handler.drain(1, IFluidHandler.FluidAction.SIMULATE).isEmpty())
+            if (!matched && !handler.drain(1, IFluidHandler.FluidAction.SIMULATE).isEmpty()) {
                 return false;
+            }
         }
         return remaining.isEmpty();
+    }
+
+    public static ItemStack getAlchemyBottle(ItemStack input) {
+        ItemStack stack = ItemStack.EMPTY;
+
+        if (input.getItem() instanceof AlchemyBottleItem item) {
+            stack = item.getPotionItem();
+        }
+        if (input.getItem() instanceof AlchemyPotionItem item) {
+            stack = input.copy();
+        }
+
+        return stack;
     }
 
     @Override
@@ -224,8 +249,8 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
             NonNullList<FluidIngredient> fluidInputs = NonNullList.create();
 
             if (json.has("ingredients")) {
-                JsonArray ingrs = GsonHelper.getAsJsonArray(json, "ingredients");
-                for (JsonElement e : ingrs) {
+                JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
+                for (JsonElement e : ingredients) {
                     inputs.add(Ingredient.fromJson(e));
                 }
             }
@@ -272,7 +297,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
             for (FluidIngredient input : recipe.getFluidInputs()) {
                 input.write(buffer);
             }
-            AlchemyPotionUtil.alchemyPotionToNetwork(recipe.getAlchemyPotion(), buffer);
+            AlchemyPotionUtil.alchemyPotionToNetwork(recipe.getAlchemyPotionIngredient(), buffer);
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             buffer.writeFluidStack(recipe.getFluidResult());
             AlchemyPotionUtil.alchemyPotionToNetwork(recipe.getAlchemyPotion(), buffer);

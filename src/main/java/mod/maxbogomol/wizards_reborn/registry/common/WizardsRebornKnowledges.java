@@ -77,7 +77,9 @@ public class WizardsRebornKnowledges {
     public static ItemKnowledge RUNIC_PEDESTAL = new ItemKnowledge(WizardsReborn.MOD_ID+":runic_pedestal", true, 10, WizardsRebornItems.RUNIC_PEDESTAL.get());
     public static CrystalRitualKnowledge CRYSTAL_INFUSION = new CrystalRitualKnowledge(WizardsReborn.MOD_ID+":crystal_infusion", true, 15, WizardsRebornCrystalRituals.CRYSTAL_INFUSION);
     public static ItemTagKnowledge INNOCENT_WOOD = new ItemTagKnowledge(WizardsReborn.MOD_ID+":innocent_wood", true, 10, WizardsRebornItemTags.INNOCENT_WOOD_LOGS, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_LOG.get()));
+
     public static ItemTagKnowledge INNOCENT_WOOD_TOOLS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":innocent_wood_tools", false, 5, WizardsRebornItemTags.INNOCENT_WOOD_TOOLS, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_PICKAXE.get()));
+    public static ItemKnowledge MUSIC_DISC_DISCO = new MusicDiscKnowledge(WizardsReborn.MOD_ID+":music_disc_disco", false, 8, WizardsRebornItems.MUSIC_DISC_DISCO.get());
 
     //ALCHEMY
     public static ItemKnowledge PETALS = new ItemKnowledge(WizardsReborn.MOD_ID+":petals", false, 3, WizardsRebornItems.PETALS.get());
@@ -171,6 +173,7 @@ public class WizardsRebornKnowledges {
         KnowledgeHandler.register(INNOCENT_WOOD);
 
         KnowledgeHandler.register(INNOCENT_WOOD_TOOLS);
+        KnowledgeHandler.register(MUSIC_DISC_DISCO);
 
         //ALCHEMY
         KnowledgeHandler.register(PETALS);
@@ -285,6 +288,7 @@ public class WizardsRebornKnowledges {
         addAdditionalProgression(LIGHT_SENSOR, LIGHT_EMITTER);
         addAdditionalProgression(LIGHT_CASING, LIGHT_EMITTER);
         addAdditionalProgression(INNOCENT_WOOD_TOOLS, INNOCENT_WOOD);
+        addAdditionalProgression(MUSIC_DISC_DISCO, INNOCENT_WOOD);
     }
 
     public static void addProgression(Knowledge knowledge) {

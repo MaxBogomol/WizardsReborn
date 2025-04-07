@@ -66,8 +66,8 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
             int stackIndex = -1;
 
             for (int j = 0; j < ingredientsMissing.size(); j++) {
-                Ingredient ingr = ingredientsMissing.get(j);
-                if (ingr.test(input)) {
+                Ingredient ingredient = ingredientsMissing.get(j);
+                if (ingredient.test(input)) {
                     stackIndex = j;
                     break;
                 }
@@ -84,8 +84,8 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
         if (stack.isEmpty()) {
             return false;
         }
-        Ingredient ingr = inputs.get(0);
-        if (!ingr.test(stack)) {
+        Ingredient ingredient = inputs.get(0);
+        if (!ingredient.test(stack)) {
             return false;
         }
 

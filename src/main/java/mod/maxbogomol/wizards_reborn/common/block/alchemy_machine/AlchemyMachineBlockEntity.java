@@ -482,7 +482,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     public boolean isCanCraft(SimpleContainer inv, ItemStack output, AlchemyMachineRecipe recipe, boolean isCanFluid) {
         if (!AlchemyPotionUtil.isEmpty(recipe.getAlchemyPotionIngredient())) {
             ItemStack bottle = getAlchemyBottle();
-            if (bottle.getItem() instanceof AlchemyPotionItem item) {
+            if (bottle.getItem() instanceof AlchemyPotionItem) {
                 if (AlchemyPotionUtil.getPotion(bottle) != recipe.getAlchemyPotionIngredient()) {
                     return false;
                 }
@@ -491,7 +491,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             }
         }
 
-        if (recipe.getFluidInputs().size() <= 0) {
+        if (recipe.getFluidInputs().size() == 0) {
             for (int i = 0; i < 3; i++) {
                 if (!getTank(i).isEmpty()) {
                     return false;
@@ -507,13 +507,13 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             return isCanFluid;
         }
 
-        if (!recipe.getFluidInputs().isEmpty() && !recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
+        if (!recipe.getFluidResult().isEmpty() && !recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
             if (isCanFluid) {
                 return isCanCraftItem(inv, output);
             }
         }
 
-        if (!recipe.getFluidInputs().isEmpty()) {
+        if (!recipe.getFluidResult().isEmpty()) {
             return isCanFluid;
         }
 

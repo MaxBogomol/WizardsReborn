@@ -53,8 +53,8 @@ public class CrystalInfusionRecipe implements Recipe<Container> {
             int stackIndex = -1;
 
             for (int j = 0; j < ingredientsMissing.size(); j++) {
-                Ingredient ingr = ingredientsMissing.get(j);
-                if (ingr.test(input)) {
+                Ingredient ingredient = ingredientsMissing.get(j);
+                if (ingredient.test(input)) {
                     stackIndex = j;
                     break;
                 }
