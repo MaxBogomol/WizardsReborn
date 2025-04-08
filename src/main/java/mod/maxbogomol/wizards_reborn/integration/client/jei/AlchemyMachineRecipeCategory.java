@@ -161,7 +161,9 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
         int y = 0;
         for (FluidIngredient o : recipe.getFluidInputs()) {
             int width = 32;
-            width /= (int) ((double) 5000 / (double) o.getFluids().get(0).getAmount());
+            double value = ((double) 5000 / (double) o.getFluids().get(0).getAmount());
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(TEXTURE, 76, 34 + y, 176, 0, width, 8, 256, 256);
 
             y = y + 18;
@@ -175,7 +177,9 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
 
         if (!recipe.getFluidResult().isEmpty()) {
             int width = 32;
-            width /= (int) ((double) 5000 / (double) recipe.getFluidResult().getAmount());
+            double value = ((double) 5000 / (double) recipe.getFluidResult().getAmount());
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(TEXTURE, 136, 52, 176, 0, width, 8, 256, 256);
         } else {
             gui.blit(TEXTURE, 144, 48, 176, 8, 16, 16, 256, 256);

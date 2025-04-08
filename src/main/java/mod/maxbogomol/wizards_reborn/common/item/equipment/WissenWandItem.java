@@ -373,7 +373,9 @@ public class WissenWandItem extends Item {
         public void drawBar(GuiGraphics gui, ResourceLocation barTexture, int x, int y, float value, float maxValue) {
             gui.blit(barTexture, x, y, 0, 0, 48, 10, 64, 64);
             int width = 32;
-            width /= (double) maxValue / (double) value;
+            double v = (double) maxValue / (double) value;
+            width /= (int) v;
+            if (width == 0 && v > 0 && !Double.isInfinite(v)) width = 1;
             gui.blit(barTexture, x + 8, y + 1, 0, 10, width, 8, 64, 64);
         }
 

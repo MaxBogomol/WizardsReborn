@@ -581,14 +581,18 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
             int width = 32;
             if (spell != null && cooldown > 0) {
-                width /= (double) maxCooldown / (double) cooldown;
+                double value = (double) maxCooldown / (double) cooldown;
+                width /= value;
+                if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 1;
             } else {
                 width = -32;
             }
             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 10, y + 20, 0, 10, 32 - width, 8, 64, 64);
 
             width = 32;
-            width /= (double) maxWissen / (double) wissen;
+            double value = (double) maxWissen / (double) wissen;
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 1;
             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 10, y + 31, 0, 10, width, 8, 64, 64);
 
             if (getCrystal(stack)) {

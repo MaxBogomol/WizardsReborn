@@ -104,7 +104,9 @@ public class AlchemyMachinePage extends RecipePage {
             drawItem(book, gui, fluidInput1.getFluid().getBucket().asItem().getDefaultInstance(), x + 38, y + 55, mouseX, mouseY);
 
             int width = 32;
-            width /= (int) ((double) 5000 / (double) fluidInput1.getAmount());
+            double value = ((double) 5000 / (double) fluidInput1.getAmount());
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(BACKGROUND, x + 38 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 38 + 4 && mouseY >= y + 76 && mouseX <= x + 38 + 4 + 8 && mouseY <= y + 76 + 32) {
@@ -121,7 +123,9 @@ public class AlchemyMachinePage extends RecipePage {
             drawItem(book, gui, fluidInput2.getFluid().getBucket().asItem().getDefaultInstance(), x + 56, y + 55, mouseX, mouseY);
 
             int width = 32;
-            width /= (int) ((double) 5000 / (double) fluidInput2.getAmount());
+            double value = ((double) 5000 / (double) fluidInput2.getAmount());
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(BACKGROUND, x + 56 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 56 + 4 && mouseY >= y + 76 && mouseX <= x + 56 + 4 + 8 && mouseY <= y + 76 + 32) {
@@ -138,7 +142,9 @@ public class AlchemyMachinePage extends RecipePage {
             drawItem(book, gui, fluidInput3.getFluid().getBucket().asItem().getDefaultInstance(), x + 74, y + 55, mouseX, mouseY);
 
             int width = 32;
-            width /= (int) ((double) 5000 / (double) fluidInput3.getAmount());
+            double value = ((double) 5000 / (double) fluidInput3.getAmount());
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(BACKGROUND, x + 74 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 74 + 4 && mouseY >= y + 76 && mouseX <= x + 74 + 4 + 8 && mouseY <= y + 76 + 32) {
@@ -156,7 +162,9 @@ public class AlchemyMachinePage extends RecipePage {
             drawItem(book, gui, fluidResult.getFluid().getBucket().asItem().getDefaultInstance(), x + 75, y + 128, mouseX, mouseY);
 
             int width = 32;
-            width /= (int) ((double) 5000 / (double) fluidResult.getAmount());
+            double value = ((double) 5000 / (double) fluidResult.getAmount());
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(BACKGROUND, x + 60, y + 120 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 60 && mouseY >= y + 120 && mouseX <= x + 60 + 8 && mouseY <= y + 120 + 32) {

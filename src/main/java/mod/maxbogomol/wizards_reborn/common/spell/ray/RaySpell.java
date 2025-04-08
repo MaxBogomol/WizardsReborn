@@ -120,7 +120,7 @@ public class RaySpell extends Spell {
                                 spellEntity.getSpellContext().removeWissen(1);
                             }
                         } else {
-                            spellContext.startUsing(this);
+                            spellContext.stopUsing(this);
                         }
                     }
                 }

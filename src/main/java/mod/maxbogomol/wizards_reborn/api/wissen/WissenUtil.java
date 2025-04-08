@@ -219,15 +219,17 @@ public class WissenUtil {
 
     public static void removeWissenFromWissenItems(List<ItemStack> items, int wissen) {
         for (ItemStack stack : items) {
+            if (wissen <= 0) break;
             WissenItemUtil.existWissen(stack);
             int wissenRemain = WissenItemUtil.getRemoveWissenRemain(stack, wissen);
             if (WissenItemUtil.canRemoveWissen(stack, wissen)) {
                 WissenItemUtil.removeWissen(stack, wissen);
+                break;
             }
             if (wissenRemain > 0) {
                 wissen = wissenRemain;
-                WissenItemUtil.setWissen(stack, 0);
             }
+            WissenItemUtil.setWissen(stack, 0);
         }
     }
 }

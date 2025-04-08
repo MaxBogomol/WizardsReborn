@@ -29,6 +29,7 @@ public class ValueFrameClientTooltipComponent implements ClientTooltipComponent 
         guiGraphics.blit(texture, x, y, 0, 0, 48, 10, 64, 64);
         int width = 32;
         width /= this.width;
+        if (width == 0 && this.width > 0 && !Float.isInfinite(this.width)) width = 1;
         guiGraphics.blit(texture, x + 8, y + 1, 0, 10, width, 8, 64, 64);
     }
 }

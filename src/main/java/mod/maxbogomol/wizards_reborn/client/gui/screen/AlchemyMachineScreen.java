@@ -49,7 +49,9 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
         if (menu.blockEntity instanceof AlchemyMachineBlockEntity machine) {
             for (int ii = 0; ii <= 2; ii++) {
                 int width = 32;
-                width /= (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();
+                double value = (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();
+                width /= value;
+                if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 1;
                 gui.blit(GUI, i + 39, j + 65 + (ii * 15), 176, 0, width, 8, 256, 256);
 
                 if (x >= i + 39 && y >= j + 65 + (ii * 15) && x <= i + 39 + 32 && y <= j + 65 + (ii * 15) + 8) {
@@ -59,7 +61,9 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
 
             if (machine.wissenInCraft > 0 || machine.steamInCraft > 0) {
                 int width = 22;
-                width /= (double) (machine.wissenInCraft + machine.steamInCraft) / (machine.wissenIsCraft + machine.steamIsCraft);
+                double value = (double) (machine.wissenInCraft + machine.steamInCraft) / (machine.wissenIsCraft + machine.steamIsCraft);
+                width /= value;
+                if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 1;
                 gui.blit(GUI, i + 97, j + 53, 176, 8, width, 15, 256, 256);
             }
 

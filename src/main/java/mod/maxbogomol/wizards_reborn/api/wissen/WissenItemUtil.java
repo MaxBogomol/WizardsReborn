@@ -49,7 +49,7 @@ public class WissenItemUtil {
         CompoundTag nbt = stack.getOrCreateTag();
         if (!containsWissen(stack)) return 0;
         if (0 < nbt.getInt("wissen") - wissen) {
-            wissen_remain = -(nbt.getInt("wissen") - wissen);
+            wissen_remain = (nbt.getInt("wissen") - wissen);
         }
         return wissen_remain;
     }

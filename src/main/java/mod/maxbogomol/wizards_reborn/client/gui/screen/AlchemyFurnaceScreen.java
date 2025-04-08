@@ -48,11 +48,15 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
 
         if (menu.blockEntity instanceof AlchemyFurnaceBlockEntity furnace) {
             int width = 32;
-            width /= (double) furnace.getFluidMaxAmount() / (double) furnace.getFluidAmount();
+            double value = (double) furnace.getFluidMaxAmount() / (double) furnace.getFluidAmount();
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 1;
             gui.blit(GUI, i + 19, j + 60 - width, 176, 32 - width, 8, width, 256, 256);
 
             width = 32;
-            width /= (double) furnace.getMaxHeat() / (double) furnace.getHeat();
+            value = (double) furnace.getMaxHeat() / (double) furnace.getHeat();
+            width /= value;
+            if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 1;
             gui.blit(GUI, i + 19 + 15, j + 60 - width, 176 + 8, 32 - width, 8, width, 256, 256);
 
             width = 32;
@@ -61,13 +65,17 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
 
             if (furnace.burnMaxTime > 0) {
                 width = 13;
-                width /= (double) furnace.burnMaxTime / (double) furnace.burnTime;
+                value = (double) furnace.burnMaxTime / (double) furnace.burnTime;
+                width /= value;
+                if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 1;
                 gui.blit(GUI, i + 72, j + 50 - width, 176, 47 + 13 - width, 18, width, 256, 256);
             }
 
             if (furnace.cookTime > 0) {
                 width = 22;
-                width /= (double) furnace.cookMaxTime / (double) furnace.cookTime;
+                value = (double) furnace.cookMaxTime / (double) furnace.cookTime;
+                width /= value;
+                if (width == 0 && value > 0 && !Double.isInfinite(value)) width = 1;
                 gui.blit(GUI, i + 97, j + 35, 176, 32, width, 15, 256, 256);
             }
 
