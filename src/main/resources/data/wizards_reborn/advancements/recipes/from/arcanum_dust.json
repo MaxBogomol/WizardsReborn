@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_items": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:arcanum_dust"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_items"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/arcanum_dust_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

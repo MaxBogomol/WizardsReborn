@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_items": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:distant_calx"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_items"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/distant_calx_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

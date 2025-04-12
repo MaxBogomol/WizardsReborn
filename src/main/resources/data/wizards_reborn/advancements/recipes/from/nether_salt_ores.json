@@ -1,0 +1,27 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_items": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "wizards_reborn:nether_salt_ores"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_items"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:smelting/nether_salt",
+      "wizards_reborn:blasting/nether_salt"
+    ]
+  },
+  "sends_telemetry_event": false
+}

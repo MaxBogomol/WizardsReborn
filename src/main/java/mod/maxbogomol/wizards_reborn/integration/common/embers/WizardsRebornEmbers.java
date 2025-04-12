@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.integration.common.embers;
 
-import mod.maxbogomol.fluffy_fur.util.IntegrationUtil;
+import com.rekindled.embers.RegistryManager;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.IntegrationPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
@@ -31,7 +31,7 @@ public class WizardsRebornEmbers {
             emberGritEffects.add(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
 
             ArcanemiconChapters.SMOKING_PIPE.addPage(INTEGRATION_PAGE);
-            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(emberGritEffects, new ItemStack(IntegrationUtil.getItem("embers", "ember_grit"))));
+            ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(emberGritEffects, new ItemStack(RegistryManager.EMBER_GRIT.get())));
         }
     }
 

@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_items": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:vilenium_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_items"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/vilenium_nugget_from_ingot",
+      "wizards_reborn:shaped/vilenium_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_items": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:enchanted_calx_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_items"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/enchanted_calx_from_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

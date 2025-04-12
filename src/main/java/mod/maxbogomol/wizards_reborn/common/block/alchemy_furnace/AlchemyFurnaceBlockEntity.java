@@ -166,8 +166,21 @@ public class AlchemyFurnaceBlockEntity extends NameableBlockEntityBase implement
                 }
             }
 
+            if (getTank().getFluid().getFluid().is(WizardsRebornFluidTags.STEAM_EQUIVALENT)) {
+                for (int i = 0; i < 5; i++) {
+                    if (steam < getMaxSteam() && getFluidAmount() > 0) {
+                        getTank().drain(1, IFluidHandler.FluidAction.EXECUTE);
+                        steam = steam + 1;
+                        if (random.nextFloat() < 0.001F) {
+                            level.playSound(null, getBlockPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
+                        }
+                        update = true;
+                    }
+                }
+            }
+
             if (getTank().getFluid().getFluid().is(WizardsRebornFluidTags.HEAT_SOURCE)) {
-                if (steam < getMaxSteam() && heat - 20 < getMaxHeat() && getFluidAmount() > 0) {
+                if (heat - 20 < getMaxHeat() && getFluidAmount() > 0) {
                     getTank().drain(1, IFluidHandler.FluidAction.EXECUTE);
                     heat = heat + 20;
                     heatLastTime = 10 * 20;
@@ -193,7 +206,6 @@ public class AlchemyFurnaceBlockEntity extends NameableBlockEntityBase implement
                             itemFuelHandler.setStackInSlot(0, itemstack.getCraftingRemainingItem());
                         }
                     }
-
                     update = true;
                 }
             }

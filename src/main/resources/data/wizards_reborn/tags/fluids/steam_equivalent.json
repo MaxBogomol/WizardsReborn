@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "embers:steam",
+      "required": false
+    }
+  ]
+}

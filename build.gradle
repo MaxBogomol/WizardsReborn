@@ -95,6 +95,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:6154802")
     compileOnly fg.deobf("curse.maven:malum-484064:6213791")
     compileOnly fg.deobf("curse.maven:lodestone-616457:6213794")
+    compileOnly fg.deobf("curse.maven:embers-rekindled-300777:6386899")
 
     runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
     runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
