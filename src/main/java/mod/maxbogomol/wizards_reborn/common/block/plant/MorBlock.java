@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.plant;
 
-import mod.maxbogomol.wizards_reborn.common.levelgen.WizardsRebornFeatures;
+import mod.maxbogomol.wizards_reborn.registry.common.levelgen.WizardsRebornFeatures;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

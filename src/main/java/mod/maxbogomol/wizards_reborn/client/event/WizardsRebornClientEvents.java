@@ -77,7 +77,7 @@ public class WizardsRebornClientEvents {
 
                 if (draw) {
                     int i = TooltipModifierHandler.getAttributeTooltipSize() + 1;
-                    if (i < event.getToolTip().size()) {
+                    if (i <= event.getToolTip().size()) {
                         event.getToolTip().addAll(i, ArcaneEnchantmentUtil.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
                     }
                 }

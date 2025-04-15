@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.levelgen;
+package mod.maxbogomol.wizards_reborn.registry.common.levelgen;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.core.registries.Registries;

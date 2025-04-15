@@ -4,6 +4,10 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SonarResonatePacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -66,6 +70,8 @@ public class SonarArcaneEnchantment extends ArcaneEnchantment {
                         BlockState blockState = player.level().getBlockState(pos);
                         if (blockState.is(WizardsRebornBlockTags.ORES)) {
                             oresPos.add(pos);
+                            player.level().playSound(null, pos, WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 0.5f, 0.8f);
+                            WizardsRebornPacketHandler.sendTo(player, new SonarResonatePacket(pos.getCenter(), WizardsRebornArcaneEnchantments.SONAR.getColor()));
                         }
                     }
                 }

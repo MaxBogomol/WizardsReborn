@@ -128,6 +128,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         EagleShotScreenshakePacket.register(HANDLER, id++);
         SplitArrowBurstPacket.register(HANDLER, id++);
         SplitArrowScreenshakePacket.register(HANDLER, id++);
+        SonarResonatePacket.register(HANDLER, id++);
 
         ThrownScytheScreenshakePacket.register(HANDLER, id++);
     }
