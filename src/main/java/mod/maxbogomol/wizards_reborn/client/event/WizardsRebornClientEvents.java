@@ -158,6 +158,7 @@ public class WizardsRebornClientEvents {
 
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event) {
+        ArcanemiconItem.clientTick(event);
         WissenLimitHandler.clientTick(event);
         MorSporesEffect.clientTick(event);
         WissenAuraEffect.clientTick(event);

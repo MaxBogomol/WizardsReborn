@@ -906,6 +906,9 @@
   "trim_material.wizards_reborn.precision_crystal": "Материал кристалла точности",
 
   "_comment_13": "Описания предметов",
+  "lore.wizards_reborn.arcanemicon.name": "Arcane'o'micon",
+  "lore.wizards_reborn.arcanemicon": "искажённые отголоски потерянных знаний",
+
   "item.wizards_reborn.violence_banner_pattern.desc": "Насилие",
   "item.wizards_reborn.reproduction_banner_pattern.desc": "Репродукция",
   "item.wizards_reborn.cooperation_banner_pattern.desc": "Кооперация",

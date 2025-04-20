@@ -234,7 +234,7 @@ public class ResearchPage extends Page {
 
             if (currentMonogram != null) {
                 gui.pose().pushPose();
-                gui.pose().translate(0,0,1000);
+                gui.pose().translate(0, 0,1000);
                 gui.blit(BACKGROUND, mouseX - 5, mouseY - 5, 158, 30, 10, 10);
                 gui.blit(BACKGROUND, mouseX - 4, mouseY - 4, 178, 30, 8, 8);
                 RenderSystem.disableDepthTest();
