@@ -537,12 +537,12 @@ public class WizardsRebornItems {
 
     public static final RegistryObject<Item> LEATHER_COLLAR = ITEMS.register("leather_collar", () -> new LeatherCollarItem(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> BROWN_MUSHROOM_CAP = ITEMS.register("brown_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "brown_mushroom_cap"));
-    public static final RegistryObject<Item> RED_MUSHROOM_CAP = ITEMS.register("red_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "red_mushroom_cap"));
-    public static final RegistryObject<Item> CRIMSON_FUNGUS_CAP = ITEMS.register("crimson_fungus_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "crimson_fungus_cap"));
-    public static final RegistryObject<Item> WARPED_FUNGUS_CAP = ITEMS.register("warped_fungus_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "warped_fungus_cap"));
-    public static final RegistryObject<Item> MOR_CAP = ITEMS.register("mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "mor_cap"));
-    public static final RegistryObject<Item> ELDER_MOR_CAP = ITEMS.register("elder_mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "elder_mor_cap"));
+    public static final RegistryObject<Item> BROWN_MUSHROOM_CAP = ITEMS.register("brown_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.BROWN_MUSHROOM));
+    public static final RegistryObject<Item> RED_MUSHROOM_CAP = ITEMS.register("red_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.RED_MUSHROOM));
+    public static final RegistryObject<Item> CRIMSON_FUNGUS_CAP = ITEMS.register("crimson_fungus_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.CRIMSON_FUNGUS));
+    public static final RegistryObject<Item> WARPED_FUNGUS_CAP = ITEMS.register("warped_fungus_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.WARPED_FUNGUS));
+    public static final RegistryObject<Item> MOR_CAP = ITEMS.register("mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.MOR));
+    public static final RegistryObject<Item> ELDER_MOR_CAP = ITEMS.register("elder_mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.ELDER_MOR));
 
     public static final RegistryObject<Item> ARCANE_FORTRESS_HELMET = ITEMS.register("arcane_fortress_helmet", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.HELMET, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
     public static final RegistryObject<Item> ARCANE_FORTRESS_CHESTPLATE = ITEMS.register("arcane_fortress_chestplate", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.CHESTPLATE, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
