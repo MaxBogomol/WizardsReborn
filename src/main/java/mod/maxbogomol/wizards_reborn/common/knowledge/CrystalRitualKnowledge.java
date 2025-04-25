@@ -2,7 +2,10 @@ package mod.maxbogomol.wizards_reborn.common.knowledge;
 
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
+import mod.maxbogomol.wizards_reborn.api.knowledge.IItemKnowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeType;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeTypes;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.network.chat.Component;
@@ -11,9 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.List;
-
-public class CrystalRitualKnowledge extends Knowledge {
+public class CrystalRitualKnowledge extends Knowledge implements IItemKnowledge {
     public CrystalRitual ritual;
 
     public CrystalRitualKnowledge(String id, boolean articles, int points, CrystalRitual ritual) {
@@ -22,14 +23,14 @@ public class CrystalRitualKnowledge extends Knowledge {
     }
 
     @Override
-    public boolean canReceived(Player player) {
-        List<ItemStack> items = player.inventoryMenu.getItems();
-        for (ItemStack stack : items) {
-            if (stack.getItem() instanceof RunicWisestonePlateItem plate) {
-                if (CrystalRitualUtil.getCrystalRitual(stack) == ritual) {
-                    return true;
-                }
-            }
+    public KnowledgeType getKnowledgeType() {
+        return KnowledgeTypes.ITEM;
+    }
+
+    @Override
+    public boolean canReceived(Player player, ItemStack itemStack) {
+        if (itemStack.getItem() instanceof RunicWisestonePlateItem plate) {
+            return CrystalRitualUtil.getCrystalRitual(itemStack) == ritual;
         }
         return false;
     }

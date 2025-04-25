@@ -19,10 +19,6 @@ public class Knowledge {
         this.articles = articles;
     }
 
-    public boolean canReceived(Player player) {
-        return false;
-    }
-
     public String getId() {
         return id;
     }
@@ -33,6 +29,10 @@ public class Knowledge {
 
     public boolean getArticles() {
         return articles;
+    }
+
+    public KnowledgeType getKnowledgeType() {
+        return KnowledgeTypes.NONE;
     }
 
     public boolean hasToast() {
@@ -51,12 +51,8 @@ public class Knowledge {
 
     }
 
-    public boolean addTick(Player player) {
-        if (canReceived(player)) {
-            KnowledgeUtil.addKnowledge(player, this);
-            return true;
-        }
-        return false;
+    public void add(Player player) {
+        KnowledgeUtil.addKnowledge(player, this);
     }
 
     @OnlyIn(Dist.CLIENT)

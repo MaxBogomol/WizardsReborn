@@ -9,6 +9,7 @@
     "common.BowItemMixin",
     "common.CreeperMixin",
     "common.FaceAttachedHorizontalDirectionalBlockMixin",
+    "common.InventoryChangeTriggerMixin",
     "common.PhantomMixin",
     "common.farmers_delight.RichSoilBlockMixin"
   ],

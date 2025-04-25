@@ -4,16 +4,13 @@ import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.fluffy_fur.registry.common.damage.FluffyFurDamageTypeTags;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
@@ -44,9 +41,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.ArrayList;
-import java.util.Set;
-
 public class WizardsRebornEvents {
     @SubscribeEvent
     public void attachEntityCaps(AttachCapabilitiesEvent<Entity> event) {
@@ -76,16 +70,7 @@ public class WizardsRebornEvents {
     public void playerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
         if (!player.level().isClientSide()) {
-            if (player.tickCount % 20 == 0) {
-                ArrayList<Knowledge> knowledges = new ArrayList<>(KnowledgeHandler.getKnowledges());
-                Set<Knowledge> set = KnowledgeUtil.getKnowledges(player);
-                if (set != null) knowledges.removeAll(set);
-                for (Knowledge knowledge : knowledges) {
-                    knowledge.addTick(player);
-                }
-            }
-
-            ArcaneFortressArmorItem.playerTick(event);
+            KnowledgeHandler.tickKnowledgeListTrigger(player);
         }
     }
 

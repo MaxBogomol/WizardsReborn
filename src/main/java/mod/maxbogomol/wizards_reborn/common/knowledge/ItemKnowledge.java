@@ -1,15 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
+import mod.maxbogomol.wizards_reborn.api.knowledge.IItemKnowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeType;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.List;
-
-public class ItemKnowledge extends Knowledge {
+public class ItemKnowledge extends Knowledge implements IItemKnowledge {
     @Deprecated
     public final Item item;
 
@@ -19,14 +20,13 @@ public class ItemKnowledge extends Knowledge {
     }
 
     @Override
-    public boolean canReceived(Player player) {
-        List<ItemStack> items = player.inventoryMenu.getItems();
-        for (ItemStack stack : items) {
-            if (stack.getItem().equals(item)) {
-                return true;
-            }
-        }
-        return false;
+    public KnowledgeType getKnowledgeType() {
+        return KnowledgeTypes.ITEM;
+    }
+
+    @Override
+    public boolean canReceived(Player player, ItemStack itemStack) {
+        return itemStack.getItem().equals(item);
     }
 
     public Item getItem() {
