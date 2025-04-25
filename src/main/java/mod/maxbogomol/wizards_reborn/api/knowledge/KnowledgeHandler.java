@@ -55,7 +55,7 @@ public class KnowledgeHandler {
         if (!tickKnowledgeInit) {
             for (Knowledge knowledge : getKnowledges()) {
                 if (knowledge.getKnowledgeType() == KnowledgeTypes.TICK) {
-                    addItemKnowledge(knowledge);
+                    addTickKnowledge(knowledge);
                 }
             }
             tickKnowledgeInit = true;
