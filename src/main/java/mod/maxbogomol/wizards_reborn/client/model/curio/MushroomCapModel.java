@@ -24,10 +24,8 @@ public class MushroomCapModel extends HumanoidModel  {
         PartDefinition head = root.addOrReplaceChild("head", new CubeListBuilder(), PartPose.ZERO);
         PartDefinition body = root.addOrReplaceChild("body", new CubeListBuilder(), PartPose.ZERO);
 
-        PartDefinition model = head.addOrReplaceChild("model", CubeListBuilder.create().texOffs(0, 18)
-                .addBox(-5.0F, -7.0F, -5.0F, 10.0F, 2.0F, 10.0F, new CubeDeformation(0.05F)), PartPose.ZERO);
-        PartDefinition model1 = model.addOrReplaceChild("model1", CubeListBuilder.create().texOffs(0, 0)
-                .addBox(-6.0F, -13.0F, -6.0F, 12.0F, 6.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
+        PartDefinition model = head.addOrReplaceChild("model", CubeListBuilder.create().texOffs(0, 18).addBox(-5.0F, -7.0F, -5.0F, 10.0F, 2.0F, 10.0F, new CubeDeformation(0.05F)), PartPose.ZERO);
+        PartDefinition model1 = model.addOrReplaceChild("model1", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -13.0F, -6.0F, 12.0F, 6.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
 
         return LayerDefinition.create(mesh, 64, 32);
     }
