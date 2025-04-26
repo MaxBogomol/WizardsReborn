@@ -1,5 +1,5 @@
 {
-  "creative_tab.wizards_reborn": "Wizards Reborn",
+  "creative_tab.wizards_reborn": "Wizard's Reborn",
 
   "_comment_1": "Pradmiety i błoki",
   "item.wizards_reborn.arcane_gold_ingot": "Arkanavy załaty zlitak",
@@ -862,6 +862,9 @@
   "alchemy_potion.wizards_reborn.gluttony": "Ziełle abžorstva",
 
   "_comment_11": "Historyja pradmietaŭ",
+  "lore.wizards_reborn.arcanemicon.name": "Arcane'o'micon",
+  "lore.wizards_reborn.arcanemicon": "skažonaje recha utračanych viedaŭ",
+
   "lore.wizards_reborn.wissen_wand_mode.functional": "Funkcyjny režym",
   "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Režym atrymannia złučennia",
   "lore.wizards_reborn.wissen_wand_mode.send_connect": "Režym adpraŭlennia złučennia",
@@ -1090,7 +1093,7 @@
   "attribute.name.wizards_reborn.arcane_damage": "Arkanavyja paškodžanni",
 
   "_comment_19": "Mieniu Fłafi Fiur",
-  "mod_description.wizards_reborn": "Wizards Reborn - mod pra mahiju ŭ style alternatyŭnych 1930.",
+  "mod_description.wizards_reborn": "Wizard's Reborn - mod pra mahiju ŭ style alternatyŭnych 1930.",
 
   "panorama.wizards_reborn.magical_origins": "Mahičnyja vytoki",
 
@@ -1183,7 +1186,7 @@
   "commands.wizards_reborn.wissen.remove.failed": "Zdaryłasia pamyłka pry vydalenni Visenu %s",
 
   "_comment_25": "Pryviazka kłaviš",
-  "key.category.wizards_reborn.general": "Wizards Reborn",
+  "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_menu": "Mieniu vybaru",
   "key.wizards_reborn.bag_menu": "Mieniu torbaŭ",
   "key.wizards_reborn.next_spell": "Nastupny zahavor",
@@ -2019,11 +2022,11 @@
   "wizards_reborn.arcanemicon.page.menu_configs": "Konfihi mieniu",
   "wizards_reborn.arcanemicon.chapter.special_thanks": "Admietny \"Dziakuj\"",
   "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.0.title": "Admietny \"Dziakuj\"",
-  "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.0": "Wizards Reborn heta pieraasmyslennie idej z usich maich ulublenych modaŭ. Heta moj asabisty prajekt, jaki zroblen amal całkam mnoju na čystym zapale. Ja pakłaŭ vialikuju častku dušy ŭ jaho.",
+  "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.0": "Wizard's Reborn heta pieraasmyslennie idej z usich maich ulublenych modaŭ. Heta moj asabisty prajekt, jaki zroblen amal całkam mnoju na čystym zapale. Ja pakłaŭ vialikuju častku dušy ŭ jaho.",
   "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1": "Dziakuj za to, što hulajecie z maim modam!",
   "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1.name": "MaxBogomol",
   "wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1.say": "P-rrrrr",
-  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.0": "Dla mianie, Wizards reborn nie prosta biazdušny prajekt, jon staŭ častka samoha mianie. Usie idei i vyrašenni, na jakijach našturchnuŭ mianie hety mod - voś heta sapraŭdnaja mahija čałaviečaha henija.",
+  "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.0": "Dla mianie, Wizard's Reborn nie prosta biazdušny prajekt, jon staŭ častka samoha mianie. Usie idei i vyrašenni, na jakijach našturchnuŭ mianie hety mod - voś heta sapraŭdnaja mahija čałaviečaha henija.",
   "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1": "Imknicieś da viaršyń i natchniajcie inšych, jak Maks natchniŭ mianie",
   "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1.name": "OnixTheCat",
   "wizards_reborn.arcanemicon.page.special_thanks.onixthecat.1.say": ":3",
