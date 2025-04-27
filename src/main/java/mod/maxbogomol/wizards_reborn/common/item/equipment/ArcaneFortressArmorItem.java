@@ -29,6 +29,7 @@ import net.minecraftforge.common.extensions.IForgeItem;
 import net.minecraftforge.event.TickEvent;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeItem {
     public static final UUID BASE_MAX_HEALTH_UUID = UUID.fromString("11864F7D-2608-4A27-A7AA-7483A4fAA5A1");
@@ -40,7 +41,7 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void initializeClient(java.util.function.Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public ArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel original) {

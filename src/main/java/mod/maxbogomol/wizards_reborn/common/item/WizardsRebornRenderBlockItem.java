@@ -8,6 +8,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
+import java.util.function.Consumer;
+
 public class WizardsRebornRenderBlockItem extends BlockItem {
 
     public WizardsRebornRenderBlockItem(Block block, Properties properties) {
@@ -16,7 +18,7 @@ public class WizardsRebornRenderBlockItem extends BlockItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void initializeClient(java.util.function.Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {

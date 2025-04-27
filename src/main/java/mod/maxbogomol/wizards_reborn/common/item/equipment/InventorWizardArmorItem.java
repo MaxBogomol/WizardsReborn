@@ -29,6 +29,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.extensions.IForgeItem;
 
+import java.util.function.Consumer;
+
 public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeItem {
 
     public InventorWizardArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties properties) {
@@ -69,7 +71,7 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void initializeClient(java.util.function.Consumer<net.minecraftforge.client.extensions.common.IClientItemExtensions> consumer) {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public ArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel original) {
