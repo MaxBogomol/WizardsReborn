@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
-  "render_type": "minecraft:translucent",
+  "render_type": "minecraft:opaque",
   "textures": {
     "all": "wizards_reborn:block/gilded_cork_bamboo_planks"
   },
