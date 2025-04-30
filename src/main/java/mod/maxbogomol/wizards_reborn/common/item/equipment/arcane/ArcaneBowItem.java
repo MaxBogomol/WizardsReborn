@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -18,9 +19,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ArcaneBowItem extends BowItem implements IArcaneItem {
     public List<ArcaneEnchantmentType> arcaneEnchantmentTypes = new ArrayList<>();
+    public Supplier<Ingredient> repairMaterial;
 
     public ArcaneBowItem(Properties properties) {
         super(properties);
@@ -37,6 +40,11 @@ public class ArcaneBowItem extends BowItem implements IArcaneItem {
 
     public ArcaneBowItem addArcaneEnchantmentType(ArcaneEnchantmentType type) {
         arcaneEnchantmentTypes.add(type);
+        return this;
+    }
+
+    public ArcaneBowItem setRepairMaterial(Supplier<Ingredient> repairMaterial) {
+        this.repairMaterial = repairMaterial;
         return this;
     }
 
@@ -68,5 +76,13 @@ public class ArcaneBowItem extends BowItem implements IArcaneItem {
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);
         ArcaneEnchantmentUtil.onUseTick(level, livingEntity, stack, remainingUseDuration);
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        if (repairMaterial != null) {
+            return repairMaterial.get().test(repair);
+        }
+        return super.isValidRepairItem(toRepair, repair);
     }
 }

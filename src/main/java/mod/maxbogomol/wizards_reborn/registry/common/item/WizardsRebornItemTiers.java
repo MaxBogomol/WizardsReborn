@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.registry.common.item;
 
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -16,16 +15,15 @@ public class WizardsRebornItemTiers implements Tier {
     public final float efficiency;
     public final float attackDamage;
     public final int enchantability;
-    public final LazyLoadedValue<Ingredient> repairMaterial;
+    public final Supplier<Ingredient> repairMaterial;
 
-    WizardsRebornItemTiers(int harvestLevel, int maxUses, float efficiency,
-                           float attackDamage, int enchantability, Supplier<Ingredient> repairMaterial) {
+    WizardsRebornItemTiers(int harvestLevel, int maxUses, float efficiency, float attackDamage, int enchantability, Supplier<Ingredient> repairMaterial) {
         this.harvestLevel = harvestLevel;
         this.maxUses = maxUses;
         this.efficiency = efficiency;
         this.attackDamage = attackDamage;
         this.enchantability = enchantability;
-        this.repairMaterial = new LazyLoadedValue<>(repairMaterial);
+        this.repairMaterial = repairMaterial;
     }
 
     @Override
