@@ -46,8 +46,8 @@ public class AltarOfDroughtRenderer implements BlockEntityRenderer<AltarOfDrough
 
         if (WissenUtil.isCanRenderWissenWand()) {
             poseStack.pushPose();
-            poseStack.translate(-15, -15, -15);
-            RenderUtil.renderConnectBoxLines(poseStack, new Vec3(31, 31, 31), WizardsRebornRenderUtil.colorArea, 0.5f);
+            poseStack.translate(-12, -12, -12);
+            RenderUtil.renderConnectBoxLines(poseStack, new Vec3(25, 25, 25), WizardsRebornRenderUtil.colorArea, 0.5f);
             poseStack.popPose();
         }
     }

@@ -11,12 +11,12 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
-import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtBreakPacket;
 import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtSendPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
@@ -41,6 +41,11 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
     public int wissen = 0;
     public int ticks = 0;
     public int maxTicks = 0;
+
+    public int oldX = 0;
+    public int oldY = 0;
+    public int oldZ = 0;
+    public boolean oldBlock = false;
 
     public AltarOfDroughtBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -79,8 +84,6 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                 }
             }
 
-            int distance = 15;
-
             if (ticks > 0) {
                 ticks = ticks - 1;
                 if (ticks <= 0) {
@@ -90,21 +93,67 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
             }
 
             if (ticks <= 0 && wissen < getMaxWissen() && canWork()) {
-                ArrayList<BlockPos> blockPosList = CrystalRitual.getBlockPosWithArea(level, getBlockPos(), new Vec3(distance, distance, distance), new Vec3(distance, distance, distance), (p) -> {
-                    return level.getBlockState(p).is(WizardsRebornBlockTags.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(p).getValue(BlockStateProperties.PERSISTENT);
-                }, true, true, 1);
+                int distance = 12;
+                int dst = 3;
+                if (oldBlock) {
+                    if (Math.abs(getBlockPos().getX() - oldX) > distance - dst) {
+                        if (getBlockPos().getX() - oldX < 0) {
+                            oldX = oldX - (Math.abs(getBlockPos().getX() - oldX) - (distance - dst));
+                        } else {
+                            oldX = oldX + (Math.abs(getBlockPos().getX() - oldX) - (distance - dst));
+                        }
+                    }
+                    if (Math.abs(getBlockPos().getY() - oldY) > distance - dst) {
+                        if (getBlockPos().getY() - oldY < 0) {
+                            oldY = oldY - (Math.abs(getBlockPos().getY() - oldY) - (distance - dst));
+                        } else {
+                            oldY = oldY + (Math.abs(getBlockPos().getY() - oldY) - (distance - dst));
+                        }
+                    }
+                    if (Math.abs(getBlockPos().getZ() - oldZ) > distance - dst) {
+                        if (getBlockPos().getZ() - oldZ < 0) {
+                            oldZ = oldZ - (Math.abs(getBlockPos().getZ() - oldZ) - (distance - dst));
+                        } else {
+                            oldZ = oldZ + (Math.abs(getBlockPos().getZ() - oldZ) - (distance - dst));
+                        }
+                    }
+                    ArrayList<BlockPos> blockPosList = CrystalRitual.getBlockPosWithArea(level, new BlockPos(oldX, oldY, oldZ), new Vec3(dst, dst, dst), new Vec3(dst, dst, dst), (p) -> {
+                        return level.getBlockState(p).is(WizardsRebornBlockTags.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(p).getValue(BlockStateProperties.PERSISTENT);
+                    }, true, true, 1);
 
-                for (BlockPos breakPos : blockPosList) {
-                    if (level.getBlockState(breakPos).is(WizardsRebornBlockTags.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
-                        WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstPacket(getBlockPos()));
-                        WizardsRebornPacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakPacket(breakPos));
-                        WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB(), 25));
-                        level.destroyBlock(breakPos, false);
-                        addWissen(25);
-                        ticks = 20 + random.nextInt(10);
+                    if (!blockPosList.isEmpty()) {
+                        for (BlockPos breakPos : blockPosList) {
+                            breakBlock(breakPos);
+                            oldX = breakPos.getX();
+                            oldY = breakPos.getY();
+                            oldZ = breakPos.getZ();
+                            oldBlock = true;
+                            update = true;
+                        }
+                    } else {
+                        oldBlock = false;
+                        ticks = 160 + random.nextInt(40);
                         maxTicks = ticks;
                         update = true;
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ALTAR_OF_DROUGHT.get(), SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                    }
+                } else {
+                    ArrayList<BlockPos> blockPosList = CrystalRitual.getBlockPosWithArea(level, getBlockPos(), new Vec3(distance, distance, distance), new Vec3(distance, distance, distance), (p) -> {
+                        return level.getBlockState(p).is(WizardsRebornBlockTags.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(p).getValue(BlockStateProperties.PERSISTENT);
+                    }, true, true, 1);
+
+                    if (!blockPosList.isEmpty()) {
+                        for (BlockPos breakPos : blockPosList) {
+                            breakBlock(breakPos);
+                            oldX = breakPos.getX();
+                            oldY = breakPos.getY();
+                            oldZ = breakPos.getZ();
+                            oldBlock = true;
+                            update = true;
+                        }
+                    } else {
+                        ticks = 160 + random.nextInt(40);
+                        maxTicks = ticks;
+                        update = true;
                     }
                 }
             }
@@ -137,6 +186,19 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
         }
     }
 
+    public void breakBlock(BlockPos breakPos) {
+        if (level.getBlockState(breakPos).is(WizardsRebornBlockTags.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
+            WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstPacket(getBlockPos()));
+            WizardsRebornPacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakPacket(breakPos));
+            WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB(), 25));
+            level.destroyBlock(breakPos, false);
+            addWissen(25);
+            ticks = 20 + random.nextInt(10);
+            maxTicks = ticks;
+            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ALTAR_OF_DROUGHT.get(), SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        }
+    }
+
     @Override
     protected SimpleContainer createItemHandler() {
         return new SimpleContainer(1);
@@ -158,6 +220,10 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
         tag.putInt("wissen", wissen);
         tag.putInt("ticks", ticks);
         tag.putInt("maxTicks", maxTicks);
+        tag.putInt("oldX", oldX);
+        tag.putInt("oldY", oldY);
+        tag.putInt("oldZ", oldZ);
+        tag.putBoolean("oldBlock", oldBlock);
     }
 
     @Override
@@ -166,6 +232,10 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
         wissen = tag.getInt("wissen");
         ticks = tag.getInt("ticks");
         maxTicks = tag.getInt("maxTicks");
+        oldX = tag.getInt("oldX");
+        oldY = tag.getInt("oldY");
+        oldZ = tag.getInt("oldZ");
+        oldBlock = tag.getBoolean("oldBlock");
     }
 
     @Override
