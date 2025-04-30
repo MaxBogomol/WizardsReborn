@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "arcanum_dust",
   "ingredients": [
     {
       "item": "wizards_reborn:arcanum_dust_block"

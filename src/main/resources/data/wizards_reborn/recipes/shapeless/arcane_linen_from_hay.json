@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "arcane_linen",
   "ingredients": [
     {
       "item": "wizards_reborn:arcane_linen_hay"

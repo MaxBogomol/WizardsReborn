@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "redstone",
   "group": "wooden_door",
   "pattern": [
     "##",
@@ -8,7 +9,7 @@
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:innocent_wood_planks"
+      "tag": "wizards_reborn:innocent_wood_planks"
     }
   },
   "result": {

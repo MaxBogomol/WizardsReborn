@@ -11,7 +11,7 @@
       "tag": "wizards_reborn:arcane_gold_ingot"
     },
     "W": {
-      "item": "wizards_reborn:arcane_wood_planks"
+      "tag": "wizards_reborn:arcane_wood_planks"
     },
     "C": {
       "item": "minecraft:coal"

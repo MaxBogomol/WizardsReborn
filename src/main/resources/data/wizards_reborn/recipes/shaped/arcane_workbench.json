@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "wooden_fence",
+  "category": "building",
   "pattern": [
     "WWW",
     "S@S",
@@ -8,7 +8,7 @@
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:arcane_wood_planks"
+      "tag": "wizards_reborn:arcane_wood_planks"
     },
     "S": {
       "tag": "wizards_reborn:arcane_gold_ingot"

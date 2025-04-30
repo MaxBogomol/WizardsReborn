@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "arcane_gold_ingot",
   "ingredients": [
     {
       "item": "wizards_reborn:arcane_gold_block"

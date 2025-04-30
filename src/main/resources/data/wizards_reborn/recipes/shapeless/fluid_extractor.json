@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "extractor",
   "ingredients": [
     {
       "item": "wizards_reborn:fluid_pipe"

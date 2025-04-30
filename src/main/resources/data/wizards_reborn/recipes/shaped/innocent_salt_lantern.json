@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "salt_lantern",
   "pattern": [
     " C ",
     "GXG",
@@ -7,7 +9,7 @@
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:innocent_wood_slab"
+      "tag": "wizards_reborn:innocent_wood_slabs"
     },
     "X": {
       "item": "wizards_reborn:innocent_salt_torch"

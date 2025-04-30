@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gray_luminal_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:gray_luminal_glass"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_gray_luminal_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/gray_framed_luminal_glass"
+    ]
+  },
+  "sends_telemetry_event": false
+}

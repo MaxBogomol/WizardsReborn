@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_wisestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:polished_wisestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_arcane_gold_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "wizards_reborn:arcane_gold_nugget"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_wisestone",
+      "has_arcane_gold_nugget"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/gilded_polished_wisestone"
+    ]
+  },
+  "sends_telemetry_event": false
+}

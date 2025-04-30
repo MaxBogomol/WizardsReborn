@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_innocent_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:stripped_innocent_wood"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_stripped_innocent_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/stripped_innocent_wood_baulk"
+    ]
+  },
+  "sends_telemetry_event": false
+}

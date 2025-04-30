@@ -11,7 +11,7 @@
       "item": "wizards_reborn:arcanum_block"
     },
     "#": {
-      "item": "wizards_reborn:arcane_wood_planks"
+      "tag": "wizards_reborn:arcane_wood_planks"
     },
     "L": {
       "item": "wizards_reborn:wissen_altar"

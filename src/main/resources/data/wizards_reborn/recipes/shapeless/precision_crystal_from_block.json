@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "precision_crystal",
   "ingredients": [
     {
       "item": "wizards_reborn:precision_crystal_block"

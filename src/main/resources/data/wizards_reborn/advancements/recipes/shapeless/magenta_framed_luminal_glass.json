@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_magenta_luminal_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:magenta_luminal_glass"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_magenta_luminal_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/magenta_framed_luminal_glass"
+    ]
+  },
+  "sends_telemetry_event": false
+}

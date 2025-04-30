@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arcanum": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:arcanum"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_arcanum"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/ascension_banner_pattern"
+    ]
+  },
+  "sends_telemetry_event": false
+}

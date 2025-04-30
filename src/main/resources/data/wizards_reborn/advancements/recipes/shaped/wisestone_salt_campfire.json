@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_wisestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:polished_wisestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nether_salt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:nether_salt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_wisestone",
+      "has_nether_salt"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/wisestone_salt_campfire"
+    ]
+  },
+  "sends_telemetry_event": false
+}

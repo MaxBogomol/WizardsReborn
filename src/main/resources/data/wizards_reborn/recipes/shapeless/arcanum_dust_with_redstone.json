@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "arcanum_dust",
   "ingredients": [
     {
       "tag": "wizards_reborn:arcanum"
@@ -10,6 +12,6 @@
   ],
   "result": {
     "item": "wizards_reborn:arcanum_dust",
-    "count": 3
+    "count": 4
   }
 }

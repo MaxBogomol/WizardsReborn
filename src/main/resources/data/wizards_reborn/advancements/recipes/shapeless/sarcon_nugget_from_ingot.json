@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sarcon_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:sarcon_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_sarcon_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/sarcon_nugget_from_ingot"
+    ]
+  },
+  "sends_telemetry_event": false
+}

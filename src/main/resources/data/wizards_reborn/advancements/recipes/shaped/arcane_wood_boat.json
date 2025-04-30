@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arcane_wood_planks": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "wizards_reborn:arcane_wood_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_arcane_wood_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/arcane_wood_boat"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dyeable_arcane_lumos": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "wizards_reborn:dyeable_arcane_lumos"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_dyeable_arcane_lumos"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/purple_arcane_lumos"
+    ]
+  },
+  "sends_telemetry_event": false
+}

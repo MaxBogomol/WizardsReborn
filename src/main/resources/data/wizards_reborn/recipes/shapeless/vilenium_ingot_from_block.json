@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "vilenium_ingot",
   "ingredients": [
     {
       "item": "wizards_reborn:vilenium_block"

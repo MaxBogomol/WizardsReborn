@@ -9,22 +9,36 @@
         }
       ],
       "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "m": {
-            "item": "wizards_reborn:arcane_wood_planks"
-          },
-          "s": {
-            "item": "wizards_reborn:arcane_wood_branch"
-          }
+        "type": "wizards_reborn:arcane_iterator",
+        "output": {
+          "item": "wizards_reborn:innocent_wood_knife",
+          "count": 1
         },
-        "pattern": [
-          "m",
-          "s"
-        ],
-        "result": {
-          "item": "wizards_reborn:arcane_wood_knife"
-        }
+        "wissen": 2000,
+        "saveNBT": true,
+        "ingredients": [
+          {
+            "item": "wizards_reborn:arcane_wood_knife"
+          },
+          {
+            "item": "wizards_reborn:innocent_wood_branch"
+          },
+          {
+            "item": "wizards_reborn:innocent_wood_branch"
+          },
+          {
+            "item": "wizards_reborn:innocent_wood_branch"
+          },
+          {
+            "item": "wizards_reborn:arcacite"
+          },
+          {
+            "item": "wizards_reborn:arcacite"
+          },
+          {
+            "item": "wizards_reborn:natural_calx"
+          }
+        ]
       }
     }
   ]

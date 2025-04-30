@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cork_bamboo_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:cork_bamboo_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nether_salt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:nether_salt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_cork_bamboo_block",
+      "has_nether_salt"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/cork_bamboo_salt_campfire"
+    ]
+  },
+  "sends_telemetry_event": false
+}

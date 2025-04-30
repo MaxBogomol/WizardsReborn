@@ -1,0 +1,39 @@
+{
+  "type": "forge:conditional",
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "farmersdelight"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_arcane_wood_planks": {
+            "conditions": {
+              "items": [
+                {
+                  "tag": "wizards_reborn:arcane_wood_planks"
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "has_arcane_wood_planks"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "wizards_reborn:integration/farmers_delight/shaped/arcane_wood_knife"
+          ]
+        },
+        "sends_telemetry_event": false
+      }
+    }
+  ]
+}

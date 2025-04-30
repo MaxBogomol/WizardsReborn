@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arcanum_ores": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "wizards_reborn:arcanum_ores"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_arcanum_ores"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:blasting/arcanum"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "enchanted_calx",
   "ingredients": [
     {
       "item": "wizards_reborn:enchanted_calx_block"

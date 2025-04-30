@@ -128,7 +128,7 @@ public class ArcanemiconChapters {
                 ),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANUM_DUST.get(), 9), new ItemStack(WizardsRebornItems.ARCANUM_DUST_BLOCK.get())),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANUM_DUST.get(), 2), ARCANUM_ITEM),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANUM_DUST.get(), 3), ARCANUM_ITEM, new ItemStack(Items.REDSTONE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANUM_DUST.get(), 4), ARCANUM_ITEM, new ItemStack(Items.REDSTONE)),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANEMICON.get()), new ItemStack(Items.BOOK), ARCANUM_ITEM)
         );
 

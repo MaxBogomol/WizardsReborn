@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "arcane_gold_ingot",
   "pattern": [
     "###",
     "###",

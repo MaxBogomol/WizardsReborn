@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_petals_of_innocence": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:petals_of_innocence"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_petals_of_innocence"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/white_dye_from_petals_of_innocence"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_wisestone_tile": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:wisestone_tile"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wisestone_tile"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/wisestone_tile_wall"
+    ]
+  },
+  "sends_telemetry_event": false
+}

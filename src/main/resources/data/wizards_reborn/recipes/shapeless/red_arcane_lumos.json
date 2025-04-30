@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "arcane_lumos",
   "ingredients": [
     {
       "tag": "wizards_reborn:dyeable_arcane_lumos"

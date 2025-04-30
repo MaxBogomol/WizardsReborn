@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "cross_baulk",
   "ingredients": [
     {
       "item": "wizards_reborn:cork_bamboo_planks_baulk"

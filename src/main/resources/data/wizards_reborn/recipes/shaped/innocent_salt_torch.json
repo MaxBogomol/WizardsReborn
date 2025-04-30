@@ -1,12 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "salt_torch",
   "pattern": [
     "X",
     "#"
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:innocent_wood_planks"
+      "tag": "wizards_reborn:innocent_wood_planks"
     },
     "X": {
       "item": "wizards_reborn:nether_salt"

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_petals": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:petals"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_petals"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/flower_fertilizer"
+    ]
+  },
+  "sends_telemetry_event": false
+}

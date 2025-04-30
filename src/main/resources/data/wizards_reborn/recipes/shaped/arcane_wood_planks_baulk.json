@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "baulk",
   "pattern": [
     "#",
     "#",
@@ -7,7 +9,7 @@
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:arcane_wood_planks"
+      "tag": "wizards_reborn:arcane_wood_planks"
     }
   },
   "result": {

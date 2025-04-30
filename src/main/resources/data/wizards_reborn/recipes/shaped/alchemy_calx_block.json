@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "alchemy_calx_block",
   "pattern": [
     "###",
     "###",

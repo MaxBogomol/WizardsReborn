@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "arcacite_polishing_mixture",
   "ingredients": [
     {
       "item": "wizards_reborn:arcacite_polishing_mixture_block"

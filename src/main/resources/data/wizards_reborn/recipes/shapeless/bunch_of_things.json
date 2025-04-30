@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bunch_of_things",
   "ingredients": [
     {
       "item": "wizards_reborn:arcane_wood_branch"

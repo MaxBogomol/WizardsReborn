@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_arcane_gold": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:raw_arcane_gold"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_arcane_gold"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/raw_arcane_gold_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

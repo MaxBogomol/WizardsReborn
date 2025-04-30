@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "salt_lantern",
   "pattern": [
     " C ",
     "GXG",

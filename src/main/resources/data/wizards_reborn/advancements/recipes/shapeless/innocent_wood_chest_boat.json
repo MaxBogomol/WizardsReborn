@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_innocent_wood_boat": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:innocent_wood_boat"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_innocent_wood_boat"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/innocent_wood_chest_boat"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_wisestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:polished_wisestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_wisestone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/polished_wisestone_button"
+    ]
+  },
+  "sends_telemetry_event": false
+}

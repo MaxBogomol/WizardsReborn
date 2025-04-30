@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "raw_arcane_gold_block",
   "pattern": [
     "###",
     "###",

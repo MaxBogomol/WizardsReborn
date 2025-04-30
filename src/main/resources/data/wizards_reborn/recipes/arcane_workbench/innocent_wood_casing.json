@@ -11,7 +11,7 @@
       "item": "wizards_reborn:innocent_wood_frame"
     },
     "G": {
-      "item": "wizards_reborn:innocent_wood_planks"
+      "tag": "wizards_reborn:innocent_wood_planks"
     }
   },
   "output": {

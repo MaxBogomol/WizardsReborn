@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arcane_gold_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "wizards_reborn:arcane_gold_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_arcane_gold_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/leather_belt"
+    ]
+  },
+  "sends_telemetry_event": false
+}

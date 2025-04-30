@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "sign",
   "pattern": [
     "###",
@@ -8,7 +9,7 @@
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:arcane_wood_planks"
+      "tag": "wizards_reborn:arcane_wood_planks"
     },
     "X": {
       "tag": "forge:rods/wooden"

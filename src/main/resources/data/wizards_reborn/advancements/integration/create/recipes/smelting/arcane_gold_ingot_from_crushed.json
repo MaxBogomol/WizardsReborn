@@ -1,0 +1,41 @@
+{
+  "type": "forge:conditional",
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_crushed_raw_arcane_gold": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "wizards_reborn:crushed_raw_arcane_gold"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "has_crushed_raw_arcane_gold"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "wizards_reborn:integration/create/smelting/arcane_gold_ingot_from_crushed"
+          ]
+        },
+        "sends_telemetry_event": false
+      }
+    }
+  ]
+}

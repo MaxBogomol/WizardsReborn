@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fluid_pipe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:fluid_pipe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fluid_pipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/fluid_extractor"
+    ]
+  },
+  "sends_telemetry_event": false
+}

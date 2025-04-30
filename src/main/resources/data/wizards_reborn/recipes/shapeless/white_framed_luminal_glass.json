@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "framed_luminal_glass",
   "ingredients": [
     {
       "item": "wizards_reborn:white_luminal_glass"

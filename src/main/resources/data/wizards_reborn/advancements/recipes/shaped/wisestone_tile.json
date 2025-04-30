@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_wisestone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:wisestone_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wisestone_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/wisestone_tile"
+    ]
+  },
+  "sends_telemetry_event": false
+}

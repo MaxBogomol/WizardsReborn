@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shrimp": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:shrimp"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_shrimp"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:smelting/fried_shrimp"
+    ]
+  },
+  "sends_telemetry_event": false
+}

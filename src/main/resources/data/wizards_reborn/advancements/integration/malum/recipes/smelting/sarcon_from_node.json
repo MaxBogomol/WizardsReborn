@@ -1,0 +1,41 @@
+{
+  "type": "forge:conditional",
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_sarcon_node": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "wizards_reborn:sarcon_node"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "has_sarcon_node"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "wizards_reborn:integration/malum/smelting/sarcon_from_node"
+          ]
+        },
+        "sends_telemetry_event": false
+      }
+    }
+  ]
+}

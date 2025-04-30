@@ -1,12 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "redstone",
   "group": "wooden_pressure_plate",
   "pattern": [
     "##"
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:innocent_wood_planks"
+      "tag": "wizards_reborn:innocent_wood_planks"
     }
   },
   "result": {

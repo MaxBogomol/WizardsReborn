@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "distant_calx",
   "ingredients": [
     {
       "item": "wizards_reborn:distant_calx_block"

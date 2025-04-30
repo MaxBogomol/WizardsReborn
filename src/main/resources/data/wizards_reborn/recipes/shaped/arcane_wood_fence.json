@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "wooden_fence",
   "pattern": [
     "W#W",
@@ -10,7 +11,7 @@
       "tag": "forge:rods/wooden"
     },
     "W": {
-      "item": "wizards_reborn:arcane_wood_planks"
+      "tag": "wizards_reborn:arcane_wood_planks"
     }
   },
   "result": {

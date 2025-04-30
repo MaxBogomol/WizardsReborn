@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "wooden_fence",
+  "category": "building",
+  "group": "arcane_pedestal",
   "pattern": [
     "#W#",
     " W ",
@@ -8,10 +9,10 @@
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:arcane_wood_slab"
+      "tag": "wizards_reborn:arcane_wood_slabs"
     },
     "W": {
-      "item": "wizards_reborn:arcane_wood_planks"
+      "tag": "wizards_reborn:arcane_wood_planks"
     }
   },
   "result": {

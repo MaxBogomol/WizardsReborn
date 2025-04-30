@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "precision_crystal_block",
   "pattern": [
     "###",
     "###",

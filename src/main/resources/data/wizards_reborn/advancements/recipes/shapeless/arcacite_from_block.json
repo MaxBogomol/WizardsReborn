@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arcacite_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:arcacite_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_arcacite_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/arcacite_from_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

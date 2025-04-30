@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "planks",
+  "category": "misc",
+  "group": "chest_boat",
   "ingredients": [
     {
       "tag": "forge:chests/wooden"

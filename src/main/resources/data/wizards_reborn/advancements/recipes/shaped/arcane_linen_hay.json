@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arcane_linen": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:arcane_linen"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_arcane_linen"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/arcane_linen_hay"
+    ]
+  },
+  "sends_telemetry_event": false
+}

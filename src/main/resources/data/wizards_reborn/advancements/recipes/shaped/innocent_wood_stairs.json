@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_innocent_wood_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:innocent_wood_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_innocent_wood_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shaped/innocent_wood_stairs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

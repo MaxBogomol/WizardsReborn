@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "gilded",
   "ingredients": [
     {
       "item": "wizards_reborn:arcane_wood_planks"

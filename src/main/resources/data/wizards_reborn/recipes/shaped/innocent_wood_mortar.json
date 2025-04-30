@@ -1,12 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "mortar",
   "pattern": [
     "#B#",
     " # "
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:innocent_wood_planks"
+      "tag": "wizards_reborn:innocent_wood_planks"
     },
     "B": {
       "item": "wizards_reborn:innocent_wood_branch"

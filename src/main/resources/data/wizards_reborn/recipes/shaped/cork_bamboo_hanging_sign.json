@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "sign",
+  "category": "misc",
+  "group": "hanging_sign",
   "pattern": [
     "X X",
     "###",
