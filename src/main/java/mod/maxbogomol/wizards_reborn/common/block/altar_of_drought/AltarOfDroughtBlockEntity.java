@@ -94,7 +94,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
 
             if (ticks <= 0 && wissen < getMaxWissen() && canWork()) {
                 int distance = 12;
-                int dst = 3;
+                int dst = 2;
                 if (oldBlock) {
                     if (Math.abs(getBlockPos().getX() - oldX) > distance - dst) {
                         if (getBlockPos().getX() - oldX < 0) {
