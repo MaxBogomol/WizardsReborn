@@ -2,5 +2,31 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "wizards_reborn:item/rakia_bottle"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "stage": 1
+      },
+      "model": "wizards_reborn:item/drinks/rakia_bottle_stage_1"
+    },
+    {
+      "predicate": {
+        "stage": 2
+      },
+      "model": "wizards_reborn:item/drinks/rakia_bottle_stage_2"
+    },
+    {
+      "predicate": {
+        "stage": 3
+      },
+      "model": "wizards_reborn:item/drinks/rakia_bottle_stage_3"
+    },
+    {
+      "predicate": {
+        "stage": 4
+      },
+      "model": "wizards_reborn:item/drinks/rakia_bottle_stage_4"
+    }
+  ]
 }

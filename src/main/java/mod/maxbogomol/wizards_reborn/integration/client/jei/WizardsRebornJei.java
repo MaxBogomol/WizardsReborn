@@ -122,7 +122,7 @@ public class WizardsRebornJei implements IModPlugin {
         IIngredientSubtypeInterpreter<ItemStack> interpreterArcaneEnchantment = (stack, ctx) -> String.valueOf(ArcaneEnchantmentUtil.getAllArcaneEnchantments(stack).toString());
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get(), interpreterArcaneEnchantment);
 
-        IIngredientSubtypeInterpreter<ItemStack> interpreterDrinks = (stack, ctx) -> String.valueOf(DrinkBottleItem.getStageS(stack));
+        IIngredientSubtypeInterpreter<ItemStack> interpreterDrinks = (stack, ctx) -> String.valueOf(DrinkBottleItem.getStageFromItem(stack));
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsRebornItems.VODKA_BOTTLE.get(), interpreterDrinks);
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsRebornItems.BOURBON_BOTTLE.get(), interpreterDrinks);
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsRebornItems.WHISKEY_BOTTLE.get(), interpreterDrinks);

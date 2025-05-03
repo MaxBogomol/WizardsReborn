@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizards_reborn:item/tequila_bottle_stage",
+    "layer1": "wizards_reborn:item/drinks/stage_2"
+  }
+}

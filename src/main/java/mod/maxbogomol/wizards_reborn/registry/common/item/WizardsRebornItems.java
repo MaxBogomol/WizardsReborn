@@ -20,7 +20,6 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameClientTooltipComponent;
 import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipComponent;
 import mod.maxbogomol.wizards_reborn.client.model.item.CollarItemOverrides;
-import mod.maxbogomol.wizards_reborn.client.model.item.DrinksModels;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.render.curio.*;
 import mod.maxbogomol.wizards_reborn.common.item.*;
@@ -691,13 +690,43 @@ public class WizardsRebornItems {
             CuriosRendererRegistry.register(ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
 
             FluffyFurItems.makeBow(ARCANE_WOOD_BOW.get());
+            BowHandler.addBow(ARCANE_WOOD_BOW.get());
 
             ItemProperties.register(ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
             ItemProperties.register(ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
 
             ItemProperties.register(KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, level, entity, seed) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
 
-            BowHandler.addBow(ARCANE_WOOD_BOW.get());
+            ItemProperties.register(VODKA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(BOURBON_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(WHISKEY_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(WHITE_WINE_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(RED_WINE_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(PORT_WINE_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(PALM_LIQUEUR_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(MEAD_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(SBITEN_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(SLIVOVITZ_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(SAKE_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(SOJU_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(CHICHA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(CHACHA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(APPLEJACK_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(RAKIA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(KIRSCH_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(BOROVICHKA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(PALINKA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(TEQUILA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(PULQUE_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(ARKHI_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(TEJ_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(WISSEN_BEER_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(MOR_TINCTURE_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(INNOCENT_WINE_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(TARKHUNA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(BAIKAL_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(KVASS_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
+            ItemProperties.register(KISSEL_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
 
             BlazingWandItem.registerFireItemModifier();
         }
@@ -713,10 +742,6 @@ public class WizardsRebornItems {
 
             for (String skin : LeatherCollarItem.skins.values()) {
                 event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + skin), "inventory"));
-            }
-
-            for (int i = 0; i < 4; i++) {
-                event.register(DrinksModels.getModelLocationStage(i + 1));
             }
         }
 
@@ -737,37 +762,6 @@ public class WizardsRebornItems {
             BakedModel collarModel = map.get(new ModelResourceLocation(LEATHER_COLLAR.getId(), "inventory"));
             CustomModel collarNewModel = new CustomModel(collarModel, new CollarItemOverrides());
             map.replace(new ModelResourceLocation(LEATHER_COLLAR.getId(), "inventory"), collarNewModel);
-
-            DrinksModels.addDrinkItem(map, VODKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, BOURBON_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WHISKEY_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WHITE_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, RED_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, PORT_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, PALM_LIQUEUR_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, MEAD_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, SBITEN_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, SLIVOVITZ_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, SAKE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, SOJU_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, CHICHA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, CHACHA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, APPLEJACK_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, RAKIA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, KIRSCH_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, BOROVICHKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, PALINKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, TEQUILA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, PULQUE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, ARKHI_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, TEJ_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WISSEN_BEER_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, MOR_TINCTURE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, INNOCENT_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, TARKHUNA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, BAIKAL_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, KVASS_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, KISSEL_BOTTLE.getId());
 
             FluffyFurModels.addCustomRenderItemModel(map, LIGHT_EMITTER.getId());
             FluffyFurModels.addCustomRenderItemModel(map, LIGHT_TRANSFER_LENS.getId());

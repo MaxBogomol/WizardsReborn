@@ -146,7 +146,7 @@ public class DrinkBottleItem extends PlacedItem {
         setTicks(stack, getTicksFromStage(stage));
     }
 
-    public static int getStageS(ItemStack stack) {
+    public static int getStageFromItem(ItemStack stack) {
         if (stack.getItem() instanceof DrinkBottleItem drink) {
             return drink.getStage(stack);
         }
@@ -331,7 +331,10 @@ public class DrinkBottleItem extends PlacedItem {
         WizardsRebornModels.ALCHEMY_BOTTLE.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(getModelTexture(stack))), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         int stage = getStage(stack);
         if (stage > 0) {
+            poseStack.pushPose();
+            poseStack.scale(1.001f, 1.001f, 1.001f);
             WizardsRebornModels.ALCHEMY_BOTTLE.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(getStageModelTexture(stage))), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            poseStack.popPose();
         }
         poseStack.popPose();
     }
