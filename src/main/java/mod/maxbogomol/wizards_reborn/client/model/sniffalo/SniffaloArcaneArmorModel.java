@@ -27,28 +27,18 @@ public class SniffaloArcaneArmorModel extends SniffaloArmorModel {
         PartDefinition left_mid_leg = bone.addOrReplaceChild("left_mid_leg", new CubeListBuilder(), PartPose.offset(7.5F, 10.0F, 0.0F));
         PartDefinition left_hind_leg = bone.addOrReplaceChild("left_hind_leg", new CubeListBuilder(), PartPose.offset(7.5F, 10.0F, 15.0F));
 
-        PartDefinition hat = head.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(0, 0)
-                .addBox(-4.0F, -10.55F, -10F, 8.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
-        PartDefinition hat_edge = hat.addOrReplaceChild("hat_edge", CubeListBuilder.create().texOffs(-10, 11)
-                .addBox(-5.0F, -7.55F, -11F, 10.0F, 0.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
+        PartDefinition hat = head.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -10.55F, -10F, 8.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
+        PartDefinition hat_edge = hat.addOrReplaceChild("hat_edge", CubeListBuilder.create().texOffs(-10, 11).addBox(-5.0F, -7.55F, -11F, 10.0F, 0.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
 
-        PartDefinition armor = body.addOrReplaceChild("armor", CubeListBuilder.create().texOffs(32, 0)
-                .addBox(-12.5F, -14.0F, -20.0F, 25.0F, 24.0F, 40.0F, new CubeDeformation(0.65F)), PartPose.ZERO);
-        PartDefinition armor_layer = body.addOrReplaceChild("armor_layer", CubeListBuilder.create().texOffs(32, 64)
-                .addBox(-12.5F, -14.0F, -20.0F, 25.0F, 24.0F, 40.0F, new CubeDeformation(0.9F)), PartPose.ZERO);
+        PartDefinition armor = body.addOrReplaceChild("armor", CubeListBuilder.create().texOffs(32, 0).addBox(-12.5F, -14.0F, -20.0F, 25.0F, 24.0F, 40.0F, new CubeDeformation(0.65F)), PartPose.ZERO);
+        PartDefinition armor_layer = body.addOrReplaceChild("armor_layer", CubeListBuilder.create().texOffs(32, 64).addBox(-12.5F, -14.0F, -20.0F, 25.0F, 24.0F, 40.0F, new CubeDeformation(0.9F)), PartPose.ZERO);
 
-        PartDefinition right_front_leg_layer = right_front_leg.addOrReplaceChild("right_front_leg_layer", CubeListBuilder.create().texOffs(0, 21)
-                .addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
-        PartDefinition right_mid_leg_layer = right_mid_leg.addOrReplaceChild("right_mid_leg_layer", CubeListBuilder.create().texOffs(0, 21)
-                .addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
-        PartDefinition right_hind_leg_layer = right_hind_leg.addOrReplaceChild("right_hind_leg_layer", CubeListBuilder.create().texOffs(0, 21)
-                .addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
-        PartDefinition left_front_leg_layer = left_front_leg.addOrReplaceChild("left_front_leg_layer", CubeListBuilder.create().texOffs(0, 21)
-                .addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
-        PartDefinition left_mid_leg_layer = left_mid_leg.addOrReplaceChild("left_mid_leg_layer", CubeListBuilder.create().texOffs(0, 21)
-                .addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
-        PartDefinition left_hind_leg_layer = left_hind_leg.addOrReplaceChild("left_hind_leg_layer", CubeListBuilder.create().texOffs(0, 21)
-                .addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
+        PartDefinition right_front_leg_layer = right_front_leg.addOrReplaceChild("right_front_leg_layer", CubeListBuilder.create().texOffs(0, 21).addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
+        PartDefinition right_mid_leg_layer = right_mid_leg.addOrReplaceChild("right_mid_leg_layer", CubeListBuilder.create().texOffs(0, 21).addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
+        PartDefinition right_hind_leg_layer = right_hind_leg.addOrReplaceChild("right_hind_leg_layer", CubeListBuilder.create().texOffs(0, 21).addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
+        PartDefinition left_front_leg_layer = left_front_leg.addOrReplaceChild("left_front_leg_layer", CubeListBuilder.create().texOffs(0, 21).addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
+        PartDefinition left_mid_leg_layer = left_mid_leg.addOrReplaceChild("left_mid_leg_layer", CubeListBuilder.create().texOffs(0, 21).addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
+        PartDefinition left_hind_leg_layer = left_hind_leg.addOrReplaceChild("left_hind_leg_layer", CubeListBuilder.create().texOffs(0, 21).addBox(-3.5F, -1.0F, -4.0F, 7.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
 
         return LayerDefinition.create(mesh, 192, 192);
     }

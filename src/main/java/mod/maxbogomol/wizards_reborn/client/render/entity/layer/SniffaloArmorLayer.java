@@ -27,7 +27,7 @@ public class SniffaloArmorLayer extends RenderLayer<SniffaloEntity, SnifferModel
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, SniffaloEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float betHeadYaw, float headPitch) {
-        if (livingEntity.isSaddled() && false) {
+        if (livingEntity.isSaddled() && true) {
             SniffaloArmorModel model = WizardsRebornModels.SNIFFALO_ARCANE_ARMOR;
             model.young = livingEntity.isBaby();
             model.copyFromDefault(defaultModel);

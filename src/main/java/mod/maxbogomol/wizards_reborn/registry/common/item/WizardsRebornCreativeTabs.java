@@ -13,6 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
 import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.integration.common.malum.WizardsRebornMalum;
@@ -460,22 +461,22 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.GILDED_POLISHED_WISESTONE);
 
             event.accept(WizardsRebornItems.ARCANE_SALT_TORCH);
-            event.accept(WizardsRebornItems.INNOCENT_SALT_TORCH);
-            event.accept(WizardsRebornItems.CORK_BAMBOO_SALT_TORCH);
-            event.accept(WizardsRebornItems.WISESTONE_SALT_TORCH);
             event.accept(WizardsRebornItems.ARCANE_SALT_LANTERN);
-            event.accept(WizardsRebornItems.INNOCENT_SALT_LANTERN);
-            event.accept(WizardsRebornItems.CORK_BAMBOO_SALT_LANTERN);
-            event.accept(WizardsRebornItems.WISESTONE_SALT_LANTERN);
             event.accept(WizardsRebornItems.ARCANE_SALT_CAMPFIRE);
+            event.accept(WizardsRebornItems.INNOCENT_SALT_TORCH);
+            event.accept(WizardsRebornItems.INNOCENT_SALT_LANTERN);
             event.accept(WizardsRebornItems.INNOCENT_SALT_CAMPFIRE);
+            event.accept(WizardsRebornItems.CORK_BAMBOO_SALT_TORCH);
+            event.accept(WizardsRebornItems.CORK_BAMBOO_SALT_LANTERN);
             event.accept(WizardsRebornItems.CORK_BAMBOO_SALT_CAMPFIRE);
+            event.accept(WizardsRebornItems.WISESTONE_SALT_TORCH);
+            event.accept(WizardsRebornItems.WISESTONE_SALT_LANTERN);
             event.accept(WizardsRebornItems.WISESTONE_SALT_CAMPFIRE);
 
             event.accept(WizardsRebornItems.ALCHEMY_GLASS);
             event.accept(WizardsRebornItems.ALCHEMY_VIAL);
             event.accept(WizardsRebornItems.ALCHEMY_FLASK);
-            //event.accept(WizardsRebornItems.ALCHEMY_BOTTLE);
+            event.accept(WizardsRebornItems.ALCHEMY_BOTTLE);
 
             event.accept(WizardsRebornItems.WHITE_LUMINAL_GLASS);
             event.accept(WizardsRebornItems.LIGHT_GRAY_LUMINAL_GLASS);
@@ -586,7 +587,6 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_WOOD_CANE);
             event.accept(WizardsRebornItems.ARCANE_WOOD_BOW);
 
-            /*
             event.accept(WizardsRebornItems.CARGO_CARPET);
             event.accept(WizardsRebornItems.WHITE_CARGO_CARPET);
             event.accept(WizardsRebornItems.LIGHT_GRAY_CARGO_CARPET);
@@ -604,7 +604,7 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.PURPLE_CARGO_CARPET);
             event.accept(WizardsRebornItems.MAGENTA_CARGO_CARPET);
             event.accept(WizardsRebornItems.PINK_CARGO_CARPET);
-            event.accept(WizardsRebornItems.RAINBOW_CARGO_CARPET);*/
+            event.accept(WizardsRebornItems.RAINBOW_CARGO_CARPET);
 
             event.accept(WizardsRebornItems.KNOWLEDGE_SCROLL);
             event.accept(WizardsRebornItems.CREATIVE_KNOWLEDGE_SCROLL);
@@ -661,7 +661,6 @@ public class WizardsRebornCreativeTabs {
                 }
             }
 
-            /*
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.VODKA_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.BOURBON_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.WHISKEY_BOTTLE.get()));
@@ -691,7 +690,7 @@ public class WizardsRebornCreativeTabs {
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.TARKHUNA_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.BAIKAL_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.KVASS_BOTTLE.get()));
-            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.KISSEL_BOTTLE.get()));*/
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.KISSEL_BOTTLE.get()));
 
             event.accept(WizardsRebornItems.MUNDANE_BREW_BUCKET);
             event.accept(WizardsRebornItems.ALCHEMY_OIL_BUCKET);
@@ -703,7 +702,7 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.MOR_BREW_BUCKET);
             event.accept(WizardsRebornItems.FLOWER_BREW_BUCKET);
 
-            //event.accept(WizardsRebornItems.SNIFFALO_SPAWN_EGG);
+            event.accept(WizardsRebornItems.SNIFFALO_SPAWN_EGG);
         }
     }
 }

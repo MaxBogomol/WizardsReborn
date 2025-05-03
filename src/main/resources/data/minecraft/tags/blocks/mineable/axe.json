@@ -132,10 +132,10 @@
     "wizards_reborn:gilded_cork_bamboo_planks",
     "wizards_reborn:gilded_cork_bamboo_chiseled_planks",
     "wizards_reborn:arcane_salt_lantern",
-    "wizards_reborn:innocent_salt_lantern",
-    "wizards_reborn:cork_bamboo_salt_lantern",
     "wizards_reborn:arcane_salt_campfire",
     "wizards_reborn:innocent_salt_campfire",
+    "wizards_reborn:innocent_salt_lantern",
+    "wizards_reborn:cork_bamboo_salt_lantern",
     "wizards_reborn:cork_bamboo_salt_campfire"
   ]
 }

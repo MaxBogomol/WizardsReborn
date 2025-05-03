@@ -19,10 +19,8 @@ public class SniffaloSaddleArmorModel extends SniffaloArmorModel {
         PartDefinition bone = root1.addOrReplaceChild("bone", new CubeListBuilder(), PartPose.ZERO);
         PartDefinition body = bone.addOrReplaceChild("body", new CubeListBuilder(), PartPose.ZERO);
 
-        PartDefinition saddle = body.addOrReplaceChild("saddle", CubeListBuilder.create().texOffs(0, 0)
-                .addBox(-12.5F, -14.0F, -20.0F, 25.0F, 24.0F, 40.0F, new CubeDeformation(0.75F)), PartPose.ZERO);
-        PartDefinition saddle_layer = body.addOrReplaceChild("saddle_layer", CubeListBuilder.create().texOffs(0, 64)
-                .addBox(-12.5F, -14.0F, -20.0F, 25.0F, 24.0F, 40.0F, new CubeDeformation(0.85F)), PartPose.ZERO);
+        PartDefinition saddle = body.addOrReplaceChild("saddle", CubeListBuilder.create().texOffs(0, 0).addBox(-12.5F, -14.0F, -20.0F, 25.0F, 24.0F, 40.0F, new CubeDeformation(0.75F)), PartPose.ZERO);
+        PartDefinition saddle_layer = body.addOrReplaceChild("saddle_layer", CubeListBuilder.create().texOffs(0, 64).addBox(-12.5F, -14.0F, -20.0F, 25.0F, 24.0F, 40.0F, new CubeDeformation(0.85F)), PartPose.ZERO);
 
         return LayerDefinition.create(mesh, 192, 192);
     }

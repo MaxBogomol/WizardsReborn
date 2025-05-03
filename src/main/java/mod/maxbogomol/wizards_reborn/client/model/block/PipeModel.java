@@ -22,7 +22,7 @@ public class PipeModel implements BakedModel {
     private final BakedModel centerModel;
     private BakedModel[] connectionModel;
     private BakedModel[] endModel;
-    public static final List<BakedQuad> EMPTY = new ArrayList<BakedQuad>();
+    public static final List<BakedQuad> EMPTY = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
     public final List<BakedQuad>[] QUAD_CACHE = new List[729];
@@ -71,27 +71,24 @@ public class PipeModel implements BakedModel {
 
     @Override
     public List<BakedQuad> getQuads(BlockState state, Direction side, RandomSource rand, ModelData data, RenderType renderType) {
-        if (side != null)
-            return EMPTY;
+        if (side != null) return EMPTY;
         int[] sides = data.get(PipeBaseBlockEntity.DATA_TYPE);
 
         if (sides != null) {
             List<BakedQuad> quads = QUAD_CACHE[getCacheIndex(sides)];
-            if (quads != null)
-                return quads;
+            if (quads != null) return quads;
 
-            quads = new ArrayList<BakedQuad>();
+            quads = new ArrayList<>();
             quads.addAll(centerModel.getQuads(state, side, rand, data, renderType));
-            if (quads.isEmpty())
-                return quads;
+            if (quads.isEmpty()) return quads;
             for (int i = 0; i < sides.length; i++) {
-                if (sides[i] == 1)
+                if (sides[i] == 1) {
                     quads.addAll(connectionModel[i].getQuads(state, side, rand, data, renderType));
-                else if (sides[i] == 2)
+                } else if (sides[i] == 2) {
                     quads.addAll(endModel[i].getQuads(state, side, rand, data, renderType));
+                }
             }
-            if (!quads.isEmpty())
-                QUAD_CACHE[getCacheIndex(sides)] = new ArrayList<BakedQuad>(quads);
+            if (!quads.isEmpty()) QUAD_CACHE[getCacheIndex(sides)] = new ArrayList<>(quads);
             return quads;
         }
         return centerModel.getQuads(state, side, rand, data, renderType);

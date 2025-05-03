@@ -3,6 +3,14 @@
   "values": [
     "#minecraft:buttons",
     "minecraft:lever",
-    "wizards_reborn:arcane_lever"
+    "wizards_reborn:arcane_lever",
+    {
+      "id": "create:analog_lever",
+      "required": false
+    },
+    {
+      "id": "embers:caminite_lever",
+      "required": false
+    }
   ]
 }

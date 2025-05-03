@@ -2605,27 +2605,27 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_infusion",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_INFUSION))
                 ),
-                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_GROWTH_ACCELERATION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_INFUSION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsRebornItems.EARTH_CRYSTAL.get()),
                         ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 ),
-                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_GROWTH_ACCELERATION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_INFUSION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsRebornItems.WATER_CRYSTAL.get()),
                         ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 ),
-                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_GROWTH_ACCELERATION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_INFUSION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsRebornItems.AIR_CRYSTAL.get()),
                         ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 ),
-                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_GROWTH_ACCELERATION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_INFUSION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsRebornItems.FIRE_CRYSTAL.get()),
                         ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 ),
-                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_GROWTH_ACCELERATION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_INFUSION), new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsRebornItems.VOID_CRYSTAL.get()),
                         ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM

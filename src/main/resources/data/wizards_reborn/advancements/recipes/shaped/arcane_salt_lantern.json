@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_arcane_wood_planks": {
+    "has_arcane_wood_slabs": {
       "conditions": {
         "items": [
           {
-            "tag": "wizards_reborn:arcane_wood_planks"
+            "tag": "wizards_reborn:arcane_wood_slabs"
           }
         ]
       },
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "has_arcane_wood_planks",
+      "has_arcane_wood_slabs",
       "has_nether_salt"
     ]
   ],

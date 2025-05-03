@@ -12,7 +12,7 @@
   ],
   "fluidIngredients": [
     {
-      "name": "minecraft:water",
+      "tag": "wizards_reborn:water",
       "amount" : 250
     }
   ]
