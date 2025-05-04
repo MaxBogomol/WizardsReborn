@@ -587,7 +587,6 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_WOOD_CANE);
             event.accept(WizardsRebornItems.ARCANE_WOOD_BOW);
 
-            event.accept(WizardsRebornItems.CARGO_CARPET);
             event.accept(WizardsRebornItems.WHITE_CARGO_CARPET);
             event.accept(WizardsRebornItems.LIGHT_GRAY_CARGO_CARPET);
             event.accept(WizardsRebornItems.GRAY_CARGO_CARPET);

@@ -28,6 +28,6 @@ public class SniffaloCarpetArmorModel extends SniffaloArmorModel {
         PartDefinition left_bottom_carpet = body.addOrReplaceChild("left_bottom_carpet", CubeListBuilder.create().texOffs(18, 32).addBox(12.5F, -14.0F, 10.0F, 1.0F, 10.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
         PartDefinition left_bottom_carpet_layer = body.addOrReplaceChild("left_bottom_carpet_layer", CubeListBuilder.create().texOffs(18, 50).addBox(12.5F, -14.0F, 10.0F, 1.0F, 10.0F, 8.0F, new CubeDeformation(0.7F)), PartPose.ZERO);
 
-        return LayerDefinition.create(mesh, 192, 192);
+        return LayerDefinition.create(mesh, 96, 96);
     }
 }

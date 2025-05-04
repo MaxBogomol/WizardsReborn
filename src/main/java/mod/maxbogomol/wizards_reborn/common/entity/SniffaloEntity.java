@@ -1,15 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.wizards_reborn.client.gui.container.SniffaloContainer;
-import mod.maxbogomol.wizards_reborn.common.item.CargoCarpetItem;
-import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.common.network.SniffaloScreenPacket;
-import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornLootTables;
+import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -47,6 +48,13 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,6 +67,9 @@ import java.util.function.Predicate;
 public class SniffaloEntity extends Sniffer implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, PlayerRideableJumping, Saddleable {
     public static final EntityDataAccessor<Boolean> tamedId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> saddledId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> carpetedId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> banneredId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> armoredId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> risingId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<ItemStack> carpetId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> bannerId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
@@ -84,9 +95,18 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             if (getOwnerUUID() == null) {
                 Entity entity = getFirstPassenger();
                 if (entity instanceof Player player) {
-                    if (getRandom().nextInt(100) < 1 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+                    if (getRandom().nextInt(100) < 1 && !ForgeEventFactory.onAnimalTame(this, player)) {
                         tameWithName(player);
                     }
+                }
+            }
+            if (!isCarpeted()) {
+                for (int i = 0; i < 20; i++) {
+                    inventory.setItem(i + 4, ItemStack.EMPTY);
+                }
+                if (!getBanner().isEmpty() && !EnchantmentHelper.hasVanishingCurse(getBanner())) {
+                    this.spawnAtLocation(getBanner());
+                    setBanner(ItemStack.EMPTY);
                 }
             }
         }
@@ -122,38 +142,38 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
+        ItemStack itemStack = player.getItemInHand(hand);
         if (player.isSecondaryUseActive() && !this.isBaby() && this.isTamed() ) {
             this.openCustomInventoryScreen(player);
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide());
         } else {
-            InteractionResult interactionresult = super.mobInteract(player, hand);
-            boolean flag = this.isFood(itemstack);
-            if (interactionresult.consumesAction() && flag) return interactionresult;
+            InteractionResult interactionResult = super.mobInteract(player, hand);
+            boolean flag = this.isFood(itemStack);
+            if (interactionResult.consumesAction() && flag) return interactionResult;
 
-            if (itemstack.getItem() instanceof BannerItem && isSaddled()) {
-                setBanner(itemstack.copyWithCount(1));
+            if (itemStack.getItem() instanceof BannerItem && isSaddled()) {
+                setBanner(itemStack.copyWithCount(1));
                 level().gameEvent(this, GameEvent.EQUIP, this.position());
-                itemstack.shrink(1);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
+                itemStack.shrink(1);
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
             }
 
-            interactionresult = itemstack.interactLivingEntity(player, this, hand);
-            if (interactionresult.consumesAction()) {
-                return interactionresult;
+            interactionResult = itemStack.interactLivingEntity(player, this, hand);
+            if (interactionResult.consumesAction()) {
+                return interactionResult;
             } else {
                 if (this.getPassengers().size() < 2 && !this.isBaby()) {
                     getBrain().clearMemories();
                     this.doPlayerRide(player);
                 }
 
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
             }
         }
     }
 
     protected void doPlayerRide(Player player) {
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             player.setYRot(this.getYRot());
             player.setXRot(this.getXRot());
             player.startRiding(this);
@@ -327,6 +347,9 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         super.defineSynchedData();
         getEntityData().define(tamedId, false);
         getEntityData().define(saddledId, false);
+        getEntityData().define(carpetedId, false);
+        getEntityData().define(banneredId, false);
+        getEntityData().define(armoredId, false);
         getEntityData().define(risingId, 0);
         getEntityData().define(carpetId, ItemStack.EMPTY);
         getEntityData().define(bannerId, ItemStack.EMPTY);
@@ -337,6 +360,9 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         super.addAdditionalSaveData(compound);
         compound.putBoolean("Tame", getEntityData().get(tamedId));
         compound.putBoolean("Saddled", getEntityData().get(saddledId));
+        compound.putBoolean("Carpeted", getEntityData().get(carpetedId));
+        compound.putBoolean("Bannered", getEntityData().get(banneredId));
+        compound.putBoolean("Armored", getEntityData().get(armoredId));
         compound.putInt("RisingTick", getEntityData().get(risingId));
         if (this.getOwnerUUID() != null) {
             compound.putUUID("Owner", this.getOwnerUUID());
@@ -353,6 +379,9 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         super.readAdditionalSaveData(compound);
         getEntityData().set(tamedId, compound.getBoolean("Tame"));
         getEntityData().set(saddledId, compound.getBoolean("Saddled"));
+        getEntityData().set(carpetedId, compound.getBoolean("Carpeted"));
+        getEntityData().set(banneredId, compound.getBoolean("Bannered"));
+        getEntityData().set(armoredId, compound.getBoolean("Armored"));
         getEntityData().set(risingId, compound.getInt("RisingTick"));
         UUID uuid;
         if (compound.hasUUID("Owner")) {
@@ -480,22 +509,34 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         return getEntityData().get(saddledId);
     }
 
+    public boolean isCarpeted() {
+        return getEntityData().get(carpetedId);
+    }
+
+    public boolean isBannered() {
+        return getEntityData().get(banneredId);
+    }
+
+    public boolean isArmored() {
+        return getEntityData().get(armoredId);
+    }
+
     public void setCarpet(ItemStack itemStack) {
-        this.inventory.setItem(2, itemStack);
+        this.inventory.setItem(1, itemStack);
         getEntityData().set(carpetId, itemStack.copy());
     }
 
     public ItemStack getCarpet() {
-        return this.inventory.getItem(2);
+        return this.inventory.getItem(1);
     }
 
     public void setBanner(ItemStack itemStack) {
-        this.inventory.setItem(3, itemStack);
+        this.inventory.setItem(2, itemStack);
         getEntityData().set(bannerId, itemStack.copy());
     }
 
     public ItemStack getBanner() {
-        return this.inventory.getItem(3);
+        return this.inventory.getItem(2);
     }
 
     public ItemStack getCarpetClient() {
@@ -512,7 +553,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     }
 
     protected int getInventorySize() {
-        return 28;
+        return 24;
     }
 
     public void createInventory() {
@@ -532,30 +573,63 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
         this.inventory.addListener(this);
         this.updateContainerEquipment();
-        this.itemHandler = net.minecraftforge.common.util.LazyOptional.of(() -> new net.minecraftforge.items.wrapper.InvWrapper(this.inventory));
+        this.itemHandler = LazyOptional.of(() -> new InvWrapper(this.inventory));
     }
 
     public void updateContainerEquipment() {
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
+            boolean flagCarpet = this.isCarpeted();
             getEntityData().set(saddledId, !this.inventory.getItem(0).isEmpty());
+            getEntityData().set(carpetedId, !this.inventory.getItem(1).isEmpty());
+            getEntityData().set(banneredId, !this.inventory.getItem(2).isEmpty());
+            getEntityData().set(armoredId, !this.inventory.getItem(3).isEmpty());
+
             getEntityData().set(carpetId, this.inventory.getItem(1).copy());
             getEntityData().set(bannerId, this.inventory.getItem(2).copy());
+
+            ItemStack carpet = getCarpet();
+            if (carpet != null && carpet.getItem() instanceof CargoCarpetItem) {
+                SimpleContainer container = CargoCarpetItem.getInventory(carpet);
+
+                if (!flagCarpet && this.isCarpeted()) {
+                    for (int i = 0; i < 20; i++) {
+                        inventory.setItem(i + 4, container.getItem(i));
+                    }
+                }
+                if (flagCarpet && this.isCarpeted()) {
+                    for (int i = 0; i < 20; i++) {
+                        container.setItem(i, inventory.getItem(i + 4));
+                    }
+                }
+            }
         }
     }
 
     @Override
     public void containerChanged(Container container) {
-        boolean flag = this.isSaddled();
+        boolean flagSaddle = this.isSaddled();
+        boolean flagCarpet = this.isCarpeted();
+        boolean flagBanner = this.isBannered();
+        boolean flagArmor = this.isArmored();
         this.updateContainerEquipment();
-        if (this.tickCount > 20 && !flag && this.isSaddled()) {
+        if (this.tickCount > 20 && !flagSaddle && this.isSaddled()) {
             this.playSound(this.getSaddleSoundEvent(), 0.5F, 1.0F);
+        }
+        if (this.tickCount > 20 && !flagCarpet && this.isCarpeted()) {
+            this.playSound(SoundEvents.BUNDLE_INSERT, 1.0F, 1.0F);
+        }
+        if (this.tickCount > 20 && !flagBanner && this.isBannered()) {
+            this.playSound(SoundEvents.BUNDLE_INSERT, 1.0F, 1.0F);
+        }
+        if (this.tickCount > 20 && !flagArmor && this.isArmored()) {
+            this.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1.0F, 1.0F);
         }
     }
 
     protected void dropEquipment() {
         super.dropEquipment();
         if (this.inventory != null) {
-            for (int i = 0; i < this.inventory.getContainerSize(); ++i) {
+            for (int i = 0; i < 4; ++i) {
                 ItemStack itemstack = this.inventory.getItem(i);
                 if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
                     this.spawnAtLocation(itemstack);
@@ -568,12 +642,13 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         return this.inventory != container;
     }
 
-    private net.minecraftforge.common.util.LazyOptional<?> itemHandler = null;
+    private LazyOptional<?> itemHandler = null;
 
     @Override
-    public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable net.minecraft.core.Direction facing) {
-        if (this.isAlive() && capability == net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER && itemHandler != null)
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+        if (this.isAlive() && capability == ForgeCapabilities.ITEM_HANDLER && itemHandler != null) {
             return itemHandler.cast();
+        }
         return super.getCapability(capability, facing);
     }
 
@@ -581,7 +656,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     public void invalidateCaps() {
         super.invalidateCaps();
         if (itemHandler != null) {
-            net.minecraftforge.common.util.LazyOptional<?> oldHandler = itemHandler;
+            LazyOptional<?> oldHandler = itemHandler;
             itemHandler = null;
             oldHandler.invalidate();
         }
@@ -604,7 +679,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             WizardsRebornPacketHandler.sendTo(serverPlayer, new SniffaloScreenPacket(serverPlayer.containerCounter, inventory.getContainerSize(), sniffalo.getId()));
             serverPlayer.containerMenu = new SniffaloContainer(serverPlayer.containerCounter, serverPlayer.getInventory(), inventory, serverPlayer, sniffalo);
             serverPlayer.initMenu(serverPlayer.containerMenu);
-            net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.player.PlayerContainerEvent.Open(serverPlayer, serverPlayer.containerMenu));
+            MinecraftForge.EVENT_BUS.post(new PlayerContainerEvent.Open(serverPlayer, serverPlayer.containerMenu));
         }
     }
 
@@ -614,11 +689,11 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
                 return SniffaloEntity.this.inventory.getItem(slot);
             }
 
-            public boolean set(ItemStack p_149528_) {
-                if (!stackFilter.test(p_149528_)) {
+            public boolean set(ItemStack itemStack) {
+                if (!stackFilter.test(itemStack)) {
                     return false;
                 } else {
-                    SniffaloEntity.this.inventory.setItem(slot, p_149528_);
+                    SniffaloEntity.this.inventory.setItem(slot, itemStack);
                     SniffaloEntity.this.updateContainerEquipment();
                     return true;
                 }
@@ -628,7 +703,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
     public SlotAccess getSlot(int slot) {
         int i = slot - 400;
-        if (i >= 0 && i < 28 && i < this.inventory.getContainerSize()) {
+        if (i >= 0 && i < getInventorySize() && i < this.inventory.getContainerSize()) {
             if (i == 0) {
                 return this.createEquipmentSlotAccess(i, (itemStack) -> {
                     return itemStack.isEmpty() || itemStack.is(Items.SADDLE);
@@ -654,7 +729,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             }*/
         }
 
-        int j = slot - 500 + 28;
-        return j >= 28 && j < this.inventory.getContainerSize() ? SlotAccess.forContainer(this.inventory, j) : super.getSlot(slot);
+        int j = slot - 500 + getInventorySize();
+        return j >= getInventorySize() && j < this.inventory.getContainerSize() ? SlotAccess.forContainer(this.inventory, j) : super.getSlot(slot);
     }
 }

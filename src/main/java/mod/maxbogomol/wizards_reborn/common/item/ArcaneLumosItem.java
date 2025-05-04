@@ -34,8 +34,8 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
 
     private static final Random random = new Random();
 
-    public ArcaneLumosItem(Block blockIn, Properties properties) {
-        super(blockIn, properties);
+    public ArcaneLumosItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Override

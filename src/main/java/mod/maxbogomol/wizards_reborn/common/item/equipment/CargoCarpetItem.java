@@ -1,21 +1,34 @@
-package mod.maxbogomol.wizards_reborn.common.item;
+package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class CargoCarpetItem extends Item {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    public static CarpetColor CARPET = CarpetColor.create(WizardsReborn.MOD_ID, "carpet");
+public class CargoCarpetItem extends BlockItem {
+
     public static CarpetColor WHITE = CarpetColor.create(WizardsReborn.MOD_ID, "white_carpet");
     public static CarpetColor LIGHT_GRAY = CarpetColor.create(WizardsReborn.MOD_ID, "light_gray_carpet");
     public static CarpetColor GRAY = CarpetColor.create(WizardsReborn.MOD_ID, "gray_carpet");
@@ -36,9 +49,33 @@ public class CargoCarpetItem extends Item {
 
     public CarpetColor color;
 
-    public CargoCarpetItem(CarpetColor color, Properties properties) {
-        super(properties);
+    public CargoCarpetItem(Block block, CarpetColor color, Properties properties) {
+        super(block, properties);
         this.color = color;
+    }
+
+    public static SimpleContainer getInventory(ItemStack stack) {
+        return new ItemBackedInventory(stack, 20);
+    }
+
+    @Nonnull
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag oldCapNbt) {
+        return new CargoCarpetItem.InvProvider(stack);
+    }
+
+    private static class InvProvider implements ICapabilityProvider {
+        private final LazyOptional<IItemHandler> opt;
+
+        public InvProvider(ItemStack stack) {
+            opt = LazyOptional.of(() -> new InvWrapper(getInventory(stack)));
+        }
+
+        @Nonnull
+        @Override
+        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
+            return ForgeCapabilities.ITEM_HANDLER.orEmpty(capability, opt);
+        }
     }
 
     @Override
@@ -63,9 +100,11 @@ public class CargoCarpetItem extends Item {
 
     public static class CarpetColor {
         public ResourceLocation texture;
+        public ResourceLocation textureOpen;
         
-        public CarpetColor(ResourceLocation texture) {
+        public CarpetColor(ResourceLocation texture, ResourceLocation textureOpen) {
             this.texture = texture;
+            this.textureOpen = textureOpen;
         }
 
         @OnlyIn(Dist.CLIENT)
@@ -73,8 +112,13 @@ public class CargoCarpetItem extends Item {
             return texture;
         }
 
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getOpenTexture() {
+            return textureOpen;
+        }
+
         public static CarpetColor create(String modId, String carpet) {
-            return new CarpetColor(new ResourceLocation(modId, "textures/entity/sniffalo/carpet/" + carpet + ".png"));
+            return new CarpetColor(new ResourceLocation(modId, "textures/models/cargo_carpet/" + carpet + ".png"), new ResourceLocation(modId, "textures/models/cargo_carpet/" + carpet + "_open.png"));
         }
     }
 }

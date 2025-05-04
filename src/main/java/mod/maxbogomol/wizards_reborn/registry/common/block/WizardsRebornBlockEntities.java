@@ -13,6 +13,7 @@ import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestal
 import mod.maxbogomol.wizards_reborn.common.block.arcane_workbench.ArcaneWorkbenchBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.arcanum_growth.ArcanumGrowthBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.baulk.CrossBaulkBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.cargo_carpet.CargoCarpetBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.casing.fluid.FluidCasingBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.casing.steam.SteamCasingBlockEntity;
@@ -133,6 +134,7 @@ public class WizardsRebornBlockEntities {
 
     public static RegistryObject<BlockEntityType<CrossBaulkBlockEntity>> CROSS_BAULK = BLOCK_ENTITIES.register("cross_baulk", () -> BlockEntityType.Builder.of(CrossBaulkBlockEntity::new, WizardsRebornBlocks.ARCANE_WOOD_CROSS_BAULK.get(), WizardsRebornBlocks.STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), WizardsRebornBlocks.ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), WizardsRebornBlocks.INNOCENT_WOOD_CROSS_BAULK.get(), WizardsRebornBlocks.STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), WizardsRebornBlocks.INNOCENT_WOOD_PLANKS_CROSS_BAULK.get(), WizardsRebornBlocks.CORK_BAMBOO_CROSS_BAULK.get(), WizardsRebornBlocks.CORK_BAMBOO_PLANKS_CROSS_BAULK.get(), WizardsRebornBlocks.CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK.get()).build(null));
     public static RegistryObject<BlockEntityType<PlacedItemsBlockEntity>> PLACED_ITEMS = BLOCK_ENTITIES.register("placed_items", () -> BlockEntityType.Builder.of(PlacedItemsBlockEntity::new, WizardsRebornBlocks.PLACED_ITEMS.get()).build(null));
+    public static RegistryObject<BlockEntityType<CargoCarpetBlockEntity>> CARGO_CARPET = BLOCK_ENTITIES.register("cargo_carpet", () -> BlockEntityType.Builder.of(CargoCarpetBlockEntity::new, WizardsRebornBlocks.WHITE_CARGO_CARPET.get(), WizardsRebornBlocks.LIGHT_GRAY_CARGO_CARPET.get(), WizardsRebornBlocks.GRAY_CARGO_CARPET.get(), WizardsRebornBlocks.BLACK_CARGO_CARPET.get(), WizardsRebornBlocks.BROWN_CARGO_CARPET.get(), WizardsRebornBlocks.RED_CARGO_CARPET.get(), WizardsRebornBlocks.ORANGE_CARGO_CARPET.get(), WizardsRebornBlocks.YELLOW_CARGO_CARPET.get(), WizardsRebornBlocks.LIME_CARGO_CARPET.get(), WizardsRebornBlocks.GREEN_CARGO_CARPET.get(), WizardsRebornBlocks.CYAN_CARGO_CARPET.get(), WizardsRebornBlocks.LIGHT_BLUE_CARGO_CARPET.get(), WizardsRebornBlocks.BLUE_CARGO_CARPET.get(), WizardsRebornBlocks.PURPLE_CARGO_CARPET.get(), WizardsRebornBlocks.MAGENTA_CARGO_CARPET.get(), WizardsRebornBlocks.PINK_CARGO_CARPET.get(), WizardsRebornBlocks.RAINBOW_CARGO_CARPET.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

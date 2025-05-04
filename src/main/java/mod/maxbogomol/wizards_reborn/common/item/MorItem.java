@@ -15,8 +15,8 @@ public class MorItem extends BlockItem {
     public int minEffect;
     public int maxEffect;
 
-    public MorItem(Block blockIn, Properties properties, int minEffect, int maxEffect) {
-        super(blockIn, properties);
+    public MorItem(Block block, Properties properties, int minEffect, int maxEffect) {
+        super(block, properties);
         this.minEffect = minEffect;
         this.maxEffect = maxEffect;
     }

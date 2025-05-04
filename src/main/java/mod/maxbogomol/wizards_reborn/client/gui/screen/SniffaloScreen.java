@@ -42,6 +42,27 @@ public class SniffaloScreen extends AbstractContainerScreen<SniffaloContainer> {
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        InventoryScreen.renderEntityInInventoryFollowsMouse(gui, i + 51, j + 70, 11, (float)(i + 51) - x, (float)(j + 90 - 50) - y, this.sniffalo);
+        if (!sniffalo.isSaddled()) {
+            gui.blit(GUI, i + 8, j + 18, 176, 18, 16, 16, 256, 256);
+        }
+        if (!sniffalo.isCarpeted()) {
+            gui.blit(GUI, i + 8, j + 36, 176, 34, 16, 16, 256, 256);
+        }
+        if (!sniffalo.isBannered()) {
+            gui.blit(GUI, i + 8, j + 54, 176, 50, 16, 16, 256, 256);
+        }
+        if (!sniffalo.isArmored()) {
+            gui.blit(GUI, i + 8, j + 72, 176, 66, 16, 16, 256, 256);
+        }
+
+        if (sniffalo.isCarpeted()) {
+            for (int ii = 0; ii < 4; ii++) {
+                for (int iii = 0; iii < 5; iii++) {
+                    gui.blit(GUI, i + 79 + (iii * 18), j + 17 + (ii * 18), 176, 0, 18, 18, 256, 256);
+                }
+            }
+        }
+
+        InventoryScreen.renderEntityInInventoryFollowsMouse(gui, i + 51, j + 70, 11, (float) (i + 51) - x, (float) (j + 90 - 50) - y, this.sniffalo);
     }
 }

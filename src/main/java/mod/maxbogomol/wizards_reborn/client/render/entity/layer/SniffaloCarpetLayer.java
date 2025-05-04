@@ -5,7 +5,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
-import mod.maxbogomol.wizards_reborn.common.item.CargoCarpetItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.SnifferModel;
@@ -26,7 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SniffaloCarpetLayer extends RenderLayer<SniffaloEntity, SnifferModel<SniffaloEntity>> {
-    public static final ResourceLocation SNIFFALO_CARPET_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/carpet.png");
+    public static final ResourceLocation SNIFFALO_CARPET_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/models/cargo_carpet/white_carpet.png");
     public final SnifferModel defaultModel;
 
     public static BannerBlockEntity banner = new BannerBlockEntity(BlockPos.ZERO, Blocks.WHITE_BANNER.defaultBlockState());

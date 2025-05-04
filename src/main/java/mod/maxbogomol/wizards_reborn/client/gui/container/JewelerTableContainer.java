@@ -35,7 +35,7 @@ public class JewelerTableContainer extends ContainerMenuBase {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos()), player, WizardsRebornBlocks.JEWELER_TABLE.get());
+        return stillValid(ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos()), player, blockEntity.getBlockState().getBlock());
     }
 
     @Override
