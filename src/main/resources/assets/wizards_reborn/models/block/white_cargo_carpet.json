@@ -1,5 +1,5 @@
 {
 	"textures": {
-		"particle": "minecraft:block/white_wool"
+		"particle": "wizards_reborn:block/white_cargo_carpet_particle"
 	}
 }

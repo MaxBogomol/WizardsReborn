@@ -204,6 +204,7 @@ public class CargoCarpetBlock extends HorizontalDirectionalBlock implements Enti
                             container.setItem(i, ItemStack.EMPTY);
                         }
                         Containers.dropContents(level, pos, (carpetBlockEntity).getItemHandler());
+                        level.playSound(null, pos, SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.BLOCKS, 1.0f, 1.0f);
                     }
                 }
             }

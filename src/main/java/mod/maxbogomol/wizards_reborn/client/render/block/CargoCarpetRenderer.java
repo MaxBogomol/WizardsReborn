@@ -42,14 +42,14 @@ public class CargoCarpetRenderer implements BlockEntityRenderer<CargoCarpetBlock
                 poseStack.pushPose();
                 poseStack.translate(0.5F, 0.046875F + 0.01F, 0.5F);
                 poseStack.mulPose(Axis.XP.rotationDegrees(180f));
-                poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+                poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate() + 180f));
                 WizardsRebornModels.CARGO_CARPET.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(texture)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 poseStack.popPose();
             } else {
                 poseStack.pushPose();
                 poseStack.translate(0.5F, 0.01F, 0.5F);
                 poseStack.mulPose(Axis.XP.rotationDegrees(180f));
-                poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+                poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate() + 180f));
                 WizardsRebornModels.CARGO_CARPET_OPEN.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(textureOpen)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 poseStack.popPose();
 
@@ -57,7 +57,7 @@ public class CargoCarpetRenderer implements BlockEntityRenderer<CargoCarpetBlock
                 for (int i = 0; i < 20; i++) {
                     poseStack.pushPose();
                     poseStack.translate(0.5F, 0.03125F + 0.01F + (0.0001F * i), 0.5F);
-                    poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+                    poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate() + 180f));
                     poseStack.translate(((random.nextFloat() - 0.5f) * 2f) * 0.65f, 0.001F, ((random.nextFloat() - 0.5f) * 2f) * 0.65f);
                     poseStack.mulPose(Axis.YP.rotationDegrees(((random.nextFloat() - 0.5f) * 2f) * 360));
                     poseStack.mulPose(Axis.XP.rotationDegrees(90f));

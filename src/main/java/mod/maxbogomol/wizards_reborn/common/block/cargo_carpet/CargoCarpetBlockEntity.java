@@ -48,8 +48,8 @@ public class CargoCarpetBlockEntity extends BlockSimpleInventory implements Tick
     @Override
     public Component getDisplayName() {
         ItemStack stack = getItemHandler().getItem(0);
-        if (stack.getItem() instanceof CargoCarpetItem item) {
-            return item.getName(stack);
+        if (stack.getItem() instanceof CargoCarpetItem) {
+            return stack.getHoverName();
         }
         return Component.translatable("block.wizards_reborn.white_cargo_carpet");
     }
