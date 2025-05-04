@@ -1,18 +1,28 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,8 +36,11 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Stream;
 
-public class CargoCarpetItem extends BlockItem {
+public class CargoCarpetItem extends BlockItem implements ICustomBlockEntityDataItem  {
 
     public static CarpetColor WHITE = CarpetColor.create(WizardsReborn.MOD_ID, "white_carpet");
     public static CarpetColor LIGHT_GRAY = CarpetColor.create(WizardsReborn.MOD_ID, "light_gray_carpet");
@@ -79,6 +92,18 @@ public class CargoCarpetItem extends BlockItem {
     }
 
     @Override
+    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag nbt) {
+        if (!nbt.contains("Items")) {
+            ItemStack newStack = stack.copy();
+            NonNullList<ItemStack> ret = NonNullList.withSize(1, ItemStack.EMPTY);
+            ret.set(0, newStack);
+            ContainerHelper.saveAllItems(nbt, ret);
+        }
+
+        return nbt;
+    }
+
+    @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
         if (target instanceof SniffaloEntity sniffalo && target.isAlive()) {
             if (sniffalo.isSaddled()) {
@@ -93,9 +118,67 @@ public class CargoCarpetItem extends BlockItem {
         return InteractionResult.PASS;
     }
 
+    @Override
+    public void onDestroyed(ItemEntity itemEntity) {
+        Iterator<ItemStack> iter = new Iterator<>() {
+            private int i = 0;
+            private final SimpleContainer inventory = getInventory(itemEntity.getItem());
+
+            @Override
+            public boolean hasNext() {
+                return i < inventory.getContainerSize();
+            }
+
+            @Override
+            public ItemStack next() {
+                return inventory.getItem(i++);
+            }
+        };
+
+        ItemUtils.onContainerDestroyed(itemEntity, Stream.iterate(iter.next(), t -> iter.hasNext(), t -> iter.next()));
+    }
+
+    @Override
     @OnlyIn(Dist.CLIENT)
-    public ResourceLocation getCarpetTexture(ItemStack stack, SniffaloEntity entity) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
+        NonNullList<ItemStack> nonnulllist = NonNullList.withSize(20, ItemStack.EMPTY);
+        SimpleContainer container = CargoCarpetItem.getInventory(stack);
+        for (int i = 0; i < 20; i++) {
+            nonnulllist.set(i, container.getItem(i));
+        }
+        int i = 0;
+        int j = 0;
+
+        for(ItemStack itemstack : nonnulllist) {
+            if (!itemstack.isEmpty()) {
+                ++j;
+                if (i <= 4) {
+                    ++i;
+                    MutableComponent mutableComponent = itemstack.getHoverName().copy();
+                    mutableComponent.append(" x").append(String.valueOf(itemstack.getCount()));
+                    list.add(mutableComponent);
+                }
+            }
+        }
+
+        if (j - i > 0) {
+            list.add(Component.translatable("container.shulkerBox.more", j - i).withStyle(ChatFormatting.ITALIC));
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getSniffaloCarpetTexture(ItemStack stack, SniffaloEntity entity) {
         return color.getTexture();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getCarpetTexture(ItemStack stack) {
+        return color.getTexture();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getCarpetOpenTexture(ItemStack stack) {
+        return color.getOpenTexture();
     }
 
     public static class CarpetColor {

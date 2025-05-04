@@ -78,6 +78,12 @@ public class WizardsRebornMenuTypes {
                 Level level = inv.player.getCommandSenderWorld();
                 return new AlchemyBagContainer(windowId, level, data.readItem(), inv, inv.player);})));
 
+    public static final RegistryObject<MenuType<CargoCarpetContainer>> CARGO_CARPET_CONTAINER = MENU_TYPES.register("cargo_carpet",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level level = inv.player.getCommandSenderWorld();
+                return new CargoCarpetContainer(windowId, level, pos, inv, inv.player);})));
+
     public static void register(IEventBus eventBus) {
         MENU_TYPES.register(eventBus);
     }
@@ -96,6 +102,7 @@ public class WizardsRebornMenuTypes {
             MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
             MenuScreens.register(CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
             MenuScreens.register(ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);
+            MenuScreens.register(CARGO_CARPET_CONTAINER.get(), CargoCarpetScreen::new);
         }
     }
 }

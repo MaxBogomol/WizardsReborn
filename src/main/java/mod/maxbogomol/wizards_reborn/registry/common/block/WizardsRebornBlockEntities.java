@@ -185,6 +185,7 @@ public class WizardsRebornBlockEntities {
             BlockEntityRenderers.register(CRYSTAL.get(), (r) -> new CrystalRenderer());
 
             BlockEntityRenderers.register(PLACED_ITEMS.get(), (r) -> new PlacedItemsRenderer());
+            BlockEntityRenderers.register(CARGO_CARPET.get(), (r) -> new CargoCarpetRenderer());
         }
     }
 }

@@ -3,10 +3,7 @@ package mod.maxbogomol.wizards_reborn.registry.client;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
-import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyBottleModel;
-import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyFlaskModel;
-import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyVialModel;
-import mod.maxbogomol.wizards_reborn.client.model.block.PipeModel;
+import mod.maxbogomol.wizards_reborn.client.model.block.*;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
@@ -54,6 +51,9 @@ public class WizardsRebornModels {
     public static final ModelLayerLocation ALCHEMY_FLASK_LAYER = addLayer("alchemy_flask");
     public static final ModelLayerLocation ALCHEMY_BOTTLE_LAYER = addLayer("alchemy_bottle");
 
+    public static final ModelLayerLocation CARGO_CARPET_LAYER = addLayer("cargo_carpet");
+    public static final ModelLayerLocation CARGO_CARPET_OPEN_LAYER = addLayer("cargo_carpet_open");
+
     public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_SLIM_ARMOR = null;
@@ -70,6 +70,9 @@ public class WizardsRebornModels {
     public static AlchemyVialModel ALCHEMY_VIAL = null;
     public static AlchemyFlaskModel ALCHEMY_FLASK = null;
     public static AlchemyBottleModel ALCHEMY_BOTTLE = null;
+
+    public static CargoCarpetModel CARGO_CARPET = null;
+    public static CargoCarpetOpenModel CARGO_CARPET_OPEN = null;
 
     public static ModelResourceLocation JEWELER_TABLE_STONE = addCustomModel("jeweler_table_stone");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME = addCustomModel("altar_of_drought_frame");
@@ -430,6 +433,9 @@ public class WizardsRebornModels {
             event.registerLayerDefinition(ALCHEMY_VIAL_LAYER, AlchemyVialModel::createBodyLayer);
             event.registerLayerDefinition(ALCHEMY_FLASK_LAYER, AlchemyFlaskModel::createBodyLayer);
             event.registerLayerDefinition(ALCHEMY_BOTTLE_LAYER, AlchemyBottleModel::createBodyLayer);
+
+            event.registerLayerDefinition(CARGO_CARPET_LAYER, CargoCarpetModel::createBodyLayer);
+            event.registerLayerDefinition(CARGO_CARPET_OPEN_LAYER, CargoCarpetOpenModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -450,6 +456,9 @@ public class WizardsRebornModels {
             ALCHEMY_VIAL = new AlchemyVialModel(event.getEntityModels().bakeLayer(ALCHEMY_VIAL_LAYER));
             ALCHEMY_FLASK = new AlchemyFlaskModel(event.getEntityModels().bakeLayer(ALCHEMY_FLASK_LAYER));
             ALCHEMY_BOTTLE = new AlchemyBottleModel(event.getEntityModels().bakeLayer(ALCHEMY_BOTTLE_LAYER));
+
+            CARGO_CARPET = new CargoCarpetModel(event.getEntityModels().bakeLayer(CARGO_CARPET_LAYER));
+            CARGO_CARPET_OPEN = new CargoCarpetOpenModel(event.getEntityModels().bakeLayer(CARGO_CARPET_OPEN_LAYER));
         }
     }
 

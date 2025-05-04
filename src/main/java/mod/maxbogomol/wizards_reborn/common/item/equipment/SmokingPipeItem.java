@@ -252,10 +252,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
-        CompoundTag nbt = stack.getOrCreateTag();
         int invSize = getInventorySize(stack);
-
-        if (invSize > 0) list.add(Component.empty());
 
         for (int i = 0; i < invSize; i++) {
             int burn = getItemBurnCenser(getInventory(stack).getItem(i));
@@ -264,8 +261,6 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
             int B = (int) Mth.lerp(((float) burn / 5), 255, 0);
             list.add(Component.translatable(getInventory(stack).getItem(i).getDescriptionId()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, R, G, B))));
         }
-
-        if (invSize > 0) list.add(Component.empty());
     }
 
     @Override

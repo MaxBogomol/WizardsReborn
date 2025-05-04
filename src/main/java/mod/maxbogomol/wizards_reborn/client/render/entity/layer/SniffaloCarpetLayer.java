@@ -41,7 +41,7 @@ public class SniffaloCarpetLayer extends RenderLayer<SniffaloEntity, SnifferMode
         if (!livingEntity.getCarpetClient().isEmpty()) {
             ResourceLocation texture = SNIFFALO_CARPET_TEXTURE;
             if (livingEntity.getCarpetClient().getItem() instanceof CargoCarpetItem carpet) {
-                texture = carpet.getCarpetTexture(livingEntity.getCarpetClient(), livingEntity);
+                texture = carpet.getSniffaloCarpetTexture(livingEntity.getCarpetClient(), livingEntity);
             }
 
             SniffaloCarpetArmorModel model = WizardsRebornModels.SNIFFALO_CARPET;
