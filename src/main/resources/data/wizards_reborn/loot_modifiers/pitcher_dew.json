@@ -1,0 +1,21 @@
+{
+  "type": "fluffy_fur:add_item",
+  "conditions": [
+    {
+      "block": "minecraft:pitcher_crop",
+      "condition": "minecraft:block_state_property",
+      "properties": {
+        "age": "4"
+      }
+    },
+    {
+      "block": "minecraft:pitcher_crop",
+      "condition": "minecraft:block_state_property",
+      "properties": {
+        "half": "upper"
+      }
+    }
+  ],
+  "item": "wizards_reborn:pitcher_dew",
+  "chance": 0.69
+}

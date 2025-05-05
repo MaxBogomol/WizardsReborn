@@ -245,6 +245,7 @@ public class WizardsRebornCreativeTabs {
             }
             event.accept(WizardsRebornItems.ELDER_MOR_BLOCK);
 
+            event.accept(WizardsRebornItems.PITCHER_DEW);
             event.accept(WizardsRebornItems.PITCHER_TURNIP);
             event.accept(WizardsRebornItems.PITCHER_TURNIP_BLOCK);
             event.accept(WizardsRebornItems.SHINY_CLOVER_SEED);

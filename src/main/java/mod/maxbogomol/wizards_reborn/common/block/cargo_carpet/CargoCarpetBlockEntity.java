@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.cargo_carpet;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
-import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.gui.container.CargoCarpetContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
@@ -20,7 +19,7 @@ import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
 
-public class CargoCarpetBlockEntity extends BlockSimpleInventory implements TickableBlockEntity, MenuProvider {
+public class CargoCarpetBlockEntity extends BlockSimpleInventory implements MenuProvider {
 
     public CargoCarpetBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -28,11 +27,6 @@ public class CargoCarpetBlockEntity extends BlockSimpleInventory implements Tick
 
     public CargoCarpetBlockEntity(BlockPos pos, BlockState state) {
         this(WizardsRebornBlockEntities.CARGO_CARPET.get(), pos, state);
-    }
-
-    @Override
-    public void tick() {
-
     }
 
     @Override

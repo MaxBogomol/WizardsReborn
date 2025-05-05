@@ -220,6 +220,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ELDER_MOR = ITEMS.register("elder_mor", () -> new MorItem(WizardsRebornBlocks.ELDER_MOR.get(), new Item.Properties().food(WizardsRebornFoods.MOR), 1700, 2100));
     public static final RegistryObject<Item> ELDER_MOR_BLOCK = ITEMS.register("elder_mor_block", () -> new BlockItem(WizardsRebornBlocks.ELDER_MOR_BLOCK.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> PITCHER_DEW = ITEMS.register("pitcher_dew", () -> new PitcherDewItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_DER)));
     public static final RegistryObject<Item> PITCHER_TURNIP = ITEMS.register("pitcher_turnip", () -> new BlockItem(WizardsRebornBlocks.PITCHER_TURNIP.get(), new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP)));
     public static final RegistryObject<Item> PITCHER_TURNIP_BLOCK = ITEMS.register("pitcher_turnip_block", () -> new BlockItem(WizardsRebornBlocks.PITCHER_TURNIP_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> SHINY_CLOVER_SEED = ITEMS.register("shiny_clover_seed", () -> new ItemNameBlockItem(WizardsRebornBlocks.SHINY_CLOVER_CROP.get(), new Item.Properties()));
