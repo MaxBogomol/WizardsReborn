@@ -58,12 +58,10 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.DEEPSLATE_ARCANE_GOLD_ORE);
             event.accept(WizardsRebornItems.NETHER_ARCANE_GOLD_ORE);
             event.accept(WizardsRebornItems.RAW_ARCANE_GOLD_BLOCK);
-
             if (WizardsRebornCreate.isLoaded()) {
                 event.accept(WizardsRebornCreate.ItemsLoadedOnly.CRUSHED_RAW_ARCANE_GOLD);
                 event.accept(WizardsRebornCreate.ItemsLoadedOnly.ARCANE_GOLD_SHEET);
             }
-
             if (WizardsRebornMalum.isLoaded()) {
                 event.accept(WizardsRebornMalum.ItemsLoadedOnly.CRACKED_ARCANE_GOLD_IMPETUS);
                 event.accept(WizardsRebornMalum.ItemsLoadedOnly.ARCANE_GOLD_IMPETUS);
@@ -76,11 +74,9 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_GOLD_SHOVEL);
             event.accept(WizardsRebornItems.ARCANE_GOLD_HOE);
             event.accept(WizardsRebornItems.ARCANE_GOLD_SCYTHE);
-
             if (WizardsRebornFarmersDelight.isLoaded()) {
                 event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE);
             }
-
             event.accept(WizardsRebornItems.ARCANE_GOLD_HELMET);
             event.accept(WizardsRebornItems.ARCANE_GOLD_CHESTPLATE);
             event.accept(WizardsRebornItems.ARCANE_GOLD_LEGGINGS);
@@ -89,11 +85,9 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.SARCON_INGOT);
             event.accept(WizardsRebornItems.SARCON_NUGGET);
             event.accept(WizardsRebornItems.SARCON_BLOCK);
-
             if (WizardsRebornCreate.isLoaded()) {
                 event.accept(WizardsRebornCreate.ItemsLoadedOnly.SARCON_SHEET);
             }
-
             if (WizardsRebornMalum.isLoaded()) {
                 event.accept(WizardsRebornMalum.ItemsLoadedOnly.CRACKED_SARCON_IMPETUS);
                 event.accept(WizardsRebornMalum.ItemsLoadedOnly.SARCON_IMPETUS);
@@ -103,11 +97,9 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.VILENIUM_INGOT);
             event.accept(WizardsRebornItems.VILENIUM_NUGGET);
             event.accept(WizardsRebornItems.VILENIUM_BLOCK);
-
             if (WizardsRebornCreate.isLoaded()) {
                 event.accept(WizardsRebornCreate.ItemsLoadedOnly.VILENIUM_SHEET);
             }
-
             if (WizardsRebornMalum.isLoaded()) {
                 event.accept(WizardsRebornMalum.ItemsLoadedOnly.CRACKED_VILENIUM_IMPETUS);
                 event.accept(WizardsRebornMalum.ItemsLoadedOnly.VILENIUM_IMPETUS);
@@ -605,6 +597,19 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.MAGENTA_CARGO_CARPET);
             event.accept(WizardsRebornItems.PINK_CARGO_CARPET);
             event.accept(WizardsRebornItems.RAINBOW_CARGO_CARPET);
+
+            event.accept(WizardsRebornItems.MOR_PIE);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.MOR_PIE_SLICE);
+            }
+            event.accept(WizardsRebornItems.ELDER_MOR_PIE);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.ELDER_MOR_PIE_SLICE);
+            }
+            event.accept(WizardsRebornItems.PITCHER_TURNIP_PIE);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                event.accept(WizardsRebornFarmersDelight.ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE);
+            }
 
             event.accept(WizardsRebornItems.KNOWLEDGE_SCROLL);
             event.accept(WizardsRebornItems.CREATIVE_KNOWLEDGE_SCROLL);

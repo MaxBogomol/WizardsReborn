@@ -78,7 +78,7 @@ public class KnowledgePostProcess extends PostProcess {
     }
 
     public float getIntensity() {
-        double intensity =  WizardsRebornClientConfig.KNOWLEDGE_SHADER_INTENSITY.get();
+        double intensity = WizardsRebornClientConfig.KNOWLEDGE_SHADER_INTENSITY.get();
         return 5 * (float) intensity;
     }
 }

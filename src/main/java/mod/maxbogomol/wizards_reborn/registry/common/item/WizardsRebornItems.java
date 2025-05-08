@@ -587,6 +587,13 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> PINK_CARGO_CARPET = ITEMS.register("pink_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.PINK_CARGO_CARPET.get(), CargoCarpetItem.PINK, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> RAINBOW_CARGO_CARPET = ITEMS.register("rainbow_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.RAINBOW_CARGO_CARPET.get(), CargoCarpetItem.RAINBOW, new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> MOR_PIE = ITEMS.register("mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.MOR_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ELDER_MOR_PIE = ITEMS.register("elder_mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.ELDER_MOR_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> PITCHER_TURNIP_PIE = ITEMS.register("pitcher_turnip_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+
+    public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.SHRIMP), false));
+    public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.FRIED_SHRIMP), true));
+
     public static final RegistryObject<Item> ARCANE_ENCHANTED_BOOK = ITEMS.register("arcane_enchanted_book", () -> new ArcaneEnchantedBookItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> KNOWLEDGE_SCROLL = ITEMS.register("knowledge_scroll", () -> new KnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
@@ -650,9 +657,6 @@ public class WizardsRebornItems {
     public static final RegistryObject<DrinkBottleItem> BAIKAL_BOTTLE = ITEMS.register("baikal_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> KVASS_BOTTLE = ITEMS.register("kvass_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> KISSEL_BOTTLE = ITEMS.register("kissel_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.SHRIMP), false));
-    public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.FRIED_SHRIMP), true));
 
     public static final RegistryObject<Item> MUNDANE_BREW_BUCKET = ITEMS.register("mundane_brew_bucket", () -> new BucketItem(WizardsRebornFluids.MUNDANE_BREW, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> ALCHEMY_OIL_BUCKET = ITEMS.register("alchemy_oil_bucket", () -> new BucketItem(WizardsRebornFluids.ALCHEMY_OIL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));

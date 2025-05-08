@@ -13,15 +13,19 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.ArcaneIteratorPag
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CraftingTablePage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
-import mod.maxbogomol.wizards_reborn.integration.common.create.client.arcanemicon.recipe.CrushingPage;
+import mod.maxbogomol.wizards_reborn.common.item.ArcaneFoodItem;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.client.arcanemicon.recipe.CuttingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.ArcaneKnifeItem;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.ArcaneWoodKnifeItem;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.InnocentWoodKnifeItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTiers;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,6 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.item.MushroomColonyItem;
+import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModEnchantments;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.TextUtils;
@@ -56,6 +61,14 @@ public class WizardsRebornFarmersDelight {
 
         public static RegistryObject<Item> MOR_COLONY;
         public static RegistryObject<Item> ELDER_MOR_COLONY;
+
+        public static RegistryObject<Item> MOR_PIE_SLICE;
+        public static RegistryObject<Item> ELDER_MOR_PIE_SLICE;
+        public static RegistryObject<Item> PITCHER_TURNIP_PIE_SLICE;
+
+        public static FoodProperties MOR_PIE_SLICE_FOOD;
+        public static FoodProperties ELDER_MOR_PIE_SLICE_FOOD;
+        public static FoodProperties PITCHER_TURNIP_PIE_SLICE_FOOD;
     }
 
     public static class BlocksLoadedOnly {
@@ -67,11 +80,20 @@ public class WizardsRebornFarmersDelight {
 
     public static class LoadedOnly {
         public static void makeItems() {
+            ItemsLoadedOnly.MOR_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.15F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 150, 0), 1.0F).build();
+            ItemsLoadedOnly.ELDER_MOR_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.15F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 225, 0), 1.0F).build();
+            ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.1F).effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 125, 0), 1.0F).build();
+
             ItemsLoadedOnly.ARCANE_GOLD_KNIFE = ItemsLoadedOnly.ITEMS.register("arcane_gold_knife", () -> new ArcaneKnifeItem(WizardsRebornItemTiers.ARCANE_GOLD, 0.5F, -2.0F, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
             ItemsLoadedOnly.ARCANE_WOOD_KNIFE = ItemsLoadedOnly.ITEMS.register("arcane_wood_knife", () -> new ArcaneWoodKnifeItem(WizardsRebornItemTiers.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
             ItemsLoadedOnly.INNOCENT_WOOD_KNIFE = ItemsLoadedOnly.ITEMS.register("innocent_wood_knife", () -> new InnocentWoodKnifeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+
             ItemsLoadedOnly.MOR_COLONY = ItemsLoadedOnly.ITEMS.register("mor_colony", () -> new MushroomColonyItem(BlocksLoadedOnly.MOR_COLONY.get(), new Item.Properties()));
             ItemsLoadedOnly.ELDER_MOR_COLONY = ItemsLoadedOnly.ITEMS.register("elder_mor_colony", () -> new MushroomColonyItem(BlocksLoadedOnly.ELDER_MOR_COLONY.get(), new Item.Properties()));
+
+            ItemsLoadedOnly.MOR_PIE_SLICE = ItemsLoadedOnly.ITEMS.register("mor_pie_slice", () -> new ArcaneFoodItem(new Item.Properties().food(ItemsLoadedOnly.MOR_PIE_SLICE_FOOD)).setNourishmentTick(300));
+            ItemsLoadedOnly.ELDER_MOR_PIE_SLICE = ItemsLoadedOnly.ITEMS.register("elder_mor_pie_slice", () -> new ArcaneFoodItem(new Item.Properties().food(ItemsLoadedOnly.ELDER_MOR_PIE_SLICE_FOOD)).setNourishmentTick(300));
+            ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE = ItemsLoadedOnly.ITEMS.register("pitcher_turnip_pie_slice", () -> new ArcaneFoodItem(new Item.Properties().food(ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE_FOOD)).setNourishmentTick(300));
         }
 
         public static void makeBlocks() {
@@ -81,6 +103,22 @@ public class WizardsRebornFarmersDelight {
 
         public static void addKnifeSkin(ItemSkin skin, String item) {
             skin.addSkinEntry(new ItemClassSkinEntry(ArcaneKnifeItem.class, item));
+        }
+
+        public static void addNourishmentEffect(LivingEntity livingEntity, int tick, int level) {
+            livingEntity.addEffect(new MobEffectInstance(ModEffects.NOURISHMENT.get(), tick, level));
+        }
+
+        public static void addComfortEffect(LivingEntity livingEntity, int tick, int level) {
+            livingEntity.addEffect(new MobEffectInstance(ModEffects.COMFORT.get(), tick, level));
+        }
+
+        public static MobEffectInstance getNourishmentEffect(int tick, int level) {
+            return new MobEffectInstance(ModEffects.NOURISHMENT.get(), tick, level);
+        }
+
+        public static MobEffectInstance getComfortEffect(int tick, int level) {
+            return new MobEffectInstance(ModEffects.COMFORT.get(), tick, level);
         }
     }
 
