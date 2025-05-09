@@ -102,6 +102,7 @@ public class WizardsReborn {
         WizardsRebornPacketHandler.init();
         WizardsRebornAlchemyPotions.init();
         WizardsRebornKnowledges.init();
+        WizardsRebornCreativeTabs.init();
 
         Researches.init();
 
