@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
-      "model": "wizards_reborn:block/alchemy_calx_block"
-    }
+    "": [
+      { "model": "wizards_reborn:block/alchemy_calx_block", "y": 90 },
+      { "model": "wizards_reborn:block/alchemy_calx_block", "y": 270 },
+      { "model": "wizards_reborn:block/alchemy_calx_block", "y": 180 },
+      { "model": "wizards_reborn:block/alchemy_calx_block" }
+    ]
   }
 }
