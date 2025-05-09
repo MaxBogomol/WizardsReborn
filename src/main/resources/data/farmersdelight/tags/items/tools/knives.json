@@ -2,6 +2,14 @@
   "replace": false,
   "values": [
     {
+      "id": "wizards_reborn:arcane_wodd_knife",
+      "required": false
+    },
+    {
+      "id": "wizards_reborn:innocent_wood_knife",
+      "required": false
+    },
+    {
       "id": "wizards_reborn:arcane_gold_knife",
       "required": false
     }

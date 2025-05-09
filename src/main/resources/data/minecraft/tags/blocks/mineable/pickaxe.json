@@ -76,6 +76,9 @@
     "wizards_reborn:polished_wisestone_pressure_plate",
     "wizards_reborn:polished_wisestone_button",
     "wizards_reborn:wisestone_pedestal",
+    "wizards_reborn:gilded_polished_wisestone",
+    "wizards_reborn:wisestone_salt_lantern",
+    "wizards_reborn:wisestone_salt_campfire",
     "wizards_reborn:fluid_pipe",
     "wizards_reborn:fluid_extractor",
     "wizards_reborn:steam_pipe",
@@ -118,9 +121,6 @@
     "wizards_reborn:wisestone_fluid_casing",
     "wizards_reborn:wisestone_steam_casing",
     "wizards_reborn:creative_fluid_storage",
-    "wizards_reborn:creative_steam_storage",
-    "wizards_reborn:gilded_polished_wisestone",
-    "wizards_reborn:wisestone_salt_lantern",
-    "wizards_reborn:wisestone_salt_campfire"
+    "wizards_reborn:creative_steam_storage"
   ]
 }

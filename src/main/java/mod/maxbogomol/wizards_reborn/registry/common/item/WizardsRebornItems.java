@@ -72,6 +72,7 @@ import java.util.Map;
 public class WizardsRebornItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, WizardsReborn.MOD_ID);
 
+    //MATERIALS
     public static final RegistryObject<Item> ARCANE_GOLD_INGOT = ITEMS.register("arcane_gold_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_NUGGET = ITEMS.register("arcane_gold_nugget", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_ARCANE_GOLD = ITEMS.register("raw_arcane_gold", () -> new Item(new Item.Properties()));
@@ -80,18 +81,6 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> DEEPSLATE_ARCANE_GOLD_ORE = ITEMS.register("deepslate_arcane_gold_ore", () -> new BlockItem(WizardsRebornBlocks.DEEPSLATE_ARCANE_GOLD_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> NETHER_ARCANE_GOLD_ORE = ITEMS.register("nether_arcane_gold_ore", () -> new BlockItem(WizardsRebornBlocks.NETHER_ARCANE_GOLD_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> RAW_ARCANE_GOLD_BLOCK = ITEMS.register("raw_arcane_gold_block", () -> new BlockItem(WizardsRebornBlocks.RAW_ARCANE_GOLD_BLOCK.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> ARCANE_GOLD_SWORD = ITEMS.register("arcane_gold_sword", () -> new ArcaneSwordItem(WizardsRebornItemTiers.ARCANE_GOLD, 3, -2.4f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
-    public static final RegistryObject<Item> ARCANE_GOLD_PICKAXE = ITEMS.register("arcane_gold_pickaxe", () -> new ArcanePickaxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 1, -2.8f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
-    public static final RegistryObject<Item> ARCANE_GOLD_AXE = ITEMS.register("arcane_gold_axe", () -> new ArcaneAxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 6, -3.1f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
-    public static final RegistryObject<Item> ARCANE_GOLD_SHOVEL = ITEMS.register("arcane_gold_shovel", () -> new ArcaneShovelItem(WizardsRebornItemTiers.ARCANE_GOLD, 1.5f, -3f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
-    public static final RegistryObject<Item> ARCANE_GOLD_HOE = ITEMS.register("arcane_gold_hoe", () -> new ArcaneHoeItem(WizardsRebornItemTiers.ARCANE_GOLD, -2, -1f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
-    public static final RegistryObject<Item> ARCANE_GOLD_SCYTHE = ITEMS.register("arcane_gold_scythe", () -> new ArcaneScytheItem(WizardsRebornItemTiers.ARCANE_GOLD, 4, -2.8f, new Item.Properties(), 1, 1).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
-
-    public static final RegistryObject<Item> ARCANE_GOLD_HELMET = ITEMS.register("arcane_gold_helmet", () -> new ArcaneArmorItem(WizardsRebornArmorMaterials.ARCANE_GOLD, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_CHESTPLATE = ITEMS.register("arcane_gold_chestplate", () -> new ArcaneArmorItem(WizardsRebornArmorMaterials.ARCANE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_LEGGINGS = ITEMS.register("arcane_gold_leggings", () -> new ArcaneArmorItem(WizardsRebornArmorMaterials.ARCANE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_BOOTS = ITEMS.register("arcane_gold_boots", () -> new ArcaneArmorItem(WizardsRebornArmorMaterials.ARCANE_GOLD, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> SARCON_INGOT = ITEMS.register("sarcon_ingot", () -> new SarconIngotItem(new Item.Properties()));
     public static final RegistryObject<Item> SARCON_NUGGET = ITEMS.register("sarcon_nugget", () -> new SarconIngotItem(new Item.Properties()));
@@ -118,6 +107,49 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> NETHER_SALT_BLOCK = ITEMS.register("nether_salt_block", () -> new FuelBlockItem(WizardsRebornBlocks.NETHER_SALT_BLOCK.get(), new Item.Properties(), 32000));
     public static final RegistryObject<Item> NETHER_SALT_ORE = ITEMS.register("nether_salt_ore", () -> new BlockItem(WizardsRebornBlocks.NETHER_SALT_ORE.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> ALCHEMY_CALX = ITEMS.register("alchemy_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_CALX_BLOCK = ITEMS.register("alchemy_calx_block", () -> new BlockItem(WizardsRebornBlocks.ALCHEMY_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> NATURAL_CALX = ITEMS.register("natural_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> NATURAL_CALX_BLOCK = ITEMS.register("natural_calx_block", () -> new BlockItem(WizardsRebornBlocks.NATURAL_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SCORCHED_CALX = ITEMS.register("scorched_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SCORCHED_CALX_BLOCK = ITEMS.register("scorched_calx_block", () -> new BlockItem(WizardsRebornBlocks.SCORCHED_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DISTANT_CALX = ITEMS.register("distant_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DISTANT_CALX_BLOCK = ITEMS.register("distant_calx_block", () -> new BlockItem(WizardsRebornBlocks.DISTANT_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENCHANTED_CALX = ITEMS.register("enchanted_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ENCHANTED_CALX_BLOCK = ITEMS.register("enchanted_calx_block", () -> new BlockItem(WizardsRebornBlocks.ENCHANTED_CALX_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE_BLOCK = ITEMS.register("arcacite_polishing_mixture_block", () -> new BlockItem(WizardsRebornBlocks.ARCACITE_POLISHING_MIXTURE_BLOCK.get(), new Item.Properties()));
+
+    //PLANTS
+    public static final RegistryObject<Item> ARCANE_LINEN_SEEDS = ITEMS.register("arcane_linen_seeds", () -> new ItemNameBlockItem(WizardsRebornBlocks.ARCANE_LINEN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_LINEN = ITEMS.register("arcane_linen", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_LINEN_HAY = ITEMS.register("arcane_linen_hay", () -> new BlockItem(WizardsRebornBlocks.ARCANE_LINEN_HAY.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> MOR = ITEMS.register("mor", () -> new MorItem(WizardsRebornBlocks.MOR.get(), new Item.Properties().food(WizardsRebornFoods.MOR), 1500, 1800));
+    public static final RegistryObject<Item> MOR_BLOCK = ITEMS.register("mor_block", () -> new BlockItem(WizardsRebornBlocks.MOR_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ELDER_MOR = ITEMS.register("elder_mor", () -> new MorItem(WizardsRebornBlocks.ELDER_MOR.get(), new Item.Properties().food(WizardsRebornFoods.MOR), 1700, 2100));
+    public static final RegistryObject<Item> ELDER_MOR_BLOCK = ITEMS.register("elder_mor_block", () -> new BlockItem(WizardsRebornBlocks.ELDER_MOR_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PITCHER_DEW = ITEMS.register("pitcher_dew", () -> new PitcherDewItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_DER)));
+    public static final RegistryObject<Item> PITCHER_TURNIP = ITEMS.register("pitcher_turnip", () -> new BlockItem(WizardsRebornBlocks.PITCHER_TURNIP.get(), new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP)));
+    public static final RegistryObject<Item> PITCHER_TURNIP_BLOCK = ITEMS.register("pitcher_turnip_block", () -> new BlockItem(WizardsRebornBlocks.PITCHER_TURNIP_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SHINY_CLOVER_SEED = ITEMS.register("shiny_clover_seed", () -> new ItemNameBlockItem(WizardsRebornBlocks.SHINY_CLOVER_CROP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SHINY_CLOVER = ITEMS.register("shiny_clover", () -> new BlockItem(WizardsRebornBlocks.SHINY_CLOVER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE_VINE = ITEMS.register("underground_grape_vine", () -> new ItemNameBlockItem(WizardsRebornBlocks.UNDERGROUND_GRAPE_VINES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE = ITEMS.register("underground_grape", () -> new Item(new Item.Properties().food(WizardsRebornFoods.UNDERGROUND_GRAPE)));
+
+    public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new FlowerFertilizerItem(new Item.Properties()));
+    public static final RegistryObject<Item> BUNCH_OF_THINGS = ITEMS.register("bunch_of_things", () -> new BunchOfThingsItem(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_BROWN_MUSHROOM = ITEMS.register("ground_brown_mushroom", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_RED_MUSHROOM = ITEMS.register("ground_red_mushroom", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_CRIMSON_FUNGUS = ITEMS.register("ground_crimson_fungus", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_WARPED_FUNGUS = ITEMS.register("ground_warped_fungus", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_MOR = ITEMS.register("ground_mor", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_ELDER_MOR = ITEMS.register("ground_elder_mor", () -> new Item(new Item.Properties()));
+
+    //WOOD
     public static final RegistryObject<Item> ARCANE_WOOD_LOG = ITEMS.register("arcane_wood_log", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_LOG.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD = ITEMS.register("arcane_wood", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD.get(), new Item.Properties()));
     public static final RegistryObject<Item> STRIPPED_ARCANE_WOOD_LOG = ITEMS.register("stripped_arcane_wood_log", () -> new BlockItem(WizardsRebornBlocks.STRIPPED_ARCANE_WOOD_LOG.get(), new Item.Properties()));
@@ -142,13 +174,6 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ARCANE_WOOD_BOAT = ITEMS.register("arcane_wood_boat", () -> new CustomBoatItem(new Item.Properties().stacksTo(1), WizardsRebornEntities.ARCANE_WOOD_BOAT));
     public static final RegistryObject<Item> ARCANE_WOOD_CHEST_BOAT = ITEMS.register("arcane_wood_chest_boat", () -> new CustomChestBoatItem(new Item.Properties().stacksTo(1), WizardsRebornEntities.ARCANE_WOOD_CHEST_BOAT));
     public static final RegistryObject<Item> ARCANE_WOOD_BRANCH = ITEMS.register("arcane_wood_branch", () -> new FuelItem(new Item.Properties(), 200));
-    public static final RegistryObject<Item> ARCANE_WOOD_SWORD = ITEMS.register("arcane_wood_sword", () -> new ArcaneWoodSwordItem(WizardsRebornItemTiers.ARCANE_WOOD, 3, -2.4f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
-    public static final RegistryObject<Item> ARCANE_WOOD_PICKAXE = ITEMS.register("arcane_wood_pickaxe", () -> new ArcaneWoodPickaxeItem(WizardsRebornItemTiers.ARCANE_WOOD, 1, -2.8f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
-    public static final RegistryObject<Item> ARCANE_WOOD_AXE = ITEMS.register("arcane_wood_axe", () -> new ArcaneWoodAxeItem(WizardsRebornItemTiers.ARCANE_WOOD, 6, -3.1f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
-    public static final RegistryObject<Item> ARCANE_WOOD_SHOVEL = ITEMS.register("arcane_wood_shovel", () -> new ArcaneWoodShovelItem(WizardsRebornItemTiers.ARCANE_WOOD, 1.5f, -3f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
-    public static final RegistryObject<Item> ARCANE_WOOD_HOE = ITEMS.register("arcane_wood_hoe", () -> new ArcaneWoodHoeItem(WizardsRebornItemTiers.ARCANE_WOOD, -1, -1f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
-    public static final RegistryObject<Item> ARCANE_WOOD_SCYTHE = ITEMS.register("arcane_wood_scythe", () -> new ArcaneWoodScytheItem(WizardsRebornItemTiers.ARCANE_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0, ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
-    public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SAPLING = ITEMS.register("arcane_wood_sapling", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_SAPLING.get(), new Item.Properties()));
 
@@ -176,57 +201,9 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> INNOCENT_WOOD_BOAT = ITEMS.register("innocent_wood_boat", () -> new CustomBoatItem(new Item.Properties().stacksTo(1), WizardsRebornEntities.INNOCENT_WOOD_BOAT));
     public static final RegistryObject<Item> INNOCENT_WOOD_CHEST_BOAT = ITEMS.register("innocent_wood_chest_boat", () -> new CustomChestBoatItem(new Item.Properties().stacksTo(1), WizardsRebornEntities.INNOCENT_WOOD_CHEST_BOAT));
     public static final RegistryObject<Item> INNOCENT_WOOD_BRANCH = ITEMS.register("innocent_wood_branch", () -> new FuelItem(new Item.Properties(), 200));
-    public static final RegistryObject<Item> INNOCENT_WOOD_SWORD = ITEMS.register("innocent_wood_sword", () -> new InnocentWoodSwordItem(WizardsRebornItemTiers.INNOCENT_WOOD, 3, -2.4f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
-    public static final RegistryObject<Item> INNOCENT_WOOD_PICKAXE = ITEMS.register("innocent_wood_pickaxe", () -> new InnocentWoodPickaxeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 1, -2.8f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
-    public static final RegistryObject<Item> INNOCENT_WOOD_AXE = ITEMS.register("innocent_wood_axe", () -> new InnocentWoodAxeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 6, -3.1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
-    public static final RegistryObject<Item> INNOCENT_WOOD_SHOVEL = ITEMS.register("innocent_wood_shovel", () -> new InnocentWoodShovelItem(WizardsRebornItemTiers.INNOCENT_WOOD, 1.5f, -3f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
-    public static final RegistryObject<Item> INNOCENT_WOOD_HOE = ITEMS.register("innocent_wood_hoe", () -> new InnocentWoodHoeItem(WizardsRebornItemTiers.INNOCENT_WOOD, -1, -1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
-    public static final RegistryObject<Item> INNOCENT_WOOD_SCYTHE = ITEMS.register("innocent_wood_scythe", () -> new InnocentWoodScytheItem(WizardsRebornItemTiers.INNOCENT_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0, INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
-    public static final RegistryObject<Item> INNOCENT_WOOD_MORTAR = ITEMS.register("innocent_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> INNOCENT_WOOD_LEAVES = ITEMS.register("innocent_wood_leaves", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_SAPLING = ITEMS.register("innocent_wood_sapling", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_SAPLING.get(), new Item.Properties()));
     public static final RegistryObject<Item> PETALS_OF_INNOCENCE = ITEMS.register("petals_of_innocence", () -> new BlockItem(WizardsRebornBlocks.PETALS_OF_INNOCENCE.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> WISESTONE = ITEMS.register("wisestone", () -> new BlockItem(WizardsRebornBlocks.WISESTONE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_STAIRS = ITEMS.register("wisestone_stairs", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_STAIRS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_SLAB = ITEMS.register("wisestone_slab", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_SLAB.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_WALL = ITEMS.register("wisestone_wall", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_WALL.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POLISHED_WISESTONE = ITEMS.register("polished_wisestone", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POLISHED_WISESTONE_STAIRS = ITEMS.register("polished_wisestone_stairs", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_STAIRS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POLISHED_WISESTONE_SLAB = ITEMS.register("polished_wisestone_slab", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_SLAB.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POLISHED_WISESTONE_WALL = ITEMS.register("polished_wisestone_wall", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_WALL.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_BRICKS = ITEMS.register("wisestone_bricks", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_BRICKS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_BRICKS_STAIRS = ITEMS.register("wisestone_bricks_stairs", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_BRICKS_STAIRS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_BRICKS_SLAB = ITEMS.register("wisestone_bricks_slab", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_BRICKS_SLAB.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_BRICKS_WALL = ITEMS.register("wisestone_bricks_wall", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_BRICKS_WALL.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_TILE = ITEMS.register("wisestone_tile", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_TILE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_TILE_STAIRS = ITEMS.register("wisestone_tile_stairs", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_TILE_STAIRS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_TILE_SLAB = ITEMS.register("wisestone_tile_slab", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_TILE_SLAB.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_TILE_WALL = ITEMS.register("wisestone_tile_wall", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_TILE_WALL.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CHISELED_WISESTONE = ITEMS.register("chiseled_wisestone", () -> new BlockItem(WizardsRebornBlocks.CHISELED_WISESTONE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CHISELED_WISESTONE_STAIRS = ITEMS.register("chiseled_wisestone_stairs", () -> new BlockItem(WizardsRebornBlocks.CHISELED_WISESTONE_STAIRS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CHISELED_WISESTONE_SLAB = ITEMS.register("chiseled_wisestone_slab", () -> new BlockItem(WizardsRebornBlocks.CHISELED_WISESTONE_SLAB.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CHISELED_WISESTONE_WALL = ITEMS.register("chiseled_wisestone_wall", () -> new BlockItem(WizardsRebornBlocks.CHISELED_WISESTONE_WALL.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_PILLAR = ITEMS.register("wisestone_pillar", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_PILLAR.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POLISHED_WISESTONE_PRESSURE_PLATE = ITEMS.register("polished_wisestone_pressure_plate", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_PRESSURE_PLATE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POLISHED_WISESTONE_BUTTON = ITEMS.register("polished_wisestone_button", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_BUTTON.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> ARCANE_LINEN_SEEDS = ITEMS.register("arcane_linen_seeds", () -> new ItemNameBlockItem(WizardsRebornBlocks.ARCANE_LINEN.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_LINEN = ITEMS.register("arcane_linen", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_LINEN_HAY = ITEMS.register("arcane_linen_hay", () -> new BlockItem(WizardsRebornBlocks.ARCANE_LINEN_HAY.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> MOR = ITEMS.register("mor", () -> new MorItem(WizardsRebornBlocks.MOR.get(), new Item.Properties().food(WizardsRebornFoods.MOR), 1500, 1800));
-    public static final RegistryObject<Item> MOR_BLOCK = ITEMS.register("mor_block", () -> new BlockItem(WizardsRebornBlocks.MOR_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ELDER_MOR = ITEMS.register("elder_mor", () -> new MorItem(WizardsRebornBlocks.ELDER_MOR.get(), new Item.Properties().food(WizardsRebornFoods.MOR), 1700, 2100));
-    public static final RegistryObject<Item> ELDER_MOR_BLOCK = ITEMS.register("elder_mor_block", () -> new BlockItem(WizardsRebornBlocks.ELDER_MOR_BLOCK.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> PITCHER_DEW = ITEMS.register("pitcher_dew", () -> new PitcherDewItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_DER)));
-    public static final RegistryObject<Item> PITCHER_TURNIP = ITEMS.register("pitcher_turnip", () -> new BlockItem(WizardsRebornBlocks.PITCHER_TURNIP.get(), new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP)));
-    public static final RegistryObject<Item> PITCHER_TURNIP_BLOCK = ITEMS.register("pitcher_turnip_block", () -> new BlockItem(WizardsRebornBlocks.PITCHER_TURNIP_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> SHINY_CLOVER_SEED = ITEMS.register("shiny_clover_seed", () -> new ItemNameBlockItem(WizardsRebornBlocks.SHINY_CLOVER_CROP.get(), new Item.Properties()));
-    public static final RegistryObject<Item> SHINY_CLOVER = ITEMS.register("shiny_clover", () -> new BlockItem(WizardsRebornBlocks.SHINY_CLOVER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> UNDERGROUND_GRAPE_VINE = ITEMS.register("underground_grape_vine", () -> new ItemNameBlockItem(WizardsRebornBlocks.UNDERGROUND_GRAPE_VINES.get(), new Item.Properties()));
-    public static final RegistryObject<Item> UNDERGROUND_GRAPE = ITEMS.register("underground_grape", () -> new Item(new Item.Properties().food(WizardsRebornFoods.UNDERGROUND_GRAPE)));
 
     public static final RegistryObject<Item> CORK_BAMBOO_SEED = ITEMS.register("cork_bamboo_seed", () -> new ItemNameBlockItem(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get(), new Item.Properties()));
     public static final RegistryObject<Item> CORK_BAMBOO = ITEMS.register("cork_bamboo", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO.get(), new Item.Properties()));
@@ -254,16 +231,32 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> CORK_BAMBOO_RAFT = ITEMS.register("cork_bamboo_raft", () -> new CustomBoatItem(new Item.Properties().stacksTo(1), WizardsRebornEntities.CORK_BAMBOO_RAFT));
     public static final RegistryObject<Item> CORK_BAMBOO_CHEST_RAFT = ITEMS.register("cork_bamboo_chest_raft", () -> new CustomChestBoatItem(new Item.Properties().stacksTo(1), WizardsRebornEntities.CORK_BAMBOO_CHEST_RAFT));
 
-    public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new FlowerFertilizerItem(new Item.Properties()));
-    public static final RegistryObject<Item> BUNCH_OF_THINGS = ITEMS.register("bunch_of_things", () -> new BunchOfThingsItem(new Item.Properties()));
-    public static final RegistryObject<Item> GROUND_BROWN_MUSHROOM = ITEMS.register("ground_brown_mushroom", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> GROUND_RED_MUSHROOM = ITEMS.register("ground_red_mushroom", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> GROUND_CRIMSON_FUNGUS = ITEMS.register("ground_crimson_fungus", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> GROUND_WARPED_FUNGUS = ITEMS.register("ground_warped_fungus", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> GROUND_MOR = ITEMS.register("ground_mor", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> GROUND_ELDER_MOR = ITEMS.register("ground_elder_mor", () -> new Item(new Item.Properties()));
+    //STONE
+    public static final RegistryObject<Item> WISESTONE = ITEMS.register("wisestone", () -> new BlockItem(WizardsRebornBlocks.WISESTONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_STAIRS = ITEMS.register("wisestone_stairs", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_SLAB = ITEMS.register("wisestone_slab", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_WALL = ITEMS.register("wisestone_wall", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE = ITEMS.register("polished_wisestone", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_STAIRS = ITEMS.register("polished_wisestone_stairs", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_SLAB = ITEMS.register("polished_wisestone_slab", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_WALL = ITEMS.register("polished_wisestone_wall", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_BRICKS = ITEMS.register("wisestone_bricks", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_BRICKS_STAIRS = ITEMS.register("wisestone_bricks_stairs", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_BRICKS_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_BRICKS_SLAB = ITEMS.register("wisestone_bricks_slab", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_BRICKS_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_BRICKS_WALL = ITEMS.register("wisestone_bricks_wall", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_BRICKS_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_TILE = ITEMS.register("wisestone_tile", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_TILE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_TILE_STAIRS = ITEMS.register("wisestone_tile_stairs", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_TILE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_TILE_SLAB = ITEMS.register("wisestone_tile_slab", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_TILE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_TILE_WALL = ITEMS.register("wisestone_tile_wall", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_TILE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_WISESTONE = ITEMS.register("chiseled_wisestone", () -> new BlockItem(WizardsRebornBlocks.CHISELED_WISESTONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_WISESTONE_STAIRS = ITEMS.register("chiseled_wisestone_stairs", () -> new BlockItem(WizardsRebornBlocks.CHISELED_WISESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_WISESTONE_SLAB = ITEMS.register("chiseled_wisestone_slab", () -> new BlockItem(WizardsRebornBlocks.CHISELED_WISESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_WISESTONE_WALL = ITEMS.register("chiseled_wisestone_wall", () -> new BlockItem(WizardsRebornBlocks.CHISELED_WISESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_PILLAR = ITEMS.register("wisestone_pillar", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_PRESSURE_PLATE = ITEMS.register("polished_wisestone_pressure_plate", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_PRESSURE_PLATE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_BUTTON = ITEMS.register("polished_wisestone_button", () -> new BlockItem(WizardsRebornBlocks.POLISHED_WISESTONE_BUTTON.get(), new Item.Properties()));
 
+    //CRYSTALS
     public static final RegistryObject<Item> ARCANUM_SEED = ITEMS.register("arcanum_seed", () -> new BlockItem(WizardsRebornBlocks.ARCANUM_SEED.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_GROWTH = ITEMS.register("arcanum_growth", () -> new BlockItem(WizardsRebornBlocks.ARCANUM_GROWTH.get(), new Item.Properties()));
 
@@ -315,6 +308,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> PURE_FIRE_CRYSTAL = ITEMS.register("pure_fire_crystal", () -> new CrystalItem(WizardsRebornBlocks.PURE_FIRE_CRYSTAL.get(), new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> PURE_VOID_CRYSTAL = ITEMS.register("pure_void_crystal", () -> new CrystalItem(WizardsRebornBlocks.PURE_VOID_CRYSTAL.get(), new Item.Properties().stacksTo(1)));
 
+    //LUMOS
     public static final RegistryObject<Item> WHITE_ARCANE_LUMOS = ITEMS.register("white_arcane_lumos", () -> new ArcaneLumosItem(WizardsRebornBlocks.WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_GRAY_ARCANE_LUMOS = ITEMS.register("light_gray_arcane_lumos", () -> new ArcaneLumosItem(WizardsRebornBlocks.LIGHT_GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> GRAY_ARCANE_LUMOS = ITEMS.register("gray_arcane_lumos", () -> new ArcaneLumosItem(WizardsRebornBlocks.GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
@@ -334,7 +328,70 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> RAINBOW_ARCANE_LUMOS = ITEMS.register("rainbow_arcane_lumos", () -> new ArcaneLumosItem(WizardsRebornBlocks.RAINBOW_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> COSMIC_ARCANE_LUMOS = ITEMS.register("cosmic_arcane_lumos", () -> new ArcaneLumosItem(WizardsRebornBlocks.COSMIC_ARCANE_LUMOS.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> WHITE_LUMINAL_GLASS = ITEMS.register("white_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.WHITE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GRAY_LUMINAL_GLASS = ITEMS.register("light_gray_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIGHT_GRAY_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GRAY_LUMINAL_GLASS = ITEMS.register("gray_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.GRAY_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_LUMINAL_GLASS = ITEMS.register("black_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BLACK_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_LUMINAL_GLASS = ITEMS.register("brown_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BROWN_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RED_LUMINAL_GLASS = ITEMS.register("red_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.RED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_LUMINAL_GLASS = ITEMS.register("orange_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.ORANGE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_LUMINAL_GLASS = ITEMS.register("yellow_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.YELLOW_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIME_LUMINAL_GLASS = ITEMS.register("lime_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIME_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_LUMINAL_GLASS = ITEMS.register("green_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.GREEN_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_LUMINAL_GLASS = ITEMS.register("cyan_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.CYAN_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_LUMINAL_GLASS = ITEMS.register("light_blue_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIGHT_BLUE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_LUMINAL_GLASS = ITEMS.register("blue_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BLUE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_LUMINAL_GLASS = ITEMS.register("purple_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.PURPLE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_LUMINAL_GLASS = ITEMS.register("magenta_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.MAGENTA_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PINK_LUMINAL_GLASS = ITEMS.register("pink_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.PINK_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RAINBOW_LUMINAL_GLASS = ITEMS.register("rainbow_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.RAINBOW_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COSMIC_LUMINAL_GLASS = ITEMS.register("cosmic_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.COSMIC_LUMINAL_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WHITE_FRAMED_LUMINAL_GLASS = ITEMS.register("white_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.WHITE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GRAY_FRAMED_LUMINAL_GLASS = ITEMS.register("light_gray_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIGHT_GRAY_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GRAY_FRAMED_LUMINAL_GLASS = ITEMS.register("gray_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.GRAY_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_FRAMED_LUMINAL_GLASS = ITEMS.register("black_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BLACK_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_FRAMED_LUMINAL_GLASS = ITEMS.register("brown_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BROWN_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RED_FRAMED_LUMINAL_GLASS = ITEMS.register("red_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.RED_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_FRAMED_LUMINAL_GLASS = ITEMS.register("orange_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.ORANGE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_FRAMED_LUMINAL_GLASS = ITEMS.register("yellow_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.YELLOW_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIME_FRAMED_LUMINAL_GLASS = ITEMS.register("lime_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIME_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_FRAMED_LUMINAL_GLASS = ITEMS.register("green_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.GREEN_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_FRAMED_LUMINAL_GLASS = ITEMS.register("cyan_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.CYAN_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_FRAMED_LUMINAL_GLASS = ITEMS.register("light_blue_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIGHT_BLUE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_FRAMED_LUMINAL_GLASS = ITEMS.register("blue_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BLUE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_FRAMED_LUMINAL_GLASS = ITEMS.register("purple_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.PURPLE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_FRAMED_LUMINAL_GLASS = ITEMS.register("magenta_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.MAGENTA_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PINK_FRAMED_LUMINAL_GLASS = ITEMS.register("pink_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.PINK_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RAINBOW_FRAMED_LUMINAL_GLASS = ITEMS.register("rainbow_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.RAINBOW_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COSMIC_FRAMED_LUMINAL_GLASS = ITEMS.register("cosmic_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.COSMIC_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+
+    //BUILD
     public static final RegistryObject<Item> ARCANE_PEDESTAL = ITEMS.register("arcane_pedestal", () -> new BlockItem(WizardsRebornBlocks.ARCANE_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_PEDESTAL = ITEMS.register("innocent_pedestal", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CORK_BAMBOO_PEDESTAL = ITEMS.register("cork_bamboo_pedestal", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_PEDESTAL = ITEMS.register("wisestone_pedestal", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_PEDESTAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> GILDED_ARCANE_WOOD_PLANKS = ITEMS.register("gilded_arcane_wood_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_ARCANE_WOOD_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GILDED_INNOCENT_WOOD_PLANKS = ITEMS.register("gilded_innocent_wood_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_INNOCENT_WOOD_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GILDED_CORK_BAMBOO_PLANKS = ITEMS.register("gilded_cork_bamboo_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_CORK_BAMBOO_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GILDED_CORK_BAMBOO_CHISELED_PLANKS = ITEMS.register("gilded_cork_bamboo_chiseled_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_CORK_BAMBOO_CHISELED_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GILDED_POLISHED_WISESTONE = ITEMS.register("gilded_polished_wisestone", () -> new BlockItem(WizardsRebornBlocks.GILDED_POLISHED_WISESTONE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ARCANE_SALT_TORCH = ITEMS.register("arcane_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.ARCANE_SALT_TORCH.get(), WizardsRebornBlocks.ARCANE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> ARCANE_SALT_LANTERN = ITEMS.register("arcane_salt_lantern", () -> new SaltLanternItem(WizardsRebornBlocks.ARCANE_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_SALT_CAMPFIRE = ITEMS.register("arcane_salt_campfire", () -> new SaltCampfireItem(WizardsRebornBlocks.ARCANE_SALT_CAMPFIRE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_SALT_TORCH = ITEMS.register("innocent_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.INNOCENT_SALT_TORCH.get(), WizardsRebornBlocks.INNOCENT_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> INNOCENT_SALT_LANTERN = ITEMS.register("innocent_salt_lantern", () -> new SaltLanternItem(WizardsRebornBlocks.INNOCENT_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_SALT_CAMPFIRE = ITEMS.register("innocent_salt_campfire", () -> new SaltCampfireItem(WizardsRebornBlocks.INNOCENT_SALT_CAMPFIRE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CORK_BAMBOO_SALT_TORCH = ITEMS.register("cork_bamboo_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.CORK_BAMBOO_SALT_TORCH.get(), WizardsRebornBlocks.CORK_BAMBOO_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> CORK_BAMBOO_SALT_LANTERN = ITEMS.register("cork_bamboo_salt_lantern", () -> new SaltLanternItem(WizardsRebornBlocks.CORK_BAMBOO_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CORK_BAMBOO_SALT_CAMPFIRE = ITEMS.register("cork_bamboo_salt_campfire", () -> new SaltCampfireItem(WizardsRebornBlocks.CORK_BAMBOO_SALT_CAMPFIRE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_SALT_TORCH = ITEMS.register("wisestone_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.WISESTONE_SALT_TORCH.get(), WizardsRebornBlocks.WISESTONE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> WISESTONE_SALT_LANTERN = ITEMS.register("wisestone_salt_lantern", () -> new SaltLanternItem(WizardsRebornBlocks.WISESTONE_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_SALT_CAMPFIRE = ITEMS.register("wisestone_salt_campfire", () -> new SaltCampfireItem(WizardsRebornBlocks.WISESTONE_SALT_CAMPFIRE.get(), new Item.Properties()));
+
+    //ARCANE_NATURE
     public static final RegistryObject<Item> WISSEN_ALTAR = ITEMS.register("wissen_altar", () -> new BlockItem(WizardsRebornBlocks.WISSEN_ALTAR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_TRANSLATOR = ITEMS.register("wissen_translator", () -> new BlockItem(WizardsRebornBlocks.WISSEN_TRANSLATOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_CRYSTALLIZER = ITEMS.register("wissen_crystallizer", () -> new BlockItem(WizardsRebornBlocks.WISSEN_CRYSTALLIZER.get(), new Item.Properties()));
@@ -349,7 +406,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> TOTEM_OF_DISENCHANT = ITEMS.register("totem_of_disenchant", () -> new BlockItem(WizardsRebornBlocks.TOTEM_OF_DISENCHANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_ITERATOR = ITEMS.register("arcane_iterator", () -> new BlockItem(WizardsRebornBlocks.ARCANE_ITERATOR.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> WISESTONE_PEDESTAL = ITEMS.register("wisestone_pedestal", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_PEDESTAL.get(), new Item.Properties()));
+    //ALCHEMY
     public static final RegistryObject<Item> FLUID_PIPE = ITEMS.register("fluid_pipe", () -> new BlockItem(WizardsRebornBlocks.FLUID_PIPE.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLUID_EXTRACTOR = ITEMS.register("fluid_extractor", () -> new BlockItem(WizardsRebornBlocks.FLUID_EXTRACTOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> STEAM_PIPE = ITEMS.register("steam_pipe", () -> new BlockItem(WizardsRebornBlocks.STEAM_PIPE.get(), new Item.Properties()));
@@ -361,8 +418,16 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ALCHEMY_BOILER = ITEMS.register("alchemy_boiler", () -> new BlockItem(WizardsRebornBlocks.ALCHEMY_BOILER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_CENSER = ITEMS.register("arcane_censer", () -> new BlockItem(WizardsRebornBlocks.ARCANE_CENSER.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> CORK_BAMBOO_PEDESTAL = ITEMS.register("cork_bamboo_pedestal", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_GLASS = ITEMS.register("alchemy_glass", () -> new BlockItem(WizardsRebornBlocks.ALCHEMY_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_BOTTLE = ITEMS.register("alchemy_bottle", () -> new AlchemyDrinkBottleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_VIAL_POTION = ITEMS.register("alchemy_vial_potion", () -> new VialPotionItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new FlaskPotionItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> SNIFFALO_EGG = ITEMS.register("sniffalo_egg", () -> new BlockItem(WizardsRebornBlocks.SNIFFALO_EGG.get(), new Item.Properties()));
+
+    //CRYSTAL_RITUALS
     public static final RegistryObject<Item> LIGHT_EMITTER = ITEMS.register("light_emitter", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.LIGHT_EMITTER.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_TRANSFER_LENS = ITEMS.register("light_transfer_lens", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RUNIC_PEDESTAL = ITEMS.register("runic_pedestal", () -> new BlockItem(WizardsRebornBlocks.RUNIC_PEDESTAL.get(), new Item.Properties()));
@@ -389,8 +454,12 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ENGRAVED_WISESTONE_TENEBRIS = ITEMS.register("engraved_wisestone_tenebris", () -> new EngravedWisestoneItem(WizardsRebornBlocks.ENGRAVED_WISESTONE_TENEBRIS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ENGRAVED_WISESTONE_UNIVERSUM = ITEMS.register("engraved_wisestone_universum", () -> new EngravedWisestoneItem(WizardsRebornBlocks.ENGRAVED_WISESTONE_UNIVERSUM.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> INNOCENT_PEDESTAL = ITEMS.register("innocent_pedestal", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANUM_LENS = ITEMS.register("arcanum_lens", () -> new ArcanumLensItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> WISESTONE_PLATE = ITEMS.register("wisestone_plate", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> RUNIC_WISESTONE_PLATE = ITEMS.register("runic_wisestone_plate", () -> new RunicWisestonePlateItem(new Item.Properties().stacksTo(1)));
+
+    //AUTOMATION
     public static final RegistryObject<Item> ARCANE_LEVER = ITEMS.register("arcane_lever", () -> new BlockItem(WizardsRebornBlocks.ARCANE_LEVER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_HOPPER = ITEMS.register("arcane_hopper", () -> new HeadBlockItem(WizardsRebornBlocks.ARCANE_HOPPER.get(), new Item.Properties()));
     public static final RegistryObject<Item> REDSTONE_SENSOR = ITEMS.register("redstone_sensor", () -> new BlockItem(WizardsRebornBlocks.REDSTONE_SENSOR.get(), new Item.Properties()));
@@ -438,90 +507,59 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> CREATIVE_FLUID_STORAGE = ITEMS.register("creative_fluid_storage", () -> new BlockItem(WizardsRebornBlocks.CREATIVE_FLUID_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_STEAM_STORAGE = ITEMS.register("creative_steam_storage", () -> new BlockItem(WizardsRebornBlocks.CREATIVE_STEAM_STORAGE.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> GILDED_ARCANE_WOOD_PLANKS = ITEMS.register("gilded_arcane_wood_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_ARCANE_WOOD_PLANKS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GILDED_INNOCENT_WOOD_PLANKS = ITEMS.register("gilded_innocent_wood_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_INNOCENT_WOOD_PLANKS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GILDED_CORK_BAMBOO_PLANKS = ITEMS.register("gilded_cork_bamboo_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_CORK_BAMBOO_PLANKS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GILDED_CORK_BAMBOO_CHISELED_PLANKS = ITEMS.register("gilded_cork_bamboo_chiseled_planks", () -> new BlockItem(WizardsRebornBlocks.GILDED_CORK_BAMBOO_CHISELED_PLANKS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GILDED_POLISHED_WISESTONE = ITEMS.register("gilded_polished_wisestone", () -> new BlockItem(WizardsRebornBlocks.GILDED_POLISHED_WISESTONE.get(), new Item.Properties()));
+    //EQUIPMENT
+    public static final RegistryObject<Item> ARCANE_WOOD_SWORD = ITEMS.register("arcane_wood_sword", () -> new ArcaneWoodSwordItem(WizardsRebornItemTiers.ARCANE_WOOD, 3, -2.4f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
+    public static final RegistryObject<Item> ARCANE_WOOD_PICKAXE = ITEMS.register("arcane_wood_pickaxe", () -> new ArcaneWoodPickaxeItem(WizardsRebornItemTiers.ARCANE_WOOD, 1, -2.8f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
+    public static final RegistryObject<Item> ARCANE_WOOD_AXE = ITEMS.register("arcane_wood_axe", () -> new ArcaneWoodAxeItem(WizardsRebornItemTiers.ARCANE_WOOD, 6, -3.1f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
+    public static final RegistryObject<Item> ARCANE_WOOD_SHOVEL = ITEMS.register("arcane_wood_shovel", () -> new ArcaneWoodShovelItem(WizardsRebornItemTiers.ARCANE_WOOD, 1.5f, -3f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
+    public static final RegistryObject<Item> ARCANE_WOOD_HOE = ITEMS.register("arcane_wood_hoe", () -> new ArcaneWoodHoeItem(WizardsRebornItemTiers.ARCANE_WOOD, -1, -1f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
+    public static final RegistryObject<Item> ARCANE_WOOD_SCYTHE = ITEMS.register("arcane_wood_scythe", () -> new ArcaneWoodScytheItem(WizardsRebornItemTiers.ARCANE_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0, ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
+    public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
 
-    public static final RegistryObject<Item> ARCANE_SALT_TORCH = ITEMS.register("arcane_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.ARCANE_SALT_TORCH.get(), WizardsRebornBlocks.ARCANE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryObject<Item> ARCANE_SALT_LANTERN = ITEMS.register("arcane_salt_lantern", () -> new SaltLanternItem(WizardsRebornBlocks.ARCANE_SALT_LANTERN.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_SALT_CAMPFIRE = ITEMS.register("arcane_salt_campfire", () -> new SaltCampfireItem(WizardsRebornBlocks.ARCANE_SALT_CAMPFIRE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_SALT_TORCH = ITEMS.register("innocent_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.INNOCENT_SALT_TORCH.get(), WizardsRebornBlocks.INNOCENT_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryObject<Item> INNOCENT_SALT_LANTERN = ITEMS.register("innocent_salt_lantern", () -> new SaltLanternItem(WizardsRebornBlocks.INNOCENT_SALT_LANTERN.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_SALT_CAMPFIRE = ITEMS.register("innocent_salt_campfire", () -> new SaltCampfireItem(WizardsRebornBlocks.INNOCENT_SALT_CAMPFIRE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CORK_BAMBOO_SALT_TORCH = ITEMS.register("cork_bamboo_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.CORK_BAMBOO_SALT_TORCH.get(), WizardsRebornBlocks.CORK_BAMBOO_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryObject<Item> CORK_BAMBOO_SALT_LANTERN = ITEMS.register("cork_bamboo_salt_lantern", () -> new SaltLanternItem(WizardsRebornBlocks.CORK_BAMBOO_SALT_LANTERN.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CORK_BAMBOO_SALT_CAMPFIRE = ITEMS.register("cork_bamboo_salt_campfire", () -> new SaltCampfireItem(WizardsRebornBlocks.CORK_BAMBOO_SALT_CAMPFIRE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_SALT_TORCH = ITEMS.register("wisestone_salt_torch", () -> new SaltTorchItem(WizardsRebornBlocks.WISESTONE_SALT_TORCH.get(), WizardsRebornBlocks.WISESTONE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryObject<Item> WISESTONE_SALT_LANTERN = ITEMS.register("wisestone_salt_lantern", () -> new SaltLanternItem(WizardsRebornBlocks.WISESTONE_SALT_LANTERN.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_SALT_CAMPFIRE = ITEMS.register("wisestone_salt_campfire", () -> new SaltCampfireItem(WizardsRebornBlocks.WISESTONE_SALT_CAMPFIRE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SWORD = ITEMS.register("innocent_wood_sword", () -> new InnocentWoodSwordItem(WizardsRebornItemTiers.INNOCENT_WOOD, 3, -2.4f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+    public static final RegistryObject<Item> INNOCENT_WOOD_PICKAXE = ITEMS.register("innocent_wood_pickaxe", () -> new InnocentWoodPickaxeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 1, -2.8f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+    public static final RegistryObject<Item> INNOCENT_WOOD_AXE = ITEMS.register("innocent_wood_axe", () -> new InnocentWoodAxeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 6, -3.1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SHOVEL = ITEMS.register("innocent_wood_shovel", () -> new InnocentWoodShovelItem(WizardsRebornItemTiers.INNOCENT_WOOD, 1.5f, -3f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+    public static final RegistryObject<Item> INNOCENT_WOOD_HOE = ITEMS.register("innocent_wood_hoe", () -> new InnocentWoodHoeItem(WizardsRebornItemTiers.INNOCENT_WOOD, -1, -1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SCYTHE = ITEMS.register("innocent_wood_scythe", () -> new InnocentWoodScytheItem(WizardsRebornItemTiers.INNOCENT_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0, INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+    public static final RegistryObject<Item> INNOCENT_WOOD_MORTAR = ITEMS.register("innocent_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
 
-    public static final RegistryObject<Item> ALCHEMY_GLASS = ITEMS.register("alchemy_glass", () -> new BlockItem(WizardsRebornBlocks.ALCHEMY_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties()));
-    public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties()));
-    public static final RegistryObject<Item> ALCHEMY_BOTTLE = ITEMS.register("alchemy_bottle", () -> new AlchemyDrinkBottleItem(new Item.Properties()));
-    public static final RegistryObject<Item> ALCHEMY_VIAL_POTION = ITEMS.register("alchemy_vial_potion", () -> new VialPotionItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new FlaskPotionItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCANE_GOLD_SWORD = ITEMS.register("arcane_gold_sword", () -> new ArcaneSwordItem(WizardsRebornItemTiers.ARCANE_GOLD, 3, -2.4f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
+    public static final RegistryObject<Item> ARCANE_GOLD_PICKAXE = ITEMS.register("arcane_gold_pickaxe", () -> new ArcanePickaxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 1, -2.8f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
+    public static final RegistryObject<Item> ARCANE_GOLD_AXE = ITEMS.register("arcane_gold_axe", () -> new ArcaneAxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 6, -3.1f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
+    public static final RegistryObject<Item> ARCANE_GOLD_SHOVEL = ITEMS.register("arcane_gold_shovel", () -> new ArcaneShovelItem(WizardsRebornItemTiers.ARCANE_GOLD, 1.5f, -3f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
+    public static final RegistryObject<Item> ARCANE_GOLD_HOE = ITEMS.register("arcane_gold_hoe", () -> new ArcaneHoeItem(WizardsRebornItemTiers.ARCANE_GOLD, -2, -1f, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
+    public static final RegistryObject<Item> ARCANE_GOLD_SCYTHE = ITEMS.register("arcane_gold_scythe", () -> new ArcaneScytheItem(WizardsRebornItemTiers.ARCANE_GOLD, 4, -2.8f, new Item.Properties(), 1, 1).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
 
-    public static final RegistryObject<Item> WHITE_LUMINAL_GLASS = ITEMS.register("white_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.WHITE_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GRAY_LUMINAL_GLASS = ITEMS.register("light_gray_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIGHT_GRAY_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GRAY_LUMINAL_GLASS = ITEMS.register("gray_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.GRAY_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLACK_LUMINAL_GLASS = ITEMS.register("black_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BLACK_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_LUMINAL_GLASS = ITEMS.register("brown_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BROWN_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RED_LUMINAL_GLASS = ITEMS.register("red_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.RED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_LUMINAL_GLASS = ITEMS.register("orange_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.ORANGE_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_LUMINAL_GLASS = ITEMS.register("yellow_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.YELLOW_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIME_LUMINAL_GLASS = ITEMS.register("lime_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIME_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_LUMINAL_GLASS = ITEMS.register("green_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.GREEN_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_LUMINAL_GLASS = ITEMS.register("cyan_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.CYAN_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_LUMINAL_GLASS = ITEMS.register("light_blue_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIGHT_BLUE_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_LUMINAL_GLASS = ITEMS.register("blue_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BLUE_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_LUMINAL_GLASS = ITEMS.register("purple_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.PURPLE_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_LUMINAL_GLASS = ITEMS.register("magenta_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.MAGENTA_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PINK_LUMINAL_GLASS = ITEMS.register("pink_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.PINK_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RAINBOW_LUMINAL_GLASS = ITEMS.register("rainbow_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.RAINBOW_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> COSMIC_LUMINAL_GLASS = ITEMS.register("cosmic_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.COSMIC_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_HELMET = ITEMS.register("arcane_gold_helmet", () -> new ArcaneArmorItem(WizardsRebornArmorMaterials.ARCANE_GOLD, ArmorItem.Type.HELMET, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
+    public static final RegistryObject<Item> ARCANE_GOLD_CHESTPLATE = ITEMS.register("arcane_gold_chestplate", () -> new ArcaneArmorItem(WizardsRebornArmorMaterials.ARCANE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
+    public static final RegistryObject<Item> ARCANE_GOLD_LEGGINGS = ITEMS.register("arcane_gold_leggings", () -> new ArcaneArmorItem(WizardsRebornArmorMaterials.ARCANE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
+    public static final RegistryObject<Item> ARCANE_GOLD_BOOTS = ITEMS.register("arcane_gold_boots", () -> new ArcaneArmorItem(WizardsRebornArmorMaterials.ARCANE_GOLD, ArmorItem.Type.BOOTS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
 
-    public static final RegistryObject<Item> WHITE_FRAMED_LUMINAL_GLASS = ITEMS.register("white_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.WHITE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GRAY_FRAMED_LUMINAL_GLASS = ITEMS.register("light_gray_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIGHT_GRAY_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GRAY_FRAMED_LUMINAL_GLASS = ITEMS.register("gray_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.GRAY_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLACK_FRAMED_LUMINAL_GLASS = ITEMS.register("black_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BLACK_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_FRAMED_LUMINAL_GLASS = ITEMS.register("brown_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BROWN_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RED_FRAMED_LUMINAL_GLASS = ITEMS.register("red_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.RED_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_FRAMED_LUMINAL_GLASS = ITEMS.register("orange_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.ORANGE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_FRAMED_LUMINAL_GLASS = ITEMS.register("yellow_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.YELLOW_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIME_FRAMED_LUMINAL_GLASS = ITEMS.register("lime_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIME_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_FRAMED_LUMINAL_GLASS = ITEMS.register("green_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.GREEN_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_FRAMED_LUMINAL_GLASS = ITEMS.register("cyan_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.CYAN_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_FRAMED_LUMINAL_GLASS = ITEMS.register("light_blue_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.LIGHT_BLUE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_FRAMED_LUMINAL_GLASS = ITEMS.register("blue_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.BLUE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_FRAMED_LUMINAL_GLASS = ITEMS.register("purple_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.PURPLE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_FRAMED_LUMINAL_GLASS = ITEMS.register("magenta_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.MAGENTA_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PINK_FRAMED_LUMINAL_GLASS = ITEMS.register("pink_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.PINK_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RAINBOW_FRAMED_LUMINAL_GLASS = ITEMS.register("rainbow_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.RAINBOW_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> COSMIC_FRAMED_LUMINAL_GLASS = ITEMS.register("cosmic_framed_luminal_glass", () -> new BlockItem(WizardsRebornBlocks.COSMIC_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_FORTRESS_HELMET = ITEMS.register("arcane_fortress_helmet", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.HELMET, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
+    public static final RegistryObject<Item> ARCANE_FORTRESS_CHESTPLATE = ITEMS.register("arcane_fortress_chestplate", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.CHESTPLATE, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
+    public static final RegistryObject<Item> ARCANE_FORTRESS_LEGGINGS = ITEMS.register("arcane_fortress_leggings", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.LEGGINGS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
+    public static final RegistryObject<Item> ARCANE_FORTRESS_BOOTS = ITEMS.register("arcane_fortress_boots", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.BOOTS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
 
-    public static final RegistryObject<Item> ALCHEMY_CALX = ITEMS.register("alchemy_calx", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> NATURAL_CALX = ITEMS.register("natural_calx", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SCORCHED_CALX = ITEMS.register("scorched_calx", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> DISTANT_CALX = ITEMS.register("distant_calx", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ENCHANTED_CALX = ITEMS.register("enchanted_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INVENTOR_WIZARD_HAT = ITEMS.register("inventor_wizard_hat", () -> new InventorWizardArmorItem(WizardsRebornArmorMaterials.INVENTOR_WIZARD, ArmorItem.Type.HELMET, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INVENTOR_WIZARD_ARMOR));
+    public static final RegistryObject<Item> INVENTOR_WIZARD_COSTUME = ITEMS.register("inventor_wizard_costume", () -> new InventorWizardArmorItem(WizardsRebornArmorMaterials.INVENTOR_WIZARD, ArmorItem.Type.CHESTPLATE, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INVENTOR_WIZARD_ARMOR));
+    public static final RegistryObject<Item> INVENTOR_WIZARD_TROUSERS = ITEMS.register("inventor_wizard_trousers", () -> new InventorWizardArmorItem(WizardsRebornArmorMaterials.INVENTOR_WIZARD, ArmorItem.Type.LEGGINGS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INVENTOR_WIZARD_ARMOR));
+    public static final RegistryObject<Item> INVENTOR_WIZARD_BOOTS = ITEMS.register("inventor_wizard_boots", () -> new InventorWizardArmorItem(WizardsRebornArmorMaterials.INVENTOR_WIZARD, ArmorItem.Type.BOOTS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INVENTOR_WIZARD_ARMOR));
 
-    public static final RegistryObject<Item> ALCHEMY_CALX_BLOCK = ITEMS.register("alchemy_calx_block", () -> new BlockItem(WizardsRebornBlocks.ALCHEMY_CALX_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> NATURAL_CALX_BLOCK = ITEMS.register("natural_calx_block", () -> new BlockItem(WizardsRebornBlocks.NATURAL_CALX_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> SCORCHED_CALX_BLOCK = ITEMS.register("scorched_calx_block", () -> new BlockItem(WizardsRebornBlocks.SCORCHED_CALX_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> DISTANT_CALX_BLOCK = ITEMS.register("distant_calx_block", () -> new BlockItem(WizardsRebornBlocks.DISTANT_CALX_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ENCHANTED_CALX_BLOCK = ITEMS.register("enchanted_calx_block", () -> new BlockItem(WizardsRebornBlocks.ENCHANTED_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_CANE = ITEMS.register("arcane_wood_cane", () -> new CaneItem(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE_BLOCK = ITEMS.register("arcacite_polishing_mixture_block", () -> new BlockItem(WizardsRebornBlocks.ARCACITE_POLISHING_MIXTURE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_SMOKING_PIPE = ITEMS.register("arcane_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SMOKING_PIPE = ITEMS.register("innocent_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BAMBOO_SMOKING_PIPE = ITEMS.register("bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CORK_BAMBOO_SMOKING_PIPE = ITEMS.register("cork_bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> SNIFFALO_EGG = ITEMS.register("sniffalo_egg", () -> new BlockItem(WizardsRebornBlocks.SNIFFALO_EGG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
 
-    public static final RegistryObject<Item> ARCANUM_LENS = ITEMS.register("arcanum_lens", () -> new ArcanumLensItem(new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_PLATE = ITEMS.register("wisestone_plate", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RUNIC_WISESTONE_PLATE = ITEMS.register("runic_wisestone_plate", () -> new RunicWisestonePlateItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BLAZE_REAP = ITEMS.register("blaze_reap", () -> new ArcanePickaxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 1, -2.8f, new Item.Properties().rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BLAZING_WAND = ITEMS.register("blazing_wand", () -> new BlazingWandItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANUM_AMULET = ITEMS.register("arcanum_amulet", () -> new ArcanumAmuletItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANUM_RING = ITEMS.register("arcanum_ring", () -> new ArcanumRingItem(new Item.Properties().stacksTo(1)));
@@ -545,30 +583,6 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> MOR_CAP = ITEMS.register("mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.MOR));
     public static final RegistryObject<Item> ELDER_MOR_CAP = ITEMS.register("elder_mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.ELDER_MOR));
 
-    public static final RegistryObject<Item> ARCANE_FORTRESS_HELMET = ITEMS.register("arcane_fortress_helmet", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.HELMET, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
-    public static final RegistryObject<Item> ARCANE_FORTRESS_CHESTPLATE = ITEMS.register("arcane_fortress_chestplate", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.CHESTPLATE, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
-    public static final RegistryObject<Item> ARCANE_FORTRESS_LEGGINGS = ITEMS.register("arcane_fortress_leggings", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.LEGGINGS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
-    public static final RegistryObject<Item> ARCANE_FORTRESS_BOOTS = ITEMS.register("arcane_fortress_boots", () -> new ArcaneFortressArmorItem(WizardsRebornArmorMaterials.ARCANE_FORTRESS, ArmorItem.Type.BOOTS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_FORTRESS_ARMOR));
-
-    public static final RegistryObject<Item> INVENTOR_WIZARD_HAT = ITEMS.register("inventor_wizard_hat", () -> new InventorWizardArmorItem(WizardsRebornArmorMaterials.INVENTOR_WIZARD, ArmorItem.Type.HELMET, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INVENTOR_WIZARD_ARMOR));
-    public static final RegistryObject<Item> INVENTOR_WIZARD_COSTUME = ITEMS.register("inventor_wizard_costume", () -> new InventorWizardArmorItem(WizardsRebornArmorMaterials.INVENTOR_WIZARD, ArmorItem.Type.CHESTPLATE, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INVENTOR_WIZARD_ARMOR));
-    public static final RegistryObject<Item> INVENTOR_WIZARD_TROUSERS = ITEMS.register("inventor_wizard_trousers", () -> new InventorWizardArmorItem(WizardsRebornArmorMaterials.INVENTOR_WIZARD, ArmorItem.Type.LEGGINGS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INVENTOR_WIZARD_ARMOR));
-    public static final RegistryObject<Item> INVENTOR_WIZARD_BOOTS = ITEMS.register("inventor_wizard_boots", () -> new InventorWizardArmorItem(WizardsRebornArmorMaterials.INVENTOR_WIZARD, ArmorItem.Type.BOOTS, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INVENTOR_WIZARD_ARMOR));
-
-    public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BLAZING_WAND = ITEMS.register("blazing_wand", () -> new BlazingWandItem(new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> ARCANE_WOOD_SMOKING_PIPE = ITEMS.register("arcane_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> INNOCENT_WOOD_SMOKING_PIPE = ITEMS.register("innocent_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BAMBOO_SMOKING_PIPE = ITEMS.register("bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CORK_BAMBOO_SMOKING_PIPE = ITEMS.register("cork_bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> ARCANE_WOOD_CANE = ITEMS.register("arcane_wood_cane", () -> new CaneItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
-
-    public static final RegistryObject<Item> BLAZE_REAP = ITEMS.register("blaze_reap", () -> new ArcanePickaxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 1, -2.8f, new Item.Properties().rarity(Rarity.EPIC)));
-
     public static final RegistryObject<Item> WHITE_CARGO_CARPET = ITEMS.register("white_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.WHITE_CARGO_CARPET.get(), CargoCarpetItem.WHITE, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LIGHT_GRAY_CARGO_CARPET = ITEMS.register("light_gray_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.LIGHT_GRAY_CARGO_CARPET.get(), CargoCarpetItem.LIGHT_GRAY, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> GRAY_CARGO_CARPET = ITEMS.register("gray_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.GRAY_CARGO_CARPET.get(), CargoCarpetItem.GRAY, new Item.Properties().stacksTo(1)));
@@ -587,13 +601,6 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> PINK_CARGO_CARPET = ITEMS.register("pink_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.PINK_CARGO_CARPET.get(), CargoCarpetItem.PINK, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> RAINBOW_CARGO_CARPET = ITEMS.register("rainbow_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.RAINBOW_CARGO_CARPET.get(), CargoCarpetItem.RAINBOW, new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> MOR_PIE = ITEMS.register("mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.MOR_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> ELDER_MOR_PIE = ITEMS.register("elder_mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.ELDER_MOR_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> PITCHER_TURNIP_PIE = ITEMS.register("pitcher_turnip_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-
-    public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.SHRIMP), false));
-    public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.FRIED_SHRIMP), true));
-
     public static final RegistryObject<Item> ARCANE_ENCHANTED_BOOK = ITEMS.register("arcane_enchanted_book", () -> new ArcaneEnchantedBookItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> KNOWLEDGE_SCROLL = ITEMS.register("knowledge_scroll", () -> new KnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
@@ -602,6 +609,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> CREATIVE_SPELL_SCROLL = ITEMS.register("creative_spell_scroll", () -> new CreativeSpellSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), false));
     public static final RegistryObject<Item> CREATIVE_SPELL_ANCIENT_SCROLL = ITEMS.register("creative_spell_ancient_scroll", () -> new CreativeSpellSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), true));
 
+    //COSMETICS
     public static final RegistryObject<Item> VIOLENCE_BANNER_PATTERN = ITEMS.register("violence_banner_pattern", () -> new RainBannerPatternItem(RainBannerPatternItem.Types.VIOLENCE, WizardsRebornBannerPatternTags.VIOLENCE_BANNER, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> REPRODUCTION_BANNER_PATTERN = ITEMS.register("reproduction_banner_pattern", () -> new RainBannerPatternItem(RainBannerPatternItem.Types.REPRODUCTION, WizardsRebornBannerPatternTags.REPRODUCTION_BANNER, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> COOPERATION_BANNER_PATTERN = ITEMS.register("cooperation_banner_pattern", () -> new RainBannerPatternItem(RainBannerPatternItem.Types.COOPERATION, WizardsRebornBannerPatternTags.COOPERATION_BANNER, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
@@ -627,6 +635,15 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> IMPLOSION_TRIM = ITEMS.register("implosion_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.IMPLOSION));
     public static final RegistryObject<Item> PHANTOM_INK_TRIM = ITEMS.register("phantom_ink_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.PHANTOM_INK));
 
+    //FOOD
+    public static final RegistryObject<Item> MOR_PIE = ITEMS.register("mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.MOR_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ELDER_MOR_PIE = ITEMS.register("elder_mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.ELDER_MOR_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> PITCHER_TURNIP_PIE = ITEMS.register("pitcher_turnip_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+
+    public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.SHRIMP), false));
+    public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.FRIED_SHRIMP), true));
+
+    //DRINKS
     public static final RegistryObject<DrinkBottleItem> VODKA_BOTTLE = ITEMS.register("vodka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> BOURBON_BOTTLE = ITEMS.register("bourbon_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> WHISKEY_BOTTLE = ITEMS.register("whiskey_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
@@ -658,6 +675,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<DrinkBottleItem> KVASS_BOTTLE = ITEMS.register("kvass_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> KISSEL_BOTTLE = ITEMS.register("kissel_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
 
+    //FLUIDS
     public static final RegistryObject<Item> MUNDANE_BREW_BUCKET = ITEMS.register("mundane_brew_bucket", () -> new BucketItem(WizardsRebornFluids.MUNDANE_BREW, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> ALCHEMY_OIL_BUCKET = ITEMS.register("alchemy_oil_bucket", () -> new BucketItem(WizardsRebornFluids.ALCHEMY_OIL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> OIL_TEA_BUCKET = ITEMS.register("oil_tea_bucket", () -> new BucketItem(WizardsRebornFluids.OIL_TEA, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
@@ -668,6 +686,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> MOR_BREW_BUCKET = ITEMS.register("mor_brew_bucket", () -> new BucketItem(WizardsRebornFluids.MOR_BREW, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> FLOWER_BREW_BUCKET = ITEMS.register("flower_brew_bucket", () -> new BucketItem(WizardsRebornFluids.FLOWER_BREW, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
+    //ENTITIES
     public static final RegistryObject<ForgeSpawnEggItem> SNIFFALO_SPAWN_EGG = ITEMS.register("sniffalo_spawn_egg", () -> new ForgeSpawnEggItem(WizardsRebornEntities.SNIFFALO, ColorUtil.packColor(255, 96, 58, 62), ColorUtil.packColor(255, 181, 139, 117), new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

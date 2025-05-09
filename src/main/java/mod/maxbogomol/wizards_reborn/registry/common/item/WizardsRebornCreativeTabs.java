@@ -163,8 +163,8 @@ public class WizardsRebornCreativeTabs {
                         AlchemyPotionUtil.setPotion(stack, WizardsRebornAlchemyPotions.WATER);
                         return stack;
                     })
-                    .title(Component.translatable("creative_tab.wizards_reborn.sub").append(": ").append(Component.translatable("creative_tab.wizards_reborn.sub.flask_potions")))
-                    .subTitle(Component.translatable("creative_tab.wizards_reborn.sub.flask_potions"))
+                    .title(Component.translatable("creative_tab.wizards_reborn.sub").append(": ").append(Component.translatable("creative_tab.wizards_reborn.sub.alchemy_potions")))
+                    .subTitle(Component.translatable("creative_tab.wizards_reborn.sub.alchemy_potions"))
                     .withSubTabImage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_sub_tab.png"));
 
     public static final SubCreativeTab DRINKS =
@@ -223,6 +223,7 @@ public class WizardsRebornCreativeTabs {
         if (event.getTabKey() == WizardsRebornCreativeTabs.WIZARDS_REBORN.getKey()) {
             addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANEMICON);
 
+            //MATERIALS
             addInSub(event, MATERIALS, WizardsRebornItems.ARCANE_GOLD_INGOT);
             addInSub(event, MATERIALS, WizardsRebornItems.ARCANE_GOLD_NUGGET);
             addInSub(event, MATERIALS, WizardsRebornItems.RAW_ARCANE_GOLD);
@@ -320,8 +321,8 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, PLANTS, WizardsRebornItems.UNDERGROUND_GRAPE_VINE);
             addInSub(event, PLANTS, WizardsRebornItems.UNDERGROUND_GRAPE);
 
-            addInSub(event, PLANTS, WizardsRebornItems.CORK_BAMBOO_SEED);
-            addInSub(event, PLANTS, WizardsRebornItems.CORK_BAMBOO);
+            PLANTS.addDisplayItem(WizardsRebornItems.CORK_BAMBOO_SEED.get());
+            PLANTS.addDisplayItem(WizardsRebornItems.CORK_BAMBOO.get());
 
             addInSub(event, PLANTS, WizardsRebornItems.PETALS);
             addInSub(event, PLANTS, WizardsRebornItems.FLOWER_FERTILIZER);
@@ -396,6 +397,8 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, WOOD, WizardsRebornItems.INNOCENT_WOOD_SAPLING);
             addInSub(event, WOOD, WizardsRebornItems.PETALS_OF_INNOCENCE);
 
+            addInSub(event, WOOD, WizardsRebornItems.CORK_BAMBOO_SEED);
+            addInSub(event, WOOD, WizardsRebornItems.CORK_BAMBOO);
             addInSub(event, WOOD, WizardsRebornItems.CORK_BAMBOO_BLOCK);
             addInSub(event, WOOD, WizardsRebornItems.CORK_BAMBOO_PLANKS);
             addInSub(event, WOOD, WizardsRebornItems.CORK_BAMBOO_CHISELED_PLANKS);

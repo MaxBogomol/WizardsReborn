@@ -29,6 +29,18 @@
     {
       "id": "wizards_reborn:arcane_gold_knife",
       "required": false
+    },
+    {
+      "id": "wizards_reborn:cracked_arcane_gold_impetus",
+      "required": false
+    },
+    {
+      "id": "wizards_reborn:arcane_gold_impetus",
+      "required": false
+    },
+    {
+      "id": "wizards_reborn:arcane_gold_node",
+      "required": false
     }
   ]
 }
