@@ -20,11 +20,11 @@ public class WizardsRebornBlockSetTypes {
             WizardsRebornSounds.INNOCENT_WOOD_BUTTON_CLICK_OFF.get(), WizardsRebornSounds.INNOCENT_WOOD_BUTTON_CLICK_ON.get()));
 
     public static final BlockSetType CORK_BAMBOO = BlockSetType.register(new BlockSetType("cork_bamboo", true,
-            WizardsRebornSounds.ARCANE_WOOD,
-            WizardsRebornSounds.ARCANE_WOOD_DOOR_CLOSE.get(), WizardsRebornSounds.ARCANE_WOOD_DOOR_OPEN.get(),
-            WizardsRebornSounds.ARCANE_WOOD_TRAPDOOR_CLOSE.get(), WizardsRebornSounds.ARCANE_WOOD_TRAPDOOR_OPEN.get(),
-            WizardsRebornSounds.ARCANE_WOOD_PRESSURE_PLATE_CLICK_OFF.get(), WizardsRebornSounds.ARCANE_WOOD_PRESSURE_PLATE_CLICK_ON.get(),
-            WizardsRebornSounds.ARCANE_WOOD_BUTTON_CLICK_OFF.get(), WizardsRebornSounds.ARCANE_WOOD_BUTTON_CLICK_ON.get()));
+            WizardsRebornSounds.CORK_BAMBOO_WOOD,
+            WizardsRebornSounds.CORK_BAMBOO_DOOR_CLOSE.get(), WizardsRebornSounds.CORK_BAMBOO_DOOR_OPEN.get(),
+            WizardsRebornSounds.CORK_BAMBOO_TRAPDOOR_CLOSE.get(), WizardsRebornSounds.CORK_BAMBOO_TRAPDOOR_OPEN.get(),
+            WizardsRebornSounds.CORK_BAMBOO_PRESSURE_PLATE_CLICK_OFF.get(), WizardsRebornSounds.CORK_BAMBOO_PRESSURE_PLATE_CLICK_ON.get(),
+            WizardsRebornSounds.CORK_BAMBOO_BUTTON_CLICK_OFF.get(), WizardsRebornSounds.CORK_BAMBOO_BUTTON_CLICK_ON.get()));
 
     public static final BlockSetType WISESTONE = BlockSetType.register(new BlockSetType("wisestone", true,
             WizardsRebornSounds.POLISHED_WISESTONE,

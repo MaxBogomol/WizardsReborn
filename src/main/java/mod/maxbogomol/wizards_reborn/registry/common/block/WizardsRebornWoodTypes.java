@@ -20,8 +20,8 @@ public class WizardsRebornWoodTypes {
             WizardsRebornSounds.INNOCENT_WOOD_FENCE_GATE_CLOSE.get(), WizardsRebornSounds.INNOCENT_WOOD_FENCE_GATE_OPEN.get()));
 
     public static final WoodType CORK_BAMBOO = WoodType.register(new WoodType(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo").toString(), WizardsRebornBlockSetTypes.CORK_BAMBOO,
-            WizardsRebornSounds.ARCANE_WOOD, WizardsRebornSounds.ARCANE_WOOD_HANGING_SIGN,
-            WizardsRebornSounds.ARCANE_WOOD_FENCE_GATE_CLOSE.get(), WizardsRebornSounds.ARCANE_WOOD_FENCE_GATE_OPEN.get()));
+            WizardsRebornSounds.CORK_BAMBOO_WOOD, WizardsRebornSounds.ARCANE_WOOD_HANGING_SIGN,
+            WizardsRebornSounds.CORK_BAMBOO_FENCE_GATE_CLOSE.get(), WizardsRebornSounds.CORK_BAMBOO_FENCE_GATE_OPEN.get()));
 
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
