@@ -13,11 +13,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class ArcaneWoodTools {
-    @Deprecated
-    public final Item repairItem;
+import java.util.function.Supplier;
 
-    public ArcaneWoodTools(Item repairItem) {
+public class ArcaneWoodTools {
+
+    public final Supplier<Item> repairItem;
+
+    public ArcaneWoodTools(Supplier<Item> repairItem) {
         this.repairItem = repairItem;
     }
 
@@ -57,7 +59,7 @@ public class ArcaneWoodTools {
                 offStack = player.getItemInHand(InteractionHand.OFF_HAND);
             }
 
-            if (offStack.getItem().equals(repairItem)) {
+            if (offStack.getItem().equals(repairItem.get())) {
                 if (!player.isCreative()) offStack.shrink(1);
                 stack.setDamageValue(0);
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), getRepairSound(stack, level, player), SoundSource.PLAYERS, 1.0f, 1.5f);

@@ -27,7 +27,7 @@ public class VialPotionItem extends AlchemyPotionItem {
     public static final ResourceLocation VIAL_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/models/potion/alchemy_vial.png");
 
     public VialPotionItem(Properties properties) {
-        super(properties, 3, WizardsRebornItems.ALCHEMY_VIAL.get());
+        super(properties, 3, WizardsRebornItems.ALCHEMY_VIAL);
     }
 
     @Override

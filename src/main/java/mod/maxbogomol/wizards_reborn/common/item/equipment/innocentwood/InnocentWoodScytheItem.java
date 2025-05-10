@@ -6,14 +6,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 
+import java.util.function.Supplier;
+
 public class InnocentWoodScytheItem extends ArcaneWoodScytheItem {
 
-    public InnocentWoodScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, float distance, int radius, Item repairItem) {
+    public InnocentWoodScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, float distance, int radius, Supplier<Item> repairItem) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties, distance, radius, repairItem);
     }
 
     @Override
-    public ArcaneWoodTools getTools(Item repairItem) {
+    public ArcaneWoodTools getTools(Supplier<Item> repairItem) {
         return new InnocentWoodTools(repairItem);
     }
 

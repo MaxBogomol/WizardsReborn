@@ -12,6 +12,8 @@ public class WizardsRebornFoods {
     public static final FoodProperties UNDERGROUND_GRAPE = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.2F).build();
     public static final FoodProperties MOR_PIE = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.4F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 600, 0), 1.0F).build();
     public static final FoodProperties ELDER_MOR_PIE = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.4F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 900, 0), 1.0F).build();
+    public static final FoodProperties MOR_SOUP = (new FoodProperties.Builder()).nutrition(7).saturationMod(0.7F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 600, 0), 1.0F).build();
+    public static final FoodProperties ELDER_MOR_SOUP = (new FoodProperties.Builder()).nutrition(7).saturationMod(0.7F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 900, 0), 1.0F).build();
     public static final FoodProperties PITCHER_TURNIP_PIE = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.3F).effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 500, 0), 1.0F).build();
     public static final FoodProperties SHRIMP = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.25F).build();
     public static final FoodProperties FRIED_SHRIMP = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.6F).build();

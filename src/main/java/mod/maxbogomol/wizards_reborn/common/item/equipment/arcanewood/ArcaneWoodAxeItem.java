@@ -12,17 +12,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
+import java.util.function.Supplier;
+
 public class ArcaneWoodAxeItem extends ArcaneAxeItem {
 
     public final ArcaneWoodTools tools;
 
-    public ArcaneWoodAxeItem(Tier tier, float attackDamageModifier, float attackSpeedModifier, Properties properties, Item repairItem) {
+    public ArcaneWoodAxeItem(Tier tier, float attackDamageModifier, float attackSpeedModifier, Properties properties, Supplier<Item> repairItem) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
         this.tools = getTools(repairItem);
         arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.WOODEN);
     }
 
-    public ArcaneWoodTools getTools(Item repairItem) {
+    public ArcaneWoodTools getTools(Supplier<Item> repairItem) {
         return new ArcaneWoodTools(repairItem);
     }
 

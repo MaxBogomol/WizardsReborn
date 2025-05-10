@@ -13,9 +13,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.function.Supplier;
+
 public class InnocentWoodTools extends ArcaneWoodTools {
 
-    public InnocentWoodTools(Item repairItem) {
+    public InnocentWoodTools(Supplier<Item> repairItem) {
         super(repairItem);
     }
 

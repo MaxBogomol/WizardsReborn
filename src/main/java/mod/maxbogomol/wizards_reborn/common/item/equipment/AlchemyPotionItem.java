@@ -34,15 +34,15 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class AlchemyPotionItem extends PlacedItem {
     public int maxUses;
     public static List<Item> potionList = new ArrayList<>();
 
-    @Deprecated
-    public final Item bottle;
+    public final Supplier<Item> bottle;
 
-    public AlchemyPotionItem(Properties properties, int maxUses, Item bottle) {
+    public AlchemyPotionItem(Properties properties, int maxUses, Supplier<Item> bottle) {
         super(properties);
         this.maxUses = maxUses;
         this.bottle = bottle;
@@ -101,10 +101,10 @@ public class AlchemyPotionItem extends PlacedItem {
                         stack.shrink(1);
 
                         if (stack.isEmpty()) {
-                            return new ItemStack(bottle);
+                            return new ItemStack(bottle.get());
                         }
 
-                        player.getInventory().add(new ItemStack(bottle));
+                        player.getInventory().add(new ItemStack(bottle.get()));
                     }
                 }
             }
@@ -209,7 +209,7 @@ public class AlchemyPotionItem extends PlacedItem {
                                         stack.shrink(1);
 
                                         if (stack.isEmpty()) {
-                                            player.setItemInHand(hand, new ItemStack(vial.bottle));
+                                            player.setItemInHand(hand, new ItemStack(vial.bottle.get()));
                                         }
                                     }
                                 }

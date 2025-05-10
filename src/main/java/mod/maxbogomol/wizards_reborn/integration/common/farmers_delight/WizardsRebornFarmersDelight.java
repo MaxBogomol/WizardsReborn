@@ -85,8 +85,8 @@ public class WizardsRebornFarmersDelight {
             ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.1F).effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 125, 0), 1.0F).build();
 
             ItemsLoadedOnly.ARCANE_GOLD_KNIFE = ItemsLoadedOnly.ITEMS.register("arcane_gold_knife", () -> new ArcaneKnifeItem(WizardsRebornItemTiers.ARCANE_GOLD, 0.5F, -2.0F, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
-            ItemsLoadedOnly.ARCANE_WOOD_KNIFE = ItemsLoadedOnly.ITEMS.register("arcane_wood_knife", () -> new ArcaneWoodKnifeItem(WizardsRebornItemTiers.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
-            ItemsLoadedOnly.INNOCENT_WOOD_KNIFE = ItemsLoadedOnly.ITEMS.register("innocent_wood_knife", () -> new InnocentWoodKnifeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+            ItemsLoadedOnly.ARCANE_WOOD_KNIFE = ItemsLoadedOnly.ITEMS.register("arcane_wood_knife", () -> new ArcaneWoodKnifeItem(WizardsRebornItemTiers.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.ARCANE_WOOD_BRANCH).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
+            ItemsLoadedOnly.INNOCENT_WOOD_KNIFE = ItemsLoadedOnly.ITEMS.register("innocent_wood_knife", () -> new InnocentWoodKnifeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.INNOCENT_WOOD_BRANCH).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
 
             ItemsLoadedOnly.MOR_COLONY = ItemsLoadedOnly.ITEMS.register("mor_colony", () -> new MushroomColonyItem(BlocksLoadedOnly.MOR_COLONY.get(), new Item.Properties()));
             ItemsLoadedOnly.ELDER_MOR_COLONY = ItemsLoadedOnly.ITEMS.register("elder_mor_colony", () -> new MushroomColonyItem(BlocksLoadedOnly.ELDER_MOR_COLONY.get(), new Item.Properties()));

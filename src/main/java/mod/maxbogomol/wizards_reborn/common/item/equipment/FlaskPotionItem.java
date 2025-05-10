@@ -27,7 +27,7 @@ public class FlaskPotionItem extends AlchemyPotionItem {
     public static final ResourceLocation FLASK_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/models/potion/alchemy_flask.png");
 
     public FlaskPotionItem(Properties properties) {
-        super(properties, 6, WizardsRebornItems.ALCHEMY_FLASK.get());
+        super(properties, 6, WizardsRebornItems.ALCHEMY_FLASK);
     }
 
     @Override

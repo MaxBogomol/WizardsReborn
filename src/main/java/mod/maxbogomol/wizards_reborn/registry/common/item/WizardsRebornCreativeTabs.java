@@ -872,6 +872,9 @@ public class WizardsRebornCreativeTabs {
                 addInSub(event, FOOD, WizardsRebornFarmersDelight.ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE);
             }
 
+            addInSub(event, FOOD, WizardsRebornItems.MOR_SOUP);
+            addInSub(event, FOOD, WizardsRebornItems.ELDER_MOR_SOUP);
+
             //ALCHEMY_POTIONS
             for (AlchemyPotion potion : AlchemyPotionHandler.getAlchemyPotions()) {
                 if (potion != WizardsRebornAlchemyPotions.EMPTY && potion != WizardsRebornAlchemyPotions.COMBINED) {
