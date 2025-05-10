@@ -640,6 +640,27 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ELDER_MOR_PIE = ITEMS.register("elder_mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.ELDER_MOR_PIE)).setNourishmentTick(1200));
     public static final RegistryObject<Item> PITCHER_TURNIP_PIE = ITEMS.register("pitcher_turnip_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
 
+    public static final RegistryObject<Item> BLIN = ITEMS.register("blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> CREPE = ITEMS.register("crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SWEET_BERRIES_JAM_BLIN = ITEMS.register("sweet_berries_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SWEET_BERRIES_JAM_CREPE = ITEMS.register("sweet_berries_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> GLOW_BERRIES_JAM_BLIN = ITEMS.register("glow_berries_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> GLOW_BERRIES_JAM_CREPE = ITEMS.register("glow_berries_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE_JAM_BLIN = ITEMS.register("underground_grape_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE_JAM_CREPE = ITEMS.register("underground_grape_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> PITCHER_DEW_JAM_BLIN = ITEMS.register("pitcher_dew_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> PITCHER_DEW_JAM_CREPE = ITEMS.register("pitcher_dew_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SHINY_CLOVER_JAM_BLIN = ITEMS.register("shiny_clover_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SHINY_CLOVER_JAM_CREPE = ITEMS.register("shiny_clover_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> MOR_JAM_BLIN = ITEMS.register("mor_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> MOR_JAM_CREPE = ITEMS.register("mor_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ELDER_MOR_JAM_BLIN = ITEMS.register("elder_mor_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ELDER_MOR_JAM_CREPE = ITEMS.register("elder_mor_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> HONEY_BLIN = ITEMS.register("honey_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> HONEY_CREPE = ITEMS.register("honey_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> CHOCOLATE_BLIN = ITEMS.register("chocolate_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> CHOCOLATE_CREPE = ITEMS.register("chocolate_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+
     public static final RegistryObject<Item> MOR_SOUP = ITEMS.register("mor_soup", () -> new ArcaneSoupItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.MOR_SOUP)).setNourishmentTick(1200));
     public static final RegistryObject<Item> ELDER_MOR_SOUP = ITEMS.register("elder_mor_soup", () -> new ArcaneSoupItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.ELDER_MOR_SOUP)).setNourishmentTick(1200));
 

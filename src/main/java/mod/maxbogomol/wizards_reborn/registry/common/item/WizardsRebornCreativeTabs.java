@@ -872,6 +872,27 @@ public class WizardsRebornCreativeTabs {
                 addInSub(event, FOOD, WizardsRebornFarmersDelight.ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE);
             }
 
+            addInSub(event, FOOD, WizardsRebornItems.BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.SWEET_BERRIES_JAM_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.SWEET_BERRIES_JAM_CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.GLOW_BERRIES_JAM_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.GLOW_BERRIES_JAM_CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.UNDERGROUND_GRAPE_JAM_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.UNDERGROUND_GRAPE_JAM_CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.PITCHER_DEW_JAM_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.PITCHER_DEW_JAM_CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.SHINY_CLOVER_JAM_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.SHINY_CLOVER_JAM_CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.MOR_JAM_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.MOR_JAM_CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.ELDER_MOR_JAM_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.ELDER_MOR_JAM_CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.HONEY_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.HONEY_CREPE);
+            addInSub(event, FOOD, WizardsRebornItems.CHOCOLATE_BLIN);
+            addInSub(event, FOOD, WizardsRebornItems.CHOCOLATE_CREPE);
+
             addInSub(event, FOOD, WizardsRebornItems.MOR_SOUP);
             addInSub(event, FOOD, WizardsRebornItems.ELDER_MOR_SOUP);
 
