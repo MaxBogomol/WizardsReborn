@@ -896,6 +896,25 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, FOOD, WizardsRebornItems.MOR_SOUP);
             addInSub(event, FOOD, WizardsRebornItems.ELDER_MOR_SOUP);
 
+            addInSub(event, FOOD, WizardsRebornItems.SWEET_BERRIES_JAM_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.SWEET_BERRIES_JAM_FLASK);
+            addInSub(event, FOOD, WizardsRebornItems.GLOW_BERRIES_JAM_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.GLOW_BERRIES_JAM_FLASK);
+            addInSub(event, FOOD, WizardsRebornItems.UNDERGROUND_GRAPE_JAM_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.UNDERGROUND_GRAPE_JAM_FLASK);
+            addInSub(event, FOOD, WizardsRebornItems.PITCHER_DEW_JAM_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.PITCHER_DEW_JAM_FLASK);
+            addInSub(event, FOOD, WizardsRebornItems.SHINY_CLOVER_JAM_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.SHINY_CLOVER_JAM_FLASK);
+            addInSub(event, FOOD, WizardsRebornItems.MOR_JAM_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.MOR_JAM_FLASK);
+            addInSub(event, FOOD, WizardsRebornItems.ELDER_MOR_JAM_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.ELDER_MOR_JAM_FLASK);
+            addInSub(event, FOOD, WizardsRebornItems.HONEY_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.HONEY_FLASK);
+            addInSub(event, FOOD, WizardsRebornItems.CHOCOLATE_VIAL);
+            addInSub(event, FOOD, WizardsRebornItems.CHOCOLATE_FLASK);
+
             //ALCHEMY_POTIONS
             for (AlchemyPotion potion : AlchemyPotionHandler.getAlchemyPotions()) {
                 if (potion != WizardsRebornAlchemyPotions.EMPTY && potion != WizardsRebornAlchemyPotions.COMBINED) {

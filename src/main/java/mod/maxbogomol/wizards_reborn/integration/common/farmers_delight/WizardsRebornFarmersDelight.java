@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.ArcaneIteratorPag
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CenserPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.CraftingTablePage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.TitledBlockPage;
-import mod.maxbogomol.wizards_reborn.common.item.ArcaneFoodItem;
+import mod.maxbogomol.wizards_reborn.common.item.food.ArcaneFoodItem;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.client.arcanemicon.recipe.CuttingPage;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.ArcaneKnifeItem;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.ArcaneWoodKnifeItem;

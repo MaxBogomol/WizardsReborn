@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.item;
+package mod.maxbogomol.wizards_reborn.common.item.food;
 
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import net.minecraft.network.chat.Component;
@@ -48,6 +48,11 @@ public class ArcaneFoodItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+        applyEffect(stack, level, livingEntity);
+        return super.finishUsingItem(stack, level, livingEntity);
+    }
+
+    public void applyEffect(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (WizardsRebornFarmersDelight.isLoaded()) {
             if (nourishmentTick > 0) {
                 WizardsRebornFarmersDelight.LoadedOnly.addNourishmentEffect(livingEntity, nourishmentTick, nourishmentLevel);
@@ -56,7 +61,6 @@ public class ArcaneFoodItem extends Item {
                 WizardsRebornFarmersDelight.LoadedOnly.addComfortEffect(livingEntity, comfortTick, comfortLevel);
             }
         }
-        return super.finishUsingItem(stack, level, livingEntity);
     }
 
     @Override

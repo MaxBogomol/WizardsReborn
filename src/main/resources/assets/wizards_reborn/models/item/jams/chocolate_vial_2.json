@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizards_reborn:item/alchemy_vial",
+    "layer1": "wizards_reborn:item/jams/chocolate_vial_2"
+  }
+}

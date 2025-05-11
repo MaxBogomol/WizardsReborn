@@ -1,0 +1,45 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizards_reborn:item/alchemy_flask",
+    "layer1": "wizards_reborn:item/underground_grape_jam_flask_0"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "uses": 0
+      },
+      "model": "wizards_reborn:item/jams/underground_grape_jam_flask_0"
+    },
+    {
+      "predicate": {
+        "uses": 1
+      },
+      "model": "wizards_reborn:item/jams/underground_grape_jam_flask_1"
+    },
+    {
+      "predicate": {
+        "uses": 2
+      },
+      "model": "wizards_reborn:item/jams/underground_grape_jam_flask_2"
+    },
+    {
+      "predicate": {
+        "uses": 3
+      },
+      "model": "wizards_reborn:item/jams/underground_grape_jam_flask_3"
+    },
+    {
+      "predicate": {
+        "uses": 4
+      },
+      "model": "wizards_reborn:item/jams/underground_grape_jam_flask_4"
+    },
+    {
+      "predicate": {
+        "uses": 5
+      },
+      "model": "wizards_reborn:item/jams/underground_grape_jam_flask_5"
+    }
+  ]
+}

@@ -28,6 +28,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.*;
+import mod.maxbogomol.wizards_reborn.common.item.food.*;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -664,6 +665,25 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> MOR_SOUP = ITEMS.register("mor_soup", () -> new ArcaneSoupItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.MOR_SOUP)).setNourishmentTick(1200));
     public static final RegistryObject<Item> ELDER_MOR_SOUP = ITEMS.register("elder_mor_soup", () -> new ArcaneSoupItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.ELDER_MOR_SOUP)).setNourishmentTick(1200));
 
+    public static final RegistryObject<Item> SWEET_BERRIES_JAM_VIAL = ITEMS.register("sweet_berries_jam_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SWEET_BERRIES_JAM_FLASK = ITEMS.register("sweet_berries_jam_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> GLOW_BERRIES_JAM_VIAL = ITEMS.register("glow_berries_jam_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> GLOW_BERRIES_JAM_FLASK = ITEMS.register("glow_berries_jam_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE_JAM_VIAL = ITEMS.register("underground_grape_jam_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE_JAM_FLASK = ITEMS.register("underground_grape_jam_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> PITCHER_DEW_JAM_VIAL = ITEMS.register("pitcher_dew_jam_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> PITCHER_DEW_JAM_FLASK = ITEMS.register("pitcher_dew_jam_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SHINY_CLOVER_JAM_VIAL = ITEMS.register("shiny_clover_jam_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SHINY_CLOVER_JAM_FLASK = ITEMS.register("shiny_clover_jam_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> MOR_JAM_VIAL = ITEMS.register("mor_jam_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> MOR_JAM_FLASK = ITEMS.register("mor_jam_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ELDER_MOR_JAM_VIAL = ITEMS.register("elder_mor_jam_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ELDER_MOR_JAM_FLASK = ITEMS.register("elder_mor_jam_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> HONEY_VIAL = ITEMS.register("honey_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> HONEY_FLASK = ITEMS.register("honey_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> CHOCOLATE_VIAL = ITEMS.register("chocolate_vial", () -> new VialJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> CHOCOLATE_FLASK = ITEMS.register("chocolate_flask", () -> new FlaskJamItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.SWEET_BERRIES_JAM)).setNourishmentTick(1200));
+
     public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.SHRIMP), false));
     public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.FRIED_SHRIMP), true));
 
@@ -743,6 +763,25 @@ public class WizardsRebornItems {
             ItemProperties.register(ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
 
             ItemProperties.register(KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, level, entity, seed) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
+
+            ItemProperties.register(SWEET_BERRIES_JAM_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(SWEET_BERRIES_JAM_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(GLOW_BERRIES_JAM_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(GLOW_BERRIES_JAM_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(UNDERGROUND_GRAPE_JAM_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(UNDERGROUND_GRAPE_JAM_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(PITCHER_DEW_JAM_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(PITCHER_DEW_JAM_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(SHINY_CLOVER_JAM_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(SHINY_CLOVER_JAM_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(MOR_JAM_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(MOR_JAM_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(ELDER_MOR_JAM_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(ELDER_MOR_JAM_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(HONEY_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(HONEY_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(CHOCOLATE_VIAL.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
+            ItemProperties.register(CHOCOLATE_FLASK.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> JamItem.getUses(stack));
 
             ItemProperties.register(VODKA_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));
             ItemProperties.register(BOURBON_BOTTLE.get(), new ResourceLocation("stage"), (stack, level, entity, seed) -> DrinkBottleItem.getStageFromItem(stack));

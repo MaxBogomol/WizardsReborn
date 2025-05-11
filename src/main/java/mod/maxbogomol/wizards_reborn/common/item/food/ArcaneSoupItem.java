@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.item;
+package mod.maxbogomol.wizards_reborn.common.item.food;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

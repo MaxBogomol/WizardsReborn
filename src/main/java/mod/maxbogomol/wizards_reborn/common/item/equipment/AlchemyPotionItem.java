@@ -97,15 +97,13 @@ public class AlchemyPotionItem extends PlacedItem {
             if (!player.getAbilities().instabuild) {
                 setUses(stack, getUses(stack) + 1);
                 if (getUses(stack) >= maxUses) {
-                    if (!player.getAbilities().instabuild) {
-                        stack.shrink(1);
+                    stack.shrink(1);
 
-                        if (stack.isEmpty()) {
-                            return new ItemStack(bottle.get());
-                        }
-
-                        player.getInventory().add(new ItemStack(bottle.get()));
+                    if (stack.isEmpty()) {
+                        return new ItemStack(bottle.get());
                     }
+
+                    player.getInventory().add(new ItemStack(bottle.get()));
                 }
             }
         }

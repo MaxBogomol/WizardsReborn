@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizards_reborn:item/alchemy_flask",
+    "layer1": "wizards_reborn:item/jams/sweet_berries_jam_flask_3"
+  }
+}
