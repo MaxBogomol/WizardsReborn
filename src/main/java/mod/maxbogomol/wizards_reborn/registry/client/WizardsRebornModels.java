@@ -47,12 +47,23 @@ public class WizardsRebornModels {
     public static final ModelLayerLocation SNIFFALO_CARPET_LAYER = addLayer("sniffalo_carpet");
     public static final ModelLayerLocation SNIFFALO_ARCANE_ARMOR_LAYER = addLayer("sniffalo_arcane_armor");
 
+    public static final ModelLayerLocation CARGO_CARPET_LAYER = addLayer("cargo_carpet");
+    public static final ModelLayerLocation CARGO_CARPET_OPEN_LAYER = addLayer("cargo_carpet_open");
+
     public static final ModelLayerLocation ALCHEMY_VIAL_LAYER = addLayer("alchemy_vial");
     public static final ModelLayerLocation ALCHEMY_FLASK_LAYER = addLayer("alchemy_flask");
     public static final ModelLayerLocation ALCHEMY_BOTTLE_LAYER = addLayer("alchemy_bottle");
 
-    public static final ModelLayerLocation CARGO_CARPET_LAYER = addLayer("cargo_carpet");
-    public static final ModelLayerLocation CARGO_CARPET_OPEN_LAYER = addLayer("cargo_carpet_open");
+    public static final ModelLayerLocation JAM_VIAL_LAYER_0 = addLayer("jam_vial_0");
+    public static final ModelLayerLocation JAM_VIAL_LAYER_1 = addLayer("jam_vial_1");
+    public static final ModelLayerLocation JAM_VIAL_LAYER_2 = addLayer("jam_vial_2");
+
+    public static final ModelLayerLocation JAM_FLASK_LAYER_0 = addLayer("jam_flask_0");
+    public static final ModelLayerLocation JAM_FLASK_LAYER_1 = addLayer("jam_flask_1");
+    public static final ModelLayerLocation JAM_FLASK_LAYER_2 = addLayer("jam_flask_2");
+    public static final ModelLayerLocation JAM_FLASK_LAYER_3 = addLayer("jam_flask_3");
+    public static final ModelLayerLocation JAM_FLASK_LAYER_4 = addLayer("jam_flask_4");
+    public static final ModelLayerLocation JAM_FLASK_LAYER_5 = addLayer("jam_flask_5");
 
     public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR = null;
@@ -67,12 +78,23 @@ public class WizardsRebornModels {
     public static SniffaloCarpetArmorModel SNIFFALO_CARPET = null;
     public static SniffaloArcaneArmorModel SNIFFALO_ARCANE_ARMOR = null;
 
+    public static CargoCarpetModel CARGO_CARPET = null;
+    public static CargoCarpetOpenModel CARGO_CARPET_OPEN = null;
+
     public static AlchemyVialModel ALCHEMY_VIAL = null;
     public static AlchemyFlaskModel ALCHEMY_FLASK = null;
     public static AlchemyBottleModel ALCHEMY_BOTTLE = null;
 
-    public static CargoCarpetModel CARGO_CARPET = null;
-    public static CargoCarpetOpenModel CARGO_CARPET_OPEN = null;
+    public static JamVialModel JAM_VIAL_0 = null;
+    public static JamVialModel JAM_VIAL_1 = null;
+    public static JamVialModel JAM_VIAL_2 = null;
+
+    public static JamFlaskModel JAM_FLASK_0 = null;
+    public static JamFlaskModel JAM_FLASK_1 = null;
+    public static JamFlaskModel JAM_FLASK_2 = null;
+    public static JamFlaskModel JAM_FLASK_3 = null;
+    public static JamFlaskModel JAM_FLASK_4 = null;
+    public static JamFlaskModel JAM_FLASK_5 = null;
 
     public static ModelResourceLocation JEWELER_TABLE_STONE = addCustomModel("jeweler_table_stone");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME = addCustomModel("altar_of_drought_frame");
@@ -430,12 +452,23 @@ public class WizardsRebornModels {
             event.registerLayerDefinition(SNIFFALO_CARPET_LAYER, SniffaloCarpetArmorModel::createBodyLayer);
             event.registerLayerDefinition(SNIFFALO_ARCANE_ARMOR_LAYER, SniffaloArcaneArmorModel::createBodyLayer);
 
+            event.registerLayerDefinition(CARGO_CARPET_LAYER, CargoCarpetModel::createBodyLayer);
+            event.registerLayerDefinition(CARGO_CARPET_OPEN_LAYER, CargoCarpetOpenModel::createBodyLayer);
+
             event.registerLayerDefinition(ALCHEMY_VIAL_LAYER, AlchemyVialModel::createBodyLayer);
             event.registerLayerDefinition(ALCHEMY_FLASK_LAYER, AlchemyFlaskModel::createBodyLayer);
             event.registerLayerDefinition(ALCHEMY_BOTTLE_LAYER, AlchemyBottleModel::createBodyLayer);
 
-            event.registerLayerDefinition(CARGO_CARPET_LAYER, CargoCarpetModel::createBodyLayer);
-            event.registerLayerDefinition(CARGO_CARPET_OPEN_LAYER, CargoCarpetOpenModel::createBodyLayer);
+            event.registerLayerDefinition(JAM_VIAL_LAYER_0, () -> JamVialModel.createBodyLayer(0));
+            event.registerLayerDefinition(JAM_VIAL_LAYER_1, () -> JamVialModel.createBodyLayer(1));
+            event.registerLayerDefinition(JAM_VIAL_LAYER_2, () -> JamVialModel.createBodyLayer(2));
+
+            event.registerLayerDefinition(JAM_FLASK_LAYER_0, () -> JamFlaskModel.createBodyLayer(0));
+            event.registerLayerDefinition(JAM_FLASK_LAYER_1, () -> JamFlaskModel.createBodyLayer(1));
+            event.registerLayerDefinition(JAM_FLASK_LAYER_2, () -> JamFlaskModel.createBodyLayer(2));
+            event.registerLayerDefinition(JAM_FLASK_LAYER_3, () -> JamFlaskModel.createBodyLayer(3));
+            event.registerLayerDefinition(JAM_FLASK_LAYER_4, () -> JamFlaskModel.createBodyLayer(4));
+            event.registerLayerDefinition(JAM_FLASK_LAYER_5, () -> JamFlaskModel.createBodyLayer(5));
         }
 
         @SubscribeEvent
@@ -453,12 +486,23 @@ public class WizardsRebornModels {
             SNIFFALO_CARPET = new SniffaloCarpetArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_CARPET_LAYER));
             SNIFFALO_ARCANE_ARMOR = new SniffaloArcaneArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_ARCANE_ARMOR_LAYER));
 
+            CARGO_CARPET = new CargoCarpetModel(event.getEntityModels().bakeLayer(CARGO_CARPET_LAYER));
+            CARGO_CARPET_OPEN = new CargoCarpetOpenModel(event.getEntityModels().bakeLayer(CARGO_CARPET_OPEN_LAYER));
+
             ALCHEMY_VIAL = new AlchemyVialModel(event.getEntityModels().bakeLayer(ALCHEMY_VIAL_LAYER));
             ALCHEMY_FLASK = new AlchemyFlaskModel(event.getEntityModels().bakeLayer(ALCHEMY_FLASK_LAYER));
             ALCHEMY_BOTTLE = new AlchemyBottleModel(event.getEntityModels().bakeLayer(ALCHEMY_BOTTLE_LAYER));
 
-            CARGO_CARPET = new CargoCarpetModel(event.getEntityModels().bakeLayer(CARGO_CARPET_LAYER));
-            CARGO_CARPET_OPEN = new CargoCarpetOpenModel(event.getEntityModels().bakeLayer(CARGO_CARPET_OPEN_LAYER));
+            JAM_VIAL_0 = new JamVialModel(event.getEntityModels().bakeLayer(JAM_VIAL_LAYER_0));
+            JAM_VIAL_1 = new JamVialModel(event.getEntityModels().bakeLayer(JAM_VIAL_LAYER_1));
+            JAM_VIAL_2 = new JamVialModel(event.getEntityModels().bakeLayer(JAM_VIAL_LAYER_2));
+
+            JAM_FLASK_0 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_0));
+            JAM_FLASK_1 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_1));
+            JAM_FLASK_2 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_2));
+            JAM_FLASK_3 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_3));
+            JAM_FLASK_4 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_4));
+            JAM_FLASK_5 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_5));
         }
     }
 

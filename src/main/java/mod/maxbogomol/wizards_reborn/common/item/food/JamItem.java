@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -150,5 +151,15 @@ public class JamItem extends PlacedItem {
     public static void setUses(ItemStack stack, int uses) {
         CompoundTag nbt = stack.getOrCreateTag();
         nbt.putInt("uses", uses);
+    }
+
+    public static ResourceLocation getModelTexture(ItemStack stack) {
+        String string = stack.getDescriptionId();
+        int i = string.indexOf(".");
+        string = string.substring(i + 1);
+        i = string.indexOf(".");
+        String modId = string.substring(0, i);
+        String drinkId = string.substring(i + 1);
+        return new ResourceLocation(modId, "textures/models/jam/" + drinkId + ".png");
     }
 }

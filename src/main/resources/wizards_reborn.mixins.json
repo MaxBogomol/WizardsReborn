@@ -7,6 +7,7 @@
     "common.AbstractArrowMixin",
     "common.BlockMixin",
     "common.BowItemMixin",
+    "common.CampfireBlockMixin",
     "common.CreeperMixin",
     "common.FaceAttachedHorizontalDirectionalBlockMixin",
     "common.InventoryChangeTriggerMixin",

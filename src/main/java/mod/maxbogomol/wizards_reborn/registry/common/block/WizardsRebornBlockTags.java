@@ -18,4 +18,6 @@ public class WizardsRebornBlockTags {
     public static final TagKey<Block> BAULKS = TagKey.create(Registries.BLOCK, new ResourceLocation(WizardsReborn.MOD_ID, "baulks"));
     public static final TagKey<Block> CROSS_BAULKS = TagKey.create(Registries.BLOCK, new ResourceLocation(WizardsReborn.MOD_ID, "cross_baulks"));
     public static final TagKey<Block> CROSS_BAULKS_CONNECTION = TagKey.create(Registries.BLOCK, new ResourceLocation(WizardsReborn.MOD_ID, "cross_baulks_connection"));
+    public static final TagKey<Block> CAMPFIRE_SIGNAL_SMOKE = TagKey.create(Registries.BLOCK, new ResourceLocation(WizardsReborn.MOD_ID, "campfire_signal_smoke"));
+    public static final TagKey<Block> SALT_CAMPFIRE_SIGNAL_SMOKE = TagKey.create(Registries.BLOCK, new ResourceLocation(WizardsReborn.MOD_ID, "salt_campfire_signal_smoke"));
 }

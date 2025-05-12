@@ -80,9 +80,9 @@ public class WizardsRebornFarmersDelight {
 
     public static class LoadedOnly {
         public static void makeItems() {
-            ItemsLoadedOnly.MOR_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.15F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 150, 0), 1.0F).build();
-            ItemsLoadedOnly.ELDER_MOR_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.15F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 225, 0), 1.0F).build();
-            ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.1F).effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 125, 0), 1.0F).build();
+            ItemsLoadedOnly.MOR_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.15F).fast().effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 150, 0), 1.0F).build();
+            ItemsLoadedOnly.ELDER_MOR_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.15F).fast().effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 225, 0), 1.0F).build();
+            ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE_FOOD = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.1F).fast().effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 125, 0), 1.0F).build();
 
             ItemsLoadedOnly.ARCANE_GOLD_KNIFE = ItemsLoadedOnly.ITEMS.register("arcane_gold_knife", () -> new ArcaneKnifeItem(WizardsRebornItemTiers.ARCANE_GOLD, 0.5F, -2.0F, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_COLD));
             ItemsLoadedOnly.ARCANE_WOOD_KNIFE = ItemsLoadedOnly.ITEMS.register("arcane_wood_knife", () -> new ArcaneWoodKnifeItem(WizardsRebornItemTiers.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.ARCANE_WOOD_BRANCH).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));

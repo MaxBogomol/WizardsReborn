@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:hay_bale",
+    "wizards_reborn:arcane_linen_hay",
+    {
+      "id": "#farmersdelight:campfire_signal_smoke",
+      "required": false
+    }
+  ]
+}
