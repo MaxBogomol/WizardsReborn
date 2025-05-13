@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -50,7 +51,7 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
 
     public SaltCampfireBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(BlockStateProperties.LIT, true));
+        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(BlockStateProperties.LIT, true).setValue(BlockStateProperties.SIGNAL_FIRE, true));
     }
 
     @Nonnull
@@ -67,13 +68,14 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.WATERLOGGED).add(FACING);
         builder.add(BlockStateProperties.LIT);
+        builder.add(BlockStateProperties.SIGNAL_FIRE);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER).setValue(BlockStateProperties.SIGNAL_FIRE, isSmokeSource(context.getLevel().getBlockState(context.getClickedPos().below())));
     }
 
     @Override
@@ -162,7 +164,7 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return direction.getOpposite() == state.getValue(FACING) && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : state;
+        return direction.getOpposite() == state.getValue(FACING) && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : state.setValue(BlockStateProperties.SIGNAL_FIRE, isSmokeSource(level.getBlockState(currentPos.below())));
     }
 
     @Nullable
@@ -208,5 +210,9 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
         if (random.nextInt(10) == 0) {
             level.playLocalSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + random.nextFloat(), random.nextFloat() * 0.7F + 0.6F, false);
         }
+    }
+
+    public boolean isSmokeSource(BlockState state) {
+        return state.is(WizardsRebornBlockTags.SALT_CAMPFIRE_SIGNAL_SMOKE);
     }
 }

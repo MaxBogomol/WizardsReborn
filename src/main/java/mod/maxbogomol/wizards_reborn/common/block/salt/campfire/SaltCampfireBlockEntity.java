@@ -149,8 +149,8 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0.35f, 0).setEasing(Easing.SINE_OUT).build())
                         .setLifetime(30)
-                        .randomVelocity(0.005f)
-                        .addVelocity(0, 0.04f, 0)
+                        .randomVelocity(getBlockState().getValue(BlockStateProperties.SIGNAL_FIRE) ? 0.01f : 0.005f)
+                        .addVelocity(0, getBlockState().getValue(BlockStateProperties.SIGNAL_FIRE) ? 0.1f : 0.04f, 0)
                         .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
             if (random.nextFloat() < 0.3) {
@@ -158,12 +158,12 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.45f, 0).build())
+                        .setScaleData(GenericParticleData.create(getBlockState().getValue(BlockStateProperties.SIGNAL_FIRE) ? 0.7f : 0.45f, 0).build())
                         .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                         .setLightData(LightParticleData.DEFAULT)
-                        .setLifetime(60)
+                        .setLifetime(getBlockState().getValue(BlockStateProperties.SIGNAL_FIRE) ? 80 : 60)
                         .randomVelocity(0.005f)
-                        .addVelocity(0, 0.03f, 0)
+                        .addVelocity(0, getBlockState().getValue(BlockStateProperties.SIGNAL_FIRE) ? 0.1f : 0.03f, 0)
                         .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
 
@@ -227,7 +227,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                                 .setLifetime(50)
                                 .randomVelocity(0.005f)
                                 .addVelocity(0, 0.03f, 0)
-                                .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
+                                .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() + 0.35f, getBlockPos().getZ() + pos.z());
                     }
                 }
             }
