@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_polished_wisestone_slabs": {
+    "has_polished_wisestone_slab": {
       "conditions": {
         "items": [
           {
             "items": [
-              "wizards_reborn:polished_wisestone_slabs"
+              "wizards_reborn:polished_wisestone_slab"
             ]
           }
         ]
@@ -28,7 +28,7 @@
   },
   "requirements": [
     [
-      "has_polished_wisestone_slabs",
+      "has_polished_wisestone_slab",
       "has_nether_salt"
     ]
   ],

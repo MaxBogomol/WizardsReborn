@@ -68,18 +68,18 @@ public class StatisticPage extends Page {
         }
         Player player = Minecraft.getInstance().player;
 
-        String progressionText = String.valueOf(Math.round((float) currentKnowledges / totalKnowledges * 1000) / 10f) + "%";
-        String knowledgeText = String.valueOf(currentKnowledges) + "/" + String.valueOf(totalKnowledges);
-        String pointsText = String.valueOf(currentPoints) + "/" + String.valueOf(totalPoints) + " (" + String.valueOf(points) + ")";
-        String spellsText = String.valueOf(currentSpells) + "/" + String.valueOf(totalSpells);
-        String healthText = String.valueOf(Math.round((player.getHealth() + player.getAbsorptionAmount()) * 10) / 10f) + "/" + String.valueOf(Math.round(player.getMaxHealth() * 10) / 10f);
-        String foodText = String.valueOf(Math.round(player.getFoodData().getFoodLevel() * 10) / 10f) + " (" + String.valueOf(Math.round(player.getFoodData().getSaturationLevel() * 10) / 10f) + ")";
-        String armorText = String.valueOf(Math.round(player.getArmorValue() * 10) / 10f);
-        String magicArmorText = String.valueOf(Math.round(player.getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get()).getValue() * 10) / 10f) + "%";
-        String wissenDiscountText = String.valueOf(Math.round(WissenUtil.getWissenCostModifierWithDiscount(player) * 1000) / 10f) + "%";
-        String experienceText = String.valueOf(player.experienceLevel) + " (" + String.valueOf(getPlayerXP(player)) + ")";
+        String progressionText = I18n.get(this.text + ".progression",Math.round((float) currentKnowledges / totalKnowledges * 1000) / 10f + "%");
+        String knowledgeText = I18n.get(this.text + ".knowledge", currentKnowledges + "/" + totalKnowledges);
+        String pointsText = I18n.get(this.text + ".points", currentPoints + "/" + totalPoints + " (" + points + ")");
+        String spellsText = I18n.get(this.text + ".spells", currentSpells + "/" + totalSpells);
+        String healthText = I18n.get(this.text + ".health", Math.round((player.getHealth() + player.getAbsorptionAmount()) * 10) / 10f + "/" + Math.round(player.getMaxHealth() * 10) / 10f);
+        String foodText = I18n.get(this.text + ".food", Math.round(player.getFoodData().getFoodLevel() * 10) / 10f + " (" + Math.round(player.getFoodData().getSaturationLevel() * 10) / 10f + ")");
+        String armorText = I18n.get(this.text + ".armor", Math.round(player.getArmorValue() * 10) / 10f);
+        String magicArmorText = I18n.get(this.text + ".magic_armor", Math.round(player.getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get()).getValue() * 10) / 10f + "%");
+        String wissenDiscountText = I18n.get(this.text + ".wissen_discount", Math.round(WissenUtil.getWissenCostModifierWithDiscount(player) * 1000) / 10f + "%");
+        String experienceText = I18n.get(this.text + ".experience", player.experienceLevel + " (" + getPlayerXP(player) + ")");
 
-        String text = I18n.get(this.text, progressionText, knowledgeText, pointsText, spellsText, healthText, foodText, armorText, magicArmorText, wissenDiscountText, experienceText);
+        String text = progressionText + " \n " + knowledgeText + " \n " + pointsText + " \n " + spellsText + " \n " + healthText + " \n " + foodText + " \n " + armorText + " \n " + magicArmorText + " \n " + wissenDiscountText + " \n " + experienceText;
 
         drawWrappingText(book, gui, text, x + 4, y + 24, 124);
     }
