@@ -2,7 +2,7 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "wizards_reborn:item/alchemy_flask",
-    "layer1": "wizards_reborn:item/honey_flask_0"
+    "layer1": "wizards_reborn:item/jams/honey_flask_0"
   },
   "overrides": [
     {

@@ -2,7 +2,7 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "wizards_reborn:item/alchemy_vial",
-    "layer1": "wizards_reborn:item/elder_mor_jam_vial_0"
+    "layer1": "wizards_reborn:item/jams/elder_mor_jam_vial_0"
   },
   "overrides": [
     {
