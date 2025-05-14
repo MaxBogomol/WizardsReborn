@@ -592,6 +592,8 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, ARCANE_NATURE, WizardsRebornItems.TOTEM_OF_DISENCHANT);
             addInSub(event, ARCANE_NATURE, WizardsRebornItems.ARCANE_ITERATOR);
 
+            ARCANE_NATURE.addDisplayItem(WizardsRebornItems.CREATIVE_WISSEN_STORAGE.get());
+
             //ALCHEMY
             addInSub(event, ALCHEMY, WizardsRebornItems.FLUID_PIPE);
             addInSub(event, ALCHEMY, WizardsRebornItems.FLUID_EXTRACTOR);
@@ -610,6 +612,9 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, ALCHEMY, WizardsRebornItems.ALCHEMY_BOTTLE);
 
             addInSub(event, ALCHEMY, WizardsRebornItems.SNIFFALO_EGG);
+
+            ALCHEMY.addDisplayItem(WizardsRebornItems.CREATIVE_FLUID_STORAGE.get());
+            ALCHEMY.addDisplayItem(WizardsRebornItems.CREATIVE_STEAM_STORAGE.get());
 
             //CRYSTAL_RITUALS
             addInSub(event, CRYSTAL_RITUALS, WizardsRebornItems.LIGHT_EMITTER);
@@ -648,6 +653,8 @@ public class WizardsRebornCreativeTabs {
                     addInSub(event, CRYSTAL_RITUALS, stack);
                 }
             }
+
+            CRYSTAL_RITUALS.addDisplayItem(WizardsRebornItems.CREATIVE_LIGHT_STORAGE.get());
 
             //AUTOMATION
             addInSub(event, AUTOMATION, WizardsRebornItems.ARCANE_LEVER);
