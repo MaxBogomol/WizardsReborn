@@ -49,6 +49,7 @@ import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTrans
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlock;
 import mod.maxbogomol.wizards_reborn.common.block.ore.ArcanumOreBlock;
 import mod.maxbogomol.wizards_reborn.common.block.ore.NetherSaltOreBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pancake.PancakeBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid.FluidExtractorBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.steam.SteamExtractorBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBlock;
@@ -517,6 +518,9 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> MAGENTA_CARGO_CARPET = BLOCKS.register("magenta_cargo_carpet", () -> new CargoCarpetBlock(BlockBehaviour.Properties.copy(Blocks.MAGENTA_WOOL).noOcclusion()));
     public static final RegistryObject<Block> PINK_CARGO_CARPET = BLOCKS.register("pink_cargo_carpet", () -> new CargoCarpetBlock(BlockBehaviour.Properties.copy(Blocks.PINK_WOOL).noOcclusion()));
     public static final RegistryObject<Block> RAINBOW_CARGO_CARPET = BLOCKS.register("rainbow_cargo_carpet", () -> new CargoCarpetBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).noOcclusion()));
+
+    //FOOD
+    public static final RegistryObject<Block> PANCAKE = BLOCKS.register("pancake", () -> new PancakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).noOcclusion()));
 
     //FLUIDS
     public static final RegistryObject<LiquidBlock> MUNDANE_BREW = BLOCKS.register("mundane_brew", () -> new LiquidBlock(WizardsRebornFluids.MUNDANE_BREW, BlockBehaviour.Properties.copy(Blocks.WATER)));

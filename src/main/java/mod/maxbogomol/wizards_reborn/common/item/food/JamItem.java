@@ -159,7 +159,7 @@ public class JamItem extends PlacedItem {
         string = string.substring(i + 1);
         i = string.indexOf(".");
         String modId = string.substring(0, i);
-        String drinkId = string.substring(i + 1);
-        return new ResourceLocation(modId, "textures/models/jam/" + drinkId + ".png");
+        String jamId = string.substring(i + 1);
+        return new ResourceLocation(modId, "textures/models/jam/" + jamId + ".png");
     }
 }

@@ -18,6 +18,7 @@ public enum ArcaneEnchantmentTypes implements ArcaneEnchantmentType {
     SCYTHE,
     KNIFE,
     BOW,
+    CROSSBOW,
     HELMET,
     CHESTPLATE,
     LEGGINGS,

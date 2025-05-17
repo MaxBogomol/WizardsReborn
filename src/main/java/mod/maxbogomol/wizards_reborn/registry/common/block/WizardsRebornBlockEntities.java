@@ -29,6 +29,7 @@ import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBloc
 import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pancake.PancakeBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid.FluidExtractorBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.steam.SteamExtractorBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBlockEntity;
@@ -44,8 +45,8 @@ import mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter.ItemSorterB
 import mod.maxbogomol.wizards_reborn.common.block.sensor.wissen_activator.WissenActivatorBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage.SteamThermalStorageBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience.ExperienceTotemBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.totem.flames.TotemOfFlamesBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_altar.WissenAltarBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_cell.WissenCellBlockEntity;
@@ -148,6 +149,9 @@ public class WizardsRebornBlockEntities {
     //EQUIPMENT
     public static RegistryObject<BlockEntityType<CargoCarpetBlockEntity>> CARGO_CARPET = BLOCK_ENTITIES.register("cargo_carpet", () -> BlockEntityType.Builder.of(CargoCarpetBlockEntity::new, WizardsRebornBlocks.WHITE_CARGO_CARPET.get(), WizardsRebornBlocks.LIGHT_GRAY_CARGO_CARPET.get(), WizardsRebornBlocks.GRAY_CARGO_CARPET.get(), WizardsRebornBlocks.BLACK_CARGO_CARPET.get(), WizardsRebornBlocks.BROWN_CARGO_CARPET.get(), WizardsRebornBlocks.RED_CARGO_CARPET.get(), WizardsRebornBlocks.ORANGE_CARGO_CARPET.get(), WizardsRebornBlocks.YELLOW_CARGO_CARPET.get(), WizardsRebornBlocks.LIME_CARGO_CARPET.get(), WizardsRebornBlocks.GREEN_CARGO_CARPET.get(), WizardsRebornBlocks.CYAN_CARGO_CARPET.get(), WizardsRebornBlocks.LIGHT_BLUE_CARGO_CARPET.get(), WizardsRebornBlocks.BLUE_CARGO_CARPET.get(), WizardsRebornBlocks.PURPLE_CARGO_CARPET.get(), WizardsRebornBlocks.MAGENTA_CARGO_CARPET.get(), WizardsRebornBlocks.PINK_CARGO_CARPET.get(), WizardsRebornBlocks.RAINBOW_CARGO_CARPET.get()).build(null));
 
+    //FOOD
+    public static RegistryObject<BlockEntityType<PancakeBlockEntity>> PANCAKE = BLOCK_ENTITIES.register("pancake", () -> BlockEntityType.Builder.of(PancakeBlockEntity::new, WizardsRebornBlocks.PANCAKE.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }
@@ -210,6 +214,9 @@ public class WizardsRebornBlockEntities {
 
             //EQUIPMENT
             BlockEntityRenderers.register(CARGO_CARPET.get(), (r) -> new CargoCarpetRenderer());
+
+            //FOOD
+            BlockEntityRenderers.register(PANCAKE.get(), (r) -> new PancakeRenderer());
         }
     }
 }

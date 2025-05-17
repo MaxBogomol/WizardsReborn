@@ -65,6 +65,8 @@ public class WizardsRebornModels {
     public static final ModelLayerLocation JAM_FLASK_LAYER_4 = addLayer("jam_flask_4");
     public static final ModelLayerLocation JAM_FLASK_LAYER_5 = addLayer("jam_flask_5");
 
+    public static final ModelLayerLocation PANCAKE_LAYER = addLayer("pancake");
+
     public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_SLIM_ARMOR = null;
@@ -95,6 +97,8 @@ public class WizardsRebornModels {
     public static JamFlaskModel JAM_FLASK_3 = null;
     public static JamFlaskModel JAM_FLASK_4 = null;
     public static JamFlaskModel JAM_FLASK_5 = null;
+
+    public static PancakeModel PANCAKE = null;
 
     public static ModelResourceLocation JEWELER_TABLE_STONE = addCustomModel("jeweler_table_stone");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME = addCustomModel("altar_of_drought_frame");
@@ -469,6 +473,8 @@ public class WizardsRebornModels {
             event.registerLayerDefinition(JAM_FLASK_LAYER_3, () -> JamFlaskModel.createBodyLayer(3));
             event.registerLayerDefinition(JAM_FLASK_LAYER_4, () -> JamFlaskModel.createBodyLayer(4));
             event.registerLayerDefinition(JAM_FLASK_LAYER_5, () -> JamFlaskModel.createBodyLayer(5));
+
+            event.registerLayerDefinition(PANCAKE_LAYER, PancakeModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -503,6 +509,8 @@ public class WizardsRebornModels {
             JAM_FLASK_3 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_3));
             JAM_FLASK_4 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_4));
             JAM_FLASK_5 = new JamFlaskModel(event.getEntityModels().bakeLayer(JAM_FLASK_LAYER_5));
+
+            PANCAKE = new PancakeModel(event.getEntityModels().bakeLayer(PANCAKE_LAYER));
         }
     }
 

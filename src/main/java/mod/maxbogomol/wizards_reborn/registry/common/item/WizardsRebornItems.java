@@ -22,6 +22,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipCompone
 import mod.maxbogomol.wizards_reborn.client.model.item.CollarItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.render.curio.*;
+import mod.maxbogomol.wizards_reborn.common.block.pancake.PancakeBlock;
 import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
@@ -68,6 +69,7 @@ import net.minecraftforge.registries.RegistryObject;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
 
 public class WizardsRebornItems {
@@ -555,6 +557,9 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> CORK_BAMBOO_SMOKING_PIPE = ITEMS.register("cork_bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
+    public static final RegistryObject<Item> ARCANE_WOOD_CROSSBOW = ITEMS.register("arcane_wood_crossbow", () -> new ArcaneCrossbowItem(new Item.Properties().durability(698)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
+    public static final RegistryObject<Item> ARCANE_WOOD_FISHING_ROD = ITEMS.register("arcane_wood_fishing_rod", () -> new ArcaneFishingRodItem(new Item.Properties().durability(96)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
+    public static final RegistryObject<Item> ARCANE_WOOD_SHEARS = ITEMS.register("arcane_wood_shears", () -> new ArcaneShearsItem(new Item.Properties().durability(357)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
 
     public static final RegistryObject<Item> BLAZE_REAP = ITEMS.register("blaze_reap", () -> new ArcanePickaxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 1, -2.8f, new Item.Properties().rarity(Rarity.EPIC)));
 
@@ -641,26 +646,26 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ELDER_MOR_PIE = ITEMS.register("elder_mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.ELDER_MOR_PIE)).setNourishmentTick(1200));
     public static final RegistryObject<Item> PITCHER_TURNIP_PIE = ITEMS.register("pitcher_turnip_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
 
-    public static final RegistryObject<Item> BLIN = ITEMS.register("blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> CREPE = ITEMS.register("crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> SWEET_BERRIES_JAM_BLIN = ITEMS.register("sweet_berries_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> SWEET_BERRIES_JAM_CREPE = ITEMS.register("sweet_berries_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> GLOW_BERRIES_JAM_BLIN = ITEMS.register("glow_berries_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> GLOW_BERRIES_JAM_CREPE = ITEMS.register("glow_berries_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> UNDERGROUND_GRAPE_JAM_BLIN = ITEMS.register("underground_grape_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> UNDERGROUND_GRAPE_JAM_CREPE = ITEMS.register("underground_grape_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> PITCHER_DEW_JAM_BLIN = ITEMS.register("pitcher_dew_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> PITCHER_DEW_JAM_CREPE = ITEMS.register("pitcher_dew_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> SHINY_CLOVER_JAM_BLIN = ITEMS.register("shiny_clover_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> SHINY_CLOVER_JAM_CREPE = ITEMS.register("shiny_clover_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> MOR_JAM_BLIN = ITEMS.register("mor_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> MOR_JAM_CREPE = ITEMS.register("mor_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> ELDER_MOR_JAM_BLIN = ITEMS.register("elder_mor_jam_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> ELDER_MOR_JAM_CREPE = ITEMS.register("elder_mor_jam_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> HONEY_BLIN = ITEMS.register("honey_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> HONEY_CREPE = ITEMS.register("honey_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> CHOCOLATE_BLIN = ITEMS.register("chocolate_blin", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
-    public static final RegistryObject<Item> CHOCOLATE_CREPE = ITEMS.register("chocolate_crepe", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> BLIN = ITEMS.register("blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> CREPE = ITEMS.register("crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SWEET_BERRIES_JAM_BLIN = ITEMS.register("sweet_berries_jam_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SWEET_BERRIES_JAM_CREPE = ITEMS.register("sweet_berries_jam_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> GLOW_BERRIES_JAM_BLIN = ITEMS.register("glow_berries_jam_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> GLOW_BERRIES_JAM_CREPE = ITEMS.register("glow_berries_jam_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE_JAM_BLIN = ITEMS.register("underground_grape_jam_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE_JAM_CREPE = ITEMS.register("underground_grape_jam_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> PITCHER_DEW_JAM_BLIN = ITEMS.register("pitcher_dew_jam_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> PITCHER_DEW_JAM_CREPE = ITEMS.register("pitcher_dew_jam_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SHINY_CLOVER_JAM_BLIN = ITEMS.register("shiny_clover_jam_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> SHINY_CLOVER_JAM_CREPE = ITEMS.register("shiny_clover_jam_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> MOR_JAM_BLIN = ITEMS.register("mor_jam_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> MOR_JAM_CREPE = ITEMS.register("mor_jam_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ELDER_MOR_JAM_BLIN = ITEMS.register("elder_mor_jam_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ELDER_MOR_JAM_CREPE = ITEMS.register("elder_mor_jam_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> HONEY_BLIN = ITEMS.register("honey_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> HONEY_CREPE = ITEMS.register("honey_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> CHOCOLATE_BLIN = ITEMS.register("chocolate_blin", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> CHOCOLATE_CREPE = ITEMS.register("chocolate_crepe", () -> new PancakeItem(new Item.Properties().food(WizardsRebornFoods.SWEET_BERRIES_BLIN)).setNourishmentTick(1200));
 
     public static final RegistryObject<Item> MOR_SOUP = ITEMS.register("mor_soup", () -> new ArcaneSoupItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.MOR_SOUP)).setNourishmentTick(1200));
     public static final RegistryObject<Item> ELDER_MOR_SOUP = ITEMS.register("elder_mor_soup", () -> new ArcaneSoupItem(new Item.Properties().stacksTo(16).food(WizardsRebornFoods.ELDER_MOR_SOUP)).setNourishmentTick(1200));
@@ -898,6 +903,45 @@ public class WizardsRebornItems {
 
         AlchemyPotionItem.potionList.add(ALCHEMY_VIAL_POTION.get());
         AlchemyPotionItem.potionList.add(ALCHEMY_FLASK_POTION.get());
+
+        PancakeBlock.jamMap.put(BLIN.get(), new HashMap<>());
+        PancakeBlock.jamMap.get(BLIN.get()).put(SWEET_BERRIES_JAM_VIAL.get(), SWEET_BERRIES_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(SWEET_BERRIES_JAM_FLASK.get(), SWEET_BERRIES_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(GLOW_BERRIES_JAM_VIAL.get(), GLOW_BERRIES_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(GLOW_BERRIES_JAM_FLASK.get(), GLOW_BERRIES_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(UNDERGROUND_GRAPE_JAM_VIAL.get(), UNDERGROUND_GRAPE_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(UNDERGROUND_GRAPE_JAM_FLASK.get(), UNDERGROUND_GRAPE_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(PITCHER_DEW_JAM_VIAL.get(), PITCHER_DEW_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(PITCHER_DEW_JAM_FLASK.get(), PITCHER_DEW_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(SHINY_CLOVER_JAM_VIAL.get(), SHINY_CLOVER_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(SHINY_CLOVER_JAM_FLASK.get(), SHINY_CLOVER_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(MOR_JAM_VIAL.get(), MOR_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(MOR_JAM_FLASK.get(), MOR_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(ELDER_MOR_JAM_VIAL.get(), ELDER_MOR_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(ELDER_MOR_JAM_FLASK.get(), ELDER_MOR_JAM_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(HONEY_VIAL.get(), HONEY_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(HONEY_FLASK.get(), HONEY_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(CHOCOLATE_VIAL.get(), CHOCOLATE_BLIN.get());
+        PancakeBlock.jamMap.get(BLIN.get()).put(CHOCOLATE_FLASK.get(), CHOCOLATE_BLIN.get());
+        PancakeBlock.jamMap.put(CREPE.get(), new HashMap<>());
+        PancakeBlock.jamMap.get(CREPE.get()).put(SWEET_BERRIES_JAM_VIAL.get(), SWEET_BERRIES_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(SWEET_BERRIES_JAM_FLASK.get(), SWEET_BERRIES_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(GLOW_BERRIES_JAM_VIAL.get(), GLOW_BERRIES_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(GLOW_BERRIES_JAM_FLASK.get(), GLOW_BERRIES_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(UNDERGROUND_GRAPE_JAM_VIAL.get(), UNDERGROUND_GRAPE_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(UNDERGROUND_GRAPE_JAM_FLASK.get(), UNDERGROUND_GRAPE_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(PITCHER_DEW_JAM_VIAL.get(), PITCHER_DEW_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(PITCHER_DEW_JAM_FLASK.get(), PITCHER_DEW_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(SHINY_CLOVER_JAM_VIAL.get(), SHINY_CLOVER_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(SHINY_CLOVER_JAM_FLASK.get(), SHINY_CLOVER_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(MOR_JAM_VIAL.get(), MOR_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(MOR_JAM_FLASK.get(), MOR_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(ELDER_MOR_JAM_VIAL.get(), ELDER_MOR_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(ELDER_MOR_JAM_FLASK.get(), ELDER_MOR_JAM_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(HONEY_VIAL.get(), HONEY_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(HONEY_FLASK.get(), HONEY_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(CHOCOLATE_VIAL.get(), CHOCOLATE_CREPE.get());
+        PancakeBlock.jamMap.get(CREPE.get()).put(CHOCOLATE_FLASK.get(), CHOCOLATE_CREPE.get());
 
         DispenserBlock.registerBehavior(ARCANUM_DUST.get(), new OptionalDispenseItemBehavior() {
             protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
