@@ -6,8 +6,11 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
@@ -46,6 +49,11 @@ public class ArcaneShovelItem extends ShovelItem implements IArcaneItem {
         ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());
         list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, level, flags));
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        return ArcaneEnchantmentUtil.use(level, player, hand);
     }
 
     @Override

@@ -1,0 +1,6 @@
+{
+  "parent": "wizards_reborn:item/arcane_gold_shears",
+  "textures": {
+    "layer0": "wizards_reborn:item/arcane_gold_shears_open"
+  }
+}

@@ -13,6 +13,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantm
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
@@ -47,6 +48,23 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.SCYTHE);
         }
         return false;
+    }
+
+    public static InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+
+        if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.THROW) > 0) {
+            float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+            List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+            int wissen = WissenUtil.getWissenInItems(items);
+            int cost = (int) (150 * (1 - costModifier));
+
+            if (WissenUtil.canRemoveWissen(wissen, cost)) {
+                player.startUsingItem(hand);
+                return InteractionResultHolder.pass(stack);
+            }
+        }
+        return InteractionResultHolder.pass(stack);
     }
 
     public static void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {

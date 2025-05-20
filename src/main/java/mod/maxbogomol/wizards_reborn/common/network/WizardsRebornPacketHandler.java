@@ -6,6 +6,9 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.*;
 import mod.maxbogomol.wizards_reborn.common.network.block.*;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstPacket;
+import mod.maxbogomol.wizards_reborn.common.network.entity.SniffaloScreenPacket;
+import mod.maxbogomol.wizards_reborn.common.network.entity.ThrownScytheScreenshakePacket;
+import mod.maxbogomol.wizards_reborn.common.network.entity.ThrownShearsBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.item.*;
 import mod.maxbogomol.wizards_reborn.common.network.knowledge.*;
 import mod.maxbogomol.wizards_reborn.common.network.lightray.LightRayBurstPacket;
@@ -131,6 +134,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         SonarResonatePacket.register(HANDLER, id++);
 
         ThrownScytheScreenshakePacket.register(HANDLER, id++);
+        ThrownShearsBurstPacket.register(HANDLER, id++);
     }
 
     public static SimpleChannel getHandler() {

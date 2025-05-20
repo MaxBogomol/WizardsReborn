@@ -30,6 +30,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.*;
 import mod.maxbogomol.wizards_reborn.common.item.food.*;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -559,7 +560,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
     public static final RegistryObject<Item> ARCANE_WOOD_CROSSBOW = ITEMS.register("arcane_wood_crossbow", () -> new ArcaneCrossbowItem(new Item.Properties().durability(698)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
     public static final RegistryObject<Item> ARCANE_WOOD_FISHING_ROD = ITEMS.register("arcane_wood_fishing_rod", () -> new ArcaneFishingRodItem(new Item.Properties().durability(96)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
-    public static final RegistryObject<Item> ARCANE_WOOD_SHEARS = ITEMS.register("arcane_wood_shears", () -> new ArcaneShearsItem(new Item.Properties().durability(357)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
+    public static final RegistryObject<Item> ARCANE_GOLD_SHEARS = ITEMS.register("arcane_gold_shears", () -> new ArcaneShearsItem(new Item.Properties().durability(357)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
 
     public static final RegistryObject<Item> BLAZE_REAP = ITEMS.register("blaze_reap", () -> new ArcanePickaxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 1, -2.8f, new Item.Properties().rarity(Rarity.EPIC)));
 
@@ -761,7 +762,6 @@ public class WizardsRebornItems {
             CuriosRendererRegistry.register(MOR_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
 
-            FluffyFurItems.makeBow(ARCANE_WOOD_BOW.get());
             BowHandler.addBow(ARCANE_WOOD_BOW.get());
 
             ItemProperties.register(ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
@@ -824,12 +824,14 @@ public class WizardsRebornItems {
 
         @SubscribeEvent
         public static void modelRegistryItems(ModelEvent.RegisterAdditional event) {
-            FluffyFurModels.addBowItemModel(event, WizardsReborn.MOD_ID, "arcane_wood_bow");
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_scythe"));
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_scythe"));
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_gold_scythe"));
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "blaze_reap"));
             event.register(LargeItemRenderer.getInHeadModelResourceLocation(WizardsReborn.MOD_ID, "arcane_hopper"));
+
+            FluffyFurModels.addBowItemModel(event, WizardsReborn.MOD_ID, "arcane_wood_bow");
+            WizardsRebornModels.addArcaneShearsItemModel(event, WizardsReborn.MOD_ID, "arcane_gold_shears");
 
             for (String skin : LeatherCollarItem.skins.values()) {
                 event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + skin), "inventory"));

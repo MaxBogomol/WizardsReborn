@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.wizards_reborn.client.gui.container.SniffaloContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
-import mod.maxbogomol.wizards_reborn.common.network.SniffaloScreenPacket;
+import mod.maxbogomol.wizards_reborn.common.network.entity.SniffaloScreenPacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornLootTables;
 import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;

@@ -772,7 +772,7 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANE_WOOD_BOW);
             addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANE_WOOD_CROSSBOW);
             addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANE_WOOD_FISHING_ROD);
-            addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANE_WOOD_SHEARS);
+            addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANE_GOLD_SHEARS);
 
             addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANE_WAND);
             addInSub(event, EQUIPMENT, WizardsRebornItems.WISSEN_WAND);

@@ -21,6 +21,7 @@ public class WizardsRebornParticles {
     public static RegistryObject<GenericParticleType> KARMA = PARTICLES.register("karma", GenericParticleType::new);
     public static RegistryObject<LeavesParticleType> ARCANE_WOOD_LEAVES = PARTICLES.register("arcane_wood_leaves", LeavesParticleType::new);
     public static RegistryObject<LeavesParticleType> INNOCENT_WOOD_LEAVES= PARTICLES.register("innocence_wood_leaves", LeavesParticleType::new);
+    public static RegistryObject<GenericParticleType> THROWN_SHEARS_CUT = PARTICLES.register("thrown_shears_cut", GenericParticleType::new);
 
     public static void register(IEventBus eventBus) {
         PARTICLES.register(eventBus);
@@ -34,6 +35,7 @@ public class WizardsRebornParticles {
             particleEngine.register(KARMA.get(), GenericParticleType.Factory::new);
             particleEngine.register(ARCANE_WOOD_LEAVES.get(), LeavesParticleType.Factory::new);
             particleEngine.register(INNOCENT_WOOD_LEAVES.get(), LeavesParticleType.Factory::new);
+            particleEngine.register(THROWN_SHEARS_CUT.get(), GenericParticleType.Factory::new);
         }
     }
 }

@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "wizards_reborn.refmap.json",
   "mixins": [
+    "client.ItemInHandRendererMixin",
     "common.AbstractArrowMixin",
     "common.BlockMixin",
     "common.BowItemMixin",
@@ -16,6 +17,7 @@
   ],
   "client": [
     "client.GuiGraphicsMixin",
+    "client.ItemInHandLayerMixin",
     "client.LevelRendererMixin"
   ],
   "minVersion": "0.8",

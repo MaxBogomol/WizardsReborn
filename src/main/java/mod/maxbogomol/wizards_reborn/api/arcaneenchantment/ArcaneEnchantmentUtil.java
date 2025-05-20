@@ -12,8 +12,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -210,10 +214,24 @@ public class ArcaneEnchantmentUtil {
         return list;
     }
 
+    public static InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        InteractionResultHolder<ItemStack> holder;
+        holder = ThrowArcaneEnchantment.use(level, player, hand);
+        if (holder.getResult() != InteractionResult.PASS) return holder;
+        holder = SonarArcaneEnchantment.use(level, player, hand);
+        if (holder.getResult() != InteractionResult.PASS) return holder;
+        holder = SilkSongArcaneEnchantment.use(level, player, hand);
+        if (holder.getResult() != InteractionResult.PASS) return holder;
+
+        ItemStack stack = player.getItemInHand(hand);
+        return InteractionResultHolder.pass(stack);
+    }
+
     public static void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
         LifeMendingArcaneEnchantment.inventoryTick(stack, level, entity, slot, isSelected);
         WissenMendingArcaneEnchantment.inventoryTick(stack, level, entity, slot, isSelected);
         SonarArcaneEnchantment.inventoryTick(stack, level, entity, slot, isSelected);
+        SilkSongArcaneEnchantment.inventoryTick(stack, level, entity, slot, isSelected);
     }
 
     public static int damageItem(ItemStack stack, int amount, LivingEntity entity) {

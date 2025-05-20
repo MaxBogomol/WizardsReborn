@@ -1,13 +1,18 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.TooltipFlag;
@@ -28,9 +33,8 @@ public class ArcaneShearsItem extends ShearsItem implements IArcaneItem {
     public ArcaneShearsItem(Properties properties) {
         super(properties);
         arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BREAKABLE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.CROSSBOW);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.RANGED_WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.SHEARS);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.TOOL);
     }
 
     @Override
@@ -54,6 +58,11 @@ public class ArcaneShearsItem extends ShearsItem implements IArcaneItem {
         ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());
         list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, level, flags));
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        return ArcaneEnchantmentUtil.use(level, player, hand);
     }
 
     @Override
@@ -84,5 +93,19 @@ public class ArcaneShearsItem extends ShearsItem implements IArcaneItem {
             return repairMaterial.get().test(repair);
         }
         return super.isValidRepairItem(toRepair, repair);
+    }
+
+    public static int getOpen(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (nbt.contains(WizardsReborn.MOD_ID+":open")) {
+            return nbt.getInt(WizardsReborn.MOD_ID+":open");
+        }
+
+        return 0;
+    }
+
+    public static void setOpen(ItemStack stack, int open) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putInt(WizardsReborn.MOD_ID+":open", open);
     }
 }

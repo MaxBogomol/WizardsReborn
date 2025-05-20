@@ -5,9 +5,6 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SonarArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -56,24 +53,7 @@ public class ArcanePickaxeItem extends PickaxeItem implements IArcaneItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-
-        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SONAR);
-        if (enchantmentLevel > 0) {
-            float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
-            List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
-            int wissen = WissenUtil.getWissenInItems(items);
-            int cost = (int) (60 * (1 - costModifier));
-
-            if (WissenUtil.canRemoveWissen(wissen, cost)) {
-                if (SonarArcaneEnchantment.getCooldown(stack) <= 0 && SonarArcaneEnchantment.getOres(stack).isEmpty()) {
-                    SonarArcaneEnchantment.writeOres(player, stack, enchantmentLevel);
-                    WissenUtil.removeWissenFromWissenItems(items, cost);
-                    return InteractionResultHolder.success(stack);
-                }
-            }
-        }
-        return InteractionResultHolder.pass(stack);
+        return ArcaneEnchantmentUtil.use(level, player, hand);
     }
 
     @Override

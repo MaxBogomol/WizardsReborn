@@ -15,6 +15,7 @@ public class WizardsRebornArcaneEnchantments {
     public static ArcaneEnchantment EAGLE_SHOT = new EagleShotArcaneEnchantment(WizardsReborn.MOD_ID+":eagle_shot", 4);
     public static ArcaneEnchantment SPLIT = new SplitArcaneEnchantment(WizardsReborn.MOD_ID+":split", 4);
     public static ArcaneEnchantment SONAR = new SonarArcaneEnchantment(WizardsReborn.MOD_ID+":sonar", 3);
+    public static ArcaneEnchantment SILK_SONG = new SilkSongArcaneEnchantment(WizardsReborn.MOD_ID+":silk_song", 1);
 
     public static void register() {
         ArcaneEnchantmentHandler.register(WISSEN_MENDING);
@@ -26,5 +27,6 @@ public class WizardsRebornArcaneEnchantments {
         ArcaneEnchantmentHandler.register(EAGLE_SHOT);
         ArcaneEnchantmentHandler.register(SPLIT);
         ArcaneEnchantmentHandler.register(SONAR);
+        ArcaneEnchantmentHandler.register(SILK_SONG);
     }
 }

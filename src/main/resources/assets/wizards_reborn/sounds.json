@@ -54,6 +54,11 @@
   "boom": {"sounds": ["wizards_reborn:boom"], "subtitle": "sounds.wizards_reborn.boom"},
   "moai": {"sounds": ["wizards_reborn:moai"], "subtitle": "sounds.wizards_reborn.moai"},
 
+  "thrown_shears_open": {"sounds": ["wizards_reborn:equipment/thrown_shears/open"], "subtitle": "sounds.wizards_reborn.thrown_shears_open"},
+  "thrown_shears_throw": {"sounds": ["wizards_reborn:equipment/thrown_shears/throw"], "subtitle": "sounds.wizards_reborn.thrown_shears_throw"},
+  "thrown_shears_hit": {"sounds": ["wizards_reborn:equipment/thrown_shears/hit1", "wizards_reborn:equipment/thrown_shears/hit2", "wizards_reborn:equipment/thrown_shears/hit3", "wizards_reborn:equipment/thrown_shears/hit4"], "subtitle": "sounds.wizards_reborn.thrown_shears_hit"},
+  "thrown_shears_return_close": {"sounds": ["wizards_reborn:equipment/thrown_shears/return_close"], "subtitle": "sounds.wizards_reborn.thrown_shears_return_close"},
+
   "arcane_gold_break": {"sounds": ["wizards_reborn:blocks/arcane_gold/break1", "wizards_reborn:blocks/arcane_gold/break2", "wizards_reborn:blocks/arcane_gold/break3", "wizards_reborn:blocks/arcane_gold/break4"], "subtitle": "subtitles.block.generic.break"},
   "arcane_gold_step": {"sounds": ["wizards_reborn:blocks/arcane_gold/step1", "wizards_reborn:blocks/arcane_gold/step2", "wizards_reborn:blocks/arcane_gold/step3", "wizards_reborn:blocks/arcane_gold/step4", "wizards_reborn:blocks/arcane_gold/step5"], "subtitle": "subtitles.block.generic.footsteps"},
   "arcane_gold_place": {"sounds": ["wizards_reborn:blocks/arcane_gold/break1", "wizards_reborn:blocks/arcane_gold/break2", "wizards_reborn:blocks/arcane_gold/break3", "wizards_reborn:blocks/arcane_gold/break4"], "subtitle": "subtitles.block.generic.place"},

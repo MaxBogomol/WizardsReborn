@@ -3,7 +3,9 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SonarResonatePacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -17,6 +19,8 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -126,34 +130,57 @@ public class SonarArcaneEnchantment extends ArcaneEnchantment {
         }
     }
 
-    public static void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
-        if (getCooldown(stack) > 0) {
-            setCooldown(stack, getCooldown(stack) - 1);
-        }
+    public static InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
-        List<Map<Integer, Float>> ores = getOres(stack);
+        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SONAR);
+        if (enchantmentLevel > 0) {
+            float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+            List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+            int wissen = WissenUtil.getWissenInItems(items);
+            int cost = (int) (60 * (1 - costModifier));
 
-        if (getTick(stack) > 0 && !ores.isEmpty()) {
-            setTick(stack, getTick(stack) - 1);
-
-            if (getTick(stack) <= 0) {
-                Map<Integer, Float> map = ores.get(0);
-                int id = (Integer) map.keySet().toArray()[0];
-                float distance = map.get((Integer) map.keySet().toArray()[0]);
-
-                float volume = 1;
-                if (distance > 0) {
-                    volume = 1f - (distance / 11f);
+            if (WissenUtil.canRemoveWissen(wissen, cost)) {
+                if (SonarArcaneEnchantment.getCooldown(stack) <= 0 && SonarArcaneEnchantment.getOres(stack).isEmpty()) {
+                    SonarArcaneEnchantment.writeOres(player, stack, enchantmentLevel);
+                    WissenUtil.removeWissenFromWissenItems(items, cost);
+                    return InteractionResultHolder.success(stack);
                 }
-                if (volume < 0.1f) volume = 0.1f;
-                playSound(entity.level(), entity.position(), volume, id);
+            }
+        }
+        return InteractionResultHolder.pass(stack);
+    }
 
-                Vec3 pos = entity.getLookAngle().scale(1.5f).add(entity.getEyePosition());
-                level.addParticle(ParticleTypes.NOTE, pos.x(), pos.y(), pos.z(), (id % 7) / 7f, 0.0D, 0.0D);
-                setTick(stack, 10);
+    public static void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SONAR) > 0) {
+            if (getCooldown(stack) > 0) {
+                setCooldown(stack, getCooldown(stack) - 1);
+            }
 
-                ores.remove(0);
-                setOres(stack, ores);
+            List<Map<Integer, Float>> ores = getOres(stack);
+
+            if (getTick(stack) > 0 && !ores.isEmpty()) {
+                setTick(stack, getTick(stack) - 1);
+
+                if (getTick(stack) <= 0) {
+                    Map<Integer, Float> map = ores.get(0);
+                    int id = (Integer) map.keySet().toArray()[0];
+                    float distance = map.get((Integer) map.keySet().toArray()[0]);
+
+                    float volume = 1;
+                    if (distance > 0) {
+                        volume = 1f - (distance / 11f);
+                    }
+                    if (volume < 0.1f) volume = 0.1f;
+                    playSound(entity.level(), entity.position(), volume, id);
+
+                    Vec3 pos = entity.getLookAngle().scale(1.5f).add(entity.getEyePosition());
+                    level.addParticle(ParticleTypes.NOTE, pos.x(), pos.y(), pos.z(), (id % 7) / 7f, 0.0D, 0.0D);
+                    setTick(stack, 10);
+
+                    ores.remove(0);
+                    setOres(stack, ores);
+                }
             }
         }
     }

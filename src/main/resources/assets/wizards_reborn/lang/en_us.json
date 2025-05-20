@@ -536,6 +536,9 @@
   "item.wizards_reborn.cork_bamboo_smoking_pipe": "Cork Bamboo Wood Smoking Pipe",
 
   "item.wizards_reborn.arcane_wood_bow": "Arcane Wood Bow",
+  "item.wizards_reborn.arcane_wood_crossbow": "Arcane Wood Crossbow",
+  "item.wizards_reborn.arcane_wood_fishing_rod": "Arcane Wood Fishing Rod",
+  "item.wizards_reborn.arcane_gold_shears": "Arcane Gold Shears",
 
   "item.wizards_reborn.blaze_reap": "Blaze Reap",
 
@@ -882,6 +885,7 @@
   "arcane_enchantment.wizards_reborn.eagle_shot": "Eagle Shot",
   "arcane_enchantment.wizards_reborn.split": "Split",
   "arcane_enchantment.wizards_reborn.sonar": "Sonar",
+  "arcane_enchantment.wizards_reborn.silk_song": "Silk Song",
 
   "_comment_8": "Crystal Rituals",
   "crystal_ritual.wizards_reborn.empty": "Empty",

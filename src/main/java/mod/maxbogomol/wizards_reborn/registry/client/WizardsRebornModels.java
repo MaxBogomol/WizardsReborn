@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.registry.client;
 
+import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.block.*;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
+import mod.maxbogomol.wizards_reborn.client.model.item.ArcaneShearsItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
@@ -586,6 +588,34 @@ public class WizardsRebornModels {
     public static void bakePipeModel(ArrayList<PipeModel> pipes, ModelManager manager) {
         for (PipeModel model : pipes) {
             model.init(manager);
+        }
+    }
+
+    public static void addArcaneShearsItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item) {
+        addArcaneShearsItemModel(map, item, new ArcaneShearsItemOverrides());
+    }
+
+    public static void addArcaneShearsItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item, ArcaneShearsItemOverrides itemOverrides) {
+        BakedModel model = map.get(new ModelResourceLocation(item, "inventory"));
+        CustomModel customModel = new CustomModel(model, itemOverrides);
+
+        itemOverrides.openModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_open"), "inventory"));
+        itemOverrides.thrownModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_thrown"), "inventory"));
+
+        map.replace(new ModelResourceLocation(item, "inventory"), customModel);
+    }
+
+    public static ArrayList<ModelResourceLocation> getArcaneShearsModels(String modId, String item) {
+        ArrayList<ModelResourceLocation> models = new ArrayList<>();
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_open"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_thrown"), "inventory"));
+        return models;
+    }
+
+    public static void addArcaneShearsItemModel(ModelEvent.RegisterAdditional event, String modId, String item) {
+        for (ModelResourceLocation model : getArcaneShearsModels(modId, item)) {
+            event.register(model);
         }
     }
 }

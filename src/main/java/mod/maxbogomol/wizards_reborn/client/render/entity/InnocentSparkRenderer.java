@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InnocentSparkRenderer<T extends InnocentSparkEntity> extends EntityRenderer<T> {
+    public static Color RED_COLOR = new Color(0.694F, 0.274F, 0.309F);
 
     public InnocentSparkRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -31,7 +32,7 @@ public class InnocentSparkRenderer<T extends InnocentSparkEntity> extends Entity
     @Override
     public void render(InnocentSparkEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
         Color color1 = WizardsRebornArcaneEnchantments.LIFE_ROOTS.getColor();
-        Color color2 = new Color(0.694F, 0.274F, 0.309F);
+        Color color2 = RED_COLOR;
 
         List<TrailPoint> trail = new ArrayList<>(entity.trailPointBuilder.getTrailPoints());
         if (trail.size() > 1 && entity.tickCount >= entity.trailPointBuilder.trailLength.get()) {

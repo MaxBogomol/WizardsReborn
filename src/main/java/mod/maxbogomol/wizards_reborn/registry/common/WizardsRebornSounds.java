@@ -338,6 +338,11 @@ public class WizardsRebornSounds {
     public static final RegistryObject<SoundEvent> BOOM = SOUND_EVENTS.register("boom", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "boom")));
     public static final RegistryObject<SoundEvent> MOAI = SOUND_EVENTS.register("moai", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "moai")));
 
+    public static final RegistryObject<SoundEvent> THROWN_SHEARS_OPEN = SOUND_EVENTS.register("thrown_shears_open", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_shears_open")));
+    public static final RegistryObject<SoundEvent> THROWN_SHEARS_THROW = SOUND_EVENTS.register("thrown_shears_throw", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_shears_throw")));
+    public static final RegistryObject<SoundEvent> THROWN_SHEARS_HIT = SOUND_EVENTS.register("thrown_shears_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_shears_hit")));
+    public static final RegistryObject<SoundEvent> THROWN_SHEARS_RETURN_CLOSE = SOUND_EVENTS.register("thrown_shears_return_close", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_shears_return_close")));
+
     public static void register(IEventBus eventBus) {
         SOUND_EVENTS.register(eventBus);
     }

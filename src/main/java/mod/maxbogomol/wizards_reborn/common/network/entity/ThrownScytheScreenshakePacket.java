@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.entity;
 
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeInstance;

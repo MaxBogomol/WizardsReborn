@@ -7,7 +7,6 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.ThrowArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ScytheItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -75,23 +74,9 @@ public class ArcaneScytheItem extends ScytheItem implements IArcaneItem, ICustom
         return super.hurtEnemy(stack, target, attacker);
     }
 
-
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-
-        if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.THROW) > 0) {
-            float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
-            List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
-            int wissen = WissenUtil.getWissenInItems(items);
-            int cost = (int) (150 * (1 - costModifier));
-
-            if (WissenUtil.canRemoveWissen(wissen, cost)) {
-                player.startUsingItem(hand);
-                return InteractionResultHolder.pass(stack);
-            }
-        }
-        return InteractionResultHolder.pass(stack);
+        return ArcaneEnchantmentUtil.use(level, player, hand);
     }
 
     @Override

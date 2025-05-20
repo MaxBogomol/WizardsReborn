@@ -536,6 +536,9 @@
   "item.wizards_reborn.cork_bamboo_smoking_pipe": "Пробково-бамбуковая курительная трубка",
 
   "item.wizards_reborn.arcane_wood_bow": "Арканово-древесный лук",
+  "item.wizards_reborn.arcane_wood_crossbow": "Арканово-древесный арбалет",
+  "item.wizards_reborn.arcane_wood_fishing_rod": "Арканово-древесная удочка",
+  "item.wizards_reborn.arcane_gold_shears": "Аркановые золотые ножницы",
 
   "item.wizards_reborn.blaze_reap": "Пламекос",
 
@@ -882,6 +885,7 @@
   "arcane_enchantment.wizards_reborn.eagle_shot": "Орлиный выстрел",
   "arcane_enchantment.wizards_reborn.split": "Расщепление",
   "arcane_enchantment.wizards_reborn.sonar": "Сонар",
+  "arcane_enchantment.wizards_reborn.silk_song": "Шёлковая песнь",
 
   "_comment_8": "Кристальные ритуалы",
   "crystal_ritual.wizards_reborn.empty": "Пусто",

@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.behavior.CubeParticleBehavior;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
@@ -12,11 +12,11 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.common.network.entity.ThrownScytheScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.entity.ThrownShearsBurstPacket;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -46,39 +46,40 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
-import java.awt.*;
-import java.util.List;
 import java.util.*;
 
-public class ThrownScytheEntity extends ThrowableItemProjectile {
-    public static final EntityDataAccessor<Optional<UUID>> ownerId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    public static final EntityDataAccessor<Integer> endTickId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> blockId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> blockTickId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Float> baseDamageId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> magicDamageId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Integer> slotId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Float> endPointXId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> endPointYId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> endPointZId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Boolean> isRightId = SynchedEntityData.defineId(ThrownScytheEntity.class, EntityDataSerializers.BOOLEAN);
+public class ThrownShearsEntity extends ThrowableItemProjectile {
+    public static final EntityDataAccessor<Optional<UUID>> ownerId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    public static final EntityDataAccessor<Integer> endTickId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> blockId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> blockTickId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> baseDamageId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> magicDamageId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Integer> slotId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> endPointXId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> endPointYId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> endPointZId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Boolean> isRightId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> isCutId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> cutTickId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> isThrownId = SynchedEntityData.defineId(ThrownShearsEntity.class, EntityDataSerializers.BOOLEAN);
 
     public TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(30);
     public Map<UUID, Integer> damagedEntities = new HashMap<>();
 
-    public ThrownScytheEntity(EntityType<?> type, Level level) {
-        super(WizardsRebornEntities.THROWN_SCYTHE.get(), level);
+    public ThrownShearsEntity(EntityType<?> type, Level level) {
+        super(WizardsRebornEntities.THROWN_SHEARS.get(), level);
         noPhysics = false;
     }
 
-    public ThrownScytheEntity(Level level) {
-        super(WizardsRebornEntities.THROWN_SCYTHE.get(), level);
+    public ThrownShearsEntity(Level level) {
+        super(WizardsRebornEntities.THROWN_SHEARS.get(), level);
     }
 
-    public ThrownScytheEntity(Level level, double x, double y, double z) {
-        super(WizardsRebornEntities.THROWN_SCYTHE.get(), x, y, z, level);
+    public ThrownShearsEntity(Level level, double x, double y, double z) {
+        super(WizardsRebornEntities.THROWN_SHEARS.get(), x, y, z, level);
     }
 
     public void setData(Entity owner, float baseDamage, float magicDamage, int slot, boolean isRight) {
@@ -96,23 +97,56 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
             RayHitResult hitResult = RayCast.getHit(level(), new RayCastContext(position(), position().add(getDeltaMovement())));
 
             if (!level().isClientSide()) {
-                Vec3 mov = getDeltaMovement();
-                for (int i = 0; i < 5; i++) {
-                    double lx = Mth.lerp((double) i / 5f, getX(), mov.x());
-                    double ly = Mth.lerp((double) i / 5f, getY(), mov.y());
-                    double lz = Mth.lerp((double) i / 5f, getZ(), mov.z());
-                    List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lx - 1, ly - 0.1f, lz - 1, lx + 1, ly + 0.1f, lz + 1));
-                    if (tickCount < 5) {
-                        if (getOwner() instanceof LivingEntity living) {
-                            if (entityList.contains(living)) {
-                                entityList.remove(living);
+                if (getIsCut()) {
+                    Player player = getSender();
+                    if (player != null) {
+                        for (int i = 0; i < 8; i++) {
+                            float tick = (float) Math.toRadians(i * 45f);
+                            int right = getIsRight() ? 1 : -1;
+
+                            float yaw = -(tick * right);
+
+                            float x = (float) Math.cos(yaw) * 2;
+                            float z = (float) Math.sin(yaw) * 2;
+
+                            double lx = getX() + x;
+                            double ly = getY() + player.getBbHeight() / 1.5f;
+                            double lz = getZ() + z;
+                            List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lx - 1f, ly - 0.3f, lz - 1f, lx + 1f, ly + 0.5f, lz + 1f));
+                            if (tickCount < 5) {
+                                if (getOwner() instanceof LivingEntity living) {
+                                    if (entityList.contains(living)) {
+                                        entityList.remove(living);
+                                    }
+                                }
+                            }
+                            for (LivingEntity target : entityList) {
+                                if (!damagedEntities.keySet().contains(target.getUUID()) && !target.equals(player)) {
+                                    hitEntity(target);
+                                    damagedEntities.put(target.getUUID(), 10);
+                                }
                             }
                         }
                     }
-                    for (LivingEntity target : entityList) {
-                        if (!damagedEntities.keySet().contains(target.getUUID())) {
-                            hitEntity(target);
-                            damagedEntities.put(target.getUUID(), 20);
+                } else {
+                    Vec3 mov = getDeltaMovement();
+                    for (int i = 0; i < 5; i++) {
+                        double lx = Mth.lerp((double) i / 5f, getX(), mov.x());
+                        double ly = Mth.lerp((double) i / 5f, getY(), mov.y());
+                        double lz = Mth.lerp((double) i / 5f, getZ(), mov.z());
+                        List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lx - 0.2f, ly - 0.1f, lz - 0.2f, lx + 0.2f, ly + 0.3f, lz + 0.2f));
+                        if (tickCount < 5) {
+                            if (getOwner() instanceof LivingEntity living) {
+                                if (entityList.contains(living)) {
+                                    entityList.remove(living);
+                                }
+                            }
+                        }
+                        for (LivingEntity target : entityList) {
+                            if (!damagedEntities.keySet().contains(target.getUUID())) {
+                                hitEntity(target);
+                                damagedEntities.put(target.getUUID(), 20);
+                            }
                         }
                     }
                 }
@@ -128,74 +162,104 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                 }
             }
 
-            if (!getBlock() && (hitResult.hasBlock() || (position().y() < level().dimensionType().minY() + FluffyFurConfig.VOID_HEIGHT.get()))) {
-                setBlock(true);
-                setBlockTick(30);
-                setDeltaMovement(0, 0, 0);
-                setPos(hitResult.getPos());
-            }
+            if (getIsCut()) {
+                Player player = getSender();
+                if (player != null) {
+                    setPos(player.position());
 
-            Vec3 motion = getDeltaMovement();
-            if (motion.distanceTo(Vec3.ZERO) < 0.02f && !getBlock()) {
-                setFade(true);
-                setFadeTick(30);
-                refund();
-            } else if (!getBlock()) {
-                setDeltaMovement(motion.x * 0.95, motion.y * 0.95, motion.z * 0.95);
+                    if (!getBlock()) {
+                        for (int i = 0; i < 8; i++) {
+                            float tick = (float) Math.toRadians(i * 45f);
+                            int right = getIsRight() ? 1 : -1;
 
-                Vec3 pos = position();
-                xo = pos.x;
-                yo = pos.y;
-                zo = pos.z;
-                setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
-            }
+                            float yaw = -(tick * right);
 
+                            float x = (float) Math.cos(yaw) * 2;
+                            float z = (float) Math.sin(yaw) * 2;
 
-            if (level().isClientSide()) {
-                int right = getIsRight() ? 1 : -1;
-                float yaw = (float) -tickCount * right * 0.8f + (getIsRight() ? 0.3f : -0.3f) + (float) Math.toRadians(-getYRot()) + (getIsRight() ? 0 : (float) Math.PI);
-                float pitch = (float) (Math.PI / 2f);
-
-                float x = (float) Math.sin(pitch) * (float) Math.cos(yaw);
-                float y = (float) Math.cos(pitch);
-                float z = (float) Math.sin(pitch) * (float) Math.sin(yaw);
-
-                addTrail(new Vec3(position().toVector3f()).add(x, y, z));
-                Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
-                Vec3 pos = new Vec3(getPosition(0.5f).toVector3f()).add(x, y, z);
-
-                if (random.nextFloat() < 0.8f) {
-                    ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                            .setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                            .setBehavior(CubeParticleBehavior.create().build())
-                            .setColorData(ColorParticleData.create(color).build())
-                            .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
-                            .setLifetime(40)
-                            .randomVelocity(0.02f, 0.02f, 0.02f)
-                            .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
+                            hitResult = RayCast.getHit(level(), new RayCastContext(position().add(x, player.getBbHeight() / 1.5f, z), position().add(x, player.getBbHeight() / 1.5f + 0.1f, z)));
+                            if (hitResult.hasBlock() || (position().y() < level().dimensionType().minY() + FluffyFurConfig.VOID_HEIGHT.get())) {
+                                setCutTick(0);
+                                setIsCut(false);
+                                setBlock(true);
+                                setBlockTick(5);
+                                setPos(hitResult.getPos());
+                            }
+                        }
+                    }
+                }
+                setDeltaMovement(Vec3.ZERO);
+            } else {
+                if (getCutTick() > 0) {
+                    Player player = getSender();
+                    if (player != null) {
+                        double distance = Math.sqrt(distanceToSqr(player));
+                        if (distance < 3) {
+                            setIsCut(true);
+                        } else {
+                            target(player.position().add(0, player.getBbHeight(), 0), 0.5f);
+                        }
+                    }
                 }
 
-                int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, getItem());
-                if (i > 0) {
-                    if (random.nextFloat() < 0.8f) {
-                        ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                                .setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                                .setBehavior(CubeParticleBehavior.create().build())
-                                .setColorData(ColorParticleData.create(0.882f, 0.498f, 0.404f, 0.979f, 0.912f, 0.585f).build())
-                                .setTransparencyData(GenericParticleData.create(0.6f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
-                                .setLifetime(40)
-                                .randomVelocity(0.02f, 0.02f, 0.02f)
-                                .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
+                if (!getBlock() && (hitResult.hasBlock() || (position().y() < level().dimensionType().minY() + FluffyFurConfig.VOID_HEIGHT.get())) && !getIsCut()) {
+                    setCutTick(0);
+                    setIsCut(false);
+                    setBlock(true);
+                    setBlockTick(5);
+                    setPos(hitResult.getPos());
+                }
+
+                Vec3 motion = getDeltaMovement();
+                if (!getBlock()) {
+                    float friction = getCutTick() > 0 ? 0.99f : 0.9f;
+                    float gravity = getCutTick() > 0 ? 0 : 0.05f;
+                    setDeltaMovement(motion.x * friction, (motion.y > 0 ? motion.y * friction : motion.y) - gravity, motion.z * friction);
+
+                    Vec3 pos = position();
+                    xo = pos.x;
+                    yo = pos.y;
+                    zo = pos.z;
+                    setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
+                }
+            }
+
+            if (level().isClientSide()) {
+                if (!getIsCut()) {
+                    addTrail(new Vec3(position().toVector3f()));
+                } else {
+                    Player player = getSender();
+                    if (player != null) {
+                        int right = getIsRight() ? 1 : -1;
+                        ParticleBuilder.create(WizardsRebornParticles.THROWN_SHEARS_CUT)
+                                .setBehavior(ParticleBehavior.create(90, 0, 0)
+                                        .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-15, 15).build())
+                                        .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-15, 15).build())
+                                        .setZSpinData(SpinParticleData.create(-0.5f * right, -2 * right).randomOffset().build())
+                                        .build())
+                                .setColorData(ColorParticleData.create(WizardsRebornArcaneEnchantments.SILK_SONG.getColor()).build())
+                                .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                .setScaleData(GenericParticleData.create(3f, 1.5f).setEasing(Easing.SINE_IN_OUT).build())
+                                .setLifetime(10, 5)
+                                .randomVelocity(0.15f, 0, 0.15f)
+                                .spawn(level(), player.position().add(0, player.getBbHeight() / 1.5f, 0));
                     }
                 }
             } else {
-                if (!getFade()) {
-                    if ((!getBlock() && tickCount % 4 == 0) || (getBlock() && tickCount % 8 == 0)) {
-                        level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.5f, 1.3f);
+                if (!getFade() && getIsCut()) {
+                    if ((!getBlock() && tickCount % 3 == 0)) {
+                        Player player = getSender();
+                        if (player != null) {
+                            float tick = tickCount;
+                            int right = getIsRight() ? 1 : -1;
+
+                            float yaw = -(tick * right * 2f) * 10f;
+
+                            float x = (float) Math.cos(yaw) * 2;
+                            float z = (float) Math.sin(yaw) * 2;
+
+                            level().playSound(null, player.getX() + x, player.getY() + (player.getBbHeight() / 1.5f), player.getZ() + z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.5f, 1.3f);
+                        }
                     }
                 }
             }
@@ -217,8 +281,8 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
         }
 
         if (getBlock()) {
-            setDeltaMovement(0, 0, 0);
             if (getBlockTick() <= 0) {
+                setIsCut(false);
                 setBlock(false);
                 setFade(true);
                 setFadeTick(30);
@@ -227,10 +291,34 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                 setBlockTick(getBlockTick() - 1);
             }
         } else {
-            if (tickCount > 200 && !getFade()) {
+            if (tickCount > 1000 && !getFade()) {
                 setBlock(true);
                 setBlockTick(30);
             }
+        }
+        if (getCutTick() <= 0) {
+            if (getIsCut()) {
+                setIsCut(false);
+                Player player = getSender();
+                if (player != null) {
+                    float tick = tickCount;
+                    int right = getIsRight() ? 1 : -1;
+
+                    float yaw = -(tick * right * 2f) * 10f;
+
+                    float x = (float) Math.cos(yaw) * 2;
+                    float z = (float) Math.sin(yaw) * 2;
+                    setPos(position().add(x, player.getBbHeight() / 1.5f, z));
+                    if (getIsThrown()) {
+                        shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3F, 0.1F);
+                    } else {
+                        setDeltaMovement(x / 2, 0.75f, z / 2);
+                    }
+                    setIsThrown(false);
+                }
+            }
+        } else {
+            setCutTick(getCutTick() - 1);
         }
         if (level().isClientSide()) {
             trailPointBuilder.tickTrailPoints();
@@ -242,13 +330,8 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
             boolean dist = false;
             if (getOwner() instanceof Player player) {
                 if (distanceTo(getOwner()) < 250 && player.isAlive()) {
-                    WizardsRebornPacketHandler.sendTo(player, new ThrownScytheScreenshakePacket(position().subtract(player.getEyePosition())));
-                    int knockback = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.KNOCKBACK, getItem());
-                    player.knockback(1f + (0.4f * knockback), getX() - player.getX(), getZ() - player.getZ());
-                    player.hurtMarked = true;
-
-                    level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
-                    level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
+                    level().playSound(null, blockPosition(), WizardsRebornSounds.THROWN_SHEARS_RETURN_CLOSE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+                    level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.THROWN_SHEARS_RETURN_CLOSE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
                     setEndTick(tickCount);
                     setEndPoint(getSender().position().add(0, getSender().getBbHeight() / 2f, 0));
 
@@ -270,21 +353,7 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                     for (LivingEntity target : entities) {
                         hitEntity(target);
                     }
-
-                    if (player.getInventory().getFreeSlot() > -1) {
-                        if (player.getInventory().getItem(getSlot()).isEmpty()) {
-                            player.getInventory().setItem(getSlot(), getItem());
-                        } else {
-                            player.getInventory().add(getItem());
-                        }
-                    } else {
-                        ItemEntity itemEntity = new ItemEntity(level(), player.getX(), player.getY() + 0.5f, player.getZ(), getItem());
-                        itemEntity.setPickUpDelay(40);
-                        itemEntity.setTarget(getSenderUUID());
-                        itemEntity.setNoGravity(true);
-                        itemEntity.setDeltaMovement(Vec3.ZERO);
-                        level().addFreshEntity(itemEntity);
-                    }
+                    WizardsRebornPacketHandler.sendTo(player, new ThrownShearsBurstPacket(position(), WizardsRebornArcaneEnchantments.SILK_SONG.getColor()));
                 } else {
                     dist = true;
                 }
@@ -297,56 +366,6 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                 itemEntity.setDeltaMovement(Vec3.ZERO);
                 level().addFreshEntity(itemEntity);
             }
-        } else {
-            if (getSender() != null && distanceTo(getSender()) < 250 && getSender().isAlive()) {
-                Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
-
-                for (int i = 0; i < 30; i++) {
-                    double lX = Mth.lerp(i / 30.0f, getX(), getSender().getX());
-                    double lY = Mth.lerp(i / 30.0f, getY(), getSender().getY() + getSender().getBbHeight() / 2f);
-                    double lZ = Mth.lerp(i / 30.0f, getZ(), getSender().getZ());
-
-                    int right = getIsRight() ? 1 : -1;
-                    float yaw = (float) -tickCount - (i * 10) * right * 0.8f + (getIsRight() ? 0.3f : -0.3f) + (float) Math.toRadians(-getYRot()) + (getIsRight() ? 0 : (float) Math.PI);
-                    float pitch = (float) (Math.PI / 2f);
-
-                    float x = (float) Math.sin(pitch) * (float) Math.cos(yaw);
-                    float y = (float) Math.cos(pitch);
-                    float z = (float) Math.sin(pitch) * (float) Math.sin(yaw);
-
-                    Vec3 pos = new Vec3(lX, lY, lZ).add(x, y, z);
-
-                    ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                            .setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                            .setBehavior(CubeParticleBehavior.create().build())
-                            .setColorData(ColorParticleData.create(color).build())
-                            .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
-                            .setLifetime(40)
-                            .randomVelocity(0.02f, 0.02f, 0.02f)
-                            .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
-                }
-
-                ParticleBuilder.create(FluffyFurParticles.TINY_STAR)
-                        .setColorData(ColorParticleData.create(color).build())
-                        .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                        .setLifetime(30)
-                        .addVelocity(0f, 0.05, 0f)
-                        .randomVelocity(0.03f)
-                        .repeat(level(), getX(), getY() + 0.1, getZ(), 5);
-                ParticleBuilder.create(FluffyFurParticles.TINY_STAR)
-                        .setColorData(ColorParticleData.create(color).build())
-                        .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                        .setLifetime(30)
-                        .addVelocity(0f, -0.05, 0f)
-                        .randomVelocity(0.03f)
-                        .repeat(level(), getX(), getY() + 0.1, getZ(), 5);
-            }
         }
     }
 
@@ -357,9 +376,9 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
             DamageSource source = DamageHandler.create(target.level(), DamageTypes.GENERIC, this, owner);
             boolean success = target.hurt(source, getBaseDamage());
             if (success && target instanceof LivingEntity livingEntity) {
-                ItemStack scythe = getItem();
-                scythe.hurtAndBreak(1, owner, (e) -> remove(RemovalReason.KILLED));
-                int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, scythe);
+                ItemStack shears = getItem();
+                shears.hurtAndBreak(1, owner, (e) -> remove(RemovalReason.KILLED));
+                int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, shears);
                 if (i > 0) {
                     livingEntity.setSecondsOnFire(i * 4);
                 }
@@ -371,10 +390,25 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                     target.invulnerableTime = invulnerableTime;
                 }
 
-                level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
+                level().playSound(null, blockPosition(), WizardsRebornSounds.THROWN_SHEARS_HIT.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
             }
             owner.setItemSlot(EquipmentSlot.MAINHAND, oldStack);
         }
+    }
+
+    public void target(Vec3 pos, double speed) {
+        double dX = pos.x() - getX();
+        double dY = pos.y() - getY();
+        double dZ = pos.z() - getZ();
+
+        double yaw = Math.atan2(dZ, dX);
+        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+        double x = Math.sin(pitch) * Math.cos(yaw) * speed;
+        double y = Math.cos(pitch) * speed;
+        double z = Math.sin(pitch) * Math.sin(yaw) * speed;
+        Vec3 motion = getDeltaMovement();
+        setDeltaMovement(motion.x - x, motion.y- y, motion.z - z);
     }
 
     @Override
@@ -398,6 +432,9 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
         getEntityData().define(endPointYId, 0f);
         getEntityData().define(endPointZId, 0f);
         getEntityData().define(isRightId, true);
+        getEntityData().define(isCutId, false);
+        getEntityData().define(cutTickId, 0);
+        getEntityData().define(isThrownId, false);
     }
 
     @Override
@@ -418,6 +455,9 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
         getEntityData().set(endPointYId, compound.getFloat("endPointY"));
         getEntityData().set(endPointZId, compound.getFloat("endPointZ"));
         getEntityData().set(isRightId, compound.getBoolean("isRight"));
+        getEntityData().set(isCutId, compound.getBoolean("isCut"));
+        getEntityData().set(cutTickId, compound.getInt("cutTickId"));
+        getEntityData().set(isThrownId, compound.getBoolean("isThrown"));
 
         damagedEntities.clear();
         ListTag tagList = compound.getList("damagedEntities", Tag.TAG_COMPOUND);
@@ -447,6 +487,9 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
         compound.putFloat("endPointY", getEntityData().get(endPointYId));
         compound.putFloat("endPointZ", getEntityData().get(endPointZId));
         compound.putBoolean("isRight", getEntityData().get(isRightId));
+        compound.putBoolean("isCut", getEntityData().get(isCutId));
+        compound.putInt("cutTickId", getEntityData().get(cutTickId));
+        compound.putBoolean("isThrown", getEntityData().get(isThrownId));
 
         ListTag nbtTagList = new ListTag();
         for (UUID uuid : damagedEntities.keySet()) {
@@ -560,5 +603,29 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
 
     public boolean getIsRight() {
         return getEntityData().get(isRightId);
+    }
+
+    public void setIsCut(boolean isCut) {
+        getEntityData().set(isCutId, isCut);
+    }
+
+    public boolean getIsCut() {
+        return getEntityData().get(isCutId);
+    }
+
+    public void setCutTick(int cutTick) {
+        getEntityData().set(cutTickId, cutTick);
+    }
+
+    public int getCutTick() {
+        return getEntityData().get(cutTickId);
+    }
+
+    public void setIsThrown(boolean isThrown) {
+        getEntityData().set(isThrownId, isThrown);
+    }
+
+    public boolean getIsThrown() {
+        return getEntityData().get(isThrownId);
     }
 }
