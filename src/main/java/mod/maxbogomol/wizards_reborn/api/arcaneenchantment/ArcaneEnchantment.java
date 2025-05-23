@@ -85,7 +85,7 @@ public class ArcaneEnchantment {
         if (levelEnchantment > getMaxLevel()) levelEnchantment = getMaxLevel();
         float size = 0.5f + (((float) levelEnchantment / getMaxLevel()) * 0.5f);
 
-        float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.4f * (1f + ((index / 25f) * 0.1f)) + (index * 35);
+        float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.4f * (1f + ((index / 25f) * 5f)) + (index * 35);
         if (isCurse()) ticks = -ticks;
 
         poseStack.pushPose();

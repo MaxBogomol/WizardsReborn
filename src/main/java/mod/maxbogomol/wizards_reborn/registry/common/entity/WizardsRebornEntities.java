@@ -38,11 +38,12 @@ public class WizardsRebornEntities {
     public static final RegistryObject<EntityType<CustomChestBoatEntity>> CORK_BAMBOO_CHEST_RAFT = ENTITIES.register("cork_bamboo_chest_raft", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.CORK_BAMBOO_CHEST_RAFT, true)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chest_boat").toString()));
 
     public static final RegistryObject<EntityType<SpellEntity>> SPELL = ENTITIES.register("spell", () -> EntityType.Builder.<SpellEntity>of(SpellEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "spell").toString()));
-    public static final RegistryObject<EntityType<ThrownScytheEntity>> THROWN_SCYTHE = ENTITIES.register("thrown_scythe", () -> EntityType.Builder.<ThrownScytheEntity>of(ThrownScytheEntity::new, MobCategory.MISC).sized(1.75f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_scythe").toString()));
-    public static final RegistryObject<EntityType<ThrownShearsEntity>> THROWN_SHEARS = ENTITIES.register("thrown_shears", () -> EntityType.Builder.<ThrownShearsEntity>of(ThrownShearsEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_scythe").toString()));
-    public static final RegistryObject<EntityType<SplitArrowEntity>> SPLIT_ARROW = ENTITIES.register("split_arrow", () -> EntityType.Builder.<SplitArrowEntity>of(SplitArrowEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "split_arrow").toString()));
 
     public static final RegistryObject<EntityType<InnocentSparkEntity>> INNOCENT_SPARK = ENTITIES.register("innocent_spark", () -> EntityType.Builder.<InnocentSparkEntity>of(InnocentSparkEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_spark").toString()));
+
+    public static final RegistryObject<EntityType<SplitArrowEntity>> SPLIT_ARROW = ENTITIES.register("split_arrow", () -> EntityType.Builder.<SplitArrowEntity>of(SplitArrowEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "split_arrow").toString()));
+    public static final RegistryObject<EntityType<ThrownScytheEntity>> THROWN_SCYTHE = ENTITIES.register("thrown_scythe", () -> EntityType.Builder.<ThrownScytheEntity>of(ThrownScytheEntity::new, MobCategory.MISC).sized(1.75f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_scythe").toString()));
+    public static final RegistryObject<EntityType<ThrownShearsEntity>> THROWN_SHEARS = ENTITIES.register("thrown_shears", () -> EntityType.Builder.<ThrownShearsEntity>of(ThrownShearsEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "thrown_scythe").toString()));
 
     public static final RegistryObject<EntityType<SniffaloEntity>> SNIFFALO = ENTITIES.register("sniffalo", () -> EntityType.Builder.<SniffaloEntity>of(SniffaloEntity::new, MobCategory.CREATURE).sized(1.9F, 1.75F).clientTrackingRange(10).build(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo").toString()));
 
@@ -88,10 +89,10 @@ public class WizardsRebornEntities {
             EntityRenderers.register(CORK_BAMBOO_RAFT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "cork_bamboo", false, true));
             EntityRenderers.register(CORK_BAMBOO_CHEST_RAFT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "cork_bamboo", true, true));
             EntityRenderers.register(SPELL.get(), SpellRenderer::new);
+            EntityRenderers.register(INNOCENT_SPARK.get(), InnocentSparkRenderer::new);
+            EntityRenderers.register(SPLIT_ARROW.get(), SplitArrowRenderer::new);
             EntityRenderers.register(THROWN_SCYTHE.get(), ThrownScytheRenderer::new);
             EntityRenderers.register(THROWN_SHEARS.get(), ThrownShearsRenderer::new);
-            EntityRenderers.register(SPLIT_ARROW.get(), SplitArrowRenderer::new);
-            EntityRenderers.register(INNOCENT_SPARK.get(), InnocentSparkRenderer::new);
             EntityRenderers.register(SNIFFALO.get(), SniffaloRenderer::new);
         }
     }

@@ -14,6 +14,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.common.network.entity.ThrownScytheScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -141,7 +142,9 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                 setFadeTick(30);
                 refund();
             } else if (!getBlock()) {
-                setDeltaMovement(motion.x * 0.95, motion.y * 0.95, motion.z * 0.95);
+                int propellingLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(getItem(), WizardsRebornArcaneEnchantments.PROPELLING);
+                float friction = 0.95f - (0.05f * (propellingLevel / 3f));
+                setDeltaMovement(motion.x * friction, motion.y * friction, motion.z * friction);
 
                 Vec3 pos = position();
                 xo = pos.x;
@@ -195,7 +198,7 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
             } else {
                 if (!getFade()) {
                     if ((!getBlock() && tickCount % 4 == 0) || (getBlock() && tickCount % 8 == 0)) {
-                        level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.5f, 1.3f);
+                        level().playSound(null, position().x(), position().y(), position().z(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.5f, 1.3f);
                     }
                 }
             }
@@ -247,7 +250,7 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                     player.knockback(1f + (0.4f * knockback), getX() - player.getX(), getZ() - player.getZ());
                     player.hurtMarked = true;
 
-                    level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
+                    level().playSound(null, position().x(), position().y(), position().z(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
                     level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
                     setEndTick(tickCount);
                     setEndPoint(getSender().position().add(0, getSender().getBbHeight() / 2f, 0));
@@ -371,7 +374,7 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
                     target.invulnerableTime = invulnerableTime;
                 }
 
-                level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
+                level().playSound(null, position().x(), position().y(), position().z(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
             }
             owner.setItemSlot(EquipmentSlot.MAINHAND, oldStack);
         }
@@ -518,6 +521,10 @@ public class ThrownScytheEntity extends ThrowableItemProjectile {
 
     public UUID getSenderUUID() {
         return (getEntityData().get(ownerId).isPresent()) ? getEntityData().get(ownerId).get() : null;
+    }
+
+    public void setSender(Player player) {
+        getEntityData().set(ownerId, Optional.of(player.getUUID()));
     }
 
     public float getBaseDamage() {

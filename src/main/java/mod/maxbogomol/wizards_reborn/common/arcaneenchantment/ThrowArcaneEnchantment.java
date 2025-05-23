@@ -54,10 +54,11 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
         ItemStack stack = player.getItemInHand(hand);
 
         if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.THROW) > 0) {
+            int propellingLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.PROPELLING);
             float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
             List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
             int wissen = WissenUtil.getWissenInItems(items);
-            int cost = (int) (150 * (1 - costModifier));
+            int cost = (int) ((150 + (propellingLevel * 10)) * (1 - costModifier));
 
             if (WissenUtil.canRemoveWissen(wissen, cost)) {
                 player.startUsingItem(hand);
@@ -72,10 +73,11 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
             if (livingEntity instanceof Player player) {
                 if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
                     if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.THROW) > 0) {
+                        int propellingLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.PROPELLING);
                         float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
                         List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
                         int wissen = WissenUtil.getWissenInItems(items);
-                        int cost = (int) (150 * (1 - costModifier));
+                        int cost = (int) ((150 + (propellingLevel * 10)) * (1 - costModifier));
 
                         int ticks = player.getUseItem().getUseDuration() - player.getUseItemRemainingTicks();
                         if (ticks > 18 && WissenUtil.canRemoveWissen(wissen, cost)) {
@@ -110,7 +112,7 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
                             entity.setData(livingEntity, baseDamage, magicDamage, slot, ItemAnimation.isRightHand(player, player.getUsedItemHand()));
                             entity.setItem(stack);
 
-                            entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 0F);
+                            entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F + (1.5f * (propellingLevel / 3f)), 0F);
                             level.addFreshEntity(entity);
 
                             player.awardStat(Stats.ITEM_USED.get(stack.getItem()));

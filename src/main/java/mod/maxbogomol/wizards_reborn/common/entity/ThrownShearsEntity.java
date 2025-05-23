@@ -12,6 +12,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.entity.ThrownShearsBurstPacket;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
@@ -126,6 +127,15 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
                                     damagedEntities.put(target.getUUID(), 10);
                                 }
                             }
+                        }
+                        Vec3 vel = player.getViewVector(0);
+                        int propellingLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(getItem(), WizardsRebornArcaneEnchantments.PROPELLING);
+                        if (player.isFallFlying()) {
+                            player.push(vel.x() * ((propellingLevel / 3f) * 0.005f), 0.02f + ((propellingLevel / 3f) * 0.02f), vel.z()  * ((propellingLevel / 3f) * 0.005f));
+                            player.hurtMarked = true;
+                        } else if (!player.onGround() && propellingLevel > 0) {
+                            player.push(vel.x() * ((propellingLevel / 3f) * 0.02f), ((propellingLevel / 3f) * 0.06f), vel.z()  * ((propellingLevel / 3f) * 0.02f));
+                            player.hurtMarked = true;
                         }
                     }
                 } else {
@@ -292,6 +302,8 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
             }
         } else {
             if (tickCount > 1000 && !getFade()) {
+                setCutTick(0);
+                setIsCut(false);
                 setBlock(true);
                 setBlockTick(30);
             }
@@ -308,6 +320,10 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
 
                     float x = (float) Math.cos(yaw) * 2;
                     float z = (float) Math.sin(yaw) * 2;
+                    if (getIsThrown()) {
+                        x = 0;
+                        z = 0;
+                    }
                     setPos(position().add(x, player.getBbHeight() / 1.5f, z));
                     if (getIsThrown()) {
                         shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3F, 0.1F);
@@ -330,7 +346,7 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
             boolean dist = false;
             if (getOwner() instanceof Player player) {
                 if (distanceTo(getOwner()) < 250 && player.isAlive()) {
-                    level().playSound(null, blockPosition(), WizardsRebornSounds.THROWN_SHEARS_RETURN_CLOSE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+                    level().playSound(null, position().x(), position().y(), position().z(), WizardsRebornSounds.THROWN_SHEARS_RETURN_CLOSE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
                     level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.THROWN_SHEARS_RETURN_CLOSE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
                     setEndTick(tickCount);
                     setEndPoint(getSender().position().add(0, getSender().getBbHeight() / 2f, 0));
@@ -390,7 +406,7 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
                     target.invulnerableTime = invulnerableTime;
                 }
 
-                level().playSound(null, blockPosition(), WizardsRebornSounds.THROWN_SHEARS_HIT.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+                level().playSound(null, position().x(), position().y(), position().z(), WizardsRebornSounds.THROWN_SHEARS_HIT.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
             }
             owner.setItemSlot(EquipmentSlot.MAINHAND, oldStack);
         }
@@ -561,6 +577,10 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
 
     public UUID getSenderUUID() {
         return (getEntityData().get(ownerId).isPresent()) ? getEntityData().get(ownerId).get() : null;
+    }
+
+    public void setSender(Player player) {
+        getEntityData().set(ownerId, Optional.of(player.getUUID()));
     }
 
     public float getBaseDamage() {

@@ -8,7 +8,6 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
-import mod.maxbogomol.wizards_reborn.client.animation.ScytheThrowItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrownShearsEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneShearsItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -37,8 +36,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class SilkSongArcaneEnchantment extends ArcaneEnchantment {
-
-    public static ScytheThrowItemAnimation animation = new ScytheThrowItemAnimation();
 
     public SilkSongArcaneEnchantment(String id, int maxLevel) {
         super(id, maxLevel);
@@ -122,6 +119,10 @@ public class SilkSongArcaneEnchantment extends ArcaneEnchantment {
                         thrownShearsEntity.setCutTick(2);
                         player.getCooldowns().addCooldown(stack.getItem(), 10);
                     }
+                    if (!thrownShearsEntity.getSender().equals(player)) thrownShearsEntity.setSender(player);
+                    int slot = player.getUsedItemHand() == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;
+                    thrownShearsEntity.setSlot(slot);
+                    thrownShearsEntity.setIsRight(ItemAnimation.isRightHand(player, hand));
                 }
                 return InteractionResultHolder.success(stack);
             }
