@@ -29,9 +29,7 @@ public class ArcaneFishingRodItem extends FishingRodItem implements IArcaneItem 
     public ArcaneFishingRodItem(Properties properties) {
         super(properties);
         arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BREAKABLE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.CROSSBOW);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.RANGED_WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.FISHING_ROD);
     }
 
     @Override

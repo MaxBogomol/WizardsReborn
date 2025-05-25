@@ -13,6 +13,7 @@ public class WizardsRebornArcaneEnchantments {
     public static ArcaneEnchantment WISSEN_CHARGE = new WissenChargeArcaneEnchantment(WizardsReborn.MOD_ID+":wissen_charge", 2);
     public static ArcaneEnchantment EAGLE_SHOT = new EagleShotArcaneEnchantment(WizardsReborn.MOD_ID+":eagle_shot", 4);
     public static ArcaneEnchantment SPLIT = new SplitArcaneEnchantment(WizardsReborn.MOD_ID+":split", 4);
+    public static ArcaneEnchantment FIREWORK_JUMP = new FireworkJumpArcaneEnchantment(WizardsReborn.MOD_ID+":firework_jump", 3);
     public static ArcaneEnchantment SONAR = new SonarArcaneEnchantment(WizardsReborn.MOD_ID+":sonar", 3);
     public static ArcaneEnchantment THROW = new ThrowArcaneEnchantment(WizardsReborn.MOD_ID+":throw", 1);
     public static ArcaneEnchantment SILK_SONG = new SilkSongArcaneEnchantment(WizardsReborn.MOD_ID+":silk_song", 1);
@@ -26,6 +27,7 @@ public class WizardsRebornArcaneEnchantments {
         ArcaneEnchantmentHandler.register(WISSEN_CHARGE);
         ArcaneEnchantmentHandler.register(EAGLE_SHOT);
         ArcaneEnchantmentHandler.register(SPLIT);
+        ArcaneEnchantmentHandler.register(FIREWORK_JUMP);
         ArcaneEnchantmentHandler.register(SONAR);
         ArcaneEnchantmentHandler.register(THROW);
         ArcaneEnchantmentHandler.register(SILK_SONG);

@@ -6,7 +6,9 @@ import mod.maxbogomol.fluffy_fur.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.render.entity.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
+import mod.maxbogomol.wizards_reborn.common.capability.IFireworkModifier;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
+import mod.maxbogomol.wizards_reborn.common.capability.IPlayerModifier;
 import mod.maxbogomol.wizards_reborn.common.entity.*;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.WizardsRebornFarmersDelight;
 import mod.maxbogomol.wizards_reborn.integration.common.farmers_delight.common.item.KnifeInnocentSparkType;
@@ -74,7 +76,9 @@ public class WizardsRebornEntities {
         @SubscribeEvent
         public static void registerCaps(RegisterCapabilitiesEvent event) {
             event.register(IKnowledge.class);
+            event.register(IPlayerModifier.class);
             event.register(IArrowModifier.class);
+            event.register(IFireworkModifier.class);
         }
     }
 

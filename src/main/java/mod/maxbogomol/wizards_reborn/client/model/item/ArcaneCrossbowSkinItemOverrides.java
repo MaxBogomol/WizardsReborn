@@ -5,7 +5,9 @@ import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import javax.annotation.Nullable;
 
@@ -35,12 +37,16 @@ public class ArcaneCrossbowSkinItemOverrides extends ArcaneCrossbowItemOverrides
         }
         if ( getCharged(stack, level, entity, seed)) {
             boolean firework = getFirework(stack, level, entity, seed);
-            boolean arcaneFirework = getFirework(stack, level, entity, seed);
+            boolean arcaneFirework = getArcaneFirework(stack, level, entity, seed);
             String skinStr = skin.getItemModelName(stack) + "_arrow";
             if (firework) skinStr = skin.getItemModelName(stack) + "_firework";
             if (arcaneFirework) skinStr = skin.getItemModelName(stack) + "_arcane_firework";
             return skinStr;
         }
         return skin.getItemModelName(stack);
+    }
+
+    public boolean getArcaneFirework(ItemStack stack, ClientLevel level, LivingEntity entity, int seed) {
+        return CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, Items.DIRT);
     }
 }

@@ -763,6 +763,7 @@ public class WizardsRebornItems {
             CuriosRendererRegistry.register(ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
 
             BowHandler.addBow(ARCANE_WOOD_BOW.get());
+            BowHandler.addCrossbow(ARCANE_WOOD_CROSSBOW.get());
 
             ItemProperties.register(ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
             ItemProperties.register(ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));

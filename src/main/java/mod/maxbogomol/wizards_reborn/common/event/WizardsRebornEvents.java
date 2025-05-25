@@ -5,9 +5,8 @@ import mod.maxbogomol.fluffy_fur.registry.common.damage.FluffyFurDamageTypeTags;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
-import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
-import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
-import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.FireworkJumpArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.capability.*;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
@@ -28,6 +27,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -45,7 +45,9 @@ public class WizardsRebornEvents {
     @SubscribeEvent
     public void attachEntityCaps(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) event.addCapability(new ResourceLocation(WizardsReborn.MOD_ID, "knowledge"), new KnowledgeProvider());
+        if (event.getObject() instanceof Player) event.addCapability(new ResourceLocation(WizardsReborn.MOD_ID, "player_modifier"), new PlayerModifierProvider());
         if (event.getObject() instanceof AbstractArrow) event.addCapability(new ResourceLocation(WizardsReborn.MOD_ID, "arrow_modifier"), new ArrowModifierProvider());
+        if (event.getObject() instanceof FireworkRocketEntity) event.addCapability(new ResourceLocation(WizardsReborn.MOD_ID, "firework_modifier"), new FireworkModifierProvider());
     }
 
     @SubscribeEvent
@@ -72,6 +74,7 @@ public class WizardsRebornEvents {
         if (!player.level().isClientSide()) {
             KnowledgeHandler.tickKnowledgeListTrigger(player);
         }
+        FireworkJumpArcaneEnchantment.playerTick(event);
     }
 
     @SubscribeEvent

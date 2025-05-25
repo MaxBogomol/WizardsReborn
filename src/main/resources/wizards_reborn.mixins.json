@@ -10,9 +10,12 @@
     "common.BowItemMixin",
     "common.CampfireBlockMixin",
     "common.CreeperMixin",
+    "common.CrossbowItemMixin",
     "common.FaceAttachedHorizontalDirectionalBlockMixin",
+    "common.FireworkRocketEntityMixin",
     "common.InventoryChangeTriggerMixin",
     "common.PhantomMixin",
+    "common.PlayerMixin",
     "common.farmers_delight.RichSoilBlockMixin"
   ],
   "client": [
