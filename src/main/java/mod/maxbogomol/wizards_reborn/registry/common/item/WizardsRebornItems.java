@@ -559,8 +559,8 @@ public class WizardsRebornItems {
 
     public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
     public static final RegistryObject<Item> ARCANE_WOOD_CROSSBOW = ITEMS.register("arcane_wood_crossbow", () -> new ArcaneCrossbowItem(new Item.Properties().durability(698)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
-    public static final RegistryObject<Item> ARCANE_WOOD_FISHING_ROD = ITEMS.register("arcane_wood_fishing_rod", () -> new ArcaneFishingRodItem(new Item.Properties().durability(96)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
-    public static final RegistryObject<Item> ARCANE_GOLD_SHEARS = ITEMS.register("arcane_gold_shears", () -> new ArcaneShearsItem(new Item.Properties().durability(357)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
+    public static final RegistryObject<Item> ARCANE_WOOD_FISHING_ROD = ITEMS.register("arcane_wood_fishing_rod", () -> new ArcaneWoodFishingRodItem(new Item.Properties().durability(96)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())));
+    public static final RegistryObject<Item> ARCANE_GOLD_SHEARS = ITEMS.register("arcane_gold_shears", () -> new ArcaneShearsItem(new Item.Properties().durability(357)).setRepairMaterial(() -> Ingredient.of(WizardsRebornItems.ARCANE_GOLD_INGOT.get())));
 
     public static final RegistryObject<Item> BLAZE_REAP = ITEMS.register("blaze_reap", () -> new ArcanePickaxeItem(WizardsRebornItemTiers.ARCANE_GOLD, 1, -2.8f, new Item.Properties().rarity(Rarity.EPIC)));
 
@@ -831,6 +831,8 @@ public class WizardsRebornItems {
             event.register(LargeItemRenderer.getInHeadModelResourceLocation(WizardsReborn.MOD_ID, "arcane_hopper"));
 
             FluffyFurModels.addBowItemModel(event, WizardsReborn.MOD_ID, "arcane_wood_bow");
+            WizardsRebornModels.addArcaneCrossbowItemModel(event, WizardsReborn.MOD_ID, "arcane_wood_crossbow");
+            FluffyFurModels.addFishingRodItemModel(event, WizardsReborn.MOD_ID, "arcane_wood_fishing_rod");
             WizardsRebornModels.addArcaneShearsItemModel(event, WizardsReborn.MOD_ID, "arcane_gold_shears");
 
             for (String skin : LeatherCollarItem.skins.values()) {

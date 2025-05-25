@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.block.*;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
+import mod.maxbogomol.wizards_reborn.client.model.item.ArcaneCrossbowItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.ArcaneShearsItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
@@ -588,6 +589,43 @@ public class WizardsRebornModels {
     public static void bakePipeModel(ArrayList<PipeModel> pipes, ModelManager manager) {
         for (PipeModel model : pipes) {
             model.init(manager);
+        }
+    }
+
+    public static void addArcaneCrossbowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item, ArcaneCrossbowItemOverrides itemOverrides) {
+        BakedModel model = map.get(new ModelResourceLocation(item, "inventory"));
+        CustomModel customModel = new CustomModel(model, itemOverrides);
+
+        for (int i = 0; i < 3; i++) {
+            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_pulling_" + i), "inventory"));
+            itemOverrides.pullingModels.add(pullModel);
+        }
+        itemOverrides.arrowModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_arrow"), "inventory"));
+        itemOverrides.fireworkModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_firework"), "inventory"));
+        itemOverrides.arcaneFireworkModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_arcane_firework"), "inventory"));
+
+        map.replace(new ModelResourceLocation(item, "inventory"), customModel);
+    }
+
+    public static void addArcaneCrossbowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item) {
+        addArcaneCrossbowItemModel(map, item, new ArcaneCrossbowItemOverrides());
+    }
+
+    public static ArrayList<ModelResourceLocation> getArcaneCrossbowModels(String modId, String item) {
+        ArrayList<ModelResourceLocation> models = new ArrayList<>();
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_0"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_1"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_2"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_arrow"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_firework"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_arcane_firework"), "inventory"));
+        return models;
+    }
+
+    public static void addArcaneCrossbowItemModel(ModelEvent.RegisterAdditional event, String modId, String item) {
+        for (ModelResourceLocation model : getArcaneCrossbowModels(modId, item)) {
+            event.register(model);
         }
     }
 

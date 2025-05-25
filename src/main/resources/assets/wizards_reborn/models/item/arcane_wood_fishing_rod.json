@@ -1,0 +1,6 @@
+{
+  "parent": "item/fishing_rod",
+  "textures": {
+    "layer0": "wizards_reborn:item/arcane_wood_fishing_rod"
+  }
+}

@@ -41,15 +41,4 @@ public abstract class ItemInHandRendererMixin {
         if (wizards_reborn$renderShears) return true;
         return value;
     }
-
-/*    @Inject(at = @At("HEAD"), method = "evaluateWhichHandsToRender", cancellable = true)
-    private static void wizards_reborn$evaluateWhichHandsToRender(LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir) {
-        ItemStack itemStack = player.getItemInHand(InteractionHand.OFF_HAND);
-        if (itemStack.getItem() instanceof ArcaneShearsItem) {
-            int open = ArcaneShearsItem.getOpen(itemStack);
-            if (open == 2) {
-                cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.RENDER_BOTH_HANDS);
-            }
-        }
-    }*/
 }

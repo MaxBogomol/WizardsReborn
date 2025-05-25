@@ -16,6 +16,7 @@
     "common.farmers_delight.RichSoilBlockMixin"
   ],
   "client": [
+    "client.FishingHookRendererMixin",
     "client.GuiGraphicsMixin",
     "client.ItemInHandLayerMixin",
     "client.LevelRendererMixin"

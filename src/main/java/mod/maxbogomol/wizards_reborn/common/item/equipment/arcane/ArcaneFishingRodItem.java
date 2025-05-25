@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.FishingRodItem;
@@ -84,5 +85,10 @@ public class ArcaneFishingRodItem extends FishingRodItem implements IArcaneItem 
             return repairMaterial.get().test(repair);
         }
         return super.isValidRepairItem(toRepair, repair);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getTexture(ItemStack stack, Entity entity) {
+        return null;
     }
 }

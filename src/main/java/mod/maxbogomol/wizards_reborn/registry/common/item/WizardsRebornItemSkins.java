@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.registry.common.item;
 
 import mod.maxbogomol.fluffy_fur.client.model.item.BowSkinItemOverrides;
+import mod.maxbogomol.fluffy_fur.client.model.item.FishingRodSkinItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.ItemSkinItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.ItemSkinModels;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
@@ -9,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkinHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItemSkins;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.model.item.ArcaneCrossbowSkinItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.ArcaneShearsSkinItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.itemskin.*;
@@ -121,6 +123,8 @@ public class WizardsRebornItemSkins {
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new ItemSkinItemOverrides());
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new ItemSkinItemOverrides());
             FluffyFurModels.addBowItemModel(map, WizardsRebornItems.ARCANE_WOOD_BOW.getId(), new BowSkinItemOverrides());
+            WizardsRebornModels.addArcaneCrossbowItemModel(map, WizardsRebornItems.ARCANE_WOOD_CROSSBOW.getId(), new ArcaneCrossbowSkinItemOverrides());
+            FluffyFurModels.addFishingRodItemModel(map, WizardsRebornItems.ARCANE_WOOD_FISHING_ROD.getId(), new FishingRodSkinItemOverrides());
             WizardsRebornModels.addArcaneShearsItemModel(map, WizardsRebornItems.ARCANE_GOLD_SHEARS.getId(), new ArcaneShearsSkinItemOverrides());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_HELMET.getId());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_CHESTPLATE.getId());
