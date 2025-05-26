@@ -14,7 +14,9 @@ public class PlayerMixin {
     private void wizards_reborn$getFlyingSpeed(CallbackInfoReturnable<Float> cir) {
         Player self = (Player) ((Object) this);
         if (FireworkJumpArcaneEnchantment.isFireworkJump(self)) {
-            cir.setReturnValue(cir.getReturnValue() * ((FireworkJumpArcaneEnchantment.getFireworkJump(self) + 1f) * 3f));
+            float power = FireworkJumpArcaneEnchantment.getFireworkJump(self);
+            if (power > 1f) power = 1f;
+            cir.setReturnValue(cir.getReturnValue() * ((power + 1f) * 3f));
         }
     }
 }

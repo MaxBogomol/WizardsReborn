@@ -30,8 +30,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class FireworkJumpArcaneEnchantment extends ArcaneEnchantment {
 
-    public static int invulnerableTime = 0;
-
     public FireworkJumpArcaneEnchantment(String id, int maxLevel) {
         super(id, maxLevel);
     }
@@ -77,7 +75,6 @@ public class FireworkJumpArcaneEnchantment extends ArcaneEnchantment {
     public static void onHitFirst(FireworkRocketEntity rocket, LivingEntity livingEntity) {
         if (!rocket.level().isClientSide()) {
             if (isJump(rocket)) {
-                invulnerableTime = livingEntity.invulnerableTime;
                 livingEntity.invulnerableTime = 0;
             }
         }
@@ -100,7 +97,6 @@ public class FireworkJumpArcaneEnchantment extends ArcaneEnchantment {
                 Vec3 vec = livingEntity.position().subtract(rocket.position()).normalize().scale(p).scale(jump);
                 livingEntity.push(vec.x(), vec.y(), vec.z());
                 livingEntity.hurtMarked = true;
-                livingEntity.invulnerableTime = invulnerableTime;
                 if (livingEntity instanceof Player player) {
                     setFireworkJump(player, jump);
                 }
