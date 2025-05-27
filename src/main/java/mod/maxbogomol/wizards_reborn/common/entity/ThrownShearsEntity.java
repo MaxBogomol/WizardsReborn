@@ -35,7 +35,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
@@ -69,6 +68,8 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
 
     public TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(30);
     public Map<UUID, Integer> damagedEntities = new HashMap<>();
+
+    public int cutTickCount = 0;
 
     public ThrownShearsEntity(EntityType<?> type, Level level) {
         super(WizardsRebornEntities.THROWN_SHEARS.get(), level);
@@ -114,11 +115,9 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
                             double ly = getY() + player.getBbHeight() / 1.5f;
                             double lz = getZ() + z;
                             List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lx - 1f, ly - 0.3f, lz - 1f, lx + 1f, ly + 0.5f, lz + 1f));
-                            if (tickCount < 5) {
-                                if (getOwner() instanceof LivingEntity living) {
-                                    if (entityList.contains(living)) {
-                                        entityList.remove(living);
-                                    }
+                            if (getOwner() instanceof LivingEntity living) {
+                                if (entityList.contains(living)) {
+                                    entityList.remove(living);
                                 }
                             }
                             for (LivingEntity target : entityList) {
@@ -138,6 +137,7 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
                             player.hurtMarked = true;
                         }
                     }
+                    cutTickCount = 0;
                 } else {
                     Vec3 mov = getDeltaMovement();
                     for (int i = 0; i < 5; i++) {
@@ -145,7 +145,7 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
                         double ly = Mth.lerp((double) i / 5f, getY(), mov.y());
                         double lz = Mth.lerp((double) i / 5f, getZ(), mov.z());
                         List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lx - 0.2f, ly - 0.1f, lz - 0.2f, lx + 0.2f, ly + 0.3f, lz + 0.2f));
-                        if (tickCount < 5) {
+                        if (tickCount < 5  || cutTickCount < 5 || getCutTick() > 0) {
                             if (getOwner() instanceof LivingEntity living) {
                                 if (entityList.contains(living)) {
                                     entityList.remove(living);
@@ -159,6 +159,7 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
                             }
                         }
                     }
+                    cutTickCount++;
                 }
                 List<UUID> remove = new ArrayList<>();
                 for (UUID uuid : damagedEntities.keySet()) {
@@ -343,7 +344,6 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
 
     public void refund() {
         if (!level().isClientSide()) {
-            boolean dist = false;
             if (getOwner() instanceof Player player) {
                 if (distanceTo(getOwner()) < 250 && player.isAlive()) {
                     level().playSound(null, position().x(), position().y(), position().z(), WizardsRebornSounds.THROWN_SHEARS_RETURN_CLOSE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
@@ -370,17 +370,7 @@ public class ThrownShearsEntity extends ThrowableItemProjectile {
                         hitEntity(target);
                     }
                     WizardsRebornPacketHandler.sendTo(player, new ThrownShearsBurstPacket(position(), WizardsRebornArcaneEnchantments.SILK_SONG.getColor()));
-                } else {
-                    dist = true;
                 }
-            }
-            if (getOwner() != null && dist) {
-                ItemEntity itemEntity = new ItemEntity(level(), getX(), getY() + 0.1f, getZ(), getItem());
-                itemEntity.setPickUpDelay(40);
-                itemEntity.setTarget(getSenderUUID());
-                itemEntity.setNoGravity(true);
-                itemEntity.setDeltaMovement(Vec3.ZERO);
-                level().addFreshEntity(itemEntity);
             }
         }
     }

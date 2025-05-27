@@ -117,7 +117,7 @@ public class SilkSongArcaneEnchantment extends ArcaneEnchantment {
                     if (thrownShearsEntity.getIsCut() && player.isShiftKeyDown()) {
                         thrownShearsEntity.setIsThrown(true);
                         thrownShearsEntity.setCutTick(2);
-                        player.getCooldowns().addCooldown(stack.getItem(), 10);
+                        player.getCooldowns().addCooldown(stack.getItem(), 5);
                     }
                     if (!thrownShearsEntity.getSender().equals(player)) thrownShearsEntity.setSender(player);
                     int slot = player.getUsedItemHand() == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;

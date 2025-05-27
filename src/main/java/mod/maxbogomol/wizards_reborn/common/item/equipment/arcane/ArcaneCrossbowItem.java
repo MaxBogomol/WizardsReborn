@@ -5,6 +5,9 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -53,6 +56,21 @@ public class ArcaneCrossbowItem extends CrossbowItem implements IArcaneItem {
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());
+
+        List<Component> crossbowList = new ArrayList<>();
+        super.appendHoverText(stack, level, crossbowList, flags);
+        if (crossbowList.size() > 0) {
+            list.add(crossbowList.get(0));
+            if (crossbowList.size() > 1) {
+                if (Screen.hasShiftDown()) {
+                    crossbowList.remove(0);
+                    list.addAll(crossbowList);
+                } else {
+                    list.add(Component.empty().append(CommonComponents.SPACE).append(Component.literal("[...]").withStyle(ChatFormatting.GRAY)));
+                }
+            }
+        }
+
         list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, level, flags));
     }
 
