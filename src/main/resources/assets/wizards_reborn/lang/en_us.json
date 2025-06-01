@@ -618,6 +618,8 @@
   "item.wizards_reborn.soul_hunter_trim": "Wisestone Trim",
   "item.wizards_reborn.implosion_trim": "Wisestone Trim",
   "item.wizards_reborn.phantom_ink_trim": "Innocent Wood Trim",
+  "item.wizards_reborn.royal_guard_trim": "Innocent Wood Trim",
+  "item.wizards_reborn.capitalist_trim": "Innocent Wood Trim",
 
   "item.wizards_reborn.mor_pie": "Mor Pie",
   "item.wizards_reborn.mor_pie_slice": "Mor Pie Slice",
@@ -861,13 +863,17 @@
 
   "_comment_6": "Skins",
   "item_skin.wizards_reborn.top_hat": "Top Hat",
+  "item_skin.wizards_reborn.magnificent_maid": "Magnificent Maid",
+  "item_skin.wizards_reborn.summer_love": "Summer Love",
   "item_skin.wizards_reborn.soul_hunter": "Soul Hunter",
   "item_skin.wizards_reborn.implosion": "Implosion",
   "item_skin.wizards_reborn.phantom_ink": "Phantom Ink",
-  "item_skin.wizards_reborn.magnificent_maid": "Magnificent Maid",
-  "item_skin.wizards_reborn.summer_love": "Summer Love",
+  "item_skin.wizards_reborn.royal_guard": "Royal Guard",
+  "item_skin.wizards_reborn.capitalist": "Capitalist",
 
   "item_skin.wizards_reborn.arcane_armor": "Arcane Armor",
+  "item_skin.wizards_reborn.arcane_magic_armor": "Arcane Magic Armor",
+  "item_skin.wizards_reborn.arcane_fortress_armor": "Arcane Fortress Armor",
   "item_skin.wizards_reborn.arcane_magic_hats": "Arcane Magic Hats",
   "item_skin.wizards_reborn.arcane_tools": "Arcane Tools",
   "item_skin.wizards_reborn.arcane_scythes": "Arcane Scythes",

@@ -618,6 +618,8 @@
   "item.wizards_reborn.soul_hunter_trim": "Мудро-каменная отделка",
   "item.wizards_reborn.implosion_trim": "Мудро-каменная отделка",
   "item.wizards_reborn.phantom_ink_trim": "Невинно-древесная отделка",
+  "item.wizards_reborn.royal_guard_trim": "Невинно-древесная отделка",
+  "item.wizards_reborn.capitalist_trim": "Невинно-древесная отделка",
 
   "item.wizards_reborn.mor_pie": "Моровый пирог",
   "item.wizards_reborn.mor_pie_slice": "Ломтик морового пирога",
@@ -861,13 +863,17 @@
 
   "_comment_6": "Облики",
   "item_skin.wizards_reborn.top_hat": "Цилиндр",
+  "item_skin.wizards_reborn.magnificent_maid": "Великолепная горничная",
+  "item_skin.wizards_reborn.summer_love": "Летняя любовь",
   "item_skin.wizards_reborn.soul_hunter": "Жнец душ",
   "item_skin.wizards_reborn.implosion": "Имплозия",
   "item_skin.wizards_reborn.phantom_ink": "Фантомные чернила",
-  "item_skin.wizards_reborn.magnificent_maid": "Великолепная горничная",
-  "item_skin.wizards_reborn.summer_love": "Летняя любовь",
+  "item_skin.wizards_reborn.royal_guard": "Королевская стража",
+  "item_skin.wizards_reborn.capitalist": "Капиталист",
 
   "item_skin.wizards_reborn.arcane_armor": "Аркановая броня",
+  "item_skin.wizards_reborn.arcane_magic_armor": "Аркановая магическая броня",
+  "item_skin.wizards_reborn.arcane_fortress_armor": "Аркановая штурмовая броня",
   "item_skin.wizards_reborn.arcane_magic_hats": "Аркановые магические шляпы",
   "item_skin.wizards_reborn.arcane_tools": "Аркановые инструменты",
   "item_skin.wizards_reborn.arcane_scythes": "Аркановые косы",

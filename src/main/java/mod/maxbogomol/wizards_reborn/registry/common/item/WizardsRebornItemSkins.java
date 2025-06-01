@@ -30,19 +30,23 @@ import java.util.Map;
 
 public class WizardsRebornItemSkins {
     public static ItemSkin TOP_HAT = new TopHatSkin(WizardsReborn.MOD_ID+":top_hat", new Color(54, 60, 81));
+    public static ItemSkin MAGNIFICENT_MAID = new MagnificentMaidSkin(WizardsReborn.MOD_ID+":magnificent_maid", new Color(153, 168, 184));
+    public static ItemSkin SUMMER_LOVE = new SummerLoveSkin(WizardsReborn.MOD_ID+":summer_love", new Color(243, 181, 127));
     public static ItemSkin SOUL_HUNTER = new SoulHunterSkin(WizardsReborn.MOD_ID+":soul_hunter", new Color(225, 99, 226));
     public static ItemSkin IMPLOSION = new ImplosionSkin(WizardsReborn.MOD_ID+":implosion", new Color(149, 237, 255));
     public static ItemSkin PHANTOM_INK = new PhantomInkSkin(WizardsReborn.MOD_ID+":phantom_ink", new Color(189, 237, 255));
-    public static ItemSkin MAGNIFICENT_MAID = new MagnificentMaidSkin(WizardsReborn.MOD_ID+":magnificent_maid", new Color(153, 168, 184));
-    public static ItemSkin SUMMER_LOVE = new SummerLoveSkin(WizardsReborn.MOD_ID+":summer_love", new Color(243, 181, 127));
+    public static ItemSkin ROYAL_GUARD = new RoyalGuardSkin(WizardsReborn.MOD_ID+":royal_guard", new Color(159, 201, 231));
+    public static ItemSkin CAPITALIST = new CapitalistSkin(WizardsReborn.MOD_ID+":capitalist", new Color(177, 70, 79));
 
     public static void register() {
         ItemSkinHandler.register(TOP_HAT);
+        ItemSkinHandler.register(MAGNIFICENT_MAID);
+        ItemSkinHandler.register(SUMMER_LOVE);
         ItemSkinHandler.register(SOUL_HUNTER);
         ItemSkinHandler.register(IMPLOSION);
         ItemSkinHandler.register(PHANTOM_INK);
-        ItemSkinHandler.register(MAGNIFICENT_MAID);
-        ItemSkinHandler.register(SUMMER_LOVE);
+        ItemSkinHandler.register(ROYAL_GUARD);
+        ItemSkinHandler.register(CAPITALIST);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             registerModels();
@@ -53,6 +57,17 @@ public class WizardsRebornItemSkins {
     @OnlyIn(Dist.CLIENT)
     public static void registerModels() {
         ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":top_hat");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_headwear");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_suit");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_stockings");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_boots");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_arcane_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_wissen_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_flower");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_dress");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_boots");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_arcane_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_wissen_wand");
         ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_hood");
         ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_costume");
         ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_trousers");
@@ -70,17 +85,14 @@ public class WizardsRebornItemSkins {
         ItemSkinModels.addBowSkin(WizardsReborn.MOD_ID+":implosion_bow");
         ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_arcane_wand");
         ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_wissen_wand");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_headwear");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_suit");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_stockings");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_boots");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_arcane_wand");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_wissen_wand");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_flower");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_dress");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_boots");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_arcane_wand");
-        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_wissen_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":royal_guard_hat");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":royal_guard_costume");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":royal_guard_trousers");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":royal_guard_boots");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":capitalist_hat");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":capitalist_costume");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":capitalist_trousers");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":capitalist_boots");
     }
 
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -95,10 +107,10 @@ public class WizardsRebornItemSkins {
         public static void modelBakeSkins(ModelEvent.ModifyBakingResult event) {
             Map<ResourceLocation, BakedModel> map = event.getModels();
 
-            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_arcane_wand"));
-            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_arcane_wand"));
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/magnificent_maid_arcane_wand"));
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/summer_love_arcane_wand"));
+            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_arcane_wand"));
+            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_arcane_wand"));
 
             FluffyFurItemSkins.addLargeModel(map, WizardsReborn.MOD_ID, "soul_hunter_scythe");
             FluffyFurItemSkins.addLargeModel(map, WizardsReborn.MOD_ID, "implosion_scythe");
@@ -122,10 +134,6 @@ public class WizardsRebornItemSkins {
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe", new ItemSkinItemOverrides());
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new ItemSkinItemOverrides());
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new ItemSkinItemOverrides());
-            FluffyFurModels.addBowItemModel(map, WizardsRebornItems.ARCANE_WOOD_BOW.getId(), new BowSkinItemOverrides());
-            WizardsRebornModels.addArcaneCrossbowItemModel(map, WizardsRebornItems.ARCANE_WOOD_CROSSBOW.getId(), new ArcaneCrossbowSkinItemOverrides());
-            FluffyFurModels.addFishingRodItemModel(map, WizardsRebornItems.ARCANE_WOOD_FISHING_ROD.getId(), new FishingRodSkinItemOverrides());
-            WizardsRebornModels.addArcaneShearsItemModel(map, WizardsRebornItems.ARCANE_GOLD_SHEARS.getId(), new ArcaneShearsSkinItemOverrides());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_HELMET.getId());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_CHESTPLATE.getId());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_LEGGINGS.getId());
@@ -134,6 +142,10 @@ public class WizardsRebornItemSkins {
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_COSTUME.getId());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_TROUSERS.getId());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_BOOTS.getId());
+            FluffyFurModels.addBowItemModel(map, WizardsRebornItems.ARCANE_WOOD_BOW.getId(), new BowSkinItemOverrides());
+            WizardsRebornModels.addArcaneCrossbowItemModel(map, WizardsRebornItems.ARCANE_WOOD_CROSSBOW.getId(), new ArcaneCrossbowSkinItemOverrides());
+            FluffyFurModels.addFishingRodItemModel(map, WizardsRebornItems.ARCANE_WOOD_FISHING_ROD.getId(), new FishingRodSkinItemOverrides());
+            WizardsRebornModels.addArcaneShearsItemModel(map, WizardsRebornItems.ARCANE_GOLD_SHEARS.getId(), new ArcaneShearsSkinItemOverrides());
 
             if (WizardsRebornFarmersDelight.isLoaded()) {
                 FluffyFurItemSkins.addSkinModel(map, WizardsRebornFarmersDelight.ItemsLoadedOnly.ARCANE_GOLD_KNIFE.getId());

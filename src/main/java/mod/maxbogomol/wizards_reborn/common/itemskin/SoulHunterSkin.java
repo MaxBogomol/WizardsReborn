@@ -37,7 +37,7 @@ public class SoulHunterSkin extends ItemSkin {
         addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/soul_hunter_arcane_wand"));
         addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":soul_hunter_wissen_wand"));
 
-        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_armor"));
+        addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_magic_armor"));
         addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_scythes"));
         addApplyingItem(Component.translatable("item_skin.wizards_reborn.arcane_wand"));
         addApplyingItem(Component.translatable("item_skin.wizards_reborn.wissen_wand"));

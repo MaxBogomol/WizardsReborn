@@ -858,6 +858,8 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, COSMETICS, WizardsRebornItems.SOUL_HUNTER_TRIM);
             addInSub(event, COSMETICS, WizardsRebornItems.IMPLOSION_TRIM);
             addInSub(event, COSMETICS, WizardsRebornItems.PHANTOM_INK_TRIM);
+            addInSub(event, COSMETICS, WizardsRebornItems.ROYAL_GUARD_TRIM);
+            addInSub(event, COSMETICS, WizardsRebornItems.CAPITALIST_TRIM);
 
             //ARCANE_ENCHANTMENTS
             for (ArcaneEnchantment enchantment : ArcaneEnchantmentHandler.getArcaneEnchantments()) {

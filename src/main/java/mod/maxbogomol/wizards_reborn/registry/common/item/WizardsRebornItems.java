@@ -641,6 +641,8 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> SOUL_HUNTER_TRIM = ITEMS.register("soul_hunter_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.SOUL_HUNTER));
     public static final RegistryObject<Item> IMPLOSION_TRIM = ITEMS.register("implosion_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.IMPLOSION));
     public static final RegistryObject<Item> PHANTOM_INK_TRIM = ITEMS.register("phantom_ink_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.PHANTOM_INK));
+    public static final RegistryObject<Item> ROYAL_GUARD_TRIM = ITEMS.register("royal_guard_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.ROYAL_GUARD));
+    public static final RegistryObject<Item> CAPITALIST_TRIM = ITEMS.register("capitalist_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.CAPITALIST));
 
     //FOOD
     public static final RegistryObject<Item> MOR_PIE = ITEMS.register("mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.MOR_PIE)).setNourishmentTick(1200));
