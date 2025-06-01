@@ -30,6 +30,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class FireworkJumpArcaneEnchantment extends ArcaneEnchantment {
 
+    public static ItemStack crossbowStack;
+    public static boolean entityHit = false;
+
     public FireworkJumpArcaneEnchantment(String id, int maxLevel) {
         super(id, maxLevel);
     }
@@ -53,7 +56,6 @@ public class FireworkJumpArcaneEnchantment extends ArcaneEnchantment {
             if (enchantmentLevel > 0) {
                 if (projectile instanceof FireworkRocketEntity rocket) {
                     rocket.getCapability(IFireworkModifier.INSTANCE, null).ifPresent((w) -> {
-
                         float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
                         List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
                         int wissen = WissenUtil.getWissenInItems(items);
@@ -83,6 +85,8 @@ public class FireworkJumpArcaneEnchantment extends ArcaneEnchantment {
     public static void onHit(FireworkRocketEntity rocket, LivingEntity livingEntity) {
         if (!rocket.level().isClientSide()) {
             if (isJump(rocket)) {
+                int momentEnchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(crossbowStack, WizardsRebornArcaneEnchantments.MOMENT);
+
                 float jump = getJump(rocket);
                 float f = 0.0F;
                 ItemStack itemstack = rocket.getItem();
@@ -93,12 +97,21 @@ public class FireworkJumpArcaneEnchantment extends ArcaneEnchantment {
                 }
 
                 float f1 = f * (float) Math.sqrt((5.0D - (double) rocket.distanceTo(livingEntity)) / 5.0D);
+                if (momentEnchantmentLevel > 0 && rocket.getOwner() == livingEntity)  f1 = f;
                 float p = (f1 / 6f);
                 Vec3 vec = livingEntity.position().subtract(rocket.position()).normalize().scale(p).scale(jump);
+                if (momentEnchantmentLevel > 0 && rocket.getOwner() == livingEntity) {
+                    vec = rocket.getOwner().getLookAngle().reverse().normalize().scale(p).scale(jump);
+                    System.out.println(entityHit);
+                    if (!entityHit) {
+                        livingEntity.setDeltaMovement(Vec3.ZERO);
+                        entityHit = true;
+                    }
+                }
                 livingEntity.push(vec.x(), vec.y(), vec.z());
                 livingEntity.hurtMarked = true;
                 if (livingEntity instanceof Player player) {
-                    setFireworkJump(player, jump);
+                    if (getFireworkJump(player) < jump) setFireworkJump(player, jump);
                 }
             }
         }
