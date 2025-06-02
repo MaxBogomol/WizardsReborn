@@ -50,7 +50,7 @@ public class TotemOfDisenchantStartPacket extends ServerPacket {
 
         if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
             ListTag listtag = EnchantedBookItem.getEnchantments(stack);
-            for(int ii = 0; ii < listtag.size(); ++ii) {
+            for (int ii = 0; ii < listtag.size(); ++ii) {
                 CompoundTag compoundtag = listtag.getCompound(ii);
                 Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(EnchantmentHelper.getEnchantmentId(compoundtag));
                 enchantments.put(enchantment, EnchantmentHelper.getEnchantmentLevel(compoundtag));

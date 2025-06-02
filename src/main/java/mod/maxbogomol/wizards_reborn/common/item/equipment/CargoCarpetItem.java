@@ -149,7 +149,7 @@ public class CargoCarpetItem extends BlockItem implements ICustomBlockEntityData
         int i = 0;
         int j = 0;
 
-        for(ItemStack itemstack : nonnulllist) {
+        for (ItemStack itemstack : nonnulllist) {
             if (!itemstack.isEmpty()) {
                 ++j;
                 if (i <= 4) {
