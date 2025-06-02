@@ -70,7 +70,6 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     public static final EntityDataAccessor<Boolean> carpetedId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> banneredId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> armoredId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> risingId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<ItemStack> carpetId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> bannerId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> armorId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
@@ -89,9 +88,6 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         super.tick();
 
         if (!level().isClientSide()) {
-            if (this.entityData.get(DATA_STATE) == State.DIGGING) {
-                this.entityData.set(risingId, tickCount);
-            }
             if (getOwnerUUID() == null) {
                 Entity entity = getFirstPassenger();
                 if (entity instanceof Player player) {
@@ -131,7 +127,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             BlockPos blockpos = this.getHeadBlock();
 
             for (ItemStack itemstack : list) {
-                ItemEntity itementity = new ItemEntity(serverlevel, (double)blockpos.getX(), (double)blockpos.getY(), (double)blockpos.getZ(), itemstack);
+                ItemEntity itementity = new ItemEntity(serverlevel, blockpos.getX(), blockpos.getY(), blockpos.getZ(), itemstack);
                 itementity.setDefaultPickUpDelay();
                 serverlevel.addFreshEntity(itementity);
             }
@@ -218,42 +214,14 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             float f = Mth.sin(this.yBodyRot * ((float) Math.PI / 180F));
             float f1 = Mth.cos(this.yBodyRot * ((float) Math.PI / 180F));
             float f2 = flag ? -0.4F : 0.4F;
-            float f3 = 0.15F + positionRiderOffset();
+            float f3 = 0.15F;
+            if (isDigging()) f3 = f3 - 0.4f;
 
             callback.accept(passenger, this.getX() + (double) (f2 * f), this.getY() + this.getPassengersRidingOffset() + passenger.getMyRidingOffset() + (double) f3, this.getZ() - (double) (f2 * f1));
             if (passenger instanceof LivingEntity) {
                 ((LivingEntity) passenger).yBodyRot = this.yBodyRot;
             }
         }
-    }
-
-    public float positionRiderOffset() {
-        float offset = 0F;
-
-        if (this.entityData.get(DATA_STATE) == State.DIGGING) {
-            int startTick = this.entityData.get(DATA_DROP_SEED_AT_TICK) - 95;
-            if (tickCount > startTick) {
-                if (tickCount - startTick < 5) {
-                    float prt = ((tickCount - startTick) / 5f);
-                    offset = offset - (prt * 0.5f);
-                } else {
-                    offset = offset - 0.5f;
-                }
-            }
-        }
-        if (this.entityData.get(DATA_STATE) == State.RISING) {
-            int startTick = this.entityData.get(risingId) + 20;
-            if (tickCount > startTick) {
-                if (tickCount - startTick < 5) {
-                    float prt = ((tickCount - startTick) / 5f);
-                    offset = offset - 0.5f + (prt * 0.5f);
-                }
-            } else {
-                offset = offset - 0.5f;
-            }
-        }
-
-        return offset;
     }
 
     public boolean isPushable() {
@@ -350,7 +318,6 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         getEntityData().define(carpetedId, false);
         getEntityData().define(banneredId, false);
         getEntityData().define(armoredId, false);
-        getEntityData().define(risingId, 0);
         getEntityData().define(carpetId, ItemStack.EMPTY);
         getEntityData().define(bannerId, ItemStack.EMPTY);
         getEntityData().define(armorId, ItemStack.EMPTY);
@@ -363,7 +330,6 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         compound.putBoolean("Carpeted", getEntityData().get(carpetedId));
         compound.putBoolean("Bannered", getEntityData().get(banneredId));
         compound.putBoolean("Armored", getEntityData().get(armoredId));
-        compound.putInt("RisingTick", getEntityData().get(risingId));
         if (this.getOwnerUUID() != null) {
             compound.putUUID("Owner", this.getOwnerUUID());
         }
@@ -382,7 +348,6 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         getEntityData().set(carpetedId, compound.getBoolean("Carpeted"));
         getEntityData().set(banneredId, compound.getBoolean("Bannered"));
         getEntityData().set(armoredId, compound.getBoolean("Armored"));
-        getEntityData().set(risingId, compound.getInt("RisingTick"));
         UUID uuid;
         if (compound.hasUUID("Owner")) {
             uuid = compound.getUUID("Owner");
@@ -450,6 +415,10 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         } else {
             super.handleEntityEvent(id);
         }
+    }
+
+    public boolean isDigging() {
+        return this.entityData.get(DATA_STATE) == State.DIGGING;
     }
 
     public boolean canControl() {

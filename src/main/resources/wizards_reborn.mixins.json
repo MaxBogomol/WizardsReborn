@@ -22,7 +22,8 @@
     "client.FishingHookRendererMixin",
     "client.GuiGraphicsMixin",
     "client.ItemInHandLayerMixin",
-    "client.LevelRendererMixin"
+    "client.LevelRendererMixin",
+    "client.LivingEntityRendererMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

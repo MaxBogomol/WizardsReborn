@@ -35,12 +35,12 @@ public class CrossbowItemMixin {
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"), method = "shootProjectile")
-    private static void wizards_reborn$shootProjectile(Level level, LivingEntity shooter, InteractionHand hand, ItemStack crossbowStack, ItemStack ammoStack, float soundPitch, boolean isCreativeMode, float velocity, float inaccuracy, float projectileAngle, CallbackInfo c) {
+    private static void wizards_reborn$shootProjectile(Level level, LivingEntity shooter, InteractionHand hand, ItemStack crossbowStack, ItemStack ammoStack, float soundPitch, boolean isCreativeMode, float velocity, float inaccuracy, float projectileAngle, CallbackInfo ci) {
 
     }
 
     @Inject(at = @At("TAIL"), method = "shootProjectile")
-    private static void wizards_reborn$shootProjectileTail(Level level, LivingEntity shooter, InteractionHand hand, ItemStack crossbowStack, ItemStack ammoStack, float soundPitch, boolean isCreativeMode, float velocity, float inaccuracy, float projectileAngle, CallbackInfo c) {
+    private static void wizards_reborn$shootProjectileTail(Level level, LivingEntity shooter, InteractionHand hand, ItemStack crossbowStack, ItemStack ammoStack, float soundPitch, boolean isCreativeMode, float velocity, float inaccuracy, float projectileAngle, CallbackInfo ci) {
         MomentArcaneEnchantment.onCrossbowShot(wizards_reborn$projectile, level, shooter, hand, crossbowStack, ammoStack, soundPitch, isCreativeMode, velocity, inaccuracy, projectileAngle);
     }
 }
