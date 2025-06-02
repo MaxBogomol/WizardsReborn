@@ -57,9 +57,7 @@ public class SniffaloCarpetLayer extends RenderLayer<SniffaloEntity, SnifferMode
 
                 poseStack.pushPose();
                 ModelPart body = defaultModel.root().getChild("bone").getChild("body");
-                poseStack.mulPose(Axis.XP.rotationDegrees((float) (Math.toDegrees(body.xRot))));
-                poseStack.mulPose(Axis.YP.rotationDegrees((float) (Math.toDegrees(body.yRot))));
-                poseStack.mulPose(Axis.ZP.rotationDegrees((float) (Math.toDegrees(body.zRot))));
+                body.translateAndRotate(poseStack);
                 poseStack.translate(body.x / 16f, body.y / 16f, body.z / 16f);
                 poseStack.translate(-1, -1, -1);
                 poseStack.mulPose(Axis.ZP.rotationDegrees(180f));

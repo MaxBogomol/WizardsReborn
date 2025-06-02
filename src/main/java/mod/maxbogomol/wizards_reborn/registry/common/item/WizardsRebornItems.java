@@ -10,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.book.CustomBookHandler;
 import mod.maxbogomol.fluffy_fur.common.entity.ItemEntityHandler;
 import mod.maxbogomol.fluffy_fur.common.entity.ItemEntityModifier;
 import mod.maxbogomol.fluffy_fur.common.item.*;
+import mod.maxbogomol.fluffy_fur.integration.common.curios.PlushHeadRenderer;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
@@ -749,6 +750,7 @@ public class WizardsRebornItems {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerItems(FMLClientSetupEvent event) {
+            CuriosRendererRegistry.register(ARCANE_HOPPER.get(), PlushHeadRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
             CuriosRendererRegistry.register(ARCACITE_AMULET.get(), AmuletRenderer::new);
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
