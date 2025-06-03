@@ -956,7 +956,7 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.ARCANE_WOOD_GLASS_FRAME.get()),
                         EMPTY_ITEM, ACLHEMY_GLASS, EMPTY_ITEM,
-                        EMPTY_ITEM, new ItemStack(WizardsRebornItems.WISESTONE_FRAME.get())
+                        EMPTY_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_FRAME.get())
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone_glass_frame",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISESTONE_GLASS_FRAME.get()))
