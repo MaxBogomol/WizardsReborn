@@ -102,7 +102,6 @@ public class FireworkJumpArcaneEnchantment extends ArcaneEnchantment {
                 Vec3 vec = livingEntity.position().subtract(rocket.position()).normalize().scale(p).scale(jump);
                 if (momentEnchantmentLevel > 0 && rocket.getOwner() == livingEntity) {
                     vec = rocket.getOwner().getLookAngle().reverse().normalize().scale(p).scale(jump);
-                    System.out.println(entityHit);
                     if (!entityHit) {
                         livingEntity.setDeltaMovement(Vec3.ZERO);
                         entityHit = true;
