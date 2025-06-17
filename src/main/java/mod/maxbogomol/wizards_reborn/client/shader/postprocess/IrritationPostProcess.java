@@ -53,7 +53,7 @@ public class IrritationPostProcess extends PostProcess {
 
     @Override
     public void beforeProcess(PoseStack poseStack) {
-        double intensity =  WizardsRebornClientConfig.IRRITATION_SHADER_INTENSITY.get();
+        double intensity = WizardsRebornClientConfig.IRRITATION_SHADER_INTENSITY.get();
         float fade = (Mth.lerp(ClientTickHandler.partialTicks, oldTick, tick) / getMaxTick()) * (float) intensity;
         effectInstance.safeGetUniform("fade").set(fade);
         effectInstance.safeGetUniform("startTime").set(startTime);

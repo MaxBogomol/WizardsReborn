@@ -52,7 +52,7 @@ public class PlayerModifierImpl implements IPlayerModifier, INBTSerializable<Com
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        if ((nbt).contains("jump")) {
+        if (nbt.contains("jump")) {
             setFireworkJump(nbt.getFloat("jump"));
         }
     }

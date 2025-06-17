@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:hay_block",
-    "wizards_reborn:arcane_linen_hay",
+    "wizards_reborn:arcane_linen_bale",
     {
       "id": "#farmersdelight:campfire_signal_smoke",
       "required": false

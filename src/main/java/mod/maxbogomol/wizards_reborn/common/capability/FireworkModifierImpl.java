@@ -52,7 +52,7 @@ public class FireworkModifierImpl implements IFireworkModifier, INBTSerializable
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        if ((nbt).contains("jump")) {
+        if (nbt.contains("jump")) {
             setJump(nbt.getFloat("jump"));
         }
     }

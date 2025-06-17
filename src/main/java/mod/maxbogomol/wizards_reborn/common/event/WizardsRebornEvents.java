@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.fluffy_fur.registry.common.damage.FluffyFurDamageTypeTags;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
+import mod.maxbogomol.wizards_reborn.api.knowledge.EchoHandler;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.FireworkJumpArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.capability.*;
@@ -74,6 +75,7 @@ public class WizardsRebornEvents {
         if (!player.level().isClientSide()) {
             KnowledgeHandler.tickKnowledgeListTrigger(player);
         }
+        EchoHandler.tick(player);
         FireworkJumpArcaneEnchantment.playerTick(event);
     }
 

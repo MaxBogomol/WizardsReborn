@@ -129,7 +129,7 @@ public class WizardsRebornItems {
     //PLANTS
     public static final RegistryObject<Item> ARCANE_LINEN_SEEDS = ITEMS.register("arcane_linen_seeds", () -> new ItemNameBlockItem(WizardsRebornBlocks.ARCANE_LINEN.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_LINEN = ITEMS.register("arcane_linen", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_LINEN_HAY = ITEMS.register("arcane_linen_hay", () -> new BlockItem(WizardsRebornBlocks.ARCANE_LINEN_HAY.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_LINEN_BALE = ITEMS.register("arcane_linen_bale", () -> new BlockItem(WizardsRebornBlocks.ARCANE_LINEN_BALE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> MOR = ITEMS.register("mor", () -> new MorItem(WizardsRebornBlocks.MOR.get(), new Item.Properties().food(WizardsRebornFoods.MOR), 1500, 1800));
     public static final RegistryObject<Item> MOR_BLOCK = ITEMS.register("mor_block", () -> new BlockItem(WizardsRebornBlocks.MOR_BLOCK.get(), new Item.Properties()));
@@ -892,7 +892,7 @@ public class WizardsRebornItems {
         FluffyFurItems.composterItem(0.3F, PETALS_OF_INNOCENCE.get());
         FluffyFurItems.composterItem(0.3F, ARCANE_LINEN_SEEDS.get());
         FluffyFurItems.composterItem(0.65F, ARCANE_LINEN.get());
-        FluffyFurItems.composterItem(0.85F, ARCANE_LINEN_HAY.get());
+        FluffyFurItems.composterItem(0.85F, ARCANE_LINEN_BALE.get());
         FluffyFurItems.composterItem(0.65F, MOR.get());
         FluffyFurItems.composterItem(0.65F, ELDER_MOR.get());
         FluffyFurItems.composterItem(0.85F, MOR_BLOCK.get());

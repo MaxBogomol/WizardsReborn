@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.capability;
 
-import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
+import mod.maxbogomol.wizards_reborn.api.knowledge.*;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import net.minecraft.nbt.CompoundTag;
@@ -20,6 +19,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
     ArrayList<ArrayList<Spell>> spellSets = new ArrayList<>();
     int currentSpellSet = 0;
     int currentSpellInSet = 0;
+    ArrayList<EchoStack> echoes = new ArrayList<>();
 
     @Override
     public boolean isKnowledge(Knowledge knowledge) {
@@ -162,6 +162,36 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
     }
 
     @Override
+    public boolean isEcho(Echo echo) {
+        return echoes.stream().anyMatch(i -> i.getEcho().equals(echo));
+    }
+
+    @Override
+    public void addEcho(EchoStack echo) {
+        echoes.add(echo);
+    }
+
+    @Override
+    public void removeEcho(EchoStack echo) {
+        echoes.remove(echo);
+    }
+
+    @Override
+    public void removeEcho(int id) {
+        echoes.remove(id);
+    }
+
+    @Override
+    public void removeAllEcho() {
+        echoes.clear();
+    }
+
+    @Override
+    public ArrayList<EchoStack> getEchoes() {
+        return echoes;
+    }
+
+    @Override
     public CompoundTag serializeNBT() {
         ListTag knowledges = new ListTag();
         for (Knowledge knowledge : getKnowledges()) {
@@ -186,12 +216,19 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
             spellSets.add(spellSetTag);
         }
 
+        ListTag echoes = new ListTag();
+        for (EchoStack echoStack : getEchoes()) {
+            CompoundTag echoTag = echoStack.toTag();
+            echoes.add(echoTag);
+        }
+
         CompoundTag wrapper = new CompoundTag();
         wrapper.put("knowledges", knowledges);
         wrapper.put("spells", spells);
         wrapper.put("spellsSets", spellSets);
         wrapper.putInt("currentSpellSet", getCurrentSpellSet());
         wrapper.putInt("currentSpellInSet", getCurrentSpellInSet());
+        wrapper.put("echoes", echoes);
 
         return wrapper;
     }
@@ -202,8 +239,9 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
         removeAllSpell();
         removeAllSpellSets();
         setCurrentSpellSet(0);
+        removeAllEcho();
 
-        if ((nbt).contains("knowledges")) {
+        if (nbt.contains("knowledges")) {
             ListTag knowledges = nbt.getList("knowledges", Tag.TAG_STRING);
             for (int i = 0; i < knowledges.size(); i++) {
                 Knowledge knowledge = KnowledgeHandler.getKnowledge(knowledges.getString(i));
@@ -211,7 +249,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
             }
         }
 
-        if ((nbt).contains("spells")) {
+        if (nbt.contains("spells")) {
             ListTag spells = nbt.getList("spells", Tag.TAG_STRING);
             for (int i = 0; i < spells.size(); i++) {
                 Spell spell = SpellHandler.getSpell(spells.getString(i));
@@ -219,7 +257,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
             }
         }
 
-        if ((nbt).contains("spellsSets")) {
+        if (nbt.contains("spellsSets")) {
             ListTag spellSets = nbt.getList("spellsSets", Tag.TAG_LIST);
             for (int i = 0; i < spellSets.size(); i++) {
                 ListTag spellSet = spellSets.getList(i);
@@ -231,11 +269,18 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
             }
         }
 
-        if ((nbt).contains("currentSpellSet")) {
+        if (nbt.contains("currentSpellSet")) {
             setCurrentSpellSet(nbt.getInt("currentSpellSet"));
         }
-        if ((nbt).contains("currentSpellInSet")) {
+        if (nbt.contains("currentSpellInSet")) {
             setCurrentSpellInSet(nbt.getInt("currentSpellInSet"));
+        }
+
+        if (nbt.contains("echoes")) {
+            ListTag echoes = nbt.getList("echoes", Tag.TAG_COMPOUND);
+            for (int i = 0; i < echoes.size(); i++) {
+                addEcho(EchoStack.fromTag(echoes.getCompound(i)));
+            }
         }
     }
 }

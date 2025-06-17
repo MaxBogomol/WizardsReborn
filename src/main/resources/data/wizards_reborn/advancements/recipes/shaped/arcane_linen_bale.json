@@ -21,7 +21,7 @@
   ],
   "rewards": {
     "recipes": [
-      "wizards_reborn:shaped/arcane_linen_hay"
+      "wizards_reborn:shaped/arcane_linen_bale"
     ]
   },
   "sends_telemetry_event": false

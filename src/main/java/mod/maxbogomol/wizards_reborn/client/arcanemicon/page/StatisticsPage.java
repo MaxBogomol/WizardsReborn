@@ -20,14 +20,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class StatisticPage extends Page {
+public class StatisticsPage extends Page {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/title_page.png");
     public String text, title;
     public List<List<Knowledge>> knowledges;
     public int offset = 0;
 
     @SafeVarargs
-    public StatisticPage(String textKey, List<Knowledge>... knowledges) {
+    public StatisticsPage(String textKey, List<Knowledge>... knowledges) {
         super(BACKGROUND);
         this.text = textKey;
         this.title = textKey + ".title";

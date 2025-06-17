@@ -132,7 +132,7 @@ public class WizardsRebornBlocks {
 
     //PLANTS
     public static final RegistryObject<Block> ARCANE_LINEN = BLOCKS.register("arcane_linen", () -> new ArcaneLinenBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
-    public static final RegistryObject<Block> ARCANE_LINEN_HAY = BLOCKS.register("arcane_linen_hay", () -> new HayBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
+    public static final RegistryObject<Block> ARCANE_LINEN_BALE = BLOCKS.register("arcane_linen_bale", () -> new HayBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
 
     public static final RegistryObject<Block> MOR = BLOCKS.register("mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM).mapColor(MapColor.COLOR_BLUE).sound(WizardsRebornSounds.MOR)));
     public static final RegistryObject<Block> POTTED_MOR = BLOCKS.register("potted_mor", () -> new FlowerPotBlock(MOR.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
@@ -586,7 +586,7 @@ public class WizardsRebornBlocks {
         FluffyFurBlocks.fireBlock(INNOCENT_WOOD_FENCE_GATE.get(), 5, 20);
         FluffyFurBlocks.fireBlock(INNOCENT_WOOD_LEAVES.get(), 30, 60);
         FluffyFurBlocks.fireBlock(PETALS_OF_INNOCENCE.get(), 60, 100);
-        FluffyFurBlocks.fireBlock(ARCANE_LINEN_HAY.get(), 60, 20);
+        FluffyFurBlocks.fireBlock(ARCANE_LINEN_BALE.get(), 60, 20);
         FluffyFurBlocks.fireBlock(SHINY_CLOVER_CROP.get(), 60, 100);
         FluffyFurBlocks.fireBlock(SHINY_CLOVER.get(), 60, 100);
     }

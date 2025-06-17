@@ -2963,19 +2963,19 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_linen",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_LINEN_SEEDS.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_LINEN.get())),
-                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_LINEN_HAY.get()))
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_LINEN_BALE.get()))
                 ),
                 new WissenCrystallizerPage(new ItemStack(WizardsRebornItems.ARCANE_LINEN_SEEDS.get()),
                         new ItemStack(Items.WHEAT_SEEDS), ARCANUM_ITEM, ARCANUM_ITEM,
                         ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM,
                         new ItemStack(Items.WHEAT), new ItemStack(Items.WHEAT)
                 ),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANE_LINEN_HAY.get()),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANE_LINEN_BALE.get()),
                         new ItemStack(WizardsRebornItems.ARCANE_LINEN.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN.get()),
                         new ItemStack(WizardsRebornItems.ARCANE_LINEN.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN.get()),
                         new ItemStack(WizardsRebornItems.ARCANE_LINEN.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN.get())
                 ),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANE_LINEN.get(), 9), new ItemStack(WizardsRebornItems.ARCANE_LINEN_HAY.get())),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANE_LINEN.get(), 9), new ItemStack(WizardsRebornItems.ARCANE_LINEN_BALE.get())),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.cross_baulks",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_CROSS_BAULK.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.STRIPPED_ARCANE_WOOD_CROSS_BAULK.get())),
@@ -4044,8 +4044,8 @@ public class ArcanemiconChapters {
         );
 
         STATISTIC = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.statistic",
-                new StatisticPage("wizards_reborn.arcanemicon.page.statistic", WizardsRebornKnowledges.progression, WizardsRebornKnowledges.additionalProgression)
+                "wizards_reborn.arcanemicon.chapter.statistics",
+                new StatisticsPage("wizards_reborn.arcanemicon.page.statistics", WizardsRebornKnowledges.progression, WizardsRebornKnowledges.additionalProgression)
         );
 
         ANIMATIONS_CONFIGS = new Chapter(

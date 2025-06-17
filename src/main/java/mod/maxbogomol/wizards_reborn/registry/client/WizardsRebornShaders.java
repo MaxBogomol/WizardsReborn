@@ -15,6 +15,7 @@ public class WizardsRebornShaders {
         @SubscribeEvent
         public static void registerShaders(FMLClientSetupEvent event) {
             PostProcessHandler.addInstance(KnowledgePostProcess.INSTANCE);
+            PostProcessHandler.addInstance(EchoPostProcess.INSTANCE);
             PostProcessHandler.addInstance(MorSporesPostProcess.INSTANCE);
             PostProcessHandler.addInstance(WissenAuraPostProcess.INSTANCE);
             PostProcessHandler.addInstance(IrritationPostProcess.INSTANCE);

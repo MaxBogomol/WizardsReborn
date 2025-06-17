@@ -96,6 +96,7 @@ public class WizardsRebornKnowledges {
     public static ItemKnowledge ARCANE_WOOD_SMOKING_PIPE = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_wood_smoking_pipe", false, 7, WizardsRebornItems.ARCANE_WOOD_SMOKING_PIPE.get());
     public static ItemKnowledge ARCACITE = new ItemKnowledge(WizardsReborn.MOD_ID+":arcacite", true, 10, WizardsRebornItems.ARCACITE.get());
     public static ItemKnowledge ARCACITE_POLISHING_MIXTURE = new ItemKnowledge(WizardsReborn.MOD_ID+":arcacite_polishing_mixture", true, 10, WizardsRebornItems.ARCACITE_POLISHING_MIXTURE.get());
+    public static ItemKnowledge SNIFFALO_EGG = new EchoEggKnowledge(WizardsReborn.MOD_ID+":sniffalo_egg", true, 10, WizardsRebornItems.SNIFFALO_EGG.get());
 
     public static ItemKnowledge MOR = new ItemKnowledge(WizardsReborn.MOD_ID+":mor", false, 5, WizardsRebornItems.MOR.get());
     public static ItemKnowledge ELDER_MOR = new ItemKnowledge(WizardsReborn.MOD_ID+":elder_mor", false, 5, WizardsRebornItems.ELDER_MOR.get());
@@ -190,6 +191,7 @@ public class WizardsRebornKnowledges {
         KnowledgeHandler.register(ARCANE_WOOD_SMOKING_PIPE);
         KnowledgeHandler.register(ARCACITE);
         KnowledgeHandler.register(ARCACITE_POLISHING_MIXTURE);
+        KnowledgeHandler.register(SNIFFALO_EGG);
 
         KnowledgeHandler.register(MOR);
         KnowledgeHandler.register(ELDER_MOR);

@@ -301,4 +301,49 @@ public class KnowledgeUtil {
 
         return points;
     }
+
+    public static boolean isEcho(Entity entity, Echo echo) {
+        if (!(entity instanceof Player)) return false;
+        AtomicBoolean isActive = new AtomicBoolean(false);
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
+            isActive.set(k.isEcho(echo));
+        });
+        return isActive.get();
+    }
+
+    public static void addEcho(Entity entity, EchoStack echo) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
+            k.addEcho(echo);
+
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
+    public static void removeEcho(Entity entity, EchoStack echo) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
+            k.removeEcho(echo);
+
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
+    public static void removeEcho(Entity entity, int id) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
+            k.removeEcho(id);
+
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
+    public static ArrayList<EchoStack> getEchoes(Entity entity) {
+        if (!(entity instanceof Player)) return new ArrayList<>();
+        AtomicReference<ArrayList<EchoStack>> list = new AtomicReference<>();
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
+            list.set(k.getEchoes());
+        });
+        return list.get();
+    }
 }

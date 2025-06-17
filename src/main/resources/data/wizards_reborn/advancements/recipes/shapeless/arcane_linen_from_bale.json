@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_arcane_linen_hay": {
+    "has_arcane_linen_bale": {
       "conditions": {
         "items": [
           {
             "items": [
-              "wizards_reborn:arcane_linen_hay"
+              "wizards_reborn:arcane_linen_bale"
             ]
           }
         ]
@@ -16,12 +16,12 @@
   },
   "requirements": [
     [
-      "has_arcane_linen_hay"
+      "has_arcane_linen_bale"
     ]
   ],
   "rewards": {
     "recipes": [
-      "wizards_reborn:shapeless/arcane_linen_from_hay"
+      "wizards_reborn:shapeless/arcane_linen_from_bale"
     ]
   },
   "sends_telemetry_event": false

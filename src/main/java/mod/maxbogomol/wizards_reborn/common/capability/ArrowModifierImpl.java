@@ -52,7 +52,7 @@ public class ArrowModifierImpl implements IArrowModifier, INBTSerializable<Compo
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        if ((nbt).contains("charge")) {
+        if (nbt.contains("charge")) {
             setCharge(nbt.getInt("charge"));
         }
     }

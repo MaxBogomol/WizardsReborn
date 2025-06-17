@@ -74,6 +74,7 @@ public class WizardsReborn {
         WizardsRebornCrystals.register();
         WizardsRebornMonograms.register();
         WizardsRebornSpells.register();
+        WizardsRebornEchoes.register();
         WizardsRebornItemSkins.register();
         WizardsRebornArcaneEnchantments.register();
         WizardsRebornCrystalRituals.register();

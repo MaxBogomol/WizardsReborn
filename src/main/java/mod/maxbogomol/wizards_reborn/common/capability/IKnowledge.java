@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.capability;
 
+import mod.maxbogomol.wizards_reborn.api.knowledge.Echo;
+import mod.maxbogomol.wizards_reborn.api.knowledge.EchoStack;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import net.minecraftforge.common.capabilities.Capability;
@@ -40,4 +42,11 @@ public interface IKnowledge {
     void setCurrentSpellSet(int id);
     int getCurrentSpellInSet();
     void setCurrentSpellInSet(int id);
+
+    boolean isEcho(Echo echo);
+    void addEcho(EchoStack echo);
+    void removeEcho(EchoStack echo);
+    void removeEcho(int id);
+    void removeAllEcho();
+    ArrayList<EchoStack> getEchoes();
 }

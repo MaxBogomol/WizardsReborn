@@ -60,7 +60,7 @@ public class LightTypeStack {
         tag.putInt("tick", getTick());
         tag.putInt("tickConcentrated", getTickConcentrated());
         tag.putBoolean("concentrated", isConcentrated());
-        tag.put("tag", this.tag);
+        tag.put("tag", getTag());
 
         return tag;
     }

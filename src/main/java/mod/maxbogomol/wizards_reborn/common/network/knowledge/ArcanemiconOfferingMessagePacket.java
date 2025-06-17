@@ -20,9 +20,9 @@ public class ArcanemiconOfferingMessagePacket extends ClientPacket {
     @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         Player player = WizardsReborn.proxy.getPlayer();
-        player.displayClientMessage(net.minecraft.network.chat.Component.literal("<").append(
-                        net.minecraft.network.chat.Component.translatable("message.wizards_reborn.someone").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 123, 73, 109))))
-                .append(net.minecraft.network.chat.Component.literal("> "))
+        player.displayClientMessage(Component.literal("<").append(
+                        Component.translatable("message.wizards_reborn.someone").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 123, 73, 109))))
+                .append(Component.literal("> "))
                 .append(Component.translatable("message.wizards_reborn.arcanemicon_offering").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 251, 179, 176)))), false);
     }
 

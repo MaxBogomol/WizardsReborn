@@ -56,10 +56,12 @@ public class ArcanemiconOfferingKnowledge extends Knowledge implements ITickKnow
     @Override
     public void award(Player player) {
         if (!KnowledgeUtil.isKnowledge(player, WizardsRebornKnowledges.ARCANEMICON)) {
-            player.getInventory().add(new ItemStack(WizardsRebornItems.ARCANEMICON.get()));
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.ARCANEMICON_OFFERING.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
-            WizardsRebornPacketHandler.sendToTracking(player.level(), player.getOnPos(), new ArcanemiconOfferingPacket(player.position().add(0, 1, 0), player.getUUID()));
-            WizardsRebornPacketHandler.sendTo(player, new ArcanemiconOfferingMessagePacket());
+            if (player.getInventory().countItem(WizardsRebornItems.ARCANEMICON.get()) == 0) {
+                player.getInventory().add(new ItemStack(WizardsRebornItems.ARCANEMICON.get()));
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.ARCANEMICON_OFFERING.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+                WizardsRebornPacketHandler.sendToTracking(player.level(), player.getOnPos(), new ArcanemiconOfferingPacket(player.position().add(0, 1, 0), player.getUUID()));
+                WizardsRebornPacketHandler.sendTo(player, new ArcanemiconOfferingMessagePacket());
+            }
         }
     }
 }

@@ -300,7 +300,7 @@ public class WizardsRebornCreativeTabs {
             //PLANTS
             addInSub(event, PLANTS, WizardsRebornItems.ARCANE_LINEN_SEEDS);
             addInSub(event, PLANTS, WizardsRebornItems.ARCANE_LINEN);
-            addInSub(event, PLANTS, WizardsRebornItems.ARCANE_LINEN_HAY);
+            addInSub(event, PLANTS, WizardsRebornItems.ARCANE_LINEN_BALE);
 
             addInSub(event, PLANTS, WizardsRebornItems.MOR);
             if (WizardsRebornFarmersDelight.isLoaded()) {
