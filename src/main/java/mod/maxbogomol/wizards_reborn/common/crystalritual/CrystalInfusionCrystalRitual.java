@@ -317,7 +317,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                 ms.translate(1.5F, 0F, 0F);
                 ms.mulPose(Axis.YP.rotationDegrees(90f));
                 ms.scale(0.5F, 0.5F, 0.5F);
-                minecraft.getItemRenderer().renderStatic(container.getItem(i), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystal.getLevel(), 0);
+                minecraft.getItemRenderer().renderStatic(container.getItem(i), ItemDisplayContext.NONE, light, overlay, ms, buffers, crystal.getLevel(), 0);
                 ms.popPose();
             }
         }
@@ -328,7 +328,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
             ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
             ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
             ms.scale(0.5F, 0.5F, 0.5F);
-            minecraft.getItemRenderer().renderStatic(container.getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystal.getLevel(), 0);
+            minecraft.getItemRenderer().renderStatic(container.getItem(0), ItemDisplayContext.NONE, light, overlay, ms, buffers, crystal.getLevel(), 0);
             ms.popPose();
         }
     }

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
@@ -16,6 +17,7 @@ import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -97,7 +99,11 @@ public class ThrownScytheRenderer<T extends ThrownScytheEntity> extends EntityRe
             poseStack.mulPose(Axis.ZP.rotation(tick * 0.8f));
             poseStack.scale(2, 2f, 1f);
             poseStack.translate(0.25f, 0.25f, 0f);
-            Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemDisplayContext.NONE, light, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, entity.level(), 0);
+            BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(entity.getItem(), entity.level(), null, 0);
+            if (model instanceof LargeItemRenderer.LargeItemModel largeModel) {
+                model = largeModel.bakedModelHand;
+            }
+            RenderUtil.renderCustomModel(model, ItemDisplayContext.NONE, false, poseStack, bufferSource, light, OverlayTexture.NO_OVERLAY);
             poseStack.popPose();
         }
     }

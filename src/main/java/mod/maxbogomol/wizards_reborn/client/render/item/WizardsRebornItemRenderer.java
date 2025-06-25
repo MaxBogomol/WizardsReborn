@@ -29,7 +29,7 @@ public class WizardsRebornItemRenderer extends BlockEntityWithoutLevelRenderer {
         if (stack.getItem() == WizardsRebornItems.LIGHT_EMITTER.get()) {
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(WizardsRebornModels.LIGHT_EMITTER_PIECE, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
+            RenderUtil.renderCustomModel(WizardsRebornModels.LIGHT_EMITTER_PIECE, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
             poseStack.popPose();
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.8125f, 0.5f);
@@ -42,7 +42,7 @@ public class WizardsRebornItemRenderer extends BlockEntityWithoutLevelRenderer {
         if (stack.getItem() == WizardsRebornItems.LIGHT_TRANSFER_LENS.get()) {
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(WizardsRebornModels.LIGHT_TRANSFER_LENS_PIECE, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
+            RenderUtil.renderCustomModel(WizardsRebornModels.LIGHT_TRANSFER_LENS_PIECE, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
             RenderBuilder builder = WizardsRebornRenderUtil.renderHoveringLens(poseStack, buffer, packedLight, packedOverlay);
             if (displayContext.firstPerson()) FluffyFurRenderTypes.addCustomItemRenderBuilderFirst(builder);
             if (displayContext == ItemDisplayContext.GUI) FluffyFurRenderTypes.addCustomItemRenderBuilderGui(builder);
@@ -57,7 +57,7 @@ public class WizardsRebornItemRenderer extends BlockEntityWithoutLevelRenderer {
         if (stack.getItem() == WizardsRebornItems.CREATIVE_LIGHT_STORAGE.get()) {
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(WizardsRebornModels.CREATIVE_LIGHT_STORAGE_PIECE, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
+            RenderUtil.renderCustomModel(WizardsRebornModels.CREATIVE_LIGHT_STORAGE_PIECE, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
             for (Direction direction : Direction.values()) {
                 poseStack.pushPose();
                 BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
@@ -75,7 +75,7 @@ public class WizardsRebornItemRenderer extends BlockEntityWithoutLevelRenderer {
         if (stack.getItem() == item) {
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(model, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
+            RenderUtil.renderCustomModel(model, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
             for (Direction direction : Direction.values()) {
                 poseStack.pushPose();
                 BlockPos pos = new BlockPos(0, 0, 0).relative(direction);

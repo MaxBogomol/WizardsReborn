@@ -135,7 +135,7 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
         poseStack.mulPose(Axis.ZP.rotationDegrees(-zRot));
         poseStack.scale(size, size, size);
-        RenderUtil.renderCustomModel(WizardsRebornModels.ARCANE_ITERATOR_PIECE, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        RenderUtil.renderCustomModel(WizardsRebornModels.ARCANE_ITERATOR_PIECE, ItemDisplayContext.NONE, false, poseStack, bufferSource, light, overlay);
         poseStack.popPose();
     }
 

@@ -36,7 +36,7 @@ public class FluidSensorRenderer implements BlockEntityRenderer<FluidSensorBlock
 
         poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
         poseStack.mulPose(Axis.XP.rotationDegrees(blockEntity.getBlockUpRotate()));
-        RenderUtil.renderCustomModel(((SensorBaseBlock) blockEntity.getBlockState().getBlock()).getModel(blockEntity.getBlockState()), ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        RenderUtil.renderCustomModel(((SensorBaseBlock) blockEntity.getBlockState().getBlock()).getModel(blockEntity.getBlockState()), ItemDisplayContext.NONE, false, poseStack, bufferSource, light, overlay);
         poseStack.popPose();
 
         for (int i = 0; i < 10; i++) {

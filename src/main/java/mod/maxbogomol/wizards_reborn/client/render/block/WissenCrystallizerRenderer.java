@@ -24,7 +24,7 @@ public class WissenCrystallizerRenderer implements BlockEntityRenderer<WissenCry
         poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
         poseStack.scale(0.5F, 0.5F, 0.5F);
-        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
         poseStack.popPose();
 
         int size = blockEntity.getInventorySize();
@@ -39,7 +39,7 @@ public class WissenCrystallizerRenderer implements BlockEntityRenderer<WissenCry
                 poseStack.translate(0.5F, 0F, 0F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90f));
                 poseStack.scale(0.25F, 0.25F, 0.25F);
-                minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(i + 1), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+                minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(i + 1), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
                 poseStack.popPose();
             }
         }

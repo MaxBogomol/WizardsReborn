@@ -24,7 +24,7 @@ public class WissenAltarRenderer implements BlockEntityRenderer<WissenAltarBlock
         poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
         poseStack.mulPose(Axis.XP.rotationDegrees(90F));
         poseStack.scale(0.5F,0.5F,0.5F);
-        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
         poseStack.popPose();
 
         poseStack.pushPose();
@@ -32,7 +32,7 @@ public class WissenAltarRenderer implements BlockEntityRenderer<WissenAltarBlock
         poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F * blockEntity.getCraftingStage()), 0F);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
         poseStack.scale(0.5F * blockEntity.getCraftingStage(), 0.5F * blockEntity.getCraftingStage(), 0.5F * blockEntity.getCraftingStage());
-        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(2), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(2), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
         poseStack.popPose();
     }
 }

@@ -27,7 +27,7 @@ public class WizardsRebornRenderUtil {
     public static Color colorEnergySide = new Color(24, 147, 25);
 
     public static void renderHoveringLensModel(PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
-        RenderUtil.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        RenderUtil.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.NONE, false, poseStack, bufferSource, light, overlay);
     }
 
     public static RenderBuilder renderHoveringLensGlow(PoseStack poseStack, Color color) {

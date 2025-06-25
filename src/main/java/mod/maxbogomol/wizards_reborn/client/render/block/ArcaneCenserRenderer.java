@@ -40,7 +40,7 @@ public class ArcaneCenserRenderer implements BlockEntityRenderer<ArcaneCenserBlo
             poseStack.mulPose(Axis.XP.rotationDegrees((float) (Math.sin(Math.toRadians(random.nextFloat() * 360))) * 10F));
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) (Math.sin(Math.toRadians(random.nextFloat() * 360))) * 10F));
             poseStack.scale(0.25F, 0.25F, 0.25F);
-            minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(i), ItemDisplayContext.FIXED, newLight, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+            minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(i), ItemDisplayContext.NONE, newLight, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
             poseStack.popPose();
         }
     }

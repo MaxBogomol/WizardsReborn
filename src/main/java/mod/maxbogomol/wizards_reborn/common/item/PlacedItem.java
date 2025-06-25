@@ -68,7 +68,7 @@ public class PlacedItem extends ItemNameBlockItem implements ICustomBlockEntityD
         poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
         poseStack.mulPose(Axis.YP.rotationDegrees(rotateTicks));
         poseStack.scale(0.5F, 0.5F, 0.5F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, items.getLevel(), 0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, items.getLevel(), 0);
         poseStack.popPose();
     }
 }

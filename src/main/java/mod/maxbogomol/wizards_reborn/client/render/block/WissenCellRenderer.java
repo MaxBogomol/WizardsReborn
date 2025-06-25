@@ -19,7 +19,7 @@ public class WissenCellRenderer implements BlockEntityRenderer<WissenCellBlockEn
         poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
         poseStack.mulPose(Axis.XP.rotationDegrees(90F));
         poseStack.scale(0.5F,0.5F,0.5F);
-        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
         poseStack.popPose();
     }
 }

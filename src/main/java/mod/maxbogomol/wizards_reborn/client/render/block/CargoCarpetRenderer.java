@@ -62,7 +62,7 @@ public class CargoCarpetRenderer implements BlockEntityRenderer<CargoCarpetBlock
                     poseStack.mulPose(Axis.YP.rotationDegrees(((random.nextFloat() - 0.5f) * 2f) * 360));
                     poseStack.mulPose(Axis.XP.rotationDegrees(90f));
                     poseStack.scale(0.5F, 0.5F, 0.5F);
-                    Minecraft.getInstance().getItemRenderer().renderStatic(container.getItem(i), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+                    Minecraft.getInstance().getItemRenderer().renderStatic(container.getItem(i), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
                     poseStack.popPose();
                 }
             }

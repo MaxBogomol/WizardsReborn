@@ -24,7 +24,7 @@ public class ArcaneWorkbenchRenderer implements BlockEntityRenderer<ArcaneWorkbe
         poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
         poseStack.scale(0.5F, 0.5F, 0.5F);
-        minecraft.getItemRenderer().renderStatic(blockEntity.itemOutputHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        minecraft.getItemRenderer().renderStatic(blockEntity.itemOutputHandler.getStackInSlot(0), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
         poseStack.popPose();
 
         int x = -1;
@@ -38,7 +38,7 @@ public class ArcaneWorkbenchRenderer implements BlockEntityRenderer<ArcaneWorkbe
             poseStack.scale(0.15F, 0.15F, 0.15F);
             poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
 
-            minecraft.getItemRenderer().renderStatic(blockEntity.itemHandler.getStackInSlot(i), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+            minecraft.getItemRenderer().renderStatic(blockEntity.itemHandler.getStackInSlot(i), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
             poseStack.popPose();
 
             x = x + 1;
@@ -58,7 +58,7 @@ public class ArcaneWorkbenchRenderer implements BlockEntityRenderer<ArcaneWorkbe
             poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
             poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
 
-            minecraft.getItemRenderer().renderStatic(blockEntity.itemHandler.getStackInSlot(9 + i), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+            minecraft.getItemRenderer().renderStatic(blockEntity.itemHandler.getStackInSlot(9 + i), ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
             poseStack.popPose();
         }
     }
