@@ -8,7 +8,7 @@ import mod.maxbogomol.fluffy_fur.common.block.sign.CustomWallSignBlock;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
+import mod.maxbogomol.wizards_reborn.common.block.WizardsRebornBlockColor;
 import mod.maxbogomol.wizards_reborn.common.block.LuminalGlassBlock;
 import mod.maxbogomol.wizards_reborn.common.block.SniffaloEggBlock;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler.AlchemyBoilerBlock;
@@ -142,7 +142,7 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> ELDER_MOR_BLOCK = BLOCKS.register("elder_mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK).mapColor(MapColor.COLOR_BLACK).sound(WizardsRebornSounds.ELDER_MOR_BLOCK)));
 
     public static final RegistryObject<Block> PITCHER_TURNIP = BLOCKS.register("pitcher_turnip", () -> new PitcherTurnipBlock(BlockBehaviour.Properties.of().strength(0.5F).mapColor(MapColor.COLOR_ORANGE).sound(SoundType.CROP).noOcclusion()));
-    public static final RegistryObject<Block> PITCHER_TURNIP_BLOCK = BLOCKS.register("pitcher_turnip_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.PUMPKIN)));
+    public static final RegistryObject<Block> PITCHER_TURNIP_BLOCK = BLOCKS.register("pitcher_turnip_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.PUMPKIN).mapColor(MapColor.COLOR_ORANGE)));
     public static final RegistryObject<Block> POTTED_PITCHER_TURNIP = BLOCKS.register("potted_pitcher_turnip", () -> new PottedPitcherTurnipBlock(PITCHER_TURNIP.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> SHINY_CLOVER_CROP = BLOCKS.register("shiny_clover_crop", () -> new ShinyCloverCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> SHINY_CLOVER = BLOCKS.register("shiny_clover", () -> new ShinyCloverBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
@@ -176,9 +176,9 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion(), WizardsRebornWoodTypes.ARCANE_WOOD));
     public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).sound(WizardsRebornSounds.ARCANE_WOOD_HANGING_SIGN).noOcclusion(), WizardsRebornWoodTypes.ARCANE_WOOD));
     public static final RegistryObject<Block> ARCANE_WOOD_WALL_HANGING_SIGN = BLOCKS.register("arcane_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).sound(WizardsRebornSounds.ARCANE_WOOD_HANGING_SIGN).noOcclusion(), WizardsRebornWoodTypes.ARCANE_WOOD));
-    public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.AZALEA_LEAVES).lightLevel((state) -> 5)));
-    public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).sound(SoundType.AZALEA)));
-    public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.AZALEA_LEAVES).mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).lightLevel((state) -> 5)));
+    public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).sound(SoundType.AZALEA)));
+    public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> INNOCENT_WOOD_LOG = BLOCKS.register("innocent_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LOG).mapColor(MapColor.TERRACOTTA_GRAY).sound(WizardsRebornSounds.INNOCENT_WOOD)));
     public static final RegistryObject<Block> INNOCENT_WOOD = BLOCKS.register("innocent_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LOG).mapColor(MapColor.TERRACOTTA_GRAY).sound(WizardsRebornSounds.INNOCENT_WOOD)));
@@ -203,10 +203,10 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> INNOCENT_WOOD_WALL_SIGN = BLOCKS.register("innocent_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get()).noOcclusion(), WizardsRebornWoodTypes.INNOCENT_WOOD));
     public static final RegistryObject<Block> INNOCENT_WOOD_HANGING_SIGN = BLOCKS.register("innocent_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get()).sound(WizardsRebornSounds.INNOCENT_WOOD_HANGING_SIGN).noOcclusion(), WizardsRebornWoodTypes.INNOCENT_WOOD));
     public static final RegistryObject<Block> INNOCENT_WOOD_WALL_HANGING_SIGN = BLOCKS.register("innocent_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get()).sound(WizardsRebornSounds.INNOCENT_WOOD_HANGING_SIGN).noOcclusion(), WizardsRebornWoodTypes.INNOCENT_WOOD));
-    public static final RegistryObject<Block> INNOCENT_WOOD_LEAVES = BLOCKS.register("innocent_wood_leaves", () -> new InnocentWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
-    public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new InnocentWoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_LEAVES = BLOCKS.register("innocent_wood_leaves", () -> new InnocentWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES).mapColor(MapColor.TERRACOTTA_WHITE)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new InnocentWoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING).mapColor(MapColor.TERRACOTTA_WHITE)));
     public static final RegistryObject<Block> POTTED_INNOCENT_WOOD_SAPLING = BLOCKS.register("potted_innocent_wood_sapling", () -> new FlowerPotBlock(INNOCENT_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
+    public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS).mapColor(MapColor.TERRACOTTA_WHITE)));
     public static final RegistryObject<Block> POTTED_PETALS_OF_INNOCENCE = BLOCKS.register("potted_petals_of_innocence", () -> new FlowerPotBlock(PETALS_OF_INNOCENCE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> CORK_BAMBOO_SAPLING = BLOCKS.register("cork_bamboo_sapling", () -> new CorkBambooSaplingBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().randomTicks().instabreak().noCollission().strength(1.0F).sound(WizardsRebornSounds.CORK_BAMBOO_SAPLING).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY)));
@@ -541,7 +541,7 @@ public class WizardsRebornBlocks {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerColorMappingBlocks(RegisterColorHandlersEvent.Block event) {
-            event.register((state, world, pos, tintIndex) -> CustomBlockColor.getInstance().getColor(state, world, pos, tintIndex), CustomBlockColor.PLANTS);
+            event.register((state, world, pos, tintIndex) -> WizardsRebornBlockColor.getPlantsInstance().getColor(state, world, pos, tintIndex), WizardsRebornBlockColor.PLANTS);
         }
     }
 
