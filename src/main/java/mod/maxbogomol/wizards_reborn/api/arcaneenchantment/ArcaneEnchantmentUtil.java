@@ -154,6 +154,13 @@ public class ArcaneEnchantmentUtil {
         return stack.getItem() instanceof IArcaneItem;
     }
 
+    public static List<ArcaneEnchantmentType> getArcaneEnchantmentTypes(ItemStack stack) {
+        if (stack.getItem() instanceof IArcaneItem item) {
+            return item.getArcaneEnchantmentTypes();
+        }
+        return new ArrayList<>();
+    }
+
     public static boolean checkCompatibility(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
         if (isArcaneItem(stack) && arcaneEnchantment.canEnchantItem(stack)) {
             existArcaneEnchantments(stack);

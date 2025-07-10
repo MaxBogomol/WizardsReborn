@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_swamp",
+  "biomes": "#wizards_reborn:mor_spawn",
   "features": "wizards_reborn:mor_swamp",
   "step": "vegetal_decoration"
 }

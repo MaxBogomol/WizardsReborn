@@ -71,11 +71,6 @@
   "block.wizards_reborn.nether_salt_block": "Nether Salt Block",
   "block.wizards_reborn.nether_salt_ore": "Nether Salt Ore",
 
-  "block.wizards_reborn.arcane_linen": "Arcane Linen Crops",
-  "item.wizards_reborn.arcane_linen_seeds": "Arcane Linen Seeds",
-  "item.wizards_reborn.arcane_linen": "Arcane Linen",
-  "block.wizards_reborn.arcane_linen_bale": "Arcane Linen Bale",
-
   "item.wizards_reborn.alchemy_calx": "Alchemy Calx",
   "block.wizards_reborn.alchemy_calx_block": "Alchemy Calx Block",
   "item.wizards_reborn.natural_calx": "Natural Calx",
@@ -89,6 +84,11 @@
 
   "item.wizards_reborn.arcacite_polishing_mixture": "Arcacite Polishing Mixture",
   "block.wizards_reborn.arcacite_polishing_mixture_block": "Arcacite Polishing Mixture Block",
+
+  "block.wizards_reborn.arcane_linen": "Arcane Linen Crops",
+  "item.wizards_reborn.arcane_linen_seeds": "Arcane Linen Seeds",
+  "item.wizards_reborn.arcane_linen": "Arcane Linen",
+  "block.wizards_reborn.arcane_linen_bale": "Arcane Linen Bale",
 
   "block.wizards_reborn.mor": "Mor",
   "block.wizards_reborn.potted_mor": "Potted Mor",

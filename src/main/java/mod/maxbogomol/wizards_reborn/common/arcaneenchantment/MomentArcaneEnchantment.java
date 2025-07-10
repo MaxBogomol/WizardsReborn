@@ -3,7 +3,6 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,8 +29,8 @@ public class MomentArcaneEnchantment extends ArcaneEnchantment {
 
     @Override
     public boolean canEnchantItem(ItemStack stack) {
-        if (stack.getItem() instanceof IArcaneItem item) {
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.CROSSBOW);
+        if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+            return ArcaneEnchantmentUtil.getArcaneEnchantmentTypes(stack).contains(ArcaneEnchantmentTypes.CROSSBOW);
         }
         return false;
     }

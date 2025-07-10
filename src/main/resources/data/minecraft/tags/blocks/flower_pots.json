@@ -1,12 +1,13 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:potted_arcane_wood_sapling",
     "wizards_reborn:potted_mor",
     "wizards_reborn:potted_elder_mor",
+    "wizards_reborn:potted_pitcher_turnip",
+    "wizards_reborn:potted_shiny_clover",
+    "wizards_reborn:potted_arcane_wood_sapling",
     "wizards_reborn:potted_innocent_wood_sapling",
     "wizards_reborn:potted_petals_of_innocence",
-    "wizards_reborn:potted_pitcher_turnip",
-    "wizards_reborn:potted_shiny_clover"
+    "wizards_reborn:potted_cork_bamboo"
   ]
 }

@@ -3,7 +3,6 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.EagleShotRayPacket;
@@ -45,9 +44,9 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
 
     @Override
     public boolean canEnchantItem(ItemStack stack) {
-        if (stack.getItem() instanceof IArcaneItem item) {
+        if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
             if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SPLIT) > 0) return false;
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.BOW);
+            return ArcaneEnchantmentUtil.getArcaneEnchantmentTypes(stack).contains(ArcaneEnchantmentTypes.BOW);
         }
         return false;
     }

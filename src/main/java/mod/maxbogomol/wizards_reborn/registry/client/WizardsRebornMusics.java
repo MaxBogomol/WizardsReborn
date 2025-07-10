@@ -5,10 +5,10 @@ import mod.maxbogomol.fluffy_fur.client.sound.MusicModifier;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.levelgen.WizardsRebornBiomeTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.Music;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -25,7 +25,7 @@ public class WizardsRebornMusics {
             MusicHandler.register(new MusicModifier.Panorama(REBORN, WizardsRebornClient.MAGICAL_ORIGINS_PANORAMA));
             MusicHandler.register(new MusicModifier() {
                 public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
-                    if (isBiome(Tags.Biomes.IS_SWAMP, minecraft)) {
+                    if (isBiome(WizardsRebornBiomeTags.MOR_MUSIC, minecraft)) {
                         return (WizardsRebornClient.random.nextFloat() < 0.8f);
                     }
                     return false;
@@ -37,7 +37,7 @@ public class WizardsRebornMusics {
             });
             MusicHandler.register(new MusicModifier() {
                 public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
-                    if (isBiome(Tags.Biomes.IS_CAVE, minecraft)) {
+                    if (isBiome(WizardsRebornBiomeTags.SHIMMER_MUSIC, minecraft)) {
                         if (minecraft.player.getY() >= -40 && minecraft.player.getY() <= 30) {
                             return (WizardsRebornClient.random.nextFloat() < 0.6f);
                         }

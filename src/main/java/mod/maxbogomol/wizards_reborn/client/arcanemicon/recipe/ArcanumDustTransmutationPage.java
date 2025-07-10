@@ -47,7 +47,7 @@ public class ArcanumDustTransmutationPage extends RecipePage {
             inv.setItem(0, input);
 
             Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, level);
-            return !(recipe.isPresent() && recipe.get().getResultItem(RegistryAccess.EMPTY).getItem().equals(result.getItem()) || recipe.get().getDisplay().getItem().equals(result.getItem()));
+            return !(recipe.isPresent() && recipe.get().getResultItem(RegistryAccess.EMPTY).getItem().equals(result.getItem()) || recipe.isPresent() && recipe.get().getDisplay().getItem().equals(result.getItem()));
         }
 
         return false;

@@ -6,7 +6,6 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrownShearsEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneShearsItem;
@@ -48,8 +47,8 @@ public class SilkSongArcaneEnchantment extends ArcaneEnchantment {
 
     @Override
     public boolean canEnchantItem(ItemStack stack) {
-        if (stack.getItem() instanceof IArcaneItem item) {
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.SHEARS);
+        if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+            return ArcaneEnchantmentUtil.getArcaneEnchantmentTypes(stack).contains(ArcaneEnchantmentTypes.SHEARS);
         }
         return false;
     }

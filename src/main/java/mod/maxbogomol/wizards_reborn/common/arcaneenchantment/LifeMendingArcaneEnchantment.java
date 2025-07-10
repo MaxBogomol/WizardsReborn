@@ -4,7 +4,6 @@ import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.world.entity.Entity;
@@ -27,9 +26,9 @@ public class LifeMendingArcaneEnchantment extends ArcaneEnchantment {
 
     @Override
     public boolean canEnchantItem(ItemStack stack) {
-        if (stack.getItem() instanceof IArcaneItem item) {
+        if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
             if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.WISSEN_MENDING) > 0) return false;
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.BREAKABLE);
+            return ArcaneEnchantmentUtil.getArcaneEnchantmentTypes(stack).contains(ArcaneEnchantmentTypes.BREAKABLE);
         }
         return false;
     }

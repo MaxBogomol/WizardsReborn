@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#is_overworld",
+  "biomes": "#wizards_reborn:arcanum_ore_spawn",
   "features": "wizards_reborn:arcanum_ore",
   "step": "underground_ores"
 }

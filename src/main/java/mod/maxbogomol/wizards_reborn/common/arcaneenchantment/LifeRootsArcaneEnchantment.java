@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
@@ -20,8 +20,8 @@ public class LifeRootsArcaneEnchantment extends ArcaneEnchantment {
 
     @Override
     public boolean canEnchantItem(ItemStack stack) {
-        if (stack.getItem() instanceof IArcaneItem item) {
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.WOODEN);
+        if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+            return ArcaneEnchantmentUtil.getArcaneEnchantmentTypes(stack).contains(ArcaneEnchantmentTypes.WOODEN);
         }
         return false;
     }
