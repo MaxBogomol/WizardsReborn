@@ -26,7 +26,7 @@ public class WissenRingItem extends BaseWissenCurioItem {
     }
 
     @Override
-    public int getMaxWissen() {
+    public int getMaxWissen(ItemStack stack) {
         return 5000;
     }
 
@@ -49,7 +49,7 @@ public class WissenRingItem extends BaseWissenCurioItem {
 
             if (slotContext.entity() instanceof Player player) {
                 if (player.tickCount % 8 == 0) {
-                    WissenItemUtil.addWissen(stack, 1, getMaxWissen());
+                    WissenItemUtil.addWissen(stack, 1, getMaxWissen(stack));
                 }
 
                 List<ItemStack> itemsAdd = WissenUtil.getWissenItemsActive(player);
@@ -61,10 +61,10 @@ public class WissenRingItem extends BaseWissenCurioItem {
                         int wissenRemain = WissenUtil.getRemoveWissenRemain(WissenItemUtil.getWissen(stack), 1);
                         wissenRemain = 1 - wissenRemain;
                         WissenItemUtil.existWissen(item);
-                        int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen());
+                        int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen(item));
                         wissenRemain = wissenRemain - itemWissenRemain;
                         if (wissenRemain > 0) {
-                            WissenItemUtil.addWissen(item, wissenRemain, wissenItem.getMaxWissen());
+                            WissenItemUtil.addWissen(item, wissenRemain, wissenItem.getMaxWissen(item));
                             WissenItemUtil.removeWissen(stack, wissenRemain);
                         }
                     }

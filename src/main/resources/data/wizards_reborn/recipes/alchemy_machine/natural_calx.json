@@ -14,7 +14,7 @@
       "item": "wizards_reborn:alchemy_calx"
     },
     {
-      "item": "minecraft:slime_ball"
+      "tag": "forge:slimeballs"
     },
     {
       "item": "minecraft:moss_block"

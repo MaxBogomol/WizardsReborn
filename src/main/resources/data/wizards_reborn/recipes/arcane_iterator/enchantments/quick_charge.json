@@ -7,10 +7,10 @@
   "experience": 5,
   "ingredients": [
     {
-      "item": "minecraft:lapis_lazuli"
+      "tag": "forge:gems/lapis"
     },
     {
-      "item": "minecraft:lapis_lazuli"
+      "tag": "forge:gems/lapis"
     },
     {
       "item": "minecraft:arrow"
@@ -22,7 +22,7 @@
       "tag": "forge:rods/wooden"
     },
     {
-      "item": "minecraft:slime_ball"
+      "tag": "forge:slimeballs"
     }
   ]
 }

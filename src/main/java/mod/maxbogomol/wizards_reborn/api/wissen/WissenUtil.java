@@ -210,7 +210,7 @@ public class WissenUtil {
         int maxWissen = 0;
         for (ItemStack stack : items) {
             if (stack.getItem() instanceof IWissenItem wissenItem) {
-                maxWissen = maxWissen + wissenItem.getMaxWissen();
+                maxWissen = maxWissen + wissenItem.getMaxWissen(stack);
             }
         }
 

@@ -66,10 +66,10 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                         int wissen_remain = WissenUtil.getRemoveWissenRemain(wissen, 50);
                         wissen_remain = 50 - wissen_remain;
                         WissenItemUtil.existWissen(stack);
-                        int item_wissen_remain = WissenItemUtil.getAddWissenRemain(stack, wissen_remain, item.getMaxWissen());
+                        int item_wissen_remain = WissenItemUtil.getAddWissenRemain(stack, wissen_remain, item.getMaxWissen(stack));
                         wissen_remain = wissen_remain - item_wissen_remain;
                         if (wissen_remain > 0) {
-                            WissenItemUtil.addWissen(stack, wissen_remain, item.getMaxWissen());
+                            WissenItemUtil.addWissen(stack, wissen_remain, item.getMaxWissen(stack));
                             wissen = wissen - wissen_remain;
                             if (random.nextFloat() < 0.5) {
                                 WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtSendPacket(getBlockPos()));

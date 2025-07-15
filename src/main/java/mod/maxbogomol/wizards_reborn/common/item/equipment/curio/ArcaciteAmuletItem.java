@@ -44,7 +44,7 @@ public class ArcaciteAmuletItem extends BaseWissenCurioItem {
     }
 
     @Override
-    public int getMaxWissen() {
+    public int getMaxWissen(ItemStack stack) {
         return 1500;
     }
 

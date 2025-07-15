@@ -26,7 +26,7 @@ public class WissenKeychainItem extends BaseWissenCurioItem {
     }
 
     @Override
-    public int getMaxWissen() {
+    public int getMaxWissen(ItemStack stack) {
         return 25000;
     }
 
@@ -56,10 +56,10 @@ public class WissenKeychainItem extends BaseWissenCurioItem {
                         int wissenRemain = WissenUtil.getRemoveWissenRemain(WissenItemUtil.getWissen(stack), getWissenTransfer());
                         wissenRemain = getWissenTransfer() - wissenRemain;
                         WissenItemUtil.existWissen(item);
-                        int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen());
+                        int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen(item));
                         wissenRemain = wissenRemain - itemWissenRemain;
                         if (wissenRemain > 0) {
-                            WissenItemUtil.addWissen(item, wissenRemain, wissenItem.getMaxWissen());
+                            WissenItemUtil.addWissen(item, wissenRemain, wissenItem.getMaxWissen(item));
                             WissenItemUtil.removeWissen(stack, wissenRemain);
                         }
                     }

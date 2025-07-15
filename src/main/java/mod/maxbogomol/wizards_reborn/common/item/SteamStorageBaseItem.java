@@ -38,7 +38,7 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICust
     }
 
     @Override
-    public int getMaxSteam() {
+    public int getMaxSteam(ItemStack stack) {
         if (getBlock() instanceof EntityBlock block) {
             BlockEntity blockEntity = block.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
             if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
@@ -54,7 +54,7 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICust
         if (WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
             CompoundTag nbt = stack.getTag();
             if (nbt != null && nbt.contains("steam")) {
-                list.add(NumericalUtil.getSteamName(nbt.getInt("steam"), getMaxSteam()).copy().withStyle(ChatFormatting.GRAY));
+                list.add(NumericalUtil.getSteamName(nbt.getInt("steam"), getMaxSteam(stack)).copy().withStyle(ChatFormatting.GRAY));
             }
         }
     }

@@ -16,7 +16,7 @@
       "item": "minecraft:charcoal"
     },
     {
-      "item": "minecraft:cobblestone"
+      "tag": "forge:cobblestone/normal"
     },
     {
       "item": "wizards_reborn:alchemy_calx"

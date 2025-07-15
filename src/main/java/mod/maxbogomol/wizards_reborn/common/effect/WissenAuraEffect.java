@@ -41,8 +41,8 @@ public class WissenAuraEffect extends MobEffect {
                     if (item.getItem() instanceof IWissenItem wissenItem) {
                         if (wissenItem.getWissenItemType() != WissenItemType.OFF) {
                             WissenItemUtil.existWissen(item);
-                            int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen());
-                            WissenItemUtil.addWissen(item, wissenRemain, wissenItem.getMaxWissen());
+                            int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen(item));
+                            WissenItemUtil.addWissen(item, wissenRemain, wissenItem.getMaxWissen(item));
 
                             wissenRemain = itemWissenRemain;
                             if (wissenRemain <= 0) {

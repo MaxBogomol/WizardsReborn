@@ -23,7 +23,7 @@ public class BaseWissenCurioItem extends BaseCurioItem implements IWissenItem {
     }
 
     @Override
-    public int getMaxWissen() {
+    public int getMaxWissen(ItemStack stack) {
         return 0;
     }
 
@@ -37,7 +37,7 @@ public class BaseWissenCurioItem extends BaseCurioItem implements IWissenItem {
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
             WissenItemUtil.existWissen(stack);
-            list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
+            list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen(stack)).copy().withStyle(ChatFormatting.GRAY));
         }
     }
 }

@@ -103,7 +103,7 @@ public class WizardsRebornClientEvents {
         int i = 1;
         if (stack.getItem() instanceof IWissenItem item) {
             WissenItemUtil.existWissen(stack);
-            ValueFrameTooltipComponent component = new ValueFrameTooltipComponent(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), (float) item.getMaxWissen() / WissenItemUtil.getWissen(stack));
+            ValueFrameTooltipComponent component = new ValueFrameTooltipComponent(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), (float) item.getMaxWissen(stack) / WissenItemUtil.getWissen(stack));
             addTooltipComponent(component, i, tooltipElements);
             i++;
         }
@@ -118,7 +118,7 @@ public class WizardsRebornClientEvents {
         if (stack.getItem() instanceof ISteamItem item) {
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("steam")) {
-                ValueFrameTooltipComponent component = new ValueFrameTooltipComponent(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), (float) item.getMaxSteam() / nbt.getInt("steam"));
+                ValueFrameTooltipComponent component = new ValueFrameTooltipComponent(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), (float) item.getMaxSteam(stack) / nbt.getInt("steam"));
                 addTooltipComponent(component, i, tooltipElements);
             }
         }

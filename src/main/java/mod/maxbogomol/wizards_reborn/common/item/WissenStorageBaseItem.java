@@ -40,7 +40,7 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
     }
 
     @Override
-    public int getMaxWissen() {
+    public int getMaxWissen(ItemStack stack) {
         if (getBlock() instanceof EntityBlock block) {
             BlockEntity blockEntity = block.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
             if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
@@ -60,7 +60,7 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
             WissenItemUtil.existWissen(stack);
-            list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
+            list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen(stack)).copy().withStyle(ChatFormatting.GRAY));
         }
     }
 }

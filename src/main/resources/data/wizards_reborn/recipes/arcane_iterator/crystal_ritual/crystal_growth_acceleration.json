@@ -25,10 +25,10 @@
       "item": "wizards_reborn:arcanum_lens"
     },
     {
-      "item": "minecraft:redstone_block"
+      "tag": "forge:storage_block/redstone"
     },
     {
-      "item": "minecraft:redstone_block"
+      "tag": "forge:storage_block/redstone"
     },
     {
       "item": "wizards_reborn:alchemy_glass"

@@ -8,13 +8,12 @@ import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
-import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
-import mod.maxbogomol.wizards_reborn.common.network.item.ArcanumLensBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.item.ArcanumLensBurstPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundSource;
@@ -52,9 +51,9 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
             for (ItemStack item : items) {
                 if (item.getItem() instanceof IWissenItem wissenItem) {
                     WissenItemUtil.existWissen(item);
-                    int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissen, wissenItem.getMaxWissen());
+                    int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissen, wissenItem.getMaxWissen(item));
                     if (wissen - itemWissenRemain > 0) {
-                        WissenItemUtil.addWissen(item, wissen - itemWissenRemain, wissenItem.getMaxWissen());
+                        WissenItemUtil.addWissen(item, wissen - itemWissenRemain, wissenItem.getMaxWissen(item));
                         wissen = wissen - itemWissenRemain;
                     }
                 }

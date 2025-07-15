@@ -121,7 +121,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
-    public int getMaxWissen() {
+    public int getMaxWissen(ItemStack stack) {
         return 10000;
     }
 
@@ -376,7 +376,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
             WissenItemUtil.existWissen(stack);
-            list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
+            list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen(stack)).copy().withStyle(ChatFormatting.GRAY));
         }
 
         list.add(Component.empty());
@@ -572,8 +572,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             int cooldown = getCooldown(stack);
             int maxCooldown = getMaxCooldown(stack);
             int wissen = WissenItemUtil.getWissen(stack);
-            int maxWissen = wand.getMaxWissen();
-
+            int maxWissen = wand.getMaxWissen(stack);
 
             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x, y, 0, 0, 52, 18, 64, 64);
             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 2, y + 19, 0, 0, 48, 10, 64, 64);

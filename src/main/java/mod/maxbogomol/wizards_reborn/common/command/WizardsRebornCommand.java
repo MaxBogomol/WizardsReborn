@@ -582,7 +582,7 @@ public class WizardsRebornCommand {
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
                     wissen = startWissen;
-                    if (wissen > wissenItem.getMaxWissen()) wissen = wissenItem.getMaxWissen();
+                    if (wissen > wissenItem.getMaxWissen(stack)) wissen = wissenItem.getMaxWissen(stack);
                     WissenItemUtil.existWissen(stack);
                     WissenItemUtil.setWissen(stack, wissen);
                     players++;
@@ -612,7 +612,7 @@ public class WizardsRebornCommand {
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
                     WissenItemUtil.existWissen(stack);
-                    WissenItemUtil.addWissen(stack, wissen, wissenItem.getMaxWissen());
+                    WissenItemUtil.addWissen(stack, wissen, wissenItem.getMaxWissen(stack));
                     players++;
                 }
             }

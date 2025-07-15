@@ -56,10 +56,10 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
                         int wissenRemain = WissenUtil.getRemoveWissenRemain(wissen, getWissenPerReceive());
                         wissenRemain = getWissenPerReceive() - wissenRemain;
                         WissenItemUtil.existWissen(stack);
-                        int itemWissenRemain = WissenItemUtil.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
+                        int itemWissenRemain = WissenItemUtil.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen(stack));
                         wissenRemain = wissenRemain - itemWissenRemain;
                         if (wissenRemain > 0) {
-                            WissenItemUtil.addWissen(stack, wissenRemain, item.getMaxWissen());
+                            WissenItemUtil.addWissen(stack, wissenRemain, item.getMaxWissen(stack));
                             wissen = wissen - wissenRemain;
                             if (random.nextFloat() < 0.5) {
                                 WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendPacket(getBlockPos()));

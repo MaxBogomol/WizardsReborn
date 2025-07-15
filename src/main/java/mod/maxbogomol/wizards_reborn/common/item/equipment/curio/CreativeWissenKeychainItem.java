@@ -13,7 +13,7 @@ public class CreativeWissenKeychainItem extends WissenKeychainItem {
     }
 
     @Override
-    public int getMaxWissen() {
+    public int getMaxWissen(ItemStack stack) {
         return Integer.MAX_VALUE;
     }
 
