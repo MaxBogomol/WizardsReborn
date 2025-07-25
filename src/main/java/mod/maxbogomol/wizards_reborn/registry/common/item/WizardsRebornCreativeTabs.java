@@ -280,6 +280,7 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, MATERIALS, WizardsRebornItems.PRECISION_CRYSTAL_BLOCK);
 
             addInSub(event, MATERIALS, WizardsRebornItems.NETHER_SALT);
+            addInSub(event, MATERIALS, WizardsRebornItems.NETHER_SALT_PILE);
             addInSub(event, MATERIALS, WizardsRebornItems.NETHER_SALT_BLOCK);
             addInSub(event, MATERIALS, WizardsRebornItems.NETHER_SALT_ORE);
 
@@ -871,6 +872,11 @@ public class WizardsRebornCreativeTabs {
             }
 
             //FOOD
+            FOOD.addDisplayItem(WizardsRebornItems.NETHER_SALT_PILE.get());
+
+            addInSub(event, FOOD, WizardsRebornItems.WHEAT_FLOUR);
+            addInSub(event, FOOD, WizardsRebornItems.ARCANE_LINEN_FLOUR);
+
             addInSub(event, FOOD, WizardsRebornItems.MOR_PIE);
             if (WizardsRebornFarmersDelight.isLoaded()) {
                 addInSub(event, FOOD, WizardsRebornFarmersDelight.ItemsLoadedOnly.MOR_PIE_SLICE);

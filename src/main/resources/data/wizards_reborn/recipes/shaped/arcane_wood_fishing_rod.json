@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " X#",
+    "X#S",
+    "# S"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_branch"
+    },
+    "X": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "S": {
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcane_wood_fishing_rod"
+  }
+}

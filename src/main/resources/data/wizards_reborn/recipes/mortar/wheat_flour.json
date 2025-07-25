@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:mortar",
+  "from": {
+    "item": "minecraft:wheat"
+  },
+  "to": {
+    "item": "wizards_reborn:wheat_flour"
+  }
+}

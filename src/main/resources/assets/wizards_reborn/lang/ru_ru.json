@@ -68,6 +68,7 @@
   "block.wizards_reborn.precision_crystal_block": "Блок кристалла точности",
 
   "item.wizards_reborn.nether_salt": "Незер соль",
+  "item.wizards_reborn.nether_salt_pile": "Кучка незер соли",
   "block.wizards_reborn.nether_salt_block": "Блок незер соли",
   "block.wizards_reborn.nether_salt_ore": "Руда незер соли",
 
@@ -620,6 +621,9 @@
   "item.wizards_reborn.phantom_ink_trim": "Невинно-древесная отделка",
   "item.wizards_reborn.royal_guard_trim": "Невинно-древесная отделка",
   "item.wizards_reborn.capitalist_trim": "Невинно-древесная отделка",
+
+  "item.wizards_reborn.wheat_flour": "Пшеничная мука",
+  "item.wizards_reborn.arcane_linen_flour": "Арканово-льняная мука",
 
   "item.wizards_reborn.mor_pie": "Моровый пирог",
   "item.wizards_reborn.mor_pie_slice": "Ломтик морового пирога",

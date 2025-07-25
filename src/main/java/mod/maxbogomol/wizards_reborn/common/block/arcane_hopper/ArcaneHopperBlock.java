@@ -153,7 +153,7 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
         if (!state.is(pNewState.getBlock())) {
             BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof ArcaneHopperBlockEntity) {
-                Containers.dropContents(level, pos, (ArcaneHopperBlockEntity)blockentity);
+                Containers.dropContents(level, pos, (ArcaneHopperBlockEntity) blockentity);
                 level.updateNeighbourForOutputSignal(pos, this);
             }
         }
@@ -164,7 +164,7 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof ArcaneHopperBlockEntity) {
-            ArcaneHopperBlockEntity.entityInside(level, pos, state, entity, (ArcaneHopperBlockEntity)blockentity);
+            ArcaneHopperBlockEntity.entityInside(level, pos, state, entity, (ArcaneHopperBlockEntity) blockentity);
         }
     }
 }

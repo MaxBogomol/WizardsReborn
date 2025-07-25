@@ -27,11 +27,13 @@ import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEnt
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.SimpleContainer;
@@ -206,12 +208,34 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
 
                                     itemOutputHandler.setStackInSlot(0, output);
 
+                                    List<ItemStack> remainingItems = new ArrayList<>();
                                     for (int i = 0; i < 6; i++) {
-                                        if (itemHandler.getStackInSlot(0).hasCraftingRemainingItem()) {
-                                            itemHandler.setStackInSlot(0, itemHandler.getStackInSlot(0).getCraftingRemainingItem());
+                                        if (itemHandler.getStackInSlot(i).hasCraftingRemainingItem()) {
+                                            if (itemHandler.getStackInSlot(i).getCount() == 1) {
+                                                itemHandler.setStackInSlot(i, itemHandler.getStackInSlot(i).getCraftingRemainingItem());
+                                            } else {
+                                                remainingItems.add(itemHandler.getStackInSlot(i).getCraftingRemainingItem().copy());
+                                                itemHandler.getStackInSlot(i).setCount(itemHandler.getStackInSlot(i).getCount() - 1);
+                                            }
                                         } else {
                                             itemHandler.extractItem(i, 1, false);
                                         }
+                                    }
+                                    for (int i = 0; i < 6; i++) {
+                                        for (ItemStack remainingItem : new ArrayList<>(remainingItems)) {
+                                            if (itemHandler.getStackInSlot(i).isEmpty()) {
+                                                itemHandler.setStackInSlot(i, remainingItem);
+                                                remainingItems.remove(remainingItem);
+                                            } else if ((ItemHandlerHelper.canItemStacksStack(remainingItem, itemHandler.getStackInSlot(i))) && (itemHandler.getStackInSlot(i).getCount() + remainingItem.getCount() <= remainingItem.getMaxStackSize())) {
+                                                itemHandler.getStackInSlot(i).setCount(itemHandler.getStackInSlot(i).getCount() + remainingItem.getCount());
+                                                remainingItems.remove(remainingItem);
+                                            }
+                                        }
+                                    }
+                                    if (!remainingItems.isEmpty()) {
+                                        NonNullList<ItemStack> list = NonNullList.create();
+                                        list.addAll(remainingItems);
+                                        Containers.dropContents(level, getBlockPos(), list);
                                     }
 
                                     boolean ft1 = false;

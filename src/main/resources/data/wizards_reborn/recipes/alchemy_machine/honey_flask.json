@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:honey_flask",
+    "count": 1
+  },
+  "steam": 175,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_flask"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "wizards_reborn:water",
+      "amount" : 250
+    }
+  ]
+}

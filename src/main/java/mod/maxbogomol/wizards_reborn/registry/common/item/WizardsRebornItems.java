@@ -109,6 +109,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> PRECISION_CRYSTAL_BLOCK = ITEMS.register("precision_crystal_block", () -> new BlockItem(WizardsRebornBlocks.PRECISION_CRYSTAL_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> NETHER_SALT = ITEMS.register("nether_salt", () -> new NetherSaltItem(new Item.Properties(), 3200));
+    public static final RegistryObject<Item> NETHER_SALT_PILE = ITEMS.register("nether_salt_pile", () -> new NetherSaltItem(new Item.Properties(), 100));
     public static final RegistryObject<Item> NETHER_SALT_BLOCK = ITEMS.register("nether_salt_block", () -> new FuelBlockItem(WizardsRebornBlocks.NETHER_SALT_BLOCK.get(), new Item.Properties(), 32000));
     public static final RegistryObject<Item> NETHER_SALT_ORE = ITEMS.register("nether_salt_ore", () -> new BlockItem(WizardsRebornBlocks.NETHER_SALT_ORE.get(), new Item.Properties()));
 
@@ -646,6 +647,9 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> CAPITALIST_TRIM = ITEMS.register("capitalist_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.CAPITALIST));
 
     //FOOD
+    public static final RegistryObject<Item> WHEAT_FLOUR = ITEMS.register("wheat_flour", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_LINEN_FLOUR = ITEMS.register("arcane_linen_flour", () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> MOR_PIE = ITEMS.register("mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.MOR_PIE)).setNourishmentTick(1200));
     public static final RegistryObject<Item> ELDER_MOR_PIE = ITEMS.register("elder_mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.ELDER_MOR_PIE)).setNourishmentTick(1200));
     public static final RegistryObject<Item> PITCHER_TURNIP_PIE = ITEMS.register("pitcher_turnip_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP_PIE)).setNourishmentTick(1200));

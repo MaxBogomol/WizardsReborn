@@ -16,7 +16,7 @@
             ]
         },
         {
-            "name": "blit",
+            "name": "fluffy_fur:blit",
             "intarget": "final",
             "outtarget": "minecraft:main"
         }

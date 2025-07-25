@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:mortar",
+  "from": {
+    "item": "wizards_reborn:arcane_linen"
+  },
+  "to": {
+    "item": "wizards_reborn:arcane_linen_flour"
+  }
+}

@@ -16,12 +16,12 @@
             ]
         },
         {
-            "name": "blit",
+            "name": "fluffy_fur:blit",
             "intarget": "swap",
             "outtarget": "previous"
         },
         {
-            "name": "blit",
+            "name": "fluffy_fur:blit",
             "intarget": "swap",
             "outtarget": "minecraft:main"
         }

@@ -2,13 +2,12 @@
 
 uniform sampler2D DiffuseSampler;
 
-in vec2 texCoord;
-in vec2 oneTexel;
-
 uniform float totalTicks;
 uniform float speed;
 uniform float fade;
 uniform float startTime;
+
+in vec2 vertexUV;
 
 out vec4 fragColor;
 
@@ -30,10 +29,10 @@ float applyDistortion(vec2 uv, float zoom, float distortion, float gooeyness, fl
 
 void main() {
     float time = totalTicks * speed;
-    float goo = applyDistortion(texCoord, 0.7 * fade, 10 * fade, 1.0, 2.0, totalTicks + startTime, speed);
+    float goo = applyDistortion(vertexUV, 0.7 * fade, 10 * fade, 1.0, 2.0, totalTicks + startTime, speed);
     float a = 0.55 * clamp(1.-goo, 0.,1.);
-    float r = mix(texture(DiffuseSampler, texCoord).r, (255.0 / 255.0), a);
-    float g = mix(texture(DiffuseSampler, texCoord).g, (119.0 / 255.0), a);
-    float b = mix(texture(DiffuseSampler, texCoord).b, (167.0 / 255.0), a);
+    float r = mix(texture(DiffuseSampler, vertexUV).r, (255.0 / 255.0), a);
+    float g = mix(texture(DiffuseSampler, vertexUV).g, (119.0 / 255.0), a);
+    float b = mix(texture(DiffuseSampler, vertexUV).b, (167.0 / 255.0), a);
     fragColor = vec4(r, g, b, 1.0);
 }

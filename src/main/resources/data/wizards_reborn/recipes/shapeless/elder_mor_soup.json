@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "mor_pie",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "wizards_reborn:elder_mor"
+    },
+    {
+      "item": "wizards_reborn:elder_mor"
+    },
+    {
+      "item": "wizards_reborn:elder_mor"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:elder_mor_soup",
+    "count": 1
+  }
+}

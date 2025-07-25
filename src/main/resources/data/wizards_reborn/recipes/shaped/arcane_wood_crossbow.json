@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "#X#",
+    "STS",
+    "X#X"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_branch"
+    },
+    "X": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "S": {
+      "tag": "forge:string"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcane_wood_crossbow"
+  }
+}

@@ -196,7 +196,7 @@ public class CargoCarpetBlock extends HorizontalDirectionalBlock implements Enti
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof CargoCarpetBlockEntity carpetBlockEntity) {
                 if (!state.getValue(BlockStateProperties.OPEN)) {
-                    Containers.dropContents(level, pos, (carpetBlockEntity).getItemHandler());
+                    Containers.dropContents(level, pos, carpetBlockEntity.getItemHandler());
                 } else {
                     ItemStack stack = carpetBlockEntity.getItemHandler().getItem(0);
                     if (stack.getItem() instanceof CargoCarpetItem) {
@@ -205,7 +205,7 @@ public class CargoCarpetBlock extends HorizontalDirectionalBlock implements Enti
                         for (int i = 0; i < 20; i++) {
                             container.setItem(i, ItemStack.EMPTY);
                         }
-                        Containers.dropContents(level, pos, (carpetBlockEntity).getItemHandler());
+                        Containers.dropContents(level, pos, carpetBlockEntity.getItemHandler());
                         level.playSound(null, pos, SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.BLOCKS, 1.0f, 1.0f);
                     }
                 }

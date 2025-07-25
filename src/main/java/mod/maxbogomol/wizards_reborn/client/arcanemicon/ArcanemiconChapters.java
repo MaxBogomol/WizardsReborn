@@ -103,8 +103,7 @@ public class ArcanemiconChapters {
     }
 
     public static void arcaneNatureInit() {
-        ARCANUM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcanum",
+        ARCANUM = new Chapter("wizards_reborn.arcanemicon.chapter.arcanum",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcanum",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANUM_ITEM),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANUM_DUST_ITEM),
@@ -132,14 +131,12 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANEMICON.get()), new ItemStack(Items.BOOK), ARCANUM_ITEM)
         );
 
-        ARCANUM_DUST_TRANSMUTATION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcanum_dust_transmutation",
+        ARCANUM_DUST_TRANSMUTATION = new Chapter("wizards_reborn.arcanemicon.chapter.arcanum_dust_transmutation",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcanum_dust_transmutation",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANUM_DUST_ITEM))
         );
 
-        ARCANE_WOOD = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_wood",
+        ARCANE_WOOD = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_wood",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_sapling",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_SAPLING.get()))
                 ),
@@ -285,8 +282,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_GOLD = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_gold",
+        ARCANE_GOLD = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_gold",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANE_GOLD_INGOT_ITEM),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANE_GOLD_NUGGET_ITEM),
@@ -392,8 +388,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        SCYTHES = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.scythes",
+        SCYTHES = new Chapter("wizards_reborn.arcanemicon.chapter.scythes",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.scythes",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_SCYTHE.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()))
@@ -410,8 +405,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        TRINKETS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.trinkets",
+        TRINKETS = new Chapter("wizards_reborn.arcanemicon.chapter.trinkets",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.trinkets",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANUM_AMULET.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANUM_RING.get())),
@@ -434,8 +428,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_WOOD_BOW = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_wood_bow",
+        ARCANE_WOOD_BOW = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_wood_bow",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_bow",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_BOW.get()))
                 ),
@@ -446,8 +439,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        BANNER_PATTERNS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.banner_patterns",
+        BANNER_PATTERNS = new Chapter("wizards_reborn.arcanemicon.chapter.banner_patterns",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.banner_patterns",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.VIOLENCE_BANNER_PATTERN.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.REPRODUCTION_BANNER_PATTERN.get())),
@@ -476,8 +468,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen",
+        WISSEN = new Chapter("wizards_reborn.arcanemicon.chapter.wissen",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_TRANSLATOR.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_ALTAR.get())),
@@ -511,8 +502,7 @@ public class ArcanemiconChapters {
                 new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/wissen_image_page.png"))
         );
 
-        WISSEN_TRANSLATOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_translator",
+        WISSEN_TRANSLATOR = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_translator",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_translator",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_TRANSLATOR.get()))
                 ),
@@ -523,8 +513,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_PEDESTAL = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_pedestal",
+        ARCANE_PEDESTAL = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_pedestal",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_pedestal",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANE_PEDESTAL_ITEM)
                 ),
@@ -535,8 +524,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN_ALTAR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_altar",
+        WISSEN_ALTAR = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_altar",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_altar.0",
                         new BlockEntry(new ItemStack(WizardsRebornItems.WISSEN_ALTAR.get()), ARCANUM_ITEM),
                         new BlockEntry(),
@@ -553,8 +541,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN_CRYSTALLIZER = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_crystallizer",
+        WISSEN_CRYSTALLIZER = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_crystallizer",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_crystallizer",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_CRYSTALLIZER.get()))
                 ),
@@ -565,8 +552,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_WORKBENCH = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_workbench",
+        ARCANE_WORKBENCH = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_workbench",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_workbench",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WORKBENCH.get()))
                 ),
@@ -577,8 +563,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        MUSIC_DISC_SHIMMER = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.music_disc_shimmer",
+        MUSIC_DISC_SHIMMER = new Chapter("wizards_reborn.arcanemicon.chapter.music_disc_shimmer",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_shimmer.0",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_SHIMMER.get()))
                 ),
@@ -588,8 +573,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_LUMOS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_lumos",
+        ARCANE_LUMOS = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_lumos",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_lumos.0",
                         new BlockEntry(new ItemStack(WizardsRebornItems.WHITE_ARCANE_LUMOS.get())),
                         new BlockEntry(new ItemStack(WizardsRebornItems.LIGHT_GRAY_ARCANE_LUMOS.get())),
@@ -640,8 +624,7 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.PINK_ARCANE_LUMOS.get()), new ItemStack(WizardsRebornItems.WHITE_ARCANE_LUMOS.get()), new ItemStack(Items.PINK_DYE))
         );
 
-        CRYSTALS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystals",
+        CRYSTALS = new Chapter("wizards_reborn.arcanemicon.chapter.crystals",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_seeds",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.EARTH_CRYSTAL_SEED.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WATER_CRYSTAL_SEED.get())),
@@ -694,8 +677,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_WAND = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_wand",
+        ARCANE_WAND = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_wand",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wand.0",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WAND.get()))
                 ),
@@ -711,8 +693,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_LEVER = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_lever",
+        ARCANE_LEVER = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_lever",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_lever",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_LEVER.get()))
                 ),
@@ -723,8 +704,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_HOPPER = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_hopper",
+        ARCANE_HOPPER = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_hopper",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_hopper",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_HOPPER.get()))
                 ),
@@ -735,8 +715,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        REDSTONE_SENSOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.redstone_sensor",
+        REDSTONE_SENSOR = new Chapter("wizards_reborn.arcanemicon.chapter.redstone_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.redstone_sensor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.REDSTONE_SENSOR.get()))
                 ),
@@ -748,8 +727,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN_SENSOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_sensor",
+        WISSEN_SENSOR = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_sensor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_SENSOR.get()))
                 ),
@@ -760,8 +738,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        COOLDOWN_SENSOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.cooldown_sensor",
+        COOLDOWN_SENSOR = new Chapter("wizards_reborn.arcanemicon.chapter.cooldown_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.cooldown_sensor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.COOLDOWN_SENSOR.get()))
                 ),
@@ -771,8 +748,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        EXPERIENCE_SENSOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.experience_sensor",
+        EXPERIENCE_SENSOR = new Chapter("wizards_reborn.arcanemicon.chapter.experience_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.experience_sensor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.EXPERIENCE_SENSOR.get()))
                 ),
@@ -782,8 +758,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        LIGHT_SENSOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.light_sensor",
+        LIGHT_SENSOR = new Chapter("wizards_reborn.arcanemicon.chapter.light_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.light_sensor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.LIGHT_SENSOR.get()))
                 ),
@@ -793,8 +768,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        HEAT_SENSOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.heat_sensor",
+        HEAT_SENSOR = new Chapter("wizards_reborn.arcanemicon.chapter.heat_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.heat_sensor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.HEAT_SENSOR.get()))
                 ),
@@ -804,8 +778,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        FLUID_SENSOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fluid_sensor",
+        FLUID_SENSOR = new Chapter("wizards_reborn.arcanemicon.chapter.fluid_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.fluid_sensor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.FLUID_SENSOR.get()))
                 ),
@@ -816,8 +789,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        STEAM_SENSOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.steam_sensor",
+        STEAM_SENSOR = new Chapter("wizards_reborn.arcanemicon.chapter.steam_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.steam_sensor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.STEAM_SENSOR.get()))
                 ),
@@ -828,8 +800,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN_ACTIVATOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_activator",
+        WISSEN_ACTIVATOR = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_activator",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_activator",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_ACTIVATOR.get()))
                 ),
@@ -839,8 +810,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ITEM_SORTER = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.item_sorter",
+        ITEM_SORTER = new Chapter("wizards_reborn.arcanemicon.chapter.item_sorter",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.item_sorter",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ITEM_SORTER.get()))
                 ),
@@ -851,8 +821,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_WOOD_FRAME = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_wood_frame",
+        ARCANE_WOOD_FRAME = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_wood_frame",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_frame",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_FRAME.get()))
                 ),
@@ -870,8 +839,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN_CASING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_casing",
+        WISSEN_CASING = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_casing",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_casing",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_WISSEN_CASING.get()))
                 ),
@@ -882,8 +850,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISESTONE_CASING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wisestone_casing",
+        WISESTONE_CASING = new Chapter("wizards_reborn.arcanemicon.chapter.wisestone_casing",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone_frame",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISESTONE_FRAME.get()))
                 ),
@@ -909,8 +876,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        FLUID_CASING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fluid_casing",
+        FLUID_CASING = new Chapter("wizards_reborn.arcanemicon.chapter.fluid_casing",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_fluid_casing",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_FLUID_CASING.get()))
                 ),
@@ -929,8 +895,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        STEAM_CASING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.steam_casing",
+        STEAM_CASING = new Chapter("wizards_reborn.arcanemicon.chapter.steam_casing",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_steam_casing",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_STEAM_CASING.get()))
                 ),
@@ -949,8 +914,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        GLASS_FRAME = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.glass_frame",
+        GLASS_FRAME = new Chapter("wizards_reborn.arcanemicon.chapter.glass_frame",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_glass_frame",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_GLASS_FRAME.get()))
                 ),
@@ -967,8 +931,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        LIGHT_CASING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.light_casing",
+        LIGHT_CASING = new Chapter("wizards_reborn.arcanemicon.chapter.light_casing",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_light_casing",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_LIGHT_CASING.get()))
                 ),
@@ -987,8 +950,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        INNOCENT_CASING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.innocent_wood_casing",
+        INNOCENT_CASING = new Chapter("wizards_reborn.arcanemicon.chapter.innocent_wood_casing",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_frame",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_FRAME.get()))
                 ),
@@ -1045,8 +1007,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        AUTOMATION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.automation",
+        AUTOMATION = new Chapter("wizards_reborn.arcanemicon.chapter.automation",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.automation"),
                 new IndexPage(
                         new IndexEntry(ARCANE_LEVER, new ItemStack(WizardsRebornItems.ARCANE_LEVER.get()), WizardsRebornKnowledges.WISESTONE),
@@ -1076,8 +1037,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN_CELL = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_cell",
+        WISSEN_CELL = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_cell",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_cell.0",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_CELL.get()))
                 ),
@@ -1090,8 +1050,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        CRYSTAL_BAG = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystal_bag",
+        CRYSTAL_BAG = new Chapter("wizards_reborn.arcanemicon.chapter.crystal_bag",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_bag",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.CRYSTAL_BAG.get()))
                 ),
@@ -1121,8 +1080,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        TOTEM_OF_FLAMES = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.totem_of_flames",
+        TOTEM_OF_FLAMES = new Chapter("wizards_reborn.arcanemicon.chapter.totem_of_flames",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.totem_of_flames",
                         new BlockEntry(TOTEM_BASE_ITEM, new ItemStack(WizardsRebornItems.TOTEM_OF_FLAMES.get()))
                 ),
@@ -1133,8 +1091,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        EXPERIENCE_TOTEM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.experience_totem",
+        EXPERIENCE_TOTEM = new Chapter("wizards_reborn.arcanemicon.chapter.experience_totem",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.experience_totem",
                         new BlockEntry(TOTEM_BASE_ITEM, new ItemStack(WizardsRebornItems.EXPERIENCE_TOTEM.get()))
                 ),
@@ -1146,8 +1103,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        TOTEM_OF_EXPERIENCE_ABSORPTION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.totem_of_experience_absorption",
+        TOTEM_OF_EXPERIENCE_ABSORPTION = new Chapter("wizards_reborn.arcanemicon.chapter.totem_of_experience_absorption",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.totem_of_experience_absorption",
                         new BlockEntry(TOTEM_BASE_ITEM, new ItemStack(WizardsRebornItems.TOTEM_OF_EXPERIENCE_ABSORPTION.get()))
                 ),
@@ -1159,8 +1115,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        TOTEM_OF_DISENCHANT = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.totem_of_disenchant",
+        TOTEM_OF_DISENCHANT = new Chapter("wizards_reborn.arcanemicon.chapter.totem_of_disenchant",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.totem_of_disenchant",
                         new BlockEntry(TOTEM_BASE_ITEM, new ItemStack(WizardsRebornItems.TOTEM_OF_DISENCHANT.get()))
                 ),
@@ -1172,8 +1127,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ALTAR_OF_DROUGHT = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.altar_of_drought",
+        ALTAR_OF_DROUGHT = new Chapter("wizards_reborn.arcanemicon.chapter.altar_of_drought",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.altar_of_drought",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ALTAR_OF_DROUGHT.get()))
                 ),
@@ -1186,8 +1140,7 @@ public class ArcanemiconChapters {
                 new TextPage("wizards_reborn.arcanemicon.page.altar_of_drought.poem")
         );
 
-        VOID_CRYSTAL = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.void_crystal",
+        VOID_CRYSTAL = new Chapter("wizards_reborn.arcanemicon.chapter.void_crystal",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.void_crystal",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.VOID_CRYSTAL_SEED.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.VOID_CRYSTAL.get())),
@@ -1202,8 +1155,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_FORTRESS_ARMOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_fortress_armor",
+        ARCANE_FORTRESS_ARMOR = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_fortress_armor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_fortress_armor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_FORTRESS_HELMET.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_FORTRESS_CHESTPLATE.get())),
@@ -1246,8 +1198,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        INVENTOR_WIZARD_ARMOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.inventor_wizard_armor",
+        INVENTOR_WIZARD_ARMOR = new Chapter("wizards_reborn.arcanemicon.chapter.inventor_wizard_armor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.inventor_wizard_armor",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INVENTOR_WIZARD_HAT.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INVENTOR_WIZARD_COSTUME.get())),
@@ -1290,8 +1241,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_WOOD_CANE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_wood_cane",
+        ARCANE_WOOD_CANE = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_wood_cane",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_cane",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_CANE.get()))
                 ),
@@ -1303,8 +1253,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_ITERATOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_iterator",
+        ARCANE_ITERATOR = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_iterator",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_iterator.0",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_ITERATOR.get()))
                 ),
@@ -1517,8 +1466,7 @@ public class ArcanemiconChapters {
                 ).setExperience(10).setHealth(10).setEnchantment(Enchantments.BINDING_CURSE)
         );
 
-        KNOWLEDGE_SCROLL = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.knowledge_scroll",
+        KNOWLEDGE_SCROLL = new Chapter("wizards_reborn.arcanemicon.chapter.knowledge_scroll",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.knowledge_scroll",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.KNOWLEDGE_SCROLL.get()))
                 ),
@@ -1528,8 +1476,7 @@ public class ArcanemiconChapters {
                 ).setExperience(10)
         );
 
-        MUSIC_DISC_REBORN = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.music_disc_reborn",
+        MUSIC_DISC_REBORN = new Chapter("wizards_reborn.arcanemicon.chapter.music_disc_reborn",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_reborn",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_REBORN.get()))
                 ),
@@ -1538,8 +1485,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        MUSIC_DISC_PANACHE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.music_disc_panache",
+        MUSIC_DISC_PANACHE = new Chapter("wizards_reborn.arcanemicon.chapter.music_disc_panache",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_panache",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_PANACHE.get()))
                 ),
@@ -1548,8 +1494,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANUM_LENS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcanum_lens",
+        ARCANUM_LENS = new Chapter("wizards_reborn.arcanemicon.chapter.arcanum_lens",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcanum_lens",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANUM_LENS_ITEM)
                 ),
@@ -1558,8 +1503,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN_KEYCHAIN = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_keychain",
+        WISSEN_KEYCHAIN = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_keychain",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_keychain",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_KEYCHAIN.get()))
                 ),
@@ -1570,8 +1514,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISSEN_RING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wissen_ring",
+        WISSEN_RING = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_ring",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_ring",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_RING.get()))
                 ),
@@ -1580,8 +1523,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        LEATHER_COLLAR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.leather_collar",
+        LEATHER_COLLAR = new Chapter("wizards_reborn.arcanemicon.chapter.leather_collar",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.leather_collar",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.LEATHER_COLLAR.get()))
                 ),
@@ -1593,8 +1535,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        JEWELER_TABLE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.jeweler_table",
+        JEWELER_TABLE = new Chapter("wizards_reborn.arcanemicon.chapter.jeweler_table",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.jeweler_table",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.JEWELER_TABLE.get()))
                 ),
@@ -1606,8 +1547,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        FACETED_CRYSTALS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.faceted_crystals",
+        FACETED_CRYSTALS = new Chapter("wizards_reborn.arcanemicon.chapter.faceted_crystals",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.faceted_crystals",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.FACETED_EARTH_CRYSTAL.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.FACETED_WATER_CRYSTAL.get())),
@@ -1622,8 +1562,7 @@ public class ArcanemiconChapters {
                 new JewelerTablePage(new ItemStack(WizardsRebornItems.FACETED_VOID_CRYSTAL.get()), new ItemStack(WizardsRebornItems.VOID_CRYSTAL.get()), new ItemStack(WizardsRebornItems.ARCACITE_POLISHING_MIXTURE.get()))
         );
 
-        TRIMS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.trims",
+        TRIMS = new Chapter("wizards_reborn.arcanemicon.chapter.trims",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.trims",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_TRIM.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISESTONE_TRIM.get()))
@@ -1636,8 +1575,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        TOP_HAT_TRIM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.top_hat_trim",
+        TOP_HAT_TRIM = new Chapter("wizards_reborn.arcanemicon.chapter.top_hat_trim",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.top_hat_trim",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.TOP_HAT_TRIM.get()))
                 ),
@@ -1646,8 +1584,7 @@ public class ArcanemiconChapters {
                 ).setExperience(10)
         );
 
-        MAGNIFICENT_MAID_TRIM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.magnificent_maid_trim",
+        MAGNIFICENT_MAID_TRIM = new Chapter("wizards_reborn.arcanemicon.chapter.magnificent_maid_trim",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.magnificent_maid_trim",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MAGNIFICENT_MAID_TRIM.get()))
                 ),
@@ -1656,8 +1593,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        SUMMER_LOVE_TRIM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.summer_love_trim",
+        SUMMER_LOVE_TRIM = new Chapter("wizards_reborn.arcanemicon.chapter.summer_love_trim",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.summer_love_trim",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SUMMER_LOVE_TRIM.get()))
                 ),
@@ -1666,8 +1602,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        MUSIC_DISC_CAPITALISM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.music_disc_capitalism",
+        MUSIC_DISC_CAPITALISM = new Chapter("wizards_reborn.arcanemicon.chapter.music_disc_capitalism",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_capitalism",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_CAPITALISM.get()))
                 ),
@@ -1681,8 +1616,7 @@ public class ArcanemiconChapters {
         ListTag knowledgeScrollList = new ListTag();
         knowledgeScrollNbt.put("knowledges", knowledgeScrollList);
 
-        ARCANE_NATURE_INDEX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_nature_index",
+        ARCANE_NATURE_INDEX = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_nature_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.arcane_nature_index",
                         new IndexEntry(ARCANUM, ARCANUM_ITEM),
                         new IndexEntry(ARCANUM_DUST_TRANSMUTATION, ARCANUM_DUST_ITEM, WizardsRebornKnowledges.ARCANUM_DUST),
@@ -1746,433 +1680,349 @@ public class ArcanemiconChapters {
     }
 
     public static void spellsInit() {
-        EARTH_PROJECTILE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.earth_projectile",
+        EARTH_PROJECTILE = new Chapter("wizards_reborn.arcanemicon.chapter.earth_projectile",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.earth_projectile", WizardsRebornSpells.EARTH_PROJECTILE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.earth_projectile.char", WizardsRebornSpells.EARTH_PROJECTILE)
         );
-        WATER_PROJECTILE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.water_projectile",
+        WATER_PROJECTILE = new Chapter("wizards_reborn.arcanemicon.chapter.water_projectile",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.water_projectile", WizardsRebornSpells.WATER_PROJECTILE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.water_projectile.char", WizardsRebornSpells.WATER_PROJECTILE)
         );
-        AIR_PROJECTILE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.air_projectile",
+        AIR_PROJECTILE = new Chapter("wizards_reborn.arcanemicon.chapter.air_projectile",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.air_projectile", WizardsRebornSpells.AIR_PROJECTILE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.air_projectile.char", WizardsRebornSpells.AIR_PROJECTILE)
         );
-        FIRE_PROJECTILE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fire_projectile",
+        FIRE_PROJECTILE = new Chapter("wizards_reborn.arcanemicon.chapter.fire_projectile",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_projectile", WizardsRebornSpells.FIRE_PROJECTILE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.fire_projectile.char", WizardsRebornSpells.FIRE_PROJECTILE)
         );
-        VOID_PROJECTILE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.void_projectile",
+        VOID_PROJECTILE = new Chapter("wizards_reborn.arcanemicon.chapter.void_projectile",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.void_projectile", WizardsRebornSpells.VOID_PROJECTILE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.void_projectile.char", WizardsRebornSpells.VOID_PROJECTILE)
         );
-        FROST_PROJECTILE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.frost_projectile",
+        FROST_PROJECTILE = new Chapter("wizards_reborn.arcanemicon.chapter.frost_projectile",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.frost_projectile", WizardsRebornSpells.FROST_PROJECTILE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.frost_projectile.char", WizardsRebornSpells.FROST_PROJECTILE)
         );
-        HOLY_PROJECTILE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.holy_projectile",
+        HOLY_PROJECTILE = new Chapter("wizards_reborn.arcanemicon.chapter.holy_projectile",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_projectile", WizardsRebornSpells.HOLY_PROJECTILE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_projectile.char", WizardsRebornSpells.HOLY_PROJECTILE)
         );
-        CURSE_PROJECTILE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.curse_projectile",
+        CURSE_PROJECTILE = new Chapter("wizards_reborn.arcanemicon.chapter.curse_projectile",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.curse_projectile", WizardsRebornSpells.CURSE_PROJECTILE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.curse_projectile.char", WizardsRebornSpells.CURSE_PROJECTILE)
         );
 
-        EARTH_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.earth_ray",
+        EARTH_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.earth_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.earth_ray", WizardsRebornSpells.EARTH_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.earth_ray.char", WizardsRebornSpells.EARTH_RAY)
         );
-        WATER_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.water_ray",
+        WATER_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.water_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.water_ray", WizardsRebornSpells.WATER_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.water_ray.char", WizardsRebornSpells.WATER_RAY)
         );
-        AIR_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.air_ray",
+        AIR_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.air_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.air_ray", WizardsRebornSpells.AIR_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.air_ray.char", WizardsRebornSpells.AIR_RAY)
         );
-        FIRE_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fire_ray",
+        FIRE_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.fire_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_ray", WizardsRebornSpells.FIRE_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.fire_ray.char", WizardsRebornSpells.FIRE_RAY)
         );
-        VOID_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.void_ray",
+        VOID_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.void_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.void_ray", WizardsRebornSpells.VOID_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.void_ray.char", WizardsRebornSpells.VOID_RAY)
         );
-        FROST_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.frost_ray",
+        FROST_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.frost_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.frost_ray", WizardsRebornSpells.FROST_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.frost_ray.char", WizardsRebornSpells.FROST_RAY)
         );
-        HOLY_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.holy_ray",
+        HOLY_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.holy_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_ray", WizardsRebornSpells.HOLY_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_ray.char", WizardsRebornSpells.HOLY_RAY)
         );
-        CURSE_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.curse_ray",
+        CURSE_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.curse_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.curse_ray", WizardsRebornSpells.CURSE_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.curse_ray.char", WizardsRebornSpells.CURSE_RAY)
         );
 
-        HEART_OF_NATURE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.heart_of_nature",
+        HEART_OF_NATURE = new Chapter("wizards_reborn.arcanemicon.chapter.heart_of_nature",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.heart_of_nature", WizardsRebornSpells.HEART_OF_NATURE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.heart_of_nature.char", WizardsRebornSpells.HEART_OF_NATURE)
         );
-        WATER_BREATHING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.water_breathing",
+        WATER_BREATHING = new Chapter("wizards_reborn.arcanemicon.chapter.water_breathing",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.water_breathing", WizardsRebornSpells.WATER_BREATHING),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.water_breathing.char", WizardsRebornSpells.WATER_BREATHING)
         );
-        AIR_FLOW = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.air_flow",
+        AIR_FLOW = new Chapter("wizards_reborn.arcanemicon.chapter.air_flow",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.air_flow", WizardsRebornSpells.AIR_FLOW),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.air_flow.char", WizardsRebornSpells.AIR_FLOW)
         );
-        FIRE_SHIELD = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fire_shield",
+        FIRE_SHIELD = new Chapter("wizards_reborn.arcanemicon.chapter.fire_shield",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_shield", WizardsRebornSpells.FIRE_SHIELD),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.fire_shield.char", WizardsRebornSpells.FIRE_SHIELD)
         );
-        BLINK = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.blink",
+        BLINK = new Chapter("wizards_reborn.arcanemicon.chapter.blink",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.blink", WizardsRebornSpells.BLINK),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.blink.char", WizardsRebornSpells.BLINK)
         );
-        SNOWFLAKE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.snowflake",
+        SNOWFLAKE = new Chapter("wizards_reborn.arcanemicon.chapter.snowflake",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.snowflake", WizardsRebornSpells.SNOWFLAKE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.blink.snowflake", WizardsRebornSpells.SNOWFLAKE)
         );
-        HOLY_CROSS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.holy_cross",
+        HOLY_CROSS = new Chapter("wizards_reborn.arcanemicon.chapter.holy_cross",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_cross", WizardsRebornSpells.HOLY_CROSS),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_cross.char", WizardsRebornSpells.HOLY_CROSS)
         );
-        CURSE_CROSS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.curse_cross",
+        CURSE_CROSS = new Chapter("wizards_reborn.arcanemicon.chapter.curse_cross",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.curse_cross", WizardsRebornSpells.CURSE_CROSS),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.curse_cross.char", WizardsRebornSpells.CURSE_CROSS)
         );
-        POISON = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.poison",
+        POISON = new Chapter("wizards_reborn.arcanemicon.chapter.poison",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.poison", WizardsRebornSpells.POISON),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.poison.char", WizardsRebornSpells.POISON)
         );
 
-        MAGIC_SPROUT = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.magic_sprout",
+        MAGIC_SPROUT = new Chapter("wizards_reborn.arcanemicon.chapter.magic_sprout",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.magic_sprout", WizardsRebornSpells.MAGIC_SPROUT),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.magic_sprout.char", WizardsRebornSpells.MAGIC_SPROUT)
         );
-        DIRT_BLOCK = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.dirt_block",
+        DIRT_BLOCK = new Chapter("wizards_reborn.arcanemicon.chapter.dirt_block",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.dirt_block", WizardsRebornSpells.DIRT_BLOCK),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.dirt_block.char", WizardsRebornSpells.DIRT_BLOCK)
         );
-        WATER_BLOCK = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.water_block",
+        WATER_BLOCK = new Chapter("wizards_reborn.arcanemicon.chapter.water_block",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.water_block", WizardsRebornSpells.WATER_BLOCK),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.water_block.char", WizardsRebornSpells.WATER_BLOCK)
         );
-        AIR_IMPACT = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.air_impact",
+        AIR_IMPACT = new Chapter("wizards_reborn.arcanemicon.chapter.air_impact",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.air_impact", WizardsRebornSpells.AIR_IMPACT),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.air_impact.char", WizardsRebornSpells.AIR_IMPACT)
         );
-        ICE_BLOCK = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.ice_block",
+        ICE_BLOCK = new Chapter("wizards_reborn.arcanemicon.chapter.ice_block",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.ice_block", WizardsRebornSpells.ICE_BLOCK),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.ice_block.char", WizardsRebornSpells.ICE_BLOCK)
         );
 
-        EARTH_CHARGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.earth_charge",
+        EARTH_CHARGE = new Chapter("wizards_reborn.arcanemicon.chapter.earth_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.earth_charge", WizardsRebornSpells.EARTH_CHARGE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.earth_charge.char", WizardsRebornSpells.EARTH_CHARGE)
         );
-        WATER_CHARGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.water_charge",
+        WATER_CHARGE = new Chapter("wizards_reborn.arcanemicon.chapter.water_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.water_charge", WizardsRebornSpells.WATER_CHARGE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.water_charge.char", WizardsRebornSpells.WATER_CHARGE)
         );
-        AIR_CHARGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.air_charge",
+        AIR_CHARGE = new Chapter("wizards_reborn.arcanemicon.chapter.air_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.air_charge", WizardsRebornSpells.AIR_CHARGE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.air_charge.char", WizardsRebornSpells.AIR_CHARGE)
         );
-        FIRE_CHARGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fire_charge",
+        FIRE_CHARGE = new Chapter("wizards_reborn.arcanemicon.chapter.fire_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_charge", WizardsRebornSpells.FIRE_CHARGE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.fire_charge.char", WizardsRebornSpells.FIRE_CHARGE)
         );
-        VOID_CHARGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.void_charge",
+        VOID_CHARGE = new Chapter("wizards_reborn.arcanemicon.chapter.void_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.void_charge", WizardsRebornSpells.VOID_CHARGE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.void_charge.char", WizardsRebornSpells.VOID_CHARGE)
         );
-        FROST_CHARGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.frost_charge",
+        FROST_CHARGE = new Chapter("wizards_reborn.arcanemicon.chapter.frost_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.frost_charge", WizardsRebornSpells.FROST_CHARGE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.frost_charge.char", WizardsRebornSpells.FROST_CHARGE)
         );
-        HOLY_CHARGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.holy_charge",
+        HOLY_CHARGE = new Chapter("wizards_reborn.arcanemicon.chapter.holy_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_charge", WizardsRebornSpells.HOLY_CHARGE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_charge.char", WizardsRebornSpells.HOLY_CHARGE)
         );
-        CURSE_CHARGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.curse_charge",
+        CURSE_CHARGE = new Chapter("wizards_reborn.arcanemicon.chapter.curse_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.curse_charge", WizardsRebornSpells.CURSE_CHARGE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.curse_charge.char", WizardsRebornSpells.CURSE_CHARGE)
         );
 
-        EARTH_AURA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.earth_aura",
+        EARTH_AURA = new Chapter("wizards_reborn.arcanemicon.chapter.earth_aura",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.earth_aura", WizardsRebornSpells.EARTH_AURA),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.earth_aura.char", WizardsRebornSpells.EARTH_AURA)
         );
-        WATER_AURA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.water_aura",
+        WATER_AURA = new Chapter("wizards_reborn.arcanemicon.chapter.water_aura",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.water_aura", WizardsRebornSpells.WATER_AURA),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.water_aura.char", WizardsRebornSpells.WATER_AURA)
         );
-        AIR_AURA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.air_aura",
+        AIR_AURA = new Chapter("wizards_reborn.arcanemicon.chapter.air_aura",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.air_aura", WizardsRebornSpells.AIR_AURA),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.air_aura.char", WizardsRebornSpells.AIR_AURA)
         );
-        FIRE_AURA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fire_aura",
+        FIRE_AURA = new Chapter("wizards_reborn.arcanemicon.chapter.fire_aura",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_aura", WizardsRebornSpells.FIRE_AURA),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.fire_aura.char", WizardsRebornSpells.FIRE_AURA)
         );
-        VOID_AURA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.void_aura",
+        VOID_AURA = new Chapter("wizards_reborn.arcanemicon.chapter.void_aura",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.void_aura", WizardsRebornSpells.VOID_AURA),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.void_aura.char", WizardsRebornSpells.VOID_AURA)
         );
-        FROST_AURA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.frost_aura",
+        FROST_AURA = new Chapter("wizards_reborn.arcanemicon.chapter.frost_aura",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.frost_aura", WizardsRebornSpells.FROST_AURA),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.frost_aura.char", WizardsRebornSpells.FROST_AURA)
         );
-        HOLY_AURA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.holy_aura",
+        HOLY_AURA = new Chapter("wizards_reborn.arcanemicon.chapter.holy_aura",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_aura", WizardsRebornSpells.HOLY_AURA),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_aura.char", WizardsRebornSpells.HOLY_AURA)
         );
-        CURSE_AURA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.curse_aura",
+        CURSE_AURA = new Chapter("wizards_reborn.arcanemicon.chapter.curse_aura",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.curse_aura", WizardsRebornSpells.CURSE_AURA),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.curse_aura.char", WizardsRebornSpells.CURSE_AURA)
         );
 
-        RAIN_CLOUD = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.rain_cloud",
+        RAIN_CLOUD = new Chapter("wizards_reborn.arcanemicon.chapter.rain_cloud",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.rain_cloud", WizardsRebornSpells.RAIN_CLOUD),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.rain_cloud.char", WizardsRebornSpells.RAIN_CLOUD)
         );
-        LAVA_BLOCK = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.lava_block",
+        LAVA_BLOCK = new Chapter("wizards_reborn.arcanemicon.chapter.lava_block",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.lava_block", WizardsRebornSpells.LAVA_BLOCK),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.lava_block.char", WizardsRebornSpells.LAVA_BLOCK)
         );
-        ICICLE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.icicle",
+        ICICLE = new Chapter("wizards_reborn.arcanemicon.chapter.icicle",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.icicle", WizardsRebornSpells.ICICLE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.icicle.char", WizardsRebornSpells.ICICLE)
         );
-        SHARP_BLINK = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.sharp_blink",
+        SHARP_BLINK = new Chapter("wizards_reborn.arcanemicon.chapter.sharp_blink",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.sharp_blink", WizardsRebornSpells.SHARP_BLINK),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.sharp_blink.char", WizardsRebornSpells.SHARP_BLINK)
         );
-        CRYSTAL_CRUSHING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystal_crushing",
+        CRYSTAL_CRUSHING = new Chapter("wizards_reborn.arcanemicon.chapter.crystal_crushing",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.crystal_crushing", WizardsRebornSpells.CRYSTAL_CRUSHING),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.crystal_crushing.char", WizardsRebornSpells.CRYSTAL_CRUSHING)
         );
-        TOXIC_RAIN = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.toxic_rain",
+        TOXIC_RAIN = new Chapter("wizards_reborn.arcanemicon.chapter.toxic_rain",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.toxic_rain", WizardsRebornSpells.TOXIC_RAIN),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.toxic_rain.char", WizardsRebornSpells.TOXIC_RAIN)
         );
-        MOR_SWARM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.mor_swarm",
+        MOR_SWARM = new Chapter("wizards_reborn.arcanemicon.chapter.mor_swarm",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.mor_swarm", WizardsRebornSpells.MOR_SWARM),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.mor_swarm.char", WizardsRebornSpells.MOR_SWARM)
         );
-        WITHERING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.withering",
+        WITHERING = new Chapter("wizards_reborn.arcanemicon.chapter.withering",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.withering", WizardsRebornSpells.WITHERING),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.withering.char", WizardsRebornSpells.WITHERING)
         );
-        WITHERING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.withering",
+        WITHERING = new Chapter("wizards_reborn.arcanemicon.chapter.withering",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.withering", WizardsRebornSpells.WITHERING),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.withering.char", WizardsRebornSpells.WITHERING)
         );
-        IRRITATION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.irritation",
+        IRRITATION = new Chapter("wizards_reborn.arcanemicon.chapter.irritation",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.irritation", WizardsRebornSpells.IRRITATION),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.irritation.char", WizardsRebornSpells.IRRITATION)
         );
-        NECROTIC_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.necrotic_ray",
+        NECROTIC_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.necrotic_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.necrotic_ray", WizardsRebornSpells.NECROTIC_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.necrotic_ray.char", WizardsRebornSpells.NECROTIC_RAY)
         );
-        LIGHT_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.light_ray",
+        LIGHT_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.light_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.light_ray", WizardsRebornSpells.LIGHT_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.light_ray.char", WizardsRebornSpells.LIGHT_RAY)
         );
 
-        INCINERATION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.incineration",
+        INCINERATION = new Chapter("wizards_reborn.arcanemicon.chapter.incineration",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.incineration", WizardsRebornSpells.INCINERATION),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.incineration.char", WizardsRebornSpells.INCINERATION)
         );
-        REPENTANCE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.repentance",
+        REPENTANCE = new Chapter("wizards_reborn.arcanemicon.chapter.repentance",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.repentance", WizardsRebornSpells.REPENTANCE),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.repentance.char", WizardsRebornSpells.REPENTANCE)
         );
-        RENUNCIATION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.renunciation",
+        RENUNCIATION = new Chapter("wizards_reborn.arcanemicon.chapter.renunciation",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.renunciation", WizardsRebornSpells.RENUNCIATION),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.renunciation.char", WizardsRebornSpells.RENUNCIATION)
         );
 
-        EMBER_RAY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.ember_ray",
+        EMBER_RAY = new Chapter("wizards_reborn.arcanemicon.chapter.ember_ray",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.ember_ray", WizardsRebornSpells.EMBER_RAY),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.ember_ray.char", WizardsRebornSpells.EMBER_RAY)
         );
-        WISDOM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wisdom",
+        WISDOM = new Chapter("wizards_reborn.arcanemicon.chapter.wisdom",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.wisdom", WizardsRebornSpells.WISDOM),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.wisdom.char", WizardsRebornSpells.WISDOM)
         );
 
-        LUNAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.lunam_monogram",
+        LUNAM = new Chapter("wizards_reborn.arcanemicon.chapter.lunam_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.lunam_monogram", WizardsRebornMonograms.LUNAM),
                 new MonogramRecipesPage(WizardsRebornMonograms.LUNAM)
         );
-        VITA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.vita_monogram",
+        VITA = new Chapter("wizards_reborn.arcanemicon.chapter.vita_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.vita_monogram", WizardsRebornMonograms.VITA),
                 new MonogramRecipesPage(WizardsRebornMonograms.VITA)
         );
-        SOLEM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.solem_monogram",
+        SOLEM = new Chapter("wizards_reborn.arcanemicon.chapter.solem_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.solem_monogram", WizardsRebornMonograms.SOLEM),
                 new MonogramRecipesPage(WizardsRebornMonograms.SOLEM)
         );
-        MORS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.mors_monogram",
+        MORS = new Chapter("wizards_reborn.arcanemicon.chapter.mors_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.mors_monogram", WizardsRebornMonograms.MORS),
                 new MonogramRecipesPage(WizardsRebornMonograms.MORS)
         );
-        MIRACULUM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.miraculum_monogram",
+        MIRACULUM = new Chapter("wizards_reborn.arcanemicon.chapter.miraculum_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.miraculum_monogram", WizardsRebornMonograms.MIRACULUM),
                 new MonogramRecipesPage(WizardsRebornMonograms.MIRACULUM)
         );
-        TEMPUS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.tempus_monogram",
+        TEMPUS = new Chapter("wizards_reborn.arcanemicon.chapter.tempus_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.tempus_monogram", WizardsRebornMonograms.TEMPUS),
                 new MonogramRecipesPage(WizardsRebornMonograms.TEMPUS)
         );
-        STATERA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.statera_monogram",
+        STATERA = new Chapter("wizards_reborn.arcanemicon.chapter.statera_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.statera_monogram", WizardsRebornMonograms.STATERA),
                 new MonogramRecipesPage(WizardsRebornMonograms.STATERA)
         );
-        ECLIPSIS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.eclipsis_monogram",
+        ECLIPSIS = new Chapter("wizards_reborn.arcanemicon.chapter.eclipsis_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.eclipsis_monogram", WizardsRebornMonograms.ECLIPSIS),
                 new MonogramRecipesPage(WizardsRebornMonograms.ECLIPSIS)
         );
-        SICCITAS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.siccitas_monogram",
+        SICCITAS = new Chapter("wizards_reborn.arcanemicon.chapter.siccitas_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.siccitas_monogram", WizardsRebornMonograms.SICCITAS),
                 new MonogramRecipesPage(WizardsRebornMonograms.SICCITAS)
         );
-        SOLSTITIUM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.solstitium_monogram",
+        SOLSTITIUM = new Chapter("wizards_reborn.arcanemicon.chapter.solstitium_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.solstitium_monogram", WizardsRebornMonograms.SOLSTITIUM),
                 new MonogramRecipesPage(WizardsRebornMonograms.SOLSTITIUM)
         );
-        FAMES = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fames_monogram",
+        FAMES = new Chapter("wizards_reborn.arcanemicon.chapter.fames_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.fames_monogram", WizardsRebornMonograms.FAMES),
                 new MonogramRecipesPage(WizardsRebornMonograms.FAMES)
         );
-        RENAISSANCE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.renaissance_monogram",
+        RENAISSANCE = new Chapter("wizards_reborn.arcanemicon.chapter.renaissance_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.renaissance_monogram", WizardsRebornMonograms.RENAISSANCE),
                 new MonogramRecipesPage(WizardsRebornMonograms.RENAISSANCE)
         );
-        BELLUM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.bellum_monogram",
+        BELLUM = new Chapter("wizards_reborn.arcanemicon.chapter.bellum_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.bellum_monogram", WizardsRebornMonograms.BELLUM),
                 new MonogramRecipesPage(WizardsRebornMonograms.BELLUM)
         );
-        LUX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.lux_monogram",
+        LUX = new Chapter("wizards_reborn.arcanemicon.chapter.lux_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.lux_monogram", WizardsRebornMonograms.LUX),
                 new MonogramRecipesPage(WizardsRebornMonograms.LUX)
         );
-        KARA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.kara_monogram",
+        KARA = new Chapter("wizards_reborn.arcanemicon.chapter.kara_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.kara_monogram", WizardsRebornMonograms.KARA),
                 new MonogramRecipesPage(WizardsRebornMonograms.KARA)
         );
-        DEGRADATIO = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.degradatio_monogram",
+        DEGRADATIO = new Chapter("wizards_reborn.arcanemicon.chapter.degradatio_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.degradatio_monogram", WizardsRebornMonograms.DEGRADATIO),
                 new MonogramRecipesPage(WizardsRebornMonograms.DEGRADATIO)
         );
-        PRAEDICTIONEM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.praedictionem_monogram",
+        PRAEDICTIONEM = new Chapter("wizards_reborn.arcanemicon.chapter.praedictionem_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.praedictionem_monogram", WizardsRebornMonograms.PRAEDICTIONEM),
                 new MonogramRecipesPage(WizardsRebornMonograms.PRAEDICTIONEM)
         );
-        EVOLUTIONIS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.evolutionis_monogram",
+        EVOLUTIONIS = new Chapter("wizards_reborn.arcanemicon.chapter.evolutionis_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.evolutionis_monogram", WizardsRebornMonograms.EVOLUTIONIS),
                 new MonogramRecipesPage(WizardsRebornMonograms.EVOLUTIONIS)
         );
-        TENEBRIS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.tenebris_monogram",
+        TENEBRIS = new Chapter("wizards_reborn.arcanemicon.chapter.tenebris_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.tenebris_monogram", WizardsRebornMonograms.TENEBRIS),
                 new MonogramRecipesPage(WizardsRebornMonograms.TENEBRIS)
         );
-        UNIVERSUM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.universum_monogram",
+        UNIVERSUM = new Chapter("wizards_reborn.arcanemicon.chapter.universum_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.universum_monogram", WizardsRebornMonograms.UNIVERSUM),
                 new MonogramRecipesPage(WizardsRebornMonograms.UNIVERSUM)
         );
 
-        ALL_SPELLS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.all_spells",
+        ALL_SPELLS = new Chapter("wizards_reborn.arcanemicon.chapter.all_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.all_spells",
                         new SpellIndexEntry(EARTH_PROJECTILE, WizardsRebornSpells.EARTH_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(WATER_PROJECTILE, WizardsRebornSpells.WATER_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
@@ -2257,8 +2107,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        EARTH_SPELLS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.earth_spells",
+        EARTH_SPELLS = new Chapter("wizards_reborn.arcanemicon.chapter.earth_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.earth_spells",
                         new SpellIndexEntry(EARTH_PROJECTILE, WizardsRebornSpells.EARTH_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(HOLY_PROJECTILE, WizardsRebornSpells.HOLY_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
@@ -2285,8 +2134,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WATER_SPELLS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.water_spells",
+        WATER_SPELLS = new Chapter("wizards_reborn.arcanemicon.chapter.water_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.water_spells",
                         new SpellIndexEntry(WATER_PROJECTILE, WizardsRebornSpells.WATER_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(FROST_PROJECTILE, WizardsRebornSpells.FROST_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
@@ -2315,8 +2163,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        AIR_SPELLS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.air_spells",
+        AIR_SPELLS = new Chapter("wizards_reborn.arcanemicon.chapter.air_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.air_spells",
                         new SpellIndexEntry(AIR_PROJECTILE, WizardsRebornSpells.AIR_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(HOLY_PROJECTILE, WizardsRebornSpells.HOLY_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
@@ -2340,8 +2187,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        FIRE_SPELLS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fire_spells",
+        FIRE_SPELLS = new Chapter("wizards_reborn.arcanemicon.chapter.fire_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.fire_spells",
                         new SpellIndexEntry(FIRE_PROJECTILE, WizardsRebornSpells.FIRE_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(CURSE_PROJECTILE, WizardsRebornSpells.CURSE_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
@@ -2366,8 +2212,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        VOID_SPELLS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.void_spells",
+        VOID_SPELLS = new Chapter("wizards_reborn.arcanemicon.chapter.void_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.void_spells",
                         new SpellIndexEntry(VOID_PROJECTILE, WizardsRebornSpells.VOID_PROJECTILE, WizardsRebornKnowledges.VOID_CRYSTAL),
                         new SpellIndexEntry(CURSE_PROJECTILE, WizardsRebornSpells.CURSE_PROJECTILE, WizardsRebornKnowledges.ARCANE_WAND),
@@ -2397,20 +2242,17 @@ public class ArcanemiconChapters {
         RESEARCH_MAIN = new ResearchPage(true);
         RESEARCH_LIST = new ResearchPage(false);
 
-        RESEARCH = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.research",
+        RESEARCH = new Chapter("wizards_reborn.arcanemicon.chapter.research",
                 RESEARCH_MAIN,
                 RESEARCH_LIST
         );
 
-        RESEARCHES = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.researches",
+        RESEARCHES = new Chapter("wizards_reborn.arcanemicon.chapter.researches",
                 new TitlePage("wizards_reborn.arcanemicon.page.researches.0"),
                 new ResearchesPage("wizards_reborn.arcanemicon.page.researches.1")
         );
 
-        MONOGRAMS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.monograms",
+        MONOGRAMS = new Chapter("wizards_reborn.arcanemicon.chapter.monograms",
                 new TitledMonogramIndexPage("wizards_reborn.arcanemicon.page.monograms",
                         new MonogramIndexEntry(LUNAM, WizardsRebornMonograms.LUNAM),
                         new MonogramIndexEntry(VITA, WizardsRebornMonograms.VITA),
@@ -2439,8 +2281,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        SPELLS_INDEX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.spells_index",
+        SPELLS_INDEX = new Chapter("wizards_reborn.arcanemicon.chapter.spells_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.spells_index",
                         new IndexEntry(ALL_SPELLS, new ItemStack(WizardsRebornItems.ARCANE_WAND.get()), WizardsRebornKnowledges.ARCANE_WAND),
                         new IndexEntry(EARTH_SPELLS, new ItemStack(WizardsRebornItems.FACETED_EARTH_CRYSTAL.get()), WizardsRebornKnowledges.ARCANE_WAND),
@@ -2457,8 +2298,7 @@ public class ArcanemiconChapters {
     }
 
     public static void crystalRitualsInit() {
-        LIGHT_RAYS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.light_rays",
+        LIGHT_RAYS = new Chapter("wizards_reborn.arcanemicon.chapter.light_rays",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.light_rays.0",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.LIGHT_EMITTER.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.LIGHT_TRANSFER_LENS.get())),
@@ -2468,8 +2308,7 @@ public class ArcanemiconChapters {
                 new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/light_rays_image_page.png"))
         );
 
-        LIGHT_EMITTER = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.light_emitter",
+        LIGHT_EMITTER = new Chapter("wizards_reborn.arcanemicon.chapter.light_emitter",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.light_emitter",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.LIGHT_EMITTER.get()))
                 ),
@@ -2481,8 +2320,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        LIGHT_TRANSFER_LENS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.light_transfer_lens",
+        LIGHT_TRANSFER_LENS = new Chapter("wizards_reborn.arcanemicon.chapter.light_transfer_lens",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.light_transfer_lens",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.LIGHT_TRANSFER_LENS.get()))
                 ),
@@ -2494,8 +2332,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        RUNIC_PEDESTAL = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.runic_pedestal",
+        RUNIC_PEDESTAL = new Chapter("wizards_reborn.arcanemicon.chapter.runic_pedestal",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.runic_pedestal",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, RUNIC_PEDESTAL_ITEM)
                 ),
@@ -2523,8 +2360,7 @@ public class ArcanemiconChapters {
             crystalRituals.put(ritual, stack);
         }
 
-        CRYSTALS_RITUALS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystal_rituals",
+        CRYSTALS_RITUALS = new Chapter("wizards_reborn.arcanemicon.chapter.crystal_rituals",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_rituals.0",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.EARTH_CRYSTAL.get()))
                 ),
@@ -2532,8 +2368,7 @@ public class ArcanemiconChapters {
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.resonance")
         );
 
-        FOCUSING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.focusing",
+        FOCUSING = new Chapter("wizards_reborn.arcanemicon.chapter.focusing",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.focusing",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsRebornCrystalRituals.FOCUSING))
                 ),
@@ -2542,8 +2377,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARTIFICIAL_FERTILITY = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.artificial_fertility",
+        ARTIFICIAL_FERTILITY = new Chapter("wizards_reborn.arcanemicon.chapter.artificial_fertility",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.artificial_fertility",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsRebornCrystalRituals.ARTIFICIAL_FERTILITY))
                 ),
@@ -2553,8 +2387,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        RITUAL_BREEDING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.ritual_breeding",
+        RITUAL_BREEDING = new Chapter("wizards_reborn.arcanemicon.chapter.ritual_breeding",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.ritual_breeding",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsRebornCrystalRituals.RITUAL_BREEDING))
                 ),
@@ -2588,8 +2421,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        CRYSTAL_GROWTH_ACCELERATION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystal_growth_acceleration",
+        CRYSTAL_GROWTH_ACCELERATION = new Chapter("wizards_reborn.arcanemicon.chapter.crystal_growth_acceleration",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_growth_acceleration",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_GROWTH_ACCELERATION))
                 ),
@@ -2600,8 +2432,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        CRYSTAL_INFUSION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystal_infusion",
+        CRYSTAL_INFUSION = new Chapter("wizards_reborn.arcanemicon.chapter.crystal_infusion",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_infusion",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_INFUSION))
                 ),
@@ -2632,8 +2463,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANUM_SEED = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcanum_seed",
+        ARCANUM_SEED = new Chapter("wizards_reborn.arcanemicon.chapter.arcanum_seed",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcanum_seed",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANUM_SEED.get()))
                 ),
@@ -2645,8 +2475,7 @@ public class ArcanemiconChapters {
                 new ArcanumDustTransmutationPage(ARCANUM_ITEM, new ItemStack(WizardsRebornItems.ARCANUM_SEED.get()))
         );
 
-        INNOCENT_WOOD = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.innocent_wood",
+        INNOCENT_WOOD = new Chapter("wizards_reborn.arcanemicon.chapter.innocent_wood",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.petals_of_innocence",
                         new BlockEntry(new ItemStack(WizardsRebornItems.INNOCENT_PEDESTAL.get()), new ItemStack(WizardsRebornItems.PETALS_OF_INNOCENCE.get()))
                 ),
@@ -2822,8 +2651,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        INNOCENT_WOOD_TOOLS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.innocent_wood_tools",
+        INNOCENT_WOOD_TOOLS = new Chapter("wizards_reborn.arcanemicon.chapter.innocent_wood_tools",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_tools",
                         new BlockEntry(INNOCENT_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_SWORD.get())),
                         new BlockEntry(INNOCENT_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_PICKAXE.get())),
@@ -2858,8 +2686,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        PHANTOM_INK_TRIM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.phantom_ink_trim",
+        PHANTOM_INK_TRIM = new Chapter("wizards_reborn.arcanemicon.chapter.phantom_ink_trim",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.phantom_ink_trim",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_TRIM.get())),
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PHANTOM_INK_TRIM.get()))
@@ -2873,8 +2700,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        MUSIC_DISC_DISCO = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.music_disc_disco",
+        MUSIC_DISC_DISCO = new Chapter("wizards_reborn.arcanemicon.chapter.music_disc_disco",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_disco",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_DISCO.get()))
                 ),
@@ -2883,8 +2709,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        CRYSTAL_RITUALS_INDEX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystal_rituals_index",
+        CRYSTAL_RITUALS_INDEX = new Chapter("wizards_reborn.arcanemicon.chapter.crystal_rituals_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.crystal_rituals_index",
                         new IndexEntry(LIGHT_RAYS, new ItemStack(WizardsRebornItems.WISSEN_WAND.get()), WizardsRebornKnowledges.ARCANUM_LENS),
                         new IndexEntry(LIGHT_EMITTER, new ItemStack(WizardsRebornItems.LIGHT_EMITTER.get()), WizardsRebornKnowledges.ARCANUM_LENS),
@@ -2910,19 +2735,21 @@ public class ArcanemiconChapters {
     }
 
     public static void alchemyInit() {
-        MOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.mor",
+        MOR = new Chapter("wizards_reborn.arcanemicon.chapter.mor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.mor.0",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MOR.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MOR_BLOCK.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ELDER_MOR.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ELDER_MOR_BLOCK.get()))
                 ),
-                new TextPage("wizards_reborn.arcanemicon.page.mor.1")
+                new TextPage("wizards_reborn.arcanemicon.page.mor.1"),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.mor_soup",
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MOR_SOUP.get())),
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ELDER_MOR_SOUP.get()))
+                )
         );
 
-        MORTAR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.mortar",
+        MORTAR = new Chapter("wizards_reborn.arcanemicon.chapter.mortar",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.mortar",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_MORTAR.get()))
                 ),
@@ -2958,8 +2785,7 @@ public class ArcanemiconChapters {
                 new MortarPage(new ItemStack(WizardsRebornItems.GROUND_ELDER_MOR.get()), new ItemStack(WizardsRebornItems.ELDER_MOR.get()))
         );
 
-        ARCANE_LINEN = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_linen",
+        ARCANE_LINEN = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_linen",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_linen",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_LINEN_SEEDS.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_LINEN.get())),
@@ -2992,8 +2818,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        MUSHROOM_CAPS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.mushroom_caps",
+        MUSHROOM_CAPS = new Chapter("wizards_reborn.arcanemicon.chapter.mushroom_caps",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.mushroom_caps",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BROWN_MUSHROOM_CAP.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.RED_MUSHROOM_CAP.get())),
@@ -3034,8 +2859,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISESTONE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wisestone",
+        WISESTONE = new Chapter("wizards_reborn.arcanemicon.chapter.wisestone",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISESTONE.get()))
                 ),
@@ -3173,8 +2997,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        WISESTONE_PEDESTAL = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.wisestone_pedestal",
+        WISESTONE_PEDESTAL = new Chapter("wizards_reborn.arcanemicon.chapter.wisestone_pedestal",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone_pedestal",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, WISESTONE_PEDESTAL_ITEM)
                 ),
@@ -3186,8 +3009,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        FLUID_PIPES = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.fluid_pipes",
+        FLUID_PIPES = new Chapter("wizards_reborn.arcanemicon.chapter.fluid_pipes",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.fluid_pipe",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.FLUID_PIPE.get()))
                 ),
@@ -3205,8 +3027,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        STEAM_PIPES = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.steam_pipes",
+        STEAM_PIPES = new Chapter("wizards_reborn.arcanemicon.chapter.steam_pipes",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.steam_pipe",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.STEAM_PIPE.get()))
                 ),
@@ -3224,8 +3045,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ORBITAL_FLUID_RETAINER = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.orbital_fluid_retainer",
+        ORBITAL_FLUID_RETAINER = new Chapter("wizards_reborn.arcanemicon.chapter.orbital_fluid_retainer",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.orbital_fluid_retainer",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ORBITAL_FLUID_RETAINER.get()))
                 ),
@@ -3237,8 +3057,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ALCHEMY_FURNACE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_furnace",
+        ALCHEMY_FURNACE = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_furnace",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_furnace",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ALCHEMY_FURNACE.get()))
                 ),
@@ -3251,8 +3070,7 @@ public class ArcanemiconChapters {
                 new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/alchemy_furnace_image_page.png"))
         );
 
-        STEAM_THERMAL_STORAGE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.steam_thermal_storage",
+        STEAM_THERMAL_STORAGE = new Chapter("wizards_reborn.arcanemicon.chapter.steam_thermal_storage",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.steam_thermal_storage",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.STEAM_THERMAL_STORAGE.get()))
                 ),
@@ -3264,8 +3082,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ALCHEMY_MACHINE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_machine",
+        ALCHEMY_MACHINE = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_machine",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_machine",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ALCHEMY_MACHINE.get()))
                 ),
@@ -3289,8 +3106,7 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK))
         );
 
-        ALCHEMY_OIL = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_oil",
+        ALCHEMY_OIL = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_oil",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_oil",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ALCHEMY_OIL_BUCKET.get()))
                 ),
@@ -3299,8 +3115,7 @@ public class ArcanemiconChapters {
                         new ItemStack(WizardsRebornItems.PETALS.get()))
         );
 
-        MUSIC_DISC_ARCANUM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.music_disc_arcanum",
+        MUSIC_DISC_ARCANUM = new Chapter("wizards_reborn.arcanemicon.chapter.music_disc_arcanum",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_arcanum",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_ARCANUM.get()))
                 ),
@@ -3309,8 +3124,7 @@ public class ArcanemiconChapters {
                         .setInputs(new ItemStack(Items.MUSIC_DISC_13), ARCANUM_ITEM)
         );
 
-        MUSIC_DISC_MOR = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.music_disc_mor",
+        MUSIC_DISC_MOR = new Chapter("wizards_reborn.arcanemicon.chapter.music_disc_mor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_mor",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_MOR.get()))
                 ),
@@ -3319,8 +3133,7 @@ public class ArcanemiconChapters {
                         .setInputs(new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsRebornItems.MOR.get()))
         );
 
-        NETHER_SALT = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.nether_salt",
+        NETHER_SALT = new Chapter("wizards_reborn.arcanemicon.chapter.nether_salt",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.nether_salt",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, NETHER_SALT_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.NETHER_SALT_BLOCK.get())),
@@ -3384,8 +3197,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ALCHEMY_CALX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_calx",
+        ALCHEMY_CALX = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_calx",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_calx",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, ALCHEMY_CALX_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ALCHEMY_CALX_BLOCK.get()))
@@ -3415,8 +3227,7 @@ public class ArcanemiconChapters {
             flaskPotions.put(potion, stack);
         }
 
-        ALCHEMY_GLASS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_glass",
+        ALCHEMY_GLASS = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_glass",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_glass",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, ACLHEMY_GLASS)
                 ),
@@ -3586,8 +3397,7 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.COSMIC_FRAMED_LUMINAL_GLASS.get()), new ItemStack(WizardsRebornItems.COSMIC_LUMINAL_GLASS.get()), new ItemStack(Items.IRON_NUGGET))
         );
 
-        ALCHEMY_BAG = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_bag",
+        ALCHEMY_BAG = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_bag",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_bag",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ALCHEMY_BAG.get()))
                 ),
@@ -3599,8 +3409,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ALCHEMY_POTIONS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_potions",
+        ALCHEMY_POTIONS = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_potions",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_potions",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW))
                 ),
@@ -3648,8 +3457,7 @@ public class ArcanemiconChapters {
                         vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.PHANTOM_MEMBRANE), new ItemStack(Items.REDSTONE))
         );
 
-        TEA = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.tea",
+        TEA = new Chapter("wizards_reborn.arcanemicon.chapter.tea",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.oil_tea",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, vialPotions.get(WizardsRebornAlchemyPotions.OIL_TEA))
                 ),
@@ -3677,8 +3485,7 @@ public class ArcanemiconChapters {
                         new ItemStack(WizardsRebornItems.PETALS.get()), new ItemStack(WizardsRebornItems.PETALS.get()), new ItemStack(WizardsRebornItems.PETALS.get()), vialPotions.get(WizardsRebornAlchemyPotions.MILK))
         );
 
-        ALCHEMY_BREWS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_brews",
+        ALCHEMY_BREWS = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_brews",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_brews",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSHROOM_BREW_BUCKET.get())),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.HELLISH_MUSHROOM_BREW_BUCKET.get())),
@@ -3740,8 +3547,7 @@ public class ArcanemiconChapters {
                         .setInputs(vialPotions.get(WizardsRebornAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.REDSTONE))
         );
 
-        ADVANCED_CALX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.advanced_calx",
+        ADVANCED_CALX = new Chapter("wizards_reborn.arcanemicon.chapter.advanced_calx",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.advanced_calx",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, NATURAL_CALX_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, SCORCHED_CALX_ITEM),
@@ -3794,8 +3600,7 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ENCHANTED_CALX.get(), 9), new ItemStack(WizardsRebornItems.ENCHANTED_CALX_BLOCK.get()))
         );
 
-        ALCHEMY_TRANSMUTATION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_transmutation",
+        ALCHEMY_TRANSMUTATION = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_transmutation",
                 new TitlePage("wizards_reborn.arcanemicon.page.alchemy_transmutation"),
                 new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD.get(), 4)).setIsWissen(true).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.WISSEN_TEA.get(), 200))
@@ -3853,8 +3658,7 @@ public class ArcanemiconChapters {
         distantCalxEffects.add(new MobEffectInstance(MobEffects.LEVITATION, 250, 0));
         enchantedCalxEffects.add(new MobEffectInstance(MobEffects.REGENERATION, 500, 0));
 
-        ARCANE_CENSER = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_censer",
+        ARCANE_CENSER = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_censer",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_censer",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_CENSER.get()))
                 ),
@@ -3880,8 +3684,7 @@ public class ArcanemiconChapters {
                 new CenserPage(glisteringMelonSliceEffects, new ItemStack(Items.GLISTERING_MELON_SLICE))
         );
 
-        SMOKING_PIPE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.smoking_pipe",
+        SMOKING_PIPE = new Chapter("wizards_reborn.arcanemicon.chapter.smoking_pipe",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.smoking_pipe",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_SMOKING_PIPE.get())),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BAMBOO_SMOKING_PIPE.get()))
@@ -3917,8 +3720,7 @@ public class ArcanemiconChapters {
                 new CenserPage(enchantedCalxEffects, ENCHANTED_CALX_ITEM)
         );
 
-        ARCACITE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcacite",
+        ARCACITE = new Chapter("wizards_reborn.arcanemicon.chapter.arcacite",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcacite",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, ARCACITE_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCACITE_BLOCK.get()))
@@ -3952,8 +3754,7 @@ public class ArcanemiconChapters {
                         .setInputs(vialPotions.get(WizardsRebornAlchemyPotions.WISSEN_TEA), ARCANUM_ITEM, ARCANUM_ITEM, ARCACITE_ITEM, new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE))
         );
 
-        ARCACITE_POLISHING_MIXTURE = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcacite_polishing_mixture",
+        ARCACITE_POLISHING_MIXTURE = new Chapter("wizards_reborn.arcanemicon.chapter.arcacite_polishing_mixture",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcacite_polishing_mixture",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCACITE_POLISHING_MIXTURE.get())),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCACITE_POLISHING_MIXTURE_BLOCK.get()))
@@ -3970,8 +3771,7 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCACITE_POLISHING_MIXTURE.get(), 9), new ItemStack(WizardsRebornItems.ARCACITE_POLISHING_MIXTURE_BLOCK.get()))
         );
 
-        SOUL_HUNTER_TRIM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.soul_hunter_trim",
+        SOUL_HUNTER_TRIM = new Chapter("wizards_reborn.arcanemicon.chapter.soul_hunter_trim",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.soul_hunter_trim",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SOUL_HUNTER_TRIM.get()))
                 ),
@@ -3980,8 +3780,7 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.PURPLE_WOOL), new ItemStack(Items.PURPLE_WOOL), new ItemStack(Items.BLACK_WOOL), new ItemStack(Items.BLACK_WOOL))
         );
 
-        IMPLOSION_TRIM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.implosion_trim",
+        IMPLOSION_TRIM = new Chapter("wizards_reborn.arcanemicon.chapter.implosion_trim",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.implosion_trim",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.IMPLOSION_TRIM.get()))
                 ),
@@ -3991,8 +3790,7 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.BLUE_ICE), new ItemStack(Items.BLUE_ICE), new ItemStack(Items.BLUE_ICE))
         );
 
-        ALCHEMY_INDEX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_index",
+        ALCHEMY_INDEX = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.alchemy_index",
                         new IndexEntry(MOR, new ItemStack(WizardsRebornItems.MOR.get())),
                         new IndexEntry(MORTAR, new ItemStack(WizardsRebornItems.ARCANE_WOOD_MORTAR.get()), WizardsRebornKnowledges.ARCANE_WOOD),
@@ -4037,27 +3835,23 @@ public class ArcanemiconChapters {
     }
 
     public static void additionalInit() {
-        PROGRESSION = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.progression",
+        PROGRESSION = new Chapter("wizards_reborn.arcanemicon.chapter.progression",
                 new ProgressionPage("wizards_reborn.arcanemicon.page.progression", WizardsRebornKnowledges.progression),
                 new ProgressionPage("wizards_reborn.arcanemicon.page.additional_progression", WizardsRebornKnowledges.additionalProgression)
         );
 
-        STATISTIC = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.statistics",
+        STATISTIC = new Chapter("wizards_reborn.arcanemicon.chapter.statistics",
                 new StatisticsPage("wizards_reborn.arcanemicon.page.statistics", WizardsRebornKnowledges.progression, WizardsRebornKnowledges.additionalProgression)
         );
 
-        ANIMATIONS_CONFIGS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.animations_configs",
+        ANIMATIONS_CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.animations_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.animations_configs"),
                 new ConfigPage(
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SPELLS_ITEM_ANIMATIONS)
                 )
         );
 
-        PARTICLES_CONFIGS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.particles_configs",
+        PARTICLES_CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.particles_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.particles_configs"),
                 new ConfigPage(
                         new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.WISSEN_RAYS_LIMIT),
@@ -4067,8 +3861,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        GRAPHICS_CONFIGS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.graphics_configs",
+        GRAPHICS_CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.graphics_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.graphics_configs"),
                 new IndexPage(
                         new IndexEntry(ANIMATIONS_CONFIGS, new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get())),
@@ -4076,8 +3869,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        NUMERICAL_CONFIGS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.numerical_configs",
+        NUMERICAL_CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.numerical_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.numerical_configs"),
                 new ConfigPage(
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.NUMERICAL_WISSEN),
@@ -4092,8 +3884,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANEMICON_CONFIGS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcanemicon_configs",
+        ARCANEMICON_CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.arcanemicon_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.arcanemicon_configs"),
                 new ConfigPage(
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.RESEARCH_HARDMODE),
@@ -4110,8 +3901,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        ARCANE_WAND_OVERLAY_CONFIGS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.arcane_wand_overlay_configs",
+        ARCANE_WAND_OVERLAY_CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_wand_overlay_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand_overlay_configs"),
                 new ConfigPage(
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_UP),
@@ -4138,16 +3928,14 @@ public class ArcanemiconChapters {
                 )
         );
 
-        OVERLAY_CONFIGS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.overlay_configs",
+        OVERLAY_CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.overlay_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.overlay_configs"),
                 new IndexPage(
                         new IndexEntry(ARCANE_WAND_OVERLAY_CONFIGS, new ItemStack(WizardsRebornItems.ARCANE_WAND.get()), WizardsRebornKnowledges.ARCANE_WAND)
                 )
         );
 
-        CONFIGS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.configs",
+        CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.configs"),
                 new IndexPage(
                         new IndexEntry(GRAPHICS_CONFIGS, new ItemStack(WizardsRebornItems.LIME_ARCANE_LUMOS.get())),
@@ -4157,8 +3945,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        SPECIAL_THANKS = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.special_thanks",
+        SPECIAL_THANKS = new Chapter("wizards_reborn.arcanemicon.chapter.special_thanks",
                 new ThanksPage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.0"),
                 new ThanksPlushPage("wizards_reborn.arcanemicon.page.special_thanks.maxbogomol.1", new ItemStack(FluffyFurItems.MAXBOGOMOL_PLUSH.get())),
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.onixthecat.0"),
@@ -4172,8 +3959,7 @@ public class ArcanemiconChapters {
                 new ThanksVillagePage("wizards_reborn.arcanemicon.page.special_thanks.fluffy_village")
         );
 
-        ADDITIONAL_INDEX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.additional_index",
+        ADDITIONAL_INDEX = new Chapter("wizards_reborn.arcanemicon.chapter.additional_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.additional_index",
                         new IndexEntry(PROGRESSION, new ItemStack(WizardsRebornItems.CREATIVE_KNOWLEDGE_SCROLL.get())),
                         new IndexEntry(STATISTIC, new ItemStack(WizardsRebornItems.KNOWLEDGE_SCROLL.get())),

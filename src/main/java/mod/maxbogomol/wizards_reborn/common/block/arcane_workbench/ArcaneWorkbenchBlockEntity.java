@@ -26,10 +26,12 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -147,12 +149,33 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
                                 itemOutputHandler.getStackInSlot(0).setTag(tag);
                             }
 
+                            List<ItemStack> remainingItems = new ArrayList<>();
                             for (int i = 0; i < 13; i++) {
-                                if (itemHandler.getStackInSlot(0).hasCraftingRemainingItem()) {
-                                    itemHandler.setStackInSlot(0, itemHandler.getStackInSlot(0).getCraftingRemainingItem());
+                                if (itemHandler.getStackInSlot(i).hasCraftingRemainingItem()) {
+                                    if (itemHandler.getStackInSlot(i).getCount() == 1) {
+                                        itemHandler.setStackInSlot(i, itemHandler.getStackInSlot(i).getCraftingRemainingItem());
+                                    } else {
+                                        remainingItems.add(itemHandler.getStackInSlot(i).getCraftingRemainingItem().copy());
+                                    }
                                 } else {
                                     itemHandler.extractItem(i, 1, false);
                                 }
+                            }
+                            for (int i = 0; i < 13; i++) {
+                                for (ItemStack remainingItem : new ArrayList<>(remainingItems)) {
+                                    if (itemHandler.getStackInSlot(i).isEmpty()) {
+                                        itemHandler.setStackInSlot(i, remainingItem);
+                                        remainingItems.remove(remainingItem);
+                                    } else if ((ItemHandlerHelper.canItemStacksStack(remainingItem, itemHandler.getStackInSlot(i))) && (itemHandler.getStackInSlot(i).getCount() + remainingItem.getCount() <= remainingItem.getMaxStackSize())) {
+                                        itemHandler.getStackInSlot(i).setCount(itemHandler.getStackInSlot(i).getCount() + remainingItem.getCount());
+                                        remainingItems.remove(remainingItem);
+                                    }
+                                }
+                            }
+                            if (!remainingItems.isEmpty()) {
+                                NonNullList<ItemStack> list = NonNullList.create();
+                                list.addAll(remainingItems);
+                                Containers.dropContents(level, getBlockPos(), list);
                             }
 
                             update = true;

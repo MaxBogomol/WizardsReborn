@@ -98,7 +98,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
-                Containers.dropContents(level, pos, (blockSimpleInventory).getItemHandler());
+                Containers.dropContents(level, pos, blockSimpleInventory.getItemHandler());
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

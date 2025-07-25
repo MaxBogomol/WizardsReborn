@@ -68,6 +68,7 @@
   "block.wizards_reborn.precision_crystal_block": "Precision Crystal Block",
 
   "item.wizards_reborn.nether_salt": "Nether Salt",
+  "item.wizards_reborn.nether_salt_pile": "Nether Salt Pile",
   "block.wizards_reborn.nether_salt_block": "Nether Salt Block",
   "block.wizards_reborn.nether_salt_ore": "Nether Salt Ore",
 
@@ -620,6 +621,9 @@
   "item.wizards_reborn.phantom_ink_trim": "Innocent Wood Trim",
   "item.wizards_reborn.royal_guard_trim": "Innocent Wood Trim",
   "item.wizards_reborn.capitalist_trim": "Innocent Wood Trim",
+
+  "item.wizards_reborn.wheat_flour": "Wheat Flour",
+  "item.wizards_reborn.arcane_linen_flour": "Arcane Linen Flour",
 
   "item.wizards_reborn.mor_pie": "Mor Pie",
   "item.wizards_reborn.mor_pie_slice": "Mor Pie Slice",

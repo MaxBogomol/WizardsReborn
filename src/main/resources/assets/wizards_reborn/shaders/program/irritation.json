@@ -4,7 +4,7 @@
         "srcrgb": "one",
         "dstrgb": "zero"
     },
-    "vertex": "sobel",
+    "vertex": "fluffy_fur:blit",
     "fragment": "wizards_reborn:irritation",
     "attributes": [ "Position" ],
     "samplers": [

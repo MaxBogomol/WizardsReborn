@@ -83,10 +83,10 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
-                net.minecraft.world.Containers.dropContents(level, pos, (blockSimpleInventory).getItemHandler());
+                Containers.dropContents(level, pos, blockSimpleInventory.getItemHandler());
             }
             if (blockEntity instanceof SaltCampfireBlockEntity saltCampfireBlock) {
-                Containers.dropContents(level, pos, (saltCampfireBlock).getItems());
+                Containers.dropContents(level, pos, saltCampfireBlock.getItems());
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

@@ -4,7 +4,7 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "blit",
+    "vertex": "fluffy_fur:blit",
     "fragment": "wizards_reborn:light_glow",
     "attributes": [ "Position" ],
     "samplers": [

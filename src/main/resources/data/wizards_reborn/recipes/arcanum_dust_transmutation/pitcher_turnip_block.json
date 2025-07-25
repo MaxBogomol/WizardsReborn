@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:arcanum_dust_transmutation",
+  "from": {
+    "item": "wizards_reborn:pitcher_turnip"
+  },
+  "to": {
+    "item": "wizards_reborn:pitcher_turnip_block"
+  }
+}

@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.shader.postprocess;
 
+import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcess;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessInstanceData;
@@ -46,6 +47,16 @@ public class LightGlowPostProcess extends PostProcess {
     @Override
     public void afterProcess() {
         data.instances.clear();
+    }
+
+    @Override
+    public RenderTarget getRenderTarget() {
+        return minecraft.getMainRenderTarget();
+    }
+
+    @Override
+    public boolean isTranslucentDepthBuffer() {
+        return true;
     }
 
     public static class LightGlowPostProcessInstanceData extends PostProcessInstanceData {

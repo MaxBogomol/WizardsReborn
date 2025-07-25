@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "nether_salt_pile",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:nether_salt"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:nether_salt_pile",
+    "count": 3
+  }
+}

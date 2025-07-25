@@ -2,14 +2,13 @@
 
 uniform sampler2D DiffuseSampler;
 
-in vec2 texCoord;
-in vec2 oneTexel;
-
 uniform float totalTicks;
 uniform float speed;
 uniform float distortion;
 uniform float fade;
 uniform float time;
+
+in vec2 vertexUV;
 
 out vec4 fragColor;
 
@@ -24,7 +23,7 @@ float random(in vec2 _st) {
 }
 
 void main() {
-    vec2 uv = texCoord;
+    vec2 uv = vertexUV;
     float timeDistortion = totalTicks * speed;
     vec2 uvDistortion = applyDistortion(uv, 3.0, 7.0, timeDistortion, (distortion / 2) * fade);
     fragColor = vec4(texture(DiffuseSampler, uvDistortion).rgb, 1.0);

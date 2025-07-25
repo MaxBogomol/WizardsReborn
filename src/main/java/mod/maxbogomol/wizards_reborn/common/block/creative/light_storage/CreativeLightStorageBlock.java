@@ -11,6 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -77,7 +78,7 @@ public class CreativeLightStorageBlock extends Block implements EntityBlock, Sim
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
-                net.minecraft.world.Containers.dropContents(level, pos, (blockSimpleInventory).getItemHandler());
+                Containers.dropContents(level, pos, blockSimpleInventory.getItemHandler());
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

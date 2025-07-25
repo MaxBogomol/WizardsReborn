@@ -1,10 +1,12 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:sand",
-    "#minecraft:dirt",
+    "#minecraft:bamboo_plantable_on",
     "wizards_reborn:cork_bamboo",
-    "wizards_reborn:cork_bamboo_sapling",
-    "minecraft:gravel"
+    "wizards_reborn:cork_bamboo_sapling"
+  ],
+  "remove": [
+    "minecraft:bamboo",
+    "minecraft:bamboo_sapling"
   ]
 }

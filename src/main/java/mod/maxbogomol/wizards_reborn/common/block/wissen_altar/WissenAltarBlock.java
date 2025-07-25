@@ -99,7 +99,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
                 blockSimpleInventory.getItemHandler().removeItem(2, 64);
-                Containers.dropContents(level, pos, (blockSimpleInventory).getItemHandler());
+                Containers.dropContents(level, pos, blockSimpleInventory.getItemHandler());
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

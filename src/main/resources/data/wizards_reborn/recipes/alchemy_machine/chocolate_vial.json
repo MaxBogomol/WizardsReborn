@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:chocolate_vial",
+    "count": 1
+  },
+  "steam": 125,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_vial"
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "forge:milk",
+      "amount" : 250
+    }
+  ]
+}
