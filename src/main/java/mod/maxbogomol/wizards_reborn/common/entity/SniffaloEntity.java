@@ -1,9 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
+import com.mojang.serialization.Dynamic;
 import mod.maxbogomol.wizards_reborn.client.gui.container.SniffaloContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
-import mod.maxbogomol.wizards_reborn.common.network.entity.SniffaloScreenPacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.entity.SniffaloScreenPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornLootTables;
 import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
@@ -30,6 +31,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
@@ -73,6 +75,8 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     public static final EntityDataAccessor<ItemStack> carpetId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> bannerId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> armorId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
+
+    public static boolean isSnifferBrain = false;
 
     @Nullable
     public UUID owner;
@@ -278,12 +282,15 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
     @Override
     public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
-        ItemStack itemstack = new ItemStack(WizardsRebornItems.SNIFFALO_EGG.get());
-        ItemEntity itementity = new ItemEntity(level, this.position().x(), this.position().y(), this.position().z(), itemstack);
-        itementity.setDefaultPickUpDelay();
-        this.finalizeSpawnChildFromBreeding(level, mate, (AgeableMob)null);
+        ItemStack itemStack = new ItemStack(Items.SNIFFER_EGG);
+        if (random.nextFloat() <= 0.1f) {
+            itemStack = new ItemStack(WizardsRebornItems.SNIFFALO_EGG.get());
+        }
+        ItemEntity itemEntity = new ItemEntity(level, this.position().x(), this.position().y(), this.position().z(), itemStack);
+        itemEntity.setDefaultPickUpDelay();
+        this.finalizeSpawnChildFromBreeding(level, mate, null);
         this.playSound(SoundEvents.SNIFFER_EGG_PLOP, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 0.5F);
-        level.addFreshEntity(itementity);
+        level.addFreshEntity(itemEntity);
     }
 
     @Override
@@ -292,22 +299,21 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     }
 
     @Override
+    public Brain<?> makeBrain(Dynamic<?> dynamic) {
+        isSnifferBrain = true;
+        Brain<?> brain = super.makeBrain(dynamic);
+        isSnifferBrain = false;
+        return brain;
+    }
+
+    @Override
     public boolean canMate(Animal otherAnimal) {
         if (!(otherAnimal instanceof SniffaloEntity sniffalo)) {
             return false;
         } else {
             Set<State> set = Set.of(Sniffer.State.IDLING, Sniffer.State.SCENTING, Sniffer.State.FEELING_HAPPY);
-            if (set.contains(this.entityData.get(DATA_STATE)) && set.contains(sniffalo.entityData.get(DATA_STATE))) {
-                if (otherAnimal == this) {
-                    return false;
-                } else if (otherAnimal.getClass() != this.getClass()) {
-                    return false;
-                } else {
-                    return this.isInLove() && otherAnimal.isInLove();
-                }
-            }
+            return (set.contains(this.entityData.get(DATA_STATE)) && set.contains(sniffalo.entityData.get(DATA_STATE)));
         }
-        return false;
     }
 
     @Override
@@ -690,12 +696,6 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
                     return itemStack.isEmpty() || itemStack.getItem() instanceof BannerItem;
                 });
             }
-/*
-            if (i > 3) {
-                return this.createEquipmentSlotAccess(i, (itemStack) -> {
-                    return !this.getCarpet().isEmpty();
-                });
-            }*/
         }
 
         int j = slot - 500 + getInventorySize();

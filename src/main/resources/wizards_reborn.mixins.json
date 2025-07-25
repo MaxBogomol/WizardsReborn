@@ -6,6 +6,7 @@
   "mixins": [
     "client.ItemInHandRendererMixin",
     "common.AbstractArrowMixin",
+    "common.AnimalMakeLoveMixin",
     "common.BlockMixin",
     "common.BowItemMixin",
     "common.CampfireBlockMixin",

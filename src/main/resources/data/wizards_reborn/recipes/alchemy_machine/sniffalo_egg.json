@@ -1,0 +1,43 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:sniffalo_egg",
+    "count": 1
+  },
+  "wissen": 5000,
+  "steam": 2500,
+  "ingredients": [
+    {
+      "item": "minecraft:sniffer_egg"
+    },
+    {
+      "tag": "wizards_reborn:arcacite"
+    },
+    {
+      "tag": "wizards_reborn:arcacite"
+    },
+    {
+      "item": "wizards_reborn:nether_salt"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:mor_brew",
+      "amount" : 3000
+    },
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 5000
+    },
+    {
+      "tag": "forge:milk",
+      "amount" : 1500
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:crepe",
+    "count": 2
+  },
+  "steam": 300,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_linen_flour"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen_flour"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen_flour"
+    },
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "wizards_reborn:nether_salt_pile"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "forge:milk",
+      "amount" : 500
+    }
+  ]
+}
