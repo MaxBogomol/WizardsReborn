@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 import com.mojang.serialization.Dynamic;
 import mod.maxbogomol.wizards_reborn.client.gui.container.SniffaloContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.SniffaloArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.entity.SniffaloScreenPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornLootTables;
@@ -151,7 +152,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             boolean flag = this.isFood(itemStack);
             if (interactionResult.consumesAction() && flag) return interactionResult;
 
-            if (itemStack.getItem() instanceof BannerItem && isSaddled()) {
+            if (itemStack.getItem() instanceof BannerItem && isCarpeted() && !isBannered()) {
                 setBanner(itemStack.copyWithCount(1));
                 level().gameEvent(this, GameEvent.EQUIP, this.position());
                 itemStack.shrink(1);
@@ -514,12 +515,26 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         return this.inventory.getItem(2);
     }
 
+    public void setArmor(ItemStack itemStack) {
+        this.inventory.setItem(3, itemStack);
+        getEntityData().set(armorId, itemStack.copy());
+        getEntityData().set(armoredId, true);
+    }
+
+    public ItemStack getArmor() {
+        return this.inventory.getItem(3);
+    }
+
     public ItemStack getCarpetClient() {
         return getEntityData().get(carpetId);
     }
 
     public ItemStack getBannerClient() {
         return getEntityData().get(bannerId);
+    }
+
+    public ItemStack getArmorClient() {
+        return getEntityData().get(armorId);
     }
 
     @Override
@@ -694,6 +709,12 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             if (i == 2) {
                 return this.createEquipmentSlotAccess(i, (itemStack) -> {
                     return itemStack.isEmpty() || itemStack.getItem() instanceof BannerItem;
+                });
+            }
+
+            if (i == 3) {
+                return this.createEquipmentSlotAccess(i, (itemStack) -> {
+                    return itemStack.isEmpty() || itemStack.getItem() instanceof SniffaloArmorItem;
                 });
             }
         }

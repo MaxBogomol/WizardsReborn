@@ -38,7 +38,7 @@ public class SniffaloContainer extends ContainerMenuBase {
 
         this.addSlot(new SniffaloCargoCarpetSlot(sniffalo, inventoryContainer, 1, 8, 36));
         this.addSlot(new SniffaloBannerSlot(sniffalo, inventoryContainer, 2, 8, 54));
-        this.addSlot(new SniffaloBannerSlot(sniffalo, inventoryContainer, 3, 8, 72));
+        this.addSlot(new SniffaloArmorSlot(sniffalo, inventoryContainer, 3, 8, 72));
 
         int c = 4;
         for (int i = 0; i < 4; i++) {

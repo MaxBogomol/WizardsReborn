@@ -809,6 +809,8 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, EQUIPMENT, WizardsRebornItems.MOR_CAP);
             addInSub(event, EQUIPMENT, WizardsRebornItems.ELDER_MOR_CAP);
 
+            addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANE_SNIFFALO_ARMOR);
+
             addInSub(event, EQUIPMENT, WizardsRebornItems.WHITE_CARGO_CARPET);
             addInSub(event, EQUIPMENT, WizardsRebornItems.LIGHT_GRAY_CARGO_CARPET);
             addInSub(event, EQUIPMENT, WizardsRebornItems.GRAY_CARGO_CARPET);

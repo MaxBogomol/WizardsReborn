@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArmorModel;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.SniffaloArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.model.SnifferModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -27,12 +28,21 @@ public class SniffaloArmorLayer extends RenderLayer<SniffaloEntity, SnifferModel
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, SniffaloEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float betHeadYaw, float headPitch) {
-        if (livingEntity.isSaddled() && false) {
+        if (livingEntity.isArmored()) {
+            ResourceLocation texture = SNIFFALO_ARMOR_TEXTURE;
+            if (livingEntity.getArmorClient().getItem() instanceof SniffaloArmorItem armor) {
+                texture = armor.getSniffaloArmorTexture(livingEntity.getCarpetClient(), livingEntity);
+            }
+
             SniffaloArmorModel model = WizardsRebornModels.SNIFFALO_ARCANE_ARMOR;
+            if (livingEntity.getArmorClient().getItem() instanceof SniffaloArmorItem armor) {
+                model = armor.getSniffaloArmorModel(livingEntity.getCarpetClient(), livingEntity);
+            }
+
             model.young = livingEntity.isBaby();
             model.copyFromDefault(defaultModel);
             model.setupAnim(livingEntity, livingEntity.walkAnimation.position(partialTicks), livingEntity.walkAnimation.speed(partialTicks), livingEntity.tickCount + partialTicks, betHeadYaw, headPitch);
-            model.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(SNIFFALO_ARMOR_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            model.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(texture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         }
     }
 }

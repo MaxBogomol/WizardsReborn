@@ -25,6 +25,7 @@ public enum ArcaneEnchantmentTypes implements ArcaneEnchantmentType {
     CHESTPLATE,
     LEGGINGS,
     BOOTS,
+    SNIFFALO_ARMOR,
     WOODEN,
     ARCANE_COLD,
     SARCON,

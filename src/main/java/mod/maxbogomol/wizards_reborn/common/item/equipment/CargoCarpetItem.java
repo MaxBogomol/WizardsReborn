@@ -106,7 +106,7 @@ public class CargoCarpetItem extends BlockItem implements ICustomBlockEntityData
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
         if (target instanceof SniffaloEntity sniffalo && target.isAlive()) {
-            if (sniffalo.isSaddled()) {
+            if (sniffalo.isCarpeted() && !sniffalo.isBannered()) {
                 sniffalo.setCarpet(stack.copy());
                 target.level().gameEvent(target, GameEvent.EQUIP, target.position());
                 stack.shrink(1);

@@ -30,6 +30,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.*;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.sniffalo.ArcaneSniffaloArmorItem;
 import mod.maxbogomol.wizards_reborn.common.item.food.*;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -600,6 +601,8 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> WARPED_FUNGUS_CAP = ITEMS.register("warped_fungus_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.WARPED_FUNGUS));
     public static final RegistryObject<Item> MOR_CAP = ITEMS.register("mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.MOR));
     public static final RegistryObject<Item> ELDER_MOR_CAP = ITEMS.register("elder_mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), MushroomCapItem.ELDER_MOR));
+
+    public static final RegistryObject<Item> ARCANE_SNIFFALO_ARMOR = ITEMS.register("arcane_sniffalo_armor", () -> new ArcaneSniffaloArmorItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_CARGO_CARPET = ITEMS.register("white_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.WHITE_CARGO_CARPET.get(), CargoCarpetItem.WHITE, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LIGHT_GRAY_CARGO_CARPET = ITEMS.register("light_gray_cargo_carpet", () -> new CargoCarpetItem(WizardsRebornBlocks.LIGHT_GRAY_CARGO_CARPET.get(), CargoCarpetItem.LIGHT_GRAY, new Item.Properties().stacksTo(1)));
