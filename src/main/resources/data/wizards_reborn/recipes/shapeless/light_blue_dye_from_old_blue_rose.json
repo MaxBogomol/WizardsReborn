@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:old_blue_rose"
+    }
+  ],
+  "result": {
+    "item": "minecraft:light_blue_dye",
+    "count": 1
+  }
+}

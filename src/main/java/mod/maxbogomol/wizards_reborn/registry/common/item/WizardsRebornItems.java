@@ -145,6 +145,15 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> UNDERGROUND_GRAPE_VINE = ITEMS.register("underground_grape_vine", () -> new ItemNameBlockItem(WizardsRebornBlocks.UNDERGROUND_GRAPE_VINES.get(), new Item.Properties()));
     public static final RegistryObject<Item> UNDERGROUND_GRAPE = ITEMS.register("underground_grape", () -> new Item(new Item.Properties().food(WizardsRebornFoods.UNDERGROUND_GRAPE)));
 
+    public static final RegistryObject<Item> OLD_ROOTS = ITEMS.register("old_roots", () -> new BlockItem(WizardsRebornBlocks.OLD_ROOTS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> OLD_DANDELION = ITEMS.register("old_dandelion", () -> new BlockItem(WizardsRebornBlocks.OLD_DANDELION.get(), new Item.Properties()));
+    public static final RegistryObject<Item> OLD_PAEONIA = ITEMS.register("old_paeonia", () -> new BlockItem(WizardsRebornBlocks.OLD_PAEONIA.get(), new Item.Properties()));
+    public static final RegistryObject<Item> OLD_ROSE = ITEMS.register("old_rose", () -> new BlockItem(WizardsRebornBlocks.OLD_ROSE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> OLD_BLUE_ROSE = ITEMS.register("old_blue_rose", () -> new BlockItem(WizardsRebornBlocks.OLD_BLUE_ROSE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MISSING_ROSE = ITEMS.register("missing_rose", () -> new BlockItem(WizardsRebornBlocks.MISSING_ROSE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> OLD_SUNRISE_BLOSSOM = ITEMS.register("old_sunrise_blossom", () -> new BlockItem(WizardsRebornBlocks.OLD_SUNRISE_BLOSSOM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> OLD_MOONLIGHT_BLOOM = ITEMS.register("old_moonlight_bloom", () -> new BlockItem(WizardsRebornBlocks.OLD_MOONLIGHT_BLOOM.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new FlowerFertilizerItem(new Item.Properties()));
     public static final RegistryObject<Item> BUNCH_OF_THINGS = ITEMS.register("bunch_of_things", () -> new BunchOfThingsItem(new Item.Properties()));

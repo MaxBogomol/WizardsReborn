@@ -39,10 +39,8 @@ import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LeatherCollarItem extends BaseCurioItem implements IGuiParticleItem {
 
@@ -50,6 +48,11 @@ public class LeatherCollarItem extends BaseCurioItem implements IGuiParticleItem
 
     public static Map<String, String> skins = new HashMap<>();
     public static Color yapingColor = new Color(DyeColor.PINK.getMapColor().col);
+
+    public static UUID CUTIE = UUID.fromString("49746d0a-8da8-4c8c-9f57-1cdbfd62e682"); //OnixTheCat
+    public static UUID FOX = UUID.fromString("a3b9ab92-41ea-4ec1-87f8-db64036c105f"); //MaxBogomol
+    public static UUID MILK = UUID.fromString("9acb0ed8-a6a3-46bc-a6ff-23c176e5ec3d"); //Purplik
+    public static UUID SAMMY = UUID.fromString("0ca54301-6170-4c44-b3e0-b8afa6b81ed2"); //SammySemicolon
 
     public LeatherCollarItem(Properties properties) {
         super(properties);
@@ -127,15 +130,15 @@ public class LeatherCollarItem extends BaseCurioItem implements IGuiParticleItem
             Player player = WizardsReborn.proxy.getPlayer();
             if (player != null) {
                 boolean yaping = false;
-                String name = player.getGameProfile().getName();
-                if (skin.equals("MaxBogomol") && name.equals("OnixTheCat")) {
+                UUID uuid = player.getGameProfile().getId();
+                if (skin.equals("MaxBogomol") && uuid.equals(CUTIE)) {
                     yaping = true;
-                } else if (skin.equals("OnixTheCat") && name.equals("MaxBogomol")) {
+                } else if (skin.equals("OnixTheCat") && uuid.equals(FOX)) {
                     yaping = true;
                 }
-                if (skin.equals("SammySemicolon") && name.equals("mlekpi")) {
+                if (skin.equals("SammySemicolon") && uuid.equals(MILK)) {
                     yaping = true;
-                } else if (skin.equals("mlekpi") && name.equals("SammySemicolon")) {
+                } else if (skin.equals("mlekpi") && uuid.equals(SAMMY)) {
                     yaping = true;
                 }
                 if (yaping) list.add(Component.translatable(yap).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(yapingColor))));

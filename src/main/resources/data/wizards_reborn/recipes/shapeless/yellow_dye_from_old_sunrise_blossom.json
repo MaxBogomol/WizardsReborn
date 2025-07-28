@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:old_sunrise_blossom"
+    }
+  ],
+  "result": {
+    "item": "minecraft:yellow_dye",
+    "count": 3
+  }
+}

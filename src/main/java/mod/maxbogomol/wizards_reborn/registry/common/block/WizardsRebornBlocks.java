@@ -82,6 +82,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMonograms;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -149,6 +150,23 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> POTTED_SHINY_CLOVER = BLOCKS.register("potted_shiny_clover", () -> new FlowerPotBlock(SHINY_CLOVER.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> UNDERGROUND_GRAPE_VINES = BLOCKS.register("underground_grape_vines", () -> new UndergroundGrapeVinesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> UNDERGROUND_GRAPE_VINES_PLANT = BLOCKS.register("underground_grape_vines_plant", () -> new UndergroundGrapeVinesPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY)));
+
+    public static final RegistryObject<Block> OLD_ROOTS = BLOCKS.register("old_roots", () -> new OldRootsBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION).mapColor(MapColor.COLOR_BROWN).randomTicks()));
+    public static final RegistryObject<Block> POTTED_OLD_ROOTS = BLOCKS.register("potted_old_roots", () -> new FlowerPotBlock(OLD_ROOTS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> OLD_DANDELION = BLOCKS.register("old_dandelion", () -> new FlowerBlock(() -> MobEffects.LUCK, 20, BlockBehaviour.Properties.copy(Blocks.DANDELION).mapColor(MapColor.COLOR_YELLOW)));
+    public static final RegistryObject<Block> POTTED_OLD_DANDELION = BLOCKS.register("potted_old_dandelion", () -> new FlowerPotBlock(OLD_DANDELION.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> OLD_PAEONIA = BLOCKS.register("old_paeonia", () -> new FlowerBlock(() -> MobEffects.LUCK, 20, BlockBehaviour.Properties.copy(Blocks.DANDELION).mapColor(MapColor.COLOR_PINK)));
+    public static final RegistryObject<Block> POTTED_OLD_PAEONIA = BLOCKS.register("potted_old_paeonia", () -> new FlowerPotBlock(OLD_PAEONIA.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> OLD_ROSE = BLOCKS.register("old_rose", () -> new FlowerBlock(MobEffects.LUCK, 20, BlockBehaviour.Properties.copy(Blocks.DANDELION).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryObject<Block> POTTED_OLD_ROSE = BLOCKS.register("potted_old_rose", () -> new FlowerPotBlock(OLD_ROSE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> OLD_BLUE_ROSE = BLOCKS.register("old_blue_rose", () -> new FlowerBlock(MobEffects.LUCK, 20, BlockBehaviour.Properties.copy(Blocks.DANDELION).mapColor(MapColor.COLOR_LIGHT_BLUE)));
+    public static final RegistryObject<Block> POTTED_OLD_BLUE_ROSE = BLOCKS.register("potted_old_blue_rose", () -> new FlowerPotBlock(OLD_BLUE_ROSE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> MISSING_ROSE = BLOCKS.register("missing_rose", () -> new FlowerBlock(MobEffects.HARM, 200, BlockBehaviour.Properties.copy(Blocks.DANDELION).mapColor(MapColor.COLOR_BLACK)));
+    public static final RegistryObject<Block> POTTED_MISSING_ROSE = BLOCKS.register("potted_missing_rose", () -> new FlowerPotBlock(MISSING_ROSE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> OLD_SUNRISE_BLOSSOM = BLOCKS.register("old_sunrise_blossom", () -> new FlowerBlock(() -> MobEffects.LUCK, 20, BlockBehaviour.Properties.copy(Blocks.DANDELION).mapColor(MapColor.COLOR_YELLOW)));
+    public static final RegistryObject<Block> POTTED_OLD_SUNRISE_BLOSSOM = BLOCKS.register("potted_old_sunrise_blossom", () -> new FlowerPotBlock(OLD_SUNRISE_BLOSSOM.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> OLD_MOONLIGHT_BLOOM = BLOCKS.register("old_moonlight_bloom", () -> new FlowerBlock(() -> MobEffects.LUCK, 20, BlockBehaviour.Properties.copy(Blocks.DANDELION).mapColor(MapColor.COLOR_BLUE)));
+    public static final RegistryObject<Block> POTTED_OLD_MOONLIGHT_BLOOM = BLOCKS.register("potted_old_moonlight_bloom", () -> new FlowerPotBlock(OLD_MOONLIGHT_BLOOM.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> PLACED_ITEMS = BLOCKS.register("placed_items", () -> new PlacedItemsBlock(BlockBehaviour.Properties.of().strength(0.25F).mapColor(MapColor.COLOR_BROWN).sound(SoundType.CROP).noOcclusion()));
 
@@ -589,5 +607,13 @@ public class WizardsRebornBlocks {
         FluffyFurBlocks.fireBlock(ARCANE_LINEN_BALE.get(), 60, 20);
         FluffyFurBlocks.fireBlock(SHINY_CLOVER_CROP.get(), 60, 100);
         FluffyFurBlocks.fireBlock(SHINY_CLOVER.get(), 60, 100);
+
+        OldRootsBlock.plants.add(OLD_DANDELION.get());
+        OldRootsBlock.plants.add(OLD_PAEONIA.get());
+        OldRootsBlock.plants.add(OLD_ROSE.get());
+        OldRootsBlock.plants.add(OLD_BLUE_ROSE.get());
+        OldRootsBlock.rarePlants.add(OLD_SUNRISE_BLOSSOM.get());
+        OldRootsBlock.rarePlants.add(OLD_MOONLIGHT_BLOOM.get());
+        OldRootsBlock.rareRarePlants.add(MISSING_ROSE.get());
     }
 }

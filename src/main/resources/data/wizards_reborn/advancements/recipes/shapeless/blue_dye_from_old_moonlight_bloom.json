@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_old_moonlight_bloom": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:old_moonlight_bloom"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_old_moonlight_bloom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/blue_dye_from_old_moonlight_bloom"
+    ]
+  },
+  "sends_telemetry_event": false
+}

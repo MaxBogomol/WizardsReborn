@@ -325,6 +325,14 @@ public class WizardsRebornCreativeTabs {
             PLANTS.addDisplayItem(WizardsRebornItems.CORK_BAMBOO_SEED.get());
             PLANTS.addDisplayItem(WizardsRebornItems.CORK_BAMBOO.get());
 
+            addInSub(event, PLANTS, WizardsRebornItems.OLD_ROOTS);
+            addInSub(event, PLANTS, WizardsRebornItems.OLD_DANDELION);
+            addInSub(event, PLANTS, WizardsRebornItems.OLD_PAEONIA);
+            addInSub(event, PLANTS, WizardsRebornItems.OLD_ROSE);
+            addInSub(event, PLANTS, WizardsRebornItems.OLD_BLUE_ROSE);
+            addInSub(event, PLANTS, WizardsRebornItems.OLD_SUNRISE_BLOSSOM);
+            addInSub(event, PLANTS, WizardsRebornItems.OLD_MOONLIGHT_BLOOM);
+
             addInSub(event, PLANTS, WizardsRebornItems.PETALS);
             addInSub(event, PLANTS, WizardsRebornItems.FLOWER_FERTILIZER);
             addInSub(event, PLANTS, WizardsRebornItems.BUNCH_OF_THINGS);

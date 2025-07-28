@@ -15,6 +15,10 @@
         {
           "type": "minecraft:item",
           "name": "wizards_reborn:cork_bamboo_seed"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wizards_reborn:old_roots"
         }
       ],
       "rolls": 1.0

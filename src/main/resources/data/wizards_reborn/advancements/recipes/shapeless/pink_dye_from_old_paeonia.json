@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_old_paeonia": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:old_paeonia"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_old_paeonia"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/pink_dye_from_old_paeonia"
+    ]
+  },
+  "sends_telemetry_event": false
+}

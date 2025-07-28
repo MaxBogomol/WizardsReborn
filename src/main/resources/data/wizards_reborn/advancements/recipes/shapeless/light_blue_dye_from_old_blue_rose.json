@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_old_blue_rose": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:old_blue_rose"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_old_blue_rose"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/light_blue_dye_from_old_blue_rose"
+    ]
+  },
+  "sends_telemetry_event": false
+}

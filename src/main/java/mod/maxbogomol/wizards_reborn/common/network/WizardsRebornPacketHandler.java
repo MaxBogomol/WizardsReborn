@@ -44,6 +44,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
 
         ArcanumOreBreakPacket.register(HANDLER, id++);
         NetherSaltOreBreakPacket.register(HANDLER, id++);
+        OldRootsPacket.register(HANDLER, id++);
         ArcaneWoodLeavesBreakPacket.register(HANDLER, id++);
         InnocentWoodLeavesBreakPacket.register(HANDLER, id++);
         CrystalBreakPacket.register(HANDLER, id++);
