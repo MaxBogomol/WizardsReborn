@@ -1199,6 +1199,10 @@
   "entity.wizards_reborn.sniffalo": "Sniffalo",
 
   "_comment_17": "Mob Effects",
+  "effect.wizards_reborn.arcane_strength": "Arcane Strength",
+  "effect.wizards_reborn.arcane_weakness": "Arcane Weakness",
+  "effect.wizards_reborn.magic_resistance": "Magic Resistance",
+  "effect.wizards_reborn.magic_sensibility": "Magic Sensibility",
   "effect.wizards_reborn.mor_spores": "Mor Spores",
   "effect.wizards_reborn.wissen_aura": "Wissen Aura",
   "effect.wizards_reborn.irritation": "Irritation",

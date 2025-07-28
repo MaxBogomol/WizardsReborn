@@ -1199,6 +1199,10 @@
   "entity.wizards_reborn.sniffalo": "Нюхало",
 
   "_comment_17": "Эффекты мобов",
+  "effect.wizards_reborn.arcane_strength": "Аркановая сила",
+  "effect.wizards_reborn.arcane_weakness": "Аркановая слабость",
+  "effect.wizards_reborn.magic_resistance": "Магическое сопротивление",
+  "effect.wizards_reborn.magic_sensibility": "Магическая восприимчивость",
   "effect.wizards_reborn.mor_spores": "Моровые споры",
   "effect.wizards_reborn.wissen_aura": "Виссен аура",
   "effect.wizards_reborn.irritation": "Раздражение",
