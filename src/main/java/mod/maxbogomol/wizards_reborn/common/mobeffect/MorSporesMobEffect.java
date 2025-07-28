@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.effect;
+package mod.maxbogomol.wizards_reborn.common.mobeffect;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.shader.postprocess.MorSporesPostProcess;
@@ -12,13 +12,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
 
-public class MorSporesEffect extends MobEffect {
+public class MorSporesMobEffect extends MobEffect {
     public static float roll;
     public static float rollOld;
     public static float fov;
     public static float fovOld;
 
-    public MorSporesEffect() {
+    public MorSporesMobEffect() {
         super(MobEffectCategory.HARMFUL, 0x6b668c);
     }
 

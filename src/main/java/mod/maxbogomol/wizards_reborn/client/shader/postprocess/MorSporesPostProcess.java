@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcess;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
+import mod.maxbogomol.wizards_reborn.common.mobeffect.MorSporesMobEffect;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +27,7 @@ public class MorSporesPostProcess extends PostProcess {
 
     public void tickEffect() {
         oldTick = tick;
-        if (MorSporesEffect.hasEffect()) {
+        if (MorSporesMobEffect.hasEffect()) {
             setActive(true);
             if (tick < getMaxTick()) {
                 tick = tick + 1;

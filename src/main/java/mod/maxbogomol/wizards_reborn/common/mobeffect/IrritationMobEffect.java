@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.effect;
+package mod.maxbogomol.wizards_reborn.common.mobeffect;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.shader.postprocess.IrritationPostProcess;
@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class IrritationEffect extends MobEffect {
+public class IrritationMobEffect extends MobEffect {
     public static List<MobEffect> effectList = new ArrayList<>();
     public static List<MobEffect> playerEffectList = new ArrayList<>();
     public static Random random = new Random();
 
-    public IrritationEffect() {
+    public IrritationMobEffect() {
         super(MobEffectCategory.HARMFUL, 0xff77a7);
         effectList.add(MobEffects.POISON);
         effectList.add(MobEffects.WEAKNESS);

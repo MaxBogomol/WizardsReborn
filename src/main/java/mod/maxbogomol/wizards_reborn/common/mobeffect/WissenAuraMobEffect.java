@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.effect;
+package mod.maxbogomol.wizards_reborn.common.mobeffect;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
@@ -21,9 +21,9 @@ import net.minecraftforge.event.TickEvent;
 
 import java.util.List;
 
-public class WissenAuraEffect extends MobEffect {
+public class WissenAuraMobEffect extends MobEffect {
 
-    public WissenAuraEffect() {
+    public WissenAuraMobEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x9fc9e7);
         addAttributeModifier(WizardsRebornAttributes.WISSEN_DISCOUNT.get(), "3DB196CE-7DF0-4254-A014-BD7fB6DFC33A", 5, AttributeModifier.Operation.ADDITION);
         addAttributeModifier(WizardsRebornAttributes.MAGIC_ARMOR.get(), "46A55828-4BB3-4326-88DA-3C31E593C315", 5, AttributeModifier.Operation.ADDITION);

@@ -13,9 +13,9 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipComponent;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
-import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
-import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
+import mod.maxbogomol.wizards_reborn.common.mobeffect.IrritationMobEffect;
+import mod.maxbogomol.wizards_reborn.common.mobeffect.MorSporesMobEffect;
+import mod.maxbogomol.wizards_reborn.common.mobeffect.WissenAuraMobEffect;
 import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
@@ -148,21 +148,21 @@ public class WizardsRebornClientEvents {
 
     @SubscribeEvent
     public void onCameraAngles(ViewportEvent.ComputeCameraAngles event) {
-        MorSporesEffect.onCameraAngles(event);
+        MorSporesMobEffect.onCameraAngles(event);
     }
 
     @SubscribeEvent
     public void onFov(ViewportEvent.ComputeFov event) {
-        MorSporesEffect.onFov(event);
+        MorSporesMobEffect.onFov(event);
     }
 
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event) {
         ArcanemiconItem.clientTick(event);
         WissenLimitHandler.clientTick(event);
-        MorSporesEffect.clientTick(event);
-        WissenAuraEffect.clientTick(event);
-        IrritationEffect.clientTick(event);
+        MorSporesMobEffect.clientTick(event);
+        WissenAuraMobEffect.clientTick(event);
+        IrritationMobEffect.clientTick(event);
     }
 
     @SubscribeEvent

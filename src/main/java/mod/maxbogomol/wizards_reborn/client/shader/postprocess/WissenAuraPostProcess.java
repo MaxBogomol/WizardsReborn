@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcess;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
+import mod.maxbogomol.wizards_reborn.common.mobeffect.WissenAuraMobEffect;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.resources.ResourceLocation;
@@ -32,7 +32,7 @@ public class WissenAuraPostProcess extends PostProcess {
 
     public void tickEffect() {
         oldTick = tick;
-        if (WissenAuraEffect.hasEffect()) {
+        if (WissenAuraMobEffect.hasEffect()) {
             setActive(true);
             if (tick < getMaxTick()) {
                 tick = tick + 1;

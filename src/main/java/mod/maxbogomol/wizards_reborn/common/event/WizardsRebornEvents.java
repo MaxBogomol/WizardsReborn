@@ -9,7 +9,7 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.FireworkJumpArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.capability.*;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
-import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
+import mod.maxbogomol.wizards_reborn.common.mobeffect.IrritationMobEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeUpdatePacket;
@@ -142,7 +142,7 @@ public class WizardsRebornEvents {
         if (entity.hasEffect(WizardsRebornMobEffects.IRRITATION.get())) {
             MobEffectInstance effectInstance = entity.getEffect(WizardsRebornMobEffects.IRRITATION.get());
             if (effectInstance.getEffect().isDurationEffectTick(effectInstance.getDuration(), effectInstance.getAmplifier())) {
-                IrritationEffect.effectTick(entity, effectInstance.getAmplifier());
+                IrritationMobEffect.effectTick(entity, effectInstance.getAmplifier());
             }
         }
     }

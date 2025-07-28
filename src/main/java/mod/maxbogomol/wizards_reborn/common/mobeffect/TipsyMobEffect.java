@@ -1,12 +1,12 @@
-package mod.maxbogomol.wizards_reborn.common.effect;
+package mod.maxbogomol.wizards_reborn.common.mobeffect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-public class TipsyEffect extends MobEffect {
+public class TipsyMobEffect extends MobEffect {
 
-    public TipsyEffect() {
+    public TipsyMobEffect() {
         super(MobEffectCategory.NEUTRAL, 0xb5d2d2);
     }
 
