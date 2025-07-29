@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wizards_reborn:block/arcane_wood_keg",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wizards_reborn:block/arcane_wood_keg"
+    },
+    "facing=south": {
+      "model": "wizards_reborn:block/arcane_wood_keg",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wizards_reborn:block/arcane_wood_keg",
+      "y": 270
+    }
+  }
+}

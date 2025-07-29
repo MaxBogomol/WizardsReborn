@@ -62,7 +62,7 @@ public class CrystalRitual {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String ritualId = id.substring(i + 1);
-        return "crystal_ritual."  + modId + "." + ritualId;
+        return "crystal_ritual." + modId + "." + ritualId;
     }
 
     public List<CrystalType> getCrystalsList() {

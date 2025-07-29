@@ -107,7 +107,7 @@ public class RottenDrinkBottleItem extends PlacedItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, Level level, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         poseStack.pushPose();
         poseStack.translate(0F, 0.001F, 0F);
         poseStack.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));

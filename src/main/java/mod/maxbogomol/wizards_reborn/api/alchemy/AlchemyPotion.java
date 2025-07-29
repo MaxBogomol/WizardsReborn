@@ -45,7 +45,7 @@ public class AlchemyPotion {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String spellId = id.substring(i + 1);
-        return "alchemy_potion."  + modId + "." + spellId;
+        return "alchemy_potion." + modId + "." + spellId;
     }
 
     public void apply(ItemStack stack, Level level, LivingEntity livingEntity) {

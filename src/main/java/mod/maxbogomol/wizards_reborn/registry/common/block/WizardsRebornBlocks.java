@@ -8,9 +8,9 @@ import mod.maxbogomol.fluffy_fur.common.block.sign.CustomWallSignBlock;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import mod.maxbogomol.wizards_reborn.common.block.WizardsRebornBlockColor;
 import mod.maxbogomol.wizards_reborn.common.block.LuminalGlassBlock;
 import mod.maxbogomol.wizards_reborn.common.block.SniffaloEggBlock;
+import mod.maxbogomol.wizards_reborn.common.block.WizardsRebornBlockColor;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler.AlchemyBoilerBlock;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace.AlchemyFurnaceBlock;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlock;
@@ -44,6 +44,7 @@ import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWis
 import mod.maxbogomol.wizards_reborn.common.block.grower.ArcaneWoodTreeGrower;
 import mod.maxbogomol.wizards_reborn.common.block.grower.InnocentWoodTreeGrower;
 import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBlock;
+import mod.maxbogomol.wizards_reborn.common.block.keg.KegBlock;
 import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBlock;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlock;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlock;
@@ -77,6 +78,7 @@ import mod.maxbogomol.wizards_reborn.common.block.wissen_altar.WissenAltarBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_cell.WissenCellBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer.WissenCrystallizerBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlock;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMonograms;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -94,6 +96,7 @@ import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -439,6 +442,10 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> ALCHEMY_BOILER = BLOCKS.register("alchemy_boiler", () -> new AlchemyBoilerBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> ARCANE_CENSER = BLOCKS.register("arcane_censer", () -> new ArcaneCenserBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
 
+    public static final RegistryObject<KegBlock> ARCANE_WOOD_KEG = BLOCKS.register("arcane_wood_keg", () -> new KegBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<KegBlock> INNOCENT_WOOD_KEG = BLOCKS.register("innocent_wood_keg", () -> new KegBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
+    public static final RegistryObject<KegBlock> CORK_BAMBOO_KEG = BLOCKS.register("cork_bamboo_keg", () -> new KegBlock(BlockBehaviour.Properties.copy(CORK_BAMBOO_PLANKS.get())));
+
     public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_LIGHT_GRAY).noOcclusion()));
 
     public static final RegistryObject<Block> SNIFFALO_EGG = BLOCKS.register("sniffalo_egg", () -> new SniffaloEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).mapColor(MapColor.COLOR_BROWN)));
@@ -557,6 +564,13 @@ public class WizardsRebornBlocks {
 
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
+        @SubscribeEvent
+        public static void registerBlocks(FMLClientSetupEvent event) {
+            ARCANE_WOOD_KEG.get().doorModel = WizardsRebornModels.ARCANE_WOOD_KEG_DOOR;
+            INNOCENT_WOOD_KEG.get().doorModel = WizardsRebornModels.INNOCENT_WOOD_KEG_DOOR;
+            CORK_BAMBOO_KEG.get().doorModel = WizardsRebornModels.CORK_BAMBOO_KEG_DOOR;
+        }
+
         @SubscribeEvent
         public static void registerColorMappingBlocks(RegisterColorHandlersEvent.Block event) {
             event.register((state, world, pos, tintIndex) -> WizardsRebornBlockColor.getPlantsInstance().getColor(state, world, pos, tintIndex), WizardsRebornBlockColor.PLANTS);

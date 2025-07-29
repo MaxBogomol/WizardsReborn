@@ -418,6 +418,10 @@
   "block.wizards_reborn.alchemy_boiler": "Alchemy Boiler",
   "block.wizards_reborn.arcane_censer": "Arcane Censer",
 
+  "block.wizards_reborn.arcane_wood_keg": "Arcane Wood Keg",
+  "block.wizards_reborn.innocent_wood_keg": "Innocent Wood Keg",
+  "block.wizards_reborn.cork_bamboo_keg": "Cork Bamboo Keg",
+
   "block.wizards_reborn.alchemy_glass": "Alchemy Glass",
   "item.wizards_reborn.alchemy_vial": "Alchemy Vial",
   "item.wizards_reborn.alchemy_flask": "Alchemy Flask",
@@ -1224,12 +1228,12 @@
   "gui.wizards_reborn.arcanemicon.title": "Arcanemicon",
   "gui.wizards_reborn.arcane_workbench.title": "Arcane Workbench",
   "gui.wizards_reborn.jeweler_table.title": "Jeweler Table",
+  "gui.wizards_reborn.totem_of_disenchant.title": "Totem of Disenchant",
   "gui.wizards_reborn.alchemy_furnace.title": "Alchemy Furnace",
   "gui.wizards_reborn.alchemy_machine.title": "Alchemy Machine",
+  "gui.wizards_reborn.runic_pedestal.title": "Runic Pedestal",
   "gui.wizards_reborn.arcane_hopper.title": "Arcane Hopper",
   "gui.wizards_reborn.item_sorter.title": "Item Sorter",
-  "gui.wizards_reborn.totem_of_disenchant.title": "Totem of Disenchant",
-  "gui.wizards_reborn.runic_pedestal.title": "Runic Pedestal",
 
   "gui.wizards_reborn.jei.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
   "gui.wizards_reborn.jei.mortar": "Mortar",

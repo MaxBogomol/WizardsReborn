@@ -29,7 +29,7 @@ public class LightType {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String lightId = id.substring(i + 1);
-        return "light_type."  + modId + "." + lightId;
+        return "light_type." + modId + "." + lightId;
     }
 
     public Component getColoredName() {

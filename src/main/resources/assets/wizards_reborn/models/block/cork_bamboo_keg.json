@@ -1,0 +1,10 @@
+{
+	"parent": "wizards_reborn:block/keg",
+	"textures": {
+		"0": "wizards_reborn:block/cork_bamboo_keg_back",
+		"1": "wizards_reborn:block/cork_bamboo_keg_side",
+		"2": "wizards_reborn:block/cork_bamboo_keg_front",
+		"3": "wizards_reborn:block/cork_bamboo_keg_inside",
+		"particle": "wizards_reborn:block/cork_bamboo_planks"
+	}
+}

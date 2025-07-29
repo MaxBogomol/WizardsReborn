@@ -62,7 +62,7 @@ public class CrystalType {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String crystalTypeId = id.substring(i + 1);
-        return "crystal_type."  + modId + "." + crystalTypeId;
+        return "crystal_type." + modId + "." + crystalTypeId;
     }
 
     public void setRandomStats(int stat) {

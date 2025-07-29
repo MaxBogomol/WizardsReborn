@@ -32,6 +32,12 @@ public class WizardsRebornMenuTypes {
                 Level level = inv.player.getCommandSenderWorld();
                 return new JewelerTableContainer(windowId, level, pos, inv, inv.player);})));
 
+    public static final RegistryObject<MenuType<TotemOfDisenchantContainer>> TOTEM_OF_DISENCHANT_CONTAINER = MENU_TYPES.register("totem_of_disenchant",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level level = inv.player.getCommandSenderWorld();
+                return new TotemOfDisenchantContainer(windowId, level, pos, inv, inv.player);})));
+
     public static final RegistryObject<MenuType<AlchemyFurnaceContainer>> ALCHEMY_FURNACE_CONTAINER = MENU_TYPES.register("alchemy_furnace",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
@@ -44,6 +50,18 @@ public class WizardsRebornMenuTypes {
                 Level level = inv.player.getCommandSenderWorld();
                 return new AlchemyMachineContainer(windowId, level, pos, inv, inv.player);})));
 
+    public static final RegistryObject<MenuType<KegContainer>> KEG_CONTAINER = MENU_TYPES.register("keg",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level level = inv.player.getCommandSenderWorld();
+                return new KegContainer(windowId, level, pos, inv, inv.player);})));
+
+    public static final RegistryObject<MenuType<RunicPedestalContainer>> RUNIC_PEDESTAL_CONTAINER = MENU_TYPES.register("runic_pedestal",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level level = inv.player.getCommandSenderWorld();
+                return new RunicPedestalContainer(windowId, level, pos, inv, inv.player);})));
+
     public static final RegistryObject<MenuType<ArcaneHopperContainer>> ARCANE_HOPPER_CONTAINER = MENU_TYPES.register("arcane_hopper",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
@@ -55,18 +73,6 @@ public class WizardsRebornMenuTypes {
                 BlockPos pos = data.readBlockPos();
                 Level level = inv.player.getCommandSenderWorld();
                 return new ItemSorterContainer(windowId, level, pos, inv, inv.player);})));
-
-    public static final RegistryObject<MenuType<TotemOfDisenchantContainer>> TOTEM_OF_DISENCHANT_CONTAINER = MENU_TYPES.register("totem_of_disenchant",
-            () -> IForgeMenuType.create(((windowId, inv, data) -> {
-                BlockPos pos = data.readBlockPos();
-                Level level = inv.player.getCommandSenderWorld();
-                return new TotemOfDisenchantContainer(windowId, level, pos, inv, inv.player);})));
-
-    public static final RegistryObject<MenuType<RunicPedestalContainer>> RUNIC_PEDESTAL_CONTAINER = MENU_TYPES.register("runic_pedestal",
-            () -> IForgeMenuType.create(((windowId, inv, data) -> {
-                BlockPos pos = data.readBlockPos();
-                Level level = inv.player.getCommandSenderWorld();
-                return new RunicPedestalContainer(windowId, level, pos, inv, inv.player);})));
 
     public static final RegistryObject<MenuType<CrystalBagContainer>> CRYSTAL_BAG_CONTAINER = MENU_TYPES.register("crystal_bag",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
@@ -94,12 +100,13 @@ public class WizardsRebornMenuTypes {
         public static void clientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
             MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
+            MenuScreens.register(TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
             MenuScreens.register(ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
             MenuScreens.register(ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
+            MenuScreens.register(KEG_CONTAINER.get(), KegScreen::new);
+            MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
             MenuScreens.register(ARCANE_HOPPER_CONTAINER.get(), ArcaneHopperScreen::new);
             MenuScreens.register(ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
-            MenuScreens.register(TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
-            MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
             MenuScreens.register(CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
             MenuScreens.register(ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);
             MenuScreens.register(CARGO_CARPET_CONTAINER.get(), CargoCarpetScreen::new);

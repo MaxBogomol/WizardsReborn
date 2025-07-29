@@ -26,6 +26,7 @@ import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.keg.KegBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlockEntity;
@@ -117,6 +118,7 @@ public class WizardsRebornBlockEntities {
     public static RegistryObject<BlockEntityType<AlchemyMachineBlockEntity>> ALCHEMY_MACHINE = BLOCK_ENTITIES.register("alchemy_machine", () -> BlockEntityType.Builder.of(AlchemyMachineBlockEntity::new, WizardsRebornBlocks.ALCHEMY_MACHINE.get()).build(null));
     public static RegistryObject<BlockEntityType<AlchemyBoilerBlockEntity>> ALCHEMY_BOILER = BLOCK_ENTITIES.register("alchemy_boiler", () -> BlockEntityType.Builder.of(AlchemyBoilerBlockEntity::new, WizardsRebornBlocks.ALCHEMY_BOILER.get()).build(null));
     public static RegistryObject<BlockEntityType<ArcaneCenserBlockEntity>> ARCANE_CENSER = BLOCK_ENTITIES.register("arcane_censer", () -> BlockEntityType.Builder.of(ArcaneCenserBlockEntity::new, WizardsRebornBlocks.ARCANE_CENSER.get()).build(null));
+    public static RegistryObject<BlockEntityType<KegBlockEntity>> KEG = BLOCK_ENTITIES.register("keg", () -> BlockEntityType.Builder.of(KegBlockEntity::new, WizardsRebornBlocks.ARCANE_WOOD_KEG.get(), WizardsRebornBlocks.INNOCENT_WOOD_KEG.get(), WizardsRebornBlocks.CORK_BAMBOO_KEG.get()).build(null));
 
     //CRYSTAL_RITUALS
     public static RegistryObject<BlockEntityType<LightEmitterBlockEntity>> LIGHT_EMITTER = BLOCK_ENTITIES.register("light_emitter", () -> BlockEntityType.Builder.of(LightEmitterBlockEntity::new, WizardsRebornBlocks.LIGHT_EMITTER.get()).build(null));
@@ -191,6 +193,7 @@ public class WizardsRebornBlockEntities {
             BlockEntityRenderers.register(ALCHEMY_MACHINE.get(), (r) -> new AlchemyMachineRenderer());
             BlockEntityRenderers.register(ALCHEMY_BOILER.get(), (r) -> new AlchemyBoilerRenderer());
             BlockEntityRenderers.register(ARCANE_CENSER.get(), (r) -> new ArcaneCenserRenderer());
+            BlockEntityRenderers.register(KEG.get(), (r) -> new KegRenderer());
 
             //CRYSTAL_RITUALS
             BlockEntityRenderers.register(LIGHT_EMITTER.get(), (r) -> new LightEmitterBlockRenderer());

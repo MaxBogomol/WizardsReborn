@@ -21,6 +21,6 @@ public class CrystalStat {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String statId = id.substring(i + 1);
-        return "crystal_stat."  + modId + "." + statId;
+        return "crystal_stat." + modId + "." + statId;
     }
 }

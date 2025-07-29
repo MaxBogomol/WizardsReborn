@@ -107,6 +107,9 @@ public class WizardsRebornModels {
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME = addCustomModel("altar_of_drought_frame");
     public static ModelResourceLocation TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE = addCustomModel("totem_of_experience_absorption_piece");
     public static ModelResourceLocation ARCANE_ITERATOR_PIECE = addCustomModel("arcane_iterator_piece");
+    public static ModelResourceLocation ARCANE_WOOD_KEG_DOOR = addCustomModel("arcane_wood_keg_door");
+    public static ModelResourceLocation INNOCENT_WOOD_KEG_DOOR = addCustomModel("innocent_wood_keg_door");
+    public static ModelResourceLocation CORK_BAMBOO_KEG_DOOR = addCustomModel("cork_bamboo_keg_door");
     public static ModelResourceLocation HOVERING_LENS = addCustomModel("hovering_lens");
     public static ModelResourceLocation REDSTONE_SENSOR_PIECE = addCustomModel("redstone_sensor_piece");
     public static ModelResourceLocation REDSTONE_SENSOR_PIECE_ON = addCustomModel("redstone_sensor_piece_on");
@@ -242,6 +245,9 @@ public class WizardsRebornModels {
             event.register(ALTAR_OF_DROUGHT_FRAME);
             event.register(TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE);
             event.register(ARCANE_ITERATOR_PIECE);
+            event.register(ARCANE_WOOD_KEG_DOOR);
+            event.register(INNOCENT_WOOD_KEG_DOOR);
+            event.register(CORK_BAMBOO_KEG_DOOR);
             event.register(HOVERING_LENS);
             event.register(REDSTONE_SENSOR_PIECE);
             event.register(REDSTONE_SENSOR_PIECE_ON);

@@ -44,7 +44,7 @@ import java.util.Optional;
 
 public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
 
-    public int wissenInCraft= 0;
+    public int wissenInCraft = 0;
     public int wissenIsCraft = 0;
     public boolean startCraft = false;
 

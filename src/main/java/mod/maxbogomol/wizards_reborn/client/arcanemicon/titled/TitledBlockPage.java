@@ -42,7 +42,7 @@ public class TitledBlockPage extends Page {
         int ii = 0;
 
         for (int i = 0; i < blocks.size(); i++) {
-            RenderUtil.blitOffset  += 10.0F;
+            RenderUtil.blitOffset += 10.0F;
             int width = 0;
             if (lines == line) {
                 width = (120 - (20 * (6 - ((lines + 1) * 6 - blocks.size())))) / 2;

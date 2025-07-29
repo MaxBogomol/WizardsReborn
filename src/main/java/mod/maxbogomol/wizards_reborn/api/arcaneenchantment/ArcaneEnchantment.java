@@ -54,7 +54,7 @@ public class ArcaneEnchantment {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String spellId = id.substring(i + 1);
-        return "arcane_enchantment."  + modId + "." + spellId;
+        return "arcane_enchantment." + modId + "." + spellId;
     }
 
     public boolean canEnchantItem(ItemStack stack) {

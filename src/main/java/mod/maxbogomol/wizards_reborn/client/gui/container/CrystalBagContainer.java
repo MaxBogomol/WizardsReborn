@@ -33,7 +33,7 @@ public class CrystalBagContainer extends ContainerMenuBase {
             int c = 0;
             for (int i = 0; i < 3; i++) {
                 for (int ii = 0; ii < 5; ii++) {
-                    addSlot(new CrystalBagSlot(inventoryContainer, c, 44  + (ii * 18), 18 + (i * 18)));
+                    addSlot(new CrystalBagSlot(inventoryContainer, c, 44 + (ii * 18), 18 + (i * 18)));
                     c++;
                 }
             }

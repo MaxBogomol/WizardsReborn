@@ -82,7 +82,7 @@ public class Spell {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String spellId = id.substring(i + 1);
-        return "spell."  + modId + "." + spellId;
+        return "spell." + modId + "." + spellId;
     }
 
     public void addCrystalType(CrystalType crystalType) {

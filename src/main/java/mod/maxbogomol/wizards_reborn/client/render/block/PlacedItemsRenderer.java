@@ -60,7 +60,7 @@ public class PlacedItemsRenderer implements BlockEntityRenderer<PlacedItemsBlock
                 }
             }
             if (blockEntity.getItemHandler().getItem(i).getItem() instanceof IPlacedItem placedItem) {
-                placedItem.renderPlacedItem(blockEntity.getItemHandler().getItem(i), rotate, random.nextFloat() * 360f, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+                placedItem.renderPlacedItem(blockEntity.getItemHandler().getItem(i), rotate, random.nextFloat() * 360f, blockEntity.getLevel(), blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
             } else {
                 double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
                 double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;

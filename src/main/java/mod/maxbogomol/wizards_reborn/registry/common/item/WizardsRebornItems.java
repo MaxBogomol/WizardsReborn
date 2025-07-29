@@ -435,6 +435,10 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ALCHEMY_BOILER = ITEMS.register("alchemy_boiler", () -> new BlockItem(WizardsRebornBlocks.ALCHEMY_BOILER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_CENSER = ITEMS.register("arcane_censer", () -> new BlockItem(WizardsRebornBlocks.ARCANE_CENSER.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> ARCANE_WOOD_KEG = ITEMS.register("arcane_wood_keg", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_KEG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_KEG = ITEMS.register("innocent_wood_keg", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_KEG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CORK_BAMBOO_KEG = ITEMS.register("cork_bamboo_keg", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_KEG.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> ALCHEMY_GLASS = ITEMS.register("alchemy_glass", () -> new BlockItem(WizardsRebornBlocks.ALCHEMY_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties()));

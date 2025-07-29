@@ -615,6 +615,10 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, ALCHEMY, WizardsRebornItems.ALCHEMY_BOILER);
             addInSub(event, ALCHEMY, WizardsRebornItems.ARCANE_CENSER);
 
+            addInSub(event, ALCHEMY, WizardsRebornItems.ARCANE_WOOD_KEG);
+            addInSub(event, ALCHEMY, WizardsRebornItems.INNOCENT_WOOD_KEG);
+            addInSub(event, ALCHEMY, WizardsRebornItems.CORK_BAMBOO_KEG);
+
             addInSub(event, ALCHEMY, WizardsRebornItems.ALCHEMY_GLASS);
             addInSub(event, ALCHEMY, WizardsRebornItems.ALCHEMY_VIAL);
             addInSub(event, ALCHEMY, WizardsRebornItems.ALCHEMY_FLASK);
@@ -961,6 +965,10 @@ public class WizardsRebornCreativeTabs {
             }
 
             //DRINKS
+            DRINKS.addDisplayItem(WizardsRebornItems.ARCANE_WOOD_KEG.get());
+            DRINKS.addDisplayItem(WizardsRebornItems.INNOCENT_WOOD_KEG.get());
+            DRINKS.addDisplayItem(WizardsRebornItems.CORK_BAMBOO_KEG.get());
+
             addInSub(event, DRINKS, WizardsRebornItems.ROTTEN_DRINK_BOTTLE);
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.VODKA_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.BOURBON_BOTTLE.get()));

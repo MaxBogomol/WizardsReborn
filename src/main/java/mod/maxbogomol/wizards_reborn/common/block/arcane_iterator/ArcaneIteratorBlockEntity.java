@@ -63,12 +63,12 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class ArcaneIteratorBlockEntity extends BlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
-    public int wissenInCraft= 0;
+    public int wissenInCraft = 0;
     public int wissenIsCraft = 0;
-    public int experienceInCraft= 0;
+    public int experienceInCraft = 0;
     public int experienceIsCraft = 0;
     public int experienceTick = 0;
-    public int healthInCraft= 0;
+    public int healthInCraft = 0;
     public int healthIsCraft = 0;
     public int healthTick = 0;
     public boolean startCraft = false;

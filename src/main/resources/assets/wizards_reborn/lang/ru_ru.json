@@ -418,6 +418,10 @@
   "block.wizards_reborn.alchemy_boiler": "Алхимический бойлер",
   "block.wizards_reborn.arcane_censer": "Аркановая курильница",
 
+  "block.wizards_reborn.arcane_wood_keg": "Арканово-древесный бочонок",
+  "block.wizards_reborn.innocent_wood_keg": "Невинно-древесный бочонок",
+  "block.wizards_reborn.cork_bamboo_keg": "Пробково-бамбуковый бочонок",
+
   "block.wizards_reborn.alchemy_glass": "Алхимическое стекло",
   "item.wizards_reborn.alchemy_vial": "Алхимический флакон",
   "item.wizards_reborn.alchemy_flask": "Алхимическая колба",
@@ -1224,12 +1228,12 @@
   "gui.wizards_reborn.arcanemicon.title": "Аркейномикон",
   "gui.wizards_reborn.arcane_workbench.title": "Аркановый верстак",
   "gui.wizards_reborn.jeweler_table.title": "Ювелирный стол",
+  "gui.wizards_reborn.totem_of_disenchant.title": "Тотем разачарования",
   "gui.wizards_reborn.alchemy_furnace.title": "Алхимическая печь",
   "gui.wizards_reborn.alchemy_machine.title": "Алхимическая машина",
+  "gui.wizards_reborn.runic_pedestal.title": "Рунический пьедестал",
   "gui.wizards_reborn.arcane_hopper.title": "Аркановая воронка",
   "gui.wizards_reborn.item_sorter.title": "Предметный сортировщик",
-  "gui.wizards_reborn.totem_of_disenchant.title": "Тотем разачарования",
-  "gui.wizards_reborn.runic_pedestal.title": "Рунический пьедестал",
 
   "gui.wizards_reborn.jei.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
   "gui.wizards_reborn.jei.mortar": "Ступка",

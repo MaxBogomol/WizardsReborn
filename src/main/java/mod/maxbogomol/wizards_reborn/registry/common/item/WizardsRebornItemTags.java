@@ -29,4 +29,5 @@ public class WizardsRebornItemTags {
     public static final TagKey<Item> FLUID_CASINGS  = TagKey.create(Registries.ITEM, new ResourceLocation(WizardsReborn.MOD_ID, "fluid_casings"));
     public static final TagKey<Item> STEAM_CASINGS  = TagKey.create(Registries.ITEM, new ResourceLocation(WizardsReborn.MOD_ID, "steam_casings"));
     public static final TagKey<Item> SNIFFALO_FOOD  = TagKey.create(Registries.ITEM, new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_food"));
+    public static final TagKey<Item> KEG_SLOTS  = TagKey.create(Registries.ITEM, new ResourceLocation(WizardsReborn.MOD_ID, "keg_slots"));
 }

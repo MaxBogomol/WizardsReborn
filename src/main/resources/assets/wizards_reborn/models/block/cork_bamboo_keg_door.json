@@ -1,0 +1,7 @@
+{
+	"parent": "wizards_reborn:block/keg_door",
+	"textures": {
+		"4": "wizards_reborn:block/cork_bamboo_keg_door",
+		"particle": "wizards_reborn:block/cork_bamboo_planks"
+	}
+}

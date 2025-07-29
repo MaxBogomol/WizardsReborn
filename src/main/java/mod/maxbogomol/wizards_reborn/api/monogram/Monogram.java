@@ -67,7 +67,7 @@ public class Monogram {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String monogramId = id.substring(i + 1);
-        return "monogram."  + modId + "." + monogramId;
+        return "monogram." + modId + "." + monogramId;
     }
 
     public static ResourceLocation getTexture(String id) {

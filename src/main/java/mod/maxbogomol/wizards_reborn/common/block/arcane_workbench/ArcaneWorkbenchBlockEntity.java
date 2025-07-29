@@ -64,7 +64,7 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
     public final ItemStackHandler itemOutputHandler = createHandler(1);
     public final LazyOptional<IItemHandler> outputHandler = LazyOptional.of(() -> itemOutputHandler);
 
-    public int wissenInCraft= 0;
+    public int wissenInCraft = 0;
     public int wissenIsCraft = 0;
     public boolean startCraft = false;
 

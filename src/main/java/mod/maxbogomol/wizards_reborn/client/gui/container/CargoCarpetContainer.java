@@ -34,7 +34,7 @@ public class CargoCarpetContainer extends ContainerMenuBase {
                 int c = 0;
                 for (int i = 0; i < 4; i++) {
                     for (int ii = 0; ii < 5; ii++) {
-                        addSlot(new SlotItemHandler(inventoryContainer, c, 44  + (ii * 18), 18 + (i * 18)));
+                        addSlot(new SlotItemHandler(inventoryContainer, c, 44 + (ii * 18), 18 + (i * 18)));
                         c++;
                     }
                 }
