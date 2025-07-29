@@ -35,6 +35,7 @@ import mod.maxbogomol.wizards_reborn.common.item.food.*;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.banner.WizardsRebornBannerPatternTags;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
@@ -713,6 +714,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(WizardsRebornFoods.FRIED_SHRIMP), true));
 
     //DRINKS
+    public static final RegistryObject<Item> ROTTEN_DRINK_BOTTLE = ITEMS.register("rotten_drink_bottle", () -> new RottenDrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> VODKA_BOTTLE = ITEMS.register("vodka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> BOURBON_BOTTLE = ITEMS.register("bourbon_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> WHISKEY_BOTTLE = ITEMS.register("whiskey_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
@@ -1087,12 +1089,43 @@ public class WizardsRebornItems {
         int second = 20;
         int minute = 1200;
         int day = 24000;
-        VODKA_BOTTLE.get().setAged(day * 24000, 24000);
-        RED_WINE_BOTTLE.get().setAged(day * 10, day).addEffect(new DrinkBottleItem.EffectInstance(MobEffects.REGENERATION, minute, minute * 10, 0, 2));
-        INNOCENT_WINE_BOTTLE.get().setAlcoholic(false);
-        TARKHUNA_BOTTLE.get().setAlcoholic(false);
-        BAIKAL_BOTTLE.get().setAlcoholic(false);
-        KVASS_BOTTLE.get().setAlcoholic(false).setStageForAcl(4);
-        KISSEL_BOTTLE.get().setAlcoholic(false);
+        VODKA_BOTTLE.get().setAged(day * 6, day)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DAMAGE_RESISTANCE, 0, minute * 10, 0, 2, minute * 5, 1, (int) (day * 2.5f), true));
+        BOURBON_BOTTLE.get().setAged(day * 6, day);
+        WHISKEY_BOTTLE.get().setAged(day * 6, day);
+        WHITE_WINE_BOTTLE.get().setAged(day * 6, day);
+        RED_WINE_BOTTLE.get().setAged(day * 10, day)
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.REGENERATION, minute, minute * 10, 0, 2));
+        PORT_WINE_BOTTLE.get().setAged(day * 6, day);
+        PALM_LIQUEUR_BOTTLE.get().setAged(day * 6, day);
+        MEAD_BOTTLE.get().setAged(day * 6, day);
+        SBITEN_BOTTLE.get().setAged(day * 6, day);
+        SLIVOVITZ_BOTTLE.get().setAged(day * 6, day);
+        SAKE_BOTTLE.get().setAged(day * 6, day);
+        SOJU_BOTTLE.get().setAged(day * 6, day);
+        CHICHA_BOTTLE.get().setAged(day * 6, day);
+        CHACHA_BOTTLE.get().setAged(day * 6, day);
+        APPLEJACK_BOTTLE.get().setAged(day * 6, day);
+        RAKIA_BOTTLE.get().setAged(day * 6, day);
+        KIRSCH_BOTTLE.get().setAged(day * 6, day);
+        BOROVICHKA_BOTTLE.get().setAged(day * 6, day);
+        PALINKA_BOTTLE.get().setAged(day * 6, day);
+        TEQUILA_BOTTLE.get().setAged(day * 6, day);
+        PULQUE_BOTTLE.get().setAged(day * 6, day);
+        ARKHI_BOTTLE.get().setAged(day * 6, day);
+        TEJ_BOTTLE.get().setAged(day * 6, day);
+        WISSEN_BEER_BOTTLE.get().setAged(day * 6, day)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1))
+                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.WISSEN_AURA.get(), 0, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MAGIC_RESISTANCE.get(), 0, minute * 10, 0, 1));
+        MOR_TINCTURE_BOTTLE.get().setAged(day * 6, day)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1))
+                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), minute * 10, minute * 5, 0, 0));
+        INNOCENT_WINE_BOTTLE.get().setAged(day * 6, day).setAlcoholic(false);
+        TARKHUNA_BOTTLE.get().setAged(day, day * 3, day).setAlcoholic(false);
+        BAIKAL_BOTTLE.get().setAged(day, day * 3, day).setAlcoholic(false);
+        KVASS_BOTTLE.get().setAged(day * 2, day * 2, day * 2).setAlcoholic(false).setStageForAcl(4);
+        KISSEL_BOTTLE.get().setAged(day, day, day).setAlcoholic(false);
     }
 }

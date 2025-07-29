@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 public class TipsyMobEffect extends MobEffect {
 
     public TipsyMobEffect() {
-        super(MobEffectCategory.NEUTRAL, 0xb5d2d2);
+        super(MobEffectCategory.HARMFUL, 0xb5d2d2);
     }
 
     @Override

@@ -37,13 +37,16 @@ import java.util.List;
 public class DrinkBottleItem extends PlacedItem {
     boolean isAlcoholic = true;
     boolean isOverexpose = true;
+    boolean isRotten = true;
     int stageForAlc = -1;
     int stageOverexpose = 4;
 
     int ticksAged = 24000;
     int ticksAgedOverexpose = 24000;
+    int ticksAgedRotten = 24000;
 
     public List<EffectInstance> effects = new ArrayList<>();
+    public List<EffectInstance> tipsyEffects = new ArrayList<>();
 
     public DrinkBottleItem(Properties properties) {
         super(properties);
@@ -100,7 +103,11 @@ public class DrinkBottleItem extends PlacedItem {
 
         list.add(Component.empty());
 
-        List<MobEffectInstance> effectInstances = getMobEffects(ticks);
+        List<MobEffectInstance> effectInstances = new ArrayList<>();
+        if (getAlcoholicWithItem(stack)) {
+            effectInstances.addAll(getTipsyMobEffects(ticks));
+        }
+        effectInstances.addAll(getMobEffects(ticks));
         PotionUtils.addPotionTooltip(effectInstances, list, 1.0f);
     }
 
@@ -219,9 +226,25 @@ public class DrinkBottleItem extends PlacedItem {
         return isOverexpose;
     }
 
+    public DrinkBottleItem setIsRotten(boolean isRotten) {
+        this.isRotten = isRotten;
+        return this;
+    }
+
+    public boolean getIsRotten() {
+        return isRotten;
+    }
+
     public DrinkBottleItem setAged(int ticksAged, int ticksAgedOverexpose) {
         this.ticksAged = ticksAged;
         this.ticksAgedOverexpose = ticksAgedOverexpose;
+        return this;
+    }
+
+    public DrinkBottleItem setAged(int ticksAged, int ticksAgedOverexpose, int ticksAgedRotten) {
+        this.ticksAged = ticksAged;
+        this.ticksAgedOverexpose = ticksAgedOverexpose;
+        this.ticksAgedRotten = ticksAgedRotten;
         return this;
     }
 
@@ -234,10 +257,30 @@ public class DrinkBottleItem extends PlacedItem {
         return effects;
     }
 
+    public DrinkBottleItem addTipsyEffect(EffectInstance instance) {
+        tipsyEffects.add(instance);
+        return this;
+    }
+
+    public List<EffectInstance> getTipsyEffects() {
+        return tipsyEffects;
+    }
+
     public List<MobEffectInstance> getMobEffects(int ticks) {
         List<MobEffectInstance> mobEffects = new ArrayList<>();
         for (EffectInstance effectInstance : getEffects()) {
-            mobEffects.add(effectInstance.getEffectPerTick(ticks, ticksAged, ticksAgedOverexpose));
+            MobEffectInstance mobEffectInstance = effectInstance.getEffectPerTick(ticks, ticksAged, ticksAgedOverexpose);
+            if (mobEffectInstance != null) mobEffects.add(mobEffectInstance);
+        }
+
+        return mobEffects;
+    }
+
+    public List<MobEffectInstance> getTipsyMobEffects(int ticks) {
+        List<MobEffectInstance> mobEffects = new ArrayList<>();
+        for (EffectInstance effectInstance : getTipsyEffects()) {
+            MobEffectInstance mobEffectInstance = effectInstance.getEffectPerTick(ticks, ticksAged, ticksAgedOverexpose);
+            if (mobEffectInstance != null) mobEffects.add(mobEffectInstance);
         }
 
         return mobEffects;
@@ -284,6 +327,11 @@ public class DrinkBottleItem extends PlacedItem {
         public int maxDuration;
         public int minAmplifier;
         public int maxAmplifier;
+        public int overexposeDuration;
+        public int overexposeAmplifier;
+        public int overexposeTime;
+        public boolean overexposeLimit;
+        public boolean overexpose = false;
 
         public EffectInstance(MobEffect effect, int minDuration, int maxDuration, int minAmplifier, int maxAmplifier) {
             this.effect = effect;
@@ -293,16 +341,32 @@ public class DrinkBottleItem extends PlacedItem {
             this.maxAmplifier = maxAmplifier;
         }
 
+        public EffectInstance(MobEffect effect, int minDuration, int maxDuration, int minAmplifier, int maxAmplifier, int overexposeDuration, int overexposeAmplifier, int overexposeTime, boolean overexposeLimit) {
+            this(effect, minDuration, maxDuration, minAmplifier, maxAmplifier);
+            this.overexposeDuration = overexposeDuration;
+            this.overexposeAmplifier = overexposeAmplifier;
+            this.overexposeTime = overexposeTime;
+            this.overexposeLimit = overexposeLimit;
+            this.overexpose = true;
+        }
+
         public MobEffectInstance getEffectPerTick(int ticks, int ticksAged, int ticksAgedOverexpose) {
             float lerp = (float) ticks / ticksAged;
             if (lerp > 1f) lerp = 1f;
             int duration = Mth.lerpInt(lerp, minDuration, maxDuration);
             int amplifier = Mth.lerpInt(lerp, minAmplifier, maxAmplifier);
 
-            if (ticks >= ticksAged + ticksAgedOverexpose) {
-
+            if (overexpose && ticks >= ticksAged + ticksAgedOverexpose) {
+                lerp = (float) (ticks - (ticksAged + ticksAgedOverexpose)) / (overexposeTime);
+                if (!overexposeLimit) {
+                    if (lerp > 1f) lerp = 1f;
+                }
+                duration = Mth.lerpInt(lerp, maxDuration, overexposeDuration);
+                amplifier = Mth.lerpInt(lerp, maxAmplifier, overexposeAmplifier);
             }
 
+            if (duration <= 0) return null;
+            if (amplifier < 0) return null;
             return new MobEffectInstance(effect, duration, amplifier);
         }
     }

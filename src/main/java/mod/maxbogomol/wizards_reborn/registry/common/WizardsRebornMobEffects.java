@@ -13,8 +13,8 @@ public class WizardsRebornMobEffects {
 
     public static final RegistryObject<MobEffect> ARCANE_STRENGTH = MOB_EFFECTS.register("arcane_strength", ArcaneStrengthMobEffect::new);
     public static final RegistryObject<MobEffect> ARCANE_WEAKNESS = MOB_EFFECTS.register("arcane_weakness", ArcaneWeaknessMobEffect::new);
-    public static final RegistryObject<MobEffect> MAGIC_RESISTANCE = MOB_EFFECTS.register("magic_resistance", ArcaneStrengthMobEffect::new);
-    public static final RegistryObject<MobEffect> MAGIC_SENSIBILITY = MOB_EFFECTS.register("magic_sensibility", ArcaneWeaknessMobEffect::new);
+    public static final RegistryObject<MobEffect> MAGIC_RESISTANCE = MOB_EFFECTS.register("magic_resistance", MagicResistanceMobEffect::new);
+    public static final RegistryObject<MobEffect> MAGIC_SENSIBILITY = MOB_EFFECTS.register("magic_sensibility", MagicSensibilityMobEffect::new);
     public static final RegistryObject<MobEffect> MOR_SPORES = MOB_EFFECTS.register("mor_spores", MorSporesMobEffect::new);
     public static final RegistryObject<MobEffect> WISSEN_AURA = MOB_EFFECTS.register("wissen_aura", WissenAuraMobEffect::new);
     public static final RegistryObject<MobEffect> IRRITATION = MOB_EFFECTS.register("irritation", IrritationMobEffect::new);

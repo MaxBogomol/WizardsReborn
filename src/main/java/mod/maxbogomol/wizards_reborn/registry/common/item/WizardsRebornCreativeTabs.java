@@ -961,6 +961,7 @@ public class WizardsRebornCreativeTabs {
             }
 
             //DRINKS
+            addInSub(event, DRINKS, WizardsRebornItems.ROTTEN_DRINK_BOTTLE);
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.VODKA_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.BOURBON_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsRebornItems.WHISKEY_BOTTLE.get()));

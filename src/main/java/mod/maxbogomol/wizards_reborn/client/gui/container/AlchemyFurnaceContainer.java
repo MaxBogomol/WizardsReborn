@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
@@ -45,6 +46,6 @@ public class AlchemyFurnaceContainer extends ContainerMenuBase {
     }
 
     protected boolean isFuel(ItemStack pStack) {
-        return net.minecraftforge.common.ForgeHooks.getBurnTime(pStack, RecipeType.SMELTING) > 0;
+        return ForgeHooks.getBurnTime(pStack, RecipeType.SMELTING) > 0;
     }
 }

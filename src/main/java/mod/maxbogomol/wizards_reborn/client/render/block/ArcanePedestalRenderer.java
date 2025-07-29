@@ -29,7 +29,7 @@ public class ArcanePedestalRenderer implements BlockEntityRenderer<ArcanePedesta
             poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
             poseStack.scale(0.5F, 0.5F, 0.5F);
             ItemStack stack = blockEntity.getItemHandler().getItem(0);
-            Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+            Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
             poseStack.popPose();
         } else {
             CustomBookComponent component = blockEntity.bookComponent;

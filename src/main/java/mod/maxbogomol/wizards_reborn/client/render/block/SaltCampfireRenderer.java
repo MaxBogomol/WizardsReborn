@@ -31,7 +31,7 @@ public class SaltCampfireRenderer implements BlockEntityRenderer<SaltCampfireBlo
                 poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
                 poseStack.translate(-0.3125F, -0.3125F, 0.0F);
                 poseStack.scale(0.375F, 0.375F, 0.375F);
-                Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), i + j);
+                Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), i + j);
                 poseStack.popPose();
             }
         }
