@@ -34,15 +34,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrinkBottleItem extends PlacedItem {
-    boolean isAlcoholic = true;
-    boolean isOverexpose = true;
-    boolean isRotten = true;
-    int stageForAlc = -1;
-    int stageOverexpose = 4;
+    public boolean isAlcoholic = true;
+    public boolean isOverexpose = true;
+    public boolean isRotten = true;
+    public int stageForAlc = -1;
+    public int stageOverexpose = 4;
 
-    int ticksAged = 24000;
-    int ticksAgedOverexpose = 24000;
-    int ticksAgedRotten = 24000;
+    public int ticksAged = 24000;
+    public int ticksAgedOverexpose = 24000;
+    public int ticksAgedRotten = 24000;
 
     public List<EffectInstance> effects = new ArrayList<>();
     public List<EffectInstance> tipsyEffects = new ArrayList<>();

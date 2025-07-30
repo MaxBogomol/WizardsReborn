@@ -259,7 +259,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
             int R = (int) Mth.lerp(((float) burn / 5), 255, 0);
             int G = (int) Mth.lerp(((float) burn / 5), 255, 0);
             int B = (int) Mth.lerp(((float) burn / 5), 255, 0);
-            list.add(Component.translatable(getInventory(stack).getItem(i).getDescriptionId()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, R, G, B))));
+            list.add(Component.empty().append(getInventory(stack).getItem(i).getHoverName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, R, G, B))));
         }
     }
 

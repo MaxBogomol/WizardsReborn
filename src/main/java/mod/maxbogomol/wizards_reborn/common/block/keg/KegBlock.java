@@ -44,6 +44,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+
 public class KegBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
 
     private static final VoxelShape SHAPE = Stream.of(
@@ -114,7 +116,7 @@ public class KegBlock extends HorizontalDirectionalBlock implements EntityBlock,
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand).copy();
-        if (stack.isEmpty() && player.isShiftKeyDown()) {
+        if (stack.isEmpty() && player.isShiftKeyDown() && !isBlockedByBlock(level, pos, state.getValue(HORIZONTAL_FACING))) {
             level.playSound(null, pos, state.getValue(BlockStateProperties.OPEN) ? SoundEvents.BARREL_CLOSE : SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 1.0f, 1.0f);
             level.setBlock(pos, state.cycle(BlockStateProperties.OPEN), 3);
             return InteractionResult.SUCCESS;
@@ -131,6 +133,11 @@ public class KegBlock extends HorizontalDirectionalBlock implements EntityBlock,
         }
 
         return InteractionResult.PASS;
+    }
+
+    public static boolean isBlockedByBlock(Level level, BlockPos pos, Direction direction) {
+        BlockPos blockPos = pos.relative(direction);
+        return level.getBlockState(blockPos).isRedstoneConductor(level, blockPos);
     }
 
     @Override

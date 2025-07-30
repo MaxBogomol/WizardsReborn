@@ -3,12 +3,17 @@ package mod.maxbogomol.wizards_reborn.common.block.keg;
 import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.gui.container.KegContainer;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.RottenDrinkBottleItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -32,7 +37,7 @@ public class KegBlockEntity extends NameableBlockEntityBase implements TickableB
     public final ItemStackHandler itemHandler = createHandler(6);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
-    public int time = 0;
+    public long time = 0;
     public int doorTick = 0;
     public int oldDoorTick = 0;
 
@@ -48,6 +53,38 @@ public class KegBlockEntity extends NameableBlockEntityBase implements TickableB
     public void tick() {
         if (!level.isClientSide()) {
             boolean update = false;
+
+            long newTime = getLevel().getDayTime();
+            long timeDifference = newTime - time;
+
+            if (!getBlockState().getValue(BlockStateProperties.OPEN)) {
+                if (timeDifference == 0) timeDifference = 1;
+                if (timeDifference > 0) {
+                    for (int i = 0; i < 6; i += 1) {
+                        ItemStack itemStack = itemHandler.getStackInSlot(i);
+                        if (itemStack.getItem() instanceof DrinkBottleItem bottle) {
+                            DrinkBottleItem.setTicks(itemStack, DrinkBottleItem.getTicks(itemStack) + (int) timeDifference);
+                            int ticks = bottle.ticksAged + bottle.ticksAgedOverexpose + bottle.ticksAgedRotten;
+                            if (DrinkBottleItem.getTicks(itemStack) >= ticks) {
+                                ItemStack rotten = new ItemStack(WizardsRebornItems.ROTTEN_DRINK_BOTTLE.get());
+                                RottenDrinkBottleItem.getInventory(rotten).setItem(0, itemStack.copy());
+                                itemHandler.setStackInSlot(i, rotten);
+                            }
+                        }
+                    }
+                    update = true;
+                }
+            } else {
+                if (KegBlock.isBlockedByBlock(getLevel(), getBlockPos(), getBlockState().getValue(HORIZONTAL_FACING))) {
+                    level.playSound(null, getBlockPos(), SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                    level.setBlock(getBlockPos(), getBlockState().setValue(BlockStateProperties.OPEN, false), 3);
+                }
+            }
+
+            if (newTime != time) {
+                time = newTime;
+                update = true;
+            }
 
             if (update) setChanged();
         }
@@ -72,6 +109,11 @@ public class KegBlockEntity extends NameableBlockEntityBase implements TickableB
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 return stack.is(WizardsRebornItemTags.KEG_SLOTS);
+            }
+
+            @Override
+            public int getSlotLimit(int slot) {
+                return 1;
             }
 
             @Nonnull
@@ -124,7 +166,7 @@ public class KegBlockEntity extends NameableBlockEntityBase implements TickableB
         super.saveAdditional(tag);
         tag.put("inv", itemHandler.serializeNBT());
 
-        tag.putInt("time", time);
+        tag.putLong("time", time);
     }
 
     @Override
@@ -132,7 +174,7 @@ public class KegBlockEntity extends NameableBlockEntityBase implements TickableB
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inv"));
 
-        time = tag.getInt("time");
+        time = tag.getLong("time");
     }
 
     @Override

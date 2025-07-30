@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "wizards_reborn:alchemy_bottle",
     "#wizards_reborn:drinks"
   ]
 }

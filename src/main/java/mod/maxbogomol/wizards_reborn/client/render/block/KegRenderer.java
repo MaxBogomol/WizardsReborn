@@ -27,6 +27,7 @@ public class KegRenderer implements BlockEntityRenderer<KegBlockEntity> {
             poseStack.mulPose(Axis.XP.rotationDegrees(-90f));
             poseStack.translate(0, -0.3125F, -0.125F);
             poseStack.translate((-0.25F * x), 0F, (-0.375F * y));
+            poseStack.scale(0.99999f, 0.9999f, 0.9999f);
 
             ItemStack itemStack = blockEntity.itemHandler.getStackInSlot(i);
             if (itemStack.getItem() instanceof IPlacedItem placedItem) {
