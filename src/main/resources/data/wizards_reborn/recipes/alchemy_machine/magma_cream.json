@@ -1,0 +1,35 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "minecraft:magma_cream",
+    "count": 4
+  },
+  "wissen": 50,
+  "steam": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "wizards_reborn:alchemy_calx"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 100
+    }
+  ]
+}

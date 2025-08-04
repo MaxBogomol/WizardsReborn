@@ -132,27 +132,31 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
     @Override
     public void draw(@NotNull AlchemyMachineRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
-        if (recipe.getWissen() > 0 && WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
-            String textWissen = Integer.toString(recipe.getWissen());
-            int stringWidth = font.width(textWissen);
+        if (recipe.getWissen() > 0) {
+            if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
+                String textWissen = Integer.toString(recipe.getWissen());
+                int stringWidth = font.width(textWissen);
 
-            gui.drawString(font, textWissen, 122 - (stringWidth / 2) + 1, 95, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textWissen, 122 - (stringWidth / 2), 95, ArcanemiconScreen.TEXT_COLOR_INT, false);
-            if (mouseX >= 116 && mouseY >= 68 && mouseX <= 116 + 16 && mouseY <= 68 + 16) {
-                gui.renderTooltip(font, NumericalUtil.getWissenName(), (int) mouseX, (int) mouseY);
+                gui.drawString(font, textWissen, 122 - (stringWidth / 2) + 1, 95, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+                gui.drawString(font, textWissen, 122 - (stringWidth / 2), 95, ArcanemiconScreen.TEXT_COLOR_INT, false);
+                if (mouseX >= 116 && mouseY >= 68 && mouseX <= 116 + 16 && mouseY <= 68 + 16) {
+                    gui.renderTooltip(font, NumericalUtil.getWissenName(), (int) mouseX, (int) mouseY);
+                }
             }
         } else {
             gui.blit(TEXTURE, 116, 68, 176, 8, 16, 16, 256, 256);
         }
 
-        if (recipe.getSteam() > 0 && WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
-            String textSteam = Integer.toString(recipe.getSteam());
-            int stringWidth = font.width(textSteam);
+        if (recipe.getSteam() > 0) {
+            if (WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
+                String textSteam = Integer.toString(recipe.getSteam());
+                int stringWidth = font.width(textSteam);
 
-            gui.drawString(font, textSteam, 122 - (stringWidth / 2) + 1, 15, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
-            gui.drawString(font, textSteam, 122 - (stringWidth / 2), 15, ArcanemiconScreen.TEXT_COLOR_INT, false);
-            if (mouseX >= 116 && mouseY >= 28 && mouseX <= 116 + 16 && mouseY <= 28 + 16) {
-                gui.renderTooltip(font, NumericalUtil.getSteamName(), (int) mouseX, (int) mouseY);
+                gui.drawString(font, textSteam, 122 - (stringWidth / 2) + 1, 15, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
+                gui.drawString(font, textSteam, 122 - (stringWidth / 2), 15, ArcanemiconScreen.TEXT_COLOR_INT, false);
+                if (mouseX >= 116 && mouseY >= 28 && mouseX <= 116 + 16 && mouseY <= 28 + 16) {
+                    gui.renderTooltip(font, NumericalUtil.getSteamName(), (int) mouseX, (int) mouseY);
+                }
             }
         } else {
             gui.blit(TEXTURE, 116, 28, 176, 8, 16, 16, 256, 256);

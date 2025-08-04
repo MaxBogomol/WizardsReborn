@@ -1,0 +1,35 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "minecraft:cobblestone",
+    "count": 4
+  },
+  "wissen": 100,
+  "steam": 100,
+  "ingredients": [
+    {
+      "tag": "forge:cobblestone/deepslate"
+    },
+    {
+      "tag": "forge:cobblestone/deepslate"
+    },
+    {
+      "tag": "forge:cobblestone/deepslate"
+    },
+    {
+      "tag": "forge:cobblestone/deepslate"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:alchemy_calx"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 100
+    }
+  ]
+}

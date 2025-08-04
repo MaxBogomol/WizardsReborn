@@ -1,0 +1,34 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "minecraft:end_stone",
+    "count": 5
+  },
+  "steam": 100,
+  "ingredients": [
+    {
+      "tag": "forge:cobblestone/normal"
+    },
+    {
+      "tag": "forge:cobblestone/normal"
+    },
+    {
+      "tag": "forge:cobblestone/normal"
+    },
+    {
+      "tag": "forge:cobblestone/normal"
+    },
+    {
+      "item": "minecraft:end_stone"
+    },
+    {
+      "item": "wizards_reborn:alchemy_calx"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 100
+    }
+  ]
+}
