@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_scorched_calx_pile": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:scorched_calx_pile"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_scorched_calx_pile"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/scorched_calx_from_pile"
+    ]
+  },
+  "sends_telemetry_event": false
+}

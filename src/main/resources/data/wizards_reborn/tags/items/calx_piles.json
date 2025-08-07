@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:alchemy_calx_pile",
+    "wizards_reborn:natural_calx_pile",
+    "wizards_reborn:scorched_calx_pile",
+    "wizards_reborn:distant_calx_pile",
+    "wizards_reborn:enchanted_calx_pile"
+  ]
+}

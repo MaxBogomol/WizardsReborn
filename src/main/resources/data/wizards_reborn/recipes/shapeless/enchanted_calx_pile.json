@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "enchanted_calx_pile",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:enchanted_calx"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:enchanted_calx_pile",
+    "count": 5
+  }
+}

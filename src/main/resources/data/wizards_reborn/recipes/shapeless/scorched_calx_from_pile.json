@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "scorched_calx",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:scorched_calx_pile"
+    },
+    {
+      "item": "wizards_reborn:scorched_calx_pile"
+    },
+    {
+      "item": "wizards_reborn:scorched_calx_pile"
+    },
+    {
+      "item": "wizards_reborn:scorched_calx_pile"
+    },
+    {
+      "item": "wizards_reborn:scorched_calx_pile"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:scorched_calx",
+    "count": 1
+  }
+}

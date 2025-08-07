@@ -20,10 +20,10 @@
       "tag": "forge:cobblestone/deepslate"
     },
     {
-      "item": "wizards_reborn:natural_calx"
+      "item": "wizards_reborn:natural_calx_pile"
     },
     {
-      "item": "wizards_reborn:alchemy_calx"
+      "item": "wizards_reborn:alchemy_calx_pile"
     }
   ],
   "fluidIngredients": [

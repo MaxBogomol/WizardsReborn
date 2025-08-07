@@ -69,7 +69,8 @@ public class ArcanemiconChapters {
             ARCANE_PEDESTAL_ITEM, TOTEM_BASE_ITEM, WISESTONE_PEDESTAL_ITEM, RUNIC_PEDESTAL_ITEM, INNOCENT_PEDESTAL_ITEM, 
             ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_NUGGET_ITEM, ARCANUM_ITEM, ARCANUM_DUST_ITEM, ARCACITE_ITEM, ARCANE_WOOD_BRANCH_ITEM, INNOCENT_WOOD_BRANCH_ITEM,
             ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_SLAB_ITEM, INNOCENT_WOOD_PLANKS_ITEM, INNOCENT_WOOD_SLAB_ITEM, WISESTONE_ITEM, POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_SLAB_ITEM,
-            NETHER_SALT_ITEM, NETHER_SALT_PILE_ITEM, ACLHEMY_GLASS, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM, SCORCHED_CALX_ITEM, DISTANT_CALX_ITEM, ENCHANTED_CALX_ITEM, ARCANUM_LENS_ITEM;
+            NETHER_SALT_ITEM, NETHER_SALT_PILE_ITEM, ACLHEMY_GLASS, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM, SCORCHED_CALX_ITEM, DISTANT_CALX_ITEM, ENCHANTED_CALX_ITEM, ARCANUM_LENS_ITEM,
+            ALCHEMY_CALX_PILE_ITEM, NATURAL_CALX_PILE_ITEM, SCORCHED_CALX_PILE_ITEM, DISTANT_CALX_PILE_ITEM, ENCHANTED_CALX_PILE_ITEM;
 
     public static void itemsInit() {
         EMPTY_ITEM = ItemStack.EMPTY;
@@ -100,6 +101,11 @@ public class ArcanemiconChapters {
         SCORCHED_CALX_ITEM = new ItemStack(WizardsRebornItems.SCORCHED_CALX.get());
         DISTANT_CALX_ITEM = new ItemStack(WizardsRebornItems.DISTANT_CALX.get());
         ENCHANTED_CALX_ITEM = new ItemStack(WizardsRebornItems.ENCHANTED_CALX.get());
+        ALCHEMY_CALX_PILE_ITEM = new ItemStack(WizardsRebornItems.ALCHEMY_CALX_PILE.get());
+        NATURAL_CALX_PILE_ITEM = new ItemStack(WizardsRebornItems.NATURAL_CALX_PILE.get());
+        SCORCHED_CALX_PILE_ITEM = new ItemStack(WizardsRebornItems.SCORCHED_CALX_PILE.get());
+        DISTANT_CALX_PILE_ITEM = new ItemStack(WizardsRebornItems.DISTANT_CALX_PILE.get());
+        ENCHANTED_CALX_PILE_ITEM = new ItemStack(WizardsRebornItems.ENCHANTED_CALX_PILE.get());
         ARCANUM_LENS_ITEM = new ItemStack(WizardsRebornItems.ARCANUM_LENS.get());
     }
 
@@ -3251,6 +3257,7 @@ public class ArcanemiconChapters {
         ALCHEMY_CALX = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_calx",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_calx",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, ALCHEMY_CALX_ITEM),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, ALCHEMY_CALX_PILE_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ALCHEMY_CALX_BLOCK.get()))
                 ),
                 new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.ALCHEMY_CALX.get(), 3)).setIsSteam(true)
@@ -3262,7 +3269,12 @@ public class ArcanemiconChapters {
                         ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM,
                         ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM
                 ),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.ALCHEMY_CALX.get(), 9), new ItemStack(WizardsRebornItems.ALCHEMY_CALX_BLOCK.get()))
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ALCHEMY_CALX.get(), 9), new ItemStack(WizardsRebornItems.ALCHEMY_CALX_BLOCK.get())),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ALCHEMY_CALX_PILE.get(), 5), ALCHEMY_CALX_ITEM),
+                new CraftingTablePage(ALCHEMY_CALX_ITEM,
+                        ALCHEMY_CALX_PILE_ITEM, ALCHEMY_CALX_PILE_ITEM, ALCHEMY_CALX_PILE_ITEM,
+                        ALCHEMY_CALX_PILE_ITEM, ALCHEMY_CALX_PILE_ITEM
+                )
         );
 
         Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<>();
@@ -3619,6 +3631,10 @@ public class ArcanemiconChapters {
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, SCORCHED_CALX_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, DISTANT_CALX_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, ENCHANTED_CALX_ITEM),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, NATURAL_CALX_PILE_ITEM),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, SCORCHED_CALX_PILE_ITEM),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, DISTANT_CALX_PILE_ITEM),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, ENCHANTED_CALX_PILE_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.NATURAL_CALX_BLOCK.get())),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SCORCHED_CALX_BLOCK.get())),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.DISTANT_CALX_BLOCK.get())),
@@ -3663,74 +3679,94 @@ public class ArcanemiconChapters {
                         ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
                         ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM
                 ),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.ENCHANTED_CALX.get(), 9), new ItemStack(WizardsRebornItems.ENCHANTED_CALX_BLOCK.get()))
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ENCHANTED_CALX.get(), 9), new ItemStack(WizardsRebornItems.ENCHANTED_CALX_BLOCK.get())),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.NATURAL_CALX_PILE.get(), 5), NATURAL_CALX_ITEM),
+                new CraftingTablePage(NATURAL_CALX_ITEM,
+                        NATURAL_CALX_PILE_ITEM, NATURAL_CALX_PILE_ITEM, NATURAL_CALX_PILE_ITEM,
+                        NATURAL_CALX_PILE_ITEM, NATURAL_CALX_PILE_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.SCORCHED_CALX_PILE.get(), 5), SCORCHED_CALX_ITEM),
+                new CraftingTablePage(SCORCHED_CALX_ITEM,
+                        SCORCHED_CALX_PILE_ITEM, SCORCHED_CALX_PILE_ITEM, SCORCHED_CALX_PILE_ITEM,
+                        SCORCHED_CALX_PILE_ITEM, SCORCHED_CALX_PILE_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.DISTANT_CALX_PILE.get(), 5), DISTANT_CALX_ITEM),
+                new CraftingTablePage(DISTANT_CALX_ITEM,
+                        DISTANT_CALX_PILE_ITEM, DISTANT_CALX_PILE_ITEM, DISTANT_CALX_PILE_ITEM,
+                        DISTANT_CALX_PILE_ITEM, DISTANT_CALX_PILE_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ENCHANTED_CALX_PILE.get(), 5), ENCHANTED_CALX_ITEM),
+                new CraftingTablePage(ENCHANTED_CALX_ITEM,
+                        ENCHANTED_CALX_PILE_ITEM, ENCHANTED_CALX_PILE_ITEM, ENCHANTED_CALX_PILE_ITEM,
+                        ENCHANTED_CALX_PILE_ITEM, ENCHANTED_CALX_PILE_ITEM
+                )
         );
 
         ALCHEMY_TRANSMUTATION = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_transmutation",
                 new TitlePage("wizards_reborn.arcanemicon.page.alchemy_transmutation"),
                 new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD.get(), 4)).setIsWissen(true).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.WISSEN_TEA.get(), 200))
-                        .setInputs(new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), ARCANUM_ITEM, NATURAL_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), ARCANUM_ITEM, NATURAL_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.COAL, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 50))
-                        .setInputs(new ItemStack(Items.CHARCOAL), new ItemStack(Items.CHARCOAL), new ItemStack(Items.CHARCOAL), new ItemStack(Items.COBBLESTONE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.CHARCOAL), new ItemStack(Items.CHARCOAL), new ItemStack(Items.CHARCOAL), new ItemStack(Items.COBBLESTONE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.GLOWSTONE_DUST, 12)).setIsWissen(true).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.HELLISH_MUSHROOM_BREW.get(), 200))
-                        .setInputs(new ItemStack(Items.COAL), new ItemStack(Items.COAL), SCORCHED_CALX_ITEM, new ItemStack(Items.GOLD_NUGGET)),
+                        .setInputs(new ItemStack(Items.COAL), new ItemStack(Items.COAL), SCORCHED_CALX_PILE_ITEM, new ItemStack(Items.GOLD_NUGGET)),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.LEATHER, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), NATURAL_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), NATURAL_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.DEEPSLATE, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.DEEPSLATE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.DEEPSLATE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.GRANITE, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.GRANITE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.GRANITE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.DIORITE, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.DIORITE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.DIORITE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.ANDESITE, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.ANDESITE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.ANDESITE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.CALCITE, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.CALCITE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.CALCITE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.TUFF, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.TUFF), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.TUFF), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.DRIPSTONE_BLOCK, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.DRIPSTONE_BLOCK), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.DRIPSTONE_BLOCK), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.BLACKSTONE, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.BLACKSTONE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.BLACKSTONE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.BASALT, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.BASALT), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.BASALT), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.COBBLESTONE, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLESTONE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLESTONE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.NETHERRACK, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.NETHERRACK), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.NETHERRACK), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.END_STONE, 5)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.END_STONE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.END_STONE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.COBBLESTONE, 4)).setIsWissen(true).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), NATURAL_CALX_ITEM, ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), new ItemStack(Items.COBBLED_DEEPSLATE), NATURAL_CALX_PILE_ITEM, ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.NETHERRACK, 4)).setIsWissen(true).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), SCORCHED_CALX_ITEM, ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), SCORCHED_CALX_PILE_ITEM, ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.END_STONE, 4)).setIsWissen(true).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), DISTANT_CALX_ITEM, ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), DISTANT_CALX_PILE_ITEM, ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.SLIME_BALL, 4)).setIsWissen(true).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.PACKED_ICE), ALCHEMY_CALX_ITEM),
+                        .setInputs(new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.PACKED_ICE), ALCHEMY_CALX_PILE_ITEM),
                 new AlchemyMachinePage().setResult(new ItemStack(Items.MAGMA_CREAM, 4)).setIsWissen(true).setIsSteam(true)
                         .setFluidInputs(new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100))
-                        .setInputs(new ItemStack(Items.SLIME_BALL), new ItemStack(Items.SLIME_BALL), new ItemStack(Items.SLIME_BALL), new ItemStack(Items.SLIME_BALL), new ItemStack(Items.BLAZE_POWDER), ALCHEMY_CALX_ITEM)
+                        .setInputs(new ItemStack(Items.SLIME_BALL), new ItemStack(Items.SLIME_BALL), new ItemStack(Items.SLIME_BALL), new ItemStack(Items.SLIME_BALL), new ItemStack(Items.BLAZE_POWDER), ALCHEMY_CALX_PILE_ITEM)
         );
 
         List<MobEffectInstance> noEffects = new ArrayList<>();

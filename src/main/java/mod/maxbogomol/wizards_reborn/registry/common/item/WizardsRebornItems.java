@@ -116,14 +116,19 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> NETHER_SALT_ORE = ITEMS.register("nether_salt_ore", () -> new BlockItem(WizardsRebornBlocks.NETHER_SALT_ORE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ALCHEMY_CALX = ITEMS.register("alchemy_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_CALX_PILE = ITEMS.register("alchemy_calx_pile", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_CALX_BLOCK = ITEMS.register("alchemy_calx_block", () -> new BlockItem(WizardsRebornBlocks.ALCHEMY_CALX_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> NATURAL_CALX = ITEMS.register("natural_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> NATURAL_CALX_PILE = ITEMS.register("natural_calx_pile", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NATURAL_CALX_BLOCK = ITEMS.register("natural_calx_block", () -> new BlockItem(WizardsRebornBlocks.NATURAL_CALX_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> SCORCHED_CALX = ITEMS.register("scorched_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SCORCHED_CALX_PILE = ITEMS.register("scorched_calx_pile", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCORCHED_CALX_BLOCK = ITEMS.register("scorched_calx_block", () -> new BlockItem(WizardsRebornBlocks.SCORCHED_CALX_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> DISTANT_CALX = ITEMS.register("distant_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DISTANT_CALX_PILE = ITEMS.register("distant_calx_pile", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> DISTANT_CALX_BLOCK = ITEMS.register("distant_calx_block", () -> new BlockItem(WizardsRebornBlocks.DISTANT_CALX_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ENCHANTED_CALX = ITEMS.register("enchanted_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ENCHANTED_CALX_PILE = ITEMS.register("enchanted_calx_pile", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ENCHANTED_CALX_BLOCK = ITEMS.register("enchanted_calx_block", () -> new BlockItem(WizardsRebornBlocks.ENCHANTED_CALX_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));

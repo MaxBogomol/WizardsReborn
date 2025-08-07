@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "natural_calx_pile",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:natural_calx"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:natural_calx_pile",
+    "count": 5
+  }
+}

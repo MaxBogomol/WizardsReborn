@@ -285,14 +285,19 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, MATERIALS, WizardsRebornItems.NETHER_SALT_ORE);
 
             addInSub(event, MATERIALS, WizardsRebornItems.ALCHEMY_CALX);
+            addInSub(event, MATERIALS, WizardsRebornItems.ALCHEMY_CALX_PILE);
             addInSub(event, MATERIALS, WizardsRebornItems.ALCHEMY_CALX_BLOCK);
             addInSub(event, MATERIALS, WizardsRebornItems.NATURAL_CALX);
+            addInSub(event, MATERIALS, WizardsRebornItems.NATURAL_CALX_PILE);
             addInSub(event, MATERIALS, WizardsRebornItems.NATURAL_CALX_BLOCK);
             addInSub(event, MATERIALS, WizardsRebornItems.SCORCHED_CALX);
+            addInSub(event, MATERIALS, WizardsRebornItems.SCORCHED_CALX_PILE);
             addInSub(event, MATERIALS, WizardsRebornItems.SCORCHED_CALX_BLOCK);
             addInSub(event, MATERIALS, WizardsRebornItems.DISTANT_CALX);
+            addInSub(event, MATERIALS, WizardsRebornItems.DISTANT_CALX_PILE);
             addInSub(event, MATERIALS, WizardsRebornItems.DISTANT_CALX_BLOCK);
             addInSub(event, MATERIALS, WizardsRebornItems.ENCHANTED_CALX);
+            addInSub(event, MATERIALS, WizardsRebornItems.ENCHANTED_CALX_PILE);
             addInSub(event, MATERIALS, WizardsRebornItems.ENCHANTED_CALX_BLOCK);
 
             addInSub(event, MATERIALS, WizardsRebornItems.ARCACITE_POLISHING_MIXTURE);
