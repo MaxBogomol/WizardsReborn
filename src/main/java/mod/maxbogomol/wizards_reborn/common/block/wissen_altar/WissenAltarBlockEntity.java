@@ -40,6 +40,9 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
 
     public int wissen = 0;
 
+    public float craftingStage = 0;
+    public float oldCraftingStage = 0;
+
     public WissenAltarBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -132,6 +135,8 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
         }
 
         if (level.isClientSide()) {
+            oldCraftingStage = craftingStage;
+            craftingStage = getCraftingStage();
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -238,7 +243,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
         return ((float) getWissen() / (float) getMaxWissen());
     }
 
-    public float getCraftingStage () {
+    public float getCraftingStage() {
         if (wissenInItem <= 0) {
             return 1F;
         }

@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.block.wissen_altar.WissenAltarBlockE
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class WissenAltarRenderer implements BlockEntityRenderer<WissenAltarBlockEntity> {
@@ -19,6 +20,8 @@ public class WissenAltarRenderer implements BlockEntityRenderer<WissenAltarBlock
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
+        float craftingStage = Mth.lerp(partialTicks, blockEntity.oldCraftingStage, blockEntity.craftingStage);
+
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.890625F, 0.5F);
         poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
@@ -29,9 +32,9 @@ public class WissenAltarRenderer implements BlockEntityRenderer<WissenAltarBlock
 
         poseStack.pushPose();
         poseStack.translate(0.5F, 1.3125F, 0.5F);
-        poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F * blockEntity.getCraftingStage()), 0F);
+        poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F * craftingStage), 0F);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
-        poseStack.scale(0.5F * blockEntity.getCraftingStage(), 0.5F * blockEntity.getCraftingStage(), 0.5F * blockEntity.getCraftingStage());
+        poseStack.scale(0.5F * craftingStage, 0.5F * craftingStage, 0.5F * craftingStage);
         minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(2), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
         poseStack.popPose();
     }
