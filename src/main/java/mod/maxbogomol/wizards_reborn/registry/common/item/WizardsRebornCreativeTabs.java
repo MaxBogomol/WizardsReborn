@@ -597,6 +597,7 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, ARCANE_NATURE, WizardsRebornItems.WISSEN_CRYSTALLIZER);
             addInSub(event, ARCANE_NATURE, WizardsRebornItems.ARCANE_WORKBENCH);
             addInSub(event, ARCANE_NATURE, WizardsRebornItems.WISSEN_CELL);
+            addInSub(event, ARCANE_NATURE, WizardsRebornItems.WISSEN_CHARGER);
             addInSub(event, ARCANE_NATURE, WizardsRebornItems.JEWELER_TABLE);
             addInSub(event, ARCANE_NATURE, WizardsRebornItems.ALTAR_OF_DROUGHT);
             addInSub(event, ARCANE_NATURE, WizardsRebornItems.TOTEM_BASE);

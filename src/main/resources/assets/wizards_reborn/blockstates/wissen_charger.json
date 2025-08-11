@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wizards_reborn:block/wissen_charger",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wizards_reborn:block/wissen_charger"
+    },
+    "facing=south": {
+      "model": "wizards_reborn:block/wissen_charger",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wizards_reborn:block/wissen_charger",
+      "y": 270
+    }
+  }
+}

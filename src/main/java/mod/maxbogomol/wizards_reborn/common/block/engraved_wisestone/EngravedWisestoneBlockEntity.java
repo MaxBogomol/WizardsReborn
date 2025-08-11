@@ -140,9 +140,9 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
         if (getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
             if (cooldown <= 0) {
                 glow = !glow;
-                BlockEntityUpdate.packet(this);
                 level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.5f, glow ? 2f : 0.5f);
                 cooldown = 20;
+                BlockEntityUpdate.packet(this);
             }
         }
     }

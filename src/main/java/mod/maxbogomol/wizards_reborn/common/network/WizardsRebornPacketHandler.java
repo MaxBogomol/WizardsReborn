@@ -59,6 +59,8 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         WissenCrystallizerBurstPacket.register(HANDLER, id++);
         ArcaneWorkbenchBurstPacket.register(HANDLER, id++);
         WissenCellSendPacket.register(HANDLER, id++);
+        WissenChargerSendPacket.register(HANDLER, id++);
+        WissenChargerReceivePacket.register(HANDLER, id++);
         JewelerTableBurstPacket.register(HANDLER, id++);
         AltarOfDroughtBurstPacket.register(HANDLER, id++);
         AltarOfDroughtSendPacket.register(HANDLER, id++);

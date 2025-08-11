@@ -419,6 +419,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> WISSEN_CRYSTALLIZER = ITEMS.register("wissen_crystallizer", () -> new BlockItem(WizardsRebornBlocks.WISSEN_CRYSTALLIZER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WORKBENCH = ITEMS.register("arcane_workbench", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WORKBENCH.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_CELL = ITEMS.register("wissen_cell", () -> new WissenStorageBaseItem(WizardsRebornBlocks.WISSEN_CELL.get(), new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WISSEN_CHARGER = ITEMS.register("wissen_charger", () -> new BlockItem(WizardsRebornBlocks.WISSEN_CHARGER.get(), new Item.Properties()));
     public static final RegistryObject<Item> JEWELER_TABLE = ITEMS.register("jeweler_table", () -> new BlockItem(WizardsRebornBlocks.JEWELER_TABLE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALTAR_OF_DROUGHT = ITEMS.register("altar_of_drought", () -> new BlockItem(WizardsRebornBlocks.ALTAR_OF_DROUGHT.get(), new Item.Properties()));
     public static final RegistryObject<Item> TOTEM_BASE = ITEMS.register("totem_base", () -> new BlockItem(WizardsRebornBlocks.TOTEM_BASE.get(), new Item.Properties()));

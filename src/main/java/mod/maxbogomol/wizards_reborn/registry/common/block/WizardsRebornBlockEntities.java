@@ -51,6 +51,7 @@ import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.To
 import mod.maxbogomol.wizards_reborn.common.block.totem.flames.TotemOfFlamesBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_altar.WissenAltarBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_cell.WissenCellBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.wissen_charger.WissenChargerBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer.WissenCrystallizerBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -99,6 +100,7 @@ public class WizardsRebornBlockEntities {
     public static RegistryObject<BlockEntityType<WissenCrystallizerBlockEntity>> WISSEN_CRYSTALLIZER = BLOCK_ENTITIES.register("wissen_crystallizer", () -> BlockEntityType.Builder.of(WissenCrystallizerBlockEntity::new, WizardsRebornBlocks.WISSEN_CRYSTALLIZER.get()).build(null));
     public static RegistryObject<BlockEntityType<ArcaneWorkbenchBlockEntity>> ARCANE_WORKBENCH = BLOCK_ENTITIES.register("arcane_workbench", () -> BlockEntityType.Builder.of(ArcaneWorkbenchBlockEntity::new, WizardsRebornBlocks.ARCANE_WORKBENCH.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenCellBlockEntity>> WISSEN_CELL = BLOCK_ENTITIES.register("wissen_cell", () -> BlockEntityType.Builder.of(WissenCellBlockEntity::new, WizardsRebornBlocks.WISSEN_CELL.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenChargerBlockEntity>> WISSEN_CHARGER = BLOCK_ENTITIES.register("wissen_charger", () -> BlockEntityType.Builder.of(WissenChargerBlockEntity::new, WizardsRebornBlocks.WISSEN_CHARGER.get()).build(null));
     public static RegistryObject<BlockEntityType<JewelerTableBlockEntity>> JEWELER_TABLE = BLOCK_ENTITIES.register("jeweler_table", () -> BlockEntityType.Builder.of(JewelerTableBlockEntity::new, WizardsRebornBlocks.JEWELER_TABLE.get()).build(null));
     public static RegistryObject<BlockEntityType<AltarOfDroughtBlockEntity>> ALTAR_OF_DROUGHT = BLOCK_ENTITIES.register("altar_of_drought", () -> BlockEntityType.Builder.of(AltarOfDroughtBlockEntity::new, WizardsRebornBlocks.ALTAR_OF_DROUGHT.get()).build(null));
     public static RegistryObject<BlockEntityType<TotemOfFlamesBlockEntity>> TOTEM_OF_FLAMES = BLOCK_ENTITIES.register("totem_of_flames", () -> BlockEntityType.Builder.of(TotemOfFlamesBlockEntity::new, WizardsRebornBlocks.TOTEM_OF_FLAMES.get()).build(null));
@@ -181,6 +183,7 @@ public class WizardsRebornBlockEntities {
             BlockEntityRenderers.register(WISSEN_CRYSTALLIZER.get(), (r) -> new WissenCrystallizerRenderer());
             BlockEntityRenderers.register(ARCANE_WORKBENCH.get(), (r) -> new ArcaneWorkbenchRenderer());
             BlockEntityRenderers.register(WISSEN_CELL.get(), (r) -> new WissenCellRenderer());
+            BlockEntityRenderers.register(WISSEN_CHARGER.get(), (r) -> new WissenChargerRenderer());
             BlockEntityRenderers.register(JEWELER_TABLE.get(), (r) -> new JewelerTableRenderer());
             BlockEntityRenderers.register(ALTAR_OF_DROUGHT.get(), (r) -> new AltarOfDroughtRenderer());
             BlockEntityRenderers.register(EXPERIENCE_TOTEM.get(), (r) -> new ExperienceTotemRenderer());

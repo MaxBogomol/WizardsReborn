@@ -1,9 +1,9 @@
 {
-	"format_version": "1.9.0",
-	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"render_type": "minecraft:cutout",
 	"textures": {
-		"0": "wizards_reborn:block/1",
-		"particle": "wizards_reborn:block/1"
+		"0": "wizards_reborn:block/wissen_charger",
+		"particle": "wizards_reborn:block/arcane_wood_planks"
 	},
 	"elements": [
 		{

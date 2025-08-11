@@ -76,6 +76,7 @@ import mod.maxbogomol.wizards_reborn.common.block.underground_grape.UndergroundG
 import mod.maxbogomol.wizards_reborn.common.block.underground_grape.UndergroundGrapeVinesPlantBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_altar.WissenAltarBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_cell.WissenCellBlock;
+import mod.maxbogomol.wizards_reborn.common.block.wissen_charger.WissenChargerBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer.WissenCrystallizerBlock;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlock;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
@@ -421,6 +422,7 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> WISSEN_CRYSTALLIZER = BLOCKS.register("wissen_crystallizer", () -> new WissenCrystallizerBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> ARCANE_WORKBENCH = BLOCKS.register("arcane_workbench", () -> new ArcaneWorkbenchBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> WISSEN_CELL = BLOCKS.register("wissen_cell", () -> new WissenCellBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> WISSEN_CHARGER = BLOCKS.register("wissen_charger", () -> new WissenChargerBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> JEWELER_TABLE = BLOCKS.register("jeweler_table", () -> new JewelerTableBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> ALTAR_OF_DROUGHT = BLOCKS.register("altar_of_drought", () -> new AltarOfDroughtBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> TOTEM_BASE = BLOCKS.register("totem_base", () -> new TotemBaseBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
