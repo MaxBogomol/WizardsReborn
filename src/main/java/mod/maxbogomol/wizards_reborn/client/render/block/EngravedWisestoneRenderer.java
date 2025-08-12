@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
@@ -27,17 +28,15 @@ public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWi
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
 
-        if (blockEntity.glowTicks > 0 && blockEntity.getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
+        float alpha = Mth.lerp(partialTicks, blockEntity.oldGlowTicks, blockEntity.glowTicks) / 20f;
+
+        if (alpha > 0 && blockEntity.getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
             Monogram monogram = block.getMonogram();
             Color color = monogram.getColor();
 
             TextureAtlasSprite sprite = RenderUtil.getSprite(monogram.getTexture());
 
             float width = 1f;
-            float alpha = (blockEntity.glowTicks + partialTicks) / 20f;
-            if (!blockEntity.glow) alpha = (blockEntity.glowTicks - partialTicks) / 20f;
-            if (alpha > 1f) alpha = 1f;
-            if (alpha < 0f) alpha = 0f;
             float offset = 1f + ((1f - alpha) * 10f);
             float rotateOffset = offset / 2f;
 

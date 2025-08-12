@@ -10,7 +10,7 @@
       "item": "minecraft:book"
     },
     {
-      "tag": "wizards_reborn:arcacite"
+      "item": "wizards_reborn:enchanted_calx_pile"
     },
     {
       "item": "minecraft:ink_sac"
@@ -20,21 +20,6 @@
     },
     {
       "tag": "wizards_reborn:arcanum"
-    },
-    {
-      "tag": "wizards_reborn:arcanum"
-    },
-    {
-      "tag": "wizards_reborn:arcanum"
-    },
-    {
-      "tag": "wizards_reborn:arcanum"
-    },
-    {
-      "tag": "wizards_reborn:arcanum"
-    },
-    {
-      "item": "wizards_reborn:enchanted_calx"
     }
   ]
 }

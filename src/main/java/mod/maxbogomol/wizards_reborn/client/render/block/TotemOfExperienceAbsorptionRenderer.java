@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
@@ -27,29 +28,23 @@ public class TotemOfExperienceAbsorptionRenderer implements BlockEntityRenderer<
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 3;
         ticksUp = (ticksUp) % 360;
 
+        float tick = Mth.lerp(partialTicks, blockEntity.oldTick, blockEntity.tick) / 20f;
+        tick = Easing.SINE_IN_OUT.ease(tick, 0, 1, 1);
+
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.59375F, 0.5F);
         poseStack.translate(0F, (Math.sin(Math.toRadians(ticksUp)) * 0.0625F), 0F);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks * 10));
-        poseStack.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 7F));
-        poseStack.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 7F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 7F));
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks) * 7F));
+        poseStack.mulPose(Axis.XP.rotationDegrees((float) Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks) * 7F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks) * 7F));
+
         for (int i = 0; i < 4; i += 1) {
             poseStack.pushPose();
             poseStack.mulPose(Axis.YP.rotationDegrees(i * 90F));
 
-            float tt = blockEntity.tick - partialTicks;
-            if (blockEntity.getExperience() > 0 && blockEntity.getWissen() < blockEntity.getMaxWissen()) {
-                tt = blockEntity.tick + partialTicks;
-                if (tt > 20) {
-                    tt = 20;
-                }
-            } else if (blockEntity.tick == 0) {
-                tt = 0;
-            }
-
-            float t = Mth.lerp(tt / 20f, 0.09375F, 0.15625F);
-            float size = Mth.lerp(tt / 20f, 1F, 0.5F);
+            float t = Mth.lerp(tick, 0.09375F, 0.15625F);
+            float size = Mth.lerp(tick, 1F, 0.5F);
 
             poseStack.translate(t, 0F, t);
             poseStack.scale(size, size, size);
@@ -57,6 +52,7 @@ public class TotemOfExperienceAbsorptionRenderer implements BlockEntityRenderer<
             RenderUtil.renderCustomModel(WizardsRebornModels.TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE, ItemDisplayContext.NONE, false, poseStack, bufferSource, light, overlay);
             poseStack.popPose();
         }
+
         poseStack.popPose();
 
         if (WissenUtil.isCanRenderWissenWand()) {

@@ -1,9 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import com.mojang.authlib.GameProfile;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -22,6 +24,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
+import java.util.UUID;
 
 public class KnowledgeSrollItem extends Item {
 
@@ -57,10 +60,9 @@ public class KnowledgeSrollItem extends Item {
                 }
 
                 if (nbt.contains("player")) {
-                    Player playerFrom = level.getPlayerByUUID(nbt.getUUID("player"));
-                    if (playerFrom != null) {
-                        player.sendSystemMessage(Component.translatable("message.wizards_reborn.knowledge_scroll", playerFrom.getName()).withStyle(ChatFormatting.GRAY));
-                    }
+                    UUID uuid = nbt.getUUID("player");
+                    Component name = getPlayerName(level, uuid);
+                    player.sendSystemMessage(Component.translatable("message.wizards_reborn.knowledge_scroll", name).withStyle(ChatFormatting.GRAY));
                 }
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.5f);
             }
@@ -74,15 +76,26 @@ public class KnowledgeSrollItem extends Item {
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.contains("player")) {
-            Player player = level.getPlayerByUUID(nbt.getUUID("player"));
-            if (player != null) {
-                list.add(Component.translatable("lore.wizards_reborn.knowledge_scroll", player.getName()).withStyle(ChatFormatting.GRAY));
-            }
+            UUID uuid = nbt.getUUID("player");
+            Component name = getPlayerName(level, uuid);
+            list.add(Component.translatable("lore.wizards_reborn.knowledge_scroll", name).withStyle(ChatFormatting.GRAY));
         }
     }
 
     public static boolean hasKnowledge(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
         return nbt.contains("knowledges");
+    }
+
+    public static Component getPlayerName(Level level, UUID uuid) {
+        Component name = Component.translatable("wizards_reborn.arcanemicon.unknown");
+        Player player = level.getPlayerByUUID(uuid);
+        if (player != null) {
+            name = player.getName();
+        } else {
+            GameProfile gameProfile = Minecraft.getInstance().getMinecraftSessionService().fillProfileProperties(new GameProfile(uuid, null), false);
+            if (gameProfile.getName() != null) name = Component.literal(gameProfile.getName());
+        }
+        return name;
     }
 }

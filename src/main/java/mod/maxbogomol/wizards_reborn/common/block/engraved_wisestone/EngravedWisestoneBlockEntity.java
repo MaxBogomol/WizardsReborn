@@ -33,6 +33,7 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
     public int cooldown = 0;
 
     public int glowTicks = 0;
+    public int oldGlowTicks = 0;
 
     public EngravedWisestoneBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -55,6 +56,7 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
         }
 
         if (level.isClientSide()) {
+            oldGlowTicks = glowTicks;
             if (glow && glowTicks < 20) glowTicks++;
             if (!glow && glowTicks > 0) glowTicks--;
 

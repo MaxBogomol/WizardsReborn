@@ -17,7 +17,7 @@
       "item": "wizards_reborn:alchemy_glass"
     },
     "R": {
-      "tag": "forge:storage_block/redstone"
+      "tag": "forge:storage_blocks/redstone"
     }
   },
   "output": {

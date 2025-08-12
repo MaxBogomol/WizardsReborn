@@ -80,6 +80,9 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
     public int rotate = 0;
     public int offset = 0;
     public int scale = 0;
+    public int oldRotate = 0;
+    public int oldOffset = 0;
+    public int oldScale = 0;
 
     public ArcaneIteratorSoundInstance sound;
 
@@ -257,6 +260,9 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
         }
 
         if (level.isClientSide()) {
+            oldRotate = rotate;
+            oldOffset = offset;
+            oldScale = scale;
             if (isWorks()) {
                 rotate++;
 
@@ -351,12 +357,8 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                 }
 
                 if (wissenInCraft > 0 && startCraft && wissenIsCraft < wissenInCraft) {
-                    if (offset < 40) {
-                        offset++;
-                    }
-                    if (scale < 60) {
-                        scale++;
-                    }
+                    if (offset < 40) offset++;
+                    if (scale < 60) scale++;
 
                     if (random.nextFloat() < 0.255) particleRay(0.03f);
                     if (random.nextFloat() < 0.255) particleRay(-0.03f);
@@ -473,20 +475,12 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                         sound.playSound();
                     }
                 } else {
-                    if (offset > 0) {
-                        offset--;
-                    }
-                    if (scale > 0) {
-                        scale--;
-                    }
+                    if (offset > 0) offset--;
+                    if (scale > 0) scale--;
                 }
             } else {
-                if (offset > 0) {
-                    offset--;
-                }
-                if (scale > 0) {
-                    scale--;
-                }
+                if (offset > 0) offset--;
+                if (scale > 0) scale--;
             }
         }
     }

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -12,6 +13,7 @@ import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
@@ -24,54 +26,18 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
 
-        double ticks = (blockEntity.rotate + partialTicks);
+        double ticks = Mth.lerp(partialTicks, blockEntity.oldRotate, blockEntity.rotate);
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
-
-        if (!blockEntity.isWorks()) {
-            ticks = blockEntity.rotate;
-        }
 
         float x = 0.15625F;
         float y = 0.15625F;
         float z = 0.15625F;
-        float offset = 1;
-        float size = 1;
-
-        if (blockEntity.wissenInCraft > 0 && blockEntity.startCraft) {
-            if (blockEntity.offset > 0) {
-                offset = (blockEntity.offset + partialTicks) / 40F;
-                if (offset > 1) {
-                    offset = 1;
-                }
-                offset = offset + 1;
-            }
-            if (blockEntity.scale > 0) {
-                size = (blockEntity.scale + partialTicks) / 60F;
-                if (size > 1) {
-                    size = 1;
-                }
-                size = 1 - size;
-            }
-        } else {
-            if (blockEntity.offset > 0) {
-                offset = (blockEntity.offset - partialTicks) / 40F;
-                if (offset < 0) {
-                    offset = 0;
-                }
-                offset = offset + 1;
-            }
-            if (blockEntity.scale > 0) {
-                size = (blockEntity.scale - partialTicks) / 60F;
-                if (size < 0) {
-                    size = 0;
-                }
-                size = 1 - size;
-            }
-        }
-        if (size < 0) {
-            size = 0;
-        }
+        float offset = 1f + (Mth.lerp(partialTicks, blockEntity.oldOffset, blockEntity.offset) / 40f);
+        float size = 1f - (Mth.lerp(partialTicks, blockEntity.oldScale, blockEntity.scale) / 60f);
+        offset = Easing.QUINTIC_IN_OUT.ease(offset, 0, 1, 1);
+        size = Easing.QUINTIC_IN_OUT.ease(size, 0, 1, 1);
+        if (size < 0) size = 0;
 
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.5F + (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0.5F);

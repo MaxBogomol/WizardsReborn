@@ -37,6 +37,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
     public int experience = 0;
     public int cooldown = 0;
     public int tick = 0;
+    public int oldTick = 0;
 
     public Random random = new Random();
 
@@ -93,6 +94,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
         }
 
         if (level.isClientSide()) {
+            oldTick = tick;
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.3) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -149,9 +151,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
                     sound.playSound();
                 }
 
-                if (tick < 20) {
-                    tick++;
-                }
+                if (tick < 20) tick++;
             } else {
                 if (tick > 0) {
                     tick--;
