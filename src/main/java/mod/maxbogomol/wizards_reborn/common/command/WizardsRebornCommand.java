@@ -554,6 +554,9 @@ public class WizardsRebornCommand {
             if (!stack.isEmpty()) {
                 if (ArcaneEnchantmentUtil.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
                     ArcaneEnchantmentUtil.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
+                    if (enchantmentLevel == 0) {
+                        ArcaneEnchantmentUtil.removeArcaneEnchantment(stack, arcaneEnchantment);
+                    }
                     players++;
                 }
             }

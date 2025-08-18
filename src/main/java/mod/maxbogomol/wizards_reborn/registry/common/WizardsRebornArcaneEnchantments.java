@@ -9,6 +9,7 @@ public class WizardsRebornArcaneEnchantments {
     public static ArcaneEnchantment WISSEN_MENDING = new WissenMendingArcaneEnchantment(WizardsReborn.MOD_ID+":wissen_mending", 3);
     public static ArcaneEnchantment LIFE_MENDING = new LifeMendingArcaneEnchantment(WizardsReborn.MOD_ID+":life_mending", 3);
     public static ArcaneEnchantment MAGIC_BLADE = new MagicBladeArcaneEnchantment(WizardsReborn.MOD_ID+":magic_blade", 5);
+    public static ArcaneEnchantment DUAL_BLADE = new DualBladeArcaneEnchantment(WizardsReborn.MOD_ID+":dual_blade", 5);
     public static ArcaneEnchantment LIFE_ROOTS = new LifeRootsArcaneEnchantment(WizardsReborn.MOD_ID+":life_roots", 2);
     public static ArcaneEnchantment WISSEN_CHARGE = new WissenChargeArcaneEnchantment(WizardsReborn.MOD_ID+":wissen_charge", 2);
     public static ArcaneEnchantment EAGLE_SHOT = new EagleShotArcaneEnchantment(WizardsReborn.MOD_ID+":eagle_shot", 4);
@@ -24,6 +25,7 @@ public class WizardsRebornArcaneEnchantments {
         ArcaneEnchantmentHandler.register(WISSEN_MENDING);
         ArcaneEnchantmentHandler.register(LIFE_MENDING);
         ArcaneEnchantmentHandler.register(MAGIC_BLADE);
+        ArcaneEnchantmentHandler.register(DUAL_BLADE);
         ArcaneEnchantmentHandler.register(LIFE_ROOTS);
         ArcaneEnchantmentHandler.register(WISSEN_CHARGE);
         ArcaneEnchantmentHandler.register(EAGLE_SHOT);

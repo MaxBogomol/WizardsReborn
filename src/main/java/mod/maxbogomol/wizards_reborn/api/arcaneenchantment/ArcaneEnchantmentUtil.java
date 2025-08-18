@@ -251,6 +251,7 @@ public class ArcaneEnchantmentUtil {
 
     public static void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         MagicBladeArcaneEnchantment.hurtEnemy(stack, target, attacker);
+        DualBladeArcaneEnchantment.hurtEnemy(stack, target, attacker);
     }
 
     public static void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
