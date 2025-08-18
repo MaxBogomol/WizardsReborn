@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:mor"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nether_salt_pile": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:nether_salt_pile"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_mor",
+      "has_nether_salt_pile"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/mor_pie"
+    ]
+  },
+  "sends_telemetry_event": false
+}

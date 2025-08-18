@@ -63,6 +63,6 @@ public class SniffaloScreen extends AbstractContainerScreen<SniffaloContainer> {
             }
         }
 
-        InventoryScreen.renderEntityInInventoryFollowsMouse(gui, i + 51, j + 70, 11, (float) (i + 51) - x, (float) (j + 90 - 50) - y, this.sniffalo);
+        InventoryScreen.renderEntityInInventoryFollowsMouse(gui, i + 51, j + 70, 11, (float) (i + 51) - x, (float) (j + 70 - 30) - y, this.sniffalo);
     }
 }

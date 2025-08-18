@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "pitcher_turnip_pie",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:pitcher_turnip"
+    },
+    {
+      "item": "wizards_reborn:pitcher_dew"
+    },
+    {
+      "item": "wizards_reborn:nether_salt_pile"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:pitcher_turnip_pie",
+    "count": 1
+  }
+}

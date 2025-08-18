@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
@@ -29,6 +30,7 @@ public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWi
         random.setSeed(blockEntity.getBlockPos().asLong());
 
         float alpha = Mth.lerp(partialTicks, blockEntity.oldGlowTicks, blockEntity.glowTicks) / 20f;
+        alpha = Easing.SINE_IN_OUT.ease(alpha, 0, 1, 1);
 
         if (alpha > 0 && blockEntity.getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
             Monogram monogram = block.getMonogram();

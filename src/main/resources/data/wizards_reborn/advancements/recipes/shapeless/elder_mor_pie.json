@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_elder_mor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:elder_mor"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nether_salt_pile": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wizards_reborn:nether_salt_pile"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_elder_mor",
+      "has_nether_salt_pile"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/elder_mor_pie"
+    ]
+  },
+  "sends_telemetry_event": false
+}

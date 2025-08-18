@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "mor_soup",
+  "group": "mor_pie",
   "ingredients": [
     {
-      "item": "minecraft:bowl"
-    },
-    {
       "item": "wizards_reborn:elder_mor"
     },
     {
       "item": "wizards_reborn:elder_mor"
     },
     {
-      "item": "wizards_reborn:elder_mor"
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "wizards_reborn:nether_salt_pile"
     }
   ],
   "result": {
-    "item": "wizards_reborn:elder_mor_soup",
+    "item": "wizards_reborn:elder_mor_pie",
     "count": 1
   }
 }
