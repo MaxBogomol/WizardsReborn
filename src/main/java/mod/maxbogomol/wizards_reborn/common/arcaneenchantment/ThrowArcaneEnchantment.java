@@ -98,7 +98,14 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
 
                             baseDamage = baseDamage + EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
 
+                            int dualBladeLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.DUAL_BLADE);
                             int bladeLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.MAGIC_BLADE);
+
+                            if (dualBladeLevel > 0) {
+                                bladeLevel = bladeLevel + dualBladeLevel + 2;
+                                DualBladeArcaneEnchantment.selfHurt(dualBladeLevel, player);
+                            }
+
                             if (bladeLevel > 0) {
                                 int additionalCost = (int) ((5 * bladeLevel) * (1 - costModifier));
                                 if (WissenUtil.canRemoveWissen(wissen, cost + additionalCost)) {

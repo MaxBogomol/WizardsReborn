@@ -897,6 +897,8 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, FOOD, WizardsRebornItems.WHEAT_FLOUR);
             addInSub(event, FOOD, WizardsRebornItems.ARCANE_LINEN_FLOUR);
 
+            addInSub(event, FOOD, WizardsRebornItems.ARCANE_GOLD_CARROT);
+
             addInSub(event, FOOD, WizardsRebornItems.MOR_PIE);
             if (WizardsRebornFarmersDelight.isLoaded()) {
                 addInSub(event, FOOD, WizardsRebornFarmersDelight.ItemsLoadedOnly.MOR_PIE_SLICE);
@@ -908,6 +910,10 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, FOOD, WizardsRebornItems.PITCHER_TURNIP_PIE);
             if (WizardsRebornFarmersDelight.isLoaded()) {
                 addInSub(event, FOOD, WizardsRebornFarmersDelight.ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE);
+            }
+            addInSub(event, FOOD, WizardsRebornItems.CARROT_PIE);
+            if (WizardsRebornFarmersDelight.isLoaded()) {
+                addInSub(event, FOOD, WizardsRebornFarmersDelight.ItemsLoadedOnly.CARROT_PIE_SLICE);
             }
 
             addInSub(event, FOOD, WizardsRebornItems.BLIN);

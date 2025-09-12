@@ -79,16 +79,20 @@ public class DualBladeArcaneEnchantment extends ArcaneEnchantment {
                             WizardsRebornPacketHandler.sendToTracking(target.level(), target.getOnPos(), new MagicBladePacket(target.position().add(0, target.getBbHeight() / 2f, 0)));
                         }
 
-                        int invulnerableTime = attacker.invulnerableTime;
-                        attacker.invulnerableTime = 0;
-                        attacker.hurt(DamageHandler.create(player.level(), WizardsRebornDamageTypes.ARCANE_MAGIC), (enchantmentLevel + 2) / 2f);
-                        attacker.invulnerableTime = invulnerableTime;
-                        attacker.level().playSound(null, attacker.getOnPos(), WizardsRebornSounds.CRYSTAL_HIT.get(), SoundSource.PLAYERS, 1.3f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 3)));
-                        WizardsRebornPacketHandler.sendToTracking(attacker.level(), attacker.getOnPos(), new MagicBladePacket(attacker.position().add(0, attacker.getBbHeight() / 2f, 0)));
+                        selfHurt(enchantmentLevel, attacker);
                     }
                 }
             }
         }
+    }
+
+    public static void selfHurt(int enchantmentLevel, LivingEntity attacker) {
+        int invulnerableTime = attacker.invulnerableTime;
+        attacker.invulnerableTime = 0;
+        attacker.hurt(DamageHandler.create(attacker.level(), WizardsRebornDamageTypes.ARCANE_MAGIC), (enchantmentLevel + 2) / 2f);
+        attacker.invulnerableTime = invulnerableTime;
+        attacker.level().playSound(null, attacker.getOnPos(), WizardsRebornSounds.CRYSTAL_HIT.get(), SoundSource.PLAYERS, 1.3f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 3)));
+        WizardsRebornPacketHandler.sendToTracking(attacker.level(), attacker.getOnPos(), new MagicBladePacket(attacker.position().add(0, attacker.getBbHeight() / 2f, 0)));
     }
 
     @OnlyIn(Dist.CLIENT)

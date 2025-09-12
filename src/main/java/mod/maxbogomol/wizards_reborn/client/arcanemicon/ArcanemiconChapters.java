@@ -1390,8 +1390,13 @@ public class ArcanemiconChapters {
                 new TitlePage("wizards_reborn.arcanemicon.page.life_mending"),
                 new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_PICKAXE.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_PICKAXE.get()),
                         new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
-                        ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM
+                        ARCACITE_ITEM, ARCACITE_ITEM
                 ).setExperience(5).setHealth(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.LIFE_MENDING),
+                new TitlePage("wizards_reborn.arcanemicon.page.dual_blade"),
+                new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_SWORD.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_SWORD.get()),
+                        new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM
+                ).setExperience(5).setHealth(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.DUAL_BLADE),
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_iterator_enchantments"),
                 new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), new ItemStack(Items.BOOK),
                         new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),

@@ -654,12 +654,16 @@
   "item.wizards_reborn.wheat_flour": "Пшеничная мука",
   "item.wizards_reborn.arcane_linen_flour": "Арканово-льняная мука",
 
+  "item.wizards_reborn.arcane_gold_carrot": "Аркановая золотая морковь",
+
   "item.wizards_reborn.mor_pie": "Моровый пирог",
   "item.wizards_reborn.mor_pie_slice": "Ломтик морового пирога",
   "item.wizards_reborn.elder_mor_pie": "Древне-моровый пирог",
   "item.wizards_reborn.elder_mor_pie_slice": "Ломтик древне-морового пирога",
   "item.wizards_reborn.pitcher_turnip_pie": "Пирог из репки кувшинницы",
   "item.wizards_reborn.pitcher_turnip_pie_slice": "Ломтик пирога из репки кувшинницы",
+  "item.wizards_reborn.carrot_pie": "Морковный пирог",
+  "item.wizards_reborn.carrot_pie_slice": "Ломтик морковного пирога",
 
   "item.wizards_reborn.blin": "Блин",
   "item.wizards_reborn.crepe": "Креп",
@@ -1542,7 +1546,7 @@
     "wizards_reborn.arcanemicon.page.wissen_cell.1": "Используется для зарядки предметов виссеном и транспортировки виссена.",
   "wizards_reborn.arcanemicon.chapter.wissen_charger": "Виссен зарядник",
     "wizards_reborn.arcanemicon.page.wissen_charger.title": "Виссен зарядник",
-    "wizards_reborn.arcanemicon.page.wissen_charger": "@",
+    "wizards_reborn.arcanemicon.page.wissen_charger": "Устройство для зарядки предметов виссеном. В альтернативном режиме забирает виссен из предметов. Настраивается виссен жезлом.",
   "wizards_reborn.arcanemicon.chapter.crystal_bag": "Кристальная сумка",
     "wizards_reborn.arcanemicon.page.crystal_bag.title": "Кристальная сумка",
     "wizards_reborn.arcanemicon.page.crystal_bag": "Сумка для хранения кристаллов. Нажмите кнопку [minecraft:sneak], чтобы открыть сумку. Дополнительно сумку можно открыть нажав кнопку [wizards_reborn:bagMenu].",

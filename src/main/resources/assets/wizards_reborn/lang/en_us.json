@@ -654,12 +654,16 @@
   "item.wizards_reborn.wheat_flour": "Wheat Flour",
   "item.wizards_reborn.arcane_linen_flour": "Arcane Linen Flour",
 
+  "item.wizards_reborn.arcane_gold_carrot": "Arcane Gold Carrot",
+
   "item.wizards_reborn.mor_pie": "Mor Pie",
   "item.wizards_reborn.mor_pie_slice": "Mor Pie Slice",
   "item.wizards_reborn.elder_mor_pie": "Elder Mor Pie",
   "item.wizards_reborn.elder_mor_pie_slice": "Elder Mor Pie Slice",
   "item.wizards_reborn.pitcher_turnip_pie": "Pitcher Turnip Pie",
   "item.wizards_reborn.pitcher_turnip_pie_slice": "Pitcher Turnip Pie Slice",
+  "item.wizards_reborn.carrot_pie": "Carrot Pie",
+  "item.wizards_reborn.carrot_pie_slice": "Carrot Pie Slice",
 
   "item.wizards_reborn.blin": "Blin",
   "item.wizards_reborn.crepe": "Crêpe",
@@ -1542,7 +1546,7 @@
     "wizards_reborn.arcanemicon.page.wissen_cell.1": "Used to charge items with wissen and transport wissen.",
   "wizards_reborn.arcanemicon.chapter.wissen_charger": "Wissen Charger",
     "wizards_reborn.arcanemicon.page.wissen_charger.title": "Wissen Charger",
-    "wizards_reborn.arcanemicon.page.wissen_charger": "@",
+    "wizards_reborn.arcanemicon.page.wissen_charger": "A device for charging items with wissen. In an alternative mode, it takes wissen from items. It is adjusted with a wissen wand.",
   "wizards_reborn.arcanemicon.chapter.crystal_bag": "Crystal Bag",
     "wizards_reborn.arcanemicon.page.crystal_bag.title": "Crystal Bag",
     "wizards_reborn.arcanemicon.page.crystal_bag": "Bag for storing crystals. Press the [minecraft:sneak] button to open the bag. Additionally, the bag can be opened by pressing the [wizards_reborn:bagMenu] button.",

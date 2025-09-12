@@ -81,8 +81,8 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
                 boolean isTransfer = false;
 
                 if (outputBlock != null && inputBlock != null) {
-                    IItemHandler outputHandler = outputBlock.getCapability(ForgeCapabilities.ITEM_HANDLER, outputDirection).orElse(null);
-                    IItemHandler inputHandler = inputBlock.getCapability(ForgeCapabilities.ITEM_HANDLER, inputDirection).orElse(null);
+                    IItemHandler outputHandler = outputBlock.getCapability(ForgeCapabilities.ITEM_HANDLER, outputDirection.getOpposite()).orElse(null);
+                    IItemHandler inputHandler = inputBlock.getCapability(ForgeCapabilities.ITEM_HANDLER, inputDirection.getOpposite()).orElse(null);
 
                     if (outputHandler != null && inputHandler != null) {
                         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -96,7 +96,7 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
                                     ItemStack inputItemSort = inputHandler.extractItem(ii, 1, true);
 
                                     if (inputItemSort.equals(itemSort, false)) {
-                                        if (outputHandler.getStackInSlot(i).getCount() + 1 <= outputHandler.getSlotLimit(i)) {
+                                        if (outputHandler.isItemValid(ii, inputItemSort) && outputHandler.getStackInSlot(i).getCount() + 1 <= outputHandler.getSlotLimit(i)) {
                                             inputHandler.extractItem(ii, 1, false);
                                             outputHandler.insertItem(i, inputItemSort, false);
                                             isTransfer = true;
