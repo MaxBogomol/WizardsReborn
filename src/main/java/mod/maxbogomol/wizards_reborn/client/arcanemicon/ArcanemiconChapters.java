@@ -16,6 +16,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titled.*;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.integration.common.create.WizardsRebornCreate;
 import mod.maxbogomol.wizards_reborn.integration.common.embers.WizardsRebornEmbers;
@@ -52,7 +53,7 @@ public class ArcanemiconChapters {
     public static List<Category> additionalCategories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTAL_RITUALS, ALCHEMY, ADDITIONAL;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTAL_RITUALS_INDEX, ALCHEMY_INDEX, ADDITIONAL_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, ARCANE_WOOD_CROSSBOW, ARCANE_WOOD_FISHING_ROD, ARCANE_GOLD_SHEARS, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, MUSIC_DISC_SHIMMER, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, WISSEN_CHARGER, CRYSTAL_BAG, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, KNOWLEDGE_SCROLL, MUSIC_DISC_REBORN, MUSIC_DISC_PANACHE, ARCANUM_LENS, WISSEN_KEYCHAIN, WISSEN_RING, LEATHER_COLLAR, JEWELER_TABLE, FACETED_CRYSTALS, TRIMS, TOP_HAT_TRIM, MAGNIFICENT_MAID_TRIM, SUMMER_LOVE_TRIM, MUSIC_DISC_CAPITALISM,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, ARCANE_WOOD_CROSSBOW, ARCANE_WOOD_FISHING_ROD, ARCANE_GOLD_SHEARS, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, MUSIC_DISC_SHIMMER, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, WISSEN_CHARGER, CRYSTAL_BAG, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, KNOWLEDGE_SCROLL, MUSIC_DISC_REBORN, MUSIC_DISC_PANACHE, ARCANUM_LENS, WISSEN_KEYCHAIN, WISSEN_RING, LEATHER_COLLAR, JEWELER_TABLE, FACETED_CRYSTALS, TRIMS, TOP_HAT_TRIM, MAGNIFICENT_MAID_TRIM, SUMMER_LOVE_TRIM, MUSIC_DISC_CAPITALISM, CARGO_CARPET,
             ARCANE_LEVER, ARCANE_HOPPER, REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, EXPERIENCE_SENSOR, LIGHT_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER, ARCANE_WOOD_FRAME, WISSEN_CASING, WISESTONE_CASING, FLUID_CASING, STEAM_CASING, GLASS_FRAME, LIGHT_CASING, INNOCENT_CASING,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE, CURSE_PROJECTILE,
@@ -67,7 +68,8 @@ public class ArcanemiconChapters {
             RESEARCHES, MONOGRAMS, RESEARCH,
             LUNAM, VITA, SOLEM, MORS, MIRACULUM, TEMPUS, STATERA, ECLIPSIS, SICCITAS, SOLSTITIUM, FAMES, RENAISSANCE, BELLUM, LUX, KARA, DEGRADATIO, PRAEDICTIONEM, EVOLUTIONIS, TENEBRIS, UNIVERSUM,
             LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, FOCUSING, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD, INNOCENT_WOOD_TOOLS, PHANTOM_INK_TRIM, MUSIC_DISC_DISCO,
-            MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, JAM, NETHER_SALT, BLAZING_WAND, PANCAKES, PIES, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE, SOUL_HUNTER_TRIM, IMPLOSION_TRIM, SNIFFALO, TORCHFLOWER, PITCHER, OLD_ROOTS, SHINY_CLOVER, UNDERGROUND_GRAPE, CORK_BAMBOO,
+            MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, JAM, NETHER_SALT, BLAZING_WAND, PANCAKES, PIES, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE, SOUL_HUNTER_TRIM, IMPLOSION_TRIM, SNIFFALO, TORCHFLOWER, PITCHER, OLD_ROOTS, SHINY_CLOVER, UNDERGROUND_GRAPE, CORK_BAMBOO, BREWING,
+            VODKA_BOTTLE, BOURBON_BOTTLE, WHISKEY_BOTTLE, WHITE_WINE_BOTTLE, RED_WINE_BOTTLE, PORT_WINE_BOTTLE, PALM_LIQUEUR_BOTTLE, MEAD_BOTTLE, SBITEN_BOTTLE, SLIVOVITZ_BOTTLE, SAKE_BOTTLE, SOJU_BOTTLE, CHICHA_BOTTLE, CHACHA_BOTTLE, APPLEJACK_BOTTLE, RAKIA_BOTTLE, KIRSCH_BOTTLE, BOROVICHKA_BOTTLE, PALINKA_BOTTLE, TEQUILA_BOTTLE, PULQUE_BOTTLE, ARKHI_BOTTLE, TEJ_BOTTLE, WISSEN_BEER_BOTTLE, MOR_TINCTURE_BOTTLE, INNOCENT_WINE_BOTTLE, TARKHUNA_BOTTLE, BAIKAL_BOTTLE, KVASS_BOTTLE, KISSEL_BOTTLE,
             PROGRESSION, STATISTIC, CONFIGS, SPECIAL_THANKS, GRAPHICS_CONFIGS, ANIMATIONS_CONFIGS, PARTICLES_CONFIGS, ARCANEMICON_CONFIGS, NUMERICAL_CONFIGS, OVERLAY_CONFIGS, ARCANE_WAND_OVERLAY_CONFIGS;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
 
@@ -407,6 +409,14 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_BOOTS.get()),
                         ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_carrot",
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANE_GOLD_CARROT.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_CARROT.get()),
+                        ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM,
+                        ARCANE_GOLD_NUGGET_ITEM, new ItemStack(Items.CARROT), ARCANE_GOLD_NUGGET_ITEM,
+                        ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.gilded_arcane_wood_planks",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.GILDED_ARCANE_WOOD_PLANKS.get()))
@@ -1681,11 +1691,49 @@ public class ArcanemiconChapters {
 
         MUSIC_DISC_CAPITALISM = new Chapter("wizards_reborn.arcanemicon.chapter.music_disc_capitalism",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_capitalism",
-                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_CAPITALISM.get()))
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MUSIC_DISC_CAPITALISM.get()))
                 ),
                 new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.MUSIC_DISC_CAPITALISM.get()), new ItemStack(WizardsRebornItems.MUSIC_DISC_PANACHE.get()),
                         ARCANE_WOOD_PLANKS_ITEM, ARCANE_GOLD_INGOT_ITEM
                 )
+        );
+
+        CARGO_CARPET = new Chapter("wizards_reborn.arcanemicon.chapter.cargo_carpet",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.cargo_carpet",
+                        new BlockEntry(new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.LIGHT_GRAY_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.GRAY_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.BLACK_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.BROWN_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.RED_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.ORANGE_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.YELLOW_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.LIME_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.GREEN_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.CYAN_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.LIGHT_BLUE_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.BLUE_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.PURPLE_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.MAGENTA_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.PINK_CARGO_CARPET.get())),
+                        new BlockEntry(new ItemStack(WizardsRebornItems.RAINBOW_CARGO_CARPET.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.WHITE_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.LIGHT_GRAY_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.LIGHT_GRAY_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.GRAY_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.GRAY_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.BLACK_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.BLACK_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.BROWN_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.BROWN_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.RED_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.RED_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ORANGE_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.ORANGE_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.YELLOW_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.YELLOW_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.LIME_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.LIME_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.GREEN_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.GREEN_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.CYAN_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.CYAN_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.LIGHT_BLUE_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.LIGHT_BLUE_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.BLUE_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.BLUE_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.PURPLE_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.PURPLE_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.MAGENTA_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.MAGENTA_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.PINK_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.PINK_DYE))
         );
 
         ItemStack knowledgeScroll = new ItemStack(WizardsRebornItems.KNOWLEDGE_SCROLL.get());
@@ -1757,7 +1805,8 @@ public class ArcanemiconChapters {
                         new IndexEntry(SUMMER_LOVE_TRIM, new ItemStack(WizardsRebornItems.SUMMER_LOVE_TRIM.get()), WizardsRebornKnowledges.JEWELER_TABLE)
                 ),
                 new IndexPage(
-                        new IndexEntry(MUSIC_DISC_CAPITALISM, new ItemStack(WizardsRebornItems.MUSIC_DISC_CAPITALISM.get()), WizardsRebornKnowledges.ARCANE_ITERATOR)
+                        new IndexEntry(MUSIC_DISC_CAPITALISM, new ItemStack(WizardsRebornItems.MUSIC_DISC_CAPITALISM.get()), WizardsRebornKnowledges.ARCANE_ITERATOR),
+                        new IndexEntry(CARGO_CARPET, new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), WizardsRebornKnowledges.ARCANE_ITERATOR)
                 )
         );
     }
@@ -3652,7 +3701,8 @@ public class ArcanemiconChapters {
         PIES = new Chapter("wizards_reborn.arcanemicon.chapter.pies",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.pies",
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MOR_PIE.get())),
-                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ELDER_MOR_PIE.get()))
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ELDER_MOR_PIE.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.CARROT_PIE.get()))
                 ),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.MOR_PIE.get()),
                         new ItemStack(WizardsRebornItems.MOR.get()), new ItemStack(WizardsRebornItems.MOR.get()), EMPTY_ITEM,
@@ -3660,6 +3710,10 @@ public class ArcanemiconChapters {
                 ),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ELDER_MOR_PIE.get()),
                         new ItemStack(WizardsRebornItems.ELDER_MOR.get()), new ItemStack(WizardsRebornItems.ELDER_MOR.get()), EMPTY_ITEM,
+                        new ItemStack(Items.EGG), NETHER_SALT_PILE_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.CARROT_PIE.get()),
+                        new ItemStack(Items.CARROT), new ItemStack(Items.CARROT), EMPTY_ITEM,
                         new ItemStack(Items.EGG), NETHER_SALT_PILE_ITEM
                 )
         );
@@ -4307,6 +4361,260 @@ public class ArcanemiconChapters {
                 )
         );
 
+        VODKA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.vodka_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.vodka_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.VODKA_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.VODKA_BOTTLE.get(), 3))
+                )
+        );
+
+        BOURBON_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.bourbon_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.bourbon_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BOURBON_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.BOURBON_BOTTLE.get(), 3))
+                )
+        );
+
+        WHISKEY_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.whiskey_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.whiskey_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WHISKEY_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.WHISKEY_BOTTLE.get(), 3))
+                )
+        );
+
+        WHITE_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.white_wine_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.white_wine_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WHITE_WINE_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.WHITE_WINE_BOTTLE.get(), 3))
+                )
+        );
+
+        RED_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.red_wine_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.red_wine_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.RED_WINE_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.RED_WINE_BOTTLE.get(), 3))
+                )
+        );
+
+        PORT_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.port_wine_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.port_wine_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PORT_WINE_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.PORT_WINE_BOTTLE.get(), 3))
+                )
+        );
+
+        PALM_LIQUEUR_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.palm_liqueur_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.palm_liqueur_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PALM_LIQUEUR_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.PALM_LIQUEUR_BOTTLE.get(), 3))
+                )
+        );
+
+        MEAD_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.mead_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.mead_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MEAD_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.MEAD_BOTTLE.get(), 3))
+                )
+        );
+
+        SBITEN_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.sbiten_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.sbiten_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SBITEN_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.SBITEN_BOTTLE.get(), 3))
+                )
+        );
+
+        SLIVOVITZ_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.slivovitz_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.slivovitz_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SLIVOVITZ_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.SLIVOVITZ_BOTTLE.get(), 3))
+                )
+        );
+
+        SAKE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.sake_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.sake_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SAKE_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.SAKE_BOTTLE.get(), 3))
+                )
+        );
+
+        SOJU_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.soju_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.soju_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SOJU_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.SOJU_BOTTLE.get(), 3))
+                )
+        );
+
+        CHICHA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.chicha_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.chicha_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.CHICHA_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.CHICHA_BOTTLE.get(), 3))
+                )
+        );
+
+        CHACHA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.chacha_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.chacha_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.CHACHA_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.CHACHA_BOTTLE.get(), 3))
+                )
+        );
+
+        APPLEJACK_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.applejack_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.applejack_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.APPLEJACK_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.APPLEJACK_BOTTLE.get(), 3))
+                )
+        );
+
+        RAKIA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.rakia_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.rakia_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.RAKIA_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.RAKIA_BOTTLE.get(), 3))
+                )
+        );
+
+        KIRSCH_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.kirsch_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.kirsch_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.KIRSCH_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.KIRSCH_BOTTLE.get(), 3))
+                )
+        );
+
+        BOROVICHKA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.borovichka_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.borovichka_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BOROVICHKA_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.BOROVICHKA_BOTTLE.get(), 3))
+                )
+        );
+
+        PALINKA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.palinka_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.palinka_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PALINKA_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.PALINKA_BOTTLE.get(), 3))
+                )
+        );
+
+        TEQUILA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.tequila_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.tequila_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.TEQUILA_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.TEQUILA_BOTTLE.get(), 3))
+                )
+        );
+
+        PULQUE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.pulque_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.pulque_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PULQUE_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.PULQUE_BOTTLE.get(), 3))
+                )
+        );
+
+        ARKHI_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.arkhi_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arkhi_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARKHI_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.ARKHI_BOTTLE.get(), 3))
+                )
+        );
+
+        TEJ_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.tej_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.tej_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.TEJ_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.TEJ_BOTTLE.get(), 3))
+                )
+        );
+
+        WISSEN_BEER_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_beer_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_beer_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_BEER_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.WISSEN_BEER_BOTTLE.get(), 3))
+                )
+        );
+
+        MOR_TINCTURE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.mor_tincture_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.mor_tincture_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MOR_TINCTURE_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.MOR_TINCTURE_BOTTLE.get(), 3))
+                )
+        );
+
+        INNOCENT_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.innocent_wine_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wine_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WINE_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.INNOCENT_WINE_BOTTLE.get(), 3))
+                )
+        );
+
+        TARKHUNA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.tarkhuna_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.tarkhuna_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.TARKHUNA_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.TARKHUNA_BOTTLE.get(), 3))
+                )
+        );
+
+        BAIKAL_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.baikal_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.baikal_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BAIKAL_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.BAIKAL_BOTTLE.get(), 3))
+                )
+        );
+
+        KVASS_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.kvass_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.kvass_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.KVASS_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.KVASS_BOTTLE.get(), 3))
+                )
+        );
+
+        KISSEL_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.kissel_bottle",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.kissel_bottle",
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.KISSEL_BOTTLE.get())),
+                        new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.KISSEL_BOTTLE.get(), 3))
+                )
+        );
+
+        BREWING = new Chapter("wizards_reborn.arcanemicon.chapter.brewing",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.brewing"),
+                new IndexPage(
+                        new IndexEntry(VODKA_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.VODKA_BOTTLE.get(), 3)),
+                        new IndexEntry(BOURBON_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.BOURBON_BOTTLE.get(), 3)),
+                        new IndexEntry(WHISKEY_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.WHISKEY_BOTTLE.get(), 3)),
+                        new IndexEntry(WHITE_WINE_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.WHITE_WINE_BOTTLE.get(), 3)),
+                        new IndexEntry(RED_WINE_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.RED_WINE_BOTTLE.get(), 3)),
+                        new IndexEntry(PORT_WINE_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.PORT_WINE_BOTTLE.get(), 3)),
+                        new IndexEntry(PALM_LIQUEUR_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.PALM_LIQUEUR_BOTTLE.get(), 3))
+                ),
+                new IndexPage(
+                        new IndexEntry(MEAD_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.MEAD_BOTTLE.get(), 3)),
+                        new IndexEntry(SBITEN_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.SBITEN_BOTTLE.get(), 3)),
+                        new IndexEntry(SLIVOVITZ_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.SLIVOVITZ_BOTTLE.get(), 3)),
+                        new IndexEntry(SAKE_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.SAKE_BOTTLE.get(), 3)),
+                        new IndexEntry(SOJU_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.SOJU_BOTTLE.get(), 3)),
+                        new IndexEntry(CHICHA_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.CHICHA_BOTTLE.get(), 3)),
+                        new IndexEntry(CHACHA_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.CHACHA_BOTTLE.get(), 3))
+                ),
+                new IndexPage(
+                        new IndexEntry(APPLEJACK_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.APPLEJACK_BOTTLE.get(), 3)),
+                        new IndexEntry(RAKIA_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.RAKIA_BOTTLE.get(), 3)),
+                        new IndexEntry(KIRSCH_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.KIRSCH_BOTTLE.get(), 3)),
+                        new IndexEntry(BOROVICHKA_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.BOROVICHKA_BOTTLE.get(), 3)),
+                        new IndexEntry(PALINKA_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.PALINKA_BOTTLE.get(), 3)),
+                        new IndexEntry(TEQUILA_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.TEQUILA_BOTTLE.get(), 3)),
+                        new IndexEntry(PULQUE_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.PULQUE_BOTTLE.get(), 3))
+                ),
+                new IndexPage(
+                        new IndexEntry(ARKHI_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.ARKHI_BOTTLE.get(), 3)),
+                        new IndexEntry(TEJ_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.TEJ_BOTTLE.get(), 3)),
+                        new IndexEntry(WISSEN_BEER_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.WISSEN_BEER_BOTTLE.get(), 3)),
+                        new IndexEntry(MOR_TINCTURE_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.MOR_TINCTURE_BOTTLE.get(), 3)),
+                        new IndexEntry(INNOCENT_WINE_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.INNOCENT_WINE_BOTTLE.get(), 3)),
+                        new IndexEntry(TARKHUNA_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.TARKHUNA_BOTTLE.get(), 3)),
+                        new IndexEntry(BAIKAL_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.BAIKAL_BOTTLE.get(), 3))
+                ),
+                new IndexPage(
+                        new IndexEntry(KVASS_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.KVASS_BOTTLE.get(), 3)),
+                        new IndexEntry(KISSEL_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.KISSEL_BOTTLE.get(), 3))
+                )
+        );
+
         ALCHEMY_INDEX = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.alchemy_index",
                         new IndexEntry(MOR, new ItemStack(WizardsRebornItems.MOR.get())),
@@ -4360,6 +4668,9 @@ public class ArcanemiconChapters {
                         new IndexEntry(SHINY_CLOVER, new ItemStack(WizardsRebornItems.SHINY_CLOVER.get()), WizardsRebornKnowledges.JEWELER_TABLE),
                         new IndexEntry(UNDERGROUND_GRAPE, new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), WizardsRebornKnowledges.JEWELER_TABLE),
                         new IndexEntry(CORK_BAMBOO, new ItemStack(WizardsRebornItems.CORK_BAMBOO.get()), WizardsRebornKnowledges.JEWELER_TABLE)
+                ),
+                new IndexPage(
+                        new IndexEntry(BREWING, new ItemStack(WizardsRebornItems.ARCANE_WOOD_KEG.get()), WizardsRebornKnowledges.JEWELER_TABLE)
                 )
         );
     }

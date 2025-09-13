@@ -198,6 +198,17 @@ public class DrinkBottleItem extends PlacedItem {
         return getItemsForTab(item.getItem());
     }
 
+    public static ItemStack getItemStage(Item item, int stage) {
+        ItemStack stack = new ItemStack(item);
+        setStageS(stack, stage);
+
+        return stack;
+    }
+
+    public static ItemStack getItemStage(ItemStack item, int stage) {
+        return getItemStage(item.getItem(), stage);
+    }
+
     public DrinkBottleItem setAlcoholic(boolean isAlcoholic) {
         this.isAlcoholic = isAlcoholic;
         return this;

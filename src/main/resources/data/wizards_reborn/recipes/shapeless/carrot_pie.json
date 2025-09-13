@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "carrot_pie",
+  "ingredients": [
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "wizards_reborn:nether_salt_pile"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:carrot_pie",
+    "count": 1
+  }
+}

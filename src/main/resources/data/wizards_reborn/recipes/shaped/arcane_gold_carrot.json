@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GGG",
+    "G#G",
+    "GGG"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:carrot"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcane_gold_carrot"
+  }
+}

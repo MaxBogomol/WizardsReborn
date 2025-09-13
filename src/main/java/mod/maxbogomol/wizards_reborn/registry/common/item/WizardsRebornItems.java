@@ -673,7 +673,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> WHEAT_FLOUR = ITEMS.register("wheat_flour", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_LINEN_FLOUR = ITEMS.register("arcane_linen_flour", () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> ARCANE_GOLD_CARROT = ITEMS.register("arcane_gold_carrot", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.MOR_PIE)).setNourishmentTick(1200));
+    public static final RegistryObject<Item> ARCANE_GOLD_CARROT = ITEMS.register("arcane_gold_carrot", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.ARCANE_GOLD_CARROT)).setNourishmentTick(1200));
 
     public static final RegistryObject<Item> MOR_PIE = ITEMS.register("mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.MOR_PIE)).setNourishmentTick(1200));
     public static final RegistryObject<Item> ELDER_MOR_PIE = ITEMS.register("elder_mor_pie", () -> new ArcaneFoodItem(new Item.Properties().food(WizardsRebornFoods.ELDER_MOR_PIE)).setNourishmentTick(1200));

@@ -1,21 +1,21 @@
 {
   "type": "wizards_reborn:arcane_workbench",
   "pattern": [
-    "_#_",
     "G_G",
-    "GGG",
-    "____"
+    "G_G",
+    "_G_",
+    "#___"
   ],
   "key": {
     "#": {
-      "tag": "wizards_reborn:arcane_wood_planks"
+      "tag": "wizards_reborn:cork_bamboo_planks"
     },
     "G": {
       "item": "wizards_reborn:alchemy_glass"
     }
   },
   "output": {
-    "item": "wizards_reborn:alchemy_vial"
+    "item": "wizards_reborn:alchemy_bottle"
   },
   "wissen": 100
 }
