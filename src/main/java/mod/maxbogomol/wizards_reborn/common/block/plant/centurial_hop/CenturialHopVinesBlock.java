@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.underground_grape;
+package mod.maxbogomol.wizards_reborn.common.block.plant.centurial_hop;
 
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -13,25 +13,33 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CaveVinesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class UndergroundGrapeVinesBlock extends CaveVinesBlock {
+public class CenturialHopVinesBlock extends CaveVinesBlock {
 
-    public UndergroundGrapeVinesBlock(Properties properties) {
+    private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 16, 14);
+
+    public CenturialHopVinesBlock(Properties properties) {
         super(properties);
     }
 
     @Override
     protected Block getBodyBlock() {
-        return WizardsRebornBlocks.UNDERGROUND_GRAPE_VINES_PLANT.get();
+        return WizardsRebornBlocks.CENTURIAL_HOP_VINES_PLANT.get();
     }
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-        return new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE_VINE.get());
+        return new ItemStack(WizardsRebornItems.CENTURIAL_HOP_SEED.get());
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return IUndergroundGrape.use(player, state, level, pos);
+        return ICenturialHop.use(player, state, level, pos);
+    }
+
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return SHAPE;
     }
 }

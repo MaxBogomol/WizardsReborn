@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.plant;
+package mod.maxbogomol.wizards_reborn.common.block.pitcher;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;

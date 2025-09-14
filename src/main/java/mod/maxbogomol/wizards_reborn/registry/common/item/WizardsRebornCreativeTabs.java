@@ -326,6 +326,12 @@ public class WizardsRebornCreativeTabs {
             addInSub(event, PLANTS, WizardsRebornItems.SHINY_CLOVER);
             addInSub(event, PLANTS, WizardsRebornItems.UNDERGROUND_GRAPE_VINE);
             addInSub(event, PLANTS, WizardsRebornItems.UNDERGROUND_GRAPE);
+            addInSub(event, PLANTS, WizardsRebornItems.CENTURIAL_HOP_SEED);
+            addInSub(event, PLANTS, WizardsRebornItems.CENTURIAL_HOP_CONE);
+            addInSub(event, PLANTS, WizardsRebornItems.FERAL_GOSSYPIUM_SEED);
+            addInSub(event, PLANTS, WizardsRebornItems.FERAL_COTTON);
+            addInSub(event, PLANTS, WizardsRebornItems.FERAL_FRUIT);
+            addInSub(event, PLANTS, WizardsRebornItems.ROTTEN_FERAL_FRUIT);
 
             PLANTS.addDisplayItem(WizardsRebornItems.CORK_BAMBOO_SEED.get());
             PLANTS.addDisplayItem(WizardsRebornItems.CORK_BAMBOO.get());

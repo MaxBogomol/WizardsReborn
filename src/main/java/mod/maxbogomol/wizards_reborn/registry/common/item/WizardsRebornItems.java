@@ -151,6 +151,12 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> SHINY_CLOVER = ITEMS.register("shiny_clover", () -> new BlockItem(WizardsRebornBlocks.SHINY_CLOVER.get(), new Item.Properties()));
     public static final RegistryObject<Item> UNDERGROUND_GRAPE_VINE = ITEMS.register("underground_grape_vine", () -> new ItemNameBlockItem(WizardsRebornBlocks.UNDERGROUND_GRAPE_VINES.get(), new Item.Properties()));
     public static final RegistryObject<Item> UNDERGROUND_GRAPE = ITEMS.register("underground_grape", () -> new Item(new Item.Properties().food(WizardsRebornFoods.UNDERGROUND_GRAPE)));
+    public static final RegistryObject<Item> CENTURIAL_HOP_SEED = ITEMS.register("centurial_hop_seed", () -> new ItemNameBlockItem(WizardsRebornBlocks.CENTURIAL_HOP_CROP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CENTURIAL_HOP_CONE = ITEMS.register("centurial_hop_cone", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FERAL_GOSSYPIUM_SEED = ITEMS.register("feral_gossypium_seed", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FERAL_COTTON = ITEMS.register("feral_cotton", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FERAL_FRUIT = ITEMS.register("feral_fruit", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ROTTEN_FERAL_FRUIT = ITEMS.register("rotten_feral_fruit", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> OLD_ROOTS = ITEMS.register("old_roots", () -> new BlockItem(WizardsRebornBlocks.OLD_ROOTS.get(), new Item.Properties()));
     public static final RegistryObject<Item> OLD_DANDELION = ITEMS.register("old_dandelion", () -> new BlockItem(WizardsRebornBlocks.OLD_DANDELION.get(), new Item.Properties()));

@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.plant;
+package mod.maxbogomol.wizards_reborn.common.block.plant.shiny_clover;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;

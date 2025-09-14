@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.underground_grape;
+package mod.maxbogomol.wizards_reborn.common.block.plant.underground_grape;
 
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;

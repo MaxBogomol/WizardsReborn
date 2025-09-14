@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "berries=false": {
+      "model": "wizards_reborn:block/centurial_hop_vines"
+    },
+    "berries=true": {
+      "model": "wizards_reborn:block/centurial_hop_vines_lit"
+    }
+  }
+}

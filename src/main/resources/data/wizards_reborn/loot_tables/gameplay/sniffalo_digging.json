@@ -14,6 +14,14 @@
         },
         {
           "type": "minecraft:item",
+          "name": "wizards_reborn:centurial_hop_seed"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wizards_reborn:feral_gossypium_seed"
+        },
+        {
+          "type": "minecraft:item",
           "name": "wizards_reborn:cork_bamboo_seed"
         },
         {

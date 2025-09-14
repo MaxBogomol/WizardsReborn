@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.plant;
+package mod.maxbogomol.wizards_reborn.common.block.plant.shiny_clover;
 
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;

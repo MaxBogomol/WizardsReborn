@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "wizards_reborn:centurial_hop_vines_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "berries": "true"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "wizards_reborn:centurial_hop_cone"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "wizards_reborn:blocks/centurial_hop_vines_plant"
+}

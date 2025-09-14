@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.cork_bamboo;
+package mod.maxbogomol.wizards_reborn.common.block.plant.cork_bamboo;
 
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
