@@ -7,9 +7,11 @@ import net.minecraft.world.food.FoodProperties;
 
 public class WizardsRebornFoods {
     public static final FoodProperties MOR = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.2F).effect(() -> new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(() -> new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
-    public static final FoodProperties PITCHER_DER = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.1F).alwaysEat().fast().effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 3000, 0), 1.0F).effect(() -> new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 500, 0), 1.0F).build();
+    public static final FoodProperties PITCHER_DEW = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.1F).alwaysEat().fast().effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 3000, 0), 1.0F).effect(() -> new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 500, 0), 1.0F).build();
     public static final FoodProperties PITCHER_TURNIP = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.4F).build();
     public static final FoodProperties UNDERGROUND_GRAPE = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.2F).build();
+    public static final FoodProperties FERAL_FRUIT = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.5F).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 420, 0), 1.0F).build();
+    public static final FoodProperties ROTTEN_FERAL_FRUIT = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.1F).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 1000, 0), 1.0F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.TIPSY.get(), 2500, 0), 1.0F).build();
     public static final FoodProperties ARCANE_GOLD_CARROT = (new FoodProperties.Builder()).nutrition(7).saturationMod(1.2F).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
     public static final FoodProperties MOR_PIE = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.4F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 600, 0), 1.0F).build();
     public static final FoodProperties ELDER_MOR_PIE = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.4F).effect(() -> new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 900, 0), 1.0F).build();

@@ -144,7 +144,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ELDER_MOR = ITEMS.register("elder_mor", () -> new MorItem(WizardsRebornBlocks.ELDER_MOR.get(), new Item.Properties().food(WizardsRebornFoods.MOR), 1700, 2100));
     public static final RegistryObject<Item> ELDER_MOR_BLOCK = ITEMS.register("elder_mor_block", () -> new BlockItem(WizardsRebornBlocks.ELDER_MOR_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> PITCHER_DEW = ITEMS.register("pitcher_dew", () -> new PitcherDewItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_DER)));
+    public static final RegistryObject<Item> PITCHER_DEW = ITEMS.register("pitcher_dew", () -> new PitcherDewItem(new Item.Properties().food(WizardsRebornFoods.PITCHER_DEW)));
     public static final RegistryObject<Item> PITCHER_TURNIP = ITEMS.register("pitcher_turnip", () -> new BlockItem(WizardsRebornBlocks.PITCHER_TURNIP.get(), new Item.Properties().food(WizardsRebornFoods.PITCHER_TURNIP)));
     public static final RegistryObject<Item> PITCHER_TURNIP_BLOCK = ITEMS.register("pitcher_turnip_block", () -> new BlockItem(WizardsRebornBlocks.PITCHER_TURNIP_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> SHINY_CLOVER_SEED = ITEMS.register("shiny_clover_seed", () -> new ItemNameBlockItem(WizardsRebornBlocks.SHINY_CLOVER_CROP.get(), new Item.Properties()));
@@ -155,8 +155,8 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> CENTURIAL_HOP_CONE = ITEMS.register("centurial_hop_cone", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FERAL_GOSSYPIUM_SEED = ITEMS.register("feral_gossypium_seed", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FERAL_COTTON = ITEMS.register("feral_cotton", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> FERAL_FRUIT = ITEMS.register("feral_fruit", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ROTTEN_FERAL_FRUIT = ITEMS.register("rotten_feral_fruit", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FERAL_FRUIT = ITEMS.register("feral_fruit", () -> new FeralFruitItem(new Item.Properties().food(WizardsRebornFoods.FERAL_FRUIT)));
+    public static final RegistryObject<Item> ROTTEN_FERAL_FRUIT = ITEMS.register("rotten_feral_fruit", () -> new Item(new Item.Properties().food(WizardsRebornFoods.ROTTEN_FERAL_FRUIT)));
 
     public static final RegistryObject<Item> OLD_ROOTS = ITEMS.register("old_roots", () -> new BlockItem(WizardsRebornBlocks.OLD_ROOTS.get(), new Item.Properties()));
     public static final RegistryObject<Item> OLD_DANDELION = ITEMS.register("old_dandelion", () -> new BlockItem(WizardsRebornBlocks.OLD_DANDELION.get(), new Item.Properties()));

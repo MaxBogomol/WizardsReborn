@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.item;
+package mod.maxbogomol.wizards_reborn.common.item.food;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
