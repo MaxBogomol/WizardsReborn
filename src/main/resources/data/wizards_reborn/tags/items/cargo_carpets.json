@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:white_cargo_carpet",
+    "wizards_reborn:light_gray_cargo_carpet",
+    "wizards_reborn:gray_cargo_carpet",
+    "wizards_reborn:black_cargo_carpet",
+    "wizards_reborn:brown_cargo_carpet",
+    "wizards_reborn:red_cargo_carpet",
+    "wizards_reborn:orange_cargo_carpet",
+    "wizards_reborn:yellow_cargo_carpet",
+    "wizards_reborn:lime_cargo_carpet",
+    "wizards_reborn:green_cargo_carpet",
+    "wizards_reborn:cyan_cargo_carpet",
+    "wizards_reborn:light_blue_cargo_carpet",
+    "wizards_reborn:blue_cargo_carpet",
+    "wizards_reborn:purple_cargo_carpet",
+    "wizards_reborn:magenta_cargo_carpet",
+    "wizards_reborn:pink_cargo_carpet",
+    "wizards_reborn:rainbow_cargo_carpet"
+  ]
+}

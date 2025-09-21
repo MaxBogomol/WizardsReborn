@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "S#S",
+    "#_#",
+    "###",
+    "_#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:feral_cotton"
+    },
+    "S": {
+      "tag": "forge:string"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:white_cargo_carpet"
+  },
+  "wissen": 500
+}

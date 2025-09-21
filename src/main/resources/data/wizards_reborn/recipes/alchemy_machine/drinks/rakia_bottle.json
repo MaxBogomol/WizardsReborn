@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:rakia_bottle",
+    "count": 1
+  },
+  "steam": 500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_bottle"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "wizards_reborn:underground_grape"
+    },
+    {
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "item": "minecraft:glow_berries"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "wizards_reborn:water",
+      "amount" : 1000
+    }
+  ]
+}

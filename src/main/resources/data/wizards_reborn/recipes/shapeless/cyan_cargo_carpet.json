@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "group": "cargo_carpet",
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:cargo_carpets"
+    },
+    {
+      "tag": "forge:dyes/cyan"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:cyan_cargo_carpet",
+    "count": 1
+  }
+}

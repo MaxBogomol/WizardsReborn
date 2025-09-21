@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:chacha_bottle",
+    "count": 1
+  },
+  "steam": 500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_bottle"
+    },
+    {
+      "item": "wizards_reborn:underground_grape"
+    },
+    {
+      "item": "wizards_reborn:underground_grape"
+    },
+    {
+      "item": "wizards_reborn:pitcher_turnip"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "wizards_reborn:water",
+      "amount" : 1000
+    }
+  ]
+}

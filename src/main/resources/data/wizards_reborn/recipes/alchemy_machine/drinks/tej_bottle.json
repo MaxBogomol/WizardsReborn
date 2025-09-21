@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:tej_bottle",
+    "count": 1
+  },
+  "steam": 500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_bottle"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "wizards_reborn:centurial_hop_cone"
+    },
+    {
+      "item": "wizards_reborn:centurial_hop_cone"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "wizards_reborn:water",
+      "amount" : 1000
+    }
+  ]
+}

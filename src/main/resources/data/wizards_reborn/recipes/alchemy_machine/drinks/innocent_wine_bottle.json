@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:innocent_wine_bottle",
+    "count": 1
+  },
+  "steam": 500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_bottle"
+    },
+    {
+      "item": "wizards_reborn:underground_grape"
+    },
+    {
+      "item": "wizards_reborn:underground_grape"
+    },
+    {
+      "item": "wizards_reborn:underground_grape"
+    },
+    {
+      "item": "wizards_reborn:petals_of_innocence"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "wizards_reborn:water",
+      "amount" : 1000
+    }
+  ]
+}

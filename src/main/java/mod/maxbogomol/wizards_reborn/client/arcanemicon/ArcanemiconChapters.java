@@ -1718,6 +1718,12 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsRebornItems.PINK_CARGO_CARPET.get())),
                         new BlockEntry(new ItemStack(WizardsRebornItems.RAINBOW_CARGO_CARPET.get()))
                 ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()),
+                        new ItemStack(Items.STRING), new ItemStack(WizardsRebornItems.FERAL_COTTON.get()), new ItemStack(Items.STRING),
+                        new ItemStack(WizardsRebornItems.FERAL_COTTON.get()), EMPTY_ITEM, new ItemStack(WizardsRebornItems.FERAL_COTTON.get()),
+                        new ItemStack(WizardsRebornItems.FERAL_COTTON.get()), new ItemStack(WizardsRebornItems.FERAL_COTTON.get()), new ItemStack(WizardsRebornItems.FERAL_COTTON.get()),
+                        EMPTY_ITEM, new ItemStack(WizardsRebornItems.FERAL_COTTON.get()), EMPTY_ITEM, new ItemStack(WizardsRebornItems.FERAL_COTTON.get())
+                ),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.WHITE_DYE)),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.LIGHT_GRAY_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.LIGHT_GRAY_DYE)),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.GRAY_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.GRAY_DYE)),
@@ -1733,7 +1739,12 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.BLUE_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.BLUE_DYE)),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.PURPLE_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.PURPLE_DYE)),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.MAGENTA_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.MAGENTA_DYE)),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.PINK_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.PINK_DYE))
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.PINK_CARGO_CARPET.get()), new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.PINK_DYE)),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.RAINBOW_CARGO_CARPET.get()),
+                        new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()), new ItemStack(Items.PURPLE_DYE), new ItemStack(Items.BLUE_DYE),
+                        new ItemStack(Items.LIGHT_BLUE_DYE), new ItemStack(Items.LIME_DYE), new ItemStack(Items.YELLOW_DYE),
+                        new ItemStack(Items.ORANGE_DYE), new ItemStack(Items.RED_DYE)
+                )
         );
 
         ItemStack knowledgeScroll = new ItemStack(WizardsRebornItems.KNOWLEDGE_SCROLL.get());
@@ -4365,210 +4376,333 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.vodka_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.VODKA_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.VODKA_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.VODKA_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(Items.SUGAR),
+                                new ItemStack(WizardsRebornItems.PITCHER_TURNIP.get()))
         );
 
         BOURBON_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.bourbon_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.bourbon_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BOURBON_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.BOURBON_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.BOURBON_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN_SEEDS.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN_SEEDS.get()),
+                                new ItemStack(WizardsRebornItems.ARCANE_LINEN_FLOUR.get()))
         );
 
         WHISKEY_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.whiskey_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.whiskey_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WHISKEY_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.WHISKEY_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.WHISKEY_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT_SEEDS),
+                                new ItemStack(WizardsRebornItems.WHEAT_FLOUR.get()))
         );
 
         WHITE_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.white_wine_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.white_wine_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WHITE_WINE_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.WHITE_WINE_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.WHITE_WINE_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()),
+                                new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(Items.DANDELION))
         );
 
         RED_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.red_wine_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.red_wine_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.RED_WINE_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.RED_WINE_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.RED_WINE_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()),
+                                new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(Items.POPPY))
         );
 
         PORT_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.port_wine_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.port_wine_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PORT_WINE_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.PORT_WINE_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.PORT_WINE_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()),
+                                new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(Items.RED_MUSHROOM))
         );
 
         PALM_LIQUEUR_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.palm_liqueur_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.palm_liqueur_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PALM_LIQUEUR_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.PALM_LIQUEUR_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.PALM_LIQUEUR_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(Items.SUGAR),
+                                new ItemStack(Items.SUGAR), new ItemStack(WizardsRebornItems.PITCHER_DEW.get()), new ItemStack(WizardsRebornItems.PITCHER_DEW.get()))
         );
 
         MEAD_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.mead_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.mead_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MEAD_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.MEAD_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.MEAD_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(Items.HONEY_BOTTLE),
+                                new ItemStack(Items.HONEY_BOTTLE))
         );
 
         SBITEN_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.sbiten_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.sbiten_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SBITEN_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.SBITEN_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.SBITEN_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.HONEY_BOTTLE), new ItemStack(WizardsRebornItems.CENTURIAL_HOP_CONE.get()),
+                                new ItemStack(WizardsRebornItems.SHINY_CLOVER.get()), new ItemStack(WizardsRebornItems.PETALS.get()), new ItemStack(WizardsRebornItems.PETALS.get()))
         );
 
         SLIVOVITZ_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.slivovitz_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.slivovitz_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SLIVOVITZ_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.SLIVOVITZ_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.SLIVOVITZ_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.FERAL_FRUIT.get()), new ItemStack(WizardsRebornItems.PITCHER_TURNIP.get()))
         );
 
         SAKE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.sake_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.sake_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SAKE_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.SAKE_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.SAKE_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.BONE_MEAL), new ItemStack(Items.BONE_MEAL),
+                                new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT_SEEDS))
         );
 
         SOJU_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.soju_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.soju_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SOJU_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.SOJU_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.SOJU_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO),
+                                new ItemStack(WizardsRebornItems.ARCANE_LINEN_SEEDS.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN_SEEDS.get()))
         );
 
         CHICHA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.chicha_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.chicha_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.CHICHA_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.CHICHA_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.CHICHA_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.POTATO), new ItemStack(WizardsRebornItems.ARCANE_LINEN_FLOUR.get()),
+                                new ItemStack(WizardsRebornItems.ARCANE_LINEN_FLOUR.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN_FLOUR.get()))
         );
 
         CHACHA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.chacha_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.chacha_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.CHACHA_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.CHACHA_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.CHACHA_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()),
+                                new ItemStack(WizardsRebornItems.PITCHER_TURNIP.get()))
         );
 
         APPLEJACK_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.applejack_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.applejack_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.APPLEJACK_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.APPLEJACK_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.APPLEJACK_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.APPLE), new ItemStack(Items.APPLE),
+                                new ItemStack(Items.APPLE), new ItemStack(Items.APPLE))
         );
 
         RAKIA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.rakia_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.rakia_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.RAKIA_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.RAKIA_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.RAKIA_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.APPLE), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()),
+                                new ItemStack(Items.SWEET_BERRIES), new ItemStack(Items.GLOW_BERRIES))
         );
 
         KIRSCH_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.kirsch_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.kirsch_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.KIRSCH_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.KIRSCH_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.KIRSCH_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.GLOW_BERRIES), new ItemStack(Items.GLOW_BERRIES),
+                                new ItemStack(WizardsRebornItems.PITCHER_TURNIP.get()))
         );
 
         BOROVICHKA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.borovichka_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.borovichka_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BOROVICHKA_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.BOROVICHKA_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.BOROVICHKA_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT_SEEDS),
+                                new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.GLOW_BERRIES), new ItemStack(Items.GLOW_BERRIES))
         );
 
         PALINKA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.palinka_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.palinka_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PALINKA_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.PALINKA_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.PALINKA_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.FERAL_FRUIT.get()), new ItemStack(Items.APPLE),
+                                new ItemStack(Items.APPLE), new ItemStack(Items.APPLE))
         );
 
         TEQUILA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.tequila_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.tequila_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.TEQUILA_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.TEQUILA_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.TEQUILA_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.CACTUS), new ItemStack(Items.CACTUS),
+                                new ItemStack(WizardsRebornItems.PITCHER_DEW.get()))
         );
 
         PULQUE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.pulque_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.pulque_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.PULQUE_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.PULQUE_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.PULQUE_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.CACTUS), new ItemStack(Items.CACTUS),
+                                new ItemStack(Items.CACTUS))
         );
 
         ARKHI_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.arkhi_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arkhi_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARKHI_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.ARKHI_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.ARKHI_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(ForgeMod.MILK.get(), 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT_SEEDS),
+                                new ItemStack(Items.WHEAT_SEEDS), new ItemStack(WizardsRebornItems.PITCHER_TURNIP.get()))
         );
 
         TEJ_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.tej_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.tej_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.TEJ_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.TEJ_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.TEJ_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.HONEY_BOTTLE), new ItemStack(WizardsRebornItems.CENTURIAL_HOP_CONE.get()),
+                                new ItemStack(WizardsRebornItems.CENTURIAL_HOP_CONE.get()))
         );
 
         WISSEN_BEER_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.wissen_beer_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_beer_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_BEER_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.WISSEN_BEER_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.WISSEN_BEER_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.CENTURIAL_HOP_CONE.get()), new ItemStack(WizardsRebornItems.CENTURIAL_HOP_CONE.get()),
+                                new ItemStack(WizardsRebornItems.CENTURIAL_HOP_CONE.get()), ARCANUM_ITEM, ARCANUM_ITEM)
         );
 
         MOR_TINCTURE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.mor_tincture_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.mor_tincture_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.MOR_TINCTURE_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.MOR_TINCTURE_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.MOR_TINCTURE_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(WizardsRebornItems.MOR.get()),
+                                new ItemStack(WizardsRebornItems.MOR.get()), new ItemStack(WizardsRebornItems.GROUND_MOR.get()), new ItemStack(WizardsRebornItems.GROUND_MOR.get())),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.MOR_TINCTURE_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(WizardsRebornItems.ELDER_MOR.get()),
+                                new ItemStack(WizardsRebornItems.ELDER_MOR.get()), new ItemStack(WizardsRebornItems.GROUND_ELDER_MOR.get()), new ItemStack(WizardsRebornItems.GROUND_ELDER_MOR.get()))
         );
 
         INNOCENT_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.innocent_wine_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wine_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WINE_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.INNOCENT_WINE_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.INNOCENT_WINE_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()),
+                                new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get()), new ItemStack(WizardsRebornItems.PETALS_OF_INNOCENCE.get()))
         );
 
         TARKHUNA_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.tarkhuna_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.tarkhuna_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.TARKHUNA_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.TARKHUNA_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.TARKHUNA_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(WizardsRebornItems.SHINY_CLOVER.get()),
+                                new ItemStack(WizardsRebornItems.SHINY_CLOVER.get()), new ItemStack(WizardsRebornItems.SHINY_CLOVER.get()))
         );
 
         BAIKAL_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.baikal_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.baikal_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BAIKAL_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.BAIKAL_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.BAIKAL_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(Items.SUGAR),
+                                new ItemStack(Items.FERN), new ItemStack(Items.SPRUCE_LEAVES), new ItemStack(WizardsRebornItems.CENTURIAL_HOP_SEED.get()))
         );
 
         KVASS_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.kvass_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.kvass_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.KVASS_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.KVASS_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.KVASS_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(Items.BREAD),
+                                new ItemStack(Items.BREAD), new ItemStack(Items.BREAD))
         );
 
         KISSEL_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.kissel_bottle",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.kissel_bottle",
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.KISSEL_BOTTLE.get())),
                         new BlockEntry(CORK_BAMBOO_PEDESTAL_ITEM, DrinkBottleItem.getItemStage(WizardsRebornItems.KISSEL_BOTTLE.get(), 3))
-                )
+                ),
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.KISSEL_BOTTLE.get())).setIsSteam(true)
+                        .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
+                        .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.SUGAR), new ItemStack(Items.POTATO),
+                                new ItemStack(Items.SWEET_BERRIES), new ItemStack(Items.SWEET_BERRIES), new ItemStack(Items.SWEET_BERRIES))
         );
 
         BREWING = new Chapter("wizards_reborn.arcanemicon.chapter.brewing",

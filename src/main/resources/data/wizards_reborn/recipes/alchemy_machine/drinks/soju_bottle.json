@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:soju_bottle",
+    "count": 1
+  },
+  "steam": 500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_bottle"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen_seeds"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen_seeds"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "wizards_reborn:water",
+      "amount" : 1000
+    }
+  ]
+}

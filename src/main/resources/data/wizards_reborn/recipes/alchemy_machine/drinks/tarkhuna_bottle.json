@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:tarkhuna_bottle",
+    "count": 1
+  },
+  "steam": 500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_bottle"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "wizards_reborn:shiny_clover"
+    },
+    {
+      "item": "wizards_reborn:shiny_clover"
+    },
+    {
+      "item": "wizards_reborn:shiny_clover"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "tag": "wizards_reborn:water",
+      "amount" : 1000
+    }
+  ]
+}

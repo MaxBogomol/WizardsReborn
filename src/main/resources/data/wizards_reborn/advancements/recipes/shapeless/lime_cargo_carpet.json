@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cargo_carpets": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "wizards_reborn:cargo_carpets"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_cargo_carpets"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wizards_reborn:shapeless/lime_cargo_carpet"
+    ]
+  },
+  "sends_telemetry_event": false
+}
