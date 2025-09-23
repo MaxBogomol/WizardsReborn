@@ -28,10 +28,10 @@ plugins {
 
 repositories {
     maven { url = "https://maven.theillusivec4.top/" }
-    maven { url = "https://maven.tterrag.com/" }
+    maven { url = "https://maven.blamejared.com" }
+    maven { url = "https://maven.ithundxr.dev/mirror/" }
     maven { url = "https://modmaven.k-4u.nl"}
     maven { url = "https://cursemaven.com" }
-    maven { url = "https://maven.blamejared.com" }
     mavenLocal()
 }
 
