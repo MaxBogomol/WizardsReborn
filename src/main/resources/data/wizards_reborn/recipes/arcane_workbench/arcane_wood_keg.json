@@ -1,0 +1,30 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "#S#",
+    "#W#",
+    "#S#",
+    "NNGN"
+  ],
+  "key": {
+    "#": {
+      "tag": "wizards_reborn:arcane_wood_planks"
+    },
+    "S": {
+      "tag": "wizards_reborn:arcane_wood_slabs"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "N": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    },
+    "W": {
+      "item": "wizards_reborn:nether_salt"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:arcane_wood_keg"
+  },
+  "wissen": 700
+}

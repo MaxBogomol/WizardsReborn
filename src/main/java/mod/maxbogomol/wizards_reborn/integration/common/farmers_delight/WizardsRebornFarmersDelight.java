@@ -173,12 +173,25 @@ public class WizardsRebornFarmersDelight {
             ArcanemiconChapters.MOR.addPage(new CuttingPage(new ItemStack(WizardsRebornItems.MOR.get(), 5), new ItemStack(ItemsLoadedOnly.MOR_COLONY.get())));
             ArcanemiconChapters.MOR.addPage(new CuttingPage(new ItemStack(WizardsRebornItems.ELDER_MOR.get(), 5), new ItemStack(ItemsLoadedOnly.ELDER_MOR_COLONY.get())));
 
+            ArcanemiconChapters.PIES.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.PIES.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.pie_slices",
+                    new BlockEntry(ArcanemiconChapters.WISESTONE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.MOR_PIE_SLICE.get())),
+                    new BlockEntry(ArcanemiconChapters.WISESTONE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.ELDER_MOR_PIE_SLICE.get())),
+                    new BlockEntry(ArcanemiconChapters.WISESTONE_PEDESTAL_ITEM, new ItemStack(ItemsLoadedOnly.CARROT_PIE_SLICE.get()))
+            ));
+            ArcanemiconChapters.PIES.addPage(new CuttingPage(new ItemStack(ItemsLoadedOnly.MOR_PIE_SLICE.get(), 4), new ItemStack(WizardsRebornItems.MOR_PIE.get())));
+            ArcanemiconChapters.PIES.addPage(new CuttingPage(new ItemStack(ItemsLoadedOnly.ELDER_MOR_PIE_SLICE.get(), 4), new ItemStack(WizardsRebornItems.ELDER_MOR_PIE.get())));
+            ArcanemiconChapters.PIES.addPage(new CuttingPage(new ItemStack(ItemsLoadedOnly.CARROT_PIE_SLICE.get(), 4), new ItemStack(WizardsRebornItems.CARROT_PIE.get())));
+
             List<MobEffectInstance> noEffects = new ArrayList<>();
 
             ArcanemiconChapters.SMOKING_PIPE.addPage(INTEGRATION_PAGE);
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.CABBAGE_SEEDS.get())));
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.TOMATO_SEEDS.get())));
             ArcanemiconChapters.SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(ModItems.RICE.get())));
+
+            ArcanemiconChapters.PITCHER.addPage(INTEGRATION_PAGE);
+            ArcanemiconChapters.PITCHER.addPage(new CuttingPage(new ItemStack(ItemsLoadedOnly.PITCHER_TURNIP_PIE_SLICE.get(), 4), new ItemStack(WizardsRebornItems.PITCHER_TURNIP_PIE.get())));
         }
     }
 
