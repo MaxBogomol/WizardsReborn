@@ -1360,12 +1360,6 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ),
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
                 ).setExperience(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.MAGIC_BLADE),
-                new TitlePage("wizards_reborn.arcanemicon.page.throw"),
-                new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()),
-                        new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
-                        ARCANUM_ITEM, ARCANUM_ITEM,
-                        new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND), ARCANE_GOLD_INGOT_ITEM
-                ).setExperience(10).setArcaneEnchantment(WizardsRebornArcaneEnchantments.THROW),
                 new TitlePage("wizards_reborn.arcanemicon.page.life_roots"),
                 new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_WOOD_PICKAXE.get()), new ItemStack(WizardsRebornItems.ARCANE_WOOD_PICKAXE.get()),
                         new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
@@ -1391,11 +1385,41 @@ public class ArcanemiconChapters {
                         ARCANUM_ITEM, new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD),
                         new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.ARROW)
                 ).setExperience(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.SPLIT),
+                new TitlePage("wizards_reborn.arcanemicon.page.firework_jump"),
+                new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_WOOD_CROSSBOW.get()), new ItemStack(WizardsRebornItems.ARCANE_WOOD_CROSSBOW.get()),
+                        new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD),
+                        new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.ARROW)
+                ).setExperience(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.FIREWORK_JUMP),
+                new TitlePage("wizards_reborn.arcanemicon.page.moment"),
+                new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_WOOD_CROSSBOW.get()), new ItemStack(WizardsRebornItems.ARCANE_WOOD_CROSSBOW.get()),
+                        new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD),
+                        new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.ARROW)
+                ).setExperience(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.MOMENT),
                 new TitlePage("wizards_reborn.arcanemicon.page.sonar"),
                 new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_PICKAXE.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_PICKAXE.get()),
                         new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         ARCANUM_ITEM, new ItemStack(Items.RAW_IRON), new ItemStack(Items.RAW_COPPER), new ItemStack(Items.RAW_GOLD), new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD.get())
                 ).setExperience(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.SONAR),
+                new TitlePage("wizards_reborn.arcanemicon.page.throw"),
+                new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()),
+                        new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, ARCANUM_ITEM,
+                        new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND), ARCANE_GOLD_INGOT_ITEM
+                ).setExperience(10).setArcaneEnchantment(WizardsRebornArcaneEnchantments.THROW),
+                new TitlePage("wizards_reborn.arcanemicon.page.silk_song"),
+                new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_SHEARS.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_SHEARS.get()),
+                        new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD),
+                        new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.ARROW)
+                ).setExperience(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.SILK_SONG),
+                new TitlePage("wizards_reborn.arcanemicon.page.propelling"),
+                new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()),
+                        new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD),
+                        new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.ARROW)
+                ).setExperience(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.PROPELLING),
                 new TitlePage("wizards_reborn.arcanemicon.page.curse_arcane_enchantments"),
                 new TitlePage("wizards_reborn.arcanemicon.page.life_mending"),
                 new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_PICKAXE.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_PICKAXE.get()),

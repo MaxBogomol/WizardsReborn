@@ -57,14 +57,18 @@ public class WisdomSpell extends LookSpell {
     @Override
     public void useSpellTick(Level level, SpellContext spellContext, int time) {
         if (!level.isClientSide()) {
-            if (time % 20 == 0 && time > 0) {
-                spellContext.removeWissen(this);
-                spellContext.awardStat(this);
-                spellContext.spellSound(this);
-                lookSpell(level, spellContext);
+            if (!canSpell(level, spellContext)) {
+                spellContext.stopUsing(this);
+            } else {
+                if (time % 20 == 0 && time > 0) {
+                    spellContext.removeWissen(this);
+                    spellContext.awardStat(this);
+                    spellContext.spellSound(this);
+                    lookSpell(level, spellContext);
 
-                Vec3 pos = getHit(level, spellContext).getPos();
-                WizardsRebornPacketHandler.sendToTracking(level, BlockPos.containing(pos), new WisdomSpellBurstPacket(pos, getColor()));
+                    Vec3 pos = getHit(level, spellContext).getPos();
+                    WizardsRebornPacketHandler.sendToTracking(level, BlockPos.containing(pos), new WisdomSpellBurstPacket(pos, getColor()));
+                }
             }
         }
     }
@@ -82,6 +86,11 @@ public class WisdomSpell extends LookSpell {
         int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
         int exp = 5 + focusLevel;
         level.addFreshEntity(new ExperienceOrb(level, pos.x, pos.y, pos.z, exp));
+    }
+
+    @Override
+    public boolean canLookSpell(Level level, SpellContext spellContext) {
+        return spellContext.canRemoveWissen(this);
     }
 
     @Override

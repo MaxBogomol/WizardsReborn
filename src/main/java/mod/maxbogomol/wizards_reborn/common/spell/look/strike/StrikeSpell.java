@@ -100,7 +100,7 @@ public class StrikeSpell extends BlockLookSpell {
                     .addVelocity(0, 0.03f, 0)
                     .spawn(level, pos.x(), pos.y(), pos.z());
         }
-        if (!super.canSpell(level, spellContext)) {
+        if (!canSpell(level, spellContext)) {
             spellContext.stopUsing(this);
         }
         if (time > getUseTime(spellContext)) {
@@ -117,6 +117,11 @@ public class StrikeSpell extends BlockLookSpell {
             entity.setup(pos.x(), pos.y(), pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
             level.addFreshEntity(entity);
         }
+    }
+
+    @Override
+    public boolean canLookSpell(Level level, SpellContext spellContext) {
+        return spellContext.canRemoveWissen(this);
     }
 
     @Override
