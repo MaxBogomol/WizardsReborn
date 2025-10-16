@@ -7,7 +7,7 @@ public class WizardsRebornClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             SPELLS_ITEM_ANIMATIONS,
             LIGHT_RAYS_SHADER,
-            RESEARCH_HARDMODE, OLD_RESEARCH_MONOGRAM_OUTLINE, BRIGHT_RESEARCH_MONOGRAM_OUTLINE, RESEARCH_MONOGRAM_CONNECTS, MONOGRAM_GLOW, MONOGRAM_GLOW_COLOR, MONOGRAM_COLOR, MONOGRAM_RAYS, CONFIG_CENTER,
+            ARCANEMICON_CENSORSHIP, RESEARCH_HARDMODE, OLD_RESEARCH_MONOGRAM_OUTLINE, BRIGHT_RESEARCH_MONOGRAM_OUTLINE, RESEARCH_MONOGRAM_CONNECTS, MONOGRAM_GLOW, MONOGRAM_GLOW_COLOR, MONOGRAM_COLOR, MONOGRAM_RAYS, CONFIG_CENTER,
             NUMERICAL_WISSEN, NUMERICAL_COOLDOWN, SHOW_LIGHT_NAME, NUMERICAL_EXPERIENCE, NUMERICAL_HEAT, NUMERICAL_FLUID, NUMERICAL_STEAM,
             ARCANE_WAND_OVERLAY_UP, ARCANE_WAND_OVERLAY_RIGHT, ARCANE_WAND_OVERLAY_SIDE_HUD, ARCANE_WAND_OVERLAY_SIDE_BAR, ARCANE_WAND_OVERLAY_HORIZONTAL_BAR, ARCANE_WAND_OVERLAY_SECOND_HUD_FREE, ARCANE_WAND_OVERLAY_BAR_FREE, ARCANE_WAND_OVERLAY_COOLDOWN_TEXT, ARCANE_WAND_OVERLAY_WISSEN_TEXT, ARCANE_WAND_OVERLAY_REVERSE_BAR, ARCANE_WAND_OVERLAY_SHOW_EMPTY;
     public static ForgeConfigSpec.ConfigValue<Integer>
@@ -39,6 +39,7 @@ public class WizardsRebornClientConfig {
         builder.pop();
 
         builder.comment("Arcanemicon").push("arcanemicon");
+        ARCANEMICON_CENSORSHIP = builder.comment("Enable censorship of explicit language in Arcanemicon.").define("arcanemiconCensorship", false);
         RESEARCH_HARDMODE = builder.comment("Enable hard mode in research.").comment("NOTE: Always on in hardcore.").define("researchHardMode", false);
         OLD_RESEARCH_MONOGRAM_OUTLINE = builder.comment("Enable old type of monogram outline in research.").define("oldResearchMonogramOutline", false);
         BRIGHT_RESEARCH_MONOGRAM_OUTLINE = builder.comment("Enable bright type of monogram outline in research.").define("brightResearchMonogramOutline", false);

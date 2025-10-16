@@ -9,8 +9,9 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.FireworkJumpArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.capability.*;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
-import mod.maxbogomol.wizards_reborn.common.mobeffect.IrritationMobEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
+import mod.maxbogomol.wizards_reborn.common.mobeffect.IrritationMobEffect;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
@@ -77,6 +78,7 @@ public class WizardsRebornEvents {
         }
         EchoHandler.tick(player);
         FireworkJumpArcaneEnchantment.playerTick(event);
+        ArcaneFortressArmorItem.playerTick(event);
     }
 
     @SubscribeEvent

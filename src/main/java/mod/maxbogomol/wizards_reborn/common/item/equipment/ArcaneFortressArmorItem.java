@@ -109,6 +109,10 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
         };
     }
 
+    public int getHealthForSet() {
+        return 4;
+    }
+
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
         AttributeInstance attr = player.getAttribute(Attributes.MAX_HEALTH);
@@ -117,7 +121,12 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
         if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneFortressArmorItem armorItem) {
             if (armorItem.hasArmorSetPlayer(player)) {
                 if (attr.getModifier(BASE_MAX_HEALTH_UUID) == null) {
-                    attr.addPermanentModifier(new AttributeModifier(BASE_MAX_HEALTH_UUID, "bonus", 2f, AttributeModifier.Operation.ADDITION));
+                    attr.addPermanentModifier(new AttributeModifier(BASE_MAX_HEALTH_UUID, "bonus", armorItem.getHealthForSet(), AttributeModifier.Operation.ADDITION));
+                } else {
+                    if (attr.getModifier(BASE_MAX_HEALTH_UUID).getAmount() != armorItem.getHealthForSet()) {
+                        attr.removeModifier(BASE_MAX_HEALTH_UUID);
+                        attr.addPermanentModifier(new AttributeModifier(BASE_MAX_HEALTH_UUID, "bonus", armorItem.getHealthForSet(), AttributeModifier.Operation.ADDITION));
+                    }
                 }
             } else {
                 remove = true;
@@ -128,8 +137,8 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
 
         if (remove) {
             if (attr.getModifier(BASE_MAX_HEALTH_UUID) != null) {
-                if (player.getHealth() > attr.getValue() - 2) {
-                    player.setHealth((float) attr.getValue() - 2f);
+                if (player.getHealth() > player.getHealth() - attr.getModifier(BASE_MAX_HEALTH_UUID).getAmount()) {
+                    player.setHealth((float) (player.getMaxHealth() - attr.getModifier(BASE_MAX_HEALTH_UUID).getAmount()));
                 }
                 attr.removeModifier(BASE_MAX_HEALTH_UUID);
             }

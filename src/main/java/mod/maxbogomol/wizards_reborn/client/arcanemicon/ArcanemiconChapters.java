@@ -4454,7 +4454,8 @@ public class ArcanemiconChapters {
                 new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.WHISKEY_BOTTLE.get())).setIsSteam(true)
                         .setFluidInputs(new FluidStack(Fluids.WATER, 1000))
                         .setInputs(new ItemStack(WizardsRebornItems.ALCHEMY_BOTTLE.get()), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT_SEEDS),
-                                new ItemStack(WizardsRebornItems.WHEAT_FLOUR.get()))
+                                new ItemStack(WizardsRebornItems.WHEAT_FLOUR.get())),
+                new TextPage("wizards_reborn.arcanemicon.page.whiskey_bottle.lore")
         );
 
         WHITE_WINE_BOTTLE = new Chapter("wizards_reborn.arcanemicon.chapter.white_wine_bottle",
@@ -4809,7 +4810,8 @@ public class ArcanemiconChapters {
                         new IndexEntry(KVASS_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.KVASS_BOTTLE.get(), 3)),
                         new IndexEntry(KISSEL_BOTTLE, DrinkBottleItem.getItemStage(WizardsRebornItems.KISSEL_BOTTLE.get(), 3)),
                         new IndexEntry(ROTTEN_DRINK_BOTTLE, new ItemStack(WizardsRebornItems.ROTTEN_DRINK_BOTTLE.get()))
-                )
+                ),
+                new CensoredTextPage("wizards_reborn.arcanemicon.page.brewing.pub")
         );
 
         ALCHEMY_INDEX = new Chapter("wizards_reborn.arcanemicon.chapter.alchemy_index",
@@ -4925,14 +4927,15 @@ public class ArcanemiconChapters {
         ARCANEMICON_CONFIGS = new Chapter("wizards_reborn.arcanemicon.chapter.arcanemicon_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.arcanemicon_configs"),
                 new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANEMICON_CENSORSHIP),
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.RESEARCH_HARDMODE),
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.OLD_RESEARCH_MONOGRAM_OUTLINE),
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.BRIGHT_RESEARCH_MONOGRAM_OUTLINE),
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.RESEARCH_MONOGRAM_CONNECTS),
-                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_GLOW),
-                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_GLOW_COLOR)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_GLOW)
                 ),
                 new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_GLOW_COLOR),
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_COLOR),
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_RAYS),
                         new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.CONFIG_CENTER)
