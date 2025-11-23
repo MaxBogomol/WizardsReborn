@@ -7,6 +7,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class SoulHunterArmorModel extends ArmorModel {
+
     public SoulHunterArmorModel(ModelPart root) {
         super(root);
     }

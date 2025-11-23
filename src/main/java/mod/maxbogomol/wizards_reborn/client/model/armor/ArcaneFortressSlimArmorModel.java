@@ -6,6 +6,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class ArcaneFortressSlimArmorModel extends ArcaneFortressArmorModel {
+
     public ArcaneFortressSlimArmorModel(ModelPart root) {
         super(root);
     }
