@@ -57,6 +57,7 @@ public class WizardsRebornClient {
         MOD_INSTANCE = new FluffyFurMod(WizardsReborn.MOD_ID, WizardsReborn.NAME, WizardsReborn.VERSION).setDev("MaxBogomol").setItem(new ItemStack(WizardsRebornItems.ARCANUM.get()))
                 .setEdition(WizardsReborn.VERSION_NUMBER).setNameColor(new Color(205, 237, 254)).setVersionColor(new Color(255, 243, 177))
                 .setDescription(Component.translatable("mod_description.wizards_reborn"))
+                .addFluffyVillageLink("https://fluffy-village.dev/pages/eng/creations/wizards_reborn.html")
                 .addGithubLink("https://github.com/MaxBogomol/WizardsReborn")
                 .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/wizards-reborn")
                 .addModrinthLink("https://modrinth.com/mod/wizards-reborn")
