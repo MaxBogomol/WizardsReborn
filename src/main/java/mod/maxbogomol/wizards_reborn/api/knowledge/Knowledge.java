@@ -86,8 +86,8 @@ public class Knowledge {
     public static String getTranslatedName(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
-        String spellId = id.substring(i + 1);
-        return "knowledge." + modId + "." + spellId;
+        String knowledgeId = id.substring(i + 1);
+        return "knowledge." + modId + "." + knowledgeId;
     }
 
     public String getTranslatedName() {

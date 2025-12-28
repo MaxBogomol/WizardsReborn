@@ -44,8 +44,8 @@ public class AlchemyPotion {
     public static String getTranslatedName(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
-        String spellId = id.substring(i + 1);
-        return "alchemy_potion." + modId + "." + spellId;
+        String alchemyPotionId = id.substring(i + 1);
+        return "alchemy_potion." + modId + "." + alchemyPotionId;
     }
 
     public void apply(ItemStack stack, Level level, LivingEntity livingEntity) {

@@ -53,8 +53,8 @@ public class ArcaneEnchantment {
     public static String getTranslatedName(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
-        String spellId = id.substring(i + 1);
-        return "arcane_enchantment." + modId + "." + spellId;
+        String arcaneEnchantmentId = id.substring(i + 1);
+        return "arcane_enchantment." + modId + "." + arcaneEnchantmentId;
     }
 
     public boolean canEnchantItem(ItemStack stack) {

@@ -1109,101 +1109,123 @@ public class WizardsRebornItems {
         int second = 20;
         int minute = 1200;
         int day = 24000;
-        VODKA_BOTTLE.get().setAged(day * 7, day * 3)
+        VODKA_BOTTLE.get().setAged(day * 7, day * 3, day * 5)
                 .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DAMAGE_BOOST, 0, minute * 10, 0, 2, minute * 5, 1, (int) (day * 2.5f), true))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.KNOCKBACK_SENSIBILITY.get(), 0, minute * 10, 0, 2, minute * 5, 1, (int) (day * 2.5f), true));
-        BOURBON_BOTTLE.get().setAged(day * 30, day * 5)
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.MOVEMENT_SLOWDOWN, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DIG_SLOWDOWN, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.KNOCKBACK_SENSIBILITY.get(), 0, minute * 10, 0, 2, minute * 5, 1, (int) (day * 2.5f), true))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DAMAGE_BOOST, 0, minute * 10, 0, 2, minute * 5, 1, (int) (day * 2.5f), true));
+        BOURBON_BOTTLE.get().setAged(day * 30, day * 5, day * 10)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DAMAGE_RESISTANCE, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.KNOCKBACK_RESISTANCE.get(), minute, minute * 10, 0, 2));
-        WHISKEY_BOTTLE.get().setAged(day * 33, day * 6)
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.KNOCKBACK_RESISTANCE.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.MOVEMENT_SLOWDOWN, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DIG_SLOWDOWN, minute, minute * 10, 0, 2));
+        WHISKEY_BOTTLE.get().setAged(day * 33, day * 6, day * 8)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.ABSORPTION, minute, minute * 10, 0, 2));
-        WHITE_WINE_BOTTLE.get().setAged(day * 26, day * 4)
+        WHITE_WINE_BOTTLE.get().setAged(day * 26, day * 4, day * 7)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SLOWDOWN.get(), minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_STRENGTH.get(), minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_TOUGHNESS_STRENGTH.get(), minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SLOWDOWN.get(), minute, minute * 10, 0, 2));
-        RED_WINE_BOTTLE.get().setAged(day * 30, day * 5)
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.REGENERATION, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SLOWDOWN.get(), minute, minute * 10, 0, 2));
-        PORT_WINE_BOTTLE.get().setAged(day * 33, day * 6)
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.HEALTH_BOOST, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SLOWDOWN.get(), minute, minute * 10, 0, 2));
-        PALM_LIQUEUR_BOTTLE.get().setAged(day * 5, day * 2)
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_TOUGHNESS_STRENGTH.get(), minute, minute * 10, 0, 2));
+        RED_WINE_BOTTLE.get().setAged(day * 30, day * 5, day * 8)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SLOWDOWN.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.REGENERATION, minute, minute * 10, 0, 2));
+        PORT_WINE_BOTTLE.get().setAged(day * 33, day * 6, day * 10)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SLOWDOWN.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.HEALTH_BOOST, minute, minute * 10, 0, 2));
+        PALM_LIQUEUR_BOTTLE.get().setAged(day * 5, day * 2, day * 4)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.MOVEMENT_SPEED, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DOLPHINS_GRACE, minute, minute * 10, 0, 2));
-        MEAD_BOTTLE.get().setAged(day * 21, day * 4)
+        MEAD_BOTTLE.get().setAged(day * 21, day * 4, day * 5)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DAMAGE_RESISTANCE, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.SATURATION, minute, minute * 10, 0, 2));
-        SBITEN_BOTTLE.get().setAged(minute * 10, day * 2)
+        SBITEN_BOTTLE.get().setAged(minute * 10, day * 2, day * 4)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.LUCK, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.REGENERATION, minute, minute * 10, 0, 2));
-        SLIVOVITZ_BOTTLE.get().setAged(day * 28, day * 3)
+        SLIVOVITZ_BOTTLE.get().setAged(day * 28, day * 3, day * 6)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.WATER_BREATHING, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.SWIM_SPEED.get(), minute, minute * 10, 0, 2));
-        SAKE_BOTTLE.get().setAged(day * 21, day * 4)
+        SAKE_BOTTLE.get().setAged(day * 21, day * 4, day * 7)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.SATURATION, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ENTITY_REACH_EXPAND.get(), minute, minute * 10, 0, 2));
-        SOJU_BOTTLE.get().setAged(day * 10, day * 2)
+        SOJU_BOTTLE.get().setAged(day * 10, day * 2, day * 5)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.SATURATION, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.BLOCK_REACH_EXPAND.get(), minute, minute * 10, 0, 2));
-        CHICHA_BOTTLE.get().setAged(day * 5, day)
+        CHICHA_BOTTLE.get().setAged(day * 5, day, day * 3)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DAMAGE_BOOST, minute, minute * 10, 0, 2));
-        CHACHA_BOTTLE.get().setAged(day * 9, day * 2)
+        CHACHA_BOTTLE.get().setAged(day * 9, day * 2, day * 3)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.FIRE_RESISTANCE, minute, minute * 10, 0, 2));
-        APPLEJACK_BOTTLE.get().setAged(day * 10, day * 2)
+        APPLEJACK_BOTTLE.get().setAged(day * 10, day * 2, day * 4)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.LUCK, minute, minute * 10, 0, 2));
-        RAKIA_BOTTLE.get().setAged(day * 17, day * 3)
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_TOUGHNESS_STRENGTH.get(), minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MAGIC_RESISTANCE.get(), minute, minute * 10, 0, 2))
+        RAKIA_BOTTLE.get().setAged(day * 17, day * 3, day * 5)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.HUNGER, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SLOWDOWN.get(), minute, minute * 10, 0, 2));
-        KIRSCH_BOTTLE.get().setAged(day * 14, day * 2)
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.HEALTH_BOOST, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SLOWDOWN.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_TOUGHNESS_STRENGTH.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MAGIC_RESISTANCE.get(), minute, minute * 10, 0, 2));
+        KIRSCH_BOTTLE.get().setAged(day * 14, day * 2, day * 4)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ENTITY_REACH_SHRINK.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.HEALTH_BOOST, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SPEED.get(), minute, minute * 10, 0, 2));
-        BOROVICHKA_BOTTLE.get().setAged(day * 21, day * 3)
+        BOROVICHKA_BOTTLE.get().setAged(day * 21, day * 3, day * 6)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.HUNGER, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_TOUGHNESS_STRENGTH.get(), minute, minute * 10, 0, 2));
-        PALINKA_BOTTLE.get().setAged(day * 24, day * 4)
+        PALINKA_BOTTLE.get().setAged(day * 24, day * 4, day * 7)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_TOUGHNESS_WEAKNESS.get(), minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MAGIC_SENSIBILITY.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ENTITY_REACH_SHRINK.get(), minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.SATURATION, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SPEED.get(), minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ENTITY_REACH_SHRINK.get(), minute, minute * 10, 0, 2));
-        TEQUILA_BOTTLE.get().setAged(day * 21, day * 3)
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.MOVEMENT_SPEED, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.JUMP, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ATTACK_SPEED.get(), minute, minute * 10, 0, 2));
+        TEQUILA_BOTTLE.get().setAged(day * 21, day * 3, day * 6)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.HUNGER, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.WITHER, minute, minute * 10, 0, 2));
-        PULQUE_BOTTLE.get().setAged(day, day)
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.ABSORPTION, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_WEAKNESS.get(), minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DAMAGE_BOOST, minute, minute * 10, 0, 2));
-        ARKHI_BOTTLE.get().setAged(day * 5, day * 2)
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DIG_SPEED, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.WEAKNESS, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.ARCANE_WEAKNESS.get(), minute, minute * 10, 0, 2));
-        TEJ_BOTTLE.get().setAged(day * 11, day * 2)
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.SLOW_FALLING, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.WITHER, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.MOVEMENT_SPEED, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.JUMP, minute, minute * 10, 0, 2));
+        PULQUE_BOTTLE.get().setAged(day, day, day * 2)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_WEAKNESS.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.ABSORPTION, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DAMAGE_BOOST, minute, minute * 10, 0, 2));
+        ARKHI_BOTTLE.get().setAged(day * 5, day * 2, day * 3)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.WEAKNESS, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.ARCANE_WEAKNESS.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DIG_SPEED, minute, minute * 10, 0, 2));
+        TEJ_BOTTLE.get().setAged(day * 11, day * 2, day * 4)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.ARMOR_TOUGHNESS_WEAKNESS.get(), minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.KNOCKBACK_SENSIBILITY.get(), minute, minute * 10, 0, 2));
-        WISSEN_BEER_BOTTLE.get().setAged(day * 7, day * 2)
-                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1))
+                .addEffect(new DrinkBottleItem.EffectInstance(FluffyFurMobEffects.KNOCKBACK_SENSIBILITY.get(), minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.SLOW_FALLING, minute, minute * 10, 0, 2))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.MOVEMENT_SPEED, minute, minute * 10, 0, 2));
+        WISSEN_BEER_BOTTLE.get().setAged(day * 7, day * 2, day * 3)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.CONFUSION, 0, minute * 10, 0, 1))
                 .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.WISSEN_AURA.get(), 0, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MAGIC_RESISTANCE.get(), 0, minute * 10, 0, 1))
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.CONFUSION, 0, minute * 10, 0, 1));
-        MOR_TINCTURE_BOTTLE.get().setAged(day * 2, day)
-                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1))
+                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MAGIC_RESISTANCE.get(), 0, minute * 10, 0, 1));
+        MOR_TINCTURE_BOTTLE.get().setAged(day * 2, day, day * 2)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), minute * 10, minute * 5, 0, 0))
-                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.ARCANE_STRENGTH.get(), 0, minute * 10, 0, 1))
-                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.CONFUSION, 0, minute * 10, 0, 1));
-        INNOCENT_WINE_BOTTLE.get().setAged(day * 13, day * 2).setAlcoholic(false)
+                .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.CONFUSION, 0, minute * 10, 0, 1))
+                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.ARCANE_STRENGTH.get(), 0, minute * 10, 0, 1));
+        INNOCENT_WINE_BOTTLE.get().setAged(day * 13, day * 2, day * 4).setAlcoholic(false)
+                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.ARCANE_WEAKNESS.get(), minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.HEALTH_BOOST, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.REGENERATION, minute, minute * 10, 0, 2))
-                .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.ARCANE_WEAKNESS.get(), minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.MAGIC_RESISTANCE.get(), minute, minute * 10, 0, 2));
         TARKHUNA_BOTTLE.get().setAged(minute * 10, day, day).setAlcoholic(false)
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.LUCK, minute, minute * 10, 0, 2))
@@ -1211,7 +1233,8 @@ public class WizardsRebornItems {
         BAIKAL_BOTTLE.get().setAged(minute * 10, day, day).setAlcoholic(false)
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.DOLPHINS_GRACE, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.MOVEMENT_SPEED, minute, minute * 10, 0, 2));
-        KVASS_BOTTLE.get().setAged(day * 2, day * 2, day * 2).setAlcoholic(false).setStageForAcl(4)
+        KVASS_BOTTLE.get().setAged(day * 2, day * 2, day * 4).setAlcoholic(false).setStageForAcl(4)
+                .addTipsyEffect(new DrinkBottleItem.EffectInstance(WizardsRebornMobEffects.TIPSY.get(), minute * 20, minute * 10, 3, 1, minute * 25, 2, day * 5, true))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.JUMP, minute, minute * 10, 0, 2))
                 .addEffect(new DrinkBottleItem.EffectInstance(MobEffects.SATURATION, minute, minute * 10, 0, 2));
         KISSEL_BOTTLE.get().setAged(minute * 10, day, day).setAlcoholic(false)
