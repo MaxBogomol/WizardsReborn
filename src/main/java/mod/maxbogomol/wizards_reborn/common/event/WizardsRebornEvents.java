@@ -96,14 +96,14 @@ public class WizardsRebornEvents {
     public void magicArmor(LivingDamageEvent event) {
         if (!event.getEntity().level().isClientSide()) {
             float scale = 1;
-            AttributeInstance attr = event.getEntity().getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get());
+            AttributeInstance attribute = event.getEntity().getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get());
 
-            if (attr != null) {
+            if (attribute != null) {
                 if (event.getSource().is(FluffyFurDamageTypeTags.MAGIC)) {
-                    scale = (float) (1f - (attr.getValue() / 100f));
+                    scale = (float) (1f - (attribute.getValue() / 100f));
                 }
                 if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellEntity) {
-                    scale = (float) (1f - ((attr.getValue() / 2) / 100f));
+                    scale = (float) (1f - ((attribute.getValue() / 2) / 100f));
                 }
                 if (scale < 0) {
                     scale = 0;
@@ -119,11 +119,11 @@ public class WizardsRebornEvents {
     public void arcaneDamage(LivingDamageEvent event) {
         if (event.getSource().getEntity() instanceof LivingEntity attacker) {
             if (!event.getSource().is(WizardsRebornDamageTypeTags.ARCANE_MAGIC)) {
-                AttributeInstance attr = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
-                if (attr != null && attr.getValue() > 0) {
+                AttributeInstance attribute = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
+                if (attribute != null && attribute.getValue() > 0) {
                     int invulnerableTime = event.getEntity().invulnerableTime;
                     event.getEntity().invulnerableTime = 0;
-                    event.getEntity().hurt(DamageHandler.create(event.getEntity().level(), WizardsRebornDamageTypes.ARCANE_MAGIC, attacker, attacker), (float) attr.getValue());
+                    event.getEntity().hurt(DamageHandler.create(event.getEntity().level(), WizardsRebornDamageTypes.ARCANE_MAGIC, attacker, attacker), (float) attribute.getValue());
                     event.getEntity().invulnerableTime = invulnerableTime;
                 }
             }

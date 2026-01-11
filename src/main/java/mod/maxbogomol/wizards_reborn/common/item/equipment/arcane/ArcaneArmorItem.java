@@ -136,15 +136,17 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
 
     public static float getPlayerMagicModifier(Entity entity) {
         if (entity instanceof Player player) {
-            AttributeInstance attr = player.getAttribute(WizardsRebornAttributes.MAGIC_MODIFIER.get());
-            if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneArmorItem armor) {
-                if (armor.hasArmorSet()) {
-                    if (armor.hasArmorSetPlayer(player)) {
-                        return (float) (armor.getMagicModifier() + attr.getValue());
+            AttributeInstance attribute = player.getAttribute(WizardsRebornAttributes.MAGIC_MODIFIER.get());
+            if (attribute != null) {
+                if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneArmorItem armor) {
+                    if (armor.hasArmorSet()) {
+                        if (armor.hasArmorSetPlayer(player)) {
+                            return (float) (armor.getMagicModifier() + attribute.getValue());
+                        }
                     }
                 }
+                return (float) attribute.getValue();
             }
-            return (float) attr.getValue();
         }
 
         return 0f;

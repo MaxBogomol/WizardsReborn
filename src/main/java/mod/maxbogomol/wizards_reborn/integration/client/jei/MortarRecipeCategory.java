@@ -46,6 +46,7 @@ public class MortarRecipeCategory implements IRecipeCategory<MortarRecipe> {
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

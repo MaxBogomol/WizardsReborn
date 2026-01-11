@@ -45,6 +45,7 @@ public class CrystalRitualRecipeCategory implements IRecipeCategory<CrystalRitua
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

@@ -47,6 +47,7 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

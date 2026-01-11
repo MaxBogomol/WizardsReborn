@@ -50,6 +50,7 @@ public class WissenCrystallizerRecipeCategory implements IRecipeCategory<WissenC
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

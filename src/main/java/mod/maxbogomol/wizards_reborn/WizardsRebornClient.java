@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
+import mod.maxbogomol.fluffy_fur.client.language.LanguageHandler;
 import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.event.WizardsRebornClientEvents;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Random;
 
 public class WizardsRebornClient {
@@ -72,7 +74,9 @@ public class WizardsRebornClient {
     }
 
     public static void setupSplashes() {
-        SplashHandler.addSplash("Also try Malum!");
-        SplashHandler.addSplash("Also try Implosion!");
+        List<String> strings = LanguageHandler.getStringsFromFile(new ResourceLocation(WizardsReborn.MOD_ID, "texts/splashes.txt"));
+        for (String string : strings) {
+            SplashHandler.addSplash(string);
+        }
     }
 }

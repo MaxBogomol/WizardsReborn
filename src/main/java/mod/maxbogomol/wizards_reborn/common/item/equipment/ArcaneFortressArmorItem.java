@@ -115,32 +115,40 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
 
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
-        AttributeInstance attr = player.getAttribute(Attributes.MAX_HEALTH);
+        AttributeInstance attribute = player.getAttribute(Attributes.MAX_HEALTH);
         boolean remove = false;
 
-        if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneFortressArmorItem armorItem) {
-            if (armorItem.hasArmorSetPlayer(player)) {
-                if (attr.getModifier(BASE_MAX_HEALTH_UUID) == null) {
-                    attr.addPermanentModifier(new AttributeModifier(BASE_MAX_HEALTH_UUID, "bonus", armorItem.getHealthForSet(), AttributeModifier.Operation.ADDITION));
-                } else {
-                    if (attr.getModifier(BASE_MAX_HEALTH_UUID).getAmount() != armorItem.getHealthForSet()) {
-                        attr.removeModifier(BASE_MAX_HEALTH_UUID);
-                        attr.addPermanentModifier(new AttributeModifier(BASE_MAX_HEALTH_UUID, "bonus", armorItem.getHealthForSet(), AttributeModifier.Operation.ADDITION));
+        if (attribute != null) {
+            if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneFortressArmorItem armorItem) {
+                if (armorItem.hasArmorSetPlayer(player)) {
+                    if (attribute.getModifier(BASE_MAX_HEALTH_UUID) == null) {
+                        attribute.addPermanentModifier(new AttributeModifier(BASE_MAX_HEALTH_UUID, "bonus", armorItem.getHealthForSet(), AttributeModifier.Operation.ADDITION));
+                    } else {
+                        AttributeModifier attributeModifier = attribute.getModifier(BASE_MAX_HEALTH_UUID);
+                        if (attributeModifier != null) {
+                            if (attributeModifier.getAmount() != armorItem.getHealthForSet()) {
+                                attribute.removeModifier(BASE_MAX_HEALTH_UUID);
+                                attribute.addPermanentModifier(new AttributeModifier(BASE_MAX_HEALTH_UUID, "bonus", armorItem.getHealthForSet(), AttributeModifier.Operation.ADDITION));
+                            }
+                        }
                     }
+                } else {
+                    remove = true;
                 }
             } else {
                 remove = true;
             }
-        } else {
-            remove = true;
-        }
 
-        if (remove) {
-            if (attr.getModifier(BASE_MAX_HEALTH_UUID) != null) {
-                if (player.getHealth() > player.getHealth() - attr.getModifier(BASE_MAX_HEALTH_UUID).getAmount()) {
-                    player.setHealth((float) (player.getMaxHealth() - attr.getModifier(BASE_MAX_HEALTH_UUID).getAmount()));
+            if (remove) {
+                if (attribute.getModifier(BASE_MAX_HEALTH_UUID) != null) {
+                    AttributeModifier attributeModifier = attribute.getModifier(BASE_MAX_HEALTH_UUID);
+                    if (attributeModifier != null) {
+                        if (player.getHealth() > player.getHealth() - attributeModifier.getAmount()) {
+                            player.setHealth((float) (player.getMaxHealth() - attributeModifier.getAmount()));
+                        }
+                        attribute.removeModifier(BASE_MAX_HEALTH_UUID);
+                    }
                 }
-                attr.removeModifier(BASE_MAX_HEALTH_UUID);
             }
         }
     }

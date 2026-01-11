@@ -68,8 +68,8 @@ public class WissenUtil {
 
     public static float getWissenCostModifierWithDiscount(Player player) {
         if (player != null) {
-            AttributeInstance attr = player.getAttribute(WizardsRebornAttributes.WISSEN_DISCOUNT.get());
-            return (float) (attr.getValue() / 100d);
+            AttributeInstance attribute = player.getAttribute(WizardsRebornAttributes.WISSEN_DISCOUNT.get());
+            if (attribute != null) return (float) (attribute.getValue() / 100d);
         }
         return 0;
     }

@@ -48,6 +48,7 @@ public class CenserRecipeCategory implements IRecipeCategory<CenserRecipe> {
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

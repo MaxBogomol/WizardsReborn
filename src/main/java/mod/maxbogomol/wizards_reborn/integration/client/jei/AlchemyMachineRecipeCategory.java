@@ -60,6 +60,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

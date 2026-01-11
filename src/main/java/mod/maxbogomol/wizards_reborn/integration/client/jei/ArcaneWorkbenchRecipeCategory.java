@@ -48,6 +48,7 @@ public class ArcaneWorkbenchRecipeCategory implements IRecipeCategory<ArcaneWork
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

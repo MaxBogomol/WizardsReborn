@@ -60,6 +60,7 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

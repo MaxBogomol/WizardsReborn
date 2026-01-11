@@ -41,6 +41,7 @@ public class ArcanumDustTransmutationRecipeCategory implements IRecipeCategory<A
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

@@ -58,6 +58,7 @@ public class CrystalInfusionRecipeCategory implements IRecipeCategory<CrystalInf
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }

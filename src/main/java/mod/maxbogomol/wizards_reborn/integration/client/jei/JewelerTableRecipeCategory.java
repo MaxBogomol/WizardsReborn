@@ -48,6 +48,7 @@ public class JewelerTableRecipeCategory implements IRecipeCategory<JewelerTableR
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return background;
     }
