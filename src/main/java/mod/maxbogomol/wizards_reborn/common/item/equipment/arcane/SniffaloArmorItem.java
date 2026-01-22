@@ -56,6 +56,22 @@ public class SniffaloArmorItem extends Item implements IArcaneItem {
         return InteractionResult.PASS;
     }
 
+    public float getArmorValue(ItemStack stack) {
+        return 0;
+    }
+
+    public float getMagicArmorValue(ItemStack stack) {
+        return 0;
+    }
+
+    public float getArmorValue(SniffaloEntity sniffalo, ItemStack stack) {
+        return getArmorValue(stack);
+    }
+
+    public float getMagicArmorValue(SniffaloEntity sniffalo, ItemStack stack) {
+        return  getMagicArmorValue(stack);
+    }
+
     @OnlyIn(Dist.CLIENT)
     public ResourceLocation getSniffaloArmorTexture(ItemStack stack, SniffaloEntity entity) {
         return getSniffaloArmorTexture();

@@ -39,7 +39,7 @@ public class WizardsRebornAttributes {
         public static void registerAttributes(EntityAttributeModificationEvent event) {
             for (EntityType<? extends LivingEntity> livingEntity : event.getTypes()) {
                 event.add(livingEntity, MAGIC_ARMOR.get());
-                event.add(EntityType.PLAYER, ARCANE_DAMAGE.get());
+                event.add(livingEntity, ARCANE_DAMAGE.get());
             }
             event.add(EntityType.PLAYER, WISSEN_DISCOUNT.get());
             event.add(EntityType.PLAYER, MAGIC_MODIFIER.get());

@@ -496,7 +496,8 @@ public class ArcanemiconChapters {
                         EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_WOOD_BRANCH_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, ARCANE_WOOD_BRANCH_ITEM, new ItemStack(Items.STRING),
                         ARCANE_WOOD_BRANCH_ITEM, EMPTY_ITEM, new ItemStack(Items.STRING)
-                )
+                ),
+                new TextPage("wizards_reborn.arcanemicon.page.arcane_wood_fishing_rod.fish")
         );
 
         ARCANE_GOLD_SHEARS = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_gold_shears",

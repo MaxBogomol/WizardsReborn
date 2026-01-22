@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.SniffaloArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.entity.SniffaloScreenPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornLootTables;
 import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
@@ -33,6 +34,8 @@ import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
@@ -76,6 +79,9 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     public static final EntityDataAccessor<ItemStack> carpetId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> bannerId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> armorId = SynchedEntityData.defineId(SniffaloEntity.class, EntityDataSerializers.ITEM_STACK);
+
+    public static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("BFFADA4E-05FE-43C6-B5D1-4672CD6482DB");
+    public static final UUID MAGIC_ARMOR_MODIFIER_UUID = UUID.fromString("FFCC3D30-7816-409E-BB9E-E6FE12739F76");
 
     public static boolean isSnifferBrain = false;
 
@@ -590,6 +596,22 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
                     for (int i = 0; i < 20; i++) {
                         container.setItem(i, inventory.getItem(i + 4));
                     }
+                }
+            }
+
+            ItemStack armor = getArmor();
+
+            AttributeInstance attributeArmor = getAttribute(Attributes.ARMOR);
+            AttributeInstance attributeMagicArmor = getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get());
+            if (attributeArmor != null) attributeArmor.removeModifier(ARMOR_MODIFIER_UUID);
+            if (attributeMagicArmor != null) attributeMagicArmor.removeModifier(MAGIC_ARMOR_MODIFIER_UUID);
+
+            if (armor != null && armor.getItem() instanceof SniffaloArmorItem armorItem) {
+                if (attributeArmor != null) {
+                    attributeArmor.addTransientModifier(new AttributeModifier(ARMOR_MODIFIER_UUID, "Sniffalo armor bonus", armorItem.getArmorValue(armor), AttributeModifier.Operation.ADDITION));
+                }
+                if (attributeMagicArmor != null) {
+                    attributeMagicArmor.addTransientModifier(new AttributeModifier(MAGIC_ARMOR_MODIFIER_UUID, "Sniffalo magic armor bonus", armorItem.getMagicArmorValue(armor), AttributeModifier.Operation.ADDITION));
                 }
             }
         }
