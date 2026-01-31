@@ -8,6 +8,8 @@
 [![CurioApi](https://img.shields.io/badge/%20-CURIOS%20API-000000?style=for-the-badge&color=d48526&logo=curseforge&logoColor=000000&labelColor=FFFFFF)](https://www.curseforge.com/minecraft/mc-mods/curios)
 [![CurioApi](https://img.shields.io/badge/%20-CURIOS%20API-000000?style=for-the-badge&color=349a46&logo=modrinth&logoColor=000000&labelColor=FFFFFF)](https://modrinth.com/mod/curios)
 
+### [The Fluffy Village](https://fluffy-village.dev/pages/eng/creations/wizards_reborn.html)
+
 # About:
 
 "Wizard's Reborn" - a mod about magic in the style of alternative 1930s.  
