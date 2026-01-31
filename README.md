@@ -14,24 +14,22 @@ Status: **Alpha**
 
 "Wizard's Reborn" - a mod about magic in the style of alternative 1930s.  
 
-![](https://cdn.modrinth.com/data/axZDcOCH/images/554f3b41f0eb5a5cd37c6d52319bcb1210162882.png)
+![](https://fluffy-village.dev/assets/creations/wizards_reborn/logo.png)
 
 In Earth's crust you can find odd blue crystals, which brings back memories about well-forgotten past.  
 In search for knowledges you create different machines and research spells.  
 
 Looks like all answers is in this scuffed book, which fell on my head, because only it will show me the way.  
 
-![](https://cdn.modrinth.com/data/axZDcOCH/images/aec9a994b89d51b385d161960ed07cebacaaa7de.png)
+![](https://fluffy-village.dev/assets/creations/wizards_reborn/magical_origins.png)
 
 #
 
 From these crystals I was able to obtain primordial energy, which my silly book calls "Wissen". This ether-like substance brings to life various magical mechanisms.  
 
-![](https://cdn.modrinth.com/data/axZDcOCH/images/9e3e089a761f1a622417dd9365f8f39fb99066a3.png)
+![](https://fluffy-village.dev/assets/creations/wizards_reborn/wissen_mechanisms.png)
 
-#
-
-![](https://cdn.modrinth.com/data/axZDcOCH/images/64907bf766a6645a18db912d18a4858c1c3411b6.png)
+![](https://fluffy-village.dev/assets/creations/wizards_reborn/arcane_iterator.png)
 
 #
 
@@ -39,11 +37,11 @@ To fully reveal ancient potential, magic is not enough, so I've created this ste
 
 **How to build!**  
 
-![](https://cdn.modrinth.com/data/axZDcOCH/images/afe55f4a68f97e206664621f50f321c38fae2332.png)
+![](https://fluffy-village.dev/assets/creations/wizards_reborn/alchemy_machine.png)
 
 # **How NOT to build!!!**  
 
-![](https://cdn.modrinth.com/data/axZDcOCH/images/818d28307dab7b1503d86100aecf5f7801f97ab2.png)
+![](https://fluffy-village.dev/assets/creations/wizards_reborn/how_not_to_build.png)
 
 #
 
@@ -54,7 +52,7 @@ You can visit our **[Discord Server](https://discord.gg/cKf55qNugw)** to suggest
 
 #
 
-![](https://cdn.modrinth.com/data/axZDcOCH/images/cc1897498c7d031252693c76fe625816282951df.png)
+![](https://fluffy-village.dev/assets/creations/wizards_reborn/the_gang.png)
 
 <details>
 <summary>The Silly Council will decide your fate,</summary>
@@ -62,4 +60,3 @@ You can visit our **[Discord Server](https://discord.gg/cKf55qNugw)** to suggest
 meow
 
 </details>
-
