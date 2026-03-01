@@ -41,7 +41,7 @@ public class TitledMonogramPage extends Page {
         monogram.renderIcon(gui, x + 56, y + 133);
         RenderSystem.enableDepthTest();
 
-        if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
+        if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX < x + 56 + 16 && mouseY < y + 133 + 16) {
             gui.renderTooltip(Minecraft.getInstance().font, monogram.getComponentList(), Optional.empty(), mouseX, mouseY);
         }
     }

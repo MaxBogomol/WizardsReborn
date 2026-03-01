@@ -1,5 +1,6 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.slot;
 
+import mod.maxbogomol.wizards_reborn.common.gui.menu.AlchemyFurnaceMenu;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -7,9 +8,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class AlchemyFurnaceFuelSlot extends SlotItemHandler {
-    private final AlchemyFurnaceContainer menu;
+    private final AlchemyFurnaceMenu menu;
 
-    public AlchemyFurnaceFuelSlot(AlchemyFurnaceContainer furnaceMenu, IItemHandler itemHandler, int slot, int xPosition, int yPosition) {
+    public AlchemyFurnaceFuelSlot(AlchemyFurnaceMenu furnaceMenu, IItemHandler itemHandler, int slot, int xPosition, int yPosition) {
         super(itemHandler, slot, xPosition, yPosition);
         this.menu = furnaceMenu;
     }

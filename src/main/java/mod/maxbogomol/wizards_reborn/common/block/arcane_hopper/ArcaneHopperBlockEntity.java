@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_hopper;
 
-import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneHopperContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.ArcaneHopperMenu;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -445,6 +445,6 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new ArcaneHopperContainer(i, level, getBlockPos(), inventory, player);
+        return new ArcaneHopperMenu(i, level, getBlockPos(), inventory, player);
     }
 }

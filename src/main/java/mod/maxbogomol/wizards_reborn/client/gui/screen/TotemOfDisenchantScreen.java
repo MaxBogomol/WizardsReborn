@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.TotemOfDisenchantMenu;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.TotemOfDisenchantStartPacket;
@@ -31,12 +31,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDisenchantContainer> {
+public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDisenchantMenu> {
     private final ResourceLocation GUI = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/totem_of_disenchant.png");
+    private final int TITLE_COLOR = ColorUtil.packColor(255, 237, 201, 146);
 
     public ItemStack currentBook = ItemStack.EMPTY;
 
-    public TotemOfDisenchantScreen(TotemOfDisenchantContainer screenContainer, Inventory inv, Component titleIn) {
+    public TotemOfDisenchantScreen(TotemOfDisenchantMenu screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.imageHeight = 194;
         this.inventoryLabelY = this.inventoryLabelY + 28;
@@ -51,12 +52,12 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, ColorUtil.packColor(255, 237, 201, 146), false);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, TITLE_COLOR, false);
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
     }
 
     @Override
-    protected void renderBg(GuiGraphics gui, float partialTicks, int x, int y) {
+    protected void renderBg(GuiGraphics gui, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         int i = this.leftPos;
         int j = this.topPos;
@@ -65,7 +66,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
         if (menu.blockEntity instanceof TotemOfDisenchantBlockEntity totem) {
             int buttonOffset = 0;
 
-            if (x >= i + 141 && y >= j + 73 && x <= i + 141 + 16 && y <= j + 73 + 16 && !totem.isStart) {
+            if (mouseX >= i + 141 && mouseY >= j + 73 && mouseX < i + 141 + 16 && mouseY < j + 73 + 16 && !totem.isStart) {
                 buttonOffset = 18;
             }
             gui.blit(GUI, i + 140, j + 72, 176 + buttonOffset, 0, 18, 18, 256, 256);
@@ -105,8 +106,8 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                         }
 
                         gui.renderItem(book, i + 44 + (xx * 18), j + 18 + (yy * 18) + of);
-                        if (x >= i + 44 + (xx * 18) && y >= j + 18 + of + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + of + (yy * 18) + 16) {
-                            gui.renderTooltip(Minecraft.getInstance().font, book, x, y + of);
+                        if (mouseX >= i + 44 + (xx * 18) && mouseY >= j + 18 + of + (yy * 18) && mouseX < i + 44 + (xx * 18) + 16 && mouseY < j + 18 + of + (yy * 18) + 16) {
+                            gui.renderTooltip(Minecraft.getInstance().font, book, mouseX, mouseY + of);
                         }
                     }
                     xx++;
@@ -135,8 +136,8 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                         }
 
                         gui.renderItem(book, i + 44 + (xx * 18), j + 18 + (yy * 18) + of);
-                        if (x >= i + 44 + (xx * 18) && y >= j + 18 + of + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + of + (yy * 18) + 16) {
-                            gui.renderTooltip(Minecraft.getInstance().font, book, x, y + of);
+                        if (mouseX >= i + 44 + (xx * 18) && mouseY >= j + 18 + of + (yy * 18) && mouseX < i + 44 + (xx * 18) + 16 && mouseY < j + 18 + of + (yy * 18) + 16) {
+                            gui.renderTooltip(Minecraft.getInstance().font, book, mouseX, mouseY + of);
                         }
                     }
                     xx++;
@@ -151,15 +152,15 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
 
             if (!currentBook.isEmpty()) {
                 gui.renderItem(currentBook,  i + 55, j + 72);
-                if (x >= i + 55 && y >= j + 72 && x <= i + 55 + 16 && y <= j + 72 + 16) {
-                    gui.renderTooltip(Minecraft.getInstance().font, currentBook,  x, y);
+                if (mouseX >= i + 55 && mouseY >= j + 72 && mouseX < i + 55 + 16 && mouseY < j + 72 + 16) {
+                    gui.renderTooltip(Minecraft.getInstance().font, currentBook,  mouseX, mouseY);
                 }
             }
         }
     }
 
     @Override
-    public boolean mouseClicked(double x, double y, int button) {
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
         int i = this.leftPos;
         int j = this.topPos;
 
@@ -188,7 +189,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                 for (ArcaneEnchantment enchantment : arcaneEnchantments.keySet()) {
                     ItemStack book = new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get());
                     ArcaneEnchantmentUtil.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
-                    if (x >= i + 44 + (xx * 18) && y >= j + 18 + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + (yy * 18) + 16 && !totem.isStart && !enchantment.isCurse()) {
+                    if (mouseX >= i + 44 + (xx * 18) && mouseY >= j + 18 + (yy * 18) && mouseX < i + 44 + (xx * 18) + 16 && mouseY < j + 18 + (yy * 18) + 16 && !totem.isStart && !enchantment.isCurse()) {
                         currentBook = book;
                         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                         return true;
@@ -203,7 +204,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                 for (Enchantment enchantment : enchantments.keySet()) {
                     ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
                     EnchantedBookItem.addEnchantment(book, new EnchantmentInstance(enchantment, enchantments.get(enchantment)));
-                    if (x >= i + 44 + (xx * 18) && y >= j + 18 + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + (yy * 18) + 16 && !totem.isStart && !enchantment.isCurse()) {
+                    if (mouseX >= i + 44 + (xx * 18) && mouseY >= j + 18 + (yy * 18) && mouseX < i + 44 + (xx * 18) + 16 && mouseY < j + 18 + (yy * 18) + 16 && !totem.isStart && !enchantment.isCurse()) {
                         currentBook = book;
                         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                         return true;
@@ -216,7 +217,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                 }
             }
 
-            if (x >= i + 141 && y >= j + 73 && x <= i + 141 + 16 && y <= j + 73 + 16) {
+            if (mouseX >= i + 141 && mouseY >= j + 73 && mouseX < i + 141 + 16 && mouseY < j + 73 + 16) {
                 if (!currentBook.isEmpty() && !totem.isStart) {
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.NEUTRAL, 0.5f, 1.0f);
                     WizardsRebornPacketHandler.sendToServer(new TotemOfDisenchantStartPacket(getMenu().blockEntity.getBlockPos(), currentBook));
@@ -226,6 +227,6 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
             }
         }
 
-        return super.mouseClicked(x, y, button);
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 }

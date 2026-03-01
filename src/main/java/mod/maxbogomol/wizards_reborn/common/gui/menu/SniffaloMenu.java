@@ -1,9 +1,12 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.menu;
 
-import mod.maxbogomol.fluffy_fur.client.gui.screen.ContainerMenuBase;
+import mod.maxbogomol.fluffy_fur.common.gui.menu.ContainerMenuBase;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
+import mod.maxbogomol.wizards_reborn.common.gui.slot.SniffaloArmorSlot;
+import mod.maxbogomol.wizards_reborn.common.gui.slot.SniffaloBannerSlot;
+import mod.maxbogomol.wizards_reborn.common.gui.slot.SniffaloCargoCarpetInventorySlot;
+import mod.maxbogomol.wizards_reborn.common.gui.slot.SniffaloCargoCarpetSlot;
 import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -13,13 +16,12 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 
-public class SniffaloContainer extends ContainerMenuBase {
+public class SniffaloMenu extends ContainerMenuBase {
     public final Container sniffaloContainer;
     public final SniffaloEntity sniffalo;
-    public static SimpleContainer blankContainer = new SimpleContainer(1);
 
-    public SniffaloContainer(int windowId, Inventory playerInventory, Container sniffaloContainer, Player player, final SniffaloEntity sniffalo) {
-        super(null, windowId);
+    public SniffaloMenu(int containerId, Inventory playerInventory, Container sniffaloContainer, Player player, final SniffaloEntity sniffalo) {
+        super(null, containerId);
         this.sniffaloContainer = sniffaloContainer;
         this.sniffalo = sniffalo;
         this.playerEntity = player;

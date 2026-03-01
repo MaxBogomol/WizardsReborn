@@ -109,7 +109,7 @@ public class AlchemyMachinePage extends RecipePage {
             if (width <= 1 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(BACKGROUND, x + 38 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
-            if (mouseX >= x + 38 + 4 && mouseY >= y + 76 && mouseX <= x + 38 + 4 + 8 && mouseY <= y + 76 + 32) {
+            if (mouseX >= x + 38 + 4 && mouseY >= y + 76 && mouseX < x + 38 + 4 + 8 && mouseY < y + 76 + 32) {
                 Component component = NumericalUtil.getFluidName(fluidInput1, 5000);
                 if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                     component = NumericalUtil.getFluidName(fluidInput1);
@@ -128,7 +128,7 @@ public class AlchemyMachinePage extends RecipePage {
             if (width <= 1 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(BACKGROUND, x + 56 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
-            if (mouseX >= x + 56 + 4 && mouseY >= y + 76 && mouseX <= x + 56 + 4 + 8 && mouseY <= y + 76 + 32) {
+            if (mouseX >= x + 56 + 4 && mouseY >= y + 76 && mouseX < x + 56 + 4 + 8 && mouseY < y + 76 + 32) {
                 Component component = NumericalUtil.getFluidName(fluidInput2, 5000);
                 if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                     component = NumericalUtil.getFluidName(fluidInput2);
@@ -147,7 +147,7 @@ public class AlchemyMachinePage extends RecipePage {
             if (width <= 1 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(BACKGROUND, x + 74 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
-            if (mouseX >= x + 74 + 4 && mouseY >= y + 76 && mouseX <= x + 74 + 4 + 8 && mouseY <= y + 76 + 32) {
+            if (mouseX >= x + 74 + 4 && mouseY >= y + 76 && mouseX < x + 74 + 4 + 8 && mouseY < y + 76 + 32) {
                 Component component = NumericalUtil.getFluidName(fluidInput3, 5000);
                 if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                     component = NumericalUtil.getFluidName(fluidInput3);
@@ -167,7 +167,7 @@ public class AlchemyMachinePage extends RecipePage {
             if (width <= 1 && value > 0 && !Double.isInfinite(value)) width = 2;
             gui.blit(BACKGROUND, x + 60, y + 120 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
-            if (mouseX >= x + 60 && mouseY >= y + 120 && mouseX <= x + 60 + 8 && mouseY <= y + 120 + 32) {
+            if (mouseX >= x + 60 && mouseY >= y + 120 && mouseX < x + 60 + 8 && mouseY < y + 120 + 32) {
                 gui.renderTooltip(Minecraft.getInstance().font, NumericalUtil.getFluidName(fluidResult, 5000), mouseX, mouseY);
             }
         } else {
@@ -177,14 +177,14 @@ public class AlchemyMachinePage extends RecipePage {
         if (!isWissen) {
             gui.blit(BACKGROUND, x + 14, y + 76 + 8, 136, 0, 16, 16, 256, 256);
         } else {
-            if (mouseX >= x + 14 && mouseY >= y + 76 + 8 && mouseX <= x + 14 + 16 && mouseY <= y + 76 + 8 + 16) {
+            if (mouseX >= x + 14 && mouseY >= y + 76 + 8 && mouseX < x + 14 + 16 && mouseY < y + 76 + 8 + 16) {
                 gui.renderTooltip(Minecraft.getInstance().font, NumericalUtil.getWissenName(), mouseX, mouseY);
             }
         }
         if (!isSteam) {
             gui.blit(BACKGROUND, x + 98, y + 76 + 8, 136, 0, 16, 16, 256, 256);
         } else {
-            if (mouseX >= x + 98 && mouseY >= y + 76 + 8 && mouseX <= x + 98 + 16 && mouseY <= y + 76 + 8 + 16) {
+            if (mouseX >= x + 98 && mouseY >= y + 76 + 8 && mouseX < x + 98 + 16 && mouseY < y + 76 + 8 + 16) {
                 gui.renderTooltip(Minecraft.getInstance().font, NumericalUtil.getSteamName(), mouseX, mouseY);
             }
         }

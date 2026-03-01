@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.fluffy_fur.integration.common.curios.BaseCurioItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyBagContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.AlchemyBagMenu;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -110,7 +110,7 @@ public class AlchemyBagItem extends BaseCurioItem implements IBagItem {
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new AlchemyBagContainer(i, level, stack, playerInventory, playerEntity);
+                return new AlchemyBagMenu(i, level, stack, playerInventory, playerEntity);
             }
         };
     }

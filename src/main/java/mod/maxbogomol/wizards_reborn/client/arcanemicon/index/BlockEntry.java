@@ -44,12 +44,12 @@ public class BlockEntry {
 
     public void drawTooltip(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
         if (block != ItemStack.EMPTY && gui.currentItem == ItemStack.EMPTY) {
-            boolean hover = mouseX >= x && mouseY >= y && mouseX <= x + 16 && mouseY <= y + 16;
+            boolean hover = mouseX >= x && mouseY >= y && mouseX < x + 16 && mouseY < y + 16;
             if (hover) gui.currentItem = block;
         }
 
         if (item != ItemStack.EMPTY && gui.currentItem == ItemStack.EMPTY) {
-            boolean hover = mouseX >= x && mouseY >= y - 12 && mouseX <= x + 16 && mouseY < y;
+            boolean hover = mouseX >= x && mouseY >= y - 12 && mouseX < x + 16 && mouseY < y;
             if (hover) gui.currentItem = item;
         }
     }

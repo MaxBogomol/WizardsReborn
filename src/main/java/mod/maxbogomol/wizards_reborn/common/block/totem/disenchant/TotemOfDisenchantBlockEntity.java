@@ -15,7 +15,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentHandler;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
-import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.TotemOfDisenchantMenu;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.TotemOfDisenchantBurstPacket;
@@ -276,7 +276,7 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new TotemOfDisenchantContainer(i, level, getBlockPos(), inventory, player);
+        return new TotemOfDisenchantMenu(i, level, getBlockPos(), inventory, player);
     }
 
     @Override

@@ -1,7 +1,9 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.menu;
 
-import mod.maxbogomol.fluffy_fur.client.gui.screen.ContainerMenuBase;
-import mod.maxbogomol.fluffy_fur.client.gui.screen.InputSlot;
+import mod.maxbogomol.fluffy_fur.common.gui.menu.ContainerMenuBase;
+import mod.maxbogomol.fluffy_fur.common.gui.slot.InputSlot;
+import mod.maxbogomol.wizards_reborn.common.gui.slot.AlchemyFurnaceFuelSlot;
+import mod.maxbogomol.wizards_reborn.common.gui.slot.AlchemyFurnaceResultSlot;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,11 +17,11 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class AlchemyFurnaceContainer extends ContainerMenuBase {
+public class AlchemyFurnaceMenu extends ContainerMenuBase {
     public final BlockEntity blockEntity;
 
-    public AlchemyFurnaceContainer(int windowId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
-        super(WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), windowId);
+    public AlchemyFurnaceMenu(int containerId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
+        super(WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), containerId);
         this.blockEntity = level.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
@@ -45,7 +47,7 @@ public class AlchemyFurnaceContainer extends ContainerMenuBase {
         return 3;
     }
 
-    protected boolean isFuel(ItemStack pStack) {
+    public boolean isFuel(ItemStack pStack) {
         return ForgeHooks.getBurnTime(pStack, RecipeType.SMELTING) > 0;
     }
 }

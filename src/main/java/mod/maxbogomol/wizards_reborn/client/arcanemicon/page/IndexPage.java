@@ -33,7 +33,7 @@ public class IndexPage extends Page {
     @OnlyIn(Dist.CLIENT)
     public boolean click(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
         for (int i = 0; i < entries.length; i ++) if (entries[i].isUnlocked()) {
-            if (mouseX >= x + 2 && mouseX <= x + 124 && mouseY >= y + 8 + i * 20 && mouseY <= y + 26 + i * 20) {
+            if (mouseX >= x + 2 && mouseX < x + 124 && mouseY >= y + 8 + i * 20 && mouseY < y + 26 + i * 20) {
                 gui.changeChapter(entries[i].chapter);
                 Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                 return true;
@@ -57,7 +57,7 @@ public class IndexPage extends Page {
             } else {
                 gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
                 drawText(book, gui, I18n.get("wizards_reborn.arcanemicon.unknown"), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
-                if (mouseX >= x + 2 && mouseX <= x + 124 && mouseY >= y + 8 + i * 20 && mouseY <= y + 26 + i * 20) {
+                if (mouseX >= x + 2 && mouseX < x + 124 && mouseY >= y + 8 + i * 20 && mouseY < y + 26 + i * 20) {
                     if (entries[i].hasKnowledge()) {
                         List<Component> list = new ArrayList<>();
                         list.add(Component.translatable("wizards_reborn.arcanemicon.knowledge_required").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));

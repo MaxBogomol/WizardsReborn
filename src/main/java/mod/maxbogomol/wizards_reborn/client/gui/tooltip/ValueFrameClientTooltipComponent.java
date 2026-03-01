@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.gui.tooltip;
 
+import mod.maxbogomol.wizards_reborn.common.gui.tooltip.ValueFrameTooltipComponent;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;

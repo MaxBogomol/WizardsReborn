@@ -55,8 +55,7 @@ public class ArcanumDustItem extends ArcanumItem {
         if (!level.isClientSide) {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, level.getBlockState(blockPos).getBlock().asItem().getDefaultInstance());
-            Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager()
-                    .getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, level);
+            Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, level);
 
             AtomicBoolean placeBlock = new AtomicBoolean(true);
             AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);

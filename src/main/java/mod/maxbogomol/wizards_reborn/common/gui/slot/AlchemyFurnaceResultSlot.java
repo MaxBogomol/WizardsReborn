@@ -1,5 +1,6 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.slot;
 
+import mod.maxbogomol.wizards_reborn.common.gui.menu.AlchemyFurnaceMenu;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace.AlchemyFurnaceBlockEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -13,9 +14,9 @@ public class AlchemyFurnaceResultSlot extends SlotItemHandler {
     private final Player player;
     private int removeCount;
 
-    private final AlchemyFurnaceContainer menu;
+    private final AlchemyFurnaceMenu menu;
 
-    public AlchemyFurnaceResultSlot(Player player, AlchemyFurnaceContainer furnaceMenu, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+    public AlchemyFurnaceResultSlot(Player player, AlchemyFurnaceMenu furnaceMenu, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
         this.player = player;
         this.menu = furnaceMenu;

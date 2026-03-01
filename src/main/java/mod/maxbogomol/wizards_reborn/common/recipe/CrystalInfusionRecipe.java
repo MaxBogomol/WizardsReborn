@@ -110,9 +110,9 @@ public class CrystalInfusionRecipe implements Recipe<Container> {
         public CrystalInfusionRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
             int light = GsonHelper.getAsInt(json, "light");
-            JsonArray ingrs = GsonHelper.getAsJsonArray(json, "ingredients");
+            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             List<Ingredient> inputs = new ArrayList<>();
-            for (JsonElement e : ingrs) {
+            for (JsonElement e : ingredients) {
                 inputs.add(Ingredient.fromJson(e));
             }
             return new CrystalInfusionRecipe(recipeId, output, light, inputs.toArray(new Ingredient[0]));

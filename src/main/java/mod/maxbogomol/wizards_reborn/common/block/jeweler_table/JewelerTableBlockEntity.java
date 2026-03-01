@@ -15,7 +15,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.JewelerTableMenu;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.SkinTrimItem;
@@ -359,7 +359,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new JewelerTableContainer(i, level, getBlockPos(), inventory, player);
+        return new JewelerTableMenu(i, level, getBlockPos(), inventory, player);
     }
 
     public float getBlockRotate() {

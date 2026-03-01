@@ -37,7 +37,7 @@ public class TitledSpellPage extends Page {
 
         if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
             gui.blit(spell.getIcon(), x + 56, y + 133, 0, 0, 16, 16, 16, 16);
-            if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
+            if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX < x + 56 + 16 && mouseY < y + 133 + 16) {
                 gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
             }
         } else {
@@ -57,7 +57,7 @@ public class TitledSpellPage extends Page {
             if (i >= 4) {
                 w = 78;
             }
-            if (mouseX >= x + 3 + (i * 9) + w && mouseY >= y + 130 && mouseX <= x + 3 + (i * 9) + w + 8 && mouseY <= y + 130 + 8) {
+            if (mouseX >= x + 3 + (i * 9) + w && mouseY >= y + 130 && mouseX < x + 3 + (i * 9) + w + 8 && mouseY < y + 130 + 8) {
                 gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getCrystalTypes().get(i).getTranslatedName()), mouseX, mouseY);
             }
         }

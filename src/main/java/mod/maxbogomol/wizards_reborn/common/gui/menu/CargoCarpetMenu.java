@@ -1,6 +1,6 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.menu;
 
-import mod.maxbogomol.fluffy_fur.client.gui.screen.ContainerMenuBase;
+import mod.maxbogomol.fluffy_fur.common.gui.menu.ContainerMenuBase;
 import mod.maxbogomol.wizards_reborn.common.block.cargo_carpet.CargoCarpetBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
@@ -16,11 +16,11 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class CargoCarpetContainer extends ContainerMenuBase {
+public class CargoCarpetMenu extends ContainerMenuBase {
     public final BlockEntity blockEntity;
 
-    public CargoCarpetContainer(int windowId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
-        super(WizardsRebornMenuTypes.CARGO_CARPET_CONTAINER.get(), windowId);
+    public CargoCarpetMenu(int containerId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
+        super(WizardsRebornMenuTypes.CARGO_CARPET_CONTAINER.get(), containerId);
         this.blockEntity = level.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);

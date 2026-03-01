@@ -202,9 +202,9 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
                 experience = GsonHelper.getAsInt(json, "experience");
             }
 
-            JsonArray ingrs = GsonHelper.getAsJsonArray(json, "ingredients");
+            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.create();
-            for (JsonElement e : ingrs) {
+            for (JsonElement e : ingredients) {
                 inputs.add(Ingredient.fromJson(e));
             }
 

@@ -111,9 +111,9 @@ public class CrystalRitualRecipe implements Recipe<Container> {
 
         @Override
         public CrystalRitualRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            JsonArray ingrs = GsonHelper.getAsJsonArray(json, "ingredients");
+            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             List<Ingredient> inputs = new ArrayList<>();
-            for (JsonElement e : ingrs) {
+            for (JsonElement e : ingredients) {
                 inputs.add(Ingredient.fromJson(e));
             }
 

@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.fluffy_fur.integration.common.curios.BaseCurioItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.gui.container.CrystalBagContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.CrystalBagMenu;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -110,7 +110,7 @@ public class CrystalBagItem extends BaseCurioItem implements IBagItem {
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new CrystalBagContainer(i, level, stack, playerInventory, playerEntity);
+                return new CrystalBagMenu(i, level, stack, playerInventory, playerEntity);
             }
         };
     }

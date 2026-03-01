@@ -1,7 +1,6 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.menu;
 
-import mod.maxbogomol.fluffy_fur.client.gui.screen.ContainerMenuBase;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
+import mod.maxbogomol.fluffy_fur.common.gui.menu.ContainerMenuBase;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,25 +12,19 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class ItemSorterContainer extends ContainerMenuBase {
+public class TotemOfDisenchantMenu extends ContainerMenuBase {
     public final BlockEntity blockEntity;
 
-    public ItemSorterContainer(int windowId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
-        super(WizardsRebornMenuTypes.ITEM_SORTER_CONTAINER.get(), windowId);
+    public TotemOfDisenchantMenu(int containerId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
+        super(WizardsRebornMenuTypes.TOTEM_OF_DISENCHANT_CONTAINER.get(), containerId);
         this.blockEntity = level.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        this.layoutPlayerInventorySlots(8, 94);
+        this.layoutPlayerInventorySlots(8, 112);
 
         if (blockEntity != null) {
             blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-                int c = 0;
-                for (int i = 0; i < 3; i++) {
-                    for (int ii = 0; ii < 9; ii++) {
-                        addSlot(new SlotItemHandler(h, c, 8 + (ii * 18), 18 + (i * 18)));
-                        c++;
-                    }
-                }
+                addSlot(new SlotItemHandler(h, 0, 17, 36));
             });
         }
     }
@@ -43,6 +36,6 @@ public class ItemSorterContainer extends ContainerMenuBase {
 
     @Override
     public int getInventorySize() {
-        return 27;
+        return 1;
     }
 }

@@ -1,8 +1,7 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.menu;
 
-import mod.maxbogomol.fluffy_fur.client.gui.screen.ContainerMenuBase;
+import mod.maxbogomol.fluffy_fur.common.gui.menu.ContainerMenuBase;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_hopper.ArcaneHopperBlockEntity;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,11 +12,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class ArcaneHopperContainer extends ContainerMenuBase {
+public class ArcaneHopperMenu extends ContainerMenuBase {
     public final BlockEntity blockEntity;
 
-    public ArcaneHopperContainer(int windowId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
-        super(WizardsRebornMenuTypes.ARCANE_HOPPER_CONTAINER.get(), windowId);
+    public ArcaneHopperMenu(int containerId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
+        super(WizardsRebornMenuTypes.ARCANE_HOPPER_CONTAINER.get(), containerId);
         this.blockEntity = level.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);

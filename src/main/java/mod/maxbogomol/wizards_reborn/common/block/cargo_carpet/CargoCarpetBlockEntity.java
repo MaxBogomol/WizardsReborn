@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.cargo_carpet;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
-import mod.maxbogomol.wizards_reborn.client.gui.container.CargoCarpetContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.CargoCarpetMenu;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -51,7 +51,7 @@ public class CargoCarpetBlockEntity extends BlockSimpleInventory implements Menu
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new CargoCarpetContainer(i, level, getBlockPos(), inventory, player);
+        return new CargoCarpetMenu(i, level, getBlockPos(), inventory, player);
     }
 
     @Override

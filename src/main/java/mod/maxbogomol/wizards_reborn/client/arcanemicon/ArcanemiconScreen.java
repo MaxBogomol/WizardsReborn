@@ -133,13 +133,13 @@ public class ArcanemiconScreen extends Screen {
         if (currentPage > 0) {
             int x = 11, y = 155;
             int v = 0;
-            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 30 && mouseY <= guiTop + y + 12) v += 12;
+            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX < guiLeft + x + 30 && mouseY < guiTop + y + 12) v += 12;
             gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 351, v, 30, 12, 512, 512);
         }
         if (currentPage + 2 < currentChapter.size()) {
             int x = 271, y = 155;
             int v = 0;
-            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 30 && mouseY <= guiTop + y + 12) v += 12;
+            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX < guiLeft + x + 30 && mouseY < guiTop + y + 12) v += 12;
             gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 381, v, 30, 12, 512, 512);
         }
 
@@ -147,7 +147,7 @@ public class ArcanemiconScreen extends Screen {
             if (currentHistory > 1) {
                 int x = 110 + 7, y = 155;
                 int v = 0;
-                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12)
+                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX < guiLeft + x + 19 && mouseY < guiTop + y + 12)
                     v += 12;
                 gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 411, v, 19, 12, 512, 512);
             }
@@ -155,7 +155,7 @@ public class ArcanemiconScreen extends Screen {
             if (currentHistory < historyEntries.size()) {
                 int x = 169 + 7, y = 155;
                 int v = 0;
-                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12)
+                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX < guiLeft + x + 19 && mouseY < guiTop + y + 12)
                     v += 12;
                 gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 430, v, 19, 12, 512, 512);
             }
@@ -184,7 +184,7 @@ public class ArcanemiconScreen extends Screen {
 
             if (currentPage > 0) {
                 int x = guiLeft + 11, y = guiTop + 155;
-                if (mouseX >= x && mouseY >= y && mouseX <= x + 30 && mouseY <= y + 12) {
+                if (mouseX >= x && mouseY >= y && mouseX < x + 30 && mouseY < y + 12) {
                     currentPage -= 2;
                     historyEntries.set(currentHistory - 1, new ChapterHistoryEntry(currentChapter, currentPage));
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
@@ -193,7 +193,7 @@ public class ArcanemiconScreen extends Screen {
             }
             if (currentPage + 2 < currentChapter.size()) {
                 int x = guiLeft + 271, y = guiTop + 155;
-                if (mouseX >= x && mouseY >= y && mouseX <= x + 30 && mouseY <= y + 12) {
+                if (mouseX >= x && mouseY >= y && mouseX < x + 30 && mouseY < y + 12) {
                     currentPage += 2;
                     historyEntries.set(currentHistory - 1, new ChapterHistoryEntry(currentChapter, currentPage));
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
@@ -204,7 +204,7 @@ public class ArcanemiconScreen extends Screen {
             if (currentChapter != ArcanemiconChapters.RESEARCH) {
                 if (currentHistory > 1) {
                     int x = 110 + 7, y = 155;
-                    if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
+                    if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX < guiLeft + x + 19 && mouseY < guiTop + y + 12) {
                         currentHistory = currentHistory - 1;
                         currentChapter = historyEntries.get(currentHistory - 1).chapter;
                         currentPage = historyEntries.get(currentHistory - 1).page;
@@ -216,7 +216,7 @@ public class ArcanemiconScreen extends Screen {
 
                 if (currentHistory < historyEntries.size()) {
                     int x = 169 + 7, y = 155;
-                    if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
+                    if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX < guiLeft + x + 19 && mouseY < guiTop + y + 12) {
                         currentHistory = currentHistory + 1;
                         currentChapter = historyEntries.get(currentHistory - 1).chapter;
                         currentPage = historyEntries.get(currentHistory - 1).page;

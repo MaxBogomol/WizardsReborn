@@ -47,7 +47,7 @@ public class ThanksPlushPage extends Page {
         double tick = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         if (plush != ItemStack.EMPTY) RenderUtil.renderFloatingItemModelIntoGUI(gui, plush, x + 56, y + 104, (float) tick, 0);
 
-        if (mouseX >= x + 54 && mouseY >= y + 104 && mouseX <= x + 70 && mouseY <= y + 120) {
+        if (mouseX >= x + 54 && mouseY >= y + 104 && mouseX < x + 70 && mouseY < y + 120) {
             float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.05f;
             int packColor = ColorUtil.packColor(ColorUtil.rainbowColor(ticks));
 

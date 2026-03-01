@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockSimpleInventor
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
-import mod.maxbogomol.wizards_reborn.client.gui.container.RunicPedestalContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.RunicPedestalMenu;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -112,7 +112,7 @@ public class RunicPedestalBlockEntity extends NameableBlockSimpleInventory imple
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new RunicPedestalContainer(i, level, getBlockPos(), inventory, player);
+        return new RunicPedestalMenu(i, level, getBlockPos(), inventory, player);
     }
 
     @Override

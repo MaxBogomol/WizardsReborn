@@ -24,7 +24,7 @@ public abstract class Page {
         Font font = Minecraft.getInstance().font;
         gui.renderItem(stack, x, y);
         gui.renderItemDecorations(font, stack, x, y, null);
-        if (mouseX >= x && mouseY >= y && mouseX <= x + 16 && mouseY <= y + 16) {
+        if (mouseX >= x && mouseY >= y && mouseX < x + 16 && mouseY < y + 16) {
             gui.renderTooltip(font, stack, mouseX, mouseY);
         }
     }

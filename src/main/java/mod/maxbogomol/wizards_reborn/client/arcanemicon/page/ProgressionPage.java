@@ -66,7 +66,7 @@ public class ProgressionPage extends Page {
     @Override
     @OnlyIn(Dist.CLIENT)
     public boolean mouseScrolled(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY, int delta) {
-        if (mouseX >= x && mouseX <= x + 128 && mouseY >= y && mouseY <= y + 160) {
+        if (mouseX >= x && mouseX < x + 128 && mouseY >= y && mouseY < y + 160) {
             offset += delta;
             boolean changed = true;
             if (offset < 0) {
@@ -118,13 +118,13 @@ public class ProgressionPage extends Page {
         int offsetTextWidth = Minecraft.getInstance().font.width(offsetText);
         drawText(book, gui, offsetText, x + 64 - offsetTextWidth / 2, y + 144 - Minecraft.getInstance().font.lineHeight);
 
-        if (mouseX >= x + 25 && mouseY >= y + 132 && mouseX <= x + 25 + 12 && mouseY <= y + 132 + 12 && offset > 0) {
+        if (mouseX >= x + 25 && mouseY >= y + 132 && mouseX < x + 25 + 12 && mouseY < y + 132 + 12 && offset > 0) {
             gui.blit(BACKGROUND, x + 25, y + 132, 128, 24, 12, 12);
         } else {
             gui.blit(BACKGROUND, x + 25, y + 132, 128, 12, 12, 12);
         }
 
-        if (mouseX >= x + 90 && mouseY >= y + 132 && mouseX <= x + 90 + 12 && mouseY <= y + 132 + 12 && offset < knowledges.size() - 1) {
+        if (mouseX >= x + 90 && mouseY >= y + 132 && mouseX < x + 90 + 12 && mouseY < y + 132 + 12 && offset < knowledges.size() - 1) {
             gui.blit(BACKGROUND, x + 90, y + 132, 140, 24, 12, 12);
         } else {
             gui.blit(BACKGROUND, x + 90, y + 132, 140, 12, 12, 12);
@@ -165,7 +165,7 @@ public class ProgressionPage extends Page {
                     list.add(Component.translatable("wizards_reborn.arcanemicon.unknown").withStyle(ChatFormatting.GRAY));
                 }
 
-                if (mouseX >= x + X + 56 && mouseX <= x + X + 56 + 16 && mouseY >= y + Y + 128 && mouseY <= y + Y + 128 + 16) {
+                if (mouseX >= x + X + 56 && mouseX < x + X + 56 + 16 && mouseY >= y + Y + 128 && mouseY < y + Y + 128 + 16) {
                     renderList = list;
                 }
             }

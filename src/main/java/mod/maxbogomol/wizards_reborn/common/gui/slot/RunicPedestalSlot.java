@@ -1,6 +1,7 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.slot;
 
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.RunicPedestalMenu;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import net.minecraft.world.item.ItemStack;
@@ -9,9 +10,9 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class RunicPedestalSlot extends SlotItemHandler {
 
-    private final RunicPedestalContainer menu;
+    private final RunicPedestalMenu menu;
 
-    public RunicPedestalSlot(RunicPedestalContainer runicPedestalMenu, IItemHandler itemHandler, int slot, int xPosition, int yPosition) {
+    public RunicPedestalSlot(RunicPedestalMenu runicPedestalMenu, IItemHandler itemHandler, int slot, int xPosition, int yPosition) {
         super(itemHandler, slot, xPosition, yPosition);
         this.menu = runicPedestalMenu;
     }

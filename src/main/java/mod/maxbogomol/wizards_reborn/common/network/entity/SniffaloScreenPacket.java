@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.network.entity;
 
 import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
-import mod.maxbogomol.wizards_reborn.client.gui.container.SniffaloContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.SniffaloMenu;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.SniffaloScreen;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
 import net.minecraft.client.Minecraft;
@@ -36,9 +36,9 @@ public class SniffaloScreenPacket extends ClientPacket {
         if (entity instanceof SniffaloEntity sniffalo) {
             LocalPlayer localplayer = minecraft.player;
             SimpleContainer simplecontainer = new SimpleContainer(size);
-            SniffaloContainer sniffaloContainer = new SniffaloContainer(containerId, localplayer.getInventory(), simplecontainer, minecraft.player, sniffalo);
-            localplayer.containerMenu = sniffaloContainer;
-            minecraft.setScreen(new SniffaloScreen(sniffaloContainer, localplayer.getInventory(), sniffalo));
+            SniffaloMenu sniffaloMenu = new SniffaloMenu(containerId, localplayer.getInventory(), simplecontainer, minecraft.player, sniffalo);
+            localplayer.containerMenu = sniffaloMenu;
+            minecraft.setScreen(new SniffaloScreen(sniffaloMenu, localplayer.getInventory(), sniffalo));
         }
     }
 

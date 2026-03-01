@@ -10,10 +10,10 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
-import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
-import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.AlchemyFurnaceMenu;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.AlchemyMachineMenu;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.ArcaneWorkbenchMenu;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.JewelerTableMenu;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.AlchemyFurnaceScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.AlchemyMachineScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
@@ -165,11 +165,11 @@ public class WizardsRebornJei implements IModPlugin {
 
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-        registration.addRecipeTransferHandler(ArcaneWorkbenchContainer.class, WizardsRebornMenuTypes.ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchRecipeCategory.TYPE, 36, 13, 0, 36);
-        registration.addRecipeTransferHandler(AlchemyMachineContainer.class, WizardsRebornMenuTypes.ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineRecipeCategory.TYPE, 36, 6, 0, 36);
-        registration.addRecipeTransferHandler(AlchemyFurnaceContainer.class, WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), RecipeTypes.SMELTING, 36, 1, 0, 36);
-        registration.addRecipeTransferHandler(AlchemyFurnaceContainer.class, WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), RecipeTypes.FUELING, 37, 1, 0, 36);
-        registration.addRecipeTransferHandler(JewelerTableContainer.class, WizardsRebornMenuTypes.JEWELER_TABLE_CONTAINER.get(), JewelerTableRecipeCategory.TYPE, 36, 2, 0, 36);
+        registration.addRecipeTransferHandler(ArcaneWorkbenchMenu.class, WizardsRebornMenuTypes.ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchRecipeCategory.TYPE, 36, 13, 0, 36);
+        registration.addRecipeTransferHandler(AlchemyMachineMenu.class, WizardsRebornMenuTypes.ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineRecipeCategory.TYPE, 36, 6, 0, 36);
+        registration.addRecipeTransferHandler(AlchemyFurnaceMenu.class, WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), RecipeTypes.SMELTING, 36, 1, 0, 36);
+        registration.addRecipeTransferHandler(AlchemyFurnaceMenu.class, WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), RecipeTypes.FUELING, 37, 1, 0, 36);
+        registration.addRecipeTransferHandler(JewelerTableMenu.class, WizardsRebornMenuTypes.JEWELER_TABLE_CONTAINER.get(), JewelerTableRecipeCategory.TYPE, 36, 2, 0, 36);
     }
 
     private static <T extends Recipe<C>, C extends Container> List<T> sortRecipes(RecipeType<T> type, Comparator<? super T> comparator) {

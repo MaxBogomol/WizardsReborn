@@ -34,7 +34,7 @@ public class CenserPage extends RecipePage {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconScreen book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
-        if (mouseX >= x + 38 && mouseY >= y + 47 && mouseX <= x + 38 + 55 && mouseY <= y + 47 + 44) {
+        if (mouseX >= x + 38 && mouseY >= y + 47 && mouseX < x + 38 + 55 && mouseY < y + 47 + 44) {
             List<Component> tooltips = new ArrayList<>();
             PotionUtils.addPotionTooltip(result, tooltips, 1.0f);
             gui.renderTooltip(Minecraft.getInstance().font, tooltips, Optional.empty(), ItemStack.EMPTY, mouseX, mouseY);

@@ -64,7 +64,7 @@ public class ResearchPage extends Page {
 
     @OnlyIn(Dist.CLIENT)
     public boolean click(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY) {
-        if (mouseX >= x && mouseY >= y && mouseX <= x + 128 && mouseY <= y + 160) {
+        if (mouseX >= x && mouseY >= y && mouseX < x + 128 && mouseY < y + 160) {
             if (main) {
                 if (mouseY < y + 130) {
                     if (currentMonogram != null) {
@@ -94,7 +94,7 @@ public class ResearchPage extends Page {
                 } else {
                     int actives = getAllActives();
                     if (actives >= mapSize) {
-                        if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX <= x + 95 + 18 && mouseY <= y + 132 + 18) {
+                        if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX < x + 95 + 18 && mouseY < y + 132 + 18) {
                             ArcanemiconScreen.currentChapter = lastChapter;
                             WizardsRebornPacketHandler.sendToServer(new SpellUnlockPacket(spell));
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
@@ -120,7 +120,7 @@ public class ResearchPage extends Page {
                     }
                     int X = ((i - (ii * 5)) * (24));
 
-                    if (mouseX >= x + X + 1 && mouseY >= y + 8 + (ii * 15) && mouseX <= x + X + 9 && mouseY <= y + 8 + (ii * 15) + 8) {
+                    if (mouseX >= x + X + 1 && mouseY >= y + 8 + (ii * 15) && mouseX < x + X + 9 && mouseY < y + 8 + (ii * 15) + 8) {
                         Monogram monogram = monogramsSet[i];
                         if (ArcanemiconChapters.RESEARCH_MAIN.monograms.size() > 0 && ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogram) > 0) {
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.2f);
@@ -151,7 +151,7 @@ public class ResearchPage extends Page {
             gui.blit(BACKGROUND, x + 49, y + 126, 128, 50, 30, 30);
             if (spell != null) {
                 gui.blit(spell.getIcon(), x + 56, y + 133, 0, 0, 16, 16, 16, 16);
-                if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
+                if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX < x + 56 + 16 && mouseY < y + 133 + 16) {
                     gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
                 }
             }
@@ -176,7 +176,7 @@ public class ResearchPage extends Page {
             gui.blit(BACKGROUND, x + 95, y + 132, 128, 80, 18, 18);
             if (actives >= mapSize) {
                 gui.blit(BACKGROUND, x + 95, y + 132, 146, 80, 18, 18);
-                if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX <= x + 95 + 18 && mouseY <= y + 132 + 18) {
+                if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX < x + 95 + 18 && mouseY < y + 132 + 18) {
                     gui.blit(BACKGROUND, x + 95, y + 132, 164, 80, 18, 18);
                     gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("wizards_reborn.arcanemicon.research"), mouseX, mouseY);
                 }
@@ -205,7 +205,7 @@ public class ResearchPage extends Page {
             }
             i = 0;
             for (MonogramMapEntry monogramMapEntry : map) {
-                if (i == selected && mouseX >= x + 3  && mouseY >= y + 3 && mouseX <= x + 123 && mouseY <= y + 123) {
+                if (i == selected && mouseX >= x + 3  && mouseY >= y + 3 && mouseX < x + 123 && mouseY < y + 123) {
                     gui.blit(BACKGROUND, x + 59 - (int) size + (int) pointS.x - 2 - 5, y + 59 - (int) size + (int) pointS.y - 2 - 5, 158, 40, 14, 14);
                 }
                 if (monogramMapEntry.isActive()) {
@@ -224,7 +224,7 @@ public class ResearchPage extends Page {
                     monogramMapEntry.getMonogram().renderMiniIcon(gui, x + 59 - (int) size + (int) point.x + 1, y + 59 - (int) size + (int) point.y + 1);
                     RenderSystem.enableDepthTest();
                 }
-                if (mouseX >= x + 59 - (int) size + (int) point.x && mouseY >= y + 59 - (int) size + (int) point.y && mouseX <= x + 59 - (int) size + (int) point.x + 8 && mouseY <= y + 59 - (int) size + (int) point.y + 8) {
+                if (mouseX >= x + 59 - (int) size + (int) point.x && mouseY >= y + 59 - (int) size + (int) point.y && mouseX < x + 59 - (int) size + (int) point.x + 8 && mouseY < y + 59 - (int) size + (int) point.y + 8) {
                     gui.renderTooltip(Minecraft.getInstance().font, monogramMapEntry.getMonogram().getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
                 point = rotatePointAbout(point, center, angleBetweenEach);
@@ -251,7 +251,7 @@ public class ResearchPage extends Page {
                 }
                 int X = ((i - (ii * 5)) * (24));
 
-                if (mouseX >= x + X + 1 && mouseY >= y + 8 + (ii * 15) && mouseX <= x + X + 9 && mouseY <= y + 8 + (ii * 15) + 8) {
+                if (mouseX >= x + X + 1 && mouseY >= y + 8 + (ii * 15) && mouseX < x + X + 9 && mouseY < y + 8 + (ii * 15) + 8) {
                     gui.renderTooltip(Minecraft.getInstance().font, monogramsSet[i].getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
 

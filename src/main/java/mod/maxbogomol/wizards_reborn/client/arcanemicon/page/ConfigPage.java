@@ -37,8 +37,8 @@ public class ConfigPage extends Page {
     @OnlyIn(Dist.CLIENT)
     public boolean click(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
         for (int i = 0; i < entries.length; i ++) if (entries[i].isUnlocked()) {
-            if ((mouseX >= x + 2 && mouseX <= x + 124 && mouseY >= y + 8 + i * 24 && mouseY <= y + 18 + i * 24) ||
-                    (mouseX >= x + 2 && mouseX <= x + 96 && mouseY >= y + 8 + i * 24 && mouseY <= y + 28 + i * 24)) {
+            if ((mouseX >= x + 2 && mouseX < x + 124 && mouseY >= y + 8 + i * 24 && mouseY < y + 18 + i * 24) ||
+                    (mouseX >= x + 2 && mouseX < x + 96 && mouseY >= y + 8 + i * 24 && mouseY < y + 28 + i * 24)) {
                 if (entries[i].isBoolean()) {
                     entries[i].booleanConfig.set(!entries[i].booleanConfig.get());
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
@@ -50,7 +50,7 @@ public class ConfigPage extends Page {
 
             if (entries[i].isBoolean()) {
                 defaultOffset = defaultOffset - 10;
-                if (mouseX >= x + 118 && mouseX <= x + 128 && mouseY >= y + 17 + i * 24 && mouseY <= y + 27 + i * 24) {
+                if (mouseX >= x + 118 && mouseX < x + 128 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {
                     entries[i].booleanConfig.set(!entries[i].booleanConfig.get());
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                     return true;
@@ -59,13 +59,13 @@ public class ConfigPage extends Page {
 
             if (entries[i].isInteger()) {
                 defaultOffset = defaultOffset - 20;
-                if (mouseX >= x + 108 && mouseX <= x + 118 && mouseY >= y + 17 + i * 24 && mouseY <= y + 27 + i * 24) {
+                if (mouseX >= x + 108 && mouseX < x + 118 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {
                     entries[i].integerConfig.set(entries[i].integerConfig.get() - 1);
                     normalizeInteger(entries[i].integerConfig, getIntegerRange(entries[i].spec, entries[i].integerConfig));
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                     return true;
                 }
-                if (mouseX >= x + 118 && mouseX <= x + 128 && mouseY >= y + 17 + i * 24 && mouseY <= y + 27 + i * 24) {
+                if (mouseX >= x + 118 && mouseX < x + 128 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {
                     entries[i].integerConfig.set(entries[i].integerConfig.get() + 1);
                     normalizeInteger(entries[i].integerConfig, getIntegerRange(entries[i].spec, entries[i].integerConfig));
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
@@ -92,8 +92,8 @@ public class ConfigPage extends Page {
     public boolean mouseScrolled(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY, int delta) {
         for (int i = 0; i < entries.length; i ++) if (entries[i].isUnlocked()) {
             if (entries[i].isInteger()) {
-                if ((mouseX >= x + 2 && mouseX <= x + 124 && mouseY >= y + 8 + i * 24 && mouseY <= y + 18 + i * 24) ||
-                        (mouseX >= x + 2 && mouseX <= x + 96 && mouseY >= y + 8 + i * 24 && mouseY <= y + 28 + i * 24)) {
+                if ((mouseX >= x + 2 && mouseX < x + 124 && mouseY >= y + 8 + i * 24 && mouseY < y + 18 + i * 24) ||
+                        (mouseX >= x + 2 && mouseX < x + 96 && mouseY >= y + 8 + i * 24 && mouseY < y + 28 + i * 24)) {
                     entries[i].integerConfig.set(entries[i].integerConfig.get() + delta);
                     normalizeInteger(entries[i].integerConfig, getIntegerRange(entries[i].spec, entries[i].integerConfig));
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 0.2f, 2.0f);
@@ -136,7 +136,7 @@ public class ConfigPage extends Page {
                     comments.add(Component.translatable("config.number.wizards_reborn.default").append(Component.literal(" ").append(Component.translatable(defaultValue))).withStyle(ChatFormatting.GRAY));
 
                     gui.blit(BACKGROUND, x + 118, y + 17 + (i * 24), 138, 40, 10, 10);
-                    if (mouseX >= x + 118 && mouseX <= x + 128 && mouseY >= y + 17 + i * 24 && mouseY <= y + 27 + i * 24) {
+                    if (mouseX >= x + 118 && mouseX < x + 128 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {
                         gui.blit(BACKGROUND, x + 118, y + 17 + (i * 24), 138, 50, 10, 10);
                     }
                 }
@@ -157,17 +157,17 @@ public class ConfigPage extends Page {
                     comments.add(Component.translatable("config.number.wizards_reborn.default").append(Component.literal(" " + String.valueOf((int) entries[i].integerConfig.getDefault()))).withStyle(ChatFormatting.GRAY));
 
                     gui.blit(BACKGROUND, x + 108, y + 17 + (i * 24), 148, 40, 10, 10);
-                    if (mouseX >= x + 108 && mouseX <= x + 118 && mouseY >= y + 17 + i * 24 && mouseY <= y + 27 + i * 24) {
+                    if (mouseX >= x + 108 && mouseX < x + 118 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {
                         gui.blit(BACKGROUND, x + 108, y + 17 + (i * 24), 148, 50, 10, 10);
                     }
                     gui.blit(BACKGROUND, x + 118, y + 17 + (i * 24), 158, 40, 10, 10);
-                    if (mouseX >= x + 118 && mouseX <= x + 128 && mouseY >= y + 17 + i * 24 && mouseY <= y + 27 + i * 24) {
+                    if (mouseX >= x + 118 && mouseX < x + 128 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {
                         gui.blit(BACKGROUND, x + 118, y + 17 + (i * 24), 158, 50, 10, 10);
                     }
                 }
 
                 gui.blit(BACKGROUND, x + defaultOffset, y + 17 + (i * 24), 128, 40, 10, 10);
-                if (mouseX >= x + defaultOffset && mouseX <= x + defaultOffset + 10 && mouseY >= y + 17 + i * 24 && mouseY <= y + 27 + i * 24) {
+                if (mouseX >= x + defaultOffset && mouseX < x + defaultOffset + 10 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {
                     gui.blit(BACKGROUND, x + defaultOffset, y + 17 + (i * 24), 128, 50, 10, 10);
                 }
 
@@ -181,8 +181,8 @@ public class ConfigPage extends Page {
                     drawText(book, gui, value, x + 2, y + 26 + i * 24 - Minecraft.getInstance().font.lineHeight);
                 }
 
-                if ((mouseX >= x + 2 && mouseX <= x + 124 && mouseY >= y + 8 + i * 24 && mouseY < y + 18 + i * 24) ||
-                        (mouseX >= x + 2 && mouseX <= x + 96 && mouseY >= y + 8 + i * 24 && mouseY <= y + 28 + i * 24)) {
+                if ((mouseX >= x + 2 && mouseX < x + 124 && mouseY >= y + 8 + i * 24 && mouseY < y + 18 + i * 24) ||
+                        (mouseX >= x + 2 && mouseX < x + 96 && mouseY >= y + 8 + i * 24 && mouseY < y + 28 + i * 24)) {
                     gui.renderTooltip(Minecraft.getInstance().font, comments, Optional.empty(), mouseX, mouseY);
                 }
             }

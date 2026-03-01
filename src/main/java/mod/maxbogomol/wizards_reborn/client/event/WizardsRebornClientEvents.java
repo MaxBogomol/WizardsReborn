@@ -10,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconScreen;
-import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipComponent;
+import mod.maxbogomol.wizards_reborn.common.gui.tooltip.ValueFrameTooltipComponent;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.mobeffect.IrritationMobEffect;

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.AlchemyFurnaceMenu;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace.AlchemyFurnaceBlockEntity;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.client.Minecraft;
@@ -17,10 +17,11 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnaceContainer> {
+public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnaceMenu> {
     private final ResourceLocation GUI = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/alchemy_furnace.png");
+    private final int TITLE_COLOR = ColorUtil.packColor(255, 237, 201, 146);
 
-    public AlchemyFurnaceScreen(AlchemyFurnaceContainer screenContainer, Inventory inv, Component titleIn) {
+    public AlchemyFurnaceScreen(AlchemyFurnaceMenu screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.imageHeight = 176;
         this.inventoryLabelY = this.inventoryLabelY + 10;
@@ -35,12 +36,12 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, ColorUtil.packColor(255, 237, 201, 146), false);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, TITLE_COLOR, false);
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
     }
 
     @Override
-    protected void renderBg(GuiGraphics gui, float partialTicks, int x, int y) {
+    protected void renderBg(GuiGraphics gui, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         int i = this.leftPos;
         int j = this.topPos;
@@ -79,28 +80,28 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
                 gui.blit(GUI, i + 97, j + 35, 176, 32, width, 15, 256, 256);
             }
 
-            if (x >= i + 19 && y >= j + 28 && x <= i + 19 + 8 && y <= j + 28 + 32) {
+            if (mouseX >= i + 19 && mouseY >= j + 28 && mouseX < i + 19 + 8 && mouseY < j + 28 + 32) {
                 Component component = NumericalUtil.getFluidName(furnace.getTank().getFluid(), 10000);
                 if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                     component = NumericalUtil.getFluidName(furnace.getTank().getFluid());
                 }
-                gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
+                gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
 
-            if (x >= i + 19 + 15 && y >= j + 28 && x <= i + 19 + 15 + 8 && y <= j + 28 + 32) {
+            if (mouseX >= i + 19 + 15 && mouseY >= j + 28 && mouseX < i + 19 + 15 + 8 && mouseY < j + 28 + 32) {
                 Component component = NumericalUtil.getHeatName(furnace.getHeat(), furnace.getMaxSteam());
                 if (!WizardsRebornClientConfig.NUMERICAL_HEAT.get()) {
                     component = NumericalUtil.getHeatName();
                 }
-                gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
+                gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
 
-            if (x >= i + 19 + 30 && y >= j + 28 && x <= i + 19 + 30 + 8 && y <= j + 28 + 32) {
+            if (mouseX >= i + 19 + 30 && mouseY >= j + 28 && mouseX < i + 19 + 30 + 8 && mouseY < j + 28 + 32) {
                 Component component = NumericalUtil.getSteamName(furnace.getSteam(), furnace.getMaxSteam());
                 if (!WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
                     component = NumericalUtil.getSteamName();
                 }
-                gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
+                gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
 
             List<ItemStack> items = furnace.getItemsResult();

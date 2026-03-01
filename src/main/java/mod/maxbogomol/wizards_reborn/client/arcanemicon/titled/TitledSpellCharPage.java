@@ -28,7 +28,7 @@ public class TitledSpellCharPage extends Page {
 
     @OnlyIn(Dist.CLIENT)
     public boolean click(ArcanemiconScreen book, int x, int y, int mouseX, int mouseY) {
-        if (mouseX >= x + 55 && mouseY >= y + 131 && mouseX <= x + 55 + 18 && mouseY <= y + 131 + 18) {
+        if (mouseX >= x + 55 && mouseY >= y + 131 && mouseX < x + 55 + 18 && mouseY < y + 131 + 18) {
             ArcanemiconChapters.RESEARCH_MAIN.lastChapter = book.currentChapter;
             book.currentChapter = ArcanemiconChapters.RESEARCH;
             ArcanemiconChapters.RESEARCH_MAIN.createNap(spell);
@@ -49,7 +49,7 @@ public class TitledSpellCharPage extends Page {
         drawWrappingText(book, gui, I18n.get(text), x + 4, y + 24, 124);
 
         gui.blit(BACKGROUND, x + 55, y + 132, 128, 20, 18, 18);
-        if (mouseX >= x + 55 && mouseY >= y + 131 && mouseX <= x + 55 + 18 && mouseY <= y + 131 + 18) {
+        if (mouseX >= x + 55 && mouseY >= y + 131 && mouseX < x + 55 + 18 && mouseY < y + 131 + 18) {
             gui.blit(BACKGROUND, x + 55, y + 131, 146, 20, 18, 18);
         }
     }

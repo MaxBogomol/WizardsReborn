@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.slot;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.AlchemyBagItem;
 import net.minecraft.world.entity.player.Player;

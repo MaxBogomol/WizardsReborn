@@ -1,6 +1,7 @@
-package mod.maxbogomol.wizards_reborn.client.gui.container;
+package mod.maxbogomol.wizards_reborn.common.gui.menu;
 
-import mod.maxbogomol.fluffy_fur.client.gui.screen.ContainerMenuBase;
+import mod.maxbogomol.fluffy_fur.common.gui.menu.ContainerMenuBase;
+import mod.maxbogomol.wizards_reborn.common.gui.slot.RunicPedestalSlot;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,25 +12,19 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class KegContainer extends ContainerMenuBase {
+public class RunicPedestalMenu extends ContainerMenuBase {
     public final BlockEntity blockEntity;
 
-    public KegContainer(int windowId, Level level, BlockPos pos, Inventory inventory, Player player) {
-        super(WizardsRebornMenuTypes.KEG_CONTAINER.get(), windowId);
+    public RunicPedestalMenu(int containerId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
+        super(WizardsRebornMenuTypes.RUNIC_PEDESTAL_CONTAINER.get(), containerId);
         this.blockEntity = level.getBlockEntity(pos);
         playerEntity = player;
-        this.playerInventory = new InvWrapper(inventory);
-        this.layoutPlayerInventorySlots(8, 88);
+        this.playerInventory = new InvWrapper(playerInventory);
+        this.layoutPlayerInventorySlots(8, 82);
 
         if (blockEntity != null) {
             blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-                int c = 0;
-                for (int i = 0; i < 2; i++) {
-                    for (int ii = 0; ii < 3; ii++) {
-                        addSlot(new KegSlot(h, c, 62 + (ii * 18), 24 + (i * 18)));
-                        c++;
-                    }
-                }
+                addSlot(new RunicPedestalSlot(this, h, 0, 80, 30));
             });
         }
     }
@@ -41,6 +36,6 @@ public class KegContainer extends ContainerMenuBase {
 
     @Override
     public int getInventorySize() {
-        return 6;
+        return 1;
     }
 }

@@ -132,7 +132,7 @@ public class ArcaneWandScreen extends Screen {
 
             if (!isSelectedCrystalType) {
                 for (CrystalType type : CrystalHandler.getTypes()) {
-                    if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (i * 34) + 32 - 2) {
+                    if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX < x - 64 + 128 && mouseY < y - h + (i * 34) + 32 - 2) {
                         selectedCrystalType = type;
                         isSelectedCrystalType = true;
                     }
@@ -144,7 +144,7 @@ public class ArcaneWandScreen extends Screen {
                         break;
                     }
                     Spell spell = spellsList.get(selectedCrystalType).get(ii);
-                    if (mouseX >= x - 64 && mouseY >= y - h + (ii * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (ii * 34) + 32 - 2) {
+                    if (mouseX >= x - 64 && mouseY >= y - h + (ii * 34) + 2 && mouseX < x - 64 + 128 && mouseY < y - h + (ii * 34) + 32 - 2) {
                         selectedSpell = spell;
                     }
                     i++;
@@ -154,13 +154,13 @@ public class ArcaneWandScreen extends Screen {
             if (isSelectedCrystalType) {
                 int pages = (int) Math.ceil(spellsList.get(selectedCrystalType).size() / 5f);
                 if (page > 0) {
-                    if (mouseX >= x - 64 + 148 && mouseY >= y - h + 2 && mouseX <= x - 64 + 148 + 32 && mouseY <= y - h + 32 - 2) {
+                    if (mouseX >= x - 64 + 148 && mouseY >= y - h + 2 && mouseX < x - 64 + 148 + 32 && mouseY < y - h + 32 - 2) {
                         page--;
                         return true;
                     }
                 }
                 if (page + 1 < pages) {
-                    if (mouseX >= x - 64 + 148 && mouseY >= y - h + 136 + 2 && mouseX <= x - 64 + 148 + 32 && mouseY <= y - h + 136 + 32 - 2) {
+                    if (mouseX >= x - 64 + 148 && mouseY >= y - h + 136 + 2 && mouseX < x - 64 + 148 + 32 && mouseY < y - h + 136 + 32 - 2) {
                         page++;
                         return true;
                     }
@@ -460,7 +460,7 @@ public class ArcaneWandScreen extends Screen {
             if (!isSelectedCrystalType) {
                 for (CrystalType type : CrystalHandler.getTypes()) {
                     int w = 0;
-                    if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (i * 34) + 32 - 2) {
+                    if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX < x - 64 + 128 && mouseY < y - h + (i * 34) + 32 - 2) {
                         w = 16;
                         selectedCrystalType = type;
                     }
@@ -523,7 +523,7 @@ public class ArcaneWandScreen extends Screen {
                     }
                     boolean isKnow = (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell));
 
-                    if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (i * 34) + 32 - 2) {
+                    if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX < x - 64 + 128 && mouseY < y - h + (i * 34) + 32 - 2) {
                         w = 16;
                         selectedSpell = spell;
                     }
@@ -639,7 +639,7 @@ public class ArcaneWandScreen extends Screen {
                 }
             }
 
-            if (mouseX >= x - 144 + 24 - 16 && mouseY >= y - 16 && mouseX <= x - 144 + 24 + 16 && mouseY <= y + 16) {
+            if (mouseX >= x - 144 + 24 - 16 && mouseY >= y - 16 && mouseX < x - 144 + 24 + 16 && mouseY < y + 16) {
                 ItemStack wandCrystal = getWandCrystal();
                 if (!wandCrystal.isEmpty()) {
                     gui.renderTooltip(Minecraft.getInstance().font, wandCrystal, mouseX, mouseY);

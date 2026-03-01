@@ -14,7 +14,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.AlchemyMachineMenu;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler.AlchemyBoilerBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
@@ -395,7 +395,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new AlchemyMachineContainer(i, level, getBlockPos(), inventory, player);
+        return new AlchemyMachineMenu(i, level, getBlockPos(), inventory, player);
     }
 
     @Override

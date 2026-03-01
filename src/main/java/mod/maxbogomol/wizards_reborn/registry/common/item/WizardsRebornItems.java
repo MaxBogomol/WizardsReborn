@@ -20,7 +20,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameClientTooltipComponent;
-import mod.maxbogomol.wizards_reborn.client.gui.tooltip.ValueFrameTooltipComponent;
+import mod.maxbogomol.wizards_reborn.common.gui.tooltip.ValueFrameTooltipComponent;
 import mod.maxbogomol.wizards_reborn.client.model.item.CollarItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.render.curio.*;

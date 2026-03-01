@@ -14,7 +14,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.ArcaneWorkbenchMenu;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
@@ -377,7 +377,7 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new ArcaneWorkbenchContainer(i, level, getBlockPos(), inventory, player);
+        return new ArcaneWorkbenchMenu(i, level, getBlockPos(), inventory, player);
     }
 
     public float getBlockRotate() {

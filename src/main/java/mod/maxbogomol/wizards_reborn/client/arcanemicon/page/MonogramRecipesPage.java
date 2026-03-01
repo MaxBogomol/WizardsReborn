@@ -51,15 +51,15 @@ public class MonogramRecipesPage extends Page {
                 recipe.getOutput().renderMiniIcon(gui, x + (right ? 69 : 9) + 41, y + 7 + (ii * 12) + 1);
                 RenderSystem.enableDepthTest();
 
-                if (mouseX >= x + (right ? 69 : 9) + 1 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + (right ? 69 : 9) + 1 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
+                if (mouseX >= x + (right ? 69 : 9) + 1 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX < x + (right ? 69 : 9) + 1 + 8 && mouseY < y + 7 + (ii * 12) + 1 + 8) {
                     gui.renderTooltip(Minecraft.getInstance().font, monogram.getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
 
-                if (mouseX >= x + (right ? 69 : 9) + 21 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + (right ? 69 : 9) + 21 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
+                if (mouseX >= x + (right ? 69 : 9) + 21 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX < x + (right ? 69 : 9) + 21 + 8 && mouseY < y + 7 + (ii * 12) + 1 + 8) {
                     gui.renderTooltip(Minecraft.getInstance().font, extraMonogram.getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
 
-                if (mouseX >= x + (right ? 69 : 9) + 41 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + (right ? 69 : 9) + 41+ 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
+                if (mouseX >= x + (right ? 69 : 9) + 41 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX < x + (right ? 69 : 9) + 41+ 8 && mouseY < y + 7 + (ii * 12) + 1 + 8) {
                     gui.renderTooltip(Minecraft.getInstance().font, recipe.getOutput().getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
 
@@ -87,15 +87,15 @@ public class MonogramRecipesPage extends Page {
             recipe.getOutput().renderMiniIcon(gui, x + 39 + 41, y + 7 + (ii * 12) + 1);
             RenderSystem.enableDepthTest();
 
-            if (mouseX >= x + 39 + 1 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + 39 + 1 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
+            if (mouseX >= x + 39 + 1 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX < x + 39 + 1 + 8 && mouseY < y + 7 + (ii * 12) + 1 + 8) {
                 gui.renderTooltip(Minecraft.getInstance().font, recipe.getInputs().get(0).getComponentList(), Optional.empty(), mouseX, mouseY);
             }
 
-            if (mouseX >= x + 39 + 21 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + 39 + 21 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
+            if (mouseX >= x + 39 + 21 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX < x + 39 + 21 + 8 && mouseY < y + 7 + (ii * 12) + 1 + 8) {
                 gui.renderTooltip(Minecraft.getInstance().font, recipe.getInputs().get(1).getComponentList(), Optional.empty(), mouseX, mouseY);
             }
 
-            if (mouseX >= x + 39 + 41 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + 39 + 41 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
+            if (mouseX >= x + 39 + 41 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX < x + 39 + 41 + 8 && mouseY < y + 7 + (ii * 12) + 1 + 8) {
                 gui.renderTooltip(Minecraft.getInstance().font, recipe.getOutput().getComponentList(), Optional.empty(), mouseX, mouseY);
             }
         }

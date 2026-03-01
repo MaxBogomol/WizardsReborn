@@ -140,7 +140,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
 
                 gui.drawString(font, textWissen, 122 - (stringWidth / 2) + 1, 95, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
                 gui.drawString(font, textWissen, 122 - (stringWidth / 2), 95, ArcanemiconScreen.TEXT_COLOR_INT, false);
-                if (mouseX >= 116 && mouseY >= 68 && mouseX <= 116 + 16 && mouseY <= 68 + 16) {
+                if (mouseX >= 116 && mouseY >= 68 && mouseX <= 116 + 16 && mouseY < 68 + 16) {
                     gui.renderTooltip(font, NumericalUtil.getWissenName(), (int) mouseX, (int) mouseY);
                 }
             }
@@ -155,7 +155,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
 
                 gui.drawString(font, textSteam, 122 - (stringWidth / 2) + 1, 15, ArcanemiconScreen.TEXT_SHADOW_COLOR_INT, false);
                 gui.drawString(font, textSteam, 122 - (stringWidth / 2), 15, ArcanemiconScreen.TEXT_COLOR_INT, false);
-                if (mouseX >= 116 && mouseY >= 28 && mouseX <= 116 + 16 && mouseY <= 28 + 16) {
+                if (mouseX >= 116 && mouseY >= 28 && mouseX <= 116 + 16 && mouseY < 28 + 16) {
                     gui.renderTooltip(font, NumericalUtil.getSteamName(), (int) mouseX, (int) mouseY);
                 }
             }

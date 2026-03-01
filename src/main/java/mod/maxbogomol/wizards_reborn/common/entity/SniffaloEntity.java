@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
 import com.mojang.serialization.Dynamic;
-import mod.maxbogomol.wizards_reborn.client.gui.container.SniffaloContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.SniffaloMenu;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.SniffaloArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
@@ -689,7 +689,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
             serverPlayer.nextContainerCounter();
             WizardsRebornPacketHandler.sendTo(serverPlayer, new SniffaloScreenPacket(serverPlayer.containerCounter, inventory.getContainerSize(), sniffalo.getId()));
-            serverPlayer.containerMenu = new SniffaloContainer(serverPlayer.containerCounter, serverPlayer.getInventory(), inventory, serverPlayer, sniffalo);
+            serverPlayer.containerMenu = new SniffaloMenu(serverPlayer.containerCounter, serverPlayer.getInventory(), inventory, serverPlayer, sniffalo);
             serverPlayer.initMenu(serverPlayer.containerMenu);
             MinecraftForge.EVENT_BUS.post(new PlayerContainerEvent.Open(serverPlayer, serverPlayer.containerMenu));
         }

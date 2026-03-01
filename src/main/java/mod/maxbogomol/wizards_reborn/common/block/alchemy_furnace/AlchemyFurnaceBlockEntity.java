@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.AlchemyFurnaceMenu;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluidTags;
@@ -336,7 +336,7 @@ public class AlchemyFurnaceBlockEntity extends NameableBlockEntityBase implement
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new AlchemyFurnaceContainer(i, level, getBlockPos(), inventory, player);
+        return new AlchemyFurnaceMenu(i, level, getBlockPos(), inventory, player);
     }
 
     @Override

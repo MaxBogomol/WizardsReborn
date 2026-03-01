@@ -41,7 +41,7 @@ public class ThanksVillagePage extends Page {
         int nameWidth = Minecraft.getInstance().font.width(name);
         drawText(book, gui, I18n.get(name), x + 64 - nameWidth / 2, y + 136 - Minecraft.getInstance().font.lineHeight);
 
-        if (mouseX >= x + 54 && mouseY >= y + 92 && mouseX <= x + 70 && mouseY <= y + 125) {
+        if (mouseX >= x + 54 && mouseY >= y + 92 && mouseX < x + 70 && mouseY < y + 125) {
             float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.05f;
             int packColor = ColorUtil.packColor(ColorUtil.rainbowColor(ticks));
 
@@ -56,7 +56,7 @@ public class ThanksVillagePage extends Page {
     @Override
     @OnlyIn(Dist.CLIENT)
     public boolean click(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
-        if (mouseX >= x + 54 && mouseY >= y + 92 && mouseX <= x + 70 && mouseY <= y + 125) {
+        if (mouseX >= x + 54 && mouseY >= y + 92 && mouseX < x + 70 && mouseY < y + 125) {
             linkTo("https://discord.gg/cKf55qNugw");
             return true;
         }

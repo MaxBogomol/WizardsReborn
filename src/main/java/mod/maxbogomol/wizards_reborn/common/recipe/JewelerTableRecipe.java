@@ -99,9 +99,9 @@ public class JewelerTableRecipe implements Recipe<Container> {
         public JewelerTableRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
             int wissen = GsonHelper.getAsInt(json, "wissen");
-            JsonArray ingrs = GsonHelper.getAsJsonArray(json, "ingredients");
+            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             List<Ingredient> inputs = new ArrayList<>();
-            for (JsonElement e : ingrs) {
+            for (JsonElement e : ingredients) {
                 inputs.add(Ingredient.fromJson(e));
             }
             boolean isSaveNBT = false;

@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.gui.container.RunicPedestalContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.RunicPedestalMenu;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,10 +17,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Random;
 
-public class RunicPedestalScreen extends AbstractContainerScreen<RunicPedestalContainer> {
+public class RunicPedestalScreen extends AbstractContainerScreen<RunicPedestalMenu> {
     private final ResourceLocation GUI = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/runic_pedestal.png");
+    private final int TITLE_COLOR = ColorUtil.packColor(255, 237, 201, 146);
 
-    public RunicPedestalScreen(RunicPedestalContainer screenContainer, Inventory inv, Component titleIn) {
+    public RunicPedestalScreen(RunicPedestalMenu screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.imageHeight = 164;
         this.inventoryLabelY = this.inventoryLabelY - 2;
@@ -35,12 +36,12 @@ public class RunicPedestalScreen extends AbstractContainerScreen<RunicPedestalCo
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, ColorUtil.packColor(255, 237, 201, 146), false);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, TITLE_COLOR, false);
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
     }
 
     @Override
-    protected void renderBg(GuiGraphics gui, float partialTicks, int x, int y) {
+    protected void renderBg(GuiGraphics gui, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         int i = this.leftPos;
         int j = this.topPos;

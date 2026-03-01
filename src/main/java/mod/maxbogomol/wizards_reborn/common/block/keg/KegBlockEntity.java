@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.keg;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.client.gui.container.KegContainer;
+import mod.maxbogomol.wizards_reborn.common.gui.menu.KegMenu;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RottenDrinkBottleItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
@@ -148,7 +148,7 @@ public class KegBlockEntity extends NameableBlockEntityBase implements TickableB
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new KegContainer(i, level, getBlockPos(), inventory, player);
+        return new KegMenu(i, level, getBlockPos(), inventory, player);
     }
 
     public float getBlockRotate() {

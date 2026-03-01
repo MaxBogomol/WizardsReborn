@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.client.gui.tooltip;
+package mod.maxbogomol.wizards_reborn.common.gui.tooltip;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
