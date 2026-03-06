@@ -27,12 +27,12 @@ plugins {
 }
 
 repositories {
+    mavenLocal()
     maven { url = "https://maven.theillusivec4.top/" }
     maven { url = "https://maven.blamejared.com" }
     maven { url = "https://maven.ithundxr.dev/mirror/" }
     maven { url = "https://modmaven.k-4u.nl"}
     maven { url = "https://cursemaven.com" }
-    mavenLocal()
 }
 
 version = "${minecraft_version}-${mod_version}"
