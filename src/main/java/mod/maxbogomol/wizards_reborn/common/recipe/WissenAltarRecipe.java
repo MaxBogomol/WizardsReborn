@@ -107,5 +107,4 @@ public class WissenAltarRecipe implements Recipe<Container> {
     public int getWissen() {
         return wissen;
     }
-
 }
