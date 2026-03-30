@@ -1,12 +1,14 @@
 modLoader="javafml"
 loaderVersion="[47,)"
 license="GPL-2.0"
+issueTrackerURL="https://github.com/MaxBogomol/WizardsReborn/issues"
 
 [[mods]]
     modId="wizards_reborn"
     version="${file.jarVersion}"
-    updateJSONURL = "https://raw.githubusercontent.com/MaxBogomol/WizardsReborn/refs/heads/master/update.json"
     displayName="Wizard's Reborn"
+    updateJSONURL = "https://raw.githubusercontent.com/MaxBogomol/WizardsReborn/refs/heads/master/update.json"
+    displayURL = "https://fluffy-village.dev/pages/eng/creations/wizards_reborn.html"
     logoFile="wizards_reborn.png"
     authors="MaxBogomol"
     description="Adds magical things"
