@@ -20,6 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import java.awt.*;
 
 public class HolyCrossSpell extends EntityLookSpell {
+
     public HolyCrossSpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.EARTH);
