@@ -86,24 +86,23 @@ dependencies {
 
     implementation fg.deobf("mod.maxbogomol.fluffy_fur:fluffy_fur:${minecraft_version}-${fluffy_fur_version}")
 
-    implementation fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
-    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.106")
-    implementation fg.deobf("curse.maven:jade-324717:6271651")
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}")
+    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:${jei_version}")
+    implementation fg.deobf("curse.maven:jade-324717:${jade_version}")
 
-    compileOnly fg.deobf("curse.maven:create-328085:6271934")
-    compileOnly fg.deobf("com.tterrag.registrate:Registrate:MC1.20-1.3.3")
-    compileOnly fg.deobf("curse.maven:farmers-delight-398521:6154802")
-    compileOnly fg.deobf("curse.maven:malum-484064:6213791")
-    compileOnly fg.deobf("curse.maven:lodestone-616457:6213794")
-    compileOnly fg.deobf("curse.maven:embers-rekindled-300777:6386899")
+    compileOnly fg.deobf("curse.maven:create-328085:${create_version}")
+    compileOnly fg.deobf("com.tterrag.registrate:Registrate:MC${registrate_version}")
+    compileOnly fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_version}")
+    compileOnly fg.deobf("curse.maven:malum-484064:${malum_version}")
+    compileOnly fg.deobf("curse.maven:lodestone-616457:${lodestone_version}")
+    compileOnly fg.deobf("curse.maven:embers-rekindled-300777:${embers_rekindled_version}")
 
-    runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
-    runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
-    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
-
-    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:6183224")
-    runtimeOnly fg.deobf("curse.maven:oculus-581495:6020952")
-    runtimeOnly fg.deobf("curse.maven:free-cam-557076:4588036")
+    runtimeOnly fg.deobf("curse.maven:embeddium-908741:${embeddium_version}")
+    runtimeOnly fg.deobf("curse.maven:oculus-581495:${oculus_version}")
+    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:${fusion_version}")
+    runtimeOnly fg.deobf("curse.maven:configured-457570:${configured_version}")
+    runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:${model_gap_fix_version}")
+    runtimeOnly fg.deobf("curse.maven:free-cam-557076:${free_cam_version}")
 }
 
 jar {
