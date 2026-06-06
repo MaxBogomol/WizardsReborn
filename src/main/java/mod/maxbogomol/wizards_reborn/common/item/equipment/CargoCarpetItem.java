@@ -139,6 +139,11 @@ public class CargoCarpetItem extends BlockItem implements ICustomBlockEntityData
     }
 
     @Override
+    public boolean canFitInsideContainerItems() {
+        return false;
+    }
+
+    @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         NonNullList<ItemStack> nonnulllist = NonNullList.withSize(20, ItemStack.EMPTY);

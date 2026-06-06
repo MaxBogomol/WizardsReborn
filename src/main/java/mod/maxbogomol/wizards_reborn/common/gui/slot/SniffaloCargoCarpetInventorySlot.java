@@ -16,7 +16,7 @@ public class SniffaloCargoCarpetInventorySlot extends SlotItemHandler {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return sniffalo.isCarpeted();
+        return sniffalo.isCarpeted() && stack.getItem().canFitInsideContainerItems();
     }
 
     @Override

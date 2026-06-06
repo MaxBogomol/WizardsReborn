@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.gui.menu;
 
 import mod.maxbogomol.fluffy_fur.common.gui.menu.ContainerMenuBase;
 import mod.maxbogomol.wizards_reborn.common.block.cargo_carpet.CargoCarpetBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.gui.slot.CargoCarpetSlot;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -13,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class CargoCarpetMenu extends ContainerMenuBase {
@@ -34,7 +34,7 @@ public class CargoCarpetMenu extends ContainerMenuBase {
                 int c = 0;
                 for (int i = 0; i < 4; i++) {
                     for (int ii = 0; ii < 5; ii++) {
-                        addSlot(new SlotItemHandler(inventoryContainer, c, 44 + (ii * 18), 18 + (i * 18)));
+                        addSlot(new CargoCarpetSlot(inventoryContainer, c, 44 + (ii * 18), 18 + (i * 18)));
                         c++;
                     }
                 }
