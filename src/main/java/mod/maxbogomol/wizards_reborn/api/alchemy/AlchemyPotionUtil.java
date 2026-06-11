@@ -39,9 +39,7 @@ public class AlchemyPotionUtil {
         CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.contains("alchemyPotion")) {
             AlchemyPotion potion = AlchemyPotionHandler.getAlchemyPotion(nbt.getString("alchemyPotion"));
-            if (potion != null) {
-                return potion;
-            }
+            if (potion != null) return potion;
         }
 
         return WizardsRebornAlchemyPotions.EMPTY;
@@ -49,7 +47,7 @@ public class AlchemyPotionUtil {
 
     public static void setPotion(ItemStack stack, AlchemyPotion potion) {
         CompoundTag nbt = stack.getOrCreateTag();
-        nbt.putString("alchemyPotion", potion.getId());
+        if (potion != null) nbt.putString("alchemyPotion", potion.getId());
     }
 
     public static boolean isEmpty(AlchemyPotion potion) {

@@ -463,7 +463,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
     @Override
     public boolean canJump() {
-        return true;
+        return false;
     }
 
     @Override
