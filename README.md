@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/1155188824360624148?style=for-the-badge&color=6aa84f&logo=discord&label=THE%20FLUFFY%20VILLAGE)](https://discord.gg/cKf55qNugw)
 
 ### Requires:
-[![FluffyFur](https://img.shields.io/badge/%20-FLUFFY%20FUR-5800ff?style=for-the-badge&color=d77787&logo=githubsponsors&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/tree/master)
+[![FluffyFur](https://img.shields.io/badge/%20-FLUFFY%20FUR-5800ff?style=for-the-badge&color=d77787&logo=githubsponsors&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur)
 [![CurioApi](https://img.shields.io/badge/%20-CURIOS%20API-000000?style=for-the-badge&color=d48526&logo=curseforge&logoColor=000000&labelColor=FFFFFF)](https://www.curseforge.com/minecraft/mc-mods/curios)
 [![CurioApi](https://img.shields.io/badge/%20-CURIOS%20API-000000?style=for-the-badge&color=349a46&logo=modrinth&logoColor=000000&labelColor=FFFFFF)](https://modrinth.com/mod/curios)
 
