@@ -1,0 +1,30 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "NGN",
+    "S#S",
+    "_#_",
+    "_A_A"
+  ],
+  "key": {
+    "#": {
+      "tag": "wizards_reborn:arcane_wood_planks"
+    },
+    "S": {
+      "tag": "wizards_reborn:arcane_wood_slabs"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "N": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    },
+    "A": {
+      "tag": "wizards_reborn:arcanum"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:wissen_charger"
+  },
+  "wissen": 750
+}

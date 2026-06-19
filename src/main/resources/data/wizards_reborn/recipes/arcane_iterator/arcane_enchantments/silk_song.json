@@ -1,0 +1,37 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "arcane_enchantment": {
+    "arcane_enchantment": "wizards_reborn:silk_song"
+  },
+  "wissen": 1500,
+  "experience": 5,
+  "ingredients": [
+    {
+      "tag": "forge:gems/lapis"
+    },
+    {
+      "tag": "forge:gems/lapis"
+    },
+    {
+      "tag": "wizards_reborn:arcanum"
+    },
+    {
+      "tag": "forge:string"
+    },
+    {
+      "tag": "forge:string"
+    },
+    {
+      "tag": "forge:string"
+    },
+    {
+      "tag": "forge:string"
+    },
+    {
+      "item": "minecraft:jukebox"
+    },
+    {
+      "item": "minecraft:note_block"
+    }
+  ]
+}

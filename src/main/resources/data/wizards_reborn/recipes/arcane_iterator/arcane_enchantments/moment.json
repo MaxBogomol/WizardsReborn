@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "arcane_enchantment": {
+    "arcane_enchantment": "wizards_reborn:moment"
+  },
+  "wissen": 1500,
+  "experience": 5,
+  "ingredients": [
+    {
+      "tag": "forge:gems/lapis"
+    },
+    {
+      "tag": "forge:gems/lapis"
+    },
+    {
+      "tag": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "tag": "forge:gems/diamond"
+    },
+    {
+      "item": "minecraft:arrow"
+    }
+  ]
+}

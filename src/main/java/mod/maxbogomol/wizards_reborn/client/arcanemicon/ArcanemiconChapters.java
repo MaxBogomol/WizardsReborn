@@ -1185,10 +1185,10 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISSEN_CHARGER.get()))
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WISSEN_CHARGER.get()),
-                        EMPTY_ITEM, new ItemStack(WizardsRebornItems.WISSEN_ALTAR.get()), EMPTY_ITEM,
-                        ARCANE_WOOD_PLANKS_ITEM, new ItemStack(WizardsRebornItems.ARCANUM_BLOCK.get()), ARCANE_WOOD_PLANKS_ITEM,
-                        ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_PLANKS_ITEM,
-                        ARCANUM_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM
+                        ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_NUGGET_ITEM,
+                        ARCANE_WOOD_SLAB_ITEM, ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_SLAB_ITEM,
+                        EMPTY_ITEM, ARCANE_WOOD_PLANKS_ITEM, EMPTY_ITEM,
+                        EMPTY_ITEM, ARCANUM_ITEM, EMPTY_ITEM, ARCANUM_ITEM
                 )
         );
 
@@ -1470,8 +1470,8 @@ public class ArcanemiconChapters {
                 new TitlePage("wizards_reborn.arcanemicon.page.silk_song"),
                 new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_SHEARS.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_SHEARS.get()),
                         new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
-                        ARCANUM_ITEM, new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD),
-                        new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.ARROW)
+                        ARCANUM_ITEM, new ItemStack(Items.STRING), new ItemStack(Items.STRING), new ItemStack(Items.STRING), new ItemStack(Items.STRING),
+                        new ItemStack(Items.JUKEBOX),  new ItemStack(Items.NOTE_BLOCK)
                 ).setExperience(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.SILK_SONG),
                 new TitlePage("wizards_reborn.arcanemicon.page.propelling"),
                 new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()),
@@ -1488,7 +1488,8 @@ public class ArcanemiconChapters {
                 new TitlePage("wizards_reborn.arcanemicon.page.dual_blade"),
                 new ArcaneIteratorPage(new ItemStack(WizardsRebornItems.ARCANE_GOLD_SWORD.get()), new ItemStack(WizardsRebornItems.ARCANE_GOLD_SWORD.get()),
                         new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
-                        ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM
+                        new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ),
+                        ARCACITE_ITEM
                 ).setExperience(5).setHealth(5).setArcaneEnchantment(WizardsRebornArcaneEnchantments.DUAL_BLADE),
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_iterator_enchantments"),
                 new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), new ItemStack(Items.BOOK),
@@ -1788,7 +1789,7 @@ public class ArcanemiconChapters {
         );
 
         CARGO_CARPET = new Chapter("wizards_reborn.arcanemicon.chapter.cargo_carpet",
-                new TitledBlockPage("wizards_reborn.arcanemicon.page.cargo_carpet",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.cargo_carpet.0",
                         new BlockEntry(new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get())),
                         new BlockEntry(new ItemStack(WizardsRebornItems.LIGHT_GRAY_CARGO_CARPET.get())),
                         new BlockEntry(new ItemStack(WizardsRebornItems.GRAY_CARGO_CARPET.get())),
@@ -1807,6 +1808,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsRebornItems.PINK_CARGO_CARPET.get())),
                         new BlockEntry(new ItemStack(WizardsRebornItems.RAINBOW_CARGO_CARPET.get()))
                 ),
+                new TextPage("wizards_reborn.arcanemicon.page.cargo_carpet.1"),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.WHITE_CARGO_CARPET.get()),
                         new ItemStack(Items.STRING), new ItemStack(WizardsRebornItems.FERAL_COTTON.get()), new ItemStack(Items.STRING),
                         new ItemStack(WizardsRebornItems.FERAL_COTTON.get()), EMPTY_ITEM, new ItemStack(WizardsRebornItems.FERAL_COTTON.get()),
@@ -3800,10 +3802,10 @@ public class ArcanemiconChapters {
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.CREPE.get()))
                 ),
                 new TextPage("wizards_reborn.arcanemicon.page.pancakes_jam"),
-                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.BLIN.get())).setIsSteam(true)
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.BLIN.get(), 2)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(ForgeMod.MILK.get(), 500))
                         .setInputs(new ItemStack(WizardsRebornItems.WHEAT_FLOUR.get()), new ItemStack(WizardsRebornItems.WHEAT_FLOUR.get()), new ItemStack(WizardsRebornItems.WHEAT_FLOUR.get()), new ItemStack(Items.EGG), NETHER_SALT_PILE_ITEM),
-                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.CREPE.get())).setIsSteam(true)
+                new AlchemyMachinePage().setResult(new ItemStack(WizardsRebornItems.CREPE.get(), 2)).setIsSteam(true)
                         .setFluidInputs(new FluidStack(ForgeMod.MILK.get(), 500))
                         .setInputs(new ItemStack(WizardsRebornItems.ARCANE_LINEN_FLOUR.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN_FLOUR.get()), new ItemStack(WizardsRebornItems.ARCANE_LINEN_FLOUR.get()), new ItemStack(Items.EGG), NETHER_SALT_PILE_ITEM)
         );
