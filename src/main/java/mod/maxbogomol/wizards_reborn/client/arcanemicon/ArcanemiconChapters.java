@@ -746,7 +746,10 @@ public class ArcanemiconChapters {
                 ),
                 new WissenCrystallizerPage(new ItemStack(WizardsRebornItems.FIRE_CRYSTAL.get()),
                         ARCANUM_ITEM, new ItemStack(WizardsRebornItems.FRACTURED_FIRE_CRYSTAL.get()), new ItemStack(WizardsRebornItems.FRACTURED_FIRE_CRYSTAL.get()), new ItemStack(WizardsRebornItems.FRACTURED_FIRE_CRYSTAL.get())
-                )
+                ),
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.focus"),
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.balance"),
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.absorption")
         );
 
         ARCANE_WAND = new Chapter("wizards_reborn.arcanemicon.chapter.arcane_wand",
