@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
@@ -835,10 +836,10 @@ public class WizardsRebornCommand {
             for (Monogram monogram : startMap) {
                 string = string + " WizardsReborn." + Component.translatable(monogram.getTranslatedName()).getString().toUpperCase() + "_MONOGRAM, ";
             }
-            System.out.println(string);
+            WizardsReborn.LOGGER.info(string);
             for (Monogram monogram : monograms.keySet()) {
                 string = " new ResearchMonogramEntry(WizardsReborn." + Component.translatable(monogram.getTranslatedName()).getString().toUpperCase() + "_MONOGRAM, " + String.valueOf(monograms.get(monogram)) + "),";
-                System.out.println(string);
+                WizardsReborn.LOGGER.info(string);
             }
         }
 
