@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
@@ -723,20 +724,15 @@ public class WizardsRebornCommand {
                 for (MonogramRecipe recipe : MonogramHandler.getRecipes().values()) {
                     int ii = map.size() - 1;
                     Monogram secondMonogram = map.get(ii);
-
                     if (secondMonogram != monogram) {
                         add = canMonogram(monogram, secondMonogram, recipe);
-
                         if (i == end - 2) {
                             boolean secondAdd = false;
                             if (add) {
                                 secondMonogram = map.get(ii);
                                 secondAdd = canMonogram(monogram, secondMonogram, recipe);
                             }
-
-                            if (!secondAdd) {
-                                add = false;
-                            }
+                            if (!secondAdd) add = false;
                         }
                     }
 
@@ -744,16 +740,9 @@ public class WizardsRebornCommand {
                         error = true;
                         break;
                     }
-
-                    if (add) {
-                        break;
-                    }
+                    if (add) break;
                 }
-
-                if (error) {
-                    break;
-                }
-
+                if (error) break;
                 if (add) {
                     if (!(maxMap.size() > max - 2)) {
                         if (!maxMap.contains(monogram)) {
@@ -830,14 +819,14 @@ public class WizardsRebornCommand {
 
         component.append(Component.literal(String.valueOf(monograms.size())).withStyle(ChatFormatting.GRAY));
 
-        if (!error) {
+        if (!error && FluffyFur.devEnvironment) {
             String string = "";
             for (Monogram monogram : startMap) {
                 string = string + " WizardsReborn." + Component.translatable(monogram.getTranslatedName()).getString().toUpperCase() + "_MONOGRAM, ";
             }
             System.out.println(string);
             for (Monogram monogram : monograms.keySet()) {
-                string = " new ResearchMonogramEntry(WizardsReborn." + Component.translatable(monogram.getTranslatedName()).getString().toUpperCase() + "_MONOGRAM, " + String.valueOf(monograms.get(monogram)) + "),";
+                string = " new ResearchMonogramEntry(WizardsReborn." + Component.translatable(monogram.getTranslatedName()).getString().toUpperCase() + "_MONOGRAM, " + monograms.get(monogram) + "),";
                 System.out.println(string);
             }
         }
