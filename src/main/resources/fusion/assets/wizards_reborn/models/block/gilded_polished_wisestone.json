@@ -1,6 +1,5 @@
 {
   "parent": "minecraft:block/cube_all",
-  "render_type": "minecraft:translucent",
   "textures": {
     "all": "wizards_reborn:block/gilded_polished_wisestone"
   },
