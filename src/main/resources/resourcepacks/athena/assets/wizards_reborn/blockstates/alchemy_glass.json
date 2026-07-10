@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": {
+      "model": "minecraft:block/air"
+    }
+  },
+  "athena:loader": "athena:ctm",
+  "ctm_textures": {
+    "empty": "wizards_reborn:block/alchemy_glass_empty",
+    "center": "wizards_reborn:block/alchemy_glass_center",
+    "horizontal": "wizards_reborn:block/alchemy_glass_horizontal",
+    "vertical": "wizards_reborn:block/alchemy_glass_vertical",
+    "particle": "wizards_reborn:block/alchemy_glass"
+  },
+  "connect_to": {
+    "type": "sameBlock"
+  }
+}

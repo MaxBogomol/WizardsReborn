@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.client.event.WizardsRebornClientEvents;
 import mod.maxbogomol.wizards_reborn.client.event.WizardsRebornKeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WissenWandRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.integration.client.athena.WizardsRebornAthena;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTabs;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -43,6 +44,8 @@ public class WizardsRebornClient {
             forgeBus.register(new WizardsRebornClientEvents());
 
             eventBus.addListener(WizardsRebornCreativeTabs::addCreativeTabContent);
+
+            WizardsRebornAthena.init(eventBus);
         }
     }
 
@@ -50,6 +53,8 @@ public class WizardsRebornClient {
         setupMenu();
         setupSplashes();
         ArcanemiconChapters.init();
+
+        WizardsRebornAthena.setup();
     }
 
     public static FluffyFurMod MOD_INSTANCE;

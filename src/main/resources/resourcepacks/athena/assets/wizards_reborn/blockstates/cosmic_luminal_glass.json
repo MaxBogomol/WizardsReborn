@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "": {
+      "model": "minecraft:block/air"
+    }
+  },
+  "athena:loader": "athena:ctm",
+  "ctm_textures": {
+    "empty": "wizards_reborn:block/cosmic_luminal_glass_empty",
+    "center": "wizards_reborn:block/cosmic_luminal_glass_center",
+    "horizontal": "wizards_reborn:block/cosmic_luminal_glass_horizontal",
+    "vertical": "wizards_reborn:block/cosmic_luminal_glass_vertical",
+    "particle": "wizards_reborn:block/cosmic_luminal_glass"
+  },
+  "connect_to": {
+    "type": "tag",
+    "tag": "wizards_reborn:luminal_glass"
+  }
+}

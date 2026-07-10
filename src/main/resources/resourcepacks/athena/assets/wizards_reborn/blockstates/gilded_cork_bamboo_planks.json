@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "": {
+      "model": "minecraft:block/air"
+    }
+  },
+  "athena:loader": "athena:ctm",
+  "ctm_textures": {
+    "empty": "wizards_reborn:block/gilded_cork_bamboo_planks_empty",
+    "center": "wizards_reborn:block/gilded_cork_bamboo_planks_center",
+    "horizontal": "wizards_reborn:block/gilded_cork_bamboo_planks_horizontal",
+    "vertical": "wizards_reborn:block/gilded_cork_bamboo_planks_vertical",
+    "particle": "wizards_reborn:block/gilded_cork_bamboo_planks"
+  },
+  "connect_to": {
+    "type": "tag",
+    "tag": "wizards_reborn:gilded"
+  }
+}

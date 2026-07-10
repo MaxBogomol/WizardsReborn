@@ -39,10 +39,6 @@ public class WizardsRebornEmbers {
         LOADED = ModList.get().isLoaded(MOD_ID);
     }
 
-    public static void setup() {
-
-    }
-
     public static boolean isLoaded() {
         return LOADED;
     }

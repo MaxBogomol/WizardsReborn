@@ -100,6 +100,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:embeddium-908741:${embeddium_version}")
     runtimeOnly fg.deobf("curse.maven:oculus-581495:${oculus_version}")
     runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:${fusion_version}")
+    runtimeOnly fg.deobf("curse.maven:athena-841890:${athena_version}")
     runtimeOnly fg.deobf("curse.maven:configured-457570:${configured_version}")
     runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:${model_gap_fix_version}")
     runtimeOnly fg.deobf("curse.maven:free-cam-557076:${free_cam_version}")

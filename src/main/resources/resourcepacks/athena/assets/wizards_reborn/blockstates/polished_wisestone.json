@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": {
+      "model": "minecraft:block/air"
+    }
+  },
+  "athena:loader": "athena:ctm",
+  "ctm_textures": {
+    "empty": "wizards_reborn:block/polished_wisestone_empty",
+    "center": "wizards_reborn:block/polished_wisestone_center",
+    "horizontal": "wizards_reborn:block/polished_wisestone_horizontal",
+    "vertical": "wizards_reborn:block/polished_wisestone_vertical",
+    "particle": "wizards_reborn:block/polished_wisestone"
+  },
+  "connect_to": {
+    "type": "sameBlock"
+  }
+}
