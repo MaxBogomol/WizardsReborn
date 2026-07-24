@@ -68,7 +68,7 @@ public class WizardsRebornClient {
                 .addGithubLink("https://github.com/MaxBogomol/WizardsReborn")
                 .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/wizards-reborn")
                 .addModrinthLink("https://modrinth.com/mod/wizards-reborn")
-                .addDiscordLink("https://discord.gg/cKf55qNugw");
+                .addDiscordLink("https://discord.fluffy-village.dev/");
         MAGICAL_ORIGINS_PANORAMA = new FluffyFurPanorama(WizardsReborn.MOD_ID + ":magical_origins", Component.translatable("panorama.wizards_reborn.magical_origins"))
                 .setMod(MOD_INSTANCE).setItem(new ItemStack(WizardsRebornItems.ARCANE_WORKBENCH.get())).setSort(0)
                 .setTexture(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/menu/panorama/magical_origins/panorama"))
