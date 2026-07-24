@@ -57,7 +57,7 @@ public class ThanksVillagePage extends Page {
     @OnlyIn(Dist.CLIENT)
     public boolean click(ArcanemiconScreen gui, int x, int y, int mouseX, int mouseY) {
         if (mouseX >= x + 54 && mouseY >= y + 92 && mouseX < x + 70 && mouseY < y + 125) {
-            linkTo("https://discord.gg/cKf55qNugw");
+            linkTo("https://discord.fluffy-village.dev/");
             return true;
         }
         return false;
