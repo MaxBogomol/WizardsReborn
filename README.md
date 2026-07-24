@@ -49,7 +49,7 @@ To fully reveal ancient potential, magic is not enough, so I've created this ste
 ## But that's not all I wanted to tell you, so try to explore this perishable world by yourself!    
 
 The mod is in very early alpha, with a lot of different content planned for the future!  
-You can visit our **[Discord Server](https://discord.gg/cKf55qNugw)** to suggest your ideas or receive news about development.
+You can visit our **[Discord Server](https://discord.fluffy-village.dev/)** to suggest your ideas or receive news about development.
 
 #
 
