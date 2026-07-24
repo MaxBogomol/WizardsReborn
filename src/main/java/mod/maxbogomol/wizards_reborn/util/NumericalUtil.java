@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.util;
 
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -65,7 +66,7 @@ public class NumericalUtil {
 
     public static Component getName(Component name, int amount, int maxAmount) {
         return Component.literal(name.getString())
-                .append(Component.literal(" "))
+                .append(CommonComponents.SPACE)
                 .append(Component.literal(String.valueOf(amount)).
                         append(Component.literal("/")).
                         append(Component.literal(String.valueOf(maxAmount))));
@@ -77,7 +78,7 @@ public class NumericalUtil {
             number = Math.round((1f / amount) * 100f);
         }
         return Component.literal(name.getString())
-                .append(Component.literal(" "))
+                .append(CommonComponents.SPACE)
                 .append(Component.literal(String.valueOf(number)).
                         append(Component.literal("%")));
     }

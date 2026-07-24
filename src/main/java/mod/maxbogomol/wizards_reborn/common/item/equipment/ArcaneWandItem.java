@@ -30,6 +30,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -393,7 +394,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                     int blue = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
 
                     int packColor = ColorUtil.packColor(255, red, green, blue);
-                    list.add(Component.literal(" ").append(Component.translatable(stat.getTranslatedName()).append(": " + statLevel).withStyle(Style.EMPTY.withColor(packColor))));
+                    list.add(Component.empty().append(CommonComponents.SPACE).append(Component.translatable(stat.getTranslatedName()).append(": " + statLevel).withStyle(Style.EMPTY.withColor(packColor))));
                 }
             }
         }
@@ -404,7 +405,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             Spell spell = SpellHandler.getSpell(getSpell(stack));
             Color color = spell.getColor();
             int packColor = ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
-            list.add(Component.literal(" ").append(Component.translatable(spell.getTranslatedName()).withStyle(Style.EMPTY.withColor(packColor))));
+            list.add(Component.empty().append(CommonComponents.SPACE).append(Component.translatable(spell.getTranslatedName()).withStyle(Style.EMPTY.withColor(packColor))));
         }
     }
 

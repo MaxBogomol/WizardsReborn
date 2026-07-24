@@ -9,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -133,7 +134,7 @@ public class ConfigPage extends Page {
 
                     String defaultValue = I18n.get("config.number.wizards_reborn.on");
                     if (!entries[i].booleanConfig.getDefault()) defaultValue = I18n.get("config.number.wizards_reborn.off");
-                    comments.add(Component.translatable("config.number.wizards_reborn.default").append(Component.literal(" ").append(Component.translatable(defaultValue))).withStyle(ChatFormatting.GRAY));
+                    comments.add(Component.translatable("config.number.wizards_reborn.default").append(Component.empty().append(CommonComponents.SPACE).append(Component.translatable(defaultValue))).withStyle(ChatFormatting.GRAY));
 
                     gui.blit(BACKGROUND, x + 118, y + 17 + (i * 24), 138, 40, 10, 10);
                     if (mouseX >= x + 118 && mouseX < x + 128 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {
@@ -153,8 +154,8 @@ public class ConfigPage extends Page {
 
                     Vec2 range = getIntegerRange(entries[i].spec, entries[i].integerConfig);
                     if (range != null) comments.add(Component.translatable("config.number.wizards_reborn.range")
-                            .append(Component.literal(" " + String.valueOf((int) range.x) + " ~ " + String.valueOf((int) range.y))).withStyle(ChatFormatting.GRAY));
-                    comments.add(Component.translatable("config.number.wizards_reborn.default").append(Component.literal(" " + String.valueOf((int) entries[i].integerConfig.getDefault()))).withStyle(ChatFormatting.GRAY));
+                            .append(Component.empty().append(CommonComponents.SPACE).append(String.valueOf((int) range.x) + " ~ " + String.valueOf((int) range.y))).withStyle(ChatFormatting.GRAY));
+                    comments.add(Component.translatable("config.number.wizards_reborn.default").append(Component.empty().append(CommonComponents.SPACE).append(String.valueOf((int) entries[i].integerConfig.getDefault()))).withStyle(ChatFormatting.GRAY));
 
                     gui.blit(BACKGROUND, x + 108, y + 17 + (i * 24), 148, 40, 10, 10);
                     if (mouseX >= x + 108 && mouseX < x + 118 && mouseY >= y + 17 + i * 24 && mouseY < y + 27 + i * 24) {

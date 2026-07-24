@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -157,7 +158,7 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
     }
 
     public MutableComponent getArmorSetItemComponent(EquipmentSlot slot, Player player) {
-        return Component.literal(" ").append(Component.translatable(getArmorSetItem(slot).getDescriptionId()).withStyle(Style.EMPTY.withColor(hasArmorSetItem(slot, player) ? getArmorSetColor() : ChatFormatting.GRAY)));
+        return Component.empty().append(CommonComponents.SPACE).append(Component.translatable(getArmorSetItem(slot).getDescriptionId()).withStyle(Style.EMPTY.withColor(hasArmorSetItem(slot, player) ? getArmorSetColor() : ChatFormatting.GRAY)));
     }
 
     public boolean hasArmorSetPlayer(Player player) {

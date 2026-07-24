@@ -24,6 +24,7 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.commands.arguments.coordinates.Vec3Argument;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -789,7 +790,7 @@ public class WizardsRebornCommand {
 
         for (Monogram monogram : map) {
             if (monogram != null) {
-                component.append(Component.translatable(monogram.getTranslatedName())).withStyle(ChatFormatting.GOLD).append(Component.literal(" "));
+                component.append(Component.translatable(monogram.getTranslatedName())).withStyle(ChatFormatting.GOLD).append(CommonComponents.SPACE);
             } else {
                 component.append(Component.literal("NULL ").withStyle(ChatFormatting.GOLD));
             }
@@ -800,7 +801,7 @@ public class WizardsRebornCommand {
 
         for (Monogram monogram : startMap) {
             if (monogram != null) {
-                component.append(Component.translatable(monogram.getTranslatedName()).withStyle(ChatFormatting.BLUE)).append(Component.literal(" "));
+                component.append(Component.translatable(monogram.getTranslatedName()).withStyle(ChatFormatting.BLUE)).append(CommonComponents.SPACE);
             } else {
                 component.append(Component.literal("NULL ").withStyle(ChatFormatting.BLUE));
             }
@@ -811,7 +812,7 @@ public class WizardsRebornCommand {
 
         for (Monogram monogram : monograms.keySet()) {
             if (monogram != null) {
-                component.append(Component.translatable(monogram.getTranslatedName()).withStyle(ChatFormatting.GREEN)).append(Component.literal(" ")).append(Component.literal(String.valueOf(monograms.get(monogram))).withStyle(ChatFormatting.DARK_GREEN)).append(Component.literal(" "));
+                component.append(Component.translatable(monogram.getTranslatedName()).withStyle(ChatFormatting.GREEN)).append(CommonComponents.SPACE).append(Component.literal(String.valueOf(monograms.get(monogram))).withStyle(ChatFormatting.DARK_GREEN)).append(CommonComponents.SPACE);
             } else {
                 component.append(Component.literal("NULL ").withStyle(ChatFormatting.GREEN));
             }

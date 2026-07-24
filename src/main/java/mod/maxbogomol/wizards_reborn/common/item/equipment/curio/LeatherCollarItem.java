@@ -13,6 +13,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -125,7 +126,7 @@ public class LeatherCollarItem extends BaseCurioItem implements IGuiParticleItem
         String skin = LeatherCollarItem.getSkin(stack);
         if (skin != null) {
             list.add(Component.literal(skin).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 255, 173, 186)))
-                    .append(" ").append(Component.translatable(hearts).withStyle(ChatFormatting.RED)));
+                    .append(CommonComponents.SPACE).append(Component.translatable(hearts).withStyle(ChatFormatting.RED)));
 
             Player player = WizardsReborn.proxy.getPlayer();
             if (player != null) {

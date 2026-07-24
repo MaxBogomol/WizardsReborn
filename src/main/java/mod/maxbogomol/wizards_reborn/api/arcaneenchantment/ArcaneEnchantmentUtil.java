@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.GsonHelper;
@@ -198,7 +199,7 @@ public class ArcaneEnchantmentUtil {
                     int G = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getGreen());
                     int B = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getBlue());
 
-                    list.add(Component.literal(" ").append(arcaneEnchantment.getFullname(enchantmentLevel)).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, R, G, B)).withBold(arcaneEnchantment.isCurse())));
+                    list.add(Component.empty().append(CommonComponents.SPACE).append(arcaneEnchantment.getFullname(enchantmentLevel)).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, R, G, B)).withBold(arcaneEnchantment.isCurse())));
                 }
             }
         }

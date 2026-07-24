@@ -11,6 +11,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantm
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -92,7 +93,7 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
         List<Component> list = new ArrayList<>();
         int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, this);
         list.add(Component.literal(" +").append(String.valueOf(enchantmentLevel))
-                .append(" ").append(Component.translatable("attribute.name.wizards_reborn.arcane_damage"))
+                .append(CommonComponents.SPACE).append(Component.translatable("attribute.name.wizards_reborn.arcane_damage"))
                 .append(" (").append(String.valueOf((getChanceDefault(stack) + ((enchantmentLevel - 1) * getChancePerLevel(stack))) * 100)).append("%)")
                 .withStyle(ChatFormatting.DARK_GREEN));
         return list;

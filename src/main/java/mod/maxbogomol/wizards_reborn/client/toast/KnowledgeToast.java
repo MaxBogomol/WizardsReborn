@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -52,7 +53,7 @@ public class KnowledgeToast implements Toast {
     public Component getNameWithCount() {
         Component component = Component.translatable("knowledge.toast.wizards_reborn.new_knowledge");
         if (count > 1) {
-            component = Component.empty().append(component).append(Component.literal(" ")).append(Component.literal(String.valueOf(count))).append(Component.literal("x"));
+            component = Component.empty().append(component).append(CommonComponents.SPACE).append(Component.literal(String.valueOf(count))).append(Component.literal("x"));
         }
         return component;
     }

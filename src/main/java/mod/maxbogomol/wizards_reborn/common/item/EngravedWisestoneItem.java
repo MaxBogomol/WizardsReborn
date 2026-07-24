@@ -12,6 +12,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlock;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -70,7 +71,7 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
             int green = (int) Mth.lerp(ii, Color.BLACK.getGreen(), color.getGreen());
             int blue = (int) Mth.lerp(ii, Color.BLACK.getBlue(), color.getBlue());
 
-            component.append(Component.literal(String.valueOf(c) + " ").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, red, green, blue))));
+            component.append(Component.literal(String.valueOf(c)).append(CommonComponents.SPACE).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, red, green, blue))));
             i++;
         }
 

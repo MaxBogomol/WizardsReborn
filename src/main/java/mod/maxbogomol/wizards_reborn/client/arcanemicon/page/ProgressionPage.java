@@ -9,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -158,7 +159,7 @@ public class ProgressionPage extends Page {
                     int points = knowledges.get(c).getPoints();
                     if (points > 0) {
                         list.add(Component.empty());
-                        list.add(Component.empty().append(Component.translatable("wizards_reborn.arcanemicon.knowledge_points")).append(Component.literal(" ")).append(Component.literal(String.valueOf(points))).withStyle(ChatFormatting.GRAY));
+                        list.add(Component.empty().append(Component.translatable("wizards_reborn.arcanemicon.knowledge_points")).append(CommonComponents.SPACE).append(Component.literal(String.valueOf(points))).withStyle(ChatFormatting.GRAY));
                     }
                 } else {
                     gui.blit(BACKGROUND, x + X + 58, y + Y + 130, 128, 0, 12, 12);

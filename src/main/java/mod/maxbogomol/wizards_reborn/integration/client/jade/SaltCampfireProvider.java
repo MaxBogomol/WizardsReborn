@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.integration.client.jade;
 
 import mod.maxbogomol.wizards_reborn.common.block.salt.campfire.SaltCampfireBlockEntity;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +28,7 @@ public enum SaltCampfireProvider implements IBlockComponentProvider {
                 ItemStack stack = campfire.getItems().get(i);
                 if (!stack.isEmpty() && (campfire.cookingTime[i] - campfire.cookingProgress[i] > 0)) {
                     IElement icon = elements.item(stack, 0.5f).size(new Vec2(11, 10)).translate(new Vec2(0, -1));
-                    IElement text = elements.text(stack.getHoverName().copy().append(Component.literal(" ").append(IThemeHelper.get().seconds(campfire.cookingTime[i] - campfire.cookingProgress[i]))));
+                    IElement text = elements.text(stack.getHoverName().copy().append(Component.empty().append(CommonComponents.SPACE).append(IThemeHelper.get().seconds(campfire.cookingTime[i] - campfire.cookingProgress[i]))));
                     icon.message(null);
                     tooltip.add(icon);
                     tooltip.add(text);

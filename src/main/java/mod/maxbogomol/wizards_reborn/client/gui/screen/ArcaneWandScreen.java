@@ -29,6 +29,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
@@ -711,7 +712,7 @@ public class ArcaneWandScreen extends Screen {
             if (empty) {
                 gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("gui.wizards_reborn.wand.add_spell_set"), mouseX, mouseY);
             } else {
-                gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("gui.wizards_reborn.wand.spell_set").append(" ").append(String.valueOf(choosedRay + 1)), mouseX, mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("gui.wizards_reborn.wand.spell_set").append(CommonComponents.SPACE).append(String.valueOf(choosedRay + 1)), mouseX, mouseY);
             }
         }
 

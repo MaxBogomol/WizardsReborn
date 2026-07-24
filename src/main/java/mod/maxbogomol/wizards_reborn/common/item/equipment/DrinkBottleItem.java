@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -98,7 +99,7 @@ public class DrinkBottleItem extends PlacedItem {
         } else {
             list.add(Component.translatable("lore.wizards_reborn.drinks.non_alcoholic").withStyle(ChatFormatting.GRAY));
         }
-        list.add(Component.literal(dayFromTick(ticks)).append(" ").append(Component.translatable("lore.wizards_reborn.drinks.days_aged")).withStyle(ChatFormatting.GRAY));
+        list.add(Component.literal(dayFromTick(ticks)).append(CommonComponents.SPACE).append(Component.translatable("lore.wizards_reborn.drinks.days_aged")).withStyle(ChatFormatting.GRAY));
 
         list.add(Component.empty());
 
