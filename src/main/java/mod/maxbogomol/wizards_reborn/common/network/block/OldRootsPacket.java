@@ -1,10 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.network.block;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpriteParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
@@ -47,6 +44,7 @@ public class OldRootsPacket extends PositionClientPacket {
                 .setTransparencyData(GenericParticleData.create(1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                 .setScaleData(GenericParticleData.create(0.075f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                .setLightData(LightParticleData.DEFAULT)
                 .setSpriteData(SpriteParticleData.CRUMBS_RANDOM)
                 .setLifetime(20, 20)
                 .randomVelocity(0.05f)
