@@ -17,5 +17,4 @@ Belarusian Latin & Taraškievica Latin, Upside down English & Upside down LOLCAT
 
 ### Languages supported by the community:
 French - by [ishi_sama](https://github.com/ishi-sama)  
-Simplified Chinese - by [FalAut](https://github.com/FalAut)  
-Japanese - idk  
+Simplified Chinese - by [FalAut](https://github.com/FalAut)
