@@ -38,9 +38,11 @@ public class EchoHandler {
 
     public static void tick(Player player) {
         if (player.isAlive()) {
-            ArrayList<EchoStack> echoes = new ArrayList<>(KnowledgeUtil.getEchoes(player));
-            for (EchoStack echo : echoes) {
-                echo.getEcho().tick(player, echo);
+            ArrayList<EchoStack> echoes = KnowledgeUtil.getEchoes(player);
+            if (echoes != null) {
+                for (EchoStack echo : echoes) {
+                    echo.getEcho().tick(player, echo);
+                }
             }
         }
     }
