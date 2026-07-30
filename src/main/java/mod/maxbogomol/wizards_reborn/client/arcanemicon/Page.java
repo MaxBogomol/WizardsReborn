@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornKeyMappings;
+import mod.maxbogomol.fluffy_fur.client.string.StringReplacerHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -40,24 +40,7 @@ public abstract class Page {
     public static void drawWrappingText(ArcanemiconScreen book, GuiGraphics gui, String text, int x, int y, int w) {
         Font font = Minecraft.getInstance().font;
         List<String> lines = new ArrayList<>();
-        if (text.contains("wizards_reborn:selectionMenu")) {
-            text = text.replace("wizards_reborn:selectionMenu", WizardsRebornKeyMappings.SELECTION_MENU.getTranslatedKeyMessage().getString());
-        }
-        if (text.contains("wizards_reborn:bagMenu")) {
-            text = text.replace("wizards_reborn:bagMenu", WizardsRebornKeyMappings.BAG_MENU.getTranslatedKeyMessage().getString());
-        }
-        if (text.contains("wizards_reborn:nextSpell")) {
-            text = text.replace("wizards_reborn:nextSpell", WizardsRebornKeyMappings.NEXT_SPELL.getTranslatedKeyMessage().getString());
-        }
-        if (text.contains("wizards_reborn:previousSpell")) {
-            text = text.replace("wizards_reborn:previousSpell", WizardsRebornKeyMappings.PREVIOUS_SPELL.getTranslatedKeyMessage().getString());
-        }
-        if (text.contains("wizards_reborn:spellSetsToggle")) {
-            text = text.replace("wizards_reborn:spellSetsToggle", WizardsRebornKeyMappings.SPELL_SETS_TOGGLE.getTranslatedKeyMessage().getString());
-        }
-        if (text.contains("minecraft:sneak")) {
-            text = text.replace("minecraft:sneak", Minecraft.getInstance().options.keyShift.getTranslatedKeyMessage().getString());
-        }
+        text = StringReplacerHandler.replaceString(text);
         String[] words = text.split(" ");
         String line = "";
         for (String s : words) {

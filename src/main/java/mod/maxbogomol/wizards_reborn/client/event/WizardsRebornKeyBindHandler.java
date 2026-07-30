@@ -39,11 +39,11 @@ public class WizardsRebornKeyBindHandler {
 
     @SubscribeEvent
     public static void onInput(InputEvent event) {
-        if (WizardsRebornKeyMappings.OPEN_SELECTION_MENU.isDown()) {
+        if (WizardsRebornKeyMappings.SELECTION_MENU.isDown()) {
             chooseMenus();
         }
 
-        if (WizardsRebornKeyMappings.OPEN_BAG_MENU.isDown()) {
+        if (WizardsRebornKeyMappings.BAG_MENU.isDown()) {
             bagMenu();
         }
     }
