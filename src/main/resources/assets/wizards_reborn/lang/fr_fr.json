@@ -853,7 +853,7 @@
   "wizards_reborn.arcanemicon.chapter.arcane_wand": "Baguette des arcanes",
     "wizards_reborn.arcanemicon.page.arcane_wand.0.title": "Baguette des arcanes",
     "wizards_reborn.arcanemicon.page.arcane_wand.0": "L'indispensable du sorcier ! \n Utilisant un cristal comme une lentille, le sorcier est capable de réfracter l'énergie du wissen, libérant ainsi un véritable pouvoir magique.",
-    "wizards_reborn.arcanemicon.page.arcane_wand.1": "Vous pouvez accéder au menu de sélection des cristaux et des sorts en appuyant sur [wizards_reborn:wandMenu] tout en tenant la baguette dans votre main.",
+    "wizards_reborn.arcanemicon.page.arcane_wand.1": "Vous pouvez accéder au menu de sélection des cristaux et des sorts en appuyant sur [wizards_reborn:selectionMenu] tout en tenant la baguette dans votre main.",
     "wizards_reborn.arcanemicon.page.arcane_wand.focus.title": "Concentration",
     "wizards_reborn.arcanemicon.page.arcane_wand.focus": "La caractéristique de \"Concentration\" du cristal influe sur la puissance du sort.",
     "wizards_reborn.arcanemicon.page.arcane_wand.balance.title": "Équilibre",

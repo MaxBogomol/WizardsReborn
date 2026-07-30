@@ -40,11 +40,11 @@ public abstract class Page {
     public static void drawWrappingText(ArcanemiconScreen book, GuiGraphics gui, String text, int x, int y, int w) {
         Font font = Minecraft.getInstance().font;
         List<String> lines = new ArrayList<>();
-        if (text.contains("wizards_reborn:wandMenu")) {
-            text = text.replace("wizards_reborn:wandMenu", WizardsRebornKeyMappings.OPEN_SELECTION_MENU.getTranslatedKeyMessage().getString());
+        if (text.contains("wizards_reborn:selectionMenu")) {
+            text = text.replace("wizards_reborn:selectionMenu", WizardsRebornKeyMappings.SELECTION_MENU.getTranslatedKeyMessage().getString());
         }
         if (text.contains("wizards_reborn:bagMenu")) {
-            text = text.replace("wizards_reborn:bagMenu", WizardsRebornKeyMappings.OPEN_BAG_MENU.getTranslatedKeyMessage().getString());
+            text = text.replace("wizards_reborn:bagMenu", WizardsRebornKeyMappings.BAG_MENU.getTranslatedKeyMessage().getString());
         }
         if (text.contains("wizards_reborn:nextSpell")) {
             text = text.replace("wizards_reborn:nextSpell", WizardsRebornKeyMappings.NEXT_SPELL.getTranslatedKeyMessage().getString());

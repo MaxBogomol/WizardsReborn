@@ -12,8 +12,8 @@ import org.lwjgl.glfw.GLFW;
 
 public class WizardsRebornKeyMappings {
     private static final String CATEGORY = "key.category."+ WizardsReborn.MOD_ID+".general";
-    public static final KeyMapping OPEN_SELECTION_MENU = new KeyMapping("key."+WizardsReborn.MOD_ID+".selection_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY);
-    public static final KeyMapping OPEN_BAG_MENU = new KeyMapping("key."+WizardsReborn.MOD_ID+".bag_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY);
+    public static final KeyMapping SELECTION_MENU = new KeyMapping("key."+WizardsReborn.MOD_ID+".selection_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY);
+    public static final KeyMapping BAG_MENU = new KeyMapping("key."+WizardsReborn.MOD_ID+".bag_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY);
     public static final KeyMapping NEXT_SPELL = new KeyMapping("key."+WizardsReborn.MOD_ID+".next_spell", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_X, CATEGORY);
     public static final KeyMapping PREVIOUS_SPELL = new KeyMapping("key."+WizardsReborn.MOD_ID+".previous_spell", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, CATEGORY);
     public static final KeyMapping SPELL_SETS_TOGGLE = new KeyMapping("key."+WizardsReborn.MOD_ID+".spell_sets_toggle", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, CATEGORY);
@@ -22,8 +22,8 @@ public class WizardsRebornKeyMappings {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-            event.register(OPEN_SELECTION_MENU);
-            event.register(OPEN_BAG_MENU);
+            event.register(SELECTION_MENU);
+            event.register(BAG_MENU);
             event.register(NEXT_SPELL);
             event.register(PREVIOUS_SPELL);
             event.register(SPELL_SETS_TOGGLE);

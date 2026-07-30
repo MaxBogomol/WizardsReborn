@@ -21,6 +21,7 @@
   ],
   "client": [
     "client.FishingHookRendererMixin",
+    "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
     "client.ItemInHandLayerMixin",
     "client.LevelRendererMixin",
