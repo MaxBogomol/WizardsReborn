@@ -59,7 +59,7 @@ public class ArcaneCrossbowItem extends CrossbowItem implements IArcaneItem {
 
         List<Component> crossbowList = new ArrayList<>();
         super.appendHoverText(stack, level, crossbowList, flags);
-        if (crossbowList.size() > 0) {
+        if (!crossbowList.isEmpty()) {
             list.add(crossbowList.get(0));
             if (crossbowList.size() > 1) {
                 if (Screen.hasShiftDown()) {

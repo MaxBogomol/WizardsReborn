@@ -38,7 +38,7 @@ import org.joml.Matrix4f;
 import java.awt.*;
 
 public class IcicleSpell extends ProjectileSpell {
-    public static final ResourceLocation ICICLE_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/spell_projectile/icicle.png");
+    public static final ResourceLocation ICICLE_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/spell/icicle.png");
 
     public IcicleSpell(String id, int points) {
         super(id, points);

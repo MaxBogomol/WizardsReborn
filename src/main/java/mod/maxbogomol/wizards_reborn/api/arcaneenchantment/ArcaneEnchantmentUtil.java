@@ -62,7 +62,6 @@ public class ArcaneEnchantmentUtil {
         if (nbtEnchantments.contains(arcaneEnchantment.getId())) {
             return nbtEnchantments.getInt(arcaneEnchantment.getId());
         }
-
         return 0;
     }
 
@@ -84,7 +83,6 @@ public class ArcaneEnchantmentUtil {
 
     public static void addArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
         existArcaneEnchantments(stack);
-
         if (getArcaneEnchantment(stack, arcaneEnchantment) == 0) {
             addArcaneEnchantment(stack, arcaneEnchantment, 1);
         }
@@ -94,15 +92,12 @@ public class ArcaneEnchantmentUtil {
         existArcaneEnchantments(stack);
         CompoundTag nbt = stack.getTag();
         CompoundTag nbtEnchantments = nbt.getCompound("arcaneEnchantments");
-
         nbtEnchantments.putInt(arcaneEnchantment.getId(), enchantmentLevel);
     }
 
     public static void addItemArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
         existArcaneEnchantments(stack);
-
         int enchantmentLevel = getArcaneEnchantment(stack, arcaneEnchantment);
-
         if (enchantmentLevel + 1 <= arcaneEnchantment.getMaxLevel()) {
             addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel + 1);
         }
@@ -111,28 +106,23 @@ public class ArcaneEnchantmentUtil {
     public static boolean canAddArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment, int enchantmentLevel) {
         if (checkCompatibility(stack, arcaneEnchantment)) {
             existArcaneEnchantments(stack);
-
             return enchantmentLevel <= arcaneEnchantment.getMaxLevel();
         }
-
         return false;
     }
 
     public static boolean canAddItemArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
         if (checkCompatibility(stack, arcaneEnchantment)) {
             existArcaneEnchantments(stack);
-
             int enchantmentLevel = getArcaneEnchantment(stack, arcaneEnchantment);
-
             return enchantmentLevel + 1 <= arcaneEnchantment.getMaxLevel();
         }
-
         return false;
     }
 
     public static void removeArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
         existArcaneEnchantments(stack);
-        CompoundTag nbt = stack.getTag();
+        CompoundTag nbt = stack.getOrCreateTag();
 
         Map<ArcaneEnchantment, Integer> map = getAllArcaneEnchantments(stack);
         map.remove(arcaneEnchantment);
@@ -172,10 +162,8 @@ public class ArcaneEnchantmentUtil {
                     break;
                 }
             }
-
             return true;
         }
-
         return false;
     }
 
