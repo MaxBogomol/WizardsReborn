@@ -4,6 +4,10 @@
 - src/main/resources/assets/
 - src/main/resources/resourcepacks/
 
+### MaxBogomol's & OnixTheCat's Assets:
+- src/main/resources/resourcepacks/athena/pack.png
+- src/main/resources/resourcepacks/fusion/pack.png
+
 ### Onjerlay's Assets:
 - src/main/resources/assets/wizards_reborn/sounds/equipment/thrown_shears/
 - src/main/resources/assets/wizards_reborn/sounds/music/arcanum_swinging.ogg
