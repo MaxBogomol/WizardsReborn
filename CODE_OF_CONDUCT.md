@@ -10,5 +10,5 @@ The author reserves the right to cancel, modify, or reject edits if they don't a
 AI - generative artificial intelligence.  
 AI operates on the principle of imitation. It merely imitates, trying to average out responses, it doesn't create anything new, but merely copies data created by other people on which it was trained without the consent of the content creators.
 
-If you use AI to create, edit, or contribute to a project, you will be blocked.  
-If you are in any way connected to AI, or if your profile contains any content created by AI or AI tools, you will be blocked. Sorry.
+If you use AI to create, edit, or contribute to a project, you will be blocked and all your edits will be deleted.  
+If you are in any way connected to AI, or if your profile contains any content created by AI or AI tools, you will be blocked and all your edits will be deleted. Sorry.
