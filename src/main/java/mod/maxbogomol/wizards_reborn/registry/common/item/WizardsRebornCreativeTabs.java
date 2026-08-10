@@ -190,7 +190,7 @@ public class WizardsRebornCreativeTabs {
     }
 
     public static void init() {
-        if (WizardsRebornCreativeTabs.WIZARDS_REBORN.get() instanceof MultiCreativeTab multiCreativeTab) {
+        if (WIZARDS_REBORN.get() instanceof MultiCreativeTab multiCreativeTab) {
             multiCreativeTab.addSubTab(ALL);
             multiCreativeTab.addSubTab(MATERIALS);
             multiCreativeTab.addSubTab(PLANTS);
@@ -220,7 +220,7 @@ public class WizardsRebornCreativeTabs {
     }
 
     public static void addCreativeTabContent(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == WizardsRebornCreativeTabs.WIZARDS_REBORN.getKey()) {
+        if (event.getTabKey() == WIZARDS_REBORN.getKey()) {
             addInSub(event, EQUIPMENT, WizardsRebornItems.ARCANEMICON);
 
             //MATERIALS
